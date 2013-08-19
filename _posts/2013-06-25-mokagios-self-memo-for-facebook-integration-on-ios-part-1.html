@@ -1,0 +1,76 @@
+---
+layout: post
+title: mokagio's self memo for Facebook Integration on iOS - Part 1
+categories:
+- Coding
+tags:
+- CocoaPods
+- development
+- Facebook
+- iOS
+- Objective-C
+status: publish
+type: post
+published: true
+meta:
+  _publicize_pending: '1'
+  tagazine-media: a:7:{s:7:"primary";s:0:"";s:6:"images";a:0:{}s:6:"videos";a:0:{}s:11:"image_count";i:0;s:6:"author";s:8:"44200376";s:7:"blog_id";s:8:"44869138";s:9:"mod_stamp";s:19:"2013-06-25
+    22:14:28";}
+---
+<h2>Part 1 - Facebook Login</h2>
+<h3>0 - Create a Facebook App</h3>
+Create an app on the <a href="https://developers.facebook.com/apps/">Facebook App Dashboard</a>, what are you gonna integrate otherwise?!
+<h3>1 - Add the Facebook SDK Pod</h3>
+Given that you have already setup your libraries management with CocoaPods, and you should have, add to your <code>Podfile</code> the line
+<pre><code>pod "Facebook-iOS-SDK", "~&gt; 3.5.2"
+</code></pre>
+Then run <code>pod install</code>.
+
+For more info about how to use CocoaPods check out <a href="http://amokafullofstuff.wordpress.com/2013/01/05/cocoapods/">this</a> post of mine.
+<h3>2 - Add some Facebook data to the <code>Info.plist</code></h3>
+Facebook requires you to add two fields to your <code>Info.plist</code> file:
+<ul>
+	<li><strong>FacebookAppID</strong>: a 15 digits number you can find in the Settings page of your app on your Facebook developer page.</li>
+	<li><strong>FacebookDisplayName</strong>: how to comment, the display name of your app?</li>
+</ul>
+<h3>3 - A basic login flow</h3>
+The <a href="https://developers.facebook.com/docs/tutorials/ios-sdk-tutorial/">tutorial</a> tells us to put all the Facebook login in the <code>AppDelegate</code>. I don't like this approach, because I don't want to make the delegate dirty with code related only to Facebook. I prefer to create a <code>FacebookProxy</code> class, with class methods to call to interact with Facebook.
+
+Whatever solution you prefer the steps for the login are the same anyway:
+<ol>
+	<li>Check if the user is logged already. Let's assume he isn't…</li>
+	<li>Present in some way a call to action for the Facebook Login.</li>
+	<li>Call the Facebook SDK method to login the user.</li>
+	<li>Let the SDK do it's job.</li>
+	<li>Come back to the app and handle the result.</li>
+</ol>
+<h4>Check if the user is logged in</h4>
+To get the current Facebook session we use <code>FBSession.activeSession</code>. To see if the session is active, and therefore the user is already logged in, we need to check the <code>state</code> property: <code>FBSession.activeSession.state</code>. A quick look to the <code>typedef enum</code> of the <code>FBSessionState</code> and:
+<pre><code>+ (BOOL)isUserLoggedInFacebook
+{
+    if (FBSession.activeSession.state == FBSessionStateCreatedTokenLoaded
+        || FBSession.activeSession.state == FBSessionStateOpen
+        || FBSession.activeSession.state == FBSessionStateOpenTokenExtended) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+</code></pre>
+<h4>Call the Facebook SDK method to login</h4>
+Easy peasy:
+<pre><code>[FBSession openActiveSessionWithReadPermissions:nil
+                                   allowLoginUI:YES
+                              completionHandler:^(FBSession *session, FBSessionState state, NSError *error) {
+     // handle stuff here
+ }];
+</code></pre>
+In the completion handler we should… handle the result of the open active session. I think that this really depends on what our app will do, so I'm not gonna write any snippet here.
+<h4>Come back to the app and handle the result</h4>
+If you're user's are using iOS 5 -I hope they're not-, or if they're so dumb they haven't installed the native Facebook app for iOS, the login will occur with a sort of modal window in your app. In all the rest of the cases the
+<h3>Frameworks needed in the Test Bundle</h3>
+TDD is the way. Full stop. I noticed that adding the Facebook-iOS-SDK pod to my project wasn't enough for my test bundle to run, there were some framework dependencies missing:
+<ul>
+	<li>AdSupport.framework</li>
+	<li>Social.framework</li>
+</ul>
