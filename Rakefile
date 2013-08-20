@@ -1,9 +1,10 @@
 require 'listen'
 
-desc "Watches the Sass and Haml soruces for changes and recompiles"
+desc "Watches the Sass sources for changes and recompiles"
 task :watch do
 
 	puts "watching for changes to the Haml and Sass sources.\n"
+	puts "note: haml is not implemented yet... x_x"
 	Listen.to!('src') do |modified, added, removed|
 
 		def html_path(path)
