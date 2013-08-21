@@ -1,0 +1,95 @@
+$background: #cecece
+$text-color: #2f1c11
+$corner-radius: 10px
+
+@mixin bottom-right-corner-radius($radius)
+	-webkit-border-bottom-right-radius: $radius
+	-moz-border-radius-bottomright: $radius
+	border-bottom-right-radius: $radius
+
+@mixin bottom-left-corner-radius($radius)
+	-webkit-border-bottom-left-radius: $radius
+	-moz-border-radius-bottomleft: $radius
+	border-bottom-left-radius: $radius
+
+@mixin top-right-corner-radius($radius)
+	-webkit-border-top-right-radius: $radius
+	-moz-border-radius-topright: $radius
+	border-top-right-radius: $radius
+
+@mixin top-left-corner-radius($radius)
+	-webkit-border-top-left-radius: $radius
+	-moz-border-radius-topleft: $radius
+	border-top-left-radius: $radius	
+
+@mixin bottom-corner-radius($radius)
+	@include bottom-right-corner-radius($radius)
+	@include bottom-left-corner-radius($radius)
+
+@mixin top-corner-radius($radius)
+	@include top-right-corner-radius($radius)
+	@include top-left-corner-radius($radius)
+
+@mixin corner-radius($radius)
+	-webkit-border-radius: $radius
+	-moz-border-radius: $radius
+	border-radius: $radius
+
+// global reset
+*
+	margin: 0
+	padding: 0
+
+html, body
+	height: 100%
+
+body
+	background-color: $background
+	text-align: center
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif
+
+.container
+	margin: 0 auto
+	width: 700px
+	text-align: justify
+
+.box
+	background-color: white
+	color: $text-color
+	-webkit-box-shadow:  0px 1px 1px 1px rgba(0, 0, 0, 0.1)
+	box-shadow:  0px 1px 1px 1px rgba(0, 0, 0, 0.1)
+	$padding: 20px
+	padding-left: $padding
+	padding-right: $padding
+
+.header
+	@include bottom-corner-radius($corner-radius)
+
+	padding-top: 10px
+	padding-bottom: 16px
+
+	a
+		color: $text-color
+		text-decoration: none
+
+		&:hover
+			// TODO - make darker
+			color: $text-color
+
+.post-container
+	@include corner-radius($corner-radius)
+	margin: 20px 0 20px 0
+	padding-top: 20px
+	padding-bottom: 20px
+	text-align: left
+
+	.post-title
+		margin-bottom: 6px
+
+	.post-meta
+		margin-bottom: 12px
+
+.footer
+	// TODO - darker mixin!
+	color: gray
+	margin-top: 20px
