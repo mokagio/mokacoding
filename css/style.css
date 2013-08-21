@@ -49,6 +49,12 @@ body {
   .post-container .post-title {
     margin-bottom: 6px; }
   .post-container .post-meta {
+    margin-bottom: 24px;
+    font-size: smaller; }
+  .post-container .post h3 {
+    margin-top: 22px;
+    margin-bottom: 12px; }
+  .post-container .post p {
     margin-bottom: 12px; }
 
 .footer {
