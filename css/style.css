@@ -68,6 +68,8 @@ body {
     padding: 0 0.3em;
     background: lightgrey;
     color: brown; }
+  .post-container .post code.code-block {
+    padding: 0.5em 1em; }
   .post-container .post hr {
     margin: 20px 0; }
 
