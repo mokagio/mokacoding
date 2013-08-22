@@ -1,12 +1,14 @@
 ---
 layout: default
 ---
-
-<div class="post-container box">
-	<h2 class="post-title">{{ page.title }}</h2>
-	<p class="post-meta">{{ page.date | date_to_string }}</p>
-
-	<div class="post">
-		{{ content }}
-	</div>
+<div class='post-container box'>
+  <h2 class='post-title'>
+    {{ page.title }}
+  </h2>
+  <p class='post-meta'>
+    {{ page.date | date_to_string }}
+  </p>
+  <div class='post'>
+    {{ content }}
+  </div>
 </div>

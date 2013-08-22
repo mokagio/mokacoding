@@ -1,0 +1,13 @@
+:plain
+	---
+	layout: default
+	---
+
+.post-container.box
+	%h2.post-title
+		{{ page.title }}
+	%p.post-meta
+		{{ page.date | date_to_string }}
+	.post
+		{{ content }}
+		
