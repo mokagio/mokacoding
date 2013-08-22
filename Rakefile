@@ -29,11 +29,24 @@ task :watch do
 			puts "done."
 		end
 
+		def js_path(path)
+			js_path = path.gsub('src/coffee/', 'javascript/').gsub('coffee', 'js')
+		end
+
+		def coffee_compile(file)
+			file_name = file.split('/')[-1].gsub('coffee', 'js')
+			dest_dir = js_path(file).gsub("#{file_name}", "")
+			system "coffee --compile --output #{dest_dir} #{file}"
+			puts "done."
+		end
+
 		def compile(file)
 			if File.extname(file) == '.haml' 
 				haml_compile file
 			elsif File.extname(file) == '.sass' 
 				sass_compile file
+			elsif File.extname(file) == '.coffee'
+				coffee_compile(file)	
 			end
 		end		
 
@@ -42,6 +55,8 @@ task :watch do
 				html_path file
 			elsif File.extname(file) == '.sass' 
 				css_path file
+			elsif File.extname(file) == '.coffee'
+				js_path(file)					
 			end
 		end
 
