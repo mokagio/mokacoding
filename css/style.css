@@ -51,16 +51,25 @@ body {
   .post-container .post-meta {
     margin-bottom: 24px;
     font-size: smaller; }
-  .post-container .post h3 {
+  .post-container .post h1, .post-container .post h2, .post-container .post h3, .post-container .post h4 {
     margin-top: 22px;
     margin-bottom: 12px; }
   .post-container .post p {
     margin-bottom: 12px; }
+  .post-container .post ul, .post-container .post ol {
+    margin: 0 0 12px 30px; }
   .post-container .post a {
     color: gray;
     text-decoration: none; }
     .post-container .post a:hover {
       color: dimgrey; }
+  .post-container .post code {
+    display: inline-block;
+    padding: 0 0.3em;
+    background: lightgrey;
+    color: brown; }
+  .post-container .post hr {
+    margin: 20px 0; }
 
 .footer {
   color: gray;
