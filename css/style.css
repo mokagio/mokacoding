@@ -56,6 +56,11 @@ body {
     margin-bottom: 12px; }
   .post-container .post p {
     margin-bottom: 12px; }
+  .post-container .post a {
+    color: gray;
+    text-decoration: none; }
+    .post-container .post a:hover {
+      color: dimgrey; }
 
 .footer {
   color: gray;
