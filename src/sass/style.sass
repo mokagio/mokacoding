@@ -76,7 +76,7 @@ body
 			// TODO - make darker
 			color: $text-color
 
-.post-container
+.post-container, .post-container-half
 	@include corner-radius($corner-radius)
 	margin: 20px 0 20px 0
 	padding-top: 20px
@@ -123,6 +123,10 @@ body
 
 		hr
 			margin: 20px 0
+
+.post-container-half
+	display: inline-block
+	width: 300px
 
 .footer
 	// TODO - darker mixin!

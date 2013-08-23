@@ -38,7 +38,7 @@ body {
     .header a:hover {
       color: #2f1c11; }
 
-.post-container {
+.post-container, .post-container-half {
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   border-radius: 10px;
@@ -46,32 +46,36 @@ body {
   padding-top: 20px;
   padding-bottom: 20px;
   text-align: left; }
-  .post-container .post-title {
+  .post-container .post-title, .post-container-half .post-title {
     margin-bottom: 6px; }
-  .post-container .post-meta {
+  .post-container .post-meta, .post-container-half .post-meta {
     margin-bottom: 24px;
     font-size: smaller; }
-  .post-container .post h1, .post-container .post h2, .post-container .post h3, .post-container .post h4 {
+  .post-container .post h1, .post-container .post h2, .post-container .post h3, .post-container .post h4, .post-container-half .post h1, .post-container-half .post h2, .post-container-half .post h3, .post-container-half .post h4 {
     margin-top: 22px;
     margin-bottom: 12px; }
-  .post-container .post p {
+  .post-container .post p, .post-container-half .post p {
     margin-bottom: 12px; }
-  .post-container .post ul, .post-container .post ol {
+  .post-container .post ul, .post-container .post ol, .post-container-half .post ul, .post-container-half .post ol {
     margin: 0 0 12px 30px; }
-  .post-container .post a {
+  .post-container .post a, .post-container-half .post a {
     color: gray;
     text-decoration: none; }
-    .post-container .post a:hover {
+    .post-container .post a:hover, .post-container-half .post a:hover {
       color: dimgrey; }
-  .post-container .post code {
+  .post-container .post code, .post-container-half .post code {
     display: inline-block;
     padding: 0 0.3em;
     background: lightgrey;
     color: brown; }
-  .post-container .post code.code-block {
+  .post-container .post code.code-block, .post-container-half .post code.code-block {
     padding: 0.5em 1em; }
-  .post-container .post hr {
+  .post-container .post hr, .post-container-half .post hr {
     margin: 20px 0; }
+
+.post-container-half {
+  display: inline-block;
+  width: 300px; }
 
 .footer {
   color: dimgrey; }
