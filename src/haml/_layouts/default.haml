@@ -1,5 +1,5 @@
 !!!
-%hml
+%html
 	%head
 		%meta{ :charset => "utf-8" }/
 		%meta{ "http-equiv" => "X-UA-Compatible", :content => "IE=edge,chrome=1" }/
@@ -9,32 +9,32 @@
 		/ %link{ :rel => "stylesheet", :href => "/css/syntax.css" }
 		/ %link{ :rel => "stylesheet", :href => "/css/main.css" }
 		%link{ :rel => "stylesheet", :href => "/css/style.css" }
+		%link{ :rel => "stylesheet", :href => "/css/sticky-footer.css" }
 		%script{ :src => "/javascript/vendor/jquery-2.0.3.min.js", :type => "text/javascript" }
 
 	%body
-		.container
-			/ removeable
-			.site
-				.header.box
-					%h1.title
-						%a{ :href => "/" } {{ site.name }}
+		.wrapper
+			.container
+				/ removeable
+				.site
+					.header.box
+						%h1.title
+							%a{ :href => "/" } {{ site.name }}
 
-					/ %a.extra{ :href => "/"} home
+						/ %a.extra{ :href => "/"} home
 
-				{{ content }}
+					{{ content }}
+					.push
 
-				.footer
-					.contact
-						%p
-							mokagio
-							%br/
-							trying to be a good software engineer
-							%br/
-							mokagio42@gmail.com
-					.contact
-						%p
-							%a{ :href => "http://github.com/yourusername/" } http://github.com/mokagio
-							%br/
-							%a{ :href => "http://twitter.com/mokagio/"} @mokagio
+		.footer
+			.container
+				made with &#x2665 by mokagio since 2013
+				\-
+				twitter: 
+				%a{ :href => "http://twitter.com/mokagio/"} @mokagio
+				\- 
+				github: 
+				%a{ :href => "http://github.com/mokagio/" } mokagio
+						
 
 		%script{ :src => "/javascript/code_block_style.js", :type => "text/javascript" }
