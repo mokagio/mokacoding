@@ -2,7 +2,7 @@
   min-height: 100%;
   height: auto !important;
   height: 100%;
-  margin: 0 auto -60px; }
+  margin: 0 auto -2.5em; }
 
 .footer, .push {
-  height: 60px; }
+  height: 2.5em; }

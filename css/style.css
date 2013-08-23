@@ -74,5 +74,6 @@ body {
     margin: 20px 0; }
 
 .footer {
-  color: gray;
-  margin-top: 20px; }
+  color: dimgrey; }
+  .footer a {
+    text-decoration: none; }
