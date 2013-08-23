@@ -20,9 +20,10 @@ meta:
   _publicize_pending: '1'
   _elasticsearch_indexed_on: '2013-08-01 06:08:19'
 ---
+
 July has been a month dense of learning and (re)discoveries! First of all <strong>Rails 4</strong>, which I come to love back in the day, when I was working with my friends on the first prototype of <a href="http://www.kunerango.com" target="_blank">Kunerango</a>
 
-<strong>Objective-C and iOS Development</strong>
+###Objective-C and iOS Development
 
 <a href="http://rentzsch.github.io/mogenerator/" target="_blank">http://rentzsch.github.io/mogenerator/</a>
 
@@ -30,7 +31,7 @@ Guess what? CoreData doesn't make your life easy when you're seriously working w
 
 <a href="http://nomad-cli.com/">nomad</a> a set of useful tools to automate the every-day development. Another gift from mister <a href="http://mattt.me/">Mattt</a>.
 
-<strong>Ruby on Rails</strong>
+###Ruby on Rails
 
 <a href="http://rubyonrails.org/" target="_blank">Rails 4</a> finally out! <a href="http://weblog.rubyonrails.org/2013/6/25/Rails-4-0-final/" target="_blank">http://weblog.rubyonrails.org/2013/6/25/Rails-4-0-final/</a>
 
@@ -46,7 +47,7 @@ Amazon AWS S3 gem <a href="http://amazon.rubyforge.org">http://amazon.rubyforge
 
 I found a nice gem to add enumeration type to the ActiveRecord models: <a href="https://github.com/adzap/active_enum">active_enum</a>, but is it compatible with Rails 4? Here's a link on how to use it <a href="http://qubitlogs.com/Rails/2013/02/01/creating-pre-defined-set-of-attributes-mapping-integers-to-strings-in-rails/#.UdWbpT6DQ_U">http://qubitlogs.com/Rails/2013/02/01/creating-pre-defined-set-of-attributes-mapping-integers-to-strings-in-rails/#.UdWbpT6DQ_U</a>
 
-<strong>Ruby</strong>
+###Ruby
 
 I wrote some scripts to speed up some of my daily task at work, and used some nice gems in the meantime:
 <a href="http://nokogiri.org/">nokogiri</a>, to parse HTML using CSS selectors
@@ -55,7 +56,7 @@ I wrote some scripts to speed up some of my daily task at work, and used some ni
 <a href="https://github.com/samg/diffy">diffy</a>, comparing strings has never been so easy
 <a href="https://github.com/mikel/mail">mail</a>, sending emails from your scripts
 
-<strong>Coding Recipes</strong>
+###Coding Recipes
 
 <a href="http://codeartists.com/post/36892733572/how-to-directly-upload-files-to-amazon-s3-from-your">http://codeartists.com/post/36892733572/how-to-directly-upload-files-to-amazon-s3-from-your</a>
 
@@ -63,15 +64,15 @@ I wrote some scripts to speed up some of my daily task at work, and used some ni
 
 <a href="http://stackoverflow.com/questions/3159945/running-command-line-commands-within-ruby-script">Several ways to run a command line command from a Ruby script.</a>
 
-<strong>Sysadmin</strong>
+###Sysadmin
 
 Fixing Postgres connection error on OS X Mountain Lion <a href="http://jaygoldman.com/2012/11/fixing-postgres-connection-errors-on-mountain-lion/">http://jaygoldman.com/2012/11/fixing-postgres-connection-errors-on-mountain-lion/ </a>(funny because with Node there were no problems)
 
-<strong>Javascript</strong>
+###Javascript
 
 I looked into a bunch of Javasciprt techs: <a href="http://underscorejs.org/">Underscore.js</a>, <a href="http://jade-lang.com/">Jade</a>, <a href="http://handlebarsjs.com/">Handlebars</a>, <a href="http://learnboost.github.io/stylus/">Stylus</a>, <a href="http://expressjs.com/">Express</a>
 
-<strong>Tools</strong>
+###Tools
 
 <a href="http://imageoptim.com/">http://imageoptim.com/</a>
 
