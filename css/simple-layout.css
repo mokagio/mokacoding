@@ -17,8 +17,7 @@ body {
 
 h1.brand {
   font-family: "League Gothic", Impact, Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 44px;
-  margin: 16px 0; }
+  font-size: 44px; }
   h1.brand a {
     text-decoration: none; }
 
@@ -38,3 +37,5 @@ h1.brand {
     margin-bottom: 12px; }
   .post-container .post p {
     margin-bottom: 18px; }
+  .post-container .post p + h3 {
+    margin-top: 30px; }

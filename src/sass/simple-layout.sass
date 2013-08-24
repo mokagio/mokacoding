@@ -23,7 +23,6 @@ $width: 700px
 h1.brand
 	font-family: "League Gothic", Impact, Helvetica Neue, Helvetica, Arial, sans-serif
 	font-size: 44px
-	margin: 16px 0
 
 	a
 		text-decoration: none
@@ -59,17 +58,21 @@ $post-width: $width * 0.618
 		// The solution #1
 		//
 		// adjacent sibling selector: all the h3 after a p on the same level
-		// p + h3
-		// 	margin-top: 30px
+		p + h3
+			margin-top: 30px
 
 		// The solution #2
 		//
 		// not selector and first selector
-		:not(h3:first)
-			margin: top: 30px
+		// :not h3:first
+		// 	margin-top: 30px
 
 		// Why solution #2?
 		// Because it's more readable
+		//
+		// EDIT
+		// Why solution #1 for the moment?
+		// Issue with sass...
 		//
 		// What about performance
 		// TODO
