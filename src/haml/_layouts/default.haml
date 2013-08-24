@@ -8,26 +8,21 @@
 
 		/ %link{ :rel => "stylesheet", :href => "/css/syntax.css" }
 		/ %link{ :rel => "stylesheet", :href => "/css/main.css" }
-		%link{ :rel => "stylesheet", :href => "/css/style.css" }
-		%link{ :rel => "stylesheet", :href => "/css/sticky-footer.css" }
+		/ %link{ :rel => "stylesheet", :href => "/css/style.css" }
+		/ %link{ :rel => "stylesheet", :href => "/css/sticky-footer.css" }
+		%link{ :rel => "stylesheet", :href => "/css/simple-layout.css" }
+
 		%script{ :src => "/javascript/vendor/jquery-2.0.3.min.js", :type => "text/javascript" }
 
 	%body
-		.wrapper
-			.container
-				/ removeable
-				.site
-					.header.box
-						%h1.title
-							%a{ :href => "/" } {{ site.name }}
+		.container
+			.header
+				%h1.brand
+					%a{ :href => "/" } {{ site.name }}
 
-						/ %a.extra{ :href => "/"} home
+			{{ content }}
 
-					{{ content }}
-					.push
-
-		.footer
-			.container
+			.footer
 				made with &#x2665 by mokagio since 2013
 				\-
 				twitter: 

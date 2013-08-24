@@ -7,28 +7,20 @@
     <meta content='width=device-width' name='viewport'>
     <!-- %link{ :rel => "stylesheet", :href => "/css/syntax.css" } -->
     <!-- %link{ :rel => "stylesheet", :href => "/css/main.css" } -->
-    <link href='/css/style.css' rel='stylesheet'>
-    <link href='/css/sticky-footer.css' rel='stylesheet'>
+    <!-- %link{ :rel => "stylesheet", :href => "/css/style.css" } -->
+    <!-- %link{ :rel => "stylesheet", :href => "/css/sticky-footer.css" } -->
+    <link href='/css/simple-layout.css' rel='stylesheet'>
     <script src='/javascript/vendor/jquery-2.0.3.min.js' type='text/javascript'></script>
   </head>
   <body>
-    <div class='wrapper'>
-      <div class='container'>
-        <!-- removeable -->
-        <div class='site'>
-          <div class='header box'>
-            <h1 class='title'>
-              <a href='/'>{{ site.name }}</a>
-            </h1>
-            <!-- %a.extra{ :href => "/"} home -->
-          </div>
-          {{ content }}
-          <div class='push'></div>
-        </div>
+    <div class='container'>
+      <div class='header'>
+        <h1 class='brand'>
+          <a href='/'>{{ site.name }}</a>
+        </h1>
       </div>
-    </div>
-    <div class='footer'>
-      <div class='container'>
+      {{ content }}
+      <div class='footer'>
         made with &#x2665 by mokagio since 2013
         -
         twitter:

@@ -2,38 +2,7 @@ $background: #cecece
 $text-color: #2f1c11
 $corner-radius: 10px
 
-@mixin bottom-right-corner-radius($radius)
-	-webkit-border-bottom-right-radius: $radius
-	-moz-border-radius-bottomright: $radius
-	border-bottom-right-radius: $radius
-
-@mixin bottom-left-corner-radius($radius)
-	-webkit-border-bottom-left-radius: $radius
-	-moz-border-radius-bottomleft: $radius
-	border-bottom-left-radius: $radius
-
-@mixin top-right-corner-radius($radius)
-	-webkit-border-top-right-radius: $radius
-	-moz-border-radius-topright: $radius
-	border-top-right-radius: $radius
-
-@mixin top-left-corner-radius($radius)
-	-webkit-border-top-left-radius: $radius
-	-moz-border-radius-topleft: $radius
-	border-top-left-radius: $radius	
-
-@mixin bottom-corner-radius($radius)
-	@include bottom-right-corner-radius($radius)
-	@include bottom-left-corner-radius($radius)
-
-@mixin top-corner-radius($radius)
-	@include top-right-corner-radius($radius)
-	@include top-left-corner-radius($radius)
-
-@mixin corner-radius($radius)
-	-webkit-border-radius: $radius
-	-moz-border-radius: $radius
-	border-radius: $radius
+@import 'mixins'
 
 // global reset
 *
@@ -56,8 +25,6 @@ body
 .box
 	background-color: white
 	color: $text-color
-	-webkit-box-shadow:  0px 1px 1px 1px rgba(0, 0, 0, 0.1)
-	box-shadow:  0px 1px 1px 1px rgba(0, 0, 0, 0.1)
 	$padding: 20px
 	padding-left: $padding
 	padding-right: $padding

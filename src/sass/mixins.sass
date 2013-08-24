@@ -1,0 +1,42 @@
+// Border Radius
+
+@mixin bottom-right-corner-radius($radius)
+	-webkit-border-bottom-right-radius: $radius
+	-moz-border-radius-bottomright: $radius
+	border-bottom-right-radius: $radius
+
+@mixin bottom-left-corner-radius($radius)
+	-webkit-border-bottom-left-radius: $radius
+	-moz-border-radius-bottomleft: $radius
+	border-bottom-left-radius: $radius
+
+@mixin top-right-corner-radius($radius)
+	-webkit-border-top-right-radius: $radius
+	-moz-border-radius-topright: $radius
+	border-top-right-radius: $radius
+
+@mixin top-left-corner-radius($radius)
+	-webkit-border-top-left-radius: $radius
+	-moz-border-radius-topleft: $radius
+	border-top-left-radius: $radius	
+
+@mixin bottom-corner-radius($radius)
+	@include bottom-right-corner-radius($radius)
+	@include bottom-left-corner-radius($radius)
+
+@mixin top-corner-radius($radius)
+	@include top-right-corner-radius($radius)
+	@include top-left-corner-radius($radius)
+
+@mixin corner-radius($radius)
+	-webkit-border-radius: $radius
+	-moz-border-radius: $radius
+	border-radius: $radius
+
+
+// 	Box Shadow
+//	box-shadow: h-shadow v-shadow blur spread color inset
+
+@mixin box-shadow($shadow-options)
+	-webkit-box-shadow:  $shadow-options
+	box-shadow:  $shadow-options

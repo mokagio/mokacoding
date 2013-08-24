@@ -4,17 +4,8 @@ title: mokacoding
 ---
 <div id='home'>
   <div class='posts'>
-    {% assign post = site.posts[0] %}
-    <div class='box post-container'>
-      <h2>
-        <a href='{{ post.url }}'>{{ post.title }}</a>
-      </h2>
-      <span>
-        {{ post.date | date_to_string }}
-      </span>
-    </div>
-    {% for post in site.posts offset:1 %}
-    <div class='box post-container-half'>
+    {% for post in site.posts limit:5 %}
+    <div class='post-container'>
       <h2>
         <a href='{{ post.url }}'>{{ post.title }}</a>
       </h2>

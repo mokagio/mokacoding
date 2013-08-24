@@ -1,0 +1,39 @@
+@import 'mixins'
+
+// global reset
+*
+	margin: 0
+	padding: 0
+
+html, body
+	height: 100%
+
+body
+	padding-top: 40px
+	background: #efefef
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif
+
+$width: 700px
+.container
+	width: $width
+	position: relative
+	margin: 0 auto
+
+
+h1.brand
+	font-family: "League Gothic", Impact, Helvetica Neue, Helvetica, Arial, sans-serif
+	font-size: 44px
+	margin: 16px 0
+
+	a
+		text-decoration: none
+
+$post-width: $width * 0.618
+.post-container
+	background: #fff
+	padding: 18px 30px
+	margin-bottom: 60px		
+	width: $post-width
+	// avoid overflow outside of the div for long links
+	word-break: break-word
+	@include box-shadow(0px 2px 1px .5px rgba(0, 0, 0, 0.1))

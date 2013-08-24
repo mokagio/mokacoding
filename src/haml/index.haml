@@ -6,17 +6,10 @@
 
 #home
 	.posts
-		{% assign post = site.posts[0] %}
-		.box.post-container
+		{% for post in site.posts limit:5 %}
+		.post-container
 			%h2
 				%a{ :href => "{{ post.url }}" } {{ post.title }}
 			%span
 				{{ post.date | date_to_string }}
-		
-		{% for post in site.posts offset:1 %}	
-		.box.post-container-half
-			%h2
-				%a{ :href => "{{ post.url }}" } {{ post.title }}
-			%span
-				{{ post.date | date_to_string }}	
 		{% endfor %}
