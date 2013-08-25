@@ -27,6 +27,13 @@ h1.brand
 	a
 		text-decoration: none
 
+.post-wrap
+	clear: both
+	overflow: hidden
+
+	.post-container, .post-side
+		float: left
+
 $post-width: $width * 0.618
 .post-container
 	background: #fff
@@ -76,3 +83,7 @@ $post-width: $width * 0.618
 		//
 		// What about performance
 		// TODO
+	
+.post-side
+	margin-top: 56px
+	margin-left: 30px

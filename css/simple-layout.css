@@ -21,6 +21,12 @@ h1.brand {
   h1.brand a {
     text-decoration: none; }
 
+.post-wrap {
+  clear: both;
+  overflow: hidden; }
+  .post-wrap .post-container, .post-wrap .post-side {
+    float: left; }
+
 .post-container {
   background: white;
   padding: 18px 30px;
@@ -39,3 +45,7 @@ h1.brand {
     margin-bottom: 18px; }
   .post-container .post p + h3 {
     margin-top: 30px; }
+
+.post-side {
+  margin-top: 56px;
+  margin-left: 30px; }

@@ -3,11 +3,16 @@
 	layout: default
 	---
 
-.post-container
-	%h1.post-title
-		{{ page.title }}
-	%p.post-meta
-		{{ page.date | date_to_string }}
-	.post
-		{{ content }}
-		
+/ %div{ :style => "width: 30px; height: 10px; background: red;" }
+/ %div{ :style => "width: 30px; height: 10px; float: left; background: yellow;" }
+
+.post-wrap
+	.post-container
+		%h1.post-title
+			{{ page.title }}
+		.post
+			{{ content }}
+
+	.post-side
+		%p.post-meta
+			{{ page.date | date_to_string }}
