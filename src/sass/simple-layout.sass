@@ -55,6 +55,10 @@ $post-width: $width * 0.618
 	// TODO: look better into this...
 	margin-top: 30px
 	margin-bottom: 50px		
+
+	&:last-child
+		margin-bottom: 35px
+
 	width: $post-width
 	// avoid overflow outside of the div for long links
 	word-break: break-word
@@ -65,7 +69,7 @@ $post-width: $width * 0.618
 		font-size: 32px
 		line-height: 32px
 		margin-top: 16px
-		margin-bottom: 22px
+		margin-bottom: 30px
 		color: $color-primary
 
 	.post
@@ -118,3 +122,13 @@ $post-width: $width * 0.618
 	@include border-radius(9px)
 	@include box-shadow(0px -1px 0 0 #222 inset)
 	width: 130px
+
+.footer
+	padding-bottom: 20px
+	color: #666
+
+	a
+		color: darken($color-text, 20%)
+		text-decoration: none
+		&:hover
+			color: darken($color-text, 40%)
