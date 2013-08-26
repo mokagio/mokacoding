@@ -15,7 +15,6 @@ html, body
 	height: 100%
 
 body
-	padding-top: 40px
 	background: #efefef
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif
 	font-size: 13px
@@ -30,15 +29,19 @@ $width: 700px
 	position: relative
 	margin: 0 auto
 
+.header
+	margin-top: 40px
 
-h1.brand
-	@include brand-font-family
-	font-size: 44px
-	line-height: 44px
+	h1.brand
+		@include brand-font-family
+		font-size: 44px
+		line-height: 44px
 
-	a
-		text-decoration: none
-		color: $color-primary
+		a
+			text-decoration: none
+			color: $color-primary
+			&:hover
+				color: darken($color-primary, 10%)
 
 .post-wrap
 	clear: both

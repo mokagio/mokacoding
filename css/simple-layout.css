@@ -6,7 +6,6 @@ html, body {
   height: 100%; }
 
 body {
-  padding-top: 40px;
   background: #efefef;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 13px;
@@ -19,13 +18,17 @@ body {
   position: relative;
   margin: 0 auto; }
 
-h1.brand {
-  font-family: "League Gothic", Impact, Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 44px;
-  line-height: 44px; }
-  h1.brand a {
-    text-decoration: none;
-    color: #f25f31; }
+.header {
+  margin-top: 40px; }
+  .header h1.brand {
+    font-family: "League Gothic", Impact, Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 44px;
+    line-height: 44px; }
+    .header h1.brand a {
+      text-decoration: none;
+      color: #f25f31; }
+      .header h1.brand a:hover {
+        color: #e2410e; }
 
 .post-wrap {
   clear: both;
