@@ -1,5 +1,11 @@
 @import 'mixins'
 
+$color-primary: #f25f31
+$color-text: #333333
+
+@mixin brand-font-family
+	font-family: "League Gothic", Impact, Helvetica Neue, Helvetica, Arial, sans-serif
+
 // global reset
 *
 	margin: 0
@@ -12,6 +18,11 @@ body
 	padding-top: 40px
 	background: #efefef
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif
+	font-size: 13px
+	line-height: 20px
+	color: $color-text
+	text-shadow: 0 1px 0 #fff
+
 
 $width: 700px
 .container
@@ -21,11 +32,13 @@ $width: 700px
 
 
 h1.brand
-	font-family: "League Gothic", Impact, Helvetica Neue, Helvetica, Arial, sans-serif
+	@include brand-font-family
 	font-size: 44px
+	line-height: 44px
 
 	a
 		text-decoration: none
+		color: $color-primary
 
 .post-wrap
 	clear: both
@@ -48,8 +61,12 @@ $post-width: $width * 0.618
 	@include box-shadow(0px 2px 1px .5px rgba(0, 0, 0, 0.1))
 
 	.post-title
-		font-size: 28px
+		@include brand-font-family
+		font-size: 32px
+		line-height: 32px
+		margin-top: 16px
 		margin-bottom: 22px
+		color: $color-primary
 
 	.post
 		h3
@@ -83,7 +100,21 @@ $post-width: $width * 0.618
 		//
 		// What about performance
 		// TODO
+
+		a
+			color: $color-primary
+			text-decoration: none
+			&:hover
+				color: darken($color-primary, 10%)
 	
 .post-side
 	margin-top: 56px
 	margin-left: 30px
+
+	background: #444
+	padding: 10px 17px
+	color: white
+	text-shadow: 0 1px 0 #ccc
+	@include border-radius(9px)
+	@include box-shadow(0px -1px 0 0 #222 inset)
+	width: 130px
