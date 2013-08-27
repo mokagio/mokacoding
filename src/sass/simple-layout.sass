@@ -52,9 +52,10 @@ $width: 700px
 		float: left
 
 $post-width: $width * 0.618
+$post-padding-lateral: 30px
 .post-container
 	background: #fff
-	padding: 18px 30px
+	padding: 18px $post-padding-lateral
 	// Note: posts will be stacked, but remember that margin-top doesn't sum with margin-bottom
 	// TODO: look better into this...
 	margin-top: 30px
@@ -136,3 +137,23 @@ $post-width: $width * 0.618
 		text-decoration: none
 		&:hover
 			color: darken($color-text, 40%)
+
+#paginator
+	width: $post-width
+	padding: 0 $post-padding-lateral
+	text-align: center
+	font-size: 18px
+	margin-bottom: 30px
+
+	a
+		display: inline-block
+		padding: 6px 10px
+		margin-right: 6px
+		
+		color: white
+		text-shadow: none
+		background-color: $color-primary
+		text-decoration: none
+		// TODO sass lighten doesn't work nested?!
+		@include box-shadow(0 -1px 1px 0 #FF9E7E inset, 0 1px 1px 0.5px rgba(0, 0, 0, 0.2))
+		@include border-radius(4px)

@@ -37,6 +37,6 @@
 // 	Box Shadow
 //	box-shadow: h-shadow v-shadow blur spread color inset
 
-@mixin box-shadow($shadow-options)
-	-webkit-box-shadow:  $shadow-options
-	box-shadow:  $shadow-options
+@mixin box-shadow($shadow-options, $second-shadow-options: none)
+	-webkit-box-shadow:  $shadow-options, $second-shadow-options
+	box-shadow:  $shadow-options, $second-shadow-options
