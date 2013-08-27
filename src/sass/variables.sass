@@ -1,0 +1,13 @@
+$color-primary: #f25f31
+$color-text: #333333
+
+$width: 700px
+
+@mixin brand-font-family
+	font-family: "League Gothic", Impact, Helvetica Neue, Helvetica, Arial, sans-serif
+
+@mixin link-color-style
+	text-decoration: none
+	color: $color-primary
+	&:hover
+		color: darken($color-primary, 10%)
