@@ -1,4 +1,5 @@
 name: mokacoding
+baseurl: /mokacoding
 markdown: redcarpet
 pygments: true
 exclude: ['src']

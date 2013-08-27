@@ -11,7 +11,7 @@
 		.two-col-post-wrap
 			.post-container
 				%h1.post-title
-					%a{ :href => "{{ post.url }}" } {{ post.title }}
+					%a{ :href => "{{ site.baseurl}}{{ post.url }}" } {{ post.title }}
 				.post
 					{{ post.content }}
 
