@@ -1,5 +1,5 @@
 .header {
-  margin-top: 40px; }
+  margin: 40px 0; }
   .header h1.brand {
     font-family: "League Gothic", Impact, Helvetica Neue, Helvetica, Arial, sans-serif;
     font-size: 44px;
@@ -13,7 +13,6 @@
 .post-container {
   background: white;
   padding: 18px 30px;
-  margin-top: 30px;
   margin-bottom: 50px;
   word-break: break-word;
   -webkit-box-shadow: 0px 2px 1px 0.5px rgba(0, 0, 0, 0.1), none;
@@ -83,7 +82,7 @@
   .two-col-post-wrap .post-container {
     width: 432.6px; }
   .two-col-post-wrap .post-side {
-    margin-top: 56px;
+    margin-top: 30px;
     margin-left: 30px;
     background: #444444;
     padding: 10px 17px;
