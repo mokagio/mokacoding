@@ -66,6 +66,18 @@ body {
     text-decoration: none; }
     .post-container .post a:hover {
       color: #e2410e; }
+  .post-container .post ul, .post-container .post ol {
+    margin: 15px 0 15px 35px; }
+  .post-container .post code {
+    background: #f2f2f2;
+    color: #f25f31;
+    text-shadow: none;
+    padding: 0 4px; }
+    .post-container .post code .code-block {
+      display: block;
+      margin: 15px 0;
+      padding: 10px;
+      overflow-x: scroll; }
 
 .post-side {
   margin-top: 56px;
