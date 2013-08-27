@@ -1,8 +1,10 @@
-$background: #cecece
-$text-color: #2f1c11
-$corner-radius: 10px
+@import "variables"
+@import "mixins"
 
-@import 'mixins'
+@import "header"
+@import "post"
+@import "paginator"
+@import "footer"
 
 // global reset
 *
@@ -13,91 +15,15 @@ html, body
 	height: 100%
 
 body
-	background-color: $background
-	text-align: center
+	background-color: #efefef
+	background-image: url("/images/bg-noise.png")
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif
+	font-size: 13px
+	line-height: 20px
+	color: $color-text
+	text-shadow: 0 1px 0 #fff
 
 .container
+	width: $width
+	position: relative
 	margin: 0 auto
-	width: 700px
-	text-align: left
-
-.box
-	background-color: white
-	color: $text-color
-	$padding: 20px
-	padding-left: $padding
-	padding-right: $padding
-
-.header
-	@include bottom-corner-radius($corner-radius)
-
-	padding-top: 10px
-	padding-bottom: 16px
-
-	a
-		color: $text-color
-		text-decoration: none
-
-		&:hover
-			// TODO - make darker
-			color: $text-color
-
-.post-container, .post-container-half
-	@include corner-radius($corner-radius)
-	margin: 20px 0 20px 0
-	padding-top: 20px
-	padding-bottom: 20px
-	text-align: left
-
-	.post-title
-		margin-bottom: 6px
-
-	.post-meta
-		margin-bottom: 24px
-		font-size: smaller
-
-	.post
-		h1, h2, h3, h4
-			margin-top: 22px
-			margin-bottom: 12px
-
-		$margin-bottom: 12px
-		p
-			margin-bottom: $margin-bottom
-		
-		ul, ol
-			margin: 0 0 $margin-bottom 30px
-
-		a
-			color: gray
-			text-decoration: none
-
-			&:hover
-				// TODO - make darker mixin
-				color: dimgray
-
-		code
-			display: inline-block
-			padding: 0 .3em
-
-			// TEMPORARY :)
-			background: lightgray
-			color: brown
-
-		code.code-block
-			padding: 0.5em 1em
-
-		hr
-			margin: 20px 0
-
-.post-container-half
-	display: inline-block
-	width: 300px
-
-.footer
-	// TODO - darker mixin!
-	color: dimgray
-
-	a
-		text-decoration: none

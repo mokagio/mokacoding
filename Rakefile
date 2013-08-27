@@ -3,11 +3,7 @@ require 'listen'
 desc "Watches the Sass sources for changes and recompiles"
 task :watch do
 
-	puts "watching for changes to the Haml and Sass sources.\n"
-	puts "note: haml is not implemented yet... x_x"
-	Listen.to!('src') do |modified, added, removed|
-
-		def html_path(path)
+	def html_path(path)
 			html_path = path.gsub 'src/haml/', ''
 			html_path = html_path.gsub 'haml', 'html'
 			return html_path
@@ -59,6 +55,14 @@ task :watch do
 				js_path(file)					
 			end
 		end
+
+	puts "recompiling everything"
+	Dir.foreach('src') do |file|
+		compile file
+	end
+
+	puts "watching for changes to the Haml and Sass sources.\n"
+	Listen.to!('src') do |modified, added, removed|
 
 		modified.each do |file|
 			puts "#{file} changed, recompiling..."
