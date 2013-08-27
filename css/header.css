@@ -9,3 +9,9 @@
       color: #f25f31; }
       .header h1.brand a:hover {
         color: #e2410e; }
+  .header .punchline {
+    margin-top: 10px;
+    font-style: italic;
+    font-size: 16px;
+    text-shadow: none;
+    color: #666666; }
