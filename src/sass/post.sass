@@ -1,15 +1,8 @@
 @import "mixins"
 @import "variables"
 
-.post-wrap
-	clear: both
-	overflow: hidden
-
-	.post-container, .post-side
-		float: left
-
-$post-width: $width * 0.618
-$post-padding-lateral: 30px
+// ONE COLUMN POST
+//
 .post-container
 	background: #fff
 	padding: 18px $post-padding-lateral
@@ -21,7 +14,6 @@ $post-padding-lateral: 30px
 	&:last-child
 		margin-bottom: 35px
 
-	width: $post-width
 	// avoid overflow outside of the div for long links
 	word-break: break-word
 	@include box-shadow(0px 2px 1px .5px rgba(0, 0, 0, 0.1))
@@ -87,15 +79,27 @@ $post-padding-lateral: 30px
 				margin: 15px 0
 				padding: 10px
 				overflow-x: scroll
-	
-.post-side
-	margin-top: 56px
-	margin-left: 30px
 
-	background: #444
-	padding: 10px 17px
-	color: white
-	text-shadow: 0 1px 0 #ccc
-	@include border-radius(9px)
-	@include box-shadow(0px -1px 0 0 #222 inset)
-	width: 130px
+// TWO COLUMNS POST EXTENSIONS
+//
+.two-col-post-wrap
+	clear: both
+	overflow: hidden
+
+	.post-container, .post-side
+		float: left
+		
+	.post-container
+		width: $two-col-post-width
+		
+	.post-side
+		margin-top: 56px
+		margin-left: 30px
+
+		background: #444
+		padding: 10px 17px
+		color: white
+		text-shadow: 0 1px 0 #ccc
+		@include border-radius(9px)
+		@include box-shadow(0px -1px 0 0 #222 inset)
+		width: 130px

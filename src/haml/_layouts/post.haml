@@ -3,13 +3,10 @@
 	layout: default
 	---
 
-.post-wrap
-	.post-container
-		%h1.post-title
-			{{ page.title }}
-		.post
-			{{ content }}
-
-	.post-side
-		%p.post-meta
-			{{ page.date | date_to_string }}
+.post-container
+	%h1.post-title
+		%a{ :href => "{{ page.url }}" } {{ page.title }}
+	%p.post-meta
+		{{ page.date | date_to_string }}
+	.post
+		{{ content }}

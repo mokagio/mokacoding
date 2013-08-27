@@ -1,18 +1,14 @@
 ---
 layout: default
 ---
-<div class='post-wrap'>
-  <div class='post-container'>
-    <h1 class='post-title'>
-      {{ page.title }}
-    </h1>
-    <div class='post'>
-      {{ content }}
-    </div>
-  </div>
-  <div class='post-side'>
-    <p class='post-meta'>
-      {{ page.date | date_to_string }}
-    </p>
+<div class='post-container'>
+  <h1 class='post-title'>
+    <a href='{{ page.url }}'>{{ page.title }}</a>
+  </h1>
+  <p class='post-meta'>
+    {{ page.date | date_to_string }}
+  </p>
+  <div class='post'>
+    {{ content }}
   </div>
 </div>
