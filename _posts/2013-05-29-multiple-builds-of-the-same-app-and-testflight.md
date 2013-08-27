@@ -42,7 +42,7 @@ Better creating a new <a href="http://developer.apple.com/library/ios/#featureda
 
 <p>All right! Now we're finally able to archive our development version of the app and upload it on TestFlight, maybe through the TestFlight App which is nice and fast. But if we try to do it this is the result:</p>
 
-<p>"The provisioning profile is made for distribution builds but your app is built for development. Please select a valid development identity to continue".</p>
+>The provisioning profile is made for distribution builds but your app is built for development. Please select a valid development identity to continue.
 
 <p>Don't panic! The message gives us a tip already on how to solve the issue, we just need another Provisioning Profile! Select Development when creating the new profile and use the AppID of the "original" app. This last point surprised me, but I think it may have something to do with the sort of hierarchy structure the bundle ids have.</p>
 

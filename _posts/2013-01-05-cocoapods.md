@@ -16,9 +16,10 @@ published: true
 meta:
   _publicize_pending: '1'
 ---
+
 <h2>What is CocoaPods?</h2>
 
-<p><i>"CocoaPods: The best way to manage library dependencies in Objective-C projects."</i></p>
+>CocoaPods: The best way to manage library dependencies in Objective-C projects.
 
 <p>If you're familiar with Ruby on Rails, it's the same thing as <a href="http://gembundler.com/">Bundler</a>, or it's lame copy attempt for Symfony 2, <a href="http://getcomposer.org/">Composer</a>.</p>
 
@@ -47,9 +48,9 @@ meta:
 
 <p>This will, guess what, setup everything CocoaPods needs on your system. You should see an output like this:</p>
 
-<p><code>Setting up CocoaPods master repo<br />
-Cloning spec repo `master' from `https://github.com/CocoaPods/Specs.git' (branch `master')<br />
-Setup completed (read-only access)<br /></p></code>
+	Setting up CocoaPods master repo
+	Cloning spec repo `master' from `https://github.com/CocoaPods/Specs.git' (branch `master')
+	Setup completed (read-only access)
         
 <p>Done! :)</p>
 
@@ -61,11 +62,9 @@ Setup completed (read-only access)<br /></p></code>
 
 <p>Go in the root folder of your Objective-C project and create a file named `Podfile`, with whatever editor you like. We'll use this file to list all the libraries, _pods_, we need in the project. The JustNineGags `Podfile` content is:</p>
 
-<p><code>
-platform :ios<br />
-pod 'MBProgressHUD', '~&gt; 0.5'<br />
-pod 'Reachability',  '~&gt; 3.1.0'<br />
-</code></p>
+	platform :ios
+	pod 'MBProgressHUD', '~&gt; 0.5'
+	pod 'Reachability',  '~&gt; 3.1.0'
     
 <h3>Adding a Pod</h3>
 
@@ -101,7 +100,7 @@ pod 'Reachability',  '~&gt; 3.1.0'<br />
 
 <p>How to setup our own pods. I'll probably write a little and simple <code>Category</code> to add other colors to the <code>UIColor</code> factories, stay tuned!</p>
 
-<hr />
+---
 <h2>Update 2013-01-06</h2>
 
 <p>To implement HTTP requests in <a href="https://github.com/mokagio/justninegags">JustNineGags</a> I used <code><a href="https://github.com/nfarina/webrequest">SMWebRequest</a></code> because I'm too lazy to write everything by myself. <code>SMWebRequest</code> wasn't a Pod yet so I opened an <a href="https://github.com/nfarina/webrequest/issues/7">issue</a> asking good guy <a href="https://twitter.com/nfarina">nfarina</a> to add it. In less than 12 hours the Pod was added! :D</p>
