@@ -55,6 +55,11 @@ body {
     margin-top: 16px;
     margin-bottom: 30px;
     color: #f25f31; }
+    .post-container .post-title a {
+      text-decoration: none;
+      color: #f25f31; }
+      .post-container .post-title a:hover {
+        color: #e2410e; }
   .post-container .post h3 {
     margin-bottom: 12px; }
   .post-container .post p {
@@ -62,8 +67,8 @@ body {
   .post-container .post p + h3 {
     margin-top: 30px; }
   .post-container .post a {
-    color: #f25f31;
-    text-decoration: none; }
+    text-decoration: none;
+    color: #f25f31; }
     .post-container .post a:hover {
       color: #e2410e; }
   .post-container .post ul, .post-container .post ol {

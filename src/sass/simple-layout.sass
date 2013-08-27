@@ -6,6 +6,12 @@ $color-text: #333333
 @mixin brand-font-family
 	font-family: "League Gothic", Impact, Helvetica Neue, Helvetica, Arial, sans-serif
 
+@mixin link-color-style
+	text-decoration: none
+	color: $color-primary
+	&:hover
+		color: darken($color-primary, 10%)
+
 // global reset
 *
 	margin: 0
@@ -39,10 +45,8 @@ $width: 700px
 		line-height: 44px
 
 		a
-			text-decoration: none
-			color: $color-primary
-			&:hover
-				color: darken($color-primary, 10%)
+			@include link-color-style
+			
 
 .post-wrap
 	clear: both
@@ -76,6 +80,9 @@ $post-padding-lateral: 30px
 		margin-top: 16px
 		margin-bottom: 30px
 		color: $color-primary
+
+		a
+			@include link-color-style
 
 	.post
 		h3
@@ -111,10 +118,7 @@ $post-padding-lateral: 30px
 		// TODO
 
 		a
-			color: $color-primary
-			text-decoration: none
-			&:hover
-				color: darken($color-primary, 10%)
+			@include link-color-style
 
 		ul, ol
 			margin: 15px 0 15px 35px
