@@ -75,12 +75,14 @@
     margin-bottom: 18px; }
     .post-container .post blockquote p:last-child {
       margin-bottom: 0; }
-  .post-container .post hr {
+  .post-container hr {
     margin-bottom: 20px;
     border-top: 1px solid #dddddd;
     border-right: none;
     border-left: none;
     border-bottom: none; }
+  .post-container .post-meta {
+    text-align: right; }
 
 .two-col-post-wrap {
   clear: both;
