@@ -62,10 +62,12 @@ meta:
 
 <p>Go in the root folder of your Objective-C project and create a file named `Podfile`, with whatever editor you like. We'll use this file to list all the libraries, _pods_, we need in the project. The JustNineGags `Podfile` content is:</p>
 
+{% highlight ruby %}
 	platform :ios
-	pod 'MBProgressHUD', '~&gt; 0.5'
-	pod 'Reachability',  '~&gt; 3.1.0'
-    
+	pod 'MBProgressHUD', '~> 0.5'
+	pod 'Reachability',  '~> 3.1.0'
+{% endhighlight %}
+
 <h3>Adding a Pod</h3>
 
 <p>As you can see adding a Pod is really easy, just go on <a href="http://cocoapods.org">CocoaPods website</a>, look for the it, and then add it to the `Podfile` using it's name and the version you need.</p>

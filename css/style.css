@@ -52,6 +52,8 @@
     text-shadow: none;
     padding: 0 4px; }
   .post-container .post pre code {
+    color: #333333;
+    text-shadow: none;
     display: block;
     margin: 15px 0;
     padding: 10px;

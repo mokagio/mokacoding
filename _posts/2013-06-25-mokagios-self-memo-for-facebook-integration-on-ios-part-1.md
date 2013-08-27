@@ -58,6 +58,7 @@ Whatever solution you prefer the steps for the login are the same anyway:
 
 To get the current Facebook session we use `FBSession.activeSession`. To see if the session is active, and therefore the user is already logged in, we need to check the `state` property: `FBSession.activeSession.state`. A quick look to the `typedef enum` of the `FBSessionState` and:
 
+	{% highlight objective-c %}
 	+ (BOOL)isUserLoggedInFacebook
 	{
 	    if (FBSession.activeSession.state == FBSessionStateCreatedTokenLoaded
@@ -68,16 +69,19 @@ To get the current Facebook session we use `FBSession.activeSession`. To see if 
 	        return NO;
 	    }
 	}
+	{% endhighlight %}
 
 ####Call the Facebook SDK method to login
 
 Easy peasy:
 
+	{% highlight objective-c %}
 	[FBSession openActiveSessionWithReadPermissions:nil
 	                                   allowLoginUI:YES
 	                              completionHandler:^(FBSession *session, FBSessionState state, NSError *error) {
 	     // handle stuff here
 	 }];
+	 {% endhighlight %}
 
 In the completion handler we should… handle the result of the open active session. I think that this really depends on what our app will do, so I'm not gonna write any snippet here.
 
