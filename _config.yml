@@ -2,3 +2,4 @@ name: mokacoding
 markdown: redcarpet
 pygments: true
 exclude: ['src']
+paginate: 3

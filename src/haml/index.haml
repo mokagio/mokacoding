@@ -6,7 +6,7 @@
 
 #home
 	.posts
-		{% for post in site.posts limit:5 %}
+		{% for post in paginator.posts %}
 		- # DUPLICATED CODE! HORROR!!!
 		.post-wrap
 			.post-container
@@ -19,3 +19,16 @@
 				%p.post-meta
 					{{ post.date | date_to_string }}
 		{% endfor %}
+
+#paginator
+	{% if paginator.previous_page %}
+	{% if paginator.previous_page != 1 %}
+	%a{ :href => "/page{{ paginator.previous_page}}"}Prev
+	{% else %}
+	%a{ :href => "/"}Prev
+	{% endif %}
+	{% endif %}
+	{{ paginator.page }}
+	{% if paginator.next_page %}
+	%a{ :href => "/page{{ paginator.next_page}}"}Next
+	{% endif %}

@@ -4,7 +4,7 @@ title: mokacoding
 ---
 <div id='home'>
   <div class='posts'>
-    {% for post in site.posts limit:5 %}
+    {% for post in paginator.posts %}
     <div class='post-wrap'>
       <div class='post-container'>
         <h1 class='post-title'>
@@ -22,4 +22,17 @@ title: mokacoding
     </div>
     {% endfor %}
   </div>
+</div>
+<div id='paginator'>
+  {% if paginator.previous_page %}
+  {% if paginator.previous_page != 1 %}
+  <a href='/page{{ paginator.previous_page}}'>Prev</a>
+  {% else %}
+  <a href='/'>Prev</a>
+  {% endif %}
+  {% endif %}
+  {{ paginator.page }}
+  {% if paginator.next_page %}
+  <a href='/page{{ paginator.next_page}}'>Next</a>
+  {% endif %}
 </div>
