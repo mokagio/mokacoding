@@ -10,3 +10,4 @@ My personal coding blog attempt. Jekyll powered and GitHub Pages hosted. Visit [
 * Credits for the layout, as I basically copied it from a Tumblr theme.
 * Add an about
 * Categories
+* Responsive Layout!
