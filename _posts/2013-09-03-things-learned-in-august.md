@@ -55,6 +55,4 @@ Their slow in definig standards, but sometimes the W3C is a good place where to 
 <a href="https://waffle.io/">waffle.io</a>, a shared kanban board for your projects on GitHub.<em>
 </em>
 
-###Trivia
-
 My workmates <a href="http://adamj.eu/">Adam Chainz</a> introduced me to the <a href="http://colemak.com/">Colemak</a> keyboard layout.
