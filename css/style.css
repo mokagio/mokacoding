@@ -6,9 +6,9 @@
     line-height: 44px; }
     .header h1.brand a {
       text-decoration: none;
-      color: #f25f31; }
+      color: #fd0386; }
       .header h1.brand a:hover {
-        color: #e2410e; }
+        color: #e50279; }
   .header .punchline {
     margin-top: 10px;
     font-style: italic;
@@ -31,12 +31,12 @@
     line-height: 32px;
     margin-top: 16px;
     margin-bottom: 30px;
-    color: #f25f31; }
+    color: #fd0386; }
     .post-container .post-title a {
       text-decoration: none;
-      color: #f25f31; }
+      color: #fd0386; }
       .post-container .post-title a:hover {
-        color: #e2410e; }
+        color: #e50279; }
   .post-container .post h2 {
     margin-bottom: 16px; }
   .post-container .post h3 {
@@ -47,14 +47,14 @@
     margin-top: 30px; }
   .post-container .post a {
     text-decoration: none;
-    color: #f25f31; }
+    color: #fd0386; }
     .post-container .post a:hover {
-      color: #e2410e; }
+      color: #e50279; }
   .post-container .post ul, .post-container .post ol {
     margin: 15px 0 15px 35px; }
   .post-container .post code {
     background: #f2f2f2;
-    color: #f25f31;
+    color: #fd0386;
     text-shadow: none;
     padding: 0 4px; }
   .post-container .post pre code {
@@ -92,17 +92,17 @@
   .two-col-post-wrap .post-container {
     width: 432.6px; }
   .two-col-post-wrap .post-side {
-    margin-top: 30px;
     margin-left: 30px;
     background: #444444;
-    padding: 10px 17px;
+    border: 1px solid #222222;
+    padding: 8px 17px;
     color: white;
-    text-shadow: 0 1px 0 #cccccc;
+    text-shadow: 0 1px 0 black;
     -webkit-border-radius: 9px;
     -moz-border-radius: 9px;
     border-radius: 9px;
-    -webkit-box-shadow: 0px -1px 0 0 #222222 inset, none;
-    box-shadow: 0px -1px 0 0 #222222 inset, none;
+    -webkit-box-shadow: 0px -3px 1px 1px rgba(0, 0, 0, 0.2) inset, none;
+    box-shadow: 0px -3px 1px 1px rgba(0, 0, 0, 0.2) inset, none;
     width: 130px; }
 
 #paginator {
@@ -117,7 +117,7 @@
     margin-right: 6px;
     color: white;
     text-shadow: none;
-    background-color: #f25f31;
+    background-color: #fd0386;
     text-decoration: none;
     -webkit-box-shadow: 0 -1px 1px 0 #ff9e7e inset, 0 1px 1px 0.5px rgba(0, 0, 0, 0.2);
     box-shadow: 0 -1px 1px 0 #ff9e7e inset, 0 1px 1px 0.5px rgba(0, 0, 0, 0.2);
