@@ -4,3 +4,4 @@ markdown: redcarpet
 pygments: true
 exclude: ['src', 'README.md']
 paginate: 3
+permalink: /:year/:month/:day/:title.html
