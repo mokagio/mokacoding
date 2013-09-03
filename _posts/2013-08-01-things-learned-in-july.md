@@ -45,7 +45,7 @@ How cool are named routes? <code>post 'items/move_down/:id' =&gt; 'items#move_do
 
 Amazon AWS S3 gem <a href="http://amazon.rubyforge.org">http://amazon.rubyforge.org</a>
 
-I found a nice gem to add enumeration type to the ActiveRecord models: <a href="https://github.com/adzap/active_enum">active_enum</a>, but is it compatible with Rails 4? Here's a link on how to use it <a href="http://qubitlogs.com/Rails/2013/02/01/creating-pre-defined-set-of-attributes-mapping-integers-to-strings-in-rails/#.UdWbpT6DQ_U">http://qubitlogs.com/Rails/2013/02/01/creating-pre-defined-set-of-attributes-mapping-integers-to-strings-in-rails/#.UdWbpT6DQ_U</a>
+I found a nice gem to add enumeration type to the ActiveRecord models: <a href="https://github.com/adzap/active_enum">active_enum</a>, but is it compatible with Rails 4? Here's a [link](http://qubitlogs.com/Rails/2013/02/01/creating-pre-defined-set-of-attributes-mapping-integers-to-strings-in-rails/#.UdWbpT6DQ_U) on how to use it.
 
 ###Ruby
 
@@ -76,10 +76,10 @@ I looked into a bunch of Javasciprt techs: <a href="http://underscorejs.org/">U
 
 <a href="http://imageoptim.com/">http://imageoptim.com/</a>
 
-<strong>Software Engineering Good Practices</strong>
+###Software Engineering Good Practices
 
 <a href="http://en.wikipedia.org/wiki/Coupling_(computer_programming)">Coupled dependencies</a>, I found one of those monsters in a colleague's code. It took a lot of self-control to avoid being a prick and pointing it out on GitHub.
 
-<b>Interesting readings</b>
+###Interesting readings
 
 <a href="How Basecamp Next got to be so damn fast without using much client-side UI">How Basecamp Next got to be so damn fast without using much client-side UI</a>
