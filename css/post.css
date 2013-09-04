@@ -64,7 +64,7 @@
     border-left: none;
     border-bottom: none; }
   .post-container .post-meta {
-    text-align: right; }
+    display: inline-block; }
 
 .two-col-post-wrap {
   clear: both;
