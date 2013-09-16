@@ -52,6 +52,9 @@
       color: #e50279; }
   .post-container .post ul, .post-container .post ol {
     margin: 15px 0 15px 35px; }
+  .post-container .post img {
+    width: 100%;
+    cursor: pointer; }
   .post-container .post code {
     background: #f2f2f2;
     text-shadow: none;
@@ -180,6 +183,3 @@ body {
 
 .float-right {
   float: right; }
-
-img {
-  width: 100%; }
