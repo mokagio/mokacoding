@@ -21,7 +21,7 @@ Make sure all the provisioning profiles and code signing are set properly
 
 ####Step 2
 
-Open your Terminal and generate the `.ipa` yourself, with the help of [shenzhen](https://github.com/nomad/shenzhen).
+Open your Terminal and generate the `.ipa` yourself, with the help of [shenzhen](https://github.com/nomad/shenzhen).
 
 	cd my/ready/to/be/submitter/ios/project
 	ipa build -c Release
@@ -44,15 +44,15 @@ Every now and then in the lifecycle of an iOS project it comes the day when you 
 
 ###Submit your iOS7 apps today
 
-_image here_
+![Submit today]({{ site.url }}/assets/2013-09-16/submit-today.jpg)
 
 On the 10th of September Apple sent an email to their developers, "Submit your iOS7 apps today" they said. Up to that point we couldn't submit apps made with the iOS7 SDK, as written somewhere in the Xcode 5 Developer Preview release notes. But that day the iOS7 GM and Xcode 5 GM where released, and the run to submit started.
 
-_image here_
+![Use Xcode 5 GM]({{ site.url }}/assets/2013-09-16/use-xcode5.jpg)
 
 In their beautiful styled [iOS7 developer page](https://developer.apple.com/ios7/) they explained everything. If you follow the link to the [App Distribution Guide](https://developer.apple.com/library/prerelease/ios/documentation/IDEs/Conceptual/AppDistributionGuide/Introduction/Introduction.html) in the bottom of the page you will have a funny surprise. The link goes to the previous version documentation, and our Apple engineers forgot to add a link to the new version.
 
-_image here_
+![Missing link]({{ site.url }}/assets/2013-09-16/missing-link.jpg)
 
 I'm sure everything is gonna be fine, Xcode is such a reliable IDE, and the Apple guys are known for the quality of the products they give to their developers. Let's go!
 
@@ -60,7 +60,7 @@ I'm sure everything is gonna be fine, Xcode is such a reliable IDE, and the Appl
 
 When clicking on "Validate" or "Distribute" from the organizer, no matter how may times I refreshed my Accounts in the Preferences menu this is what I got
 
-_image here_
+![The terrible dialog]({{ site.url }}/assets/2013-09-16/the-terrible-dialog.jpg)
 
 And guess what? Both those buttons resulted in Xcode crashing, right there, with no explanation, no progress bar, nothing, Boom!
 
