@@ -54,7 +54,6 @@
     margin: 15px 0 15px 35px; }
   .post-container .post code {
     background: #f2f2f2;
-    color: #fd0386;
     text-shadow: none;
     padding: 0 4px; }
   .post-container .post pre code {
@@ -181,3 +180,6 @@ body {
 
 .float-right {
   float: right; }
+
+img {
+  width: 100%; }
