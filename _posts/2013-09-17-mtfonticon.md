@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Some things I learned in August
+title: MTFontIcons
 categories:
 - Coding
 tags:
@@ -10,8 +10,6 @@ tags:
 - Layout
 - CSS
 - Open Source
-status: publish
-type: post
 published: true
 ---
 
