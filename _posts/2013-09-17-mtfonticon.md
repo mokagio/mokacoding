@@ -1,6 +1,6 @@
 ---
 layout: post
-title: MTFontIcons
+title: Bringing font icons in iOS with MTFontIcon
 categories:
 - Coding
 tags:
@@ -11,6 +11,8 @@ tags:
 - CSS
 - Open Source
 published: true
+keyword: icon font ios
+seo_description: Introducing MTFontIcon, a CocoaPod library for iOS to improve application development efficiency by using font icons.
 ---
 
 Let me introduce you one of my latests projects, on which I worked almost a month ago, but I'm both lazy and hyperactive when it comes to projects, so the blog post arrives only now...
