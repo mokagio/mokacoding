@@ -1,6 +1,15 @@
 ---
+layout: post
 title: Setting a Mac for Development
+seo_description: A simple checklist of the basic tools to setup a Mac for development
+keyword: setup mac development
 published: true
+categories:
+- Checklists
+tags:
+- Mac OSX
+- Be smart, or at least try
+- Reminders
 
 ---
 
@@ -12,7 +21,7 @@ _Note: the original version of this post was long and basically just me blabberi
 
 ###Setup OS X for Development: the checklist
 
-####1- [Homebrew](http://brew.sh/)
+####[Homebrew](http://brew.sh/)
 
 Save time, and your sanity, use homebrew!
 
@@ -22,7 +31,7 @@ homebrew saves stuff in `/usr/local/bin`, so make sure it comes **before** the d
 
 	export PATH=/usr/local/bin/:$PATH
 
-####2- [zsh](http://www.zsh.org/)
+####[zsh](http://www.zsh.org/)
 
 	brew install zsh
 
@@ -41,34 +50,34 @@ Finally, set zsh as the default shell
 
 	chsh -s /usr/local/bin/zsh
 
-####3- [Ruby](https://www.ruby-lang.org/en/), of course via [rvm](https://rvm.io/)
+####[Ruby](https://www.ruby-lang.org/en/), of course via [rvm](https://rvm.io/)
 
 	\curl -L https://get.rvm.io | bash -s stable
 	rvm install 2.0.0
 
-####4- [Python](http://www.python.org/), a proper one
+####[Python](http://www.python.org/), a proper one
 
 	brew install python
 
-####5- [Node.js](http://nodejs.org/)
+####[Node.js](http://nodejs.org/)
 
 Just head to the [home page](http://nodejs.org/) and hit the green "Install" button, it's the [reccomened way](https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager#osx)! _Or use homebrew again:_
 
 	brew install node
 	
-####6- Xcode and the Command Line Tools
+####Xcode and the Command Line Tools
 
 Get it from [Apple's Developer page](https://developer.apple.com/xcode/), and then search for "Command Line Tools" in the "Downloads" tab of the "Preferences".
 
 There's also an [open source way](http://kennethreitz.org/xcode-gcc-and-homebrew/), but I haven't tried it.
 	
-####7- [Java](http://www.java.com/en/)
+####[Java](http://www.java.com/en/)
 
 Apparently OS X doesn't come with Java ready for us, but at least installing it is easy, just try to use it in the terminal, and the installation wizard will start.
 
 	java
 
-####8- Some useful extra stuff
+####Some useful extra stuff
 
 * [Chrome](http://www.google.com/chrome)
 * [Alfred](http://www.alfredapp.com/)
