@@ -8,6 +8,7 @@ categories:
 tags:
 - iOS 7
 - UX
+published: true
 ---
 
 Today I read this article I added to my reading list a couple of days ago: [iOS 7: leading UX designers give their verdict](http://www.digitalartsonline.co.uk/news/interactive-design/ios-7-leading-ux-designers-give-their-verdict/). I founded some of the opinions quite interesting and worth sharing.
