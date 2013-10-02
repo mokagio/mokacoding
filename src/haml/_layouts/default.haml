@@ -3,7 +3,15 @@
 	%head
 		%meta{ :charset => "utf-8" }/
 		%meta{ "http-equiv" => "X-UA-Compatible", :content => "IE=edge,chrome=1" }/
+		{% if page.title %}
+		{% if page.keyword %}
 		%title {{ page.title }} - {{ page.keyword }} -  {{ site.name }}
+		{% else %}
+		%title {{ page.title }} - {{ site.name }}
+		{% endif %}
+		{% else %}
+		%title {{ site.name }}
+		{% endif %}
 		%meta{ :name => "viewport", :content => "width=device-width" }
 		%meta{ :name => "description", :content => "{{ page.seo_description }}" }
 
