@@ -1,0 +1,20 @@
+@import "mixins"
+@import "variables"
+
+.header
+	margin: 40px 0
+
+	.brand
+		@include brand-font-family
+		font-size: 44px
+		line-height: 44px
+
+		a
+			@include link-color-style
+
+	.punchline
+		margin-top: 10px
+		font-style: italic
+		font-size: 16px
+		text-shadow: none
+		color: #666

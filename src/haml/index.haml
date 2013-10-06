@@ -1,0 +1,38 @@
+:plain
+	---
+	layout: default
+	---
+
+#home
+	.posts
+		{% for post in paginator.posts %}
+		.two-col-post-wrap
+			.post-container
+				%h1.post-title
+					%a{ :href => "{{ site.url }}{{ post.url }}" } {{ post.title }}
+				.post
+					{{ post.content }}
+
+			.post-side
+				%p.post-meta
+					{{ post.date | date_to_string }}
+
+				%p
+					%a{ :href => "https://twitter.com/share", :class => "twitter-share-button", "data-text" => "{{ post.title }} #mokacoding", "data-size" => "large", "data-url" => "http://mokacoding.com{{ site.url }}{{ post.url }}" }
+						Tweet
+
+					:javascript
+						!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+		{% endfor %}
+
+#paginator
+	{% if paginator.previous_page %}
+	{% if paginator.previous_page != 1 %}
+	%a{ :href => "/page{{ paginator.previous_page}}"}Prev
+	{% else %}
+	%a{ :href => "/"}Prev
+	{% endif %}
+	{% endif %}
+	{% if paginator.next_page %}
+	%a{ :href => "/page{{ paginator.next_page}}"}Next
+	{% endif %}

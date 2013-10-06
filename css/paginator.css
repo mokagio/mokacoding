@@ -1,0 +1,19 @@
+#paginator {
+  width: 432.6px;
+  padding: 0 30px;
+  text-align: center;
+  font-size: 18px;
+  margin-bottom: 30px; }
+  #paginator a {
+    display: inline-block;
+    padding: 6px 10px;
+    margin-right: 6px;
+    color: white;
+    text-shadow: none;
+    background-color: #fd0386;
+    text-decoration: none;
+    -webkit-box-shadow: 0 -1px 1px 0 #ff9e7e inset, 0 1px 1px 0.5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 -1px 1px 0 #ff9e7e inset, 0 1px 1px 0.5px rgba(0, 0, 0, 0.2);
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px; }

@@ -1,0 +1,17 @@
+.header {
+  margin: 40px 0; }
+  .header .brand {
+    font-family: "League Gothic", Impact, Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 44px;
+    line-height: 44px; }
+    .header .brand a {
+      text-decoration: none;
+      color: #fd0386; }
+      .header .brand a:hover {
+        color: #e50279; }
+  .header .punchline {
+    margin-top: 10px;
+    font-style: italic;
+    font-size: 16px;
+    text-shadow: none;
+    color: #666666; }
