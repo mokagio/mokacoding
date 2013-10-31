@@ -104,8 +104,44 @@ The [Apple Documentation](https://developer.apple.com/library/ios/featuredarticl
 
 > A workspace is an Xcode document that groups projects and other documents so you can work on them together. A workspace can contain any number of Xcode projects, plus any other files you want to include. In addition to organizing all the files in each Xcode project, a workspace provides implicit and explicit relationships among the included projects and their targets.
 
-The `.xcworkspace` from [KZPropertyMapper](https://github.com/krzysztofzablocki/KZPropertyMapper/tree/master/Example/Example.xcworkspace) is too tiny, so let's  take a look at another one, [AFNetworking](https://github.com/AFNetworking/AFNetworking/blob/master/AFNetworking.xcworkspace/contents.xcworkspacedata). As for the project the workspace is nothing but a folder, grouping configuration files. The interesting file here is `contents.xcworkspacedata`. Let's open it… Surprise! Unlike the project file this one is a more readable [XML](http://en.wikipedia.org/wiki/XML). Inside there's a list of the workspace components. If you open 
+The `.xcworkspace` from [KZPropertyMapper](https://github.com/krzysztofzablocki/KZPropertyMapper/tree/master/Example/Example.xcworkspace) is too tiny, so let's  take a look at another one, [AFNetworking](https://github.com/AFNetworking/AFNetworking/blob/master/AFNetworking.xcworkspace/contents.xcworkspacedata). As for the project the workspace is nothing but a folder, grouping configuration files. The interesting file here is `contents.xcworkspacedata`. Let's open it… Surprise! Unlike the project file this one is a more readable [XML](http://en.wikipedia.org/wiki/XML). Inside there's a list of the workspace components. 
 
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+	version = "1.0">
+	<Group
+		location = "group:AFNetworking"
+		name = "AFNetworking">
+		<FileRef
+			location = "group:AFNetworking.h">
+		</FileRef>
+		<Group
+			location = "container:"
+			name = "NSURLConnection">
+			<FileRef
+				location = "group:AFNetworking/AFURLConnectionOperation.h">
+			</FileRef>
+			...
+		</Group>
+		<Group
+			location = "container:"
+			name = "NSURLSession">
+			...
+		</Group>
+		...
+	</Group>
+	...
+	<FileRef
+		location = "group:Tests/AFNetworking Tests.xcodeproj">
+	</FileRef>	
+	...
+</Workspace>
+```
+
+If you open the `AFNetworking.xcworkspace` you'll see this
+
+![AFNetworking Workspace]({{ site.url }}/assets/2013-10-31/afnetworking_fs.png)
 
 ###References
 
