@@ -1,6 +1,18 @@
 ---
 layout: post
-title: Xcode a dive into projects and workspaces
+title: A dive into Xcode projects and workspaces
+categories:
+- Be smart or at least try!
+- Learn
+tags:
+- Xcode
+- iOS
+- Objective-C
+- Questions
+- Hacking
+published: true
+seo_description: A look at how Xcode stores information about the project and the workspace
+keyword: Xcode project workspace
 ---
 
 _Note: this is post is the first answer to my [October's Questions](). It should have arrived earlier but this month has been strange, because of several reasons I didn't had and didn't make enough time to write. But let's get started!_
@@ -13,9 +25,9 @@ The [Apple Documentation](https://developer.apple.com/library/ios/featuredarticl
 
 > An Xcode project is a repository for all the files, resources, and information required to build one or more software products. A project contains all the elements used to build your products and maintains the relationships between those elements. It contains one or more targets, which specify how to build products. A project defines default build settings for all the targets in the project (each target can also specify its own build settings, which override the project build settings).
  
-Cool, I got that, but what about the file itself? Let's open one with a text editor. I've used the `project.pbxproj` from [KZPropertyMapper](https://github.com/krzysztofzablocki/KZPropertyMapper/blob/master/Example/Example.xcodeproj/project.pbxproj) a smart library timesaving that you should all checkout.
+Cool, I got that, but what about the file itself? Let's open one with a text editor. I've used the `project.pbxproj` from [KZPropertyMapper](https://github.com/krzysztofzablocki/KZPropertyMapper/blob/master/Example/Example.xcodeproj/project.pbxproj) a smart and timesaving library that you should all checkout.
 
-It appears as a sort of JSON, it as a `{}` hierarchy, written in C, because it uses `;` and `/* inline comments */`
+It appears as a sort of JSON, written in C, as it as a `{}` hierarchy, with inside `=`, `;` and `/* inline comments */`.
 
 The top level is something like
 
@@ -42,29 +54,11 @@ CDAC634017A0EF4C00F5452A /* KZPropertyMapper.m in Sources */ = {
 };
 ```
 
-Lucky Xcode adds some comments to make the things a bit more readable for humans. _Note:_ I'm sure they're comment and not part of the way stuff is written because I actually tried changing one and everything run fine.
+Lucky for us Xcode adds some comments to make the things a bit more readable for humans. _Note:_ I'm sure they're comment and not part of the way stuff is written because I actually tried changing one and everything run fine.
 
-The `objects` has many sections, each wrapped between `/* Begin SectionName section */` and `/* End SectionName section */` comments.
+The `objects` has many sections, each wrapped between `/* Begin SectionName section */` and `/* End SectionName section */` comments. 
 
-The sections I found in my projects are:
-
-* `PBXBuildFile`
-* `PBXContainerItemProxy`
-* `PBXFileReference`
-* `PBXFrameworksBuildPhase`
-* `PBXGroup`
-* `PBXNativeTarget`
-* `PBXProject`
-* `PBXResourcesBuildPhase`
-* `PBXShellScriptBuildPhase`
-* `PBXSourcesBuildPhase`
-* `PBXTargetDependency`
-* `PBXVariantGroup`
-* `XCBuildConfiguration`
-* `XCConfigurationList`
-* `XCVersionGroup`
-
-Here's the one I found more interesting. The [xcodeproj](http://docs.cocoapods.org/xcodeproj/index.html) gem documentation used by [CocoaPods](http://cocoapods.org/) has been really helpful in understanding what some sections were about.
+Here's the ones I found more interesting, the [xcodeproj](http://docs.cocoapods.org/xcodeproj/index.html) gem documentation used by [CocoaPods](http://cocoapods.org/) has been really helpful in understanding what some sections were about:
 
 ####`PBXFileReference`
 
@@ -96,7 +90,7 @@ Here we have the settings for a _Build Phase_ of type _Run Script_. The funny th
 
 I found it hard to guess from the name, but here we have the information about the localized files.
 
-That's it, more or less… It `project.pbxproj` files stores all the informations regarding the project we're working on, it's organized in a lot of sections related together by keeping track of the objects identifiers in form of hex hashes. 
+That's it, more or less… The `project.pbxproj` file stores all the informations regarding the project we're working on, and it's organized in a lot of meaningful sections related together by keeping track of the objects identifiers in form of hex hashes. Let's move on to the workspace then.
 
 I first came across an Xcode workspace when I used [Kobold2d](http://www.kobold2d.com/display/KKSITE/Home) to develop a simple and unsuccesful game of iOS. It's easy to guess what a workspace might be. 
 
@@ -141,9 +135,16 @@ The `.xcworkspace` from [KZPropertyMapper](https://github.com/krzysztofzablocki/
 
 If you open the `AFNetworking.xcworkspace` you'll see this
 
-![AFNetworking Workspace]({{ site.url }}/assets/2013-10-31/afnetworking_fs.png)
+<!-- I know, I know... inline style is shit :(-->
+<img src="{{ site.url }}/assets/2013-10-31/afnetworking_fs.png" style="width: 200px" alt="AFNetworking Workspace"/>
+
+It all then comes together. It works more or less as the `project.pbxproj` does. The `Group` tag contains other `Group`s or `FileRef` tags, which represent where the file is in the filesystem related to the location of the workspace.
+
+This is it. Of course there could be, and may be there will be, a lot more to dig and look into, but for tonight I'm fine with this. I now have a clearer picture of what happens when I add a new file to a project or I use the GUI to edit the configurations of a target. I can't say this is gonna make my everyday battle with Xcode easier, but definitely knowing more of how it works makes me feel smarted.
+
+Happy coding.
 
 ###References
 
 * The [xcodeproj](http://docs.cocoapods.org/xcodeproj/index.html) gem used by [CocoaPods]().
-* [xcoder](), another gem to manipulate an Xcode project. 
+* [xcoder](https://github.com/rayh/xcoder), another gem to manipulate an Xcode project. 
