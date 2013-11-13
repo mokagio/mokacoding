@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Adding a new has_many association to an existing model
+title: "Rails: adding a new has_many association to an existing model"
 categories:
 - Learn
 tags:
