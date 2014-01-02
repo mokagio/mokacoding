@@ -11,25 +11,25 @@ tags:
 - Productivity
 ---
 
-2013 has been a very dense year for me, full on new experiences and challenges. I've grown a lot this year. Here I'm gonna try to do a quick *retrospective* on 2013, in full agile fashion. Finally I'm gonna set some expectations for 2014.
+2013 has been a very dense year for me, full on new experiences and challenges. I can really say I've grown a lot during year. In this post I'm gonna try to do a quick *retrospective* on 2013, in full agile fashion. Finally I'm gonna set some expectations for 2014.
 
 ##Retrospectives on 2013
 
 ###What's been good
 
 ####Love it or leave it!
-I was able to overcome some fears and leave [Memrise](http://memrise.com), my first job and first love in London, when I realized I wasn't loving the job anymore, and that my work there was teaching me less and less things week after week. Although I have to admit that to change job in a city like London, where the market is vibrant, and developers receive many emails a week from recruiters you don't really need to be brave, just smart.
+I was able to overcome some fears and leave [Memrise](http://memrise.com), my first job and first love in London, when I realized I wasn't loving it anymore, and that my work there was teaching me less and less things week after week. Although I have to admit that to change job in a city like London, where the market is so vibrant, and developers receive many emails a week from recruiters you don't really need to be brave, just smart.
 
 ####Podcasts and Screencasts
-In the last quarter of the year I decided to optimize those dead moments of my day like walking to work or eating trying to learn a bit of stuff in a chilled way. I therefore started following a number of [podcasts](http://www.mokacoding.com/2013/11/20/podcasts.html) and screencasts about technology, mainly iOS and Ruby. I think it's a good way to keep my mind busy and pick up some good things without really focusing on studying. It's also a healthier alternative to watching Dexter at dinner time and getting caught into the episodes till 3 in the morning!
+In the last quarter of the year I decided to optimize those dead moments of my day, like walking to work or eating, trying to learn a bit of stuff in a chilled way. I therefore started following a number of [podcasts](http://www.mokacoding.com/2013/11/20/podcasts.html) and screencasts about technology, mainly iOS and Ruby. It's a good way to keep my mind busy and pick up some good things without really focusing. It's also an healthier alternative to watching Dexter at dinner time and getting caught into the episodes till 3 in the morning!
 
 ####Standing desk
-At the beginning of the year, thanks to the example of my colleague Adam, I picked up the habit of working standing. It's amazing! Not a back pain or a position problem, and I always feel very energetic! Plus [_"Standing on Weekdays Burns Calories Like Running 10 Marathons a Year!"_](http://lifehacker.com/standing-for-3-hours-a-day-on-weekdays-is-like-running-1447078889)
+At the beginning of the year, thanks to the example of my colleague [Adam](http://adamj.eu), I picked up the habit of working standing. It's amazing! Not a back pain or a position problem, and I always feel very energetic! Plus... [_"Standing on Weekdays Burns Calories Like Running 10 Marathons a Year!"_](http://lifehacker.com/standing-for-3-hours-a-day-on-weekdays-is-like-running-1447078889)
 
 ###What could be improved
 
 ####Reading books and blog posts
-The internet is full of resources and informations, and so are the libraries. When 2013 started I wanted to read many technical books and blogs. I've skimmed through a handful of technical books, and except for [NSHipster](http://nshipster.com/) and [objc.io](http://objc.io) I mainly just filled my [Pocket](http://getpocket.com) read it later list.
+The internet is full of resources and informations, and so are the libraries. When 2013 started I wanted to read many technical books and blogs. I've skimmed through a handful of technical books, and except for [NSHipster](http://nshipster.com/) and [objc.io](http://objc.io) I mainly just put links in my [Pocket](http://getpocket.com) read it later list, without picking them out anymore.
 
 ####Looking at the source code
 I believe looking at the source code of libraries you're using is really important for two reasons, first because it provides a better understanding of how things work, second because it's usually a good way to pick up good coding styles. That said I spent most of 2013 looking at the source code of a library only when something didn't work properly.
@@ -52,10 +52,10 @@ I've been at the edge of the community. I've lived for one year in a city like L
 I've started looking into the iOS 7 SDK news at the end of August, joining the party late and having, still now, to work hard to catch up.
 
 ####Not enough TDD
-I've let the hurries of my CEO drive the development of my projects, rather than the tests, and a clear roadmap.
+I've let the hurries of my CEO drive the development of my projects, rather than the tests and a clear roadmap.
 
 ####Haven't learned any new language!
-Not even tried something new! I realized that only now writing this blogpost, and I feel really bad about it.
+Nor even tried something new! I realized this only now writing this blogpost, and I feel really bad about it.
 
 ####Didn't exercise
 I put aside swimming and gym to focus on work... That's not really healthy and I'm starting to feeling and seeing the consequences of 6 month of almost sedentary life style already.
@@ -67,7 +67,7 @@ After having looked back at the 2013 with a critical eye, I can say that on 2014
 Here's some goals:
 
 * 5 tweets sharing tech articles I've read a week.
-* 3 days of exercise, or at least 7 minutes workout, a week.
+* 3 days of exercise, or at least [7 minutes workout](http://well.blogs.nytimes.com/2013/05/09/the-scientific-7-minute-workout/?_r=0), a week.
 * 1 original tech blogpost per month.
 * 1 social event for developers a month.
 * 1 tech book every quarter.
