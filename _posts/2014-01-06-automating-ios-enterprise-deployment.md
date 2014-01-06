@@ -64,8 +64,6 @@ It's super simple!
 * Is it possible to unlock the keychain from the script, maybe just for its execution, in order to have more protections?
 * Dig better into the scheme and configuration issue, and maybe submit a PR.
 
----
-
 I hope after reading this you'll be able save time by automating your enterprise deployment process, and use it to read my other blogpost :P
 
 Happy deploying!
