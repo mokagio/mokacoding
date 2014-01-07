@@ -55,7 +55,7 @@ A tip I have regarding the Provisioning Profile is to be sure that the keychain 
 
 shenzhen's `distribute` command lets us distribute our freshly built `.ipa` through 4 different channels, [HockeyApp](http://hockeyapp.net/features/), [TestFlight](http://testflightapp.com/), upload to S3, or simple FTP. 
 
-Take a look at the [README](https://github.com/mokagio/shenzhen/#building--distribution) for the details of the single channels, or just type `ipa distribure:XXX --help` to find out about the parameter.
+Take a look at the [README](https://github.com/mokagio/shenzhen/#building--distribution) for the details of the single channels, or just type `ipa distribute:XXX --help` to find out about the parameter.
 
 It's super simple!
 
@@ -67,3 +67,7 @@ It's super simple!
 I hope after reading this you'll be able save time by automating your enterprise deployment process, and use it to read my other blogpost :P
 
 Happy deploying!
+
+---
+
+Thanks to [@jerryhjones](https://twitter.com/jerryhjones) for finding a typo ;)
