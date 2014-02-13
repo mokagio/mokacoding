@@ -13,7 +13,7 @@ tags:
 - Productivity
 ---
 
-In this short post I'm gonna have a look at how to use the splendid [shenzen](https://github.com/nomad/shenzhen/) gem by [Mattt](http://mattt.me/) to automate the process of building an `.ipa` for enterprise distribution and shipping it.
+In this short post I'm gonna have a look at how to use the splendid [shenzhen](https://github.com/nomad/shenzhen/) gem by [Mattt](http://mattt.me/) to automate the process of building an `.ipa` for enterprise distribution and shipping it.
 
 Here's the code for the build phase:
 
@@ -31,10 +31,10 @@ or the shorter version:
 
 ```
 ipa build \
-  --w MyAwesomeApp.xcworkspace \
-  --c MyAwesomeAppEnterpriseConfiguration \
-  --s MyAwesomeAppEnterpriseScheme \
-  --m MyAweseomAppEnterpriseDistribution.mobileprovision \
+  -w MyAwesomeApp.xcworkspace \
+  -c MyAwesomeAppEnterpriseConfiguration \
+  -s MyAwesomeAppEnterpriseScheme \
+  -m MyAweseomAppEnterpriseDistribution.mobileprovision \
   --clean \
   --archive"
 ```
