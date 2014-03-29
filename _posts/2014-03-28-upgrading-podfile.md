@@ -16,6 +16,8 @@ keyword: Upgrading Podfile
 
 I recently went through the process of upgrading a `Podfile` from a legacy codebase and bumped into an issue with a very simple solution, for those who understand how [CocoaPods](http://cocoapods.org) works under the hood.
 
+I made an example project to show the behaviour, check it out [here](https://github.com/mokagio/mokacoding-samples/tree/podfile-upgrade).
+
 The `Podfile` looked like this:
 
 ```ruby
