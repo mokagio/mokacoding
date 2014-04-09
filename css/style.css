@@ -43,3 +43,6 @@ a {
   border-right: none;
   border-left: none;
   border-bottom: none; }
+
+.primary-color {
+  color: #2ecc71; }

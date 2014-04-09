@@ -3,5 +3,5 @@ baseurl: /mokacoding
 markdown: redcarpet
 pygments: true
 exclude: ['src', 'README.md']
-paginate: 3
+paginate: 1
 permalink: /:year/:month/:day/:title.html
