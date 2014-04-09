@@ -15,29 +15,32 @@
 		%meta{ :name => "viewport", :content => "width=device-width" }
 		%meta{ :name => "description", :content => "{{ page.seo_description }}" }
 
+		%link{ :rel => "stylesheet", :href => "{{ site.url}}/css/griddy.css" }
 		%link{ :rel => "stylesheet", :href => "{{ site.url}}/css/style.css" }
 		%link{ :rel => "stylesheet", :href => "{{ site.url}}/css/syntax.css" }
 
 		%script{ :src => "{{ site.url}}/javascript/vendor/jquery-2.0.3.min.js", :type => "text/javascript" }
 
 	%body
-		.container
-			.header
-				%h2.brand
-					%a{ :href => "/" } {{ site.name }}
-				.punchline
-					improving my coding, one moka at a time
+		.page
+			.row-12
+				.col-12.header
+					%h1.brand
+						%a{ :href => "/" } {{ site.name }}
+					.punchline
+						improving my coding, one moka at a time
 
-			{{ content }}
+				.col-12
+					{{ content }}
 
-			.footer
-				made with &#x2665 by mokagio since 2013
-				\-
-				twitter: 
-				%a{ :href => "http://twitter.com/mokagio/"} @mokagio
-				\- 
-				github: 
-				%a{ :href => "http://github.com/mokagio/" } mokagio
+				.col-12.footer
+					made with &#x2665 by mokagio since 2013
+					\-
+					twitter: 
+					%a{ :href => "http://twitter.com/mokagio/"} @mokagio
+					\- 
+					github: 
+					%a{ :href => "http://github.com/mokagio/" } mokagio
 						
 
 		%script{ :src => "{{ site.url}}/javascript/code_block_style.js", :type => "text/javascript" }

@@ -1,53 +1,29 @@
-@import "variables"
-@import "mixins"
+// Colors
+//
+$flat_emerald: #2ecc71
+$flat_nephritis: #27ae60
 
-@import "header"
-@import "post"
-@import "paginator"
-@import "footer"
+$text-color: #303030
+$primary-color: $flat_emerald
+$primary-color-darker: $flat_nephritis
 
-// global reset
-*
-	margin: 0
-	padding: 0
-
-html, body
-	height: 100%
+// Fonts
+//
+// Open-Sans, because you know... Open-Sans
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400,600)
+$open-sans: 'Open Sans', sans-serif
 
 body
-	background-color: #efefef
-	background-image: url("/images/bg-noise.png")
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif
-	font-size: 13px
-	line-height: 20px
-	color: $color-text
-	text-shadow: 0 1px 0 #fff
+	font-family: $open-sans
+	color: $text-color
 
-.container
-	width: $width
-	position: relative
-	margin: 0 auto
+a
+	text-decoration: none
+	color: $primary-color
 
-// Utils
+	&:hover
+		color: $primary-color-darker
 
-.clearfix:after
-	visibility: hidden
-	display: block
-	font-size: 0
-	content: " "
-	clear: both
-	height: 0
-.clearfix 
-	display: inline-block
-/* start commented backslash hack \*/
-* html .clearfix
-	height: 1%
-.clearfix
-	display: block
-/* close commented backslash hack */
-
-.float-left
-	float: left
-
-.float-right
-	float: right
+.page
+	max-width: 800px
+	margin: auto

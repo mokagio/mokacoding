@@ -6,16 +6,11 @@
 #home
 	.posts
 		{% for post in paginator.posts %}
-		.two-col-post-wrap
-			.post-container
-				%h1.post-title
-					%a{ :href => "{{ site.url }}{{ post.url }}" } {{ post.title }}
-				.post
-					{{ post.content }}
-
-			.post-side
-				%p.post-meta
-					{{ post.date | date_to_string }}
+		.post-container
+			%h1.post-title
+				%a{ :href => "{{ site.url }}{{ post.url }}" } {{ post.title }}
+			.post
+				{{ post.content }}
 		{% endfor %}
 
 #paginator

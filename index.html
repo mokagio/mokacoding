@@ -4,19 +4,12 @@ layout: default
 <div id='home'>
   <div class='posts'>
     {% for post in paginator.posts %}
-    <div class='two-col-post-wrap'>
-      <div class='post-container'>
-        <h1 class='post-title'>
-          <a href='{{ site.url }}{{ post.url }}'>{{ post.title }}</a>
-        </h1>
-        <div class='post'>
-          {{ post.content }}
-        </div>
-      </div>
-      <div class='post-side'>
-        <p class='post-meta'>
-          {{ post.date | date_to_string }}
-        </p>
+    <div class='post-container'>
+      <h1 class='post-title'>
+        <a href='{{ site.url }}{{ post.url }}'>{{ post.title }}</a>
+      </h1>
+      <div class='post'>
+        {{ post.content }}
       </div>
     </div>
     {% endfor %}
