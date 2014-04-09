@@ -31,14 +31,16 @@ a {
   margin: 1.5em 0;
   line-height: 1.5em; }
 .post-container img {
-  max-width: 90%; }
+  max-width: 90%;
+  display: block;
+  margin: auto; }
 .post-container blockquote {
   color: #838383; }
   .post-container blockquote p {
     margin: 0.8em 0;
     font-style: italic; }
 .post-container hr {
-  margin-bottom: 20px;
+  margin: 24px 0;
   border-top: 1px solid #dddddd;
   border-right: none;
   border-left: none;
