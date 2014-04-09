@@ -17,7 +17,7 @@ meta:
 
 I've done it a lot of times by now, but I keep forgetting it. So here's a quick post to commit it to memory!
 
-If we have a project with the Tests target it can happen that after running `pod install` we get this messagge:
+If we have a project with the Tests target it can happen that after running `pod install` we get this message:
 
 	[!] The target `MyProjectTests [Debug]` overrides the `FRAMEWORK_SEARCH_PATHS` build setting defined in `Pods/Pods-MyProjectTests.xcconfig'.
 	- Use the `$(inherited)` flag, or
