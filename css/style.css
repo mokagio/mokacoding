@@ -12,3 +12,34 @@ a {
 .page {
   max-width: 800px;
   margin: auto; }
+
+.header {
+  text-align: center;
+  margin-bottom: 60px; }
+  .header h1.brand {
+    margin-bottom: 2px; }
+  .header .punchline {
+    font-style: italic; }
+
+.footer {
+  margin: 40px 0 20px;
+  text-align: right; }
+
+.post-container h2 {
+  margin-bottom: 36px; }
+.post-container p {
+  margin: 1.5em 0;
+  line-height: 1.5em; }
+.post-container img {
+  max-width: 90%; }
+.post-container blockquote {
+  color: #838383; }
+  .post-container blockquote p {
+    margin: 0.8em 0;
+    font-style: italic; }
+.post-container hr {
+  margin-bottom: 20px;
+  border-top: 1px solid #dddddd;
+  border-right: none;
+  border-left: none;
+  border-bottom: none; }

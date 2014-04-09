@@ -3,7 +3,11 @@
 $flat_emerald: #2ecc71
 $flat_nephritis: #27ae60
 
-$text-color: #303030
+$dark-grey: #303030
+$grey: #838383
+
+$text-color: $dark-grey
+$text-color-lighter: $grey
 $primary-color: $flat_emerald
 $primary-color-darker: $flat_nephritis
 
@@ -14,16 +18,55 @@ $primary-color-darker: $flat_nephritis
 $open-sans: 'Open Sans', sans-serif
 
 body
-	font-family: $open-sans
-	color: $text-color
+  font-family: $open-sans
+  color: $text-color
 
 a
-	text-decoration: none
-	color: $primary-color
+  text-decoration: none
+  color: $primary-color
 
-	&:hover
-		color: $primary-color-darker
+  &:hover
+    color: $primary-color-darker
 
 .page
-	max-width: 800px
-	margin: auto
+  max-width: 800px
+  margin: auto
+
+.header
+  text-align: center
+  margin-bottom: 60px
+
+  h1.brand
+    margin-bottom: 2px
+
+  .punchline
+    font-style: italic
+
+.footer
+  margin: 40px 0 20px
+  text-align: right
+
+.post-container
+  h2
+    margin-bottom: 36px
+
+  p
+    margin: 1.5em 0
+    line-height: 1.5em
+
+  img
+    max-width: 90%
+
+  blockquote
+    color: $text-color-lighter
+
+    p
+      margin: 0.8em 0
+      font-style: italic
+
+  hr
+    margin-bottom: 20px
+    border-top: 1px solid #ddd
+    border-right: none
+    border-left: none
+    border-bottom: none
