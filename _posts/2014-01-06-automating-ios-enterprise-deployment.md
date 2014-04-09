@@ -39,7 +39,7 @@ ipa build \
   --archive"
 ```
 
-###How does it work?
+### How does it work?
 
 What shenzhen does is calling `xcodebuild` for us using the proper arguments and avoiding the unreadable output. _Speaking of which, take a look at what [xcpretty](https://github.com/mneorr/XCPretty) does to help us_.
 
@@ -51,7 +51,7 @@ Another thing we notice in the parameters is the `--embed XXX.mobileprovision` o
 
 A tip I have regarding the Provisioning Profile is to be sure that the keychain where its keys are is _unlocked_, unless you want to the OS to pop you a dialog asking for the keychain credentials at some point. The keychain can be unlocked from the Keychain Access app.
 
-###Time to distribute!
+### Time to distribute!
 
 shenzhen's `distribute` command lets us distribute our freshly built `.ipa` through 4 different channels, [HockeyApp](http://hockeyapp.net/features/), [TestFlight](http://testflightapp.com/), upload to S3, or simple FTP. 
 
@@ -59,7 +59,7 @@ Take a look at the [README](https://github.com/mokagio/shenzhen/#building--distr
 
 It's super simple!
 
-###Where to go from here?
+### Where to go from here?
 
 * Is it possible to unlock the keychain from the script, maybe just for its execution, in order to have more protections?
 * Dig better into the scheme and configuration issue, and maybe submit a PR.

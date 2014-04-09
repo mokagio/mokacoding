@@ -13,7 +13,7 @@ tags:
 
 2013 has been a very dense year for me, full on new experiences and challenges. I can really say I've grown a lot during year. In this post I'm gonna try to do a quick *retrospective* on 2013, in full agile fashion. Finally I'm gonna set some expectations for 2014.
 
-##Retrospectives on 2013
+### Retrospectives on 2013
 
 ###What's been good
 
@@ -60,7 +60,7 @@ Nor even tried something new! I realized this only now writing this blogpost, an
 ####Didn't exercise
 I put aside swimming and gym to focus on work... That's not really healthy and I'm starting to feeling and seeing the consequences of 6 month of almost sedentary life style already.
 
-##2014 propositions
+### 2014 propositions
 
 After having looked back at the 2013 with a critical eye, I can say that on 2014 I'll **set the bar low, but jump higher**. I'm not gonna say or write something like _"I'm gonna write a blogpost every week"_, or _"I'm gonna wake up at 6 every morning to do pushups, like Bruce Waine"_. I'll set the bar low, _"I'm gonna write a blogpost every month"_, and I'm gonna try to jump higher than it every time. I'm also **not gonna be a slave of my daily job**, and be sure to have enough free time to both work on my own things and just chill. I'll try to **expand my technical knowledge both deeper and wider**, deeper in what I work on daily, and wider towards new tools. Finally I'm going to be more involved in the community, because those few time I've been at a conference or a meetup I've always came home with something new to try out and with new friends to talk to.
 

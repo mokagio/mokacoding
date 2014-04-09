@@ -24,7 +24,7 @@ The process is very simple:
 
 Creating a pod is super simple, I already [wrote about it](http://www.mokacoding.com/2013/01/21/cocoapods-how-to-create-your-own-pod.html), but it was a while ago, the best place to look for it is the [official CocoaPod documentation](http://guides.cocoapods.org/making/specs-and-specs-repo.html).
 
-## Add the assets to the pod resource bundle
+### Add the assets to the pod resource bundle
 
 Since version [0.23.0](https://github.com/CocoaPods/CocoaPods/blob/master/CHANGELOG.md#0230rc1) the Spec DSL has a `resource_bundle` attribute, and it's recommended to use it instead of the old `resources`, to avoid potential name clashes with other pods or libraries.
 
@@ -40,7 +40,7 @@ Turns out it's **dead simple**! Just list the resources path you want in the bun
 spec.ios.resource_bundle = { 'MapBox' => 'MapView/Map/Resources/*.png' }
 ```
 
-## Dynamically load the fonts
+### Dynamically load the fonts
 
 Now that the we have our Resource Bundle ready we only need to skip the annoying process of adding the fonts to the `Info.plist` and we're good to go.
 

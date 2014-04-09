@@ -17,7 +17,7 @@ At the beginning of March I released [Gradient Backgrounds Studio](https://itune
 
 Gradient Backgrounds Studio is a very simple app with a very simple implementation, but it gave me an excuse to play with some components of the framework I didn't know about.
 
-## `CGGradientLayer`
+### `CGGradientLayer`
 
 Guess what? The app is all about gradients. The first thing I had to learn was how to create and manipulate gradients.
 
@@ -62,7 +62,7 @@ gradientLayer.endPoint = CGPointMake(1.0, 0.5);
 
 <img src="{{ site.url }}/assets/2014-04-03/cagradientlayer-advanced.jpg" alt="More customized CAGradientLayer" style="width: 30%"/>
 
-## UIImage from a gradient
+### UIImage from a gradient
 
 Gradient Backgrounds Studio generates an image out of the one you pick and the gradient you configure. So the next thing I had to do was merging those images.
 
@@ -124,7 +124,7 @@ UIGraphicsEndImageContext();
 
 If you have been reading other articles from my blog you know by now I'm not clever, the credits for this code goes to [this question](http://stackoverflow.com/questions/16788305/how-to-create-uiimage-with-vertical-gradient-using-from-color-and-to-color) on SO.
 
-## UIImage merging images
+### UIImage merging images
 
 Now that we have the image with the gradient we can merge it with the background image. The code to do that is simpler than the one above, but based on the same principle; create a context, draw in it, and get an `UIImage` from it with what's drawn in it.
 
@@ -147,7 +147,7 @@ UIGraphicsEndImageContext();
 
 Note that the image is deformed, this is the [original](http://thewindsbeachclub.com/wp-content/uploads/2013/07/The-Winds-Sea-Turtle-Has-a-Name.jpg), the reason is that it's drawn in a `rect` that has a different ratio.
 
-## Blurring: `UIToolbar` does the job
+### Blurring: `UIToolbar` does the job
 
 The buttons of Gradient Backgrounds Studio are blurred because... iOS 7. 
 
@@ -176,7 +176,7 @@ blurredView.layer.cornerRadius = frame.size.width / 2 * 0.999;
 
 One other important thing is that the toolbar blurs the background of it's superview, keep this in mind in case you have overlapping view.
 
-## Justify
+### Justify
 
 The final thing I'd like to share is how to justify the text in a `UILabel`. Despite the fact that the `textAlignement` property accepts `NSTextAlignmentJustified` as an option I wasn't able to make my multiline label justify just like that.
 

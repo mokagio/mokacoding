@@ -9,6 +9,10 @@ a {
   a:hover {
     color: #27ae60; }
 
+h3 {
+  font-size: 1.3em;
+  margin: 0.6em 0; }
+
 .page {
   max-width: 800px;
   margin: auto; }
