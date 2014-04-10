@@ -14,7 +14,7 @@ h3 {
   margin: 0.6em 0; }
 
 .page {
-  max-width: 800px;
+  max-width: 700px;
   margin: auto; }
 
 .header {
@@ -29,26 +29,32 @@ h3 {
   margin: 40px 0 20px;
   text-align: right; }
 
-.post-container h2 {
-  margin-bottom: 36px; }
-.post-container p {
-  margin: 1.5em 0;
-  line-height: 1.5em; }
-.post-container img {
-  max-width: 90%;
-  display: block;
-  margin: auto; }
-.post-container blockquote {
-  color: #838383; }
-  .post-container blockquote p {
-    margin: 0.8em 0;
-    font-style: italic; }
-.post-container hr {
-  margin: 24px 0;
-  border-top: 1px solid #dddddd;
-  border-right: none;
-  border-left: none;
-  border-bottom: none; }
+.post-container {
+  text-align: justify; }
+  .post-container h2 {
+    margin-bottom: 36px; }
+  .post-container p {
+    margin: 1.5em 0;
+    line-height: 1.5em; }
+  .post-container img {
+    max-width: 90%;
+    display: block;
+    margin: auto; }
+  .post-container blockquote {
+    color: #838383; }
+    .post-container blockquote p {
+      margin: 0.8em 0;
+      font-style: italic; }
+  .post-container hr {
+    margin: 24px 0;
+    border-top: 1px solid #dddddd;
+    border-right: none;
+    border-left: none;
+    border-bottom: none; }
+  .post-container code {
+    display: block;
+    overflow-x: scroll;
+    padding: 6px 10px; }
 
 .primary-color {
   color: #2ecc71; }
