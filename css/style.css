@@ -15,6 +15,7 @@ h3 {
 
 .page {
   max-width: 700px;
+  padding: 0 8px;
   margin: auto; }
 
 .header {
@@ -32,7 +33,8 @@ h3 {
 .post-container {
   text-align: justify; }
   .post-container h2 {
-    margin-bottom: 36px; }
+    margin-bottom: 36px;
+    text-align: left; }
   .post-container p {
     margin: 1.5em 0;
     line-height: 1.5em; }
@@ -51,7 +53,7 @@ h3 {
     border-right: none;
     border-left: none;
     border-bottom: none; }
-  .post-container code {
+  .post-container pre code {
     display: block;
     overflow-x: scroll;
     padding: 6px 10px; }
