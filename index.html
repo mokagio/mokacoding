@@ -8,6 +8,9 @@ layout: default
       <h2 class='post-title'>
         <a href='{{ site.url }}{{ post.url }}'>{{ post.title }}</a>
       </h2>
+      <p id='post-date'>
+        {{ post.date | date_to_string }}
+      </p>
       <div class='post'>
         {{ post.content }}
       </div>

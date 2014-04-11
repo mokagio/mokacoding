@@ -32,9 +32,13 @@ h3 {
 
 .post-container {
   text-align: justify; }
-  .post-container h2 {
-    margin-bottom: 36px;
+  .post-container h2.post-title {
+    margin-bottom: 5px;
     text-align: left; }
+  .post-container #post-date {
+    color: #838383;
+    margin-top: 0;
+    margin-bottom: 42px; }
   .post-container p {
     margin: 1.5em 0;
     line-height: 1.5em; }
