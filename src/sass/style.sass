@@ -43,7 +43,6 @@ a
 // default h3 is not big enough for me
 h3
   font-size: 1.3em
-  margin: 0.6em 0
 
 .page
   max-width: 700px
@@ -74,6 +73,12 @@ h3
   h2.post-title
     margin-bottom: 5px
     text-align: left
+
+  h2:not(.post-title)
+    margin: 3.8em 0 0.6em
+
+  h3
+    margin: 3.4em 0 0.6em
 
   #post-date
     color: $text-color-lighter
@@ -108,10 +113,11 @@ h3
     code
       display: block
       overflow-x: scroll
-      padding: 6px 10px
+      padding: 16px 10px
 
   .highlight
     @include border-radius(4px)
+    margin: 24px 0
 
 // Utils
 //
