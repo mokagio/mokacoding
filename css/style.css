@@ -66,6 +66,10 @@ h3 {
     display: block;
     overflow-x: scroll;
     padding: 6px 10px; }
+  .post-container .highlight {
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px; }
 
 .primary-color {
   color: #27ae60; }
