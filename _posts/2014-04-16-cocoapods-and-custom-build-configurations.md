@@ -104,6 +104,9 @@ end
 
 This one sets `FB_TWEAK_ENABLED=1` in the 'QA' build configuration for the Tweak's target of the Pods project.
 
+[`xcodeproj`]: http://guides.cocoapods.org/syntax/podfile.html#xcodeproj
+[`post_install`]: http://guides.cocoapods.org/syntax/podfile.html#post_install
+
 ---
 
 There are few things as rewarding as solving a problem by understanding all the pieces of the puzzle, looking back at it and suddenly seeing everything clearly. It is something that is possible only when using open source tools.
