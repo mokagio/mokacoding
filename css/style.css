@@ -35,13 +35,14 @@ h3 {
 
 .post-container {
   text-align: justify; }
-  .post-container h2.post-title {
-    margin-bottom: 5px;
+  .post-container h2, .post-container h3 {
     text-align: left; }
+  .post-container h2.post-title {
+    margin-bottom: 5px; }
   .post-container h2:not(.post-title) {
-    margin: 3.8em 0 0.6em; }
+    padding: 1.666em 0 0; }
   .post-container h3 {
-    margin: 3.4em 0 0.6em; }
+    padding: 1.444em 0 0; }
   .post-container #post-date {
     color: #838383;
     margin-top: 0;
