@@ -111,6 +111,6 @@ This one sets `FB_TWEAK_ENABLED=1` in the 'QA' build configuration for the Tweak
 
 There are few things as rewarding as solving a problem by understanding all the pieces of the puzzle, looking back at it and suddenly seeing everything clearly. It is something that is possible only when using open source tools.
 
-I love the ability to look under the hood of the stuff I use, and I am  very grateful to the CocoaPods team for the awesome work they're doing. I was lucky enough to meet some of them in person, and their all lovely people as well!
+I love the ability to look under the hood of the stuff I use, and I am  very grateful to the CocoaPods team for the awesome work they're doing. I was lucky enough to meet some of them in person, and they are all lovely people as well!
 
 _Enjoy haking around open source_
