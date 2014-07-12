@@ -1,0 +1,39 @@
+<!DOCTYPE html><html lang="en"><head><title>mokacoding</title><link href="/css/griddy.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet"><link href="/css/highlight-obsidian.css" rel="stylesheet"></head><body><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">mokagio's blabbering on software</div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/automating-ios-enterprise-deployment">Automating iOS Enterprise Deployment with shenzhen</a></h2><p class="post-meta"><span class="post-date">Mon Jan 06 2014&nbsp;</span><a href="/tag/iOS/index.html" class="post-tag">-iOS</a><a href="/tag/Ruby/index.html" class="post-tag">-Ruby</a><a href="/tag/Automate/index.html" class="post-tag">-Automate</a><a href="/tag/Productivity/index.html" class="post-tag">-Productivity</a></p><div class="post"><p>In this short post I&#39;m gonna have a look at how to use the splendid <a href="https://github.com/nomad/shenzhen/">shenzhen</a> gem by <a href="http://mattt.me/">Mattt</a> to automate the process of building an <code>.ipa</code> for enterprise distribution and shipping it.</p>
+<p>Here&#39;s the code for the build phase:</p>
+<pre><code class="">ipa build \
+  -<span class="ruby">-workspace <span class="hljs-constant">MyAwesomeApp</span>.xcworkspace \
+</span>  -<span class="ruby">-configuration <span class="hljs-constant">MyAwesomeAppEnterpriseConfiguration</span> \
+</span>  -<span class="ruby">-scheme <span class="hljs-constant">MyAwesomeAppEnterpriseScheme</span> \
+</span>  -<span class="ruby">-embed <span class="hljs-constant">MyAweseomAppEnterpriseDistribution</span>.mobileprovision \
+</span>  -<span class="ruby">-clean \
+</span>  -<span class="ruby">-archive<span class="hljs-string">"</span></span>
+</code></pre><p>or the shorter version:</p>
+<pre><code class="">ipa build \
+  -<span class="ruby">w <span class="hljs-constant">MyAwesomeApp</span>.xcworkspace \
+</span>  -<span class="ruby">c <span class="hljs-constant">MyAwesomeAppEnterpriseConfiguration</span> \
+</span>  -<span class="ruby">s <span class="hljs-constant">MyAwesomeAppEnterpriseScheme</span> \
+</span>  -<span class="ruby">m <span class="hljs-constant">MyAweseomAppEnterpriseDistribution</span>.mobileprovision \
+</span>  -<span class="ruby">-clean \
+</span>  -<span class="ruby">-archive<span class="hljs-string">"</span></span>
+</code></pre><h3 id="how-does-it-work-">How does it work?</h3>
+<p>What shenzhen does is calling <code>xcodebuild</code> for us using the proper arguments and avoiding the unreadable output. <em>Speaking of which, take a look at what <a href="https://github.com/mneorr/XCPretty">xcpretty</a> does to help us</em>.</p>
+<p>As you can see from the code above there are quite a few options to specify. In particular <em>in my experience</em> I saw that to build properly we need <strong>both</strong> <code>--scheme</code> and <code>--configuration</code>. If you are reading this article you&#39;re probably already managing your enterprise build with a different pair of Build Configuration and Scheme, in order to change the Bundle Id and the other configurations, so those parameters will surely make sense to you. But why <strong>both</strong>? </p>
+<p>As far as I can see after 10 minutes of hacking this is due to the fact that shenzen looks for the configuration parameter if this is not specified, <a href="https://github.com/mokagio/shenzhen/blob/master/lib/shenzhen/commands/build.rb">source here</a>), and passes it to <code>xcodebuild</code>. What happens in my case is that shenzhen guesses the wrong configuration, and this is why I have to specify it in the parameters. No big deals anyway ;)</p>
+<p>Another thing we notice in the parameters is the <code>--embed XXX.mobileprovision</code> one. This is used to sign the build with the certificate specified for the enterprise distribution. You can download the Provisioning Profile you need from the Member Center in the <a href="https://developer.apple.com/membercenter">Apple Developer Portal</a>. Keep it in a safe place! Everything will work fine as long as you have the private key for that.</p>
+<p>A tip I have regarding the Provisioning Profile is to be sure that the keychain where its keys are is <em>unlocked</em>, unless you want to the OS to pop you a dialog asking for the keychain credentials at some point. The keychain can be unlocked from the Keychain Access app.</p>
+<h3 id="time-to-distribute-">Time to distribute!</h3>
+<p>shenzhen&#39;s <code>distribute</code> command lets us distribute our freshly built <code>.ipa</code> through 4 different channels, <a href="http://hockeyapp.net/features/">HockeyApp</a>, <a href="http://testflightapp.com/">TestFlight</a>, upload to S3, or simple FTP. </p>
+<p>Take a look at the <a href="https://github.com/mokagio/shenzhen/#building--distribution">README</a> for the details of the single channels, or just type <code>ipa distribute:XXX --help</code> to find out about the parameter.</p>
+<p>It&#39;s super simple!</p>
+<h3 id="where-to-go-from-here-">Where to go from here?</h3>
+<ul>
+<li>Is it possible to unlock the keychain from the script, maybe just for its execution, in order to have more protections?</li>
+<li>Dig better into the scheme and configuration issue, and maybe submit a PR.</li>
+</ul>
+<p>I hope after reading this you&#39;ll be able save time by automating your enterprise deployment process, and use it to read my other blogpost :P</p>
+<p>Happy deploying!</p>
+<hr>
+<p>Thanks to <a href="https://twitter.com/jerryhjones">@jerryhjones</a> for finding a typo ;)</p>
+</div><div id="paginator" class="bottom-box"><div class="row-12"><div class="col-6"><div><a href="/blog/sharing-assets-with-cocoapods-resource-bundle-and-dynamically-loaded-fonts"><<&nbsp;Sharing assets across iOS projects with CocoaPods, Resource Bundle, and dynamically loaded fonts</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/2013-retrospectives-and-2014-propositions">2013 retrospectives... and 2014 propositions&nbsp;>></a></div></div></div></div><div id="apps" class="bottom-box"><p>Enjoyed the post? Check out my apps: <a href="https://itunes.apple.com/au/app/fineants-savings-tracker/id888444078?mt=8">Fineants</a> and <a href="https://itunes.apple.com/us/app/gradient-backgrounds-studio/id815508757?mt=8">Gradient Background Studio</a></p>
+</div></div></div><div class="col-12 footer">made with &hearts; by <a href="http://giovannilodi.com">Giovanni Lodi</a>&nbsp;since 2013 
+&nbsp;- twitter:&nbsp;<a href="https://twitter.com/mokagio">@mokagio</a>&nbsp;- github:&nbsp;<a href="https://github.com/mokagio">mokagio</a></div></div></div></body></html>

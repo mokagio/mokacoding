@@ -1,0 +1,50 @@
+<!DOCTYPE html><html lang="en"><head><title>mokacoding</title><link href="/css/griddy.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet"><link href="/css/highlight-obsidian.css" rel="stylesheet"></head><body><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">mokagio's blabbering on software</div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/xcode5-crash-on-submission">A workaround to Xcode 5 GM crash on app submission</a></h2><p class="post-meta"><span class="post-date">Mon Sep 16 2013&nbsp;</span><a href="/tag/Xcode/index.html" class="post-tag">-Xcode</a><a href="/tag/App Store/index.html" class="post-tag">-App Store</a><a href="/tag/Bugs/index.html" class="post-tag">-Bugs</a></p><div class="post"><p>I just finished writing this post, and I realized is just about me complaining trying to sound funny. So here&#39;s, frontloaded, the important stuff.</p>
+<p>Apparently Xcode 5 GM crashed on some of us during the App Store submission process. Before even starting it. How annoying.</p>
+<p>The workaround I found relies on bypassing Xcode for the submission process.</p>
+<h4 id="step-1">Step 1</h4>
+<p>Make sure all the provisioning profiles and code signing are set properly</p>
+<h4 id="step-2">Step 2</h4>
+<p>Open your Terminal and generate the <code>.ipa</code> yourself, with the help of <a href="https://github.com/nomad/shenzhen">shenzhen</a>.</p>
+<pre><code class="">cd my/ready/<span class="hljs-keyword">to</span>/be/submitter/ios/project
+ipa build -c <span class="hljs-keyword">Release</span>
+</code></pre><h4 id="step-3">Step 3</h4>
+<p>Upload the app through Application Loader.</p>
+<h4 id="step-4">Step 4</h4>
+<p>Find a tv series to start watching while waiting for your app to be reviewed.</p>
+<p>That&#39;s all. It took me an embarrassing long while to figure this out, I hope to be helping some fellow developer with this post.</p>
+<p>Below the full thing.</p>
+<hr/>
+
+<p>Every now and then in the lifecycle of an iOS project it comes the day when you have to submit an update, or even worst touch the provisioning profiles. When that day comes, it&#39;s better if it&#39;s a Monday, because you don&#39;t want to ruin yourself the weekend. And it&#39;s also better if you have chamomile in your cup instead of coffee.</p>
+<h3 id="submit-your-ios7-apps-today">Submit your iOS7 apps today</h3>
+<p><img src="http://mokacoding.s3.amazonaws.com/2013-09-16-submit-today.jpg" alt="Submit today"></p>
+<p>On the 10th of September Apple sent an email to their developers, &quot;Submit your iOS7 apps today&quot; they said. Up to that point we couldn&#39;t submit apps made with the iOS7 SDK, as written somewhere in the Xcode 5 Developer Preview release notes. But that day the iOS7 GM and Xcode 5 GM where released, and the run to submit started.</p>
+<p><img src="http://mokacoding.s3.amazonaws.com/2013-09-16-use-xcode5.jpg" alt="Use Xcode 5 GM"></p>
+<p>In their beautiful styled <a href="https://developer.apple.com/ios7/">iOS7 developer page</a> they explained everything. If you follow the link to the <a href="https://developer.apple.com/library/prerelease/ios/documentation/IDEs/Conceptual/AppDistributionGuide/Introduction/Introduction.html">App Distribution Guide</a> in the bottom of the page you will have a funny surprise. The link goes to the previous version documentation, and our Apple engineers forgot to add a link to the new version.</p>
+<p><img src="http://mokacoding.s3.amazonaws.com/2013-09-16-missing-link.jpg" alt="Missing link"></p>
+<p>I&#39;m sure everything is gonna be fine, Xcode is such a reliable IDE, and the Apple guys are known for the quality of the products they give to their developers. Let&#39;s go!</p>
+<h3 id="the-tragic-message">The tragic message</h3>
+<p>When clicking on &quot;Validate&quot; or &quot;Distribute&quot; from the organizer, no matter how may times I refreshed my Accounts in the Preferences menu this is what I got</p>
+<p><img src="http://mokacoding.s3.amazonaws.com/2013-09-16-the-terrible-dialog.jpg" alt="The terrible dialog"></p>
+<p>And guess what? Both those buttons resulted in Xcode crashing, right there, with no explanation, no progress bar, nothing, Boom!</p>
+<p>Out of curiosity I opened the crash log that got generated and…</p>
+<pre><code class="">Crashed <span class="hljs-keyword">Thread</span>:  <span class="hljs-number">0</span>  Dispatch <span class="hljs-built_in">queue</span>: com<span class="hljs-built_in">.</span>apple<span class="hljs-built_in">.</span>main<span class="hljs-attribute">-thread</span>
+
+Exception <span class="hljs-keyword">Type</span>:  EXC_BAD_ACCESS (SIGSEGV)
+Exception Codes: EXC_I386_GPFLT
+</code></pre><p>Whenever I get an <code>EXC_BAD_ACCESS (SIGSEGV)</code> I feel like punching myself in the face, it&#39;s a memory issue, and I must have been really dumb to produce something like that in the ARC era.</p>
+<p>But let&#39;s not waste time complaining about those things, risking to be kicked out of the dev program, and look for a solution.</p>
+<h3 id="the-workaround">The workaround</h3>
+<p>What&#39;s the place where all the developers go when in trouble? No it&#39;s not church, it&#39;s <a href="stackoverflow.com">StackOverflow</a>! There I found <a href="http://stackoverflow.com/questions/18748779/xcode5-gm-crashes-no-identities-are-available-for-signing-then-crash/">someone with the same problem</a>, suggesting to use Application Loader to upload the app.</p>
+<p>I never used it before, but I was faced with a problem straightaway. Application Loader need an <code>.ipa</code>, which we can generate only through the Organizer in Xcode.</p>
+<p><em>&quot;which we can generate only through the Organizer in Xcode.&quot;</em>. Are you sure about it? </p>
+<p>Actually <code>xcodebuild</code>, Xcode CLI, let us build ipas, in a very complex way. <code>xctool</code> buy the Facebook iOS team makes the task easier, but it the usual suspect, good guy <a href="https://github.com/mattt">Mattt</a> that has the real solution for that. With his gem <a href="https://github.com/nomad/shenzhen">shenzhen</a> we can build an ipa from command line without spending too much time specifing options or reading through the <code>--help</code> guide.</p>
+<pre><code class="">ipa build -c <span class="hljs-keyword">Release</span>
+</code></pre><p>That&#39;s all we need to generate our <code>.ipa</code>.</p>
+<p>Once we have our package we can send it to the Apples servers through Application Loader, bypassing Organizer and the frustrating crash. Smart!</p>
+<p><br/>
+That&#39;s all folks. I&#39;m a bit disappointed by the fact that such an issue is leaked on a GM, when we, some of us at least, spend so much time unit testing our apps, being patient with the QA guys, and taking all the possible measures to make sure everything works as expected. But nobody&#39;s perfect, and every now and then hacking stuff is fun, so no big deal.</p>
+<p>Happy coding!</p>
+</div><div id="paginator" class="bottom-box"><div class="row-12"><div class="col-6"><div><a href="/blog/mtfonticon"><<&nbsp;Bringing font icons in iOS with MTFontIcon</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/things-learned-in-august">Some things I learned in August&nbsp;>></a></div></div></div></div><div id="apps" class="bottom-box"><p>Enjoyed the post? Check out my apps: <a href="https://itunes.apple.com/au/app/fineants-savings-tracker/id888444078?mt=8">Fineants</a> and <a href="https://itunes.apple.com/us/app/gradient-backgrounds-studio/id815508757?mt=8">Gradient Background Studio</a></p>
+</div></div></div><div class="col-12 footer">made with &hearts; by <a href="http://giovannilodi.com">Giovanni Lodi</a>&nbsp;since 2013 
+&nbsp;- twitter:&nbsp;<a href="https://twitter.com/mokagio">@mokagio</a>&nbsp;- github:&nbsp;<a href="https://github.com/mokagio">mokagio</a></div></div></div></body></html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html><html lang="en"><head><title>mokacoding</title><link href="/css/griddy.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet"><link href="/css/highlight-obsidian.css" rel="stylesheet"></head><body><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">mokagio's blabbering on software</div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/things-learned-in-july">Some things I learned in July</a></h2><p class="post-meta"><span class="post-date">Thu Aug 01 2013&nbsp;</span><a href="/tag/AWS/index.html" class="post-tag">-AWS</a><a href="/tag/iOS/index.html" class="post-tag">-iOS</a><a href="/tag/Objective-C/index.html" class="post-tag">-Objective-C</a><a href="/tag/Postgres/index.html" class="post-tag">-Postgres</a><a href="/tag/Ruby/index.html" class="post-tag">-Ruby</a><a href="/tag/Ruby on Rails/index.html" class="post-tag">-Ruby on Rails</a><a href="/tag/Software Engineering/index.html" class="post-tag">-Software Engineering</a></p><div class="post"><p>July has been a month dense of learning and (re)discoveries! First of all <strong>Rails 4</strong>, which I come to love back in the day, when I was working with my friends on the first prototype of <a href="http://www.kunerango.com" target="_blank">Kunerango</a></p>
+<h3 id="objective-c-and-ios-development">Objective-C and iOS Development</h3>
+<p><a href="http://rentzsch.github.io/mogenerator/" target="_blank">http://rentzsch.github.io/mogenerator/</a></p>
+<p>Guess what? CoreData doesn&#39;t make your life easy when you&#39;re seriously working with test, <a href="http://stackoverflow.com/questions/1876568/ocmock-with-core-data-dynamic-properties-problem" target="_blank">http://stackoverflow.com/questions/1876568/ocmock-with-core-data-dynamic-properties-problem</a>. I like the protocol approach, even if it adds a some &quot;boilerplate code&quot; to maintain.</p>
+<p><a href="http://nomad-cli.com/">nomad</a> a set of useful tools to automate the every-day development. Another gift from mister <a href="http://mattt.me/">Mattt</a>.</p>
+<h3 id="ruby-on-rails">Ruby on Rails</h3>
+<p><a href="http://rubyonrails.org/" target="_blank">Rails 4</a> finally out! <a href="http://weblog.rubyonrails.org/2013/6/25/Rails-4-0-final/" target="_blank">http://weblog.rubyonrails.org/2013/6/25/Rails-4-0-final/</a></p>
+<p>Nice and clear guide to testing with RSpec on Rails <a href="http://everydayrails.com/2012/03/12/testing-series-rspec-setup.html" target="_blank">http://everydayrails.com/2012/03/12/testing-series-rspec-setup.html</a></p>
+<p>Binstubs, because the less we type, the better! <a href="http://blog.barbershoplabs.com/blog/2013/03/01/upgrading-to-rails-40-binstubs" target="_blank">http://blog.barbershoplabs.com/blog/2013/03/01/upgrading-to-rails-40-binstubs</a>, <a href="http://mislav.uniqpath.com/2013/01/understanding-binstubs/" target="_blank">http://mislav.uniqpath.com/2013/01/understanding-binstubs/</a>, <a href="http://robots.thoughtbot.com/post/15346721484/use-bundlers-binstubs" target="_blank">http://robots.thoughtbot.com/post/15346721484/use-bundlers-binstubs</a></p>
+<p>The <a href="https://github.com/indirect/haml-rails">haml-rails</a> gem integrates with the template generators, out of the box!</p>
+<p>How cool are named routes? <code>post &#39;items/move_down/:id&#39; =&gt; &#39;items#move_down&#39;, as: :move_down )</code>, look at the routes.rb comments to know more about them.</p>
+<p>Amazon AWS S3 gem <a href="http://amazon.rubyforge.org">http://amazon.rubyforge.org</a></p>
+<p>I found a nice gem to add enumeration type to the ActiveRecord models: <a href="https://github.com/adzap/active_enum">active_enum</a>, but is it compatible with Rails 4? Here&#39;s a <a href="http://qubitlogs.com/Rails/2013/02/01/creating-pre-defined-set-of-attributes-mapping-integers-to-strings-in-rails/#.UdWbpT6DQ_U">link</a> on how to use it.</p>
+<h3 id="ruby">Ruby</h3>
+<p>I wrote some scripts to speed up some of my daily task at work, and used some nice gems in the meantime:
+<a href="http://nokogiri.org/">nokogiri</a>, to parse HTML using CSS selectors
+<a href="https://github.com/rest-client/rest-client">rest-client</a>, fetching pages from the web with one line of code
+<a href="http://rubygems.org/gems/json">json</a>, to parse JSON
+<a href="https://github.com/samg/diffy">diffy</a>, comparing strings has never been so easy
+<a href="https://github.com/mikel/mail">mail</a>, sending emails from your scripts</p>
+<h3 id="coding-recipes">Coding Recipes</h3>
+<p><a href="http://codeartists.com/post/36892733572/how-to-directly-upload-files-to-amazon-s3-from-your">http://codeartists.com/post/36892733572/how-to-directly-upload-files-to-amazon-s3-from-your</a></p>
+<p><a href="http://codeartists.com/post/36892733572/how-to-directly-upload-files-to-amazon-s3-from-your">http://quickleft.com/blog/keeping-your-json-response-lean-in-rails</a></p>
+<p><a href="http://stackoverflow.com/questions/3159945/running-command-line-commands-within-ruby-script">Several ways to run a command line command from a Ruby script.</a></p>
+<h3 id="sysadmin">Sysadmin</h3>
+<p>Fixing Postgres connection error on OS X Mountain Lion <a href="http://jaygoldman.com/2012/11/fixing-postgres-connection-errors-on-mountain-lion/">http://jaygoldman.com/2012/11/fixing-postgres-connection-errors-on-mountain-lion/ </a>(funny because with Node there were no problems)</p>
+<h3 id="javascript">Javascript</h3>
+<p>I looked into a bunch of Javasciprt techs: <a href="http://underscorejs.org/">Underscore.js</a>, <a href="http://jade-lang.com/">Jade</a>, <a href="http://handlebarsjs.com/">Handlebars</a>, <a href="http://learnboost.github.io/stylus/">Stylus</a>, <a href="http://expressjs.com/">Express</a></p>
+<h3 id="tools">Tools</h3>
+<p><a href="http://imageoptim.com/">http://imageoptim.com/</a></p>
+<h3 id="software-engineering-good-practices">Software Engineering Good Practices</h3>
+<p><a href="http://en.wikipedia.org/wiki/Coupling_(computer_programming)">Coupled dependencies</a>, I found one of those monsters in a colleague&#39;s code. It took a lot of self-control to avoid being a prick and pointing it out on GitHub.</p>
+<h3 id="interesting-readings">Interesting readings</h3>
+<p><a href="How Basecamp Next got to be so damn fast without using much client-side UI">How Basecamp Next got to be so damn fast without using much client-side UI</a></p>
+</div><div id="paginator" class="bottom-box"><div class="row-12"><div class="col-6"><div><a href="/blog/things-learned-in-august"><<&nbsp;Some things I learned in August</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/what-i-did-in-a-week">What I did in a week...&nbsp;>></a></div></div></div></div><div id="apps" class="bottom-box"><p>Enjoyed the post? Check out my apps: <a href="https://itunes.apple.com/au/app/fineants-savings-tracker/id888444078?mt=8">Fineants</a> and <a href="https://itunes.apple.com/us/app/gradient-backgrounds-studio/id815508757?mt=8">Gradient Background Studio</a></p>
+</div></div></div><div class="col-12 footer">made with &hearts; by <a href="http://giovannilodi.com">Giovanni Lodi</a>&nbsp;since 2013 
+&nbsp;- twitter:&nbsp;<a href="https://twitter.com/mokagio">@mokagio</a>&nbsp;- github:&nbsp;<a href="https://github.com/mokagio">mokagio</a></div></div></div></body></html>

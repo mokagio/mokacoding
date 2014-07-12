@@ -19,6 +19,7 @@ metalsmith(__dirname)
   .destination("..")
   .clean(true).except([
     ".git",
+    "CNAME",
     "metallo",
     "node_modules",
     ".gitignore",

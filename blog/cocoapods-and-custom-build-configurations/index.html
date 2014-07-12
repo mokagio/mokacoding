@@ -1,0 +1,56 @@
+<!DOCTYPE html><html lang="en"><head><title>mokacoding</title><link href="/css/griddy.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet"><link href="/css/highlight-obsidian.css" rel="stylesheet"></head><body><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">mokagio's blabbering on software</div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/cocoapods-and-custom-build-configurations">CocoaPods and custom Build Configurations</a></h2><p class="post-meta"><span class="post-date">Wed Apr 16 2014&nbsp;</span><a href="/tag/iOS/index.html" class="post-tag">-iOS</a><a href="/tag/Objective-C/index.html" class="post-tag">-Objective-C</a><a href="/tag/CocoaPods/index.html" class="post-tag">-CocoaPods</a><a href="/tag/Bugfixing/index.html" class="post-tag">-Bugfixing</a></p><div class="post"><p>If you run through the posts in this blog you&#39;ll find out that I&#39;m a big fan and advocate of <a href="http://cocoapods.org">CocoaPods</a>. It&#39;s such an awesome tool and makes my life as a developer so much easier. Most of the times.</p>
+<p>Recently I bumped into a quite annoying and mysterious <a href="https://github.com/CocoaPods/CocoaPods/issues/1934">issue</a> while trying to use <a href="https://github.com/facebook/Tweaks">Tweaks</a> by Facebook. I was finally able to sort everything out thanks to the help of <a href="https://github.com/grp">@grp</a>, the library creator, and <a href="https://github.com/alloy">@alloy</a>, CocoaPods dad.</p>
+<p>Thanks to that issue I now have a better understanding of what CocoaPods does, and some tips to share on how to handle build configurations like a pro.</p>
+<h2 id="the-custom-build-configuration-issue">The custom build configuration issue</h2>
+<p>The problem: when trying to use Tweaks with a build configuration in a project the linking phase was failing. Apparently some symbols used by the pod didn&#39;t exist.</p>
+<pre><code class="">Undefined symbols <span class="hljs-keyword">for</span> architecture i386:
+  <span class="hljs-string">"__FBTweakIdentifier"</span>, referenced from: <span class="hljs-keyword">...</span>
+ld: symbol(s) not found <span class="hljs-keyword">for</span> architecture i386
+clang: error: linker command failed with exit code <span class="hljs-number">1</span> (use -v to see invocation)
+</code></pre><p>Tweaks is built in a way that allows developers to turn it off for production builds, collapsing the <em>tweakable</em> values into their defaults. The way they made this possible is through <a href="http://gcc.gnu.org/onlinedocs/cpp/Macros.html">preprocessor macros</a>; if <code>FB_TWEAK_ENABLED</code> is <code>0</code> than the macro functions used for the <em>tweakable</em> values are redefined into their default values. One of the places were this happens is <a href="https://github.com/facebook/Tweaks/blob/master/FBTweak/FBTweakInlineInternal.h">FBTweakInlineInternal.h</a>.</p>
+<p><code>FB_TWEAK_ENABLED</code> itself is defined in <a href="https://github.com/facebook/Tweaks/blob/master/FBTweak/FBTweakEnabled.h">FBTweakEnabled.h</a> and its behaviour maps the <code>DEBUG</code> macro, if not set otherwise.</p>
+<p>With this understanding of how Tweaks works the error message now suggests us that there&#39;s some problem with <code>FB_TWEAK_ENABLED</code> and <code>DEBUG</code>. The linker must be getting values different by the ones I set. But how?</p>
+<h2 id="how-cocoapods-does-its-magic">How CocoaPods does its magic</h2>
+<p>@alloy opened my eyes on what was going on with this <a href="https://github.com/CocoaPods/CocoaPods/issues/1934#issuecomment-40132425">comment</a> in the issue I opened.</p>
+<blockquote>
+<p>[...] the FBTweak headers are read and interpreted by both the projects when you build. Now when the Pods project is built without DEBUG set, the FBTweak code doesn’t actually get compiled and assembled into libPods.a, but since DEBUG=1 is set in your project the FBTweak headers think the code will be in the product and it references symbols that are not actually in any of the built object files.</p>
+</blockquote>
+<p>Stripped down to the very bone what CocoaPods does is adding libraries to our project for us. The sources are located in the Pods project in the workspace. CocoaPods builds for us a static library <code>libPods.a</code> with all the compiled sources and adds it to our project the same way we do with the system frameworks, in the &quot;Link Binary With Libraries&quot; build phase.</p>
+<p>For this process to run smoothly is obvious that both the Pods and our project have to be configured in the same way. If that&#39;s not true we could be calling methods of a library in our project expecting the code to run in a certain way, but the actual code would be different.</p>
+<p>Usually the libraries we use don&#39;t rely on CPP flags to switch pieces of code on and off at compile time, this is why despite using a lot of pods and custom build configurations I had never run into this kind of issue before.</p>
+<h2 id="how-to-use-cocoapods-and-build-configurations-like-a-pro">How to use CocoaPods and build configurations like a pro</h2>
+<p>The rule of thumb is that <strong>the Pods and our target have to have the same preprocessor macro settings</strong>.</p>
+<p>Whenever you create a custom build configuration Xcode asks if you want to duplicate Debug or Release. The Podfile DSL has a way to tell CocoaPods which build configuration was duplicated from which, it&#39;s the second argument of the <a href="http://guides.cocoapods.org/syntax/podfile.html#xcodeproj"><code>xcodeproj</code></a> setting.</p>
+<pre><code class=" hljs ruby">xcodeproj <span class="hljs-smartquote">`MyProject`, '</span>QA' =&gt; :release, <span class="hljs-emphasis">'Beta'</span> =&gt; :debug
+</code></pre>
+<p>If some of your pods requires you to set preprocessor macros then remember what @alloy says:</p>
+<blockquote>
+<p>The important thing to remember here is that you cannot conditionally compile stuff by setting CPP flags from your app target only.</p>
+</blockquote>
+<p>We need to make the Pods aware of what we set in our target. There are two ways to do this.</p>
+<h3 id="with-a-version-controlled-pods-folder">With a Version-Controlled Pods Folder</h3>
+<p>If your Pods folder is under version control just set them in the Pods target that uses them in the same way you did for your target.</p>
+<p><img src="http://mokacoding.s3.amazonaws.com/2014-04-16-linked-libraries.jpg" /></p>
+<p>Git (<em>your using git right?!</em>) will remember the settings forever.</p>
+<h3 id="without-a-pods-folder">Without a Pods Folder</h3>
+<p>If the Pods are not versioned every time <code>pod install</code> or <code>pod update</code> run the Pods project is regenerated. The way to automate setting the preprocessor macro is through a <a href="http://guides.cocoapods.org/syntax/podfile.html#post_install"><code>post_install</code></a> hook.</p>
+<pre><code class=" hljs ruby">post_install <span class="hljs-built_in">do</span> |installer_representation|
+  installer_representation.project.targets.<span class="hljs-keyword">each</span> <span class="hljs-built_in">do</span> |target|
+    <span class="hljs-keyword">if</span> target.name == <span class="hljs-string">"Pods-TweaksBuildConfigurationsDemo-Tweaks"</span>
+      target.build_configurations.<span class="hljs-keyword">each</span> <span class="hljs-built_in">do</span> |config|
+        <span class="hljs-keyword">if</span> config.name == <span class="hljs-string">'QA'</span>
+          config.build_settings[<span class="hljs-string">'GCC_PREPROCESSOR_DEFINITIONS'</span>] ||= [<span class="hljs-string">'$(inherited)'</span>, <span class="hljs-string">'FB_TWEAK_ENABLED=1'</span>]
+        <span class="hljs-function"><span class="hljs-keyword">end</span></span>
+      <span class="hljs-function"><span class="hljs-keyword">end</span></span>
+    <span class="hljs-function"><span class="hljs-keyword">end</span></span>
+  <span class="hljs-function"><span class="hljs-keyword">end</span></span>
+<span class="hljs-function"><span class="hljs-keyword">end</span></span>
+</code></pre>
+<p>This one sets <code>FB_TWEAK_ENABLED=1</code> in the &#39;QA&#39; build configuration for the Tweak&#39;s target of the Pods project.</p>
+<hr>
+<p>There are few things as rewarding as solving a problem by understanding all the pieces of the puzzle, looking back at it and suddenly seeing everything clearly. It is something that is possible only when using open source tools.</p>
+<p>I love the ability to look under the hood of the stuff I use, and I am  very grateful to the CocoaPods team for the awesome work they&#39;re doing. I was lucky enough to meet some of them in person, and they are all lovely people as well!</p>
+<p><em>Enjoy haking around open source</em></p>
+</div><div id="paginator" class="bottom-box"><div class="row-12"><div class="col-6"></div><div class="col-6"><div style="text-align: right"><a href="/blog/2014-resolutions-review">2014 resolutions review&nbsp;>></a></div></div></div></div><div id="apps" class="bottom-box"><p>Enjoyed the post? Check out my apps: <a href="https://itunes.apple.com/au/app/fineants-savings-tracker/id888444078?mt=8">Fineants</a> and <a href="https://itunes.apple.com/us/app/gradient-backgrounds-studio/id815508757?mt=8">Gradient Background Studio</a></p>
+</div></div></div><div class="col-12 footer">made with &hearts; by <a href="http://giovannilodi.com">Giovanni Lodi</a>&nbsp;since 2013 
+&nbsp;- twitter:&nbsp;<a href="https://twitter.com/mokagio">@mokagio</a>&nbsp;- github:&nbsp;<a href="https://github.com/mokagio">mokagio</a></div></div></div></body></html>

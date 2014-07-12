@@ -1,0 +1,99 @@
+<!DOCTYPE html><html lang="en"><head><title>mokacoding</title><link href="/css/griddy.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet"><link href="/css/highlight-obsidian.css" rel="stylesheet"></head><body><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">mokagio's blabbering on software</div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/cocoapods">CocoaPods!</a></h2><p class="post-meta"><span class="post-date">Sat Jan 05 2013&nbsp;</span><a href="/tag/CocoaPods/index.html" class="post-tag">-CocoaPods</a><a href="/tag/git/index.html" class="post-tag">-git</a><a href="/tag/iOS/index.html" class="post-tag">-iOS</a><a href="/tag/Objective-C/index.html" class="post-tag">-Objective-C</a></p><div class="post"><h2>description: A brief introduction to CocoaPods, the Objective-C dependencies manager.</h2>
+
+<h2>What is CocoaPods?</h2>
+
+<blockquote>
+  <p>CocoaPods: The best way to manage library dependencies in Objective-C projects.</p>
+</blockquote>
+
+<p>If you&#39;re familiar with Ruby on Rails, it&#39;s the same thing as <a href="http://gembundler.com/">Bundler</a>, or it&#39;s lame copy attempt for Symfony 2, <a href="http://getcomposer.org/">Composer</a>.</p>
+
+<p>If you&#39;re not, and you haven&#39;t sorted it out from the quote above, CocoaPods is a tool that&#39;s let us manage our libraries and their dependencies in our Objective-C projects. This means:</p>
+
+<ol>
+<li>No more wasted time downloading all the libraries the one we want to use depends on.</li>
+<li>Smart and safe version management, specially when we&#39;re working on a project with other people, which is 90% of the time.</li>
+</ol>
+
+<p>To <em>&quot;get my hands dirty&quot;</em> with CocoaPods I made this little project called <a href="https://github.com/mokagio/justninegags">JustNineGags</a>, feel free to check it out on GitHub.</p>
+
+<h2>Why should I use it?</h2>
+
+<p>Because it&#39;s awesome! It makes development faster and easier, and also safer! It easier to work in teams and keep the libraries versions even. Should I go on? Ok! Just think about this: you won&#39;t download and move in your project a library anymore, <code>pod</code> will do it all for you!</p>
+
+<h2>Installing CocoaPods</h2>
+
+<p>Installing CocoaPods is as simple as installing all the other Ruby Gems, I shouldn&#39;t even writing this, as what&#39;s written in the <a href="http://cocoapods.org/#install">install section</a> is more than enough, anyway:</p>
+
+<div class="highlight"><pre lang="">gem install cocoapods
+</pre></div>
+
+<p>Once the installation is completed run:</p>
+
+<div class="highlight"><pre lang="">pod setup
+</pre></div>
+
+<p>This will, guess what, setup everything CocoaPods needs on your system. You should see an output like this:</p>
+
+<div class="highlight"><pre lang="">Setting up CocoaPods master repo
+Cloning spec repo <code>master&#39; from</code><a href='https://github.com/CocoaPods/Specs.git'>https://github.com/CocoaPods/Specs.git</a>&#39; (branch `master&#39;)
+Setup completed (read-only access)
+</pre></div>
+
+<p>Done! :)</p>
+
+<p><em>You should avoid using <code>sudo</code> otherwise everything else you&#39;ll do with <code>pod</code> will need to use <code>sudo</code> as well. And this mean that the folders and file that are gonna be created will be owend by <code>root</code> instead that by you.</em></p>
+
+<h2>Using CocoaPods</h2>
+
+<p>Again, everything written on the <a href="http://cocoapods.org/#get_started">website</a> is pretty straightforward.</p>
+
+<p>Go in the root folder of your Objective-C project and create a file named <code>Podfile</code>, with whatever editor you like. We&#39;ll use this file to list all the libraries, <em>pods</em>, we need in the project. The JustNineGags <code>Podfile</code> content is:</p>
+
+<pre><code>
+platform :ios
+pod 'MBProgressHUD', '~> 0.5'
+pod 'Reachability',  '~> 3.1.0'
+</code></pre>
+
+<h3>Adding a Pod</h3>
+
+<p>As you can see adding a Pod is really easy, just go on <a href="http://cocoapods.org">CocoaPods website</a>, look for the it, and then add it to the <code>Podfile</code> using it&#39;s name and the version you need.</p>
+
+<h3>Installing the Pods</h3>
+
+<p>Right now we&#39;ve told CocoaPods the Pods we need but they aren&#39;t yet in out project. So let&#39;s run</p>
+
+<div class="highlight"><pre lang="">pod install
+</pre></div>
+
+<p>This will download all the libraries we&#39;ve asked for, and all their dependencies. Sweet!</p>
+
+<p>The first time we run <code>pod install</code> something else will happen, a <code>Pods/</code> folder, a <code>Podfile.lock</code>, and a <code>YourProjectName.xcworkspace</code> will be created.</p>
+
+<p><strong>Important!</strong> From now on remember to open your project through the <code>YourProjectName.xcworkspace</code> file, otherwise the pods won&#39;t be loaded by Xcode.</p>
+
+<p>That&#39;s all folks! :)</p>
+
+<h3>What should we track?</h3>
+
+<p>Using CocoaPods adds some files and folders to our project, which of those should we track in our repo, and which should be left aside, adding them to the <code>.gitignore</code>? That of course assuming you&#39;re using git, and you definitely should. Let&#39;s have a look at the new stuff:</p>
+
+<ul>
+<li><code>Podfile</code>, we definitely <b>need</b> this one, as all the pods we need are listed in it.</li>
+<li><code>Podfile.lock</code>, as for all the other library management systems, we <b>need</b> this one too, because it&#39;s used to assure all the developers are using the same versions of the pods and their dependencies.</li>
+<li><code>Pods/</code>, we <b>don&#39;t need</b> to track this folder, it&#39;s created by <code>pod install</code>, and all it&#39;s content is downloaded for us from other repos.</li>
+<li><code>YourProjectName.xcworkspace</code>, we <b>don&#39;t need</b> this one either, because it&#39;s generated by <code>pod install</code> too.</li>
+</ul>
+
+<h2>What&#39;s coming next?</h2>
+
+<p>How to setup our own pods. I&#39;ll probably write a little and simple Category to add other colors to the <code>UIColor</code> factories, stay tuned!</p>
+
+<hr />
+
+<h2>Update 2013-01-06</h2>
+
+<p>To implement HTTP requests in <a href="https://github.com/mokagio/justninegags">JustNineGags</a> I used <code><a href="https://github.com/nfarina/webrequest">SMWebRequest</a></code> because I&#39;m too lazy to write everything by myself. <code>SMWebRequest</code> wasn&#39;t a Pod yet so I opened an <a href="https://github.com/nfarina/webrequest/issues/7">issue</a> asking good guy <a href="https://twitter.com/nfarina">nfarina</a> to add it. In less than 12 hours the Pod was added! :D</p></div><div id="paginator" class="bottom-box"><div class="row-12"><div class="col-6"><div><a href="/blog/cocoapods-how-to-create-your-own-pod"><<&nbsp;CocoaPods - How to create your own Pod</a></div></div><div class="col-6"></div></div></div><div id="apps" class="bottom-box"><p>Enjoyed the post? Check out my apps: <a href="https://itunes.apple.com/au/app/fineants-savings-tracker/id888444078?mt=8">Fineants</a> and <a href="https://itunes.apple.com/us/app/gradient-backgrounds-studio/id815508757?mt=8">Gradient Background Studio</a></p>
+</div></div></div><div class="col-12 footer">made with &hearts; by <a href="http://giovannilodi.com">Giovanni Lodi</a>&nbsp;since 2013 
+&nbsp;- twitter:&nbsp;<a href="https://twitter.com/mokagio">@mokagio</a>&nbsp;- github:&nbsp;<a href="https://github.com/mokagio">mokagio</a></div></div></div></body></html>

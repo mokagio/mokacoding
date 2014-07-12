@@ -1,0 +1,59 @@
+<!DOCTYPE html><html lang="en"><head><title>mokacoding</title><link href="/css/griddy.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet"><link href="/css/highlight-obsidian.css" rel="stylesheet"></head><body><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">mokagio's blabbering on software</div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/mokagios-self-memo-for-facebook-integration-on-ios-part-1">mokagio's self memo for Facebook Integration on iOS - Part 1</a></h2><p class="post-meta"><span class="post-date">Tue Jun 25 2013&nbsp;</span><a href="/tag/CocoaPods/index.html" class="post-tag">-CocoaPods</a><a href="/tag/Facebook/index.html" class="post-tag">-Facebook</a><a href="/tag/iOS/index.html" class="post-tag">-iOS</a><a href="/tag/Objective-C/index.html" class="post-tag">-Objective-C</a></p><div class="post"><h2 id="part-1-facebook-login">Part 1 - Facebook Login</h2>
+<h3 id="0-create-a-facebook-app">0 - Create a Facebook App</h3>
+<p>Create an app on the <a href="https://developers.facebook.com/apps/">Facebook App Dashboard</a>, what are you gonna integrate otherwise?!</p>
+<h3 id="1-add-the-facebook-sdk-pod">1 - Add the Facebook SDK Pod</h3>
+<p>Given that you have already setup your libraries management with CocoaPods, and you should have, add to your <code>Podfile</code> the line</p>
+<p>  pod &quot;Facebook-iOS-SDK&quot;, &quot;~&gt; 3.5.2&quot;</p>
+<p>Then run <code>pod install</code>.</p>
+<p>For more info about how to use CocoaPods check out <a href="http://amokafullofstuff.wordpress.com/2013/01/05/cocoapods/">this</a> post of mine.</p>
+<h3 id="2-add-some-facebook-data-to-the-info-plist-">2 - Add some Facebook data to the <code>Info.plist</code></h3>
+<p>Facebook requires you to add two fields to your <code>Info.plist</code> file:</p>
+<ul>
+<li><strong>FacebookAppID</strong>: a 15 digits number you can find in the Settings page of your app on your Facebook developer page.</li>
+<li><strong>FacebookDisplayName</strong>: how to comment, the display name of your app?</li>
+</ul>
+<h3 id="3-a-basic-login-flow">3 - A basic login flow</h3>
+<p>The <a href="https://developers.facebook.com/docs/tutorials/ios-sdk-tutorial/">tutorial</a> tells us to put all the Facebook login in the <code>AppDelegate</code>. I don&#39;t like this approach, because I don&#39;t want to make the delegate dirty with code related only to Facebook. I prefer to create a <code>FacebookProxy</code> class, with class methods to call to interact with Facebook.</p>
+<p>Whatever solution you prefer the steps for the login are the same anyway:</p>
+<ol>
+<li>Check if the user is logged already. Let&#39;s assume he isn&#39;t…</li>
+<li>Present in some way a call to action for the Facebook Login.</li>
+<li>Call the Facebook SDK method to login the user.</li>
+<li>Let the SDK do it&#39;s job.</li>
+<li>Come back to the app and handle the result.</li>
+</ol>
+<h4 id="check-if-the-user-is-logged-in">Check if the user is logged in</h4>
+<p>To get the current Facebook session we use <code>FBSession.activeSession</code>. To see if the session is active, and therefore the user is already logged in, we need to check the <code>state</code> property: <code>FBSession.activeSession.state</code>. A quick look to the <code>typedef enum</code> of the <code>FBSessionState</code> and:</p>
+<pre><code class="">{% highlight objective-c <span class="hljs-variable">%}</span>
++ (BOOL)isUserLoggedInFacebook
+{
+    <span class="hljs-keyword">if</span> (FBSession.activeSession.<span class="hljs-keyword">state</span> == FBSessionStateCreatedTokenLoaded
+        || FBSession.activeSession.<span class="hljs-keyword">state</span> == FBSessionStateOpen
+        || FBSession.activeSession.<span class="hljs-keyword">state</span> == FBSessionStateOpenTokenExtended) {
+        <span class="hljs-keyword">return</span> YES;
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-keyword">return</span> NO;
+    }
+}
+{% endhighlight <span class="hljs-variable">%}</span>
+</code></pre><h4 id="call-the-facebook-sdk-method-to-login">Call the Facebook SDK method to login</h4>
+<p>Easy peasy:</p>
+<pre><code class="">{% highlight objective-c %}
+[FBSession openActiveSessionWithReadPermissions:<span class="hljs-literal">nil</span>
+                                   allowLoginUI:<span class="hljs-literal">YES</span>
+                              completionHandler:^(FBSession *session, FBSessionState state, <span class="hljs-built_in">NSError</span> *error) {
+     <span class="hljs-comment">// handle stuff here</span>
+ }];
+ {% endhighlight %}
+</code></pre><p>In the completion handler we should… handle the result of the open active session. I think that this really depends on what our app will do, so I&#39;m not gonna write any snippet here.</p>
+<h4 id="come-back-to-the-app-and-handle-the-result">Come back to the app and handle the result</h4>
+<p>If you&#39;re user&#39;s are using iOS 5 -I hope they&#39;re not-, or if they&#39;re so dumb they haven&#39;t installed the native Facebook app for iOS, the login will occur with a sort of modal window in your app. In all the rest of the cases the</p>
+<h3 id="frameworks-needed-in-the-test-bundle">Frameworks needed in the Test Bundle</h3>
+<p>TDD is the way. Full stop. I noticed that adding the Facebook-iOS-SDK pod to my project wasn&#39;t enough for my test bundle to run, there were some framework dependencies missing:</p>
+<ul>
+<li>AdSupport.framework</li>
+<li>Social.framework</li>
+</ul>
+</div><div id="paginator" class="bottom-box"><div class="row-12"><div class="col-6"><div><a href="/blog/things-learned-in-june"><<&nbsp;Some things I learned in June</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/osx-a-scanner-and-the-drivers-drama">OSX, a scanner, and the drivers drama&nbsp;>></a></div></div></div></div><div id="apps" class="bottom-box"><p>Enjoyed the post? Check out my apps: <a href="https://itunes.apple.com/au/app/fineants-savings-tracker/id888444078?mt=8">Fineants</a> and <a href="https://itunes.apple.com/us/app/gradient-backgrounds-studio/id815508757?mt=8">Gradient Background Studio</a></p>
+</div></div></div><div class="col-12 footer">made with &hearts; by <a href="http://giovannilodi.com">Giovanni Lodi</a>&nbsp;since 2013 
+&nbsp;- twitter:&nbsp;<a href="https://twitter.com/mokagio">@mokagio</a>&nbsp;- github:&nbsp;<a href="https://github.com/mokagio">mokagio</a></div></div></div></body></html>

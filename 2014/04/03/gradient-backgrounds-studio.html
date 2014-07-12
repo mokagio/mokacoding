@@ -1,0 +1,150 @@
+<!DOCTYPE html><html lang="en"><head><title>mokacoding</title><link href="/css/griddy.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet"><link href="/css/highlight-obsidian.css" rel="stylesheet"></head><body><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">mokagio's blabbering on software</div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/gradient-backgrounds-studio">Gradient Backgrounds Studio: Lessons Learned</a></h2><p class="post-meta"><span class="post-date">Thu Apr 03 2014&nbsp;</span><a href="/tag/Xcode/index.html" class="post-tag">-Xcode</a><a href="/tag/iOS/index.html" class="post-tag">-iOS</a><a href="/tag/Objective-C/index.html" class="post-tag">-Objective-C</a></p><div class="post"><p><img src="http://mokacoding.s3.amazonaws.com/2014-04-03-gbs-icon.png" alt="Gradient Backgrounds Studio Icon" style="width: 120px"/></p>
+<p>At the beginning of March I released <a href="https://itunes.apple.com/us/app/gradient-backgrounds-studio/id815508757?mt=8">Gradient Backgrounds Studio</a>, app born from a simple need my girlfriend had to add a gradient on top of an image to make a better background. It was one of those ideas that hit you and no matter if it&#39;s 1 o&#39;clock in the morning you have to code them.</p>
+<p>Gradient Backgrounds Studio is a very simple app with a very simple implementation, but it gave me an excuse to play with some components of the framework I didn&#39;t know about.</p>
+<h3 id="-cggradientlayer-"><code>CGGradientLayer</code></h3>
+<p>Guess what? The app is all about gradients. The first thing I had to learn was how to create and manipulate gradients.</p>
+<p>When it comes down to graphic staff <a href="https://developer.apple.com/library/ios/documentation/GraphicsImaging/Reference/QuartzCoreRefCollection/_index.html">Quartz</a> is the framework we need to look at, and it has exactly the class we&#39;re looking for: <a href="https://developer.apple.com/library/ios/documentation/GraphicsImaging/Reference/CAGradientLayer_class/Reference/Reference.html"><code>CAGradientLayer</code></a>.</p>
+<blockquote>
+<p>The CAGradientLayer class draws a color gradient over its background color, filling the shape of the layer (including rounded corners)</p>
+</blockquote>
+<p>Creating the layer is simple:</p>
+<pre><code class=" hljs objc">CAGradientLayer *gradientLayer = [CAGradientLayer layer];
+gradientLayer<span class="hljs-variable">.backgroundColor</span> = [<span class="hljs-built_in">UIColor</span> clearColor]<span class="hljs-variable">.CGColor</span>;
+
+<span class="hljs-built_in">CGRect</span> frame = CGRectMake(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">100</span>, <span class="hljs-number">100</span>);
+
+<span class="hljs-built_in">UIColor</span> *startColor = [<span class="hljs-built_in">UIColor</span> redColor];
+<span class="hljs-built_in">UIColor</span> *endColor = [<span class="hljs-built_in">UIColor</span> orangeColor];
+
+gradientLayer<span class="hljs-variable">.frame</span> = frame;
+gradientLayer<span class="hljs-variable">.colors</span> = @[ (<span class="hljs-keyword">id</span>)starColor<span class="hljs-variable">.CGColor</span>, (<span class="hljs-keyword">id</span>)endColor<span class="hljs-variable">.CGColor</span> ];
+</code></pre>
+<p><img src="http://mokacoding.s3.amazonaws.com/2014-04-03-cagradientlayer.jpg" alt="Simple CAGradientLayer" style="width: 30%"/></p>
+<p>There are cool things we can do, like having more colors and configuring how the gradient is rendered through its start and end point.</p>
+<pre><code class=" hljs objc">CAGradientLayer *gradientLayer = [CAGradientLayer layer];
+gradientLayer<span class="hljs-variable">.backgroundColor</span> = [<span class="hljs-built_in">UIColor</span> clearColor]<span class="hljs-variable">.CGColor</span>;
+
+<span class="hljs-built_in">CGRect</span> frame = CGRectMake(<span class="hljs-number">20</span>, <span class="hljs-number">20</span>, <span class="hljs-number">200</span>, <span class="hljs-number">200</span>);
+
+<span class="hljs-built_in">UIColor</span> *startColor = [<span class="hljs-built_in">UIColor</span> blueColor];
+<span class="hljs-built_in">UIColor</span> *middleColor = [<span class="hljs-built_in">UIColor</span> whiteColor];
+<span class="hljs-built_in">UIColor</span> *endColor = [<span class="hljs-built_in">UIColor</span> purpleColor];
+
+gradientLayer<span class="hljs-variable">.frame</span> = frame;
+gradientLayer<span class="hljs-variable">.colors</span> = @[ (<span class="hljs-keyword">id</span>)startColor<span class="hljs-variable">.CGColor</span>, (<span class="hljs-keyword">id</span>)middleColor<span class="hljs-variable">.CGColor</span>, (<span class="hljs-keyword">id</span>)endColor<span class="hljs-variable">.CGColor</span> ];
+
+gradientLayer<span class="hljs-variable">.endPoint</span> = CGPointMake(<span class="hljs-number">1.0</span>, <span class="hljs-number">0.5</span>);
+</code></pre>
+<p><img src="http://mokacoding.s3.amazonaws.com/2014-04-03-cagradientlayer-advanced.jpg" alt="More customized CAGradientLayer" style="width: 30%"/></p>
+<h3 id="uiimage-from-a-gradient">UIImage from a gradient</h3>
+<p>Gradient Backgrounds Studio generates an image out of the one you pick and the gradient you configure. So the next thing I had to do was merging those images.</p>
+<p>As with most things, there are multiple ways to achieve that result. The one I choose was to make an image out of the gradient layer, and then merge the two images into one.</p>
+<p>The code to do it may look mysterious, but I added comments to explain it. </p>
+<pre><code class=" hljs objc"><span class="hljs-built_in">CGRect</span> frame = CGRectMake(<span class="hljs-number">20</span>, <span class="hljs-number">20</span>, <span class="hljs-number">200</span>, <span class="hljs-number">200</span>);
+<span class="hljs-built_in">UIColor</span> *startColor = [<span class="hljs-built_in">UIColor</span> orangeColor];
+<span class="hljs-built_in">UIColor</span> *endColor = [<span class="hljs-built_in">UIColor</span> purpleColor];
+
+<span class="hljs-comment">// Create a new bitmap-based image context, and make it current.</span>
+<span class="hljs-comment">// This way we'll be able to draw stuff in the context and get an UIImage back from it.</span>
+<span class="hljs-comment">//</span>
+<span class="hljs-built_in">CGSize</span> size = frame<span class="hljs-variable">.size</span>;
+UIGraphicsBeginImageContextWithOptions(size, <span class="hljs-literal">NO</span>, <span class="hljs-number">0</span>);
+
+CGColorSpaceRef colorspace = CGColorSpaceCreateDeviceRGB();
+
+<span class="hljs-comment">// Define the "locations" of the gradient, the points where the color(s) transformation starts and ends</span>
+<span class="hljs-comment">//</span>
+size_t gradientNumberOfLocations = <span class="hljs-number">2</span>;
+<span class="hljs-built_in">CGFloat</span> gradientLocations[<span class="hljs-number">2</span>] = { <span class="hljs-number">0.0</span>, <span class="hljs-number">1.0</span> };
+
+<span class="hljs-comment">// Get the color components out of startColor and endColor</span>
+<span class="hljs-comment">//</span>
+<span class="hljs-comment">// This is all just because I'm lazy and don't want to write the numbers myself. </span>
+<span class="hljs-comment">//</span>
+<span class="hljs-built_in">CGFloat</span> r0 = <span class="hljs-number">0</span>, g0 = <span class="hljs-number">0</span>, b0 = <span class="hljs-number">0</span>, a0 = <span class="hljs-number">0</span>;
+<span class="hljs-built_in">CGFloat</span> r1 = <span class="hljs-number">0</span>, g1 = <span class="hljs-number">0</span>, b1 = <span class="hljs-number">0</span>, a1 = <span class="hljs-number">0</span>;
+[startColor getRed:&amp;r0 green:&amp;g0 blue:&amp;b0 alpha:&amp;a0];
+[endColor getRed:&amp;r1 green:&amp;g1 blue:&amp;b1 alpha:&amp;a1];
+
+<span class="hljs-built_in">CGFloat</span> gradientComponents[<span class="hljs-number">8</span>] = {
+    r0, g0, b0, a0,
+    r1, g1, b1, a1,
+};
+
+<span class="hljs-comment">// Build a CGGradientRef structure with the values just gathered</span>
+<span class="hljs-comment">//</span>
+CGGradientRef gradient = CGGradientCreateWithColorComponents(colorspace, gradientComponents, gradientLocations, gradientNumberOfLocations);
+
+<span class="hljs-comment">// Draw the gradient in the current context</span>
+<span class="hljs-comment">//</span>
+CGContextRef context = UIGraphicsGetCurrentContext();
+CGContextDrawLinearGradient(context, gradient, CGPointMake(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>), CGPointMake(<span class="hljs-number">0</span>, size<span class="hljs-variable">.height</span>), <span class="hljs-number">0</span>);
+
+<span class="hljs-comment">// Get an image from the content of the curret context</span>
+<span class="hljs-comment">//</span>
+<span class="hljs-built_in">UIImage</span> *image = UIGraphicsGetImageFromCurrentImageContext();
+
+<span class="hljs-comment">// Release stuff and clean the context</span>
+<span class="hljs-comment">//</span>
+CGGradientRelease(gradient);
+CGColorSpaceRelease(colorspace);
+UIGraphicsEndImageContext();
+</code></pre>
+<p>If you have been reading other articles from my blog you know by now I&#39;m not clever, the credits for this code goes to <a href="http://stackoverflow.com/questions/16788305/how-to-create-uiimage-with-vertical-gradient-using-from-color-and-to-color">this question</a> on SO.</p>
+<h3 id="uiimage-merging-images">UIImage merging images</h3>
+<p>Now that we have the image with the gradient we can merge it with the background image. The code to do that is simpler than the one above, but based on the same principle; create a context, draw in it, and get an <code>UIImage</code> from it with what&#39;s drawn in it.</p>
+<pre><code class=" hljs objc">UIImage *image = <span class="hljs-keyword">...</span>
+UIImage *gradientImage = <span class="hljs-keyword">...</span>
+CGRect size = <span class="hljs-keyword">...</span>
+
+UIGraphicsBeginImageContext(size);
+
+CGRect imageRect = CGRectMake(<span class="hljs-number">0.0</span>, <span class="hljs-number">0.0</span>, size.width, size.height);
+[image drawInRect:imageRect];
+[gradient drawInRect:imageRect];
+UIImage *combinedImage = UIGraphicsGetImageFromCurrentImageContext();
+
+UIGraphicsEndImageContext();
+</code></pre>
+<p><img src="http://mokacoding.s3.amazonaws.com/2014-04-03-merged-images.jpg" alt="Gradient and background images overlapped" style="width: 30%"/></p>
+<p>Note that the image is deformed, this is the <a href="http://thewindsbeachclub.com/wp-content/uploads/2013/07/The-Winds-Sea-Turtle-Has-a-Name.jpg">original</a>, the reason is that it&#39;s drawn in a <code>rect</code> that has a different ratio.</p>
+<h3 id="blurring-uitoolbar-does-the-job">Blurring: <code>UIToolbar</code> does the job</h3>
+<p>The buttons of Gradient Backgrounds Studio are blurred because... iOS 7. </p>
+<p><img src="http://mokacoding.s3.amazonaws.com/2014-04-03-blur-buttons.jpg" alt="The round blurred buttons" style="width: 50%"/></p>
+<p>When I started reading about how to blur stuff I almost laughed at people suggesting to use <a href="https://developer.apple.com/library/ios/documentation/uikit/reference/UIToolbar_Class/Reference/Reference.html"><code>UIToolbar</code></a>, and looked into solutions like <a href="https://github.com/nicklockwood/FXBlurView">FXBlurView</a> but the performance on live blurring were horrible. <code>UIToolbar</code> won it in the end.</p>
+<p>A funny thing I bumped into when making the buttons rounded is that if I used exactly half of the frame side to set the corner radius, as you would normally do, the view disappeared! The solution I found to that was to set the corner radius to <em>almost</em> half the frame side, where <em>almost</em> = 0.999.</p>
+<pre><code class=" hljs objc">CGRect frame = ...
+
+UIToolbar *blurredView = [[UIToolbar alloc] initWithFrame:frame]<span class="hljs-comment">;</span>
+
+// To enable proper blurring
+//
+blurredView<span class="hljs-preprocessor">.barStyle</span> = UIBarStyleDefault<span class="hljs-comment">;</span>
+blurredView<span class="hljs-preprocessor">.translucent</span> = YES<span class="hljs-comment">;</span>
+
+blurredView<span class="hljs-preprocessor">.clipsToBounds</span> = YES<span class="hljs-comment">;</span>
+// this makes the toolbar invisible! o<span class="hljs-preprocessor">.O</span>
+blurredView<span class="hljs-preprocessor">.layer</span><span class="hljs-preprocessor">.cornerRadius</span> = frame<span class="hljs-preprocessor">.size</span><span class="hljs-preprocessor">.width</span> / <span class="hljs-number">2</span><span class="hljs-comment">;</span>
+// this works!
+blurredView<span class="hljs-preprocessor">.layer</span><span class="hljs-preprocessor">.cornerRadius</span> = frame<span class="hljs-preprocessor">.size</span><span class="hljs-preprocessor">.width</span> / <span class="hljs-number">2</span> * <span class="hljs-number">0.999</span><span class="hljs-comment">;</span>
+</code></pre>
+<p>One other important thing is that the toolbar blurs the background of it&#39;s superview, keep this in mind in case you have overlapping view.</p>
+<h3 id="justify">Justify</h3>
+<p>The final thing I&#39;d like to share is how to justify the text in a <code>UILabel</code>. Despite the fact that the <code>textAlignement</code> property accepts <code>NSTextAlignmentJustified</code> as an option I wasn&#39;t able to make my multiline label justify just like that.</p>
+<p>I was finally able to achieve the result by using <a href="https://developer.apple.com/library/mac/documentation/cocoa/reference/foundation/classes/NSAttributedString_Class/Reference/Reference.html"><code>NSAttributedString</code></a> and a <a href="https://developer.apple.com/library/ios/documentation/cocoa/reference/ApplicationKit/Classes/NSMutableParagraphStyle_Class/Reference/Reference.html"><code>NSMutableParagraphStyle</code></a>.</p>
+<pre><code class=" hljs objc">NSString *message = <span class="hljs-keyword">...</span>
+
+NSMutableParagraphStyle *justifiedParagraph = [[NSMutableParagraphStyle alloc] init];
+justifiedParagraph.alignment = NSTextAlignmentJustified;
+
+NSDictionary *attributes = @{ NSParagraphStyleAttributeName: justifiedParagraph, NSBaselineOffsetAttributeName: @<span class="hljs-number">0</span> };
+
+NSAttributedString *justifiedMessage = [[NSAttributedString alloc] initWithString:message attributes:attributes];
+</code></pre>
+<hr>
+<p>Market-wise <a href="https://itunes.apple.com/us/app/gradient-backgrounds-studio/id815508757?mt=8">Gradient Backgrounds Studio</a> is a failure, no more that an handful of downloads a day. But it was fun to make, and gave me a chance to learn new things, try out new designs patterns, and experiment. At the end of the day this is what matters, being able to always learn something new, and having fun!</p>
+<p>If you have better solutions for the problems I faced <strong>I&#39;d really like to hear them</strong> please tweet me <a href="https://twitter.com/mokagio">@mokagio</a></p>
+<p><em>Enjoy your next project!</em></p>
+</div><div id="paginator" class="bottom-box"><div class="row-12"><div class="col-6"><div><a href="/blog/2014-resolutions-review"><<&nbsp;2014 resolutions review</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/upgrading-podfile">A caveat when upgrading a Podfile&nbsp;>></a></div></div></div></div><div id="apps" class="bottom-box"><p>Enjoyed the post? Check out my apps: <a href="https://itunes.apple.com/au/app/fineants-savings-tracker/id888444078?mt=8">Fineants</a> and <a href="https://itunes.apple.com/us/app/gradient-backgrounds-studio/id815508757?mt=8">Gradient Background Studio</a></p>
+</div></div></div><div class="col-12 footer">made with &hearts; by <a href="http://giovannilodi.com">Giovanni Lodi</a>&nbsp;since 2013 
+&nbsp;- twitter:&nbsp;<a href="https://twitter.com/mokagio">@mokagio</a>&nbsp;- github:&nbsp;<a href="https://github.com/mokagio">mokagio</a></div></div></div></body></html>
