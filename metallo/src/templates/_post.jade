@@ -1,0 +1,24 @@
+.post-container
+  h2.post-title
+    a(href=baseUrl + post.path)= post.title
+  include _post_meta
+  .post!= post.contents
+
+  .bottom-box#paginator
+    .row-12
+      .col-6
+        if post.previous
+          div
+            a(href="#{baseUrl}#{post.previous.path}") 
+              | <<&nbsp;
+              = post.previous.title
+      .col-6
+        if post.next
+          div(style="text-align: right")
+            a(href="#{baseUrl}#{post.next.path}") 
+              = post.next.title
+              | &nbsp;>>
+
+  .bottom-box#apps
+    :markdown
+      Enjoyed the post? Check out my apps: [Fineants](https://itunes.apple.com/au/app/fineants-savings-tracker/id888444078?mt=8) and [Gradient Background Studio](https://itunes.apple.com/us/app/gradient-backgrounds-studio/id815508757?mt=8)

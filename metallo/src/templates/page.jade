@@ -1,0 +1,26 @@
+doctype html
+html(lang="en")
+  head
+    title mokacoding
+    link(href="#{baseUrl}css/griddy.css", rel="stylesheet")
+    link(href="#{baseUrl}css/style.css", rel="stylesheet")
+    link(href="#{baseUrl}css/highlight-obsidian.css", rel="stylesheet")
+  body
+    .page
+      .row-12
+        .col-12.header
+          h1.brand
+            a(href="#{baseUrl}") mokacoding
+          .punchline mokagio's blabbering on software
+
+        .col-12
+          block contents
+
+        .col-12.footer
+          | made with &hearts; by 
+          a(href="http://giovannilodi.com") Giovanni Lodi
+          | &nbsp;since 2013 
+          | &nbsp;- twitter:&nbsp;
+          a(href="https://twitter.com/mokagio") @mokagio
+          | &nbsp;- github:&nbsp;
+          a(href="https://github.com/mokagio") mokagio

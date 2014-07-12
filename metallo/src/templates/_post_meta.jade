@@ -1,0 +1,5 @@
+p.post-meta
+  span.post-date= post.date.toDateString()
+    | &nbsp;
+  for tag in post.tags
+    a.post-tag(href=baseUrl + "tag/" + tag + "/index.html")= "-" + tag

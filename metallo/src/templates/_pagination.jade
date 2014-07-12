@@ -1,0 +1,17 @@
+#paginator
+
+  - var prev_page = parseInt(currentPage - 2)
+  - var next_page = parseInt(currentPage)
+  - var post = posts[0]
+
+  if prev_page >= 0
+    div
+      a(href="#{baseUrl}#{pagination[prev_page].url}") 
+        | <<&nbsp;
+        = post.previous.title
+  
+  if next_page < numPages
+    div(style="text-align: right")
+      a(href="#{baseUrl}#{pagination[next_page].url}") 
+        = post.next.title
+        | &nbsp;>>

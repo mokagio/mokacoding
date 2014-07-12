@@ -1,0 +1,8 @@
+extends page
+
+block contents
+  - var post = posts[0]
+  include _post
+  //- we have a post per page, no point in using pagination, just rely on the prev and next properties given by collection
+  //- include _posts_list
+  //- include _pagination
