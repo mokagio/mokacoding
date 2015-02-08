@@ -78,7 +78,9 @@ metalsmith(__dirname)
 
   .use(markdown({
     highlight: function (code) {
-      return require('highlight.js').highlightAuto(code).value;
+      // TODO: highlight.js should skip ```text blocks, but it's not working atm :/
+      var hljs = require('highlight.js');
+      return hljs.highlightAuto(code).value;
     },
     langPrefix: 'hljs '
   }))

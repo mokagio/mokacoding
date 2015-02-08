@@ -26,7 +26,7 @@ The setup process is quite straightforward, and you can follow it on [this examp
 
 Calabash is distributed via [RubyGems](https://rubygems.org/), so getting it is as easy as running:
 
-```
+```text
 gem install calabash-cucumber
 ```
 
@@ -65,7 +65,7 @@ To do this just create a new Scheme, and set the Run > Build Configuration optio
 
 Now select the new Scheme and Run. If everything has been successful you'll see an output similar to this:
 
-```
+```text
 2015-01-25 21:20:35.693 CalabashSetup[33579:257892] Creating the server: <LPHTTPServer: 0x7fa4fbc07940>
 2015-01-25 21:20:35.693 CalabashSetup[33579:257892] Calabash iOS server version: CALABASH VERSION: 0.12.0
 2015-01-25 21:20:35.694 CalabashSetup[33579:257892] simroot: /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk
