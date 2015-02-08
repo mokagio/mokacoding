@@ -551,3 +551,18 @@ a.pagination-item:hover {
 .layout-reverse.sidebar-overlay #sidebar-checkbox:checked ~ .sidebar {
   box-shadow: -.25rem 0 .5rem rgba(0,0,0,.1);
 }
+
+/* mokacoding Darker Green */
+.theme-base-mc .sidebar,
+.theme-base-mc .sidebar-toggle:active,
+.theme-base-mc #sidebar-checkbox:checked ~ .sidebar-toggle {
+  background-color: #27ae60;
+}
+.theme-base-mc .container a,
+.theme-base-mc .sidebar-toggle,
+.theme-base-mc .related-posts li a:hover {
+  color: #27ae60;
+}
+.theme-base-mc code {
+  color: #27ae60;
+}
