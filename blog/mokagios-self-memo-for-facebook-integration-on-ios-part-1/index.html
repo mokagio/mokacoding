@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><title>mokacoding</title><link href="/css/griddy.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet"><link href="/css/highlight-obsidian.css" rel="stylesheet"></head><body><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">mokagio's blabbering on software</div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/mokagios-self-memo-for-facebook-integration-on-ios-part-1">mokagio's self memo for Facebook Integration on iOS - Part 1</a></h2><p class="post-meta"><span class="post-date">Tue Jun 25 2013&nbsp;</span><a href="/tag/CocoaPods/index.html" class="post-tag">-CocoaPods</a><a href="/tag/Facebook/index.html" class="post-tag">-Facebook</a><a href="/tag/iOS/index.html" class="post-tag">-iOS</a><a href="/tag/Objective-C/index.html" class="post-tag">-Objective-C</a></p><div class="post"><h2 id="part-1-facebook-login">Part 1 - Facebook Login</h2>
+<!DOCTYPE html><html lang="en"><head><title>mokacoding</title><link href="/css/griddy.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet"><link href="/css/highlight-obsidian.css" rel="stylesheet"><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"></head><body><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">a blog where we blabber on software</div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/mokagios-self-memo-for-facebook-integration-on-ios-part-1">mokagio's self memo for Facebook Integration on iOS - Part 1</a></h2><p class="post-meta"><span class="post-date">Tue Jun 25 2013&nbsp;</span><a href="/tag/CocoaPods/index.html" class="post-tag">-CocoaPods</a><a href="/tag/Facebook/index.html" class="post-tag">-Facebook</a><a href="/tag/iOS/index.html" class="post-tag">-iOS</a><a href="/tag/Objective-C/index.html" class="post-tag">-Objective-C</a></p><div class="post"><h2 id="part-1-facebook-login">Part 1 - Facebook Login</h2>
 <h3 id="0-create-a-facebook-app">0 - Create a Facebook App</h3>
 <p>Create an app on the <a href="https://developers.facebook.com/apps/">Facebook App Dashboard</a>, what are you gonna integrate otherwise?!</p>
 <h3 id="1-add-the-facebook-sdk-pod">1 - Add the Facebook SDK Pod</h3>
@@ -24,27 +24,27 @@
 </ol>
 <h4 id="check-if-the-user-is-logged-in">Check if the user is logged in</h4>
 <p>To get the current Facebook session we use <code>FBSession.activeSession</code>. To see if the session is active, and therefore the user is already logged in, we need to check the <code>state</code> property: <code>FBSession.activeSession.state</code>. A quick look to the <code>typedef enum</code> of the <code>FBSessionState</code> and:</p>
-<pre><code class="">{% highlight objective-c <span class="hljs-variable">%}</span>
-+ (BOOL)isUserLoggedInFacebook
+<pre><code class="">{% highlight objective-c %}
++ (<span class="hljs-built_in">BOOL</span>)isUserLoggedInFacebook
 {
-    <span class="hljs-keyword">if</span> (FBSession.activeSession.<span class="hljs-keyword">state</span> == FBSessionStateCreatedTokenLoaded
-        || FBSession.activeSession.<span class="hljs-keyword">state</span> == FBSessionStateOpen
-        || FBSession.activeSession.<span class="hljs-keyword">state</span> == FBSessionStateOpenTokenExtended) {
-        <span class="hljs-keyword">return</span> YES;
+    <span class="hljs-keyword">if</span> (FBSession<span class="hljs-variable">.activeSession</span><span class="hljs-variable">.state</span> == FBSessionStateCreatedTokenLoaded
+        || FBSession<span class="hljs-variable">.activeSession</span><span class="hljs-variable">.state</span> == FBSessionStateOpen
+        || FBSession<span class="hljs-variable">.activeSession</span><span class="hljs-variable">.state</span> == FBSessionStateOpenTokenExtended) {
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">YES</span>;
     } <span class="hljs-keyword">else</span> {
-        <span class="hljs-keyword">return</span> NO;
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">NO</span>;
     }
 }
-{% endhighlight <span class="hljs-variable">%}</span>
+{% endhighlight %}
 </code></pre><h4 id="call-the-facebook-sdk-method-to-login">Call the Facebook SDK method to login</h4>
 <p>Easy peasy:</p>
-<pre><code class="">{% highlight objective-c %}
-[FBSession openActiveSessionWithReadPermissions:<span class="hljs-literal">nil</span>
-                                   allowLoginUI:<span class="hljs-literal">YES</span>
-                              completionHandler:^(FBSession *session, FBSessionState state, <span class="hljs-built_in">NSError</span> *error) {
-     <span class="hljs-comment">// handle stuff here</span>
- }];
- {% endhighlight %}
+<pre><code class=""><span class="hljs-collection">{% highlight objective-c %}</span>
+<span class="hljs-collection">[FBSession openActiveSessionWithReadPermissions:nil
+                                   allowLoginUI:YES
+                              completionHandler:^<span class="hljs-list">(<span class="hljs-keyword">FBSession</span> *session, FBSessionState state, NSError *error)</span> <span class="hljs-collection">{
+     // handle stuff here
+ }</span>]</span><span class="hljs-comment">;</span>
+ <span class="hljs-collection">{% endhighlight %}</span>
 </code></pre><p>In the completion handler we should… handle the result of the open active session. I think that this really depends on what our app will do, so I&#39;m not gonna write any snippet here.</p>
 <h4 id="come-back-to-the-app-and-handle-the-result">Come back to the app and handle the result</h4>
 <p>If you&#39;re user&#39;s are using iOS 5 -I hope they&#39;re not-, or if they&#39;re so dumb they haven&#39;t installed the native Facebook app for iOS, the login will occur with a sort of modal window in your app. In all the rest of the cases the</p>
@@ -54,8 +54,7 @@
 <li>AdSupport.framework</li>
 <li>Social.framework</li>
 </ul>
-</div><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins style="display:inline-block;width:728px;height:15px" data-ad-client="ca-pub-8818333244862281" data-ad-slot="3368690341" class="adsbygoogle"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});
-</script><div id="paginator" class="bottom-box"><div class="row-12"><div class="col-6"><div><a href="/blog/things-learned-in-june"><<&nbsp;Some things I learned in June</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/osx-a-scanner-and-the-drivers-drama">OSX, a scanner, and the drivers drama&nbsp;>></a></div></div></div></div><div id="apps" class="bottom-box"><p>Enjoyed the post? Check out my apps: <a href="https://itunes.apple.com/au/app/fineants-savings-tracker/id888444078?mt=8">Fineants</a> and <a href="https://itunes.apple.com/us/app/gradient-backgrounds-studio/id815508757?mt=8">Gradient Background Studio</a></p>
+</div><div id="paginator" class="bottom-box"><div class="row-12"><div class="col-6"><div><a href="/blog/things-learned-in-june"><<&nbsp;Some things I learned in June</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/osx-a-scanner-and-the-drivers-drama">OSX, a scanner, and the drivers drama&nbsp;>></a></div></div></div></div><div id="apps" class="bottom-box"><p>Enjoyed the post? Check out my apps: <a href="https://itunes.apple.com/au/app/fineants-savings-tracker/id888444078?mt=8">Fineants</a> and <a href="https://itunes.apple.com/us/app/gradient-backgrounds-studio/id815508757?mt=8">Gradient Background Studio</a></p>
 </div></div></div><div class="col-12 footer">made with &hearts; by <a href="http://giovannilodi.com">Giovanni Lodi</a>&nbsp;since 2013 
 &nbsp;- twitter:&nbsp;<a href="https://twitter.com/mokagio">@mokagio</a>&nbsp;- github:&nbsp;<a href="https://github.com/mokagio">mokagio</a></div></div></div></body><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
