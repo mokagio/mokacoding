@@ -566,3 +566,11 @@ a.pagination-item:hover {
 .theme-base-mc code {
   color: #27ae60;
 }
+
+/* Override header margins */
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 3.5rem;
+}
+h1, h2:not(.post-title), h3, h4, h5, h6 {
+  margin-bottom: 1rem;
+}
