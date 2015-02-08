@@ -4,23 +4,24 @@
   include _post_meta
   .post!= post.contents
 
-  script(async, src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js")
-  ins(class="adsbygoogle", style="display:inline-block;width:728px;height:15px", data-ad-client="ca-pub-8818333244862281", data-ad-slot="3368690341") 
-  script.
-    (adsbygoogle = window.adsbygoogle || []).push({});
+  //-
+    script(async, src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js")
+    ins(class="adsbygoogle", style="display:inline-block;width:728px;height:15px", data-ad-client="ca-pub-8818333244862281", data-ad-slot="3368690341")
+    script.
+      (adsbygoogle = window.adsbygoogle || []).push({});
 
   .bottom-box#paginator
     .row-12
       .col-6
         if post.previous
           div
-            a(href="#{baseUrl}#{post.previous.path}") 
+            a(href="#{baseUrl}#{post.previous.path}")
               | <<&nbsp;
               = post.previous.title
       .col-6
         if post.next
           div(style="text-align: right")
-            a(href="#{baseUrl}#{post.next.path}") 
+            a(href="#{baseUrl}#{post.next.path}")
               = post.next.title
               | &nbsp;>>
 
