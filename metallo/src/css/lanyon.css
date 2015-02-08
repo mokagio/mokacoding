@@ -574,3 +574,10 @@ h1, h2, h3, h4, h5, h6 {
 h1, h2:not(.post-title), h3, h4, h5, h6 {
   margin-bottom: 1rem;
 }
+
+/* Override pre block, to matc obsidian style */
+pre {
+  background-color: #404040;
+  border-radius: 4px;
+}
+
