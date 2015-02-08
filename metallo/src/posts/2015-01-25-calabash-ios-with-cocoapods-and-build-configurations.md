@@ -20,6 +20,8 @@ The solution I propose removes both the upgrade automation problem, and the anno
 
 By using CocoaPods we can automate the version updates, and by using a custom Build Configuration we can use the main Target, and new files will always be there.
 
+The setup process is quite straightforward, and you can follow it on [this example repo](https://github.com/mokagio/setup-calabash-ios) while reading along.
+
 ### 1. Get Calabash
 
 Calabash is distributed via [RubyGems](https://rubygems.org/), so getting it is as easy as running:
