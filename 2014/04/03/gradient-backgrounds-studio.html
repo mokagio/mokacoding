@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><title>mokacoding</title><link href="/css/griddy.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet"><link href="/css/highlight-obsidian.css" rel="stylesheet"></head><body><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">mokagio's blabbering on software</div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/gradient-backgrounds-studio">Gradient Backgrounds Studio: Lessons Learned</a></h2><p class="post-meta"><span class="post-date">Thu Apr 03 2014&nbsp;</span><a href="/tag/Xcode/index.html" class="post-tag">-Xcode</a><a href="/tag/iOS/index.html" class="post-tag">-iOS</a><a href="/tag/Objective-C/index.html" class="post-tag">-Objective-C</a></p><div class="post"><p><img src="http://mokacoding.s3.amazonaws.com/2014-04-03-gbs-icon.png" alt="Gradient Backgrounds Studio Icon" style="width: 120px"/></p>
+<!DOCTYPE html><html lang="en"><head><title>mokacoding</title><link rel="stylesheet" href="/css/poole.css"><link rel="stylesheet" href="/css/lanyon.css"><link href="/css/highlight-obsidian.css" rel="stylesheet"><!-- enable responsiveness on mobile devices--><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"></head><body class="theme-base-mc"><div class="wrap"><div class="masthead"><div class="container"><h3 class="masthead-title"><a href="/">mokacoding</a></h3></div></div><div class="container content"><div class="post-container"><h2 class="post-title"><a href="/blog/gradient-backgrounds-studio">Gradient Backgrounds Studio: Lessons Learned</a></h2><p class="post-meta"><span class="post-date">Thu Apr 03 2014&nbsp;</span><a href="/tag/Xcode/index.html" class="post-tag">-Xcode</a><a href="/tag/iOS/index.html" class="post-tag">-iOS</a><a href="/tag/Objective-C/index.html" class="post-tag">-Objective-C</a></p><div class="post"><p><img src="http://mokacoding.s3.amazonaws.com/2014-04-03-gbs-icon.png" alt="Gradient Backgrounds Studio Icon" style="width: 120px"/></p>
 <p>At the beginning of March I released <a href="https://itunes.apple.com/us/app/gradient-backgrounds-studio/id815508757?mt=8">Gradient Backgrounds Studio</a>, app born from a simple need my girlfriend had to add a gradient on top of an image to make a better background. It was one of those ideas that hit you and no matter if it&#39;s 1 o&#39;clock in the morning you have to code them.</p>
 <p>Gradient Backgrounds Studio is a very simple app with a very simple implementation, but it gave me an excuse to play with some components of the framework I didn&#39;t know about.</p>
 <h3 id="-cggradientlayer-"><code>CGGradientLayer</code></h3>
@@ -113,20 +113,20 @@ UIGraphicsEndImageContext();
 <p><img src="http://mokacoding.s3.amazonaws.com/2014-04-03-blur-buttons.jpg" alt="The round blurred buttons" style="width: 50%"/></p>
 <p>When I started reading about how to blur stuff I almost laughed at people suggesting to use <a href="https://developer.apple.com/library/ios/documentation/uikit/reference/UIToolbar_Class/Reference/Reference.html"><code>UIToolbar</code></a>, and looked into solutions like <a href="https://github.com/nicklockwood/FXBlurView">FXBlurView</a> but the performance on live blurring were horrible. <code>UIToolbar</code> won it in the end.</p>
 <p>A funny thing I bumped into when making the buttons rounded is that if I used exactly half of the frame side to set the corner radius, as you would normally do, the view disappeared! The solution I found to that was to set the corner radius to <em>almost</em> half the frame side, where <em>almost</em> = 0.999.</p>
-<pre><code class=" hljs objc">CGRect frame = ...
+<pre><code class=" hljs objc">CGRect frame = <span class="hljs-keyword">...</span>
 
-UIToolbar *blurredView = [[UIToolbar alloc] initWithFrame:frame]<span class="hljs-comment">;</span>
+UIToolbar *blurredView = [[UIToolbar alloc] initWithFrame:frame];
 
 // To enable proper blurring
 //
-blurredView<span class="hljs-preprocessor">.barStyle</span> = UIBarStyleDefault<span class="hljs-comment">;</span>
-blurredView<span class="hljs-preprocessor">.translucent</span> = YES<span class="hljs-comment">;</span>
+blurredView.barStyle = UIBarStyleDefault;
+blurredView.translucent = YES;
 
-blurredView<span class="hljs-preprocessor">.clipsToBounds</span> = YES<span class="hljs-comment">;</span>
-// this makes the toolbar invisible! o<span class="hljs-preprocessor">.O</span>
-blurredView<span class="hljs-preprocessor">.layer</span><span class="hljs-preprocessor">.cornerRadius</span> = frame<span class="hljs-preprocessor">.size</span><span class="hljs-preprocessor">.width</span> / <span class="hljs-number">2</span><span class="hljs-comment">;</span>
+blurredView.clipsToBounds = YES;
+// this makes the toolbar invisible! o.O
+blurredView.layer.cornerRadius = frame.size.width / <span class="hljs-number">2</span>;
 // this works!
-blurredView<span class="hljs-preprocessor">.layer</span><span class="hljs-preprocessor">.cornerRadius</span> = frame<span class="hljs-preprocessor">.size</span><span class="hljs-preprocessor">.width</span> / <span class="hljs-number">2</span> * <span class="hljs-number">0.999</span><span class="hljs-comment">;</span>
+blurredView.layer.cornerRadius = frame.size.width / <span class="hljs-number">2</span> * <span class="hljs-number">0.999</span>;
 </code></pre>
 <p>One other important thing is that the toolbar blurs the background of it&#39;s superview, keep this in mind in case you have overlapping view.</p>
 <h3 id="justify">Justify</h3>
@@ -145,10 +145,9 @@ NSAttributedString *justifiedMessage = [[NSAttributedString alloc] initWithStrin
 <p>Market-wise <a href="https://itunes.apple.com/us/app/gradient-backgrounds-studio/id815508757?mt=8">Gradient Backgrounds Studio</a> is a failure, no more that an handful of downloads a day. But it was fun to make, and gave me a chance to learn new things, try out new designs patterns, and experiment. At the end of the day this is what matters, being able to always learn something new, and having fun!</p>
 <p>If you have better solutions for the problems I faced <strong>I&#39;d really like to hear them</strong> please tweet me <a href="https://twitter.com/mokagio">@mokagio</a></p>
 <p><em>Enjoy your next project!</em></p>
-</div><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins style="display:inline-block;width:728px;height:15px" data-ad-client="ca-pub-8818333244862281" data-ad-slot="3368690341" class="adsbygoogle"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});
-</script><div id="paginator" class="bottom-box"><div class="row-12"><div class="col-6"><div><a href="/blog/2014-resolutions-review"><<&nbsp;2014 resolutions review</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/upgrading-podfile">A caveat when upgrading a Podfile&nbsp;>></a></div></div></div></div><div id="apps" class="bottom-box"><p>Enjoyed the post? Check out my apps: <a href="https://itunes.apple.com/au/app/fineants-savings-tracker/id888444078?mt=8">Fineants</a> and <a href="https://itunes.apple.com/us/app/gradient-backgrounds-studio/id815508757?mt=8">Gradient Background Studio</a></p>
-</div></div></div><div class="col-12 footer">made with &hearts; by <a href="http://giovannilodi.com">Giovanni Lodi</a>&nbsp;since 2013 
-&nbsp;- twitter:&nbsp;<a href="https://twitter.com/mokagio">@mokagio</a>&nbsp;- github:&nbsp;<a href="https://github.com/mokagio">mokagio</a></div></div></div></body><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+</div><div id="paginator" class="bottom-box"><div class="row-12"><div class="col-6"><div><a href="/blog/2014-resolutions-review"><<&nbsp;2014 resolutions review</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/upgrading-podfile">A caveat when upgrading a Podfile&nbsp;>></a></div></div></div></div><div id="apps" class="bottom-box"><p>Enjoyed the post? Check out my apps: <a href="https://itunes.apple.com/au/app/fineants-savings-tracker/id888444078?mt=8">Fineants</a> and <a href="https://itunes.apple.com/us/app/gradient-backgrounds-studio/id815508757?mt=8">Gradient Background Studio</a></p>
+</div></div></div><div class="container">made with &hearts; by<a href="http://giovannilodi.com">Giovanni Lodi</a>&nbsp;since 2013
+&nbsp;- twitter:&nbsp;<a href="https://twitter.com/mokagio">@mokagio</a>&nbsp;- github:&nbsp;<a href="https://github.com/mokagio">mokagio</a></div></div></body><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 })(window,document,'script','//www.google-analytics.com/analytics.js','ga');

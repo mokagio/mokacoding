@@ -17,7 +17,7 @@
     "metalsmith-permalinks": "~0.3.2",
     "metalsmith-branch": "0.0.4",
     "metalsmith-ignore": "~0.1.2",
-    "highlight.js": "~8.0.0",
+    "highlight.js": "~8.4.0",
     "marked": "~0.3.2"
   },
   "devDependencies": {

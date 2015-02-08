@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><title>mokacoding</title><link href="/css/griddy.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet"><link href="/css/highlight-obsidian.css" rel="stylesheet"></head><body><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">mokagio's blabbering on software</div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/setup-a-dev-machine">Setting a Mac for Development</a></h2><p class="post-meta"><span class="post-date">Mon Sep 23 2013&nbsp;</span><a href="/tag/Mac OSX/index.html" class="post-tag">-Mac OSX</a><a href="/tag/Be smart, or at least try/index.html" class="post-tag">-Be smart, or at least try</a><a href="/tag/Reminders/index.html" class="post-tag">-Reminders</a></p><div class="post"><p>Last week I setup our new office Mac Mini, that we will use as CI server for our iOS apps (finally!), and for other tasks, such as a constant view on our products analytics.</p>
+<!DOCTYPE html><html lang="en"><head><title>mokacoding</title><link rel="stylesheet" href="/css/poole.css"><link rel="stylesheet" href="/css/lanyon.css"><link href="/css/highlight-obsidian.css" rel="stylesheet"><!-- enable responsiveness on mobile devices--><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"></head><body class="theme-base-mc"><div class="wrap"><div class="masthead"><div class="container"><h3 class="masthead-title"><a href="/">mokacoding</a></h3></div></div><div class="container content"><div class="post-container"><h2 class="post-title"><a href="/blog/setup-a-dev-machine">Setting a Mac for Development</a></h2><p class="post-meta"><span class="post-date">Mon Sep 23 2013&nbsp;</span><a href="/tag/Mac OSX/index.html" class="post-tag">-Mac OSX</a><a href="/tag/Be smart, or at least try/index.html" class="post-tag">-Be smart, or at least try</a><a href="/tag/Reminders/index.html" class="post-tag">-Reminders</a></p><div class="post"><p>Last week I setup our new office Mac Mini, that we will use as CI server for our iOS apps (finally!), and for other tasks, such as a constant view on our products analytics.</p>
 <p>Our machine is the workshop where we create awesomeness (or bugs). I really love setting up a machine for development, but I&#39;ve always ended up mad at something, or spending ages looking how to install this or that. So this time, once and for all, I took note of every step, and here&#39;s my little checklist on how to set up a Mac for development.</p>
 <p><em>Note: the original version of this post was long and basically just me blabbering about the usual suspects, Ruby, Node, Xcode… I refactored it in a condesed version. No need to thank me.</em></p>
 <h3 id="setup-os-x-for-development-the-checklist">Setup OS X for Development: the checklist</h3>
@@ -6,22 +6,22 @@
 <p>Save time, and your sanity, use homebrew!</p>
 <pre><code class="">ruby <span class="hljs-operator">-e</span> <span class="hljs-string">"<span class="hljs-variable">$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)</span>"</span>
 </code></pre><p>homebrew saves stuff in <code>/usr/local/bin</code>, so make sure it comes <strong>before</strong> the default <code>/bin</code> in the <code>$PATH</code>.</p>
-<pre><code class="">export <span class="hljs-constant">PATH</span>=<span class="hljs-regexp">/usr/local</span><span class="hljs-regexp">/bin/</span><span class="hljs-symbol">:</span><span class="hljs-variable">$PATH</span>
+<pre><code class=""><span class="hljs-built_in">export</span> PATH=/usr/<span class="hljs-built_in">local</span>/bin/:<span class="hljs-variable">$PATH</span>
 </code></pre><h4 id="-zsh-http-www-zsh-org-"><a href="http://www.zsh.org/">zsh</a></h4>
 <pre><code class="">brew <span class="hljs-keyword">install</span> zsh
 </code></pre><p>Zsh is cool, and with <a href="https://github.com/sorin-ionescu/prezto">prezto</a> we can make it super shiny. 
 <br/>
 <em>Note:</em> the following instructions are from the prezto README, <a href="https://github.com/sorin-ionescu/prezto#installation">check it out</a> just to be sure they are up to date.</p>
 <pre><code class="">zsh
-git clone --recursive https://github.com/sorin-ionescu/prezto.git <span class="hljs-string">"<span class="hljs-variable">${ZDOTDIR:-$HOME}</span>/.zprezto"</span>
-setopt EXTENDED_GLOB
+git <span class="hljs-built_in">clone</span> --recursive https://github.com/sorin-ionescu/prezto.git <span class="hljs-string">"<span class="hljs-variable">${ZDOTDIR:-$HOME}</span>/.zprezto"</span>
+<span class="hljs-built_in">setopt</span> EXTENDED_GLOB
 <span class="hljs-keyword">for</span> rcfile <span class="hljs-keyword">in</span> <span class="hljs-string">"<span class="hljs-variable">${ZDOTDIR:-$HOME}</span>"</span>/.zprezto/runcoms/^README.md(.N); <span class="hljs-keyword">do</span>
   ln <span class="hljs-operator">-s</span> <span class="hljs-string">"<span class="hljs-variable">$rcfile</span>"</span> <span class="hljs-string">"<span class="hljs-variable">${ZDOTDIR:-$HOME}</span>/.<span class="hljs-variable">${rcfile:t}</span>"</span>
 <span class="hljs-keyword">done</span>
 </code></pre><p>Finally, set zsh as the default shell</p>
-<pre><code class="">chsh <span class="hljs-attribute">-s</span> /usr/<span class="hljs-built_in">local</span>/bin/zsh
+<pre><code class="">chsh <span class="hljs-operator">-s</span> /usr/<span class="hljs-built_in">local</span>/bin/zsh
 </code></pre><h4 id="-ruby-https-www-ruby-lang-org-en-of-course-via-rvm-https-rvm-io-"><a href="https://www.ruby-lang.org/en/">Ruby</a>, of course via <a href="https://rvm.io/">rvm</a></h4>
-<pre><code class="">\curl -L <span class="hljs-keyword">https</span>://<span class="hljs-built_in">get</span>.rvm.io | bash -s stable
+<pre><code class="">\curl -L <span class="hljs-string">https:</span><span class="hljs-comment">//get.rvm.io | bash -s stable</span>
 rvm install <span class="hljs-number">2.0</span><span class="hljs-number">.0</span>
 </code></pre><h4 id="-python-http-www-python-org-a-proper-one"><a href="http://www.python.org/">Python</a>, a proper one</h4>
 <pre><code class="">brew <span class="hljs-keyword">install</span> python
@@ -42,10 +42,9 @@ rvm install <span class="hljs-number">2.0</span><span class="hljs-number">.0</sp
 <li><a href="http://lightheadsw.com/caffeine/">Caffeine</a></li>
 <li><a href="http://www.sublimetext.com/">Sublime Text</a></li>
 </ul>
-</div><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins style="display:inline-block;width:728px;height:15px" data-ad-client="ca-pub-8818333244862281" data-ad-slot="3368690341" class="adsbygoogle"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});
-</script><div id="paginator" class="bottom-box"><div class="row-12"><div class="col-6"><div><a href="/blog/ios7-ux-designers-verdict"><<&nbsp;Sharing some thoughts on iOS 7</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/mtfonticon">Bringing font icons in iOS with MTFontIcon&nbsp;>></a></div></div></div></div><div id="apps" class="bottom-box"><p>Enjoyed the post? Check out my apps: <a href="https://itunes.apple.com/au/app/fineants-savings-tracker/id888444078?mt=8">Fineants</a> and <a href="https://itunes.apple.com/us/app/gradient-backgrounds-studio/id815508757?mt=8">Gradient Background Studio</a></p>
-</div></div></div><div class="col-12 footer">made with &hearts; by <a href="http://giovannilodi.com">Giovanni Lodi</a>&nbsp;since 2013 
-&nbsp;- twitter:&nbsp;<a href="https://twitter.com/mokagio">@mokagio</a>&nbsp;- github:&nbsp;<a href="https://github.com/mokagio">mokagio</a></div></div></div></body><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+</div><div id="paginator" class="bottom-box"><div class="row-12"><div class="col-6"><div><a href="/blog/ios7-ux-designers-verdict"><<&nbsp;Sharing some thoughts on iOS 7</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/mtfonticon">Bringing font icons in iOS with MTFontIcon&nbsp;>></a></div></div></div></div><div id="apps" class="bottom-box"><p>Enjoyed the post? Check out my apps: <a href="https://itunes.apple.com/au/app/fineants-savings-tracker/id888444078?mt=8">Fineants</a> and <a href="https://itunes.apple.com/us/app/gradient-backgrounds-studio/id815508757?mt=8">Gradient Background Studio</a></p>
+</div></div></div><div class="container">made with &hearts; by<a href="http://giovannilodi.com">Giovanni Lodi</a>&nbsp;since 2013
+&nbsp;- twitter:&nbsp;<a href="https://twitter.com/mokagio">@mokagio</a>&nbsp;- github:&nbsp;<a href="https://github.com/mokagio">mokagio</a></div></div></body><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 })(window,document,'script','//www.google-analytics.com/analytics.js','ga');

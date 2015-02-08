@@ -1,14 +1,14 @@
-<!DOCTYPE html><html lang="en"><head><title>mokacoding</title><link href="/css/griddy.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet"><link href="/css/highlight-obsidian.css" rel="stylesheet"></head><body><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">mokagio's blabbering on software</div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/cocoapods-how-to-create-your-own-pod">CocoaPods - How to create your own Pod</a></h2><p class="post-meta"><span class="post-date">Mon Jan 21 2013&nbsp;</span><a href="/tag/CocoaPods/index.html" class="post-tag">-CocoaPods</a><a href="/tag/git/index.html" class="post-tag">-git</a><a href="/tag/iOS/index.html" class="post-tag">-iOS</a><a href="/tag/Objective-C/index.html" class="post-tag">-Objective-C</a></p><div class="post"><p>Like I said in the <a href="http://amokafullofstuff.wordpress.com/2013/01/05/cocoapods/">first part</a> of my exploration of CocoaPods, using this iOS dependencies management is freaking easy, and reading what&#39;s on the homepage is more than enough to get started. Anyway let&#39;s see how we can create our how Pods.</p>
+<!DOCTYPE html><html lang="en"><head><title>mokacoding</title><link rel="stylesheet" href="/css/poole.css"><link rel="stylesheet" href="/css/lanyon.css"><link href="/css/highlight-obsidian.css" rel="stylesheet"><!-- enable responsiveness on mobile devices--><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"></head><body class="theme-base-mc"><div class="wrap"><div class="masthead"><div class="container"><h3 class="masthead-title"><a href="/">mokacoding</a></h3></div></div><div class="container content"><div class="post-container"><h2 class="post-title"><a href="/blog/cocoapods-how-to-create-your-own-pod">CocoaPods - How to create your own Pod</a></h2><p class="post-meta"><span class="post-date">Mon Jan 21 2013&nbsp;</span><a href="/tag/CocoaPods/index.html" class="post-tag">-CocoaPods</a><a href="/tag/git/index.html" class="post-tag">-git</a><a href="/tag/iOS/index.html" class="post-tag">-iOS</a><a href="/tag/Objective-C/index.html" class="post-tag">-Objective-C</a></p><div class="post"><p>Like I said in the <a href="http://amokafullofstuff.wordpress.com/2013/01/05/cocoapods/">first part</a> of my exploration of CocoaPods, using this iOS dependencies management is freaking easy, and reading what&#39;s on the homepage is more than enough to get started. Anyway let&#39;s see how we can create our how Pods.</p>
 <p>To learn how to do it I started the development of a little &quot;framework&quot; I called <a href="https://github.com/mokagio/MGCraftman">MGCraftman</a>, where I&#39;ll put some utils methods I sometimes write to speed up UI development when I&#39;m not using Interface Builder. But let&#39;s stop the chitchat and let&#39;s code!</p>
 <p><h3>Step 1 - Code the Library!</h3>
 The first step is to have something to make a pod of, I guess every developer has his own little set of smart methods that make his life easier. Don&#39;t be greedy, share them with the community!</p>
 <p><h3>Step 2 - Tag your pod properly</h3>
 Since we&#39;re gonna work with a dependency manager we need to take care of the version number of our pod.</p>
-<pre><code class="">git <span class="hljs-built_in">tag</span> <span class="hljs-attribute">-a</span> <span class="hljs-number">1.0</span><span class="hljs-number">.0</span> <span class="hljs-attribute">-m</span> <span class="hljs-string">"Tag release 1.0.0"</span>
+<pre><code class="">git tag -<span class="hljs-tag">a</span> <span class="hljs-number">1.0</span>.<span class="hljs-number">0</span> -m <span class="hljs-string">"Tag release 1.0.0"</span>
 </code></pre><p>Take a couple of minutes to read through the <a href="http://semver.org/">Semantic Versioning</a> to learn how to use tagging for version numbers properly and in a way that allows for <a href="https://github.com/CocoaPods/Specs/wiki/Cross-dependencies-resolution-example">resolution of cross-dependencies</a>.</p>
 <p><h3>Step 3 - The podspec</h3>
 Once our project is tagged properly we can create the <code>.podspec</code> file. The extension name explains that it will contain the &quot;specs&quot; of our &quot;pod&quot;.</p>
-<pre><code class="">pod spec <span class="hljs-operator"><span class="hljs-keyword">create</span> Donut</span>
+<pre><code class="">pod spec create <span class="hljs-keyword">Do</span><span class="hljs-label">nut</span>
 </code></pre><p>This will generate the <code>Donut.podspec</code> file.</p>
 <p>You can also generate the <code>podspec</code> from a GitHub repo using the GitHub url instead of the name.</p>
 <p><h3>Step 4 - Leave your mark on the podspec</h3>
@@ -33,12 +33,12 @@ end
 {<span class="hljs-subst">%</span> endhighlight <span class="hljs-subst">%</span>}
 </code></pre><p><h3>Step 5 - Is my podspec ok?</h3>
 Once your <code>podspec</code> its ready validate it running</p>
-<pre><code class="">pod spec lint Peanut<span class="hljs-preprocessor">.podspec</span>
+<pre><code class=""><span class="hljs-title">pod</span> spec lint Peanut.podspec
 </code></pre><p>If everything is fine you&#39;ll read</p>
-<pre><code class="">pod spec lint Peanut.podspec 
--<span class="ruby">&gt; <span class="hljs-constant">Peanut</span> (<span class="hljs-number">1.0</span>.<span class="hljs-number">0</span>)
-</span>Analyzed 1 podspec.
-Peanut.podspec passed validation.
+<pre><code class="">pod spec lint Peanut<span class="hljs-class">.podspec</span> 
+-&gt; Peanut (<span class="hljs-number">1.0</span>.<span class="hljs-number">0</span>)
+Analyzed <span class="hljs-number">1</span> podspec.
+Peanut<span class="hljs-class">.podspec</span> passed validation.
 </code></pre><p>Otherwise <code>pod spec</code> will explain the error or warning, as everything is so simple also fixing the problems will be. Anyway the error report is already formatted in <a href="http://daringfireball.net/projects/markdown/">Markdown</a> so you can copy it and paste it in an issue on the <a href="https://github.com/CocoaPods/CocoaPods/issues/new">CocoaPods Issues page</a>.</p>
 <p><h3>Step 6 - Let your pod fly</h3>
 We&#39;re almost done here. Now to make our pod available to the community, or just to ourselves and feel cool, we have two options. The rookie way is open an issue, but we&#39;ve just coded an iOS library, with it&#39;s own repo on GitHub, and generated the <code>podspec</code> fetching the data from there, so we&#39;re not rookies. The second option is to fork the <a href="https://github.com/CocoaPods/Specs">Specs repo</a>, add our pod, submit the PR and wait.</p>
@@ -46,10 +46,9 @@ We&#39;re almost done here. Now to make our pod available to the community, or j
 <p>And here we are. My MGCraftman framework is ready to be imported via CocoaPods, and all the world will be happy to use it, or not.</p>
 
 <p>That&#39;s all folks, happy coding!</p>
-</div><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins style="display:inline-block;width:728px;height:15px" data-ad-client="ca-pub-8818333244862281" data-ad-slot="3368690341" class="adsbygoogle"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});
-</script><div id="paginator" class="bottom-box"><div class="row-12"><div class="col-6"><div><a href="/blog/multiple-builds-of-the-same-app-and-testflight"><<&nbsp;Multiple builds of the same app and TestFlight</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/cocoapods">CocoaPods!&nbsp;>></a></div></div></div></div><div id="apps" class="bottom-box"><p>Enjoyed the post? Check out my apps: <a href="https://itunes.apple.com/au/app/fineants-savings-tracker/id888444078?mt=8">Fineants</a> and <a href="https://itunes.apple.com/us/app/gradient-backgrounds-studio/id815508757?mt=8">Gradient Background Studio</a></p>
-</div></div></div><div class="col-12 footer">made with &hearts; by <a href="http://giovannilodi.com">Giovanni Lodi</a>&nbsp;since 2013 
-&nbsp;- twitter:&nbsp;<a href="https://twitter.com/mokagio">@mokagio</a>&nbsp;- github:&nbsp;<a href="https://github.com/mokagio">mokagio</a></div></div></div></body><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+</div><div id="paginator" class="bottom-box"><div class="row-12"><div class="col-6"><div><a href="/blog/multiple-builds-of-the-same-app-and-testflight"><<&nbsp;Multiple builds of the same app and TestFlight</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/cocoapods">CocoaPods!&nbsp;>></a></div></div></div></div><div id="apps" class="bottom-box"><p>Enjoyed the post? Check out my apps: <a href="https://itunes.apple.com/au/app/fineants-savings-tracker/id888444078?mt=8">Fineants</a> and <a href="https://itunes.apple.com/us/app/gradient-backgrounds-studio/id815508757?mt=8">Gradient Background Studio</a></p>
+</div></div></div><div class="container">made with &hearts; by<a href="http://giovannilodi.com">Giovanni Lodi</a>&nbsp;since 2013
+&nbsp;- twitter:&nbsp;<a href="https://twitter.com/mokagio">@mokagio</a>&nbsp;- github:&nbsp;<a href="https://github.com/mokagio">mokagio</a></div></div></body><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
