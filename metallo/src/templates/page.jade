@@ -19,9 +19,9 @@ html(lang="en")
           block contents
 
         .col-12.footer
-          | made with &hearts; by 
+          | made with &hearts; by
           a(href="http://giovannilodi.com") Giovanni Lodi
-          | &nbsp;since 2013 
+          | &nbsp;since 2013
           | &nbsp;- twitter:&nbsp;
           a(href="https://twitter.com/mokagio") @mokagio
           | &nbsp;- github:&nbsp;
@@ -35,9 +35,9 @@ html(lang="en")
     ga('create', 'UA-43554041-1', 'auto');
     ga('send', 'pageview');
   script.
-    var external_links = document.querySelectorAll('a:not([href^="#"])');
+    var external_links = document.querySelectorAll('a:not([href^="/"])');
     // external_links is an HTMLCollection, not an Array, so we can't call forEach
     for (var i = 0; i < external_links.length; i++) {
       var link = external_links[i];
-      link.setAttribute("target", "_blank"); 
+      link.setAttribute("target", "_blank");
     }
