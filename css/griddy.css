@@ -52,7 +52,8 @@
 }
 .row-12 .col-1, .row-12 .col-2, .row-12 .col-3, .row-12 .col-4, .row-12 .col-5, .row-12 .col-6, .row-12 .col-7, .row-12 .col-8, .row-12 .col-9, .row-12 .col-10, .row-12 .col-11 {
   float: left;
-  padding: 0 10px;
+  /* tweak on original version, so that cols always start from 0 left */
+  padding: 0 20px 0 0;
   box-sizing: border-box;
   min-height: 1px;
 }

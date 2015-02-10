@@ -18,14 +18,28 @@ html(lang="en")
         .col-12
           block contents
 
-        .col-12.footer
-          | made with &hearts; by
-          a(href="http://giovannilodi.com") Giovanni Lodi
-          | &nbsp;since 2013
-          | &nbsp;- twitter:&nbsp;
-          a(href="https://twitter.com/mokagio") @mokagio
-          | &nbsp;- github:&nbsp;
-          a(href="https://github.com/mokagio") mokagio
+      .row-12.footer
+        .col-12
+          h3
+            a(href="#{baseUrl}") mokacoding
+        .col-9#copy
+          :markdown
+            Hi I'm [Giovanni Lodi](http://giovannilodi.com) and this is my blog. I write here at least once a month, on software testing, productivity, and iOS development.
+
+          :markdown
+            I'm a freelance iOS engineer, and [I'm available for contract work](mailto:giovanni.lodi42+blog@gmail.com).
+
+          :markdown
+            Check out my [tech journal](http://mokagio.github.io/tech-journal), and my app [Fineants](https://itunes.apple.com/au/app/fineants-savings-tracker/id888444078?mt=8).
+
+        .col-3#links
+          p
+            | twitter:&nbsp;
+            a(href="https://twitter.com/mokagio") @mokagio
+          p
+            | github:&nbsp;
+            a(href="https://github.com/mokagio") mokagio
+
   script.
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

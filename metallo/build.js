@@ -104,12 +104,12 @@ metalsmith(__dirname)
         if (month < 10) { month = "0" + month; }
 
         var path = post.date.getFullYear() + "/" + month + "/" + day + "/" + post.slug + ".html";
-        
+
         var retrocompatible_post = {};
         for (var _key in post) {
           retrocompatible_post[_key] = post[_key];
         }
-        
+
         files[path] = retrocompatible_post;
       }
       done();

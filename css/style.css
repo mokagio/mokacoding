@@ -30,8 +30,18 @@ h3 {
     font-style: italic; }
 
 .footer {
-  margin: 64px 0 20px;
-  text-align: right; }
+  color: #838383;
+  border-top: 1px solid #ecf0f1;
+  padding-top: 44px;
+  margin-bottom: 26px; }
+  .footer p {
+    margin: 0 0 16px 0; }
+  .footer h3 {
+    margin-top: 0; }
+  .footer #copy {
+    text-align: justify; }
+  .footer #links {
+    text-align: right; }
 
 .post-container {
   text-align: justify; }
