@@ -3,6 +3,7 @@ title: Setting up Calabash for iOS projects with Cocoapods and Build Configurati
 description: A simple guide that shows the simplest way to install Calabash on an iOS project, by using Build Configurations and CocoaPods.
 tags:
 - Testing
+comments: true
 ---
 
 [Calabash](http://calaba.sh/) is a nice automation testing framework. It differs form from other solutions like [KIF](https://github.com/kif-framework/KIF) because the tests are written and run using [Cucumber](http://cukes.info/), a BDD framework from the Rails world which main selling point are human readable "features", written in a Ruby DSL.

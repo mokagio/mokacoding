@@ -61,6 +61,12 @@ metalsmith(__dirname)
         // TODO: or should it be responsibility of the template to check that tags exist?
         var tags = post.tags;
         if (!tags) { post.tags = []; }
+
+        // If not specified, enable Disqus by default
+        var comments = post.comments;
+        if (comments == null) {
+          post.comments = true;
+        }
       }
       done();
     })
