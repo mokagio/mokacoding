@@ -1,7 +1,14 @@
 doctype html
 html(lang="en")
   head
-    title mokacoding
+    if title
+      title #{title} | mokacoding
+    else
+      title mokacoding
+    if description
+      meta(name="description", content="#{description}")
+    else
+      meta(name="description", content="A blog where we write about testing, iOS development, productivity, and blabber about software in general.")
     link(href="#{baseUrl}css/griddy.css", rel="stylesheet")
     link(href="#{baseUrl}css/style.css", rel="stylesheet")
     link(href="#{baseUrl}css/highlight-obsidian.css", rel="stylesheet")
