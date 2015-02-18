@@ -2,7 +2,7 @@
 mokacoding
 ==========
 
-My personal coding blog attempt. Jekyll powered and GitHub Pages hosted. Visit [http://mokacoding.com](mokacoding.com).
+My personal coding blog attempt. Jekyll powered and GitHub Pages hosted. Visit [mokacoding.com](http://mokacoding.com).
 
 ####Note to self
 
