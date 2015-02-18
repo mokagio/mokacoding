@@ -69,9 +69,9 @@ Merge vs rebase is an open discussion in the community, and both options have th
 
 ### Special workflows
 
-On top of merge vs rebase there are other workflows that can be adopted to manage the version control in an effective way. For example [git-flow](http://nvie.com/posts/a-successful-git-branching-model/) makes it simpler to work of features, while the [GitHub flow](https://guides.github.com/introduction/flow/) is very good for teams that focus on code reviews.
+On top of merge vs rebase there are other workflows that can be adopted to manage the version control in an effective way. For example [git-flow](http://nvie.com/posts/a-successful-git-branching-model/) makes it simpler to work on features, while the [GitHub flow](https://guides.github.com/introduction/flow/) is very good for teams that focus on code reviews.
 
-Evaluate if the team can take advantage form using a particular workflow, and make it clear in the Git-iquette.
+Evaluate if the team will benefit from using a particular workflow, and make it clear in the Git-iquette.
 
 ### Hooks
 
