@@ -5,5 +5,5 @@ build:
 	node ./metallo/build.js
 
 watch:
-	build
+	node ./metallo/build.js
 	node ./metallo/watch.js

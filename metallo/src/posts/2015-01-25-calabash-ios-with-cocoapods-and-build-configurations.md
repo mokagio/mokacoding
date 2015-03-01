@@ -2,7 +2,8 @@
 title: Setting up Calabash for iOS projects with Cocoapods and Build Configurations
 description: A simple guide that shows the simplest way to install Calabash on an iOS project, by using Build Configurations and CocoaPods.
 tags:
-- Testing
+- Acceptance Testing
+- Calabash
 comments: true
 ---
 
