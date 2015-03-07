@@ -1,0 +1,12 @@
+extends page
+
+block contents
+  h1
+    a(href=baseUrl + path)= "Archive"
+
+  for post in posts
+    .post-container.tag
+      h2.post-title
+        a(href=baseUrl + post.path)= post.title
+      include _post_meta
+      p.post-description= post.description
