@@ -20,7 +20,6 @@ h3 {
 .header {
   text-align: center;
   margin-bottom: 82px;
-  padding-bottom: 8px;
   border-bottom: 1px solid #ecf0f1; }
   .header h1.brand {
     font-size: 40px;
@@ -28,6 +27,15 @@ h3 {
   .header .punchline {
     color: #838383;
     font-style: italic; }
+  .header .links {
+    border-top: 1px solid #ecf0f1;
+    text-align: left;
+    padding: 4px 0;
+    font-size: 1.05em;
+    margin-top:18px; }
+    .header .links a {
+      display: inline-block;
+      margin-right: 12px; }
 
 .footer {
   color: #838383;
