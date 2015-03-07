@@ -3,9 +3,6 @@ layout: post
 title: 2014 resolutions review
 seo_description: Reviewing my resolutions for 2014 after its first quarter
 categories: Be better, or at least try
-tags:
-- Health
-- Productivity
 ---
 
 At the start of this year I posted a [cheesy retro on 2013]({{ site.baseurl }}/2014-01-02-2013-retrospeectives-and-2014-propositions), that ended up with some resolutions for 2014:

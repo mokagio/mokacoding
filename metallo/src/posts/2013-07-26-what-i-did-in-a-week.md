@@ -1,12 +1,6 @@
 ---
 date: 2013-07-26
 title: What I did in a week...
-tags:
-- CoreData
-- iOS
-- Open Source
-- Ruby on Rails
-- TDD
 slug: what-i-did-in-a-week
 description: A recap of what I developed during an unusual week left by myself without neither girlfriend nor friends.
 ---

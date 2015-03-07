@@ -2,10 +2,7 @@
 date: 2013-07-06
 title: Some things I learned in June
 tags:
-- CocoaPods
-- Math
-- Objective-C
-- zsh
+- Life long learning
 slug: things-i-learned-in-june-2013
 description: A summary of the things I learned in June 2013.
 ---

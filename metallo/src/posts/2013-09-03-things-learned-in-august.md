@@ -2,12 +2,7 @@
 date: 2013-09-03
 title: Some things I learned in August
 tags:
-- iOS
-- Objective-C
-- Ruby
-- Layout
-- CSS
-- Open Source
+- Life long learning
 slug: things-learned-in-august-2013
 ---
 

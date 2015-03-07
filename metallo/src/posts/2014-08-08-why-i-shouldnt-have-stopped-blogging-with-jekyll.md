@@ -3,7 +3,7 @@ title: Why I (shouldn't have) stopped blogging with Jekyll
 description: I recently decided to move my blog from Ruby and Jekyll, to Metalsmith and Javascript. It turned out to be not as easy as I thought, and a quite stupid choice, but not because of the tech.
 tags:
 - Ruby
-- Node.js
+- Javascript
 ---
 
 It all started when I decided to add tags to my blog running on [Jekyll](http://jekyllrb.com/)

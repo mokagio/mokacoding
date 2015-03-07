@@ -3,9 +3,7 @@ layout: post
 title: "Gradient Backgrounds Studio: Lessons Learned"
 categories:
 tags:
-- Xcode
 - iOS
-- Objective-C
 published: true
 seo_description: 
 keyword: 

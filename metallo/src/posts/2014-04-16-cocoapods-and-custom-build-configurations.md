@@ -4,10 +4,7 @@ title: CocoaPods and custom Build Configurations
 slug: cocoapods-and-custom-build-configurations
 description: Some tips on how to use CocoaPods and customs build configurations without headaches.
 tags:
-- iOS
-- Objective-C
 - CocoaPods
-- Bugfixing
 ---
 
 If you run through the posts in this blog you'll find out that I'm a big fan and advocate of [CocoaPods]. It's such an awesome tool and makes my life as a developer so much easier. Most of the times.

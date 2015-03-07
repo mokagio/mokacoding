@@ -7,9 +7,8 @@ published: true
 categories:
 - Workflow
 tags:
-- iOS 
-- Architecture
-- Productivity
+- iOS
+- CocoaPods
 ---
 
 It is useful and time saving to centralize all the resources, assets and fonts that are shared across different projects. The best solution for that is [CocoaPods](http://cocoapods.org/), and a bit of code to avoid doing any kind on `Info.plist` update.

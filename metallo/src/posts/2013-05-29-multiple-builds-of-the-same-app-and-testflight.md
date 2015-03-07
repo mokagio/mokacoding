@@ -2,10 +2,8 @@
 date: 2013-05-29
 title: Multiple builds of the same app and TestFlight
 tags:
-- automation
-- development
-- testflight
-- xcode
+- Automation
+- TestFlight
 slug: testflight-multiple-builds
 description: How to distribute multiple builds of your iOS app, such as stable, QA and development builds, via TestFlight.
 ---

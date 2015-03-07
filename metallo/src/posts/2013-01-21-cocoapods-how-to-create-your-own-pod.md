@@ -3,9 +3,7 @@ date: 2013-01-21
 title: CocoaPods - How to create your own Pod
 tags:
 - CocoaPods
-- git
 - iOS
-- Objective-C
 description: A step by step guide to create a basic CocoaPod.
 ---
 Like I said in the <a href="http://amokafullofstuff.wordpress.com/2013/01/05/cocoapods/">first part</a> of my exploration of CocoaPods, using this iOS dependencies management is freaking easy, and reading what's on the homepage is more than enough to get started. Anyway let's see how we can create our how Pods.

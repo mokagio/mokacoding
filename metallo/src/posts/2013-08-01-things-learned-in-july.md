@@ -2,13 +2,7 @@
 date: 2013-08-01
 title: Some things I learned in July
 tags:
-- AWS
-- iOS
-- Objective-C
-- Postgres
-- Ruby
-- Ruby on Rails
-- Software Engineering
+- Life long learning
 slug: things-learned-in-july-2013
 description: A summary of the things I learned in July 2013.
 ---

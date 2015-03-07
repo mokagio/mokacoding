@@ -4,10 +4,7 @@ title: Automating iOS Enterprise Deployment with shenzhen
 description: A way of automating the deployment of an iOS app for enterprise distribution using the shenzhen gem.
 keyword: iOS, automation, shenzhen, Xcode, Enterprise Distribution
 tags:
-- iOS 
-- Ruby
-- Automate
-- Productivity
+- Automation
 slug: automating-ios-enterprise-deployment
 ---
 

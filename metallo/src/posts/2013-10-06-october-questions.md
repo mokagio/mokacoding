@@ -2,10 +2,7 @@
 date: 2013-10-06
 title: October's Questions
 tags:
-- iOS
-- Objective-C
-- Ruby
-- Open Source
+- Life long learning
 description: Introducing mokagio's monthly questions, related to iOS, Objective-C, Xcode, xctool, AFNetworking, CocoaPods.
 keyword: iOS, Xcode, xctool and AFNetworking
 slug: october-questions-2013
