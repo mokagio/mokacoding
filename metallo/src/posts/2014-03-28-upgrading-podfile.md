@@ -5,9 +5,6 @@ categories:
 - Learn
 - Bugfixing
 tags:
-- Xcode
-- iOS
-- Objective-C
 - CocoaPods
 published: true
 seo_description: A caveat when upgrading a Podfile from an older version

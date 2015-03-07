@@ -2,7 +2,6 @@
 date: 2013-07-17
 title: A week of time...
 tags:
-- xctool
 status: publish
 slug: a-week-of-time
 description: A declaration of purposes for what I'm gonna do in the next week.

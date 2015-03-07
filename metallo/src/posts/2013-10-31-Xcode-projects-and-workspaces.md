@@ -3,10 +3,6 @@ date: 2013-10-31
 title: A dive into Xcode projects and workspaces
 tags:
 - Xcode
-- iOS
-- Objective-C
-- Questions
-- Hacking
 description: A look at how Xcode stores information about the project and the workspace
 keyword: Xcode project workspace
 slug: xcode-projects-and-workspaces

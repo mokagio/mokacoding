@@ -4,9 +4,7 @@ title: Setting a Mac for Development
 description: A simple checklist of the basic tools to setup a Mac for development.
 keyword: setup mac development
 tags:
-- Mac OSX
-- Be smart, or at least try
-- Reminders
+- OS X
 slug: setup-a-mac-for-development
 ---
 

@@ -1,8 +1,6 @@
 ---
 title: Security Tips for Freelance Software Developers
 description: Tips for freelance software developers (and non) to improve the security of laptops, smartphones and website accounts, to keep your and your clients data safe.
-tags:
-- Security
 ---
 
 The security of our digital identities and properties is a topic of ever growing importance, with more and more sensible data and informations we depend on being stored on our devices or in the cloud.

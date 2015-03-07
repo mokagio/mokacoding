@@ -3,8 +3,6 @@ date: 2013-09-16
 title: A workaround to Xcode 5 GM crash on app submission
 tags:
 - Xcode
-- App Store
-- Bugs
 slug: xcode5-crash-on-submission
 description: A workaround for the unusual crash of Xcode 5 GM during the App Store submission process.
 ---

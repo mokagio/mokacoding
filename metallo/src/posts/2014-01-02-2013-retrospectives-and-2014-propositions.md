@@ -2,12 +2,6 @@
 date: 2014-01-02
 title: 2013 retrospectives... and 2014 propositions
 description: Taking a look back at 2013, to find good propositions for 2014
-tags:
-- iOS
-- Ruby
-- Health
-- Productivity
-- Resolutions
 slug: 2013-retrospective-and-2014-propositions
 ---
 

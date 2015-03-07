@@ -2,15 +2,7 @@
 date: 2013-10-02
 title: Some things I learned in September
 tags:
-- iOS
-- Objective-C
-- Ruby
-- Layout
-- CSS
-- Open Source
-- Node.js
-- Data Visualization
-- Jenkins
+- Life long learning
 description: A quick summary and memo of interesting things I've learned in September
 ---
 

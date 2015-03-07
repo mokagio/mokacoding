@@ -2,8 +2,7 @@
 date: 2013-11-13
 title: Some things I learned in October
 tags:
-- iOS
-- Open Source
+- Life long learning
 description: A quick summary and memo of interesting things I've learned in October - iOS screen capture, HTML5 game development, ways to improve your coding.
 slug: things-learned-in-october-2013
 ---

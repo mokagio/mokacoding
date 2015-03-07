@@ -4,7 +4,7 @@ title: Sharing some thoughts on iOS 7
 description: Sharing thoughts by some lead designers on iOS 7.
 keyword: iOS 7 opinions
 tags:
-- iOS 7
+- iOS
 - UX
 slug: ios-7-ux-designer-verdict
 ---

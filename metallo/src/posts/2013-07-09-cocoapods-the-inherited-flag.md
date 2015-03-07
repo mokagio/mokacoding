@@ -4,7 +4,6 @@ title: 'CocoaPods: the $(inherited) flag'
 tags:
 - CocoaPods
 - iOS
-- Xcode
 slug: cocoapods-the-inherited-flag
 description: A self memo on how to set the $(inherited) flag on a project using CocoaPods on Xcode.
 ---

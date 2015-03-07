@@ -2,10 +2,7 @@
 date: 2013-06-25
 title: mokagio's self memo for Facebook Integration on iOS - Part 1
 tags:
-- CocoaPods
-- Facebook
 - iOS
-- Objective-C
 slug: ios-facebook-integration-part-1
 description: "Step by step guide on how to integrate the Facebook SDK in an iOS app, the right way. Part 1: Facebook Login."
 ---
