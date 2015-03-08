@@ -82,6 +82,8 @@ metalsmith(__dirname)
     }
   }))
 
+  .use(tagList)
+
   .use(markdown({
     highlight: function (code) {
       return require('highlight.js').highlightAuto(code).value;
@@ -125,7 +127,6 @@ metalsmith(__dirname)
   // for the moment the blog has a post per page, no point in paginating it when collections already
   // provider next and previous
   // .use(paginator)
-  .use(tagList)
 
   // temp fix for metalsmith-template corrupting images
   // see https://github.com/segmentio/metalsmith/issues/60 and https://github.com/segmentio/metalsmith-templates/issues/17
@@ -244,6 +245,8 @@ function tagList(files, metalsmith, done) {
           tags[tag].push(metalsmith.data.posts[post]);
       }
   }
+
+  metalsmith.metadata().tags = tags;
 
   for (var tag in tags) {
     path = 'tag/' + tag + '/index.html';
