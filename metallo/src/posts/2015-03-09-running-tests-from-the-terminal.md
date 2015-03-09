@@ -18,13 +18,14 @@ So the first impression, as the name suggests by the way, is that `xcodebuild`'s
 
 > Test a scheme from the build root (SYMROOT).  This requires specifying a scheme and optionally a destination.
 
-After a bit more reading through `xcodebuild`'s man page we can write the minimum viable command to run our tests:
+After a bit more reading through `xcodebuild` man page and Apple's [Command-Line Testing resource](https://developer.apple.com/library/prerelease/ios/documentation/DeveloperTools/Conceptual/testing_with_xcode/A2-command_line_testing/A2-command_line_testing.html) we can write the minimum viable command to run our tests:
 
 ```
 xcodebuild \
   -workspace MyAwesomeApp.xcworkspace \
   -scheme MyAwesomeApp \
   -sdk iphonesimulator \
+  -destination 'platform=iOS Simulator,name=iPhone 6,OS=8.1' \
   test
 ```
 
@@ -45,6 +46,7 @@ xcodebuild \
   -workspace MyAwesomeApp.xcworkspace \
   -scheme MyAwesomeApp \
   -sdk iphonesimulator \
+  -destination 'platform=iOS Simulator,name=iPhone 6,OS=8.1' \
   test | xcpretty
 ```
 
@@ -57,6 +59,7 @@ xcodebuild \
   -workspace MyAwesomeApp.xcworkspace \
   -scheme MyAwesomeApp \
   -sdk iphonesimulator \
+  -destination 'platform=iOS Simulator,name=iPhone 6,OS=8.1' \
   test | xcpretty --test --color
 ```
 
