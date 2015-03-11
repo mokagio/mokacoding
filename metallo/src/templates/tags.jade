@@ -1,0 +1,9 @@
+extends page
+
+block contents
+  h1
+    a(href=baseUrl + path)= "Tags"
+
+  for tag in Object.keys(tags)
+    h3
+      a(href=baseUrl + "tag/" + tag.replace(/ /g, '-') + "/index.html")= tag
