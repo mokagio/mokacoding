@@ -31,13 +31,14 @@ xcodebuild \
 
 Note that we're assuming that MyAwesomeApp uses CocoaPods, therefore we're using the `-workspace` option, which then requires to use `-scheme`.
 
+You can use `instruments -s devices` to see a list of know devices to use in the `-destination` option, [more here](http://mokagio.github.io/tech-journal/2015/03/12/xcode-list-available-devices.html).
 If you try to do this you'll see something like this:
 
 ![xcodebuild test output](https://s3.amazonaws.com/mokacoding/xcodebuild-vanilla.gif)
 
 Not a very pleasant output is it?
 
-This is where [`xcpretty`](https://github.com/supermarin/xcpretty) comes to the resque. `xcpretty` is a tool designed to format `xcodebuild`'s output, and make it human readable.
+This is where [`xcpretty`](https://github.com/supermarin/xcpretty) comes to the rescue. `xcpretty` is a tool designed to format `xcodebuild`'s output, and make it human readable.
 
 Using `xcpretty` is very simple:
 
@@ -63,7 +64,7 @@ xcodebuild \
   test | xcpretty --test --color
 ```
 
-![xcodebuild test with xcpretty RSpec style output](https://s3.amazonaws.com/mokacoding/xcodebuild-xcpretty-color.gif)
+![xcodebuild test with xcpretty RSpec style output](https://s3.amazonaws.com/mokacoding/xcodebuild-xcpretty-test.gif)
 
 You might now ask _"This is all interesting and colorful, but why should I use it?"_. Here's some reasons why I like running tests from the terminal, and why you might like it too:
 
