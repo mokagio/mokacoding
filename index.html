@@ -16,8 +16,8 @@
 </span>  -<span class="ruby">destination <span class="hljs-string">'platform=iOS Simulator,name=iPhone 6,OS=8.1'</span> \
 </span>  test
 </code></pre><p>Note that we&#39;re assuming that MyAwesomeApp uses CocoaPods, therefore we&#39;re using the <code>-workspace</code> option, which then requires to use <code>-scheme</code>.</p>
-<p>You can use <code>instruments -s devices</code> to see a list of know devices to use in the <code>-destination</code> option, <a href="http://mokagio.github.io/tech-journal/2015/03/12/xcode-list-available-devices.html">more here</a>.
-If you try to do this you&#39;ll see something like this:</p>
+<p>You can use <code>instruments -s devices</code> to see a list of know devices to use in the <code>-destination</code> option, <a href="http://mokagio.github.io/tech-journal/2015/03/12/xcode-list-available-devices.html">more here</a>.</p>
+<p>If you try to do this you&#39;ll see something like this:</p>
 <p><img src="https://s3.amazonaws.com/mokacoding/xcodebuild-vanilla.gif" alt="xcodebuild test output"></p>
 <p>Not a very pleasant output is it?</p>
 <p>This is where <a href="https://github.com/supermarin/xcpretty"><code>xcpretty</code></a> comes to the rescue. <code>xcpretty</code> is a tool designed to format <code>xcodebuild</code>&#39;s output, and make it human readable.</p>

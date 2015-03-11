@@ -32,6 +32,7 @@ xcodebuild \
 Note that we're assuming that MyAwesomeApp uses CocoaPods, therefore we're using the `-workspace` option, which then requires to use `-scheme`.
 
 You can use `instruments -s devices` to see a list of know devices to use in the `-destination` option, [more here](http://mokagio.github.io/tech-journal/2015/03/12/xcode-list-available-devices.html).
+
 If you try to do this you'll see something like this:
 
 ![xcodebuild test output](https://s3.amazonaws.com/mokacoding/xcodebuild-vanilla.gif)
