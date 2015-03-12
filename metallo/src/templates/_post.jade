@@ -10,20 +10,25 @@
     script.
       (adsbygoogle = window.adsbygoogle || []).push({});
 
+  .bottom-box.no-border
+    .col-12
+      a.twitter-share-button(href="https://twitter.com/share", 'data-via'="mokagio")= Tweet
+      script
+        !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
   .bottom-box#paginator
-    .row-12
-      .col-6
-        if post.previous
-          div
-            a(href="#{baseUrl}#{post.previous.path}")
-              | <<&nbsp;
-              = post.previous.title
-      .col-6
-        if post.next
-          div(style="text-align: right")
-            a(href="#{baseUrl}#{post.next.path}")
-              = post.next.title
-              | &nbsp;>>
+    .col-6
+      if post.previous
+        div
+          a(href="#{baseUrl}#{post.previous.path}")
+            | <<&nbsp;
+            = post.previous.title
+    .col-6
+      if post.next
+        div(style="text-align: right")
+          a(href="#{baseUrl}#{post.next.path}")
+            = post.next.title
+            | &nbsp;>>
 
   .bottom-box
     #disqus_thread
