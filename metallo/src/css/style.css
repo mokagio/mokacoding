@@ -119,3 +119,12 @@ h3 {
   .bottom-box.no-border {
     border-top: none; }
 
+/* See http://nicolasgallagher.com/micro-clearfix-hack/ */
+.clearfixed:before,
+.clearfixed:after {
+  content: " ";
+  display: table;
+}
+.clearfixed:after {
+  clear: both;
+}
