@@ -13,6 +13,8 @@ html(lang="en")
     link(href="#{baseUrl}css/style.css", rel="stylesheet")
     link(href="#{baseUrl}css/font-awesome.min.css" rel="stylesheet")
     link(href="#{baseUrl}css/highlight-obsidian.css", rel="stylesheet")
+    link(href="//cdn-images.mailchimp.com/embedcode/slim-081711.css", rel="stylesheet", type="text/css")
+    link(href="#{baseUrl}css/mailchimp-form-override.css", rel="stylesheet")
     meta(http-equiv="content-type" content="text/html; charset=utf-8")
     meta(name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1")
   body
@@ -26,9 +28,13 @@ html(lang="en")
             a(href="#{baseUrl}archive.html") Archive
             a(href="#{baseUrl}tags.html") Tags
             a(href="http://giovannilodi.com") About
+            a(href="#subscribe") Subscribe
 
         .col-12
           block contents
+
+      .row-12#subscribe
+        include _mailchimp-form-slim.html
 
       .row-12.footer
         .col-12
