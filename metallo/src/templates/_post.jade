@@ -34,6 +34,9 @@
             = post.next.title
             | &nbsp;>>
 
+  .bottom-box#subscribe
+    include _mailchimp-form-slim.html
+
   .bottom-box
     #disqus_thread
     script(type="text/javascript", src="#{baseUrl}js/disqus.js")
