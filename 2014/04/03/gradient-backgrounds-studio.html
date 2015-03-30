@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><title>Gradient Backgrounds Studio: Lessons Learned | mokacoding</title><meta name="description" content="A blog where we write about testing, iOS development, productivity, and blabber about software in general."><link href="/css/griddy.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet"><link href="/css/font-awesome.min.css" rel="stylesheet"><link href="/css/highlight-obsidian.css" rel="stylesheet"><link href="//cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css"><link href="/css/mailchimp-form-override.css" rel="stylesheet"><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"></head><body><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">unit and acceptance testing, automation, productivity</div><div class="links"><a href="/archive.html">Archive</a><a href="/tags.html">Tags</a><a href="http://giovannilodi.com">About</a><a href="#subscribe">Subscribe</a></div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/gradient-backgrounds-studio">Gradient Backgrounds Studio: Lessons Learned</a></h2><p class="post-meta"><span class="post-date">Thu Apr 03 2014&nbsp;</span><a href="/tag/iOS/index.html" class="post-tag">-iOS</a></p><div class="post"><p><img src="http://mokacoding.s3.amazonaws.com/2014-04-03-gbs-icon.png" alt="Gradient Backgrounds Studio Icon" style="width: 120px"/></p>
+<!DOCTYPE html><html lang="en"><head><title>Gradient Backgrounds Studio: Lessons Learned | mokacoding</title><meta name="description" content="A blog where we write about testing, iOS development, productivity, and blabber about software in general."><link href="/css/griddy.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet"><link href="/css/font-awesome.min.css" rel="stylesheet"><link href="/css/zenburn.css" rel="stylesheet"><link href="//cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css"><link href="/css/mailchimp-form-override.css" rel="stylesheet"><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"></head><body><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">unit and acceptance testing, automation, productivity</div><div class="links"><a href="/archive.html">Archive</a><a href="/tags.html">Tags</a><a href="http://giovannilodi.com">About</a><a href="#subscribe">Subscribe</a></div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/gradient-backgrounds-studio">Gradient Backgrounds Studio: Lessons Learned</a></h2><p class="post-meta"><span class="post-date">Thu Apr 03 2014&nbsp;</span><a href="/tag/iOS/index.html" class="post-tag">-iOS</a></p><div class="post"><p><img src="http://mokacoding.s3.amazonaws.com/2014-04-03-gbs-icon.png" alt="Gradient Backgrounds Studio Icon" style="width: 120px"/></p>
 <p>At the beginning of March I released <a href="https://itunes.apple.com/us/app/gradient-backgrounds-studio/id815508757?mt=8">Gradient Backgrounds Studio</a>, app born from a simple need my girlfriend had to add a gradient on top of an image to make a better background. It was one of those ideas that hit you and no matter if it&#39;s 1 o&#39;clock in the morning you have to code them.</p>
 <p>Gradient Backgrounds Studio is a very simple app with a very simple implementation, but it gave me an excuse to play with some components of the framework I didn&#39;t know about.</p>
 <h3 id="-cggradientlayer-"><code>CGGradientLayer</code></h3>
@@ -93,16 +93,16 @@ UIGraphicsEndImageContext();
 <p>If you have been reading other articles from my blog you know by now I&#39;m not clever, the credits for this code goes to <a href="http://stackoverflow.com/questions/16788305/how-to-create-uiimage-with-vertical-gradient-using-from-color-and-to-color">this question</a> on SO.</p>
 <h3 id="uiimage-merging-images">UIImage merging images</h3>
 <p>Now that we have the image with the gradient we can merge it with the background image. The code to do that is simpler than the one above, but based on the same principle; create a context, draw in it, and get an <code>UIImage</code> from it with what&#39;s drawn in it.</p>
-<pre><code class=" hljs objc">UIImage *image = <span class="hljs-keyword">...</span>
-UIImage *gradientImage = <span class="hljs-keyword">...</span>
-CGRect size = <span class="hljs-keyword">...</span>
+<pre><code class=" hljs objc"><span class="hljs-built_in">UIImage</span> *image = ...
+<span class="hljs-built_in">UIImage</span> *gradientImage = ...
+<span class="hljs-built_in">CGRect</span> size = ...
 
 UIGraphicsBeginImageContext(size);
 
-CGRect imageRect = CGRectMake(<span class="hljs-number">0.0</span>, <span class="hljs-number">0.0</span>, size.width, size.height);
+<span class="hljs-built_in">CGRect</span> imageRect = CGRectMake(<span class="hljs-number">0.0</span>, <span class="hljs-number">0.0</span>, size<span class="hljs-variable">.width</span>, size<span class="hljs-variable">.height</span>);
 [image drawInRect:imageRect];
 [gradient drawInRect:imageRect];
-UIImage *combinedImage = UIGraphicsGetImageFromCurrentImageContext();
+<span class="hljs-built_in">UIImage</span> *combinedImage = UIGraphicsGetImageFromCurrentImageContext();
 
 UIGraphicsEndImageContext();
 </code></pre>
@@ -113,31 +113,31 @@ UIGraphicsEndImageContext();
 <p><img src="http://mokacoding.s3.amazonaws.com/2014-04-03-blur-buttons.jpg" alt="The round blurred buttons" style="width: 50%"/></p>
 <p>When I started reading about how to blur stuff I almost laughed at people suggesting to use <a href="https://developer.apple.com/library/ios/documentation/uikit/reference/UIToolbar_Class/Reference/Reference.html"><code>UIToolbar</code></a>, and looked into solutions like <a href="https://github.com/nicklockwood/FXBlurView">FXBlurView</a> but the performance on live blurring were horrible. <code>UIToolbar</code> won it in the end.</p>
 <p>A funny thing I bumped into when making the buttons rounded is that if I used exactly half of the frame side to set the corner radius, as you would normally do, the view disappeared! The solution I found to that was to set the corner radius to <em>almost</em> half the frame side, where <em>almost</em> = 0.999.</p>
-<pre><code class=" hljs objc">CGRect frame = <span class="hljs-keyword">...</span>
+<pre><code class=" hljs objc"><span class="hljs-built_in">CGRect</span> frame = ...
 
 UIToolbar *blurredView = [[UIToolbar alloc] initWithFrame:frame];
 
-// To enable proper blurring
-//
-blurredView.barStyle = UIBarStyleDefault;
-blurredView.translucent = YES;
+<span class="hljs-comment">// To enable proper blurring</span>
+<span class="hljs-comment">//</span>
+blurredView<span class="hljs-variable">.barStyle</span> = UIBarStyleDefault;
+blurredView<span class="hljs-variable">.translucent</span> = <span class="hljs-literal">YES</span>;
 
-blurredView.clipsToBounds = YES;
-// this makes the toolbar invisible! o.O
-blurredView.layer.cornerRadius = frame.size.width / <span class="hljs-number">2</span>;
-// this works!
-blurredView.layer.cornerRadius = frame.size.width / <span class="hljs-number">2</span> * <span class="hljs-number">0.999</span>;
+blurredView<span class="hljs-variable">.clipsToBounds</span> = <span class="hljs-literal">YES</span>;
+<span class="hljs-comment">// this makes the toolbar invisible! o.O</span>
+blurredView<span class="hljs-variable">.layer</span><span class="hljs-variable">.cornerRadius</span> = frame<span class="hljs-variable">.size</span><span class="hljs-variable">.width</span> / <span class="hljs-number">2</span>;
+<span class="hljs-comment">// this works!</span>
+blurredView<span class="hljs-variable">.layer</span><span class="hljs-variable">.cornerRadius</span> = frame<span class="hljs-variable">.size</span><span class="hljs-variable">.width</span> / <span class="hljs-number">2</span> * <span class="hljs-number">0.999</span>;
 </code></pre>
 <p>One other important thing is that the toolbar blurs the background of it&#39;s superview, keep this in mind in case you have overlapping view.</p>
 <h3 id="justify">Justify</h3>
 <p>The final thing I&#39;d like to share is how to justify the text in a <code>UILabel</code>. Despite the fact that the <code>textAlignement</code> property accepts <code>NSTextAlignmentJustified</code> as an option I wasn&#39;t able to make my multiline label justify just like that.</p>
 <p>I was finally able to achieve the result by using <a href="https://developer.apple.com/library/mac/documentation/cocoa/reference/foundation/classes/NSAttributedString_Class/Reference/Reference.html"><code>NSAttributedString</code></a> and a <a href="https://developer.apple.com/library/ios/documentation/cocoa/reference/ApplicationKit/Classes/NSMutableParagraphStyle_Class/Reference/Reference.html"><code>NSMutableParagraphStyle</code></a>.</p>
-<pre><code class=" hljs objc">NSString *message = <span class="hljs-keyword">...</span>
+<pre><code class=" hljs objc"><span class="hljs-built_in">NSString</span> *message = ...
 
 NSMutableParagraphStyle *justifiedParagraph = [[NSMutableParagraphStyle alloc] init];
-justifiedParagraph.alignment = NSTextAlignmentJustified;
+justifiedParagraph<span class="hljs-variable">.alignment</span> = NSTextAlignmentJustified;
 
-NSDictionary *attributes = @{ NSParagraphStyleAttributeName: justifiedParagraph, NSBaselineOffsetAttributeName: @<span class="hljs-number">0</span> };
+<span class="hljs-built_in">NSDictionary</span> *attributes = @{ NSParagraphStyleAttributeName: justifiedParagraph, NSBaselineOffsetAttributeName: @<span class="hljs-number">0</span> };
 
 NSAttributedString *justifiedMessage = [[NSAttributedString alloc] initWithString:message attributes:attributes];
 </code></pre>
