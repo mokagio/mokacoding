@@ -2,6 +2,7 @@
 
 var metalsmith  = require("metalsmith")
     , markdown  = require("metalsmith-markdown")
+    , highlight = require("highlight.js")
     , templates = require("metalsmith-templates")
     , collections  = require("metalsmith-collections")
     , permalinks = require("metalsmith-permalinks")
@@ -85,8 +86,12 @@ metalsmith(__dirname)
   .use(tagList)
 
   .use(markdown({
-    highlight: function (code) {
-      return require('highlight.js').highlightAuto(code).value;
+    highlight: function (code, lang) {
+      if (lang == undefined || highlight.getLanguage(lang) == undefined) {
+        return highlight.highlightAuto(code).value;
+      } else {
+        return highlight.highlight(lang, code).value;
+      }
     },
     langPrefix: 'hljs '
   }))
