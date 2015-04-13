@@ -67,8 +67,8 @@ end</span>
 </code></pre>
 <p>The above tasks has two flaws, the device UUID and ip are hard-coded, and it assumes the app is already on the device.</p>
 <p>We can fix the first issue by moving the configurations in a <code>.yml</code> file.</p>
-<pre><code class=" hljs yaml"><span class="hljs-label">uuid:</span> <span class="hljs-string">"device UUID"</span>
-<span class="hljs-label">ip:</span> <span class="hljs-string">"device IP when on the same network as the machine running the tests"</span>
+<pre><code class=" hljs yaml"><span class="hljs-attribute">uuid</span>: <span class="hljs-string">"device UUID"</span>
+<span class="hljs-attribute">ip</span>: <span class="hljs-string">"device IP when on the same network as the machine running the tests"</span>
 </code></pre>
 <pre><code class=" hljs ruby">desc <span class="hljs-string">'Run all the calabash/cucumber acceptance tests on the connected device.'</span>
 task <span class="hljs-symbol">:device_tests</span> =&gt; <span class="hljs-keyword">do</span>

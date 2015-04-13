@@ -18,24 +18,24 @@
 <h3 id="dynamically-load-the-fonts">Dynamically load the fonts</h3>
 <p>Now that the we have our Resource Bundle ready we only need to skip the annoying process of adding the fonts to the <code>Info.plist</code> and we&#39;re good to go.</p>
 <p>To do that I used the approach suggested by Marco Armet in <a href="http://www.marco.org/2012/12/21/ios-dynamic-font-loading">this blog post</a>. It&#39;s possible to dynamically load fonts and then consume them with the usual <code>fontNamed:withSize</code> <code>UIFont</code> class method.</p>
-<pre><code class=" hljs objc"><span class="hljs-built_in">NSData</span> *inData = <span class="hljs-comment">/* your decrypted font-file data */</span>;
-CFErrorRef error;
+<pre><code class=" hljs objc">NSData *inData = /* your decrypted font-<span class="hljs-type">file</span> data */;
+CFErrorRef <span class="hljs-keyword">error</span>;
 CGDataProviderRef provider = CGDataProviderCreateWithCFData((CFDataRef)inData);
 CGFontRef font = CGFontCreateWithDataProvider(provider);
-<span class="hljs-keyword">if</span> (! CTFontManagerRegisterGraphicsFont(font, &amp;error)) {
-    CFStringRef errorDescription = CFErrorCopyDescription(error)
-    <span class="hljs-built_in">NSLog</span>(<span class="hljs-string">@"Failed to load font: %@"</span>, errorDescription);
+<span class="hljs-keyword">if</span> (! CTFontManagerRegisterGraphicsFont(font, &amp;<span class="hljs-keyword">error</span>)) {
+    CFStringRef errorDescription = CFErrorCopyDescription(<span class="hljs-keyword">error</span>)
+    NSLog(@<span class="hljs-string">"Failed to load font: %@"</span>, errorDescription);
     CFRelease(errorDescription);
 }
 CFRelease(font);
 CFRelease(provider);
 </code></pre>
 <p>The only downside of this approach is that we need to run that code at some point. I put it into a <code>FontsManager</code> class, with getters for the fonts that sort of lazy loads them. Like this:</p>
-<pre><code class=" hljs objc"><span class="hljs-keyword">static</span> <span class="hljs-built_in">NSString</span> * <span class="hljs-keyword">const</span> kBundle = <span class="hljs-string">@"ResourceBundle.bundle"</span>;
+<pre><code class=" hljs objc"><span class="hljs-keyword">static</span> <span class="hljs-built_in">NSString</span> * <span class="hljs-keyword">const</span> kBundle = @<span class="hljs-string">"ResourceBundle.bundle"</span>;
 
 + (<span class="hljs-built_in">UIFont</span> *)openSansLightFontOfSize:(<span class="hljs-built_in">CGFloat</span>)size
 {
-    <span class="hljs-built_in">NSString</span> *fontName = <span class="hljs-string">@"OpenSans-Light"</span>;
+    <span class="hljs-built_in">NSString</span> *fontName = @<span class="hljs-string">"OpenSans-Light"</span>;
     <span class="hljs-built_in">UIFont</span> *font = [<span class="hljs-built_in">UIFont</span> fontWithName:fontName size:size];
     <span class="hljs-keyword">if</span> (!font) {
         [[<span class="hljs-keyword">self</span> class] dynamicallyLoadFontNamed:fontName];
@@ -50,16 +50,16 @@ CFRelease(provider);
 
 + (<span class="hljs-keyword">void</span>)dynamicallyLoadFontNamed:(<span class="hljs-built_in">NSString</span> *)name
 {
-    <span class="hljs-built_in">NSString</span> *resourceName = [<span class="hljs-built_in">NSString</span> stringWithFormat:<span class="hljs-string">@"%@/%@"</span>, kBundle, name];
-    <span class="hljs-built_in">NSURL</span> *url = [[<span class="hljs-built_in">NSBundle</span> mainBundle] URLForResource:resourceName withExtension:<span class="hljs-string">@"ttf"</span>];
-    <span class="hljs-built_in">NSData</span> *fontData = [<span class="hljs-built_in">NSData</span> dataWithContentsOfURL:url];
+    <span class="hljs-built_in">NSString</span> *resourceName = [<span class="hljs-built_in">NSString</span> stringWithFormat:@<span class="hljs-string">"%@/%@"</span>, kBundle, name];
+    <span class="hljs-built_in">NSURL</span> *url = [[<span class="hljs-built_in">NSBundle</span> mainBundle] URLForResource:resourceName withExtension:@<span class="hljs-string">"ttf"</span>];
+    NSData *fontData = [NSData dataWithContentsOfURL:url];
     <span class="hljs-keyword">if</span> (fontData) {
         CFErrorRef error;
         CGDataProviderRef provider = CGDataProviderCreateWithCFData((CFDataRef)fontData);
         CGFontRef font = CGFontCreateWithDataProvider(provider);
         <span class="hljs-keyword">if</span> (! CTFontManagerRegisterGraphicsFont(font, &amp;error)) {
             CFStringRef errorDescription = CFErrorCopyDescription(error);
-            <span class="hljs-built_in">NSLog</span>(<span class="hljs-string">@"Failed to load font: %@"</span>, errorDescription);
+            <span class="hljs-built_in">NSLog</span>(@<span class="hljs-string">"Failed to load font: %@"</span>, errorDescription);
             CFRelease(errorDescription);
         }
         CFRelease(font);

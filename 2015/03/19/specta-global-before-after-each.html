@@ -10,63 +10,63 @@
 <p>Say that we have a <code>Banana</code> class, and that we want to test it&#39;s <em>looks yellow</em> behaviour. We get a banana from the fruit bowl, and wherever we put it it should still look yellow.</p>
 <p>Unfortunately our <code>Banana</code> is a stateful fruit, so to make the test accurate we have to put it back in the fruit bowl every time.</p>
 <p>A Specta spec to describe this behaviour might look like this:</p>
-<pre><code class=" hljs objc">describe(<span class="hljs-string">@"Banana"</span>, ^{
-  it(<span class="hljs-string">@"should look yellow when put on the table"</span>, ^{
+<pre><code class=" hljs objc"><span class="hljs-function">describe(@<span class="hljs-string">"Banana"</span>, ^{
+  <span class="hljs-function">it(@<span class="hljs-string">"should look yellow when put on the table"</span>, ^{
     [banana removeFromTheFruitBowl];
     [banana putOnTheTable];
-    expect([banana looksYellow])<span class="hljs-variable">.to</span><span class="hljs-variable">.beTruthy</span>();
+    <span class="hljs-function">expect([banana looksYellow])</span>.to.<span class="hljs-function">beTruthy()</span>;
     [banana putInTheFruitBowl];
-  });
+  })</span>;
 
-  it(<span class="hljs-string">@"should look yellow when put on the snack bag"</span>, ^{
+  <span class="hljs-function">it(@<span class="hljs-string">"should look yellow when put on the snack bag"</span>, ^{
     [banana removeFromTheFruitBowl];
     [banana putInTheSnackBag];
-    expect([banana looksYellow])<span class="hljs-variable">.to</span><span class="hljs-variable">.beTruthy</span>();
+    <span class="hljs-function">expect([banana looksYellow])</span>.to.<span class="hljs-function">beTruthy()</span>;
     [banana putInTheFruitBowl];
-  });
-});
+  })</span>;
+})</span>;
 </code></pre>
 <p>This spec looks a bit dense, and <a href="http://en.wikipedia.org/wiki/Don%27t_repeat_yourself#DRY_vs_WET_solutions">wet</a>. Thanks to the <code>beforeEach</code> and <code>afterEach</code> hooks we can write it in a clearer and drier way:</p>
-<pre><code class=" hljs objc">describe(<span class="hljs-string">@"Banana"</span>, ^{
-  beforeEach(^{
+<pre><code class=" hljs objc"><span class="hljs-function">describe(@<span class="hljs-string">"Banana"</span>, ^{
+  <span class="hljs-function">beforeEach(^{
     [banana removeFromTheFruitBowl];
-  });
+  })</span>;
 
-  it(<span class="hljs-string">@"should look yellow when put on the table"</span>, ^{
+  <span class="hljs-function">it(@<span class="hljs-string">"should look yellow when put on the table"</span>, ^{
     [banana putOnTheTable];
-    expect([banana looksYellow])<span class="hljs-variable">.to</span><span class="hljs-variable">.beTruthy</span>();
-  });
+    <span class="hljs-function">expect([banana looksYellow])</span>.to.<span class="hljs-function">beTruthy()</span>;
+  })</span>;
 
-  it(<span class="hljs-string">@"should look yellow when put on the snack bag"</span>, ^{
+  <span class="hljs-function">it(@<span class="hljs-string">"should look yellow when put on the snack bag"</span>, ^{
     [banana putInTheSnackBag];
-    expect([banana looksYellow])<span class="hljs-variable">.to</span><span class="hljs-variable">.beTruthy</span>();
-  });
+    <span class="hljs-function">expect([banana looksYellow])</span>.to.<span class="hljs-function">beTruthy()</span>;
+  })</span>;
 
-  afterEach(^{
+  <span class="hljs-function">afterEach(^{
     [banana putInTheFruitBowl];
-  });
-});
+  })</span>;
+})</span>;
 </code></pre>
 <h2 id="configuring-a-global-hook-in-specta">Configuring a global hook in Specta</h2>
 <p>Now, not only our <code>Banana</code> is stateful, but also is an hidden dependency in several other pieces of the system. Let&#39;s for a moment forget that the best thing to do in this case would be to do some good old refactoring to extract that dependency, and imagine that the only thing we can do is call the <code>removeFromTheFruitBowl</code> and <code>putInTheFruitBowl</code> methods in every test.</p>
 <p>This option is quite annoying isn&#39;t it? Our specs shouldn&#39;t have to care about setup and tear down operations that are at the system level. Plus it&#39;s easy to forget about this step.</p>
 <p>Specta takes care of this problem for us. Before running the suite it will inspect the run time for classes with <code>beforeEach</code> and <code>afterAll</code> class methods, and run them before and after each example in the suite.</p>
-<pre><code class=" hljs objc"><span class="hljs-class"><span class="hljs-keyword">@interface</span> <span class="hljs-title">BeforeAfterEachHelper</span> : <span class="hljs-title">NSObject</span></span>
-<span class="hljs-keyword">@end</span>
+<pre><code class=" hljs objc">@interface BeforeAfterEachHelper : NSObject
+@end
 
-<span class="hljs-class"><span class="hljs-keyword">@implementation</span> <span class="hljs-title">BeforeAfterEachHelper</span></span>
+@implementation BeforeAfterEachHelper
 
-+ (<span class="hljs-keyword">void</span>)beforeEach {
-  <span class="hljs-comment">// this code will run beforeEach example</span>
-  <span class="hljs-comment">//...</span>
++ (void)beforeEach {
+  // this code will run beforeEach example
+  //<span class="hljs-keyword">...</span>
 }
 
-+ (<span class="hljs-keyword">void</span>)afterEach {
-  <span class="hljs-comment">// this code will run afterEach example</span>
-  <span class="hljs-comment">//...</span>
++ (void)afterEach {
+  // this code will run afterEach example
+  //<span class="hljs-keyword">...</span>
 }
 
-<span class="hljs-keyword">@end</span>
+@end
 </code></pre>
 <p>Pretty handy, isn&#39;t it?</p>
 <h2 id="disabling-a-global-hook">Disabling a global hook</h2>

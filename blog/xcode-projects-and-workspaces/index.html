@@ -20,9 +20,9 @@
     rootObject = CDAC62FA17A0EF1A00F5452A /* Project object */;
 }
 </code></pre><p>The <code>objects</code> part is the real deal. Everything about the project is in there. All stored again in a dictionary fashion, with hexadecimal identifiers. A common parameter is the <code>isa</code> key. Here&#39;s an example:</p>
-<pre><code class="">CDAC634017A0EF4C00F5452A /<span class="hljs-keyword">*</span> KZPropertyMapper.m in Sources <span class="hljs-keyword">*</span>/ = {
+<pre><code class="">CDAC634017A0EF4C00F5452A <span class="hljs-comment">/* KZPropertyMapper.m in Sources */</span> = {
     isa = PBXBuildFile; 
-    fileRef = CDAC633F17A0EF4C00F5452A /<span class="hljs-keyword">*</span> KZPropertyMapper.m <span class="hljs-keyword">*</span>/;
+    fileRef = CDAC633F17A0EF4C00F5452A <span class="hljs-comment">/* KZPropertyMapper.m */</span>;
 };
 </code></pre><p>Lucky for us Xcode adds some comments to make the things a bit more readable for humans. <em>Note:</em> I&#39;m sure they&#39;re comment and not part of the way stuff is written because I actually tried changing one and everything run fine.</p>
 <p>The <code>objects</code> has many sections, each wrapped between <code>/* Begin SectionName section */</code> and <code>/* End SectionName section */</code> comments. </p>
@@ -30,12 +30,12 @@
 <h4 id="-pbxfilereference-"><code>PBXFileReference</code></h4>
 <p>All the files in the project are in this list.</p>
 <pre><code class="">CDAC633F17A0EF4C00F5452A <span class="hljs-comment">/* KZPropertyMapper.m */</span> = {
-    <span class="hljs-variable">isa =</span> PBXFileReference;
-    <span class="hljs-variable">fileEncoding =</span> <span class="hljs-number">4</span>; 
-    <span class="hljs-variable">lastKnownFileType =</span> sourcecode.c.objc; 
-    <span class="hljs-variable">path =</span> KZPropertyMapper.m; 
-    <span class="hljs-variable">sourceTree =</span> <span class="hljs-string">"&lt;group&gt;"</span>; 
-};
+    isa = PBXFileReference<span class="hljs-comment">;</span>
+    fileEncoding = <span class="hljs-number">4</span><span class="hljs-comment">; </span>
+    lastKnownFileType = sourcecode<span class="hljs-preprocessor">.c</span><span class="hljs-preprocessor">.objc</span><span class="hljs-comment">; </span>
+    path = KZPropertyMapper<span class="hljs-preprocessor">.m</span><span class="hljs-comment">; </span>
+    sourceTree = <span class="hljs-string">"&lt;group&gt;"</span><span class="hljs-comment">; </span>
+}<span class="hljs-comment">;</span>
 </code></pre><h4 id="-pbxgroup-"><code>PBXGroup</code></h4>
 <p>This section has the groups tree. The groups are those fake folders that are useful only to create confusion on how the filesystem is oraganized. A PBXGroup can contain <code>PBXFirleReference</code>s, as well as other <code>PBXGroup</code>s. </p>
 <h4 id="-pbxnativetarget-"><code>PBXNativeTarget</code></h4>
@@ -52,32 +52,32 @@
 </blockquote>
 <p>The <code>.xcworkspace</code> from <a href="https://github.com/krzysztofzablocki/KZPropertyMapper/tree/master/Example/Example.xcworkspace">KZPropertyMapper</a> is too tiny, so let&#39;s  take a look at another one, <a href="https://github.com/AFNetworking/AFNetworking/blob/master/AFNetworking.xcworkspace/contents.xcworkspacedata">AFNetworking</a>. As for the project the workspace is nothing but a folder, grouping configuration files. The interesting file here is <code>contents.xcworkspacedata</code>. Let&#39;s open it… Surprise! Unlike the project file this one is a more readable <a href="http://en.wikipedia.org/wiki/XML">XML</a>. Inside there&#39;s a list of the workspace components. </p>
 <pre><code class=" hljs xml"><span class="hljs-pi">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">Workspace</span>
-    <span class="hljs-attribute">version</span> = "<span class="hljs-attribute">1.0</span>"&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">Group</span>
-        <span class="hljs-attribute">location</span> = "<span class="hljs-attribute">group:AFNetworking</span>"
+<span class="hljs-tag">&lt;<span class="hljs-title">Workspace
+</span>    <span class="hljs-attribute">version</span> = "<span class="hljs-attribute">1.0</span>"&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">Group
+</span>        <span class="hljs-attribute">location</span> = "<span class="hljs-attribute">group:AFNetworking</span>"
         <span class="hljs-attribute">name</span> = "<span class="hljs-attribute">AFNetworking</span>"&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">FileRef</span>
-            <span class="hljs-attribute">location</span> = "<span class="hljs-attribute">group:AFNetworking.h</span>"&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">FileRef
+</span>            <span class="hljs-attribute">location</span> = "<span class="hljs-attribute">group:AFNetworking.h</span>"&gt;</span>
         <span class="hljs-tag">&lt;/<span class="hljs-title">FileRef</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">Group</span>
-            <span class="hljs-attribute">location</span> = "<span class="hljs-attribute">container:</span>"
+        <span class="hljs-tag">&lt;<span class="hljs-title">Group
+</span>            <span class="hljs-attribute">location</span> = "<span class="hljs-attribute">container:</span>"
             <span class="hljs-attribute">name</span> = "<span class="hljs-attribute">NSURLConnection</span>"&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-title">FileRef</span>
-                <span class="hljs-attribute">location</span> = "<span class="hljs-attribute">group:AFNetworking</span>/<span class="hljs-attribute">AFURLConnectionOperation.h</span>"&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">FileRef
+</span>                <span class="hljs-attribute">location</span> = "<span class="hljs-attribute">group:AFNetworking</span>/<span class="hljs-attribute">AFURLConnectionOperation.h</span>"&gt;</span>
             <span class="hljs-tag">&lt;/<span class="hljs-title">FileRef</span>&gt;</span>
             ...
         <span class="hljs-tag">&lt;/<span class="hljs-title">Group</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">Group</span>
-            <span class="hljs-attribute">location</span> = "<span class="hljs-attribute">container:</span>"
+        <span class="hljs-tag">&lt;<span class="hljs-title">Group
+</span>            <span class="hljs-attribute">location</span> = "<span class="hljs-attribute">container:</span>"
             <span class="hljs-attribute">name</span> = "<span class="hljs-attribute">NSURLSession</span>"&gt;</span>
             ...
         <span class="hljs-tag">&lt;/<span class="hljs-title">Group</span>&gt;</span>
         ...
     <span class="hljs-tag">&lt;/<span class="hljs-title">Group</span>&gt;</span>
     ...
-    <span class="hljs-tag">&lt;<span class="hljs-title">FileRef</span>
-        <span class="hljs-attribute">location</span> = "<span class="hljs-attribute">group:Tests</span>/<span class="hljs-attribute">AFNetworking</span> <span class="hljs-attribute">Tests.xcodeproj</span>"&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">FileRef
+</span>        <span class="hljs-attribute">location</span> = "<span class="hljs-attribute">group:Tests</span>/<span class="hljs-attribute">AFNetworking</span> <span class="hljs-attribute">Tests.xcodeproj</span>"&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-title">FileRef</span>&gt;</span>    
     ...
 <span class="hljs-tag">&lt;/<span class="hljs-title">Workspace</span>&gt;</span>
@@ -94,7 +94,7 @@
 <li><a href="https://github.com/rayh/xcoder">xcoder</a>, another gem to manipulate an Xcode project. </li>
 </ul>
 </div><div class="bottom-box no-border"><div class="col-12"><a href="https://twitter.com/share" data-url="http://mokacoding.com/blog/xcode-projects-and-workspaces" data-via="mokacoding" data-text="A dive into Xcode projects and workspaces" class="twitter-share-button"><Tweet></Tweet></a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
-</script></div></div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"><div><a href="/blog/rails-add-has-many-association-to-existing-model"><<&nbsp;Rails: adding a new has_many association to an existing model</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/october-questions">October's Questions&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin MailChimp Signup Form -->
+</script></div></div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"><div><a href="/blog/things-learned-in-october"><<&nbsp;Some things I learned in October</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/october-questions">October's Questions&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin MailChimp Signup Form -->
 <div id="mc_embed_signup">
   <form action="//mokacoding.us10.list-manage.com/subscribe/post?u=45a265e2a9d2b9dbec5f98d51&amp;id=0f2ccfb0fa" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
     <div id="mc_embed_signup_scroll">

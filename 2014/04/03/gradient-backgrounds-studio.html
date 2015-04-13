@@ -93,16 +93,16 @@ UIGraphicsEndImageContext();
 <p>If you have been reading other articles from my blog you know by now I&#39;m not clever, the credits for this code goes to <a href="http://stackoverflow.com/questions/16788305/how-to-create-uiimage-with-vertical-gradient-using-from-color-and-to-color">this question</a> on SO.</p>
 <h3 id="uiimage-merging-images">UIImage merging images</h3>
 <p>Now that we have the image with the gradient we can merge it with the background image. The code to do that is simpler than the one above, but based on the same principle; create a context, draw in it, and get an <code>UIImage</code> from it with what&#39;s drawn in it.</p>
-<pre><code class=" hljs objc"><span class="hljs-built_in">UIImage</span> *image = ...
-<span class="hljs-built_in">UIImage</span> *gradientImage = ...
-<span class="hljs-built_in">CGRect</span> size = ...
+<pre><code class=" hljs objc">UIImage *image = <span class="hljs-keyword">...</span>
+UIImage *gradientImage = <span class="hljs-keyword">...</span>
+CGRect size = <span class="hljs-keyword">...</span>
 
 UIGraphicsBeginImageContext(size);
 
-<span class="hljs-built_in">CGRect</span> imageRect = CGRectMake(<span class="hljs-number">0.0</span>, <span class="hljs-number">0.0</span>, size<span class="hljs-variable">.width</span>, size<span class="hljs-variable">.height</span>);
+CGRect imageRect = CGRectMake(<span class="hljs-number">0.0</span>, <span class="hljs-number">0.0</span>, size.width, size.height);
 [image drawInRect:imageRect];
 [gradient drawInRect:imageRect];
-<span class="hljs-built_in">UIImage</span> *combinedImage = UIGraphicsGetImageFromCurrentImageContext();
+UIImage *combinedImage = UIGraphicsGetImageFromCurrentImageContext();
 
 UIGraphicsEndImageContext();
 </code></pre>
@@ -113,31 +113,31 @@ UIGraphicsEndImageContext();
 <p><img src="http://mokacoding.s3.amazonaws.com/2014-04-03-blur-buttons.jpg" alt="The round blurred buttons" style="width: 50%"/></p>
 <p>When I started reading about how to blur stuff I almost laughed at people suggesting to use <a href="https://developer.apple.com/library/ios/documentation/uikit/reference/UIToolbar_Class/Reference/Reference.html"><code>UIToolbar</code></a>, and looked into solutions like <a href="https://github.com/nicklockwood/FXBlurView">FXBlurView</a> but the performance on live blurring were horrible. <code>UIToolbar</code> won it in the end.</p>
 <p>A funny thing I bumped into when making the buttons rounded is that if I used exactly half of the frame side to set the corner radius, as you would normally do, the view disappeared! The solution I found to that was to set the corner radius to <em>almost</em> half the frame side, where <em>almost</em> = 0.999.</p>
-<pre><code class=" hljs objc"><span class="hljs-built_in">CGRect</span> frame = ...
+<pre><code class=" hljs objc">CGRect frame = ...
 
-UIToolbar *blurredView = [[UIToolbar alloc] initWithFrame:frame];
+UIToolbar *blurredView = [[UIToolbar alloc] initWithFrame:frame]<span class="hljs-comment">;</span>
 
-<span class="hljs-comment">// To enable proper blurring</span>
-<span class="hljs-comment">//</span>
-blurredView<span class="hljs-variable">.barStyle</span> = UIBarStyleDefault;
-blurredView<span class="hljs-variable">.translucent</span> = <span class="hljs-literal">YES</span>;
+// To enable proper blurring
+//
+blurredView<span class="hljs-preprocessor">.barStyle</span> = UIBarStyleDefault<span class="hljs-comment">;</span>
+blurredView<span class="hljs-preprocessor">.translucent</span> = YES<span class="hljs-comment">;</span>
 
-blurredView<span class="hljs-variable">.clipsToBounds</span> = <span class="hljs-literal">YES</span>;
-<span class="hljs-comment">// this makes the toolbar invisible! o.O</span>
-blurredView<span class="hljs-variable">.layer</span><span class="hljs-variable">.cornerRadius</span> = frame<span class="hljs-variable">.size</span><span class="hljs-variable">.width</span> / <span class="hljs-number">2</span>;
-<span class="hljs-comment">// this works!</span>
-blurredView<span class="hljs-variable">.layer</span><span class="hljs-variable">.cornerRadius</span> = frame<span class="hljs-variable">.size</span><span class="hljs-variable">.width</span> / <span class="hljs-number">2</span> * <span class="hljs-number">0.999</span>;
+blurredView<span class="hljs-preprocessor">.clipsToBounds</span> = YES<span class="hljs-comment">;</span>
+// this makes the toolbar invisible! o<span class="hljs-preprocessor">.O</span>
+blurredView<span class="hljs-preprocessor">.layer</span><span class="hljs-preprocessor">.cornerRadius</span> = frame<span class="hljs-preprocessor">.size</span><span class="hljs-preprocessor">.width</span> / <span class="hljs-number">2</span><span class="hljs-comment">;</span>
+// this works!
+blurredView<span class="hljs-preprocessor">.layer</span><span class="hljs-preprocessor">.cornerRadius</span> = frame<span class="hljs-preprocessor">.size</span><span class="hljs-preprocessor">.width</span> / <span class="hljs-number">2</span> * <span class="hljs-number">0.999</span><span class="hljs-comment">;</span>
 </code></pre>
 <p>One other important thing is that the toolbar blurs the background of it&#39;s superview, keep this in mind in case you have overlapping view.</p>
 <h3 id="justify">Justify</h3>
 <p>The final thing I&#39;d like to share is how to justify the text in a <code>UILabel</code>. Despite the fact that the <code>textAlignement</code> property accepts <code>NSTextAlignmentJustified</code> as an option I wasn&#39;t able to make my multiline label justify just like that.</p>
 <p>I was finally able to achieve the result by using <a href="https://developer.apple.com/library/mac/documentation/cocoa/reference/foundation/classes/NSAttributedString_Class/Reference/Reference.html"><code>NSAttributedString</code></a> and a <a href="https://developer.apple.com/library/ios/documentation/cocoa/reference/ApplicationKit/Classes/NSMutableParagraphStyle_Class/Reference/Reference.html"><code>NSMutableParagraphStyle</code></a>.</p>
-<pre><code class=" hljs objc"><span class="hljs-built_in">NSString</span> *message = ...
+<pre><code class=" hljs objc">NSString *message = <span class="hljs-keyword">...</span>
 
 NSMutableParagraphStyle *justifiedParagraph = [[NSMutableParagraphStyle alloc] init];
-justifiedParagraph<span class="hljs-variable">.alignment</span> = NSTextAlignmentJustified;
+justifiedParagraph.alignment = NSTextAlignmentJustified;
 
-<span class="hljs-built_in">NSDictionary</span> *attributes = @{ NSParagraphStyleAttributeName: justifiedParagraph, NSBaselineOffsetAttributeName: @<span class="hljs-number">0</span> };
+NSDictionary *attributes = @{ NSParagraphStyleAttributeName: justifiedParagraph, NSBaselineOffsetAttributeName: @<span class="hljs-number">0</span> };
 
 NSAttributedString *justifiedMessage = [[NSAttributedString alloc] initWithString:message attributes:attributes];
 </code></pre>

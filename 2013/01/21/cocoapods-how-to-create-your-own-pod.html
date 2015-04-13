@@ -4,11 +4,11 @@
 The first step is to have something to make a pod of, I guess every developer has his own little set of smart methods that make his life easier. Don&#39;t be greedy, share them with the community!</p>
 <p><h3>Step 2 - Tag your pod properly</h3>
 Since we&#39;re gonna work with a dependency manager we need to take care of the version number of our pod.</p>
-<pre><code class="">git tag -<span class="hljs-tag">a</span> <span class="hljs-number">1.0</span>.<span class="hljs-number">0</span> -m <span class="hljs-string">"Tag release 1.0.0"</span>
+<pre><code class="">git <span class="hljs-built_in">tag</span> <span class="hljs-attribute">-a</span> <span class="hljs-number">1.0</span><span class="hljs-number">.0</span> <span class="hljs-attribute">-m</span> <span class="hljs-string">"Tag release 1.0.0"</span>
 </code></pre><p>Take a couple of minutes to read through the <a href="http://semver.org/">Semantic Versioning</a> to learn how to use tagging for version numbers properly and in a way that allows for <a href="https://github.com/CocoaPods/Specs/wiki/Cross-dependencies-resolution-example">resolution of cross-dependencies</a>.</p>
 <p><h3>Step 3 - The podspec</h3>
 Once our project is tagged properly we can create the <code>.podspec</code> file. The extension name explains that it will contain the &quot;specs&quot; of our &quot;pod&quot;.</p>
-<pre><code class="">pod spec create <span class="hljs-keyword">Do</span><span class="hljs-label">nut</span>
+<pre><code class="">pod spec <span class="hljs-operator"><span class="hljs-keyword">create</span> Donut</span>
 </code></pre><p>This will generate the <code>Donut.podspec</code> file.</p>
 <p>You can also generate the <code>podspec</code> from a GitHub repo using the GitHub url instead of the name.</p>
 <p><h3>Step 4 - Leave your mark on the podspec</h3>
@@ -33,12 +33,12 @@ end
 {<span class="hljs-subst">%</span> endhighlight <span class="hljs-subst">%</span>}
 </code></pre><p><h3>Step 5 - Is my podspec ok?</h3>
 Once your <code>podspec</code> its ready validate it running</p>
-<pre><code class=""><span class="hljs-title">pod</span> spec lint Peanut.podspec
+<pre><code class="">pod spec lint Peanut<span class="hljs-preprocessor">.podspec</span>
 </code></pre><p>If everything is fine you&#39;ll read</p>
-<pre><code class="">pod spec lint Peanut<span class="hljs-class">.podspec</span> 
--&gt; Peanut (<span class="hljs-number">1.0</span>.<span class="hljs-number">0</span>)
-Analyzed <span class="hljs-number">1</span> podspec.
-Peanut<span class="hljs-class">.podspec</span> passed validation.
+<pre><code class="">pod spec lint Peanut.podspec 
+-<span class="ruby">&gt; <span class="hljs-constant">Peanut</span> (<span class="hljs-number">1.0</span>.<span class="hljs-number">0</span>)
+</span>Analyzed 1 podspec.
+Peanut.podspec passed validation.
 </code></pre><p>Otherwise <code>pod spec</code> will explain the error or warning, as everything is so simple also fixing the problems will be. Anyway the error report is already formatted in <a href="http://daringfireball.net/projects/markdown/">Markdown</a> so you can copy it and paste it in an issue on the <a href="https://github.com/CocoaPods/CocoaPods/issues/new">CocoaPods Issues page</a>.</p>
 <p><h3>Step 6 - Let your pod fly</h3>
 We&#39;re almost done here. Now to make our pod available to the community, or just to ourselves and feel cool, we have two options. The rookie way is open an issue, but we&#39;ve just coded an iOS library, with it&#39;s own repo on GitHub, and generated the <code>podspec</code> fetching the data from there, so we&#39;re not rookies. The second option is to fork the <a href="https://github.com/CocoaPods/Specs">Specs repo</a>, add our pod, submit the PR and wait.</p>

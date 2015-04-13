@@ -28,15 +28,15 @@ UIATarget.localTarget().frontMostApp().mainWindow().tableViews()[<span class="hl
 <p>The open source libraries for unit testing show a trend in the <em>style</em> of the tests, they&#39;re in fact all in an xSpec style, which is taken from the <a href="http://rspec.info/">RSpec</a> Ruby testing library, and gives more relevance to the testing the behaviour of a class, rather than enumerating its methods.</p>
 <h3 id="-kiwi-https-github-com-kiwi-bdd-kiwi-"><a href="https://github.com/kiwi-bdd/Kiwi">Kiwi</a></h3>
 <p><a href="https://github.com/kiwi-bdd/Kiwi">Kiwi</a> is a <em>drop-in</em> full stack replacement for XCTest, that provides an xSpec syntax. A Kiwi test, or better spec, looks like this:</p>
-<pre><code class=" hljs objc">describe(<span class="hljs-string">@"Team"</span>, ^{
-  context(<span class="hljs-string">@"when newly created"</span>, ^{
-    it(<span class="hljs-string">@"has a name"</span>, ^{
-      <span class="hljs-keyword">id</span> team = [Team team];
-      [[team<span class="hljs-variable">.name</span> should] equal:<span class="hljs-string">@"Black Hawks"</span>];
+<pre><code class=" hljs objc">describe(@<span class="hljs-string">"Team"</span>, ^{
+  context(@<span class="hljs-string">"when newly created"</span>, ^{
+    <span class="hljs-keyword">it</span>(@<span class="hljs-string">"has a name"</span>, ^{
+      <span class="hljs-property">id</span> team = [Team team];
+      [[team.<span class="hljs-property">name</span> should] <span class="hljs-keyword">equal</span>:@<span class="hljs-string">"Black Hawks"</span>];
     });
 
-    it(<span class="hljs-string">@"has 11 players"</span>, ^{
-      <span class="hljs-keyword">id</span> team = [Team team];
+    <span class="hljs-keyword">it</span>(@<span class="hljs-string">"has 11 players"</span>, ^{
+      <span class="hljs-property">id</span> team = [Team team];
       [[[team should] have:<span class="hljs-number">11</span>] players];
     });
   });
@@ -48,19 +48,19 @@ UIATarget.localTarget().frontMostApp().mainWindow().tableViews()[<span class="hl
 <p><a href="https://github.com/specta/specta">Specta</a> is very similar to Kiwi, but takes a different architectural approach. Where Kiwi is a monolithic drop-in replacement, Specta values modularity and composition. The only thing the library takes care of is the framework for writing and running xSpec style tests, it&#39;s then up to the user to plug in libraries to take care of expectations, matching, mocking and stubbing.</p>
 <p>I personally prefer this approach to library design, little self contained pieces that can be combined together.</p>
 <p>Here&#39;s a Specta spec:</p>
-<pre><code class=" hljs objc">SpecBegin(Thing)
+<pre><code class=" hljs objc"><span class="hljs-function">SpecBegin(Thing)</span>
 
-describe(<span class="hljs-string">@"Thing"</span>, ^{
-  it(<span class="hljs-string">@"should do stuff"</span>, ^{
-    <span class="hljs-comment">// This is an example block. Place your assertions here.</span>
-  });
+<span class="hljs-function">describe(@<span class="hljs-string">"Thing"</span>, ^{
+  <span class="hljs-function">it(@<span class="hljs-string">"should do stuff"</span>, ^{
+    // This is an example block. Place your assertions here.
+  })</span>;
 
-  it(<span class="hljs-string">@"should do some stuff asynchronously"</span>, ^{
-    waitUntil(^(DoneCallback done) {
-      <span class="hljs-comment">// Async example blocks need to invoke done() callback.</span>
-      done();
-    });
-  });
+  <span class="hljs-function">it(@<span class="hljs-string">"should do some stuff asynchronously"</span>, ^{
+    <span class="hljs-function">waitUntil(^(DoneCallback done)</span> {
+      // Async example blocks need to invoke <span class="hljs-function">done()</span> callback.
+      <span class="hljs-function">done()</span>;
+    })</span>;
+  })</span>;
 });
 </code></pre>
 <p>Notice how the implementation on the <code>it</code> blocks is left empty. It&#39;s left to the library&#39;s user to fill them using the tools they prefer.</p>
@@ -75,17 +75,17 @@ describe(<span class="hljs-string">@"Thing"</span>, ^{
 </ul>
 <h3 id="-quick-https-github-com-quick-quick-"><a href="https://github.com/Quick/Quick">Quick</a></h3>
 <p><a href="https://github.com/Quick/Quick">Quick</a> is the new kid in the block, and it&#39;s a very cool kid indeed. Quick is mainly written in Swift and it&#39;s best suited to write test components written in the new language.</p>
-<pre><code class=" hljs swift">import Quick
+<pre><code class=" hljs swift"><span class="hljs-keyword">import</span> Quick
 
-class ThingSpec: QuickSpec {
-  override func spec() {
-    describe(&quot;a &#39;Thing&#39;&quot;) {
-      it(&quot;should do stuff) {
+<span class="hljs-keyword">class</span> ThingSpec: QuickSpec {
+  <span class="hljs-keyword">override</span> func spec() {
+    describe(<span class="hljs-string">"a 'Thing'"</span>) {
+      it(<span class="hljs-string">"should do stuff) {
         //
       }
     }
   }
-}
+}</span>
 </code></pre>
 <p>Thanks to Swift&#39;s syntax and closures Quick specs look far more readable that Kiwi&#39;s or Specta&#39;s.</p>
 <p>Quick comes together with <a href="https://github.com/Quick/Nimble">Nimble</a> it&#39;s matchers library, which allows us to write neat things like <code>expect(10) &gt; 2</code>.</p>
@@ -108,26 +108,26 @@ class ThingSpec: QuickSpec {
 <h3 id="-subliminal-https-github-com-inkling-subliminal-"><a href="https://github.com/inkling/Subliminal">Subliminal</a></h3>
 <p><a href="https://github.com/inkling/Subliminal">Subliminal</a> is an Objective-C framework that, like KIF, integrates with XCTest. Unlike KIF though, Subliminal is written on top of UIAutomation itself, and aims to hide away it&#39;s complexity from the developers.</p>
 <pre><code class=" hljs objc">- (<span class="hljs-keyword">void</span>)testLogInSucceedsWithUsernameAndPassword {
-  SLTextField *usernameField = [SLTextField elementWithAccessibilityLabel:<span class="hljs-string">@"username field"</span>];
-  SLTextField *passwordField = [SLTextField elementWithAccessibilityLabel:<span class="hljs-string">@"password field"</span> isSecure:<span class="hljs-literal">YES</span>];
-  SLElement *submitButton = [SLElement elementWithAccessibilityLabel:<span class="hljs-string">@"Submit"</span>];
-  SLElement *loginSpinner = [SLElement elementWithAccessibilityLabel:<span class="hljs-string">@"Logging in..."</span>];
+  SLTextField *usernameField = [SLTextField elementWithAccessibilityLabel:@<span class="hljs-string">"username field"</span>];
+  SLTextField *passwordField = [SLTextField elementWithAccessibilityLabel:@<span class="hljs-string">"password field"</span> isSecure:<span class="hljs-literal">YES</span>];
+  SLElement *submitButton = [SLElement elementWithAccessibilityLabel:@<span class="hljs-string">"Submit"</span>];
+  SLElement *loginSpinner = [SLElement elementWithAccessibilityLabel:@<span class="hljs-string">"Logging in..."</span>];
 
-  <span class="hljs-built_in">NSString</span> *username = <span class="hljs-string">@"Jeff"</span>, *password = <span class="hljs-string">@"foo"</span>;
+  <span class="hljs-built_in">NSString</span> *username = @<span class="hljs-string">"Jeff"</span>, *password = @<span class="hljs-string">"foo"</span>;
   [usernameField setText:username];
   [passwordField setText:password];
 
   [submitButton tap];
 
   <span class="hljs-comment">// wait for the login spinner to disappear</span>
-  SLAssertTrueWithTimeout([loginSpinner isInvalidOrInvisible], <span class="hljs-number">3.0</span>, <span class="hljs-string">@"Log-in was not successful."</span>);
+  SLAssertTrueWithTimeout([loginSpinner isInvalidOrInvisible], <span class="hljs-number">3.0</span>, @<span class="hljs-string">"Log-in was not successful."</span>);
 
-  <span class="hljs-built_in">NSString</span> *successMessage = [<span class="hljs-built_in">NSString</span> stringWithFormat:<span class="hljs-string">@"Hello, %@!"</span>, username];
+  <span class="hljs-built_in">NSString</span> *successMessage = [<span class="hljs-built_in">NSString</span> stringWithFormat:@<span class="hljs-string">"Hello, %@!"</span>, username];
   SLAssertTrue([[SLElement elementWithAccessibilityLabel:successMessage] isValid],
-  <span class="hljs-string">@"Log-in did not succeed."</span>);
+  @<span class="hljs-string">"Log-in did not succeed."</span>);
 
   <span class="hljs-comment">// Check the internal state of the app.</span>
-  SLAssertTrue(SLAskAppYesNo(isUserLoggedIn), <span class="hljs-string">@"User is not logged in."</span>)
+  SLAssertTrue(SLAskAppYesNo(isUserLoggedIn), @<span class="hljs-string">"User is not logged in."</span>)
 }
 </code></pre>
 <p>Subliminal states that it can enable testing In-App Purchase alerts, and even put the app to sleep. This all sounds great, but the fact that, at the time of writing, the last commit is from September 2014, and there are 13 active PR throws a bad signal on the status of the library 😕.</p>

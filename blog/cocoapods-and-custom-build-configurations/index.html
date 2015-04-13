@@ -21,7 +21,7 @@ clang: error: linker command failed with exit code <span class="hljs-number">1</
 <h2 id="how-to-use-cocoapods-and-build-configurations-like-a-pro">How to use CocoaPods and build configurations like a pro</h2>
 <p>The rule of thumb is that <strong>the Pods and our target have to have the same preprocessor macro settings</strong>.</p>
 <p>Whenever you create a custom build configuration Xcode asks if you want to duplicate Debug or Release. The Podfile DSL has a way to tell CocoaPods which build configuration was duplicated from which, it&#39;s the second argument of the <a href="http://guides.cocoapods.org/syntax/podfile.html#xcodeproj"><code>xcodeproj</code></a> setting.</p>
-<pre><code class=" hljs ruby">xcodeproj <span class="hljs-string">`MyProject`</span>, <span class="hljs-string">'QA'</span> =&gt; <span class="hljs-symbol">:release</span>, <span class="hljs-string">'Beta'</span> =&gt; <span class="hljs-symbol">:debug</span>
+<pre><code class=" hljs ruby">xcodeproj `<span class="hljs-constant">MyProject</span>`, <span class="hljs-string">'QA'</span> =&gt; <span class="hljs-symbol">:release</span>, <span class="hljs-string">'Beta'</span> =&gt; <span class="hljs-symbol">:debug</span>
 </code></pre>
 <p>If some of your pods requires you to set preprocessor macros then remember what @alloy says:</p>
 <blockquote>
