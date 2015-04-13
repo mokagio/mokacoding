@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Better testing with Specta
+title: Better tests with Specta
 description: "Writing unit tests for our iOS and OS X projects not only is important, but should be always part of the development cycle. As such the way we write the tests is as important, and having the option to write tests that easily explain their purpose can drastically increase the quality of the suite. Specta and Expecta are two libraries that provide a different way to writing tests than XCTest, let's see what we can gain by using such approach."
 tags:
 - Testing
