@@ -50,10 +50,10 @@
 <span class="hljs-class"><span class="hljs-keyword">@implementation</span> <span class="hljs-title">MainScreenTest</span></span>
 
 - (<span class="hljs-keyword">void</span>)testUI {
-  [tester waitForViewWithAccessibilityLabel:@<span class="hljs-string">"Bench"</span>];
-  [tester waitForViewWithAccessibilityLabel:@<span class="hljs-string">"say hello"</span>];
-  [tester waitForViewWithAccessibilityLabel:@<span class="hljs-string">"show elements"</span>];
-  [tester waitForViewWithAccessibilityLabel:@<span class="hljs-string">"mokacoding.com"</span>];
+  [tester waitForViewWithAccessibilityLabel:<span class="hljs-string">@"Bench"</span>];
+  [tester waitForViewWithAccessibilityLabel:<span class="hljs-string">@"say hello"</span>];
+  [tester waitForViewWithAccessibilityLabel:<span class="hljs-string">@"show elements"</span>];
+  [tester waitForViewWithAccessibilityLabel:<span class="hljs-string">@"mokacoding.com"</span>];
 }
 
 <span class="hljs-keyword">@end</span>
@@ -66,37 +66,37 @@
 <h2 id="more-useful-tests">More useful tests</h2>
 <p>Let&#39;s be honest, the test we just wrote is not very useful. One could actually argue that if that&#39;s what we mean with acceptance testing it&#39;s actually a waste of time. So let&#39;s try to test something that actually makes sense, let&#39;s see if the app is behaving as it should.</p>
 <p>Bench does two things, shows a greetings alert to the user, and a list of the elements of the periodic table.</p>
-<pre><code class=" hljs objc"><span class="hljs-javadoc">/**
+<pre><code class=" hljs objc"><span class="hljs-comment">/**
  *  When I tap the "say hello" button, I see a greetings alert, so that I can be happier :)
  */</span>
 - (<span class="hljs-keyword">void</span>)testSayHello {
-  [tester tapViewWithAccessibilityLabel:@<span class="hljs-string">"say hello"</span>];
+  [tester tapViewWithAccessibilityLabel:<span class="hljs-string">@"say hello"</span>];
 
-  [tester waitForViewWithAccessibilityLabel:@<span class="hljs-string">"Hello"</span>];
-  [tester waitForViewWithAccessibilityLabel:@<span class="hljs-string">"Sup?"</span>];
-  [tester waitForViewWithAccessibilityLabel:@<span class="hljs-string">"Dismiss"</span>];
+  [tester waitForViewWithAccessibilityLabel:<span class="hljs-string">@"Hello"</span>];
+  [tester waitForViewWithAccessibilityLabel:<span class="hljs-string">@"Sup?"</span>];
+  [tester waitForViewWithAccessibilityLabel:<span class="hljs-string">@"Dismiss"</span>];
 
-  [tester tapViewWithAccessibilityLabel:@<span class="hljs-string">"Dismiss"</span>];
+  [tester tapViewWithAccessibilityLabel:<span class="hljs-string">@"Dismiss"</span>];
 
-  [tester waitForAbsenceOfViewWithAccessibilityLabel:@<span class="hljs-string">"Hello"</span>];
-  [tester waitForAbsenceOfViewWithAccessibilityLabel:@<span class="hljs-string">"Sup?"</span>];
-  [tester waitForAbsenceOfViewWithAccessibilityLabel:@<span class="hljs-string">"Dismiss"</span>];
+  [tester waitForAbsenceOfViewWithAccessibilityLabel:<span class="hljs-string">@"Hello"</span>];
+  [tester waitForAbsenceOfViewWithAccessibilityLabel:<span class="hljs-string">@"Sup?"</span>];
+  [tester waitForAbsenceOfViewWithAccessibilityLabel:<span class="hljs-string">@"Dismiss"</span>];
 }
 
-<span class="hljs-javadoc">/**
+<span class="hljs-comment">/**
  *  When I tap the "show elements" button, I see a listt of elements, so I can expand my knowledge
  */</span>
 - (<span class="hljs-keyword">void</span>)testShowElements {
-  [tester tapViewWithAccessibilityLabel:@<span class="hljs-string">"show elements"</span>];
+  [tester tapViewWithAccessibilityLabel:<span class="hljs-string">@"show elements"</span>];
 
-  [tester waitForViewWithAccessibilityLabel:@<span class="hljs-string">"Elements"</span>];
-  [tester waitForViewWithAccessibilityLabel:@<span class="hljs-string">"[H] Hydrogen (1)"</span> ];
-  [tester waitForViewWithAccessibilityLabel:@<span class="hljs-string">"[Uuo] Ununoctium (118)"</span>];
-  [tester waitForViewWithAccessibilityLabel:@<span class="hljs-string">"Back"</span>];
+  [tester waitForViewWithAccessibilityLabel:<span class="hljs-string">@"Elements"</span>];
+  [tester waitForViewWithAccessibilityLabel:<span class="hljs-string">@"[H] Hydrogen (1)"</span> ];
+  [tester waitForViewWithAccessibilityLabel:<span class="hljs-string">@"[Uuo] Ununoctium (118)"</span>];
+  [tester waitForViewWithAccessibilityLabel:<span class="hljs-string">@"Back"</span>];
 
-  [tester tapViewWithAccessibilityLabel:@<span class="hljs-string">"Back"</span>];
+  [tester tapViewWithAccessibilityLabel:<span class="hljs-string">@"Back"</span>];
 
-  [tester waitForAbsenceOfViewWithAccessibilityLabel:@<span class="hljs-string">"Elements"</span>];
+  [tester waitForAbsenceOfViewWithAccessibilityLabel:<span class="hljs-string">@"Elements"</span>];
 }
 </code></pre>
 <p>Notice how in both tests we&#39;re bringing the app back to it&#39;s original state, that&#39;s an important thing to keep in mind when writing acceptance tests.</p>

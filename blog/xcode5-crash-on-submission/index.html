@@ -5,8 +5,8 @@
 <p>Make sure all the provisioning profiles and code signing are set properly</p>
 <h4 id="step-2">Step 2</h4>
 <p>Open your Terminal and generate the <code>.ipa</code> yourself, with the help of <a href="https://github.com/nomad/shenzhen">shenzhen</a>.</p>
-<pre><code class="">cd my/ready/<span class="hljs-keyword">to</span>/be/submitter/ios/project
-ipa build -c <span class="hljs-keyword">Release</span>
+<pre><code class="">cd my<span class="hljs-regexp">/ready/</span>to<span class="hljs-regexp">/be/</span>submitter<span class="hljs-regexp">/ios/</span><span class="hljs-keyword">project</span>
+ipa build -c Release
 </code></pre><h4 id="step-3">Step 3</h4>
 <p>Upload the app through Application Loader.</p>
 <h4 id="step-4">Step 4</h4>
@@ -28,10 +28,10 @@ ipa build -c <span class="hljs-keyword">Release</span>
 <p><img src="http://mokacoding.s3.amazonaws.com/2013-09-16-the-terrible-dialog.jpg" alt="The terrible dialog"></p>
 <p>And guess what? Both those buttons resulted in Xcode crashing, right there, with no explanation, no progress bar, nothing, Boom!</p>
 <p>Out of curiosity I opened the crash log that got generated and…</p>
-<pre><code class="">Crashed <span class="hljs-keyword">Thread</span>:  <span class="hljs-number">0</span>  Dispatch <span class="hljs-built_in">queue</span>: com<span class="hljs-built_in">.</span>apple<span class="hljs-built_in">.</span>main<span class="hljs-attribute">-thread</span>
+<pre><code class="">Crashed <span class="hljs-string">Thread:</span>  <span class="hljs-number">0</span>  Dispatch <span class="hljs-string">queue:</span> com.apple.main-thread
 
-Exception <span class="hljs-keyword">Type</span>:  EXC_BAD_ACCESS (SIGSEGV)
-Exception Codes: EXC_I386_GPFLT
+Exception <span class="hljs-string">Type:</span>  EXC_BAD_ACCESS (SIGSEGV)
+Exception <span class="hljs-string">Codes:</span> EXC_I386_GPFLT
 </code></pre><p>Whenever I get an <code>EXC_BAD_ACCESS (SIGSEGV)</code> I feel like punching myself in the face, it&#39;s a memory issue, and I must have been really dumb to produce something like that in the ARC era.</p>
 <p>But let&#39;s not waste time complaining about those things, risking to be kicked out of the dev program, and look for a solution.</p>
 <h3 id="the-workaround">The workaround</h3>

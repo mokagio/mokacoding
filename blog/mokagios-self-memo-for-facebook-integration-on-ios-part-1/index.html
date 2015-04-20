@@ -24,27 +24,27 @@
 </ol>
 <h4 id="check-if-the-user-is-logged-in">Check if the user is logged in</h4>
 <p>To get the current Facebook session we use <code>FBSession.activeSession</code>. To see if the session is active, and therefore the user is already logged in, we need to check the <code>state</code> property: <code>FBSession.activeSession.state</code>. A quick look to the <code>typedef enum</code> of the <code>FBSessionState</code> and:</p>
-<pre><code class="">{% highlight objective-c <span class="hljs-variable">%}</span>
+<pre><code class="">{% highlight objective-c %}
 + (BOOL)isUserLoggedInFacebook
 {
-    <span class="hljs-keyword">if</span> (FBSession.activeSession.<span class="hljs-keyword">state</span> == FBSessionStateCreatedTokenLoaded
+    if (FBSession.activeSession.<span class="hljs-keyword">state</span> == FBSessionStateCreatedTokenLoaded
         || FBSession.activeSession.<span class="hljs-keyword">state</span> == FBSessionStateOpen
         || FBSession.activeSession.<span class="hljs-keyword">state</span> == FBSessionStateOpenTokenExtended) {
-        <span class="hljs-keyword">return</span> YES;
-    } <span class="hljs-keyword">else</span> {
-        <span class="hljs-keyword">return</span> NO;
+        return YES;
+    } else {
+        return NO;
     }
 }
-{% endhighlight <span class="hljs-variable">%}</span>
+{% endhighlight %}
 </code></pre><h4 id="call-the-facebook-sdk-method-to-login">Call the Facebook SDK method to login</h4>
 <p>Easy peasy:</p>
-<pre><code class="">{% highlight objective-c %}
-[FBSession openActiveSessionWithReadPermissions:<span class="hljs-literal">nil</span>
-                                   allowLoginUI:<span class="hljs-literal">YES</span>
-                              completionHandler:^(FBSession *session, FBSessionState state, <span class="hljs-built_in">NSError</span> *error) {
-     <span class="hljs-comment">// handle stuff here</span>
- }];
- {% endhighlight %}
+<pre><code class=""><span class="hljs-collection">{% highlight objective-c %}</span>
+<span class="hljs-collection">[FBSession openActiveSessionWithReadPermissions:nil
+                                   allowLoginUI:YES
+                              completionHandler:^<span class="hljs-list">(<span class="hljs-keyword">FBSession</span> *session, FBSessionState state, NSError *error)</span> <span class="hljs-collection">{
+     // handle stuff here
+ }</span>]</span><span class="hljs-comment">;</span>
+ <span class="hljs-collection">{% endhighlight %}</span>
 </code></pre><p>In the completion handler we should… handle the result of the open active session. I think that this really depends on what our app will do, so I&#39;m not gonna write any snippet here.</p>
 <h4 id="come-back-to-the-app-and-handle-the-result">Come back to the app and handle the result</h4>
 <p>If you&#39;re user&#39;s are using iOS 5 -I hope they&#39;re not-, or if they&#39;re so dumb they haven&#39;t installed the native Facebook app for iOS, the login will occur with a sort of modal window in your app. In all the rest of the cases the</p>

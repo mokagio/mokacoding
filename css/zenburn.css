@@ -5,7 +5,7 @@ based on dark.css by Ivan Sagalaev
 
 */
 
-.hljs {
+pre code {
   display: block;
   overflow-x: auto;
   padding: 0.5em;
@@ -116,3 +116,7 @@ based on dark.css by Ivan Sagalaev
   opacity: 0.5;
 }
 
+/* Override style for non highligted code */
+pre code:not(.hljs) span {
+  color: #dcdcdc;
+}

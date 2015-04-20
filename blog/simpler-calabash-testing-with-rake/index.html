@@ -67,8 +67,8 @@ end</span>
 </code></pre>
 <p>The above tasks has two flaws, the device UUID and ip are hard-coded, and it assumes the app is already on the device.</p>
 <p>We can fix the first issue by moving the configurations in a <code>.yml</code> file.</p>
-<pre><code class=" hljs yaml"><span class="hljs-attribute">uuid</span>: <span class="hljs-string">"device UUID"</span>
-<span class="hljs-attribute">ip</span>: <span class="hljs-string">"device IP when on the same network as the machine running the tests"</span>
+<pre><code class=" hljs yaml"><span class="hljs-method">uuid:</span> <span class="hljs-comment">"device UUID"</span>
+<span class="hljs-method">ip:</span> <span class="hljs-comment">"device IP when on the same network as the machine running the tests"</span>
 </code></pre>
 <pre><code class=" hljs ruby">desc <span class="hljs-string">'Run all the calabash/cucumber acceptance tests on the connected device.'</span>
 task <span class="hljs-symbol">:device_tests</span> =&gt; <span class="hljs-keyword">do</span>
@@ -92,7 +92,7 @@ end</span>
 <p>As of Xcode 6.1.1 Apple has not provided a tool to deploy an app on device from the command line  Lucky enough the open source community has a solution for that. <a href="https://github.com/phonegap/ios-deploy">ios-deploy</a>, previously known as <a href="https://github.com/ghughes/fruitstrap">fruitstrap</a>, and maintained by the PhoneGap community, lets you deploy an ipa on a connected device as easily as <code>ios-deploy -b MyApp.ipa</code>.</p>
 <p><em>ios-deploy is distribute via npm, but if you&#39;d like two add it to your project&#39;s Gemfile you can do it thanks to <a href="https://github.com/mokagio/ios-deploy-gem">this gem</a>.</em></p>
 <p>The missing piece of the puzzle is how to build the app in a format that can be deployed to the device. To keep things simple we&#39;re gonna use the <a href="https://github.com/nomad/shenzhen">shenzhen</a> gem. The command needed to build is:</p>
-<pre><code class="">ipa build --workpace <span class="hljs-keyword">...</span> --configuration <span class="hljs-keyword">...</span> --scheme .. --archive --sdk iphoneos --ipa <span class="hljs-string">"MyApp.ipa"</span>
+<pre><code class=""><span class="hljs-comment">ipa</span> <span class="hljs-comment">build</span> <span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-comment">workpace</span> <span class="hljs-string">.</span><span class="hljs-string">.</span><span class="hljs-string">.</span> <span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-comment">configuration</span> <span class="hljs-string">.</span><span class="hljs-string">.</span><span class="hljs-string">.</span> <span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-comment">scheme</span> <span class="hljs-string">.</span><span class="hljs-string">.</span> <span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-comment">archive</span> <span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-comment">sdk</span> <span class="hljs-comment">iphoneos</span> <span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-comment">ipa</span> <span class="hljs-comment">"MyApp</span><span class="hljs-string">.</span><span class="hljs-comment">ipa"</span>
 </code></pre><p>Putting it all together:</p>
 <pre><code class=" hljs ruby">desc <span class="hljs-string">'Run all the calabash/cucumber acceptance tests on the connected device.'</span>
 task <span class="hljs-symbol">:device_tests</span> =&gt; <span class="hljs-keyword">do</span>

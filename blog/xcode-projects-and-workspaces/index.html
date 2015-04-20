@@ -10,19 +10,19 @@
 <p>The top level is something like</p>
 <pre><code class="">// !$*UTF8*$!
 {
-    archiveVersion = <span class="hljs-number">1</span>;
-    classes = {
+    <span class="hljs-variable">archiveVersion =</span> <span class="hljs-number">1</span>;
+    <span class="hljs-variable">classes =</span> {
     };
-    objectVersion = <span class="hljs-number">46</span>;
-    objects = {
-        <span class="hljs-keyword">...</span>
+    <span class="hljs-variable">objectVersion =</span> <span class="hljs-number">46</span>;
+    <span class="hljs-variable">objects =</span> {
+        ...
     };
-    rootObject = CDAC62FA17A0EF1A00F5452A /* Project object */;
+    <span class="hljs-variable">rootObject =</span> CDAC62FA17A0EF1A00F5452A <span class="hljs-comment">/* Project object */</span>;
 }
 </code></pre><p>The <code>objects</code> part is the real deal. Everything about the project is in there. All stored again in a dictionary fashion, with hexadecimal identifiers. A common parameter is the <code>isa</code> key. Here&#39;s an example:</p>
-<pre><code class="">CDAC634017A0EF4C00F5452A <span class="hljs-comment">/* KZPropertyMapper.m in Sources */</span> = {
+<pre><code class="">CDAC634017A0EF4C00F5452A /<span class="hljs-keyword">*</span> KZPropertyMapper.m in Sources <span class="hljs-keyword">*</span>/ = {
     isa = PBXBuildFile; 
-    fileRef = CDAC633F17A0EF4C00F5452A <span class="hljs-comment">/* KZPropertyMapper.m */</span>;
+    fileRef = CDAC633F17A0EF4C00F5452A /<span class="hljs-keyword">*</span> KZPropertyMapper.m <span class="hljs-keyword">*</span>/;
 };
 </code></pre><p>Lucky for us Xcode adds some comments to make the things a bit more readable for humans. <em>Note:</em> I&#39;m sure they&#39;re comment and not part of the way stuff is written because I actually tried changing one and everything run fine.</p>
 <p>The <code>objects</code> has many sections, each wrapped between <code>/* Begin SectionName section */</code> and <code>/* End SectionName section */</code> comments. </p>
@@ -30,12 +30,12 @@
 <h4 id="-pbxfilereference-"><code>PBXFileReference</code></h4>
 <p>All the files in the project are in this list.</p>
 <pre><code class="">CDAC633F17A0EF4C00F5452A <span class="hljs-comment">/* KZPropertyMapper.m */</span> = {
-    isa = PBXFileReference<span class="hljs-comment">;</span>
-    fileEncoding = <span class="hljs-number">4</span><span class="hljs-comment">; </span>
-    lastKnownFileType = sourcecode<span class="hljs-preprocessor">.c</span><span class="hljs-preprocessor">.objc</span><span class="hljs-comment">; </span>
-    path = KZPropertyMapper<span class="hljs-preprocessor">.m</span><span class="hljs-comment">; </span>
-    sourceTree = <span class="hljs-string">"&lt;group&gt;"</span><span class="hljs-comment">; </span>
-}<span class="hljs-comment">;</span>
+    <span class="hljs-variable">isa =</span> PBXFileReference;
+    <span class="hljs-variable">fileEncoding =</span> <span class="hljs-number">4</span>; 
+    <span class="hljs-variable">lastKnownFileType =</span> sourcecode.c.objc; 
+    <span class="hljs-variable">path =</span> KZPropertyMapper.m; 
+    <span class="hljs-variable">sourceTree =</span> <span class="hljs-string">"&lt;group&gt;"</span>; 
+};
 </code></pre><h4 id="-pbxgroup-"><code>PBXGroup</code></h4>
 <p>This section has the groups tree. The groups are those fake folders that are useful only to create confusion on how the filesystem is oraganized. A PBXGroup can contain <code>PBXFirleReference</code>s, as well as other <code>PBXGroup</code>s. </p>
 <h4 id="-pbxnativetarget-"><code>PBXNativeTarget</code></h4>
@@ -52,32 +52,32 @@
 </blockquote>
 <p>The <code>.xcworkspace</code> from <a href="https://github.com/krzysztofzablocki/KZPropertyMapper/tree/master/Example/Example.xcworkspace">KZPropertyMapper</a> is too tiny, so let&#39;s  take a look at another one, <a href="https://github.com/AFNetworking/AFNetworking/blob/master/AFNetworking.xcworkspace/contents.xcworkspacedata">AFNetworking</a>. As for the project the workspace is nothing but a folder, grouping configuration files. The interesting file here is <code>contents.xcworkspacedata</code>. Let&#39;s open it… Surprise! Unlike the project file this one is a more readable <a href="http://en.wikipedia.org/wiki/XML">XML</a>. Inside there&#39;s a list of the workspace components. </p>
 <pre><code class=" hljs xml"><span class="hljs-pi">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">Workspace
-</span>    <span class="hljs-attribute">version</span> = "<span class="hljs-attribute">1.0</span>"&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">Group
-</span>        <span class="hljs-attribute">location</span> = "<span class="hljs-attribute">group:AFNetworking</span>"
+<span class="hljs-tag">&lt;<span class="hljs-title">Workspace</span>
+    <span class="hljs-attribute">version</span> = "<span class="hljs-attribute">1.0</span>"&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">Group</span>
+        <span class="hljs-attribute">location</span> = "<span class="hljs-attribute">group:AFNetworking</span>"
         <span class="hljs-attribute">name</span> = "<span class="hljs-attribute">AFNetworking</span>"&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">FileRef
-</span>            <span class="hljs-attribute">location</span> = "<span class="hljs-attribute">group:AFNetworking.h</span>"&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">FileRef</span>
+            <span class="hljs-attribute">location</span> = "<span class="hljs-attribute">group:AFNetworking.h</span>"&gt;</span>
         <span class="hljs-tag">&lt;/<span class="hljs-title">FileRef</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">Group
-</span>            <span class="hljs-attribute">location</span> = "<span class="hljs-attribute">container:</span>"
+        <span class="hljs-tag">&lt;<span class="hljs-title">Group</span>
+            <span class="hljs-attribute">location</span> = "<span class="hljs-attribute">container:</span>"
             <span class="hljs-attribute">name</span> = "<span class="hljs-attribute">NSURLConnection</span>"&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-title">FileRef
-</span>                <span class="hljs-attribute">location</span> = "<span class="hljs-attribute">group:AFNetworking</span>/<span class="hljs-attribute">AFURLConnectionOperation.h</span>"&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">FileRef</span>
+                <span class="hljs-attribute">location</span> = "<span class="hljs-attribute">group:AFNetworking</span>/<span class="hljs-attribute">AFURLConnectionOperation.h</span>"&gt;</span>
             <span class="hljs-tag">&lt;/<span class="hljs-title">FileRef</span>&gt;</span>
             ...
         <span class="hljs-tag">&lt;/<span class="hljs-title">Group</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">Group
-</span>            <span class="hljs-attribute">location</span> = "<span class="hljs-attribute">container:</span>"
+        <span class="hljs-tag">&lt;<span class="hljs-title">Group</span>
+            <span class="hljs-attribute">location</span> = "<span class="hljs-attribute">container:</span>"
             <span class="hljs-attribute">name</span> = "<span class="hljs-attribute">NSURLSession</span>"&gt;</span>
             ...
         <span class="hljs-tag">&lt;/<span class="hljs-title">Group</span>&gt;</span>
         ...
     <span class="hljs-tag">&lt;/<span class="hljs-title">Group</span>&gt;</span>
     ...
-    <span class="hljs-tag">&lt;<span class="hljs-title">FileRef
-</span>        <span class="hljs-attribute">location</span> = "<span class="hljs-attribute">group:Tests</span>/<span class="hljs-attribute">AFNetworking</span> <span class="hljs-attribute">Tests.xcodeproj</span>"&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">FileRef</span>
+        <span class="hljs-attribute">location</span> = "<span class="hljs-attribute">group:Tests</span>/<span class="hljs-attribute">AFNetworking</span> <span class="hljs-attribute">Tests.xcodeproj</span>"&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-title">FileRef</span>&gt;</span>    
     ...
 <span class="hljs-tag">&lt;/<span class="hljs-title">Workspace</span>&gt;</span>

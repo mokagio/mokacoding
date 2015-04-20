@@ -3,10 +3,10 @@
 <p>Thanks to that issue I now have a better understanding of what CocoaPods does, and some tips to share on how to handle build configurations like a pro.</p>
 <h2 id="the-custom-build-configuration-issue">The custom build configuration issue</h2>
 <p>The problem: when trying to use Tweaks with a build configuration in a project the linking phase was failing. Apparently some symbols used by the pod didn&#39;t exist.</p>
-<pre><code class="">Undefined symbols <span class="hljs-keyword">for</span> architecture i386:
-  <span class="hljs-string">"__FBTweakIdentifier"</span>, referenced from: <span class="hljs-keyword">...</span>
-ld: symbol(s) not found <span class="hljs-keyword">for</span> architecture i386
-clang: error: linker command failed with exit code <span class="hljs-number">1</span> (use -v to see invocation)
+<pre><code class="">Undefined symbols <span class="hljs-keyword">for</span> <span class="hljs-keyword">architecture</span> i386:
+  <span class="hljs-string">"__FBTweakIdentifier"</span>, referenced from: ...
+ld: symbol(s) <span class="hljs-keyword">not</span> found <span class="hljs-keyword">for</span> <span class="hljs-keyword">architecture</span> i386
+clang: error: linker command failed <span class="hljs-keyword">with</span> <span class="hljs-keyword">exit</span> code <span class="hljs-number">1</span> (<span class="hljs-keyword">use</span> -v <span class="hljs-keyword">to</span> see invocation)
 </code></pre><p>Tweaks is built in a way that allows developers to turn it off for production builds, collapsing the <em>tweakable</em> values into their defaults. The way they made this possible is through <a href="http://gcc.gnu.org/onlinedocs/cpp/Macros.html">preprocessor macros</a>; if <code>FB_TWEAK_ENABLED</code> is <code>0</code> than the macro functions used for the <em>tweakable</em> values are redefined into their default values. One of the places were this happens is <a href="https://github.com/facebook/Tweaks/blob/master/FBTweak/FBTweakInlineInternal.h">FBTweakInlineInternal.h</a>.</p>
 <p><code>FB_TWEAK_ENABLED</code> itself is defined in <a href="https://github.com/facebook/Tweaks/blob/master/FBTweak/FBTweakEnabled.h">FBTweakEnabled.h</a> and its behaviour maps the <code>DEBUG</code> macro, if not set otherwise.</p>
 <p>With this understanding of how Tweaks works the error message now suggests us that there&#39;s some problem with <code>FB_TWEAK_ENABLED</code> and <code>DEBUG</code>. The linker must be getting values different by the ones I set. But how?</p>
@@ -21,7 +21,7 @@ clang: error: linker command failed with exit code <span class="hljs-number">1</
 <h2 id="how-to-use-cocoapods-and-build-configurations-like-a-pro">How to use CocoaPods and build configurations like a pro</h2>
 <p>The rule of thumb is that <strong>the Pods and our target have to have the same preprocessor macro settings</strong>.</p>
 <p>Whenever you create a custom build configuration Xcode asks if you want to duplicate Debug or Release. The Podfile DSL has a way to tell CocoaPods which build configuration was duplicated from which, it&#39;s the second argument of the <a href="http://guides.cocoapods.org/syntax/podfile.html#xcodeproj"><code>xcodeproj</code></a> setting.</p>
-<pre><code class=" hljs ruby">xcodeproj `<span class="hljs-constant">MyProject</span>`, <span class="hljs-string">'QA'</span> =&gt; <span class="hljs-symbol">:release</span>, <span class="hljs-string">'Beta'</span> =&gt; <span class="hljs-symbol">:debug</span>
+<pre><code class=" hljs ruby">xcodeproj <span class="hljs-string">`MyProject`</span>, <span class="hljs-string">'QA'</span> =&gt; <span class="hljs-symbol">:release</span>, <span class="hljs-string">'Beta'</span> =&gt; <span class="hljs-symbol">:debug</span>
 </code></pre>
 <p>If some of your pods requires you to set preprocessor macros then remember what @alloy says:</p>
 <blockquote>

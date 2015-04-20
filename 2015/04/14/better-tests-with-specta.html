@@ -42,27 +42,27 @@
 }
 
 - (<span class="hljs-keyword">void</span>)testNilArgument {
-    XCTAssertNil([<span class="hljs-keyword">self</span><span class="hljs-variable">.formatter</span> formattedElementString:<span class="hljs-literal">nil</span>], @<span class="hljs-string">"ElementFormatter did not return nil when given nil data"</span>);
+    XCTAssertNil([<span class="hljs-keyword">self</span><span class="hljs-variable">.formatter</span> formattedElementString:<span class="hljs-literal">nil</span>], <span class="hljs-string">@"ElementFormatter did not return nil when given nil data"</span>);
 }
 
 - (<span class="hljs-keyword">void</span>)testMissingName {
-    <span class="hljs-built_in">NSDictionary</span> *data = @{ @<span class="hljs-string">"symbol"</span>: @<span class="hljs-string">"E"</span>, @<span class="hljs-string">"atomic_number"</span>: @<span class="hljs-string">"42"</span> };
-    XCTAssertNil([<span class="hljs-keyword">self</span><span class="hljs-variable">.formatter</span> formattedElementString:data], @<span class="hljs-string">"ElementFormatter did not return nil when given element data missing the name"</span>);
+    <span class="hljs-built_in">NSDictionary</span> *data = @{ <span class="hljs-string">@"symbol"</span>: <span class="hljs-string">@"E"</span>, <span class="hljs-string">@"atomic_number"</span>: <span class="hljs-string">@"42"</span> };
+    XCTAssertNil([<span class="hljs-keyword">self</span><span class="hljs-variable">.formatter</span> formattedElementString:data], <span class="hljs-string">@"ElementFormatter did not return nil when given element data missing the name"</span>);
 }
 
 - (<span class="hljs-keyword">void</span>)testMissingSymbol {
-    <span class="hljs-built_in">NSDictionary</span> *data = @{ @<span class="hljs-string">"name"</span>: @<span class="hljs-string">"element"</span>, @<span class="hljs-string">"atomic_number"</span>: @<span class="hljs-string">"42"</span> };
-    XCTAssertNil([<span class="hljs-keyword">self</span><span class="hljs-variable">.formatter</span> formattedElementString:data], @<span class="hljs-string">"ElementFormatter did not return nil when given element data missing the symbol"</span>);
+    <span class="hljs-built_in">NSDictionary</span> *data = @{ <span class="hljs-string">@"name"</span>: <span class="hljs-string">@"element"</span>, <span class="hljs-string">@"atomic_number"</span>: <span class="hljs-string">@"42"</span> };
+    XCTAssertNil([<span class="hljs-keyword">self</span><span class="hljs-variable">.formatter</span> formattedElementString:data], <span class="hljs-string">@"ElementFormatter did not return nil when given element data missing the symbol"</span>);
 }
 
 - (<span class="hljs-keyword">void</span>)testMissingAtomicNumber {
-    <span class="hljs-built_in">NSDictionary</span> *data = @{ @<span class="hljs-string">"name"</span>: @<span class="hljs-string">"element"</span>, @<span class="hljs-string">"symbol"</span>: @<span class="hljs-string">"E"</span> };
-    XCTAssertEqualObjects([<span class="hljs-keyword">self</span><span class="hljs-variable">.formatter</span> formattedElementString:data], @<span class="hljs-string">"[E] element"</span>, @<span class="hljs-string">"ElementFormatter did not format element data missing the atomic number as expected"</span>);
+    <span class="hljs-built_in">NSDictionary</span> *data = @{ <span class="hljs-string">@"name"</span>: <span class="hljs-string">@"element"</span>, <span class="hljs-string">@"symbol"</span>: <span class="hljs-string">@"E"</span> };
+    XCTAssertEqualObjects([<span class="hljs-keyword">self</span><span class="hljs-variable">.formatter</span> formattedElementString:data], <span class="hljs-string">@"[E] element"</span>, <span class="hljs-string">@"ElementFormatter did not format element data missing the atomic number as expected"</span>);
 }
 
 - (<span class="hljs-keyword">void</span>)testSuccess {
-    <span class="hljs-built_in">NSDictionary</span> *data = @{ @<span class="hljs-string">"name"</span>: @<span class="hljs-string">"element"</span>, @<span class="hljs-string">"symbol"</span>: @<span class="hljs-string">"E"</span>, @<span class="hljs-string">"atomic_number"</span>: @<span class="hljs-string">"42"</span> };
-    XCTAssertEqualObjects([<span class="hljs-keyword">self</span><span class="hljs-variable">.formatter</span> formattedElementString:data], @<span class="hljs-string">"[E] element (42)"</span>, @<span class="hljs-string">"ElementFormatter did not format valid element data as expected"</span>);
+    <span class="hljs-built_in">NSDictionary</span> *data = @{ <span class="hljs-string">@"name"</span>: <span class="hljs-string">@"element"</span>, <span class="hljs-string">@"symbol"</span>: <span class="hljs-string">@"E"</span>, <span class="hljs-string">@"atomic_number"</span>: <span class="hljs-string">@"42"</span> };
+    XCTAssertEqualObjects([<span class="hljs-keyword">self</span><span class="hljs-variable">.formatter</span> formattedElementString:data], <span class="hljs-string">@"[E] element (42)"</span>, <span class="hljs-string">@"ElementFormatter did not format valid element data as expected"</span>);
 }
 
 <span class="hljs-keyword">@end</span>
@@ -70,55 +70,55 @@
 <h3 id="the-specta-way">The Specta way</h3>
 <p>Now let&#39;s add Specta and its expectation and matching library <a href="https://github.com/specta/expecta">Expecta</a> to our project and write a test, actually a <em>spec</em> using the xSpec terminology, for <code>ElementFormatter</code>.</p>
 <p><em>Note: I don&#39;t know why the text highlighting is not working properly. This blog is <a href="https://github.com/mokagio/mokacoding/">open source</a> though, so if you have a suggestion on how to fix it I&#39;d love a PR.</em></p>
-<pre><code class=" hljs objc"><span class="hljs-id">#import</span> &lt;Specta<span class="hljs-class">.h</span>&gt;
-<span class="hljs-id">#import</span> &lt;Expecta<span class="hljs-class">.h</span>&gt;
-<span class="hljs-id">#import</span> "ElementFormatter<span class="hljs-class">.h</span>"
+<pre><code class=" hljs objc"><span class="hljs-preprocessor">#import <span class="hljs-title">&lt;Specta.h&gt;</span></span>
+<span class="hljs-preprocessor">#import <span class="hljs-title">&lt;Expecta.h&gt;</span></span>
+<span class="hljs-preprocessor">#import <span class="hljs-title">"ElementFormatter.h"</span></span>
 
-<span class="hljs-function">SpecBegin(ElementFormatter)</span>
+SpecBegin(ElementFormatter)
 
-<span class="hljs-function">describe(@<span class="hljs-string">"ElementFormatter"</span>, ^{
+describe(<span class="hljs-string">@"ElementFormatter"</span>, ^{
     __block ElementFormatter *formatter;
 
-    <span class="hljs-function">beforeAll(^{
+    beforeAll(^{
         formatter = [[ElementFormatter alloc] init];
-    })</span>;
+    });
 
-    <span class="hljs-function">context(@<span class="hljs-string">"when formatting an element dictionary"</span>, ^{
-        <span class="hljs-function">context(@<span class="hljs-string">"when the dictionary is nil"</span>, ^{
-            <span class="hljs-function">it(@<span class="hljs-string">"returns nil"</span>, ^{
-                <span class="hljs-function">expect([formatter formattedElementString:nil])</span>.to.<span class="hljs-function">beNil()</span>;
-            })</span>;
-        })</span>;
+    context(<span class="hljs-string">@"when formatting an element dictionary"</span>, ^{
+        context(<span class="hljs-string">@"when the dictionary is nil"</span>, ^{
+            it(<span class="hljs-string">@"returns nil"</span>, ^{
+                expect([formatter formattedElementString:<span class="hljs-literal">nil</span>])<span class="hljs-variable">.to</span><span class="hljs-variable">.beNil</span>();
+            });
+        });
 
-        <span class="hljs-function">context(@<span class="hljs-string">"when the dictionary is missing the name key"</span>, ^{
-            <span class="hljs-function">it(@<span class="hljs-string">"returns nil"</span>, ^{
-                NSDictionary *data = @{ @<span class="hljs-string">"symbol"</span>: @<span class="hljs-string">"E"</span>, @<span class="hljs-string">"atomic_number"</span>: @<span class="hljs-string">"42"</span> };
-                <span class="hljs-function">expect([formatter formattedElementString:data])</span>.to.<span class="hljs-function">beNil()</span>;
-            })</span>;
-        })</span>;
+        context(<span class="hljs-string">@"when the dictionary is missing the name key"</span>, ^{
+            it(<span class="hljs-string">@"returns nil"</span>, ^{
+                <span class="hljs-built_in">NSDictionary</span> *data = @{ <span class="hljs-string">@"symbol"</span>: <span class="hljs-string">@"E"</span>, <span class="hljs-string">@"atomic_number"</span>: <span class="hljs-string">@"42"</span> };
+                expect([formatter formattedElementString:data])<span class="hljs-variable">.to</span><span class="hljs-variable">.beNil</span>();
+            });
+        });
 
-        <span class="hljs-function">context(@<span class="hljs-string">"when the dictionary is missing the symbol key"</span>, ^{
-            <span class="hljs-function">it(@<span class="hljs-string">"returns nil"</span>, ^{
-                NSDictionary *data = @{ @<span class="hljs-string">"name"</span>: @<span class="hljs-string">"element"</span>, @<span class="hljs-string">"atomic_number"</span>: @<span class="hljs-string">"42"</span> };
-                <span class="hljs-function">expect([formatter formattedElementString:data])</span>.to.<span class="hljs-function">beNil()</span>;
-            })</span>;
-        })</span>;
+        context(<span class="hljs-string">@"when the dictionary is missing the symbol key"</span>, ^{
+            it(<span class="hljs-string">@"returns nil"</span>, ^{
+                <span class="hljs-built_in">NSDictionary</span> *data = @{ <span class="hljs-string">@"name"</span>: <span class="hljs-string">@"element"</span>, <span class="hljs-string">@"atomic_number"</span>: <span class="hljs-string">@"42"</span> };
+                expect([formatter formattedElementString:data])<span class="hljs-variable">.to</span><span class="hljs-variable">.beNil</span>();
+            });
+        });
 
-        <span class="hljs-function">context(@<span class="hljs-string">"when the dictionary is missing the atomic_number key"</span>, ^{
-            <span class="hljs-function">it(@<span class="hljs-string">"returns the [symbol] name format"</span>, ^{
-                NSDictionary *data = @{ @<span class="hljs-string">"name"</span>: @<span class="hljs-string">"element"</span>, @<span class="hljs-string">"symbol"</span>: @<span class="hljs-string">"E"</span> };
-                <span class="hljs-function">expect([formatter formattedElementString:data])</span>.to.<span class="hljs-function">equal(@<span class="hljs-string">"[E] element"</span>)</span>;
-            })</span>;
-        })</span>;
+        context(<span class="hljs-string">@"when the dictionary is missing the atomic_number key"</span>, ^{
+            it(<span class="hljs-string">@"returns the [symbol] name format"</span>, ^{
+                <span class="hljs-built_in">NSDictionary</span> *data = @{ <span class="hljs-string">@"name"</span>: <span class="hljs-string">@"element"</span>, <span class="hljs-string">@"symbol"</span>: <span class="hljs-string">@"E"</span> };
+                expect([formatter formattedElementString:data])<span class="hljs-variable">.to</span><span class="hljs-variable">.equal</span>(<span class="hljs-string">@"[E] element"</span>);
+            });
+        });
 
-        <span class="hljs-function">context(@<span class="hljs-string">"when the dictionary contains all the keys"</span>, ^{
-            <span class="hljs-function">it(@<span class="hljs-string">"returns the expected string it the [symbol] name (atomic number) format"</span>, ^{
-                NSDictionary *data = @{ @<span class="hljs-string">"name"</span>: @<span class="hljs-string">"element"</span>, @<span class="hljs-string">"symbol"</span>: @<span class="hljs-string">"E"</span>, @<span class="hljs-string">"atomic_number"</span>: @<span class="hljs-string">"42"</span> };
-                <span class="hljs-function">expect([formatter formattedElementString:data])</span>.to.<span class="hljs-function">equal(@<span class="hljs-string">"[E] element (42)"</span>)</span>;
-            })</span>;
-        })</span>;
-    })</span>;
-})</span>;
+        context(<span class="hljs-string">@"when the dictionary contains all the keys"</span>, ^{
+            it(<span class="hljs-string">@"returns the expected string it the [symbol] name (atomic number) format"</span>, ^{
+                <span class="hljs-built_in">NSDictionary</span> *data = @{ <span class="hljs-string">@"name"</span>: <span class="hljs-string">@"element"</span>, <span class="hljs-string">@"symbol"</span>: <span class="hljs-string">@"E"</span>, <span class="hljs-string">@"atomic_number"</span>: <span class="hljs-string">@"42"</span> };
+                expect([formatter formattedElementString:data])<span class="hljs-variable">.to</span><span class="hljs-variable">.equal</span>(<span class="hljs-string">@"[E] element (42)"</span>);
+            });
+        });
+    });
+});
 
 SpecEnd
 </code></pre>
@@ -126,12 +126,12 @@ SpecEnd
 <p>In my opinion the Specta version explains what the system under test is supposed to do better, and is more readable.</p>
 <p>Thanks to the <code>context</code> and <code>describe</code> blocks (they are aliases) we can organize the spec like a book, with chapter and paragraphs. Using the <code>it</code> block we can focus only on the expected result, moving any clutter due to setup code in the <code>context</code> block. The only way to achieve a similar result with XCTest is to use comments, or multiple files, with Specta we have built in support for clarity.</p>
 <p>The fact that <code>it</code> and <code>context</code> take as their first argument the description of the block itself results in a clearer test. The reader reads what is expected first, and then sees the assertion code.</p>
-<pre><code class=" hljs objc">// <span class="hljs-type">XCTest</span>
-<span class="hljs-type">XCTAssertNil</span>([self.formatter formattedElementString:<span class="hljs-typedef"><span class="hljs-keyword">data</span>], @"<span class="hljs-type">ElementFormatter</span> did not return nil when given element <span class="hljs-keyword">data</span> missing the symbol");</span>
+<pre><code class=" hljs objc"><span class="hljs-comment">// XCTest</span>
+XCTAssertNil([<span class="hljs-keyword">self</span><span class="hljs-variable">.formatter</span> formattedElementString:data], <span class="hljs-string">@"ElementFormatter did not return nil when given element data missing the symbol"</span>);
 
-// <span class="hljs-type">Specta</span>
-<span class="hljs-type">NSDictionary</span> *<span class="hljs-typedef"><span class="hljs-keyword">data</span> = @<span class="hljs-container">{ @"<span class="hljs-title">symbol</span>": @"<span class="hljs-type">E</span>", @"<span class="hljs-title">atomic_number</span>": @"42" }</span>;</span>
-<span class="hljs-title">expect</span>([formatter formattedElementString:<span class="hljs-typedef"><span class="hljs-keyword">data</span>]).to.beNil<span class="hljs-container">()</span>;</span>
+<span class="hljs-comment">// Specta</span>
+<span class="hljs-built_in">NSDictionary</span> *data = @{ <span class="hljs-string">@"symbol"</span>: <span class="hljs-string">@"E"</span>, <span class="hljs-string">@"atomic_number"</span>: <span class="hljs-string">@"42"</span> };
+expect([formatter formattedElementString:data])<span class="hljs-variable">.to</span><span class="hljs-variable">.beNil</span>();
 </code></pre>
 <p>Thanks to Expecta even the syntax used for the assertion is more <em>human readable</em>, <code>expect().to.equal()</code> instead of <code>XCTAssertEqual()</code>.</p>
 <p>I think that these details all sum up together to produce tests that are easy to read, understand and write. These test could serve as a first form of documentation, that doesn&#39;t take extra time to be written, because it&#39;s developed together with the code.</p>
@@ -140,7 +140,7 @@ SpecEnd
 <p>I&#39;m interested to hear your opinion on the matter, so please use the comments form below, or tweet me <a href="https://twitter.com/mokagio">@mokagio</a>. And if you&#39;re curious about how the tests would be in Swift using <a href="https://github.com/Quick/Quick">Quick</a>,  or with another Objective-C library, <a href="/#subscribe">subscribe</a> to the newsletter because we&#39;ll look at it soon.</p>
 <p><em>Happy coding, and leave the codebase better than you found it.</em></p>
 </div><div class="bottom-box no-border"><div class="col-12"><a href="https://twitter.com/share" data-url="http://mokacoding.com/blog/better-tests-with-specta" data-via="mokacoding" data-text="Better tests with Specta" class="twitter-share-button"><Tweet></Tweet></a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
-</script></div></div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"></div><div class="col-6"><div style="text-align: right"><a href="/blog/xcode-testing-shortcuts">Xcode keyboard shortcuts for testing&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin MailChimp Signup Form -->
+</script></div></div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"><div><a href="/blog/job-stories-acceptance-tests-with-kif-and-specta"><<&nbsp;Job stories acceptance tests using KIF and Specta</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/xcode-testing-shortcuts">Xcode keyboard shortcuts for testing&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin MailChimp Signup Form -->
 <div id="mc_embed_signup">
   <form action="//mokacoding.us10.list-manage.com/subscribe/post?u=45a265e2a9d2b9dbec5f98d51&amp;id=0f2ccfb0fa" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
     <div id="mc_embed_signup_scroll">
