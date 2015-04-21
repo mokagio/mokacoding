@@ -1,5 +1,10 @@
 ---
 title: Job stories acceptance tests using KIF and Specta
+description: "When writing tests it's very important do be declarative, aiming to have tests that explain how a class is supposed to behave as good as its documentation would do. When talking about acceptance tests we can achieve this kind of clarity by having a 1:1 relationship between the tests and the acceptance criteria for the application. A very effective way to express acceptance criteria is through _job stories_. In this post we'll see how to write acceptance tests that map job stories for our iOS apps, using KIF and Specta."
+tags:
+- Acceptance Testing
+- KIF
+- Specta
 ---
 
 In this post we'll put together two of the tools seen in the past weeks, [KIF](http://www.mokacoding.com/blog/setting-up-kif-for-ios-acceptance-testing) and [Specta](http://www.mokacoding.com/blog/better-tests-with-specta), to write more effective acceptance tests, that map user stories.
