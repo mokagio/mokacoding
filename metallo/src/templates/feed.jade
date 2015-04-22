@@ -1,0 +1,22 @@
+doctype xml
+rss(version="2.0", xmlns:atom="http://www.w3.org/2005/Atom")
+  channel
+    title.
+      mokacoding
+    description.
+      A blog where we write about testing, iOS development, productivity, and blabber about software in general.
+    link.
+      http://mokacoding.com
+    atom:link(href="http://mokacoding.com/feed.xml", rel="self", type="application/rss+xml")
+    language.
+      en-US
+    pubDate=(new Date).toUTCString()
+    lastBuildDate=(new Date).toUTCString()
+    for post in posts
+      item
+        title=post.title
+        description=post.description
+        pubDate=post.date.toUTCString()
+        guid(isPermaLink="true")="http://mokacoding.com/blog/" + post.slug
+        for tag in post.tags
+          category=tag
