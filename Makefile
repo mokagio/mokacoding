@@ -3,9 +3,7 @@ serve:
 
 build:
 	node ./metallo/build.js
-	mv feed.html feed.xml
 
 watch:
 	node ./metallo/build.js
-	mv feed.html feed.xml
 	node ./metallo/watch.js

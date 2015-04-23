@@ -142,6 +142,12 @@ metalsmith(__dirname)
     }))
   )
 
+  .use(function (files, metalsmith, done) {
+    files['feed.xml'] = files['feed.html'];
+    delete files['feed.html'];
+    done();
+  })
+
   .build(function(err) {
     if (err) {
       throw err;
