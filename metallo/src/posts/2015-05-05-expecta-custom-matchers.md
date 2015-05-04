@@ -23,6 +23,8 @@ Now let's imagine that for some reason a big part of the system we're developing
 
 The first step is creating an `EXPMatchers` category named after the new matcher: `EXPMatchers+beAFruit`.
 
+We are now going to look at the code step by step, you can always check the example repo to see the entire [header](https://github.com/mokacoding/expecta-plugin-example/blob/6f18f0ea17976e376fa55feea2006bb52b3671dd/expecta-plugins-exampleTests/EXPMatchers%2BbeAFruit.h) and [implementation](https://github.com/mokacoding/expecta-plugin-example/blob/6f18f0ea17976e376fa55feea2006bb52b3671dd/expecta-plugins-exampleTests/EXPMatchers%2BbeAFruit.m).
+
 In the `.h` we'll define the signature of our matcher using the `EXPMatcherInterface` macro, which expects the matcher name and a list of arguments.
 
 ```objc
