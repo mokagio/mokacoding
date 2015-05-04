@@ -90,7 +90,7 @@ The last thing left to do is do declare that the implementation is finished.
 EXPMatcherImplementationEnd
 ```
 
-You can see `beAFruit` implementation all in one file, as well as it's usage in a test case, in the [example repo](https://github.com/mokagio/expecta-plugin-example).
+You can see `beAFruit` implementation all in one file, as well as it's usage in a test case, in the [example repo](https://github.com/mokacoding/expecta-plugin-example).
 
 In case you want to write a matcher that uses an argument, like `expect(@42).to.beLessThan(@100)`, you can specify it in the matcher interface and implementation definition blocks like this:
 
