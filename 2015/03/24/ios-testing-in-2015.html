@@ -104,7 +104,8 @@ class ThingSpec: QuickSpec {
   [tester waitForTappableViewWithAccessibilityLabel:<span class="hljs-string">@"Welcome"</span>];
 }
 </code></pre>
-<p>A big downside of KIF is the slow response time of the maintainers. This doesn&#39;t want to be a critique though, in the open source world everything is done for free, and since we all need to pay the bills, the amount of time that can be spent on such projects is limited. But when mixed with an foundation hard to work with, this results in unstable tools.</p>
+<p><del>A big downside of KIF is the slow response time of the maintainers. This doesn&#39;t want to be a critique though, in the open source world everything is done for free, and since we all need to pay the bills, the amount of time that can be spent on such projects is limited. But when mixed with an foundation hard to work with, this results in unstable tools.</del></p>
+<p><strong>Update 2015/06/04</strong> Since the months right after the publication of this article KIF has seen a remarkable burst in the response time of the maintainers, such that the observation above is not valid any more. Right now KIF is not only the best candidate for UI automation and acceptance testing, but also has an active community, and <a href="https://github.com/kif-framework/KIF/pull/646">new version</a> that will bring architectural and performance improvements is on its way. KIF&#39;s future is definitely bright.</p>
 <h3 id="-subliminal-https-github-com-inkling-subliminal-"><a href="https://github.com/inkling/Subliminal">Subliminal</a></h3>
 <p><a href="https://github.com/inkling/Subliminal">Subliminal</a> is an Objective-C framework that, like KIF, integrates with XCTest. Unlike KIF though, Subliminal is written on top of UIAutomation itself, and aims to hide away it&#39;s complexity from the developers.</p>
 <pre><code class=" hljs objc">- (<span class="hljs-keyword">void</span>)testLogInSucceedsWithUsernameAndPassword {
