@@ -3,8 +3,8 @@ layout: post
 title: Xcode 7 UI testing, a first look
 description: "How to get started with UI testing in Xcode 7, recording tests and using the new APIs to assert the state of the application under test."
 tags:
-- Acceptance Tests
-- UI Tests
+- Acceptance Testing
+- UI Testing
 - Xcode
 ---
 
