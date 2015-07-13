@@ -75,6 +75,11 @@ h3 {
   .post-container p {
     margin: 1.5em 0;
     line-height: 1.5em; }
+    .post-container p code {
+      background-color: rgba(150, 160, 150, 0.2);
+      padding: 1px 4px 2px;
+      border-radius: 3px;
+      font-size: 1.1em; }
   .post-container img {
     max-width: 90%;
     display: block;
