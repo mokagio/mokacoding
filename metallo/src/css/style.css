@@ -85,6 +85,9 @@ h3 {
     display: block;
     margin: auto; }
   .post-container blockquote {
+    margin: 0;
+    padding: 0 26px 0;
+    border-left: 3px solid rgba(39, 174, 94, 0.7);
     color: #838383; }
     .post-container blockquote p {
       margin: 0.8em 0;
