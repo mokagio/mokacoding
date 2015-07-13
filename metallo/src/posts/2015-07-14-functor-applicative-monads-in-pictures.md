@@ -13,9 +13,9 @@ date: 2015-07-14
 
 > Despite all the hype about it, **Swift is not a functional language**. This means that we need to write a bit of extra code to achieve the same results that language like Haskell have with built-in operators.
 
-> Finally, don't worry if you find the content hard to grasp. I had to read the original version a number of times to wrap my head around it, plus a lot of mess around with the Swift code.
+> You can find a Playground with all the code from the article [on GitHub](https://github.com/mokacoding/Swift-Functors-Applicative-Monads-In-Pictures-Playground).
 
-> **Add link to Playground**
+> Finally, don't worry if you find the content hard to grasp. I had to read the original version a number of times to wrap my head around it, plus a lot of mess around with the Swift code.
 
 Here’s a simple value:
 
@@ -88,7 +88,7 @@ And `map` magically applies this function, because `Optional` is a Functor. It s
 
 ```swift
 func map<U>(f: T -> U) -> U? {
-  swifth self {
+  switch self {
   case .Some(let x): return f(x)
   case .None: return .None
 }
@@ -304,12 +304,12 @@ Monads have a function `flatMap` (`liftM` in Haskell) to do this. And we can def
 ```swift
 infix operator >>- { associativity left }
 
-func >>-<T, U>(f: T -> U?, a: T?) -> U? {
+func >>-<T, U>(a: T?, f: T -> U?) -> U? {
   return a.flatMap(f)
 }
 ```
 
-> **Note:** Unlike `<$>`, `>>=` would compile. I decided to use `>>-` to be in line with the library [Runes](https://github.com/thoughtbot/Runes) which provides "Infix operators for monadic functions in Swif", and it's hopefully going to become the standard for this sort of things.
+> **Note:** Unlike `<$>`, `>>=` would compile. I decided to use `>>-` to be in line with the library [Runes](https://github.com/thoughtbot/Runes) which provides "Infix operators for monadic functions in Swift", and it's hopefully going to become the standard for this sort of things.
 
 Let’s see an example. Good ol’ Optional is a monad:
 
@@ -395,6 +395,8 @@ What is the difference between the three?
 So, dear friend (I think we are friends by this point), I think we both agree that monads are easy and a SMART IDEA(tm). Now that you’ve wet your whistle on this guide, why not pull a Mel Gibson and grab the whole bottle. Check out LYAH’s [section on Monads](http://learnyouahaskell.com/a-fistful-of-monads). There’s a lot of things I’ve glossed over because Miran does a great job going in-depth with this stuff.
 
 > Thanks for reading through this article, if you have any feedback, suggestion, or error to report please tweet me [@mokagio](https://twitter.com/mokagio), or leave a comment below.
+
+> If you want to play around with the code head over to GitHub and [clone the Playground](https://github.com/mokacoding/Swift-Functors-Applicative-Monads-In-Pictures-Playground)
 
 > Once again, thanks [Adit](https://twitter.com/_egonschiele) for the wonderful post, and for all the other great ones on [the blog](http://adit.io/index.html).
 

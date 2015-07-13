@@ -3,8 +3,8 @@
 <p>I don&#39;t want to take any merit for writing this, I only went through the fun exercise of translating the code snippets in Swift. </p>
 <p>If you enjoy this post be sure to say thanks to the author of the original version: <a href="http://adit.io/index.html">Aditya Bhargava</a>, <a href="https://twitter.com/_egonschiele">@_egonschiele</a> on Twitter.</p>
 <p>Despite all the hype about it, <strong>Swift is not a functional language</strong>. This means that we need to write a bit of extra code to achieve the same results that language like Haskell have with built-in operators.</p>
+<p>You can find a Playground with all the code from the article <a href="https://github.com/mokacoding/Swift-Functors-Applicative-Monads-In-Pictures-Playground">on GitHub</a>.</p>
 <p>Finally, don&#39;t worry if you find the content hard to grasp. I had to read the original version a number of times to wrap my head around it, plus a lot of mess around with the Swift code.</p>
-<p><strong>Add link to Playground</strong></p>
 </blockquote>
 <p>Here’s a simple value:</p>
 <p><img src="http://adit.io/imgs/functors/value.png" alt=""></p>
@@ -49,7 +49,7 @@
 </code></pre>
 <p>And <code>map</code> magically applies this function, because <code>Optional</code> is a Functor. It specifies how <code>map</code> applies to <code>Some</code>s and <code>None</code>s:</p>
 <pre><code class=" hljs swift"><span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">map</span><span class="hljs-generics">&lt;U&gt;</span><span class="hljs-params">(f: T -&gt; U)</span></span> -&gt; <span class="hljs-type">U</span>? {
-  swifth <span class="hljs-keyword">self</span> {
+  <span class="hljs-keyword">switch</span> <span class="hljs-keyword">self</span> {
   <span class="hljs-keyword">case</span> .<span class="hljs-type">Some</span>(<span class="hljs-keyword">let</span> x): <span class="hljs-keyword">return</span> f(x)
   <span class="hljs-keyword">case</span> .<span class="hljs-type">None</span>: <span class="hljs-keyword">return</span> .<span class="hljs-type">None</span>
 }
@@ -196,12 +196,12 @@ curriedTimes &lt;^&gt; <span class="hljs-type">Optional</span>(<span class="hljs
 <p>Monads have a function <code>flatMap</code> (<code>liftM</code> in Haskell) to do this. And we can define an infix operator <code>&gt;&gt;-</code> (<code>&gt;&gt;=</code> in Haskell) for it.</p>
 <pre><code class=" hljs swift"><span class="hljs-keyword">infix</span> <span class="hljs-keyword">operator</span> &gt;&gt;- { <span class="hljs-keyword">associativity</span> <span class="hljs-keyword">left</span> }
 
-<span class="hljs-func"><span class="hljs-keyword">func</span> &gt;&gt;-<span class="hljs-generics">&lt;T, U&gt;</span><span class="hljs-params">(f: T -&gt; U?, a: T?)</span></span> -&gt; <span class="hljs-type">U</span>? {
+<span class="hljs-func"><span class="hljs-keyword">func</span> &gt;&gt;-<span class="hljs-generics">&lt;T, U&gt;</span><span class="hljs-params">(a: T?, f: T -&gt; U?)</span></span> -&gt; <span class="hljs-type">U</span>? {
   <span class="hljs-keyword">return</span> a.flatMap(f)
 }
 </code></pre>
 <blockquote>
-<p><strong>Note:</strong> Unlike <code>&lt;$&gt;</code>, <code>&gt;&gt;=</code> would compile. I decided to use <code>&gt;&gt;-</code> to be in line with the library <a href="https://github.com/thoughtbot/Runes">Runes</a> which provides &quot;Infix operators for monadic functions in Swif&quot;, and it&#39;s hopefully going to become the standard for this sort of things.</p>
+<p><strong>Note:</strong> Unlike <code>&lt;$&gt;</code>, <code>&gt;&gt;=</code> would compile. I decided to use <code>&gt;&gt;-</code> to be in line with the library <a href="https://github.com/thoughtbot/Runes">Runes</a> which provides &quot;Infix operators for monadic functions in Swift&quot;, and it&#39;s hopefully going to become the standard for this sort of things.</p>
 </blockquote>
 <p>Let’s see an example. Good ol’ Optional is a monad:</p>
 <p><img src="http://adit.io/imgs/functors/context.png" alt=""></p>
@@ -261,6 +261,7 @@ curriedTimes &lt;^&gt; <span class="hljs-type">Optional</span>(<span class="hljs
 <p>So, dear friend (I think we are friends by this point), I think we both agree that monads are easy and a SMART IDEA(tm). Now that you’ve wet your whistle on this guide, why not pull a Mel Gibson and grab the whole bottle. Check out LYAH’s <a href="http://learnyouahaskell.com/a-fistful-of-monads">section on Monads</a>. There’s a lot of things I’ve glossed over because Miran does a great job going in-depth with this stuff.</p>
 <blockquote>
 <p>Thanks for reading through this article, if you have any feedback, suggestion, or error to report please tweet me <a href="https://twitter.com/mokagio">@mokagio</a>, or leave a comment below.</p>
+<p>If you want to play around with the code head over to GitHub and <a href="https://github.com/mokacoding/Swift-Functors-Applicative-Monads-In-Pictures-Playground">clone the Playground</a></p>
 <p>Once again, thanks <a href="https://twitter.com/_egonschiele">Adit</a> for the wonderful post, and for all the other great ones on <a href="http://adit.io/index.html">the blog</a>.</p>
 </blockquote>
 <p><em>Happy coding, and leave the codebase better than you found it</em></p>
