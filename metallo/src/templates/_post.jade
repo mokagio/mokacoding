@@ -4,12 +4,6 @@
   include _post_meta
   .post!= post.contents
 
-  //-
-    script(async, src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js")
-    ins(class="adsbygoogle", style="display:inline-block;width:728px;height:15px", data-ad-client="ca-pub-8818333244862281", data-ad-slot="3368690341")
-    script.
-      (adsbygoogle = window.adsbygoogle || []).push({});
-
   .bottom-box.no-border
     .col-12
       a.twitter-share-button(href="https://twitter.com/share",
@@ -19,6 +13,10 @@
         Tweet
       script.
         !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+
+  .bottom-box.no-border
+    .col-12
+      include _responsive-ad
 
   .bottom-box#paginator.clearfixed
     .col-6
