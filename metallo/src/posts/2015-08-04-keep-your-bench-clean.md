@@ -1,30 +1,30 @@
 ---
 layout: post
-title: Keep Your Bench Clear
+title: Keep Your Bench Clean
 description: "Like good chefs keep their benches clean to make delicious dishes all day long in the restaurants' kitchens, so good developer keep their codebase clean. It all comes down to little habits, the result of which when summed up together is a tidy, clean and easy to maintain software."
 tags:
 - Productivity
 ---
 
-Last week the grand finale of [MasterChef Australia](http://tenplay.com.au/channel-ten/masterchef) went on air. Don't worry, mokacoding.com hasn't been hacked and turned into a kitchen blog. We are not going to talk about delicious food, unfortunately some of you might think, but of something that [Heston Blumenthal](https://en.wikipedia.org/wiki/Heston_Blumenthal) said to one of the finalist, Georgia:
+Last week the grand finale of [MasterChef Australia](http://tenplay.com.au/channel-ten/masterchef) went on air. Don't worry, mokacoding.com hasn't been hacked and turned into a kitchen blog. We are not going to talk about delicious food, unfortunately some of you might think, but of something [Heston Blumenthal](https://en.wikipedia.org/wiki/Heston_Blumenthal) said to one of the finalist, Georgia:
 
 > If you are not careful you're gonna end up be so cluttered that in the end you'll get caught up.
 
 Spoiler alert, Georgia didn't win the MasterChef.
 
-Earlier on in the season [Anna Poloyviou](http://annapolyviou.com/) said something similar during her _pressure test_ challenge to a contestant, Fiona, when explaining why they should clean their bench:
+Earlier on in the season [Anna Poloyviou](http://annapolyviou.com/) said something similar during her _pressure test_ challenge to a contestant, Fiona, when explaining why she should clean her bench:
 
-> Is not for me is for you because it will affect your end product. 
+> It's not for me is for you because it will affect your end product. 
 
 Fiona then justified herself like this:
 
-> Of course my bench is a mess but I don't have time to clean, I need to assemble the cake.
+> Of course my bench is a mess but I don't really have time to clean, I need to assemble the cake.
 
 Fiona lost the challenge and when home.
 
 ![A messy codebase is like a dirty bench](https://s3.amazonaws.com/mokacoding/2015-08-04-dirty-bench.png)
 
-The **keep your bench clear** rule is as valid in the kitchen as it is when making software. If your codebase and you workstation are messy and cluttered being productive is going to be haarder and harder. You will need to spend time browsing through folders, deciphering unreadable code, scrolling through files full of commented code and unused methods. Your productivity is inversely proportional to, among other things, the clutter of your codebase and machine.
+The **keep your bench clean** rule is as valid in the kitchen as it is when making software. If your codebase and you workstation are messy and cluttered being productive is going to be haarder and harder. You will need to spend time browsing through folders, deciphering unreadable code, scrolling through files full of commented code and unused methods. Your productivity is inversely proportional to, among other things, the clutter of your codebase and machine.
 
 But how to keep our benches and workspaces clean? The answer is made up of little small habits. Here's some.
 
@@ -52,7 +52,7 @@ Having the code follow a style guide makes it easier to both write and read. Dev
 
 ---
 
-The list could go on, but in my opinion these are the most simple yet effective ways to keep your codebase clear.
+The list could go on, but in my opinion these are the most simple yet effective ways to keep your codebase clean.
 
 Each of the practices listed above is simple and not hard to apply, so my best suggestion is to pick one, and try to stick with it for at least a week. Consistency is important here. The same way if you spend 10 minutes every day cleaning you house you will hardly ever have to do _a big clean_, if you remove old and commented code, make changes in little atomic commits, keep your methods and classes short, you rarely will have to stop and spend days cleaning up the codebase. There is much to gain for such a little investment, you work smoothly, get stuff done quick, and will not need to explain you manager or clients that you need to day to sort out the code because it has became too messy. 
 
