@@ -20,7 +20,7 @@ Fiona then justified herself like this:
 
 > Of course my bench is a mess but I don't really have time to clean, I need to assemble the cake.
 
-Fiona lost the challenge and when home.
+Fiona lost the challenge and went home.
 
 ![A messy codebase is like a dirty bench](https://s3.amazonaws.com/mokacoding/2015-08-04-dirty-bench.png)
 
