@@ -1,0 +1,40 @@
+<!DOCTYPE html><html lang="en"><head><title>Packaging an ipa with Swift files from the terminal | mokacoding</title><meta name="description" content="If you are having problems with xcodebuild failing to export your apps with either Swift or Watch Kit support here's the solution, with a handy custom script."><link href="/css/griddy.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet"><link href="/css/font-awesome.min.css" rel="stylesheet"><link href="/css/zenburn.css" rel="stylesheet"><link href="//cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css"><link href="/css/mailchimp-form-override.css" rel="stylesheet"><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"></head><body><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">unit and acceptance testing, automation, productivity</div><div class="links"><a href="/archive.html">Archive</a><a href="/tags.html">Tags</a><a href="http://giovannilodi.com">About</a><a href="#subscribe">Subscribe</a><a href="/feed.xml"><i class="fa fa-rss"></i></a></div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/packaging-swift-ipa">Packaging an ipa with Swift files from the terminal</a></h2><p class="post-meta"><span class="post-date">Mon Aug 03 2015&nbsp;</span><a href="/tag/Espresso/index.html" class="post-tag">-Espresso</a><a href="/tag/Swift/index.html" class="post-tag">-Swift</a><a href="/tag/Automation/index.html" class="post-tag">-Automation</a><a href="/tag/TestFlight/index.html" class="post-tag">-TestFlight</a></p><div class="post"><p>One day I saw this tweet from my friend <a href="http://marcosero.com/">Marco Sero</a></p>
+<p><blockquote class="twitter-tweet" lang="en"><p lang="en" dir="ltr">Shout-out to <a href="https://twitter.com/phatblat">@phatblat</a> who today saved me a lot of time adding Swift support to the Yammer app with his script <a href="https://t.co/oEwdRVaeDq">https://t.co/oEwdRVaeDq</a></p>&mdash; Marco Sero (@marcosero) <a href="https://twitter.com/marcosero/status/623418915033628672">July 21, 2015</a></blockquote></p>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<p>It looked liked something I should have take note of. So I obviously forgot about it.</p>
+<p>Some days ago I set up the automated build distribution pipeline for a new client, with an app using a bit of Swift. I usually use something similar to <a href="https://gist.github.com/mokagio/bae969dd8e3846ef7773">this script</a>. It is a pretty battle tested script, but something when wrong.</p>
+<p>And that&#39;s when I remembered Marco&#39;s tweet and <a href="https://twitter.com/phatblat">phatblat</a>&#39;s script.</p>
+<p>Download the raw script <a href="https://gist.githubusercontent.com/phatblat/6eb8895e2202f796960e/raw/264765c05ecc8918425cb513b12409de91e3a675/package-ida.sh">from here</a>, place it somewhere, maybe in the project&#39;s root, then simply replace the <code>xcodebuild -exportArchive</code> command with:</p>
+<pre><code class="">bin/package-swift-ipa.sh <span class="hljs-string">"<span class="hljs-variable">$archive_path</span>"</span> <span class="hljs-string">"<span class="hljs-variable">$(pwd)</span>/<span class="hljs-variable">$ipa_path</span>"</span>
+</code></pre><p>Notice the <code>$(pwd)</code> in the second argument. That&#39;s because the script is expecting absolute paths, while mine uses relative ones.</p>
+<p><em>Leave the codebase better than you found it.</em></p>
+</div><div class="bottom-box no-border"><div class="col-12"><a href="https://twitter.com/share" data-url="http://www.mokacoding.com/blog/packaging-swift-ipa" data-via="mokacoding" datacount-url="http://www.mokacoding.com/blog/packaging-swift-ipa" data-text="Packaging an ipa with Swift files from the terminal" class="twitter-share-button"><Tweet></Tweet></a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+</script></div></div><div class="bottom-box no-border"><div class="col-12"><script async="true" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins style="display:block" data-ad-client="ca-pub-1350647337420416" data-ad-slot="4912767686" data-ad-format="auto" class="adsbygoogle"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div></div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"><div><a href="/blog/keep-your-bench-clean"><<&nbsp;Keep Your Bench Clean</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/xcode-ui-test-view-changes">How to test UI changes in Xcode 7&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin MailChimp Signup Form -->
+<div id="mc_embed_signup">
+  <form action="//mokacoding.us10.list-manage.com/subscribe/post?u=45a265e2a9d2b9dbec5f98d51&amp;id=0f2ccfb0fa" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+    <label for="mce-EMAIL">Subscribe to our mailing list</label>
+    <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;"><input type="text" name="b_45a265e2a9d2b9dbec5f98d51_0f2ccfb0fa" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+  </form>
+</div>
+</div><div class="bottom-box"><div id="disqus_thread"></div><script type="text/javascript" src="/js/disqus.js"></script><noscript>Please enable JavaScript to view the<a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></div></div></div><div class="row-12 footer"><div class="col-12"><h3><a href="/">mokacoding</a></h3></div><div id="copy" class="col-9"><p>Hi I&#39;m <a href="http://giovannilodi.com">Giovanni Lodi</a> and this is my blog. I write here at least once a month, on software testing, productivity, and iOS development.</p>
+<p>I&#39;m a freelance iOS engineer, and <a href="mailto:giovanni.lodi42+blog@gmail.com">I&#39;m available for contract work</a>.</p>
+<p>Check out my <a href="http://mokagio.github.io/tech-journal">tech journal</a>, and my app <a href="https://itunes.apple.com/au/app/fineants-savings-tracker/id888444078?mt=8">Fineants</a>.</p>
+</div><div id="links" class="col-3"><p><i class="fa fa-twitter"></i>&nbsp;<a href="https://twitter.com/mokagio">@mokagio</a></p><p><i class="fa fa-github"></i>&nbsp;<a href="https://github.com/mokagio">mokagio</a></p></div></div></div></body><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-43554041-1', 'auto');
+ga('send', 'pageview');</script><script>var external_links = document.querySelectorAll('a:not([href^="/"]):not([href$="#subscribe"])');
+// external_links is an HTMLCollection, not an Array, so we can't call forEach
+for (var i = 0; i < external_links.length; i++) {
+  var link = external_links[i];
+  link.setAttribute("target", "_blank");
+}</script></html>
