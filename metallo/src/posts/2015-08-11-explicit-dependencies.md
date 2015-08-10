@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Explicit Dependencies for Code with No Surprises
-description: "Sometimes the idea we get when reading a class interface is different from what is actually going on inside its implementation, for example there could be several hidden dependencies. Making a class dependency explicit in its interface isa useful technique to make the code simpler to understand, and easier to test."
+description: "Sometimes the idea we get when reading a class interface is different from what is actually going on inside its implementation, for example there could be several hidden dependencies. Making a class dependency explicit in its interface is a useful technique to make the code simpler to understand, and easier to test."
 tags:
 - Testing
 - Objective-C
