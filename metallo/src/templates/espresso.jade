@@ -1,0 +1,22 @@
+extends page
+
+block contents
+  h1
+    a(href=baseUrl + path)= "Espresso"
+
+  :markdown
+    An [espresso](https://en.wikipedia.org/wiki/Espresso) is a small coffee, sometimes taken as a quick break.
+
+    The espresso posts on mokacoding are short super focused post, mainly a way for me to share interesting little findings, and dump information I might forget.
+
+    Enjoy ☕️.
+
+  br
+
+  for post in posts
+    if post.tags.indexOf("Espresso") != -1
+      .post-container.tag
+        h2.post-title
+          a(href=baseUrl + post.path)= post.title
+        include _post_meta
+        p.post-description= post.description
