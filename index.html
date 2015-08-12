@@ -1,12 +1,113 @@
-<!DOCTYPE html><html lang="en"><head><title>mokacoding</title><meta name="description" content="A blog where we write about testing, iOS development, productivity, and blabber about software in general."><link href="/css/griddy.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet"><link href="/css/font-awesome.min.css" rel="stylesheet"><link href="/css/zenburn.css" rel="stylesheet"><link href="//cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css"><link href="/css/mailchimp-form-override.css" rel="stylesheet"><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"></head><body><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">unit and acceptance testing, automation, productivity</div><div class="links"><a href="/archive.html">Archive</a><a href="/tags.html">Tags</a><a href="http://giovannilodi.com">About</a><a href="#subscribe">Subscribe</a><a href="/feed.xml"><i class="fa fa-rss"></i></a></div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/swift-array-string-characters">Swift array of characters from String</a></h2><p class="post-meta"><span class="post-date">Wed Aug 12 2015&nbsp;</span><a href="/tag/Swift/index.html" class="post-tag">-Swift</a><a href="/tag/Espresso/index.html" class="post-tag">-Espresso</a></p><div class="post"><p>Sometimes you might need to get an array of characters out of a String, for example:</p>
-<pre><code class=""><span class="hljs-string">"foo bar"</span> =&gt; [<span class="hljs-string">"f"</span>, <span class="hljs-string">"o"</span>, <span class="hljs-string">"o"</span>, <span class="hljs-string">" "</span>, <span class="hljs-string">"b"</span>, <span class="hljs-string">"a"</span>, <span class="hljs-string">"r"</span>]
-</code></pre><p>This used to be trivial in Swift 1.x, but became slightly more tedious in Swift 2:</p>
-<pre><code class=" hljs swift"><span class="hljs-string">"foo bar"</span>.characters.<span class="hljs-built_in">map</span> { <span class="hljs-type">String</span>($<span class="hljs-number">0</span>) }
+<!DOCTYPE html><html lang="en"><head><title>mokacoding</title><meta name="description" content="A blog where we write about testing, iOS development, productivity, and blabber about software in general."><link href="/css/griddy.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet"><link href="/css/font-awesome.min.css" rel="stylesheet"><link href="/css/zenburn.css" rel="stylesheet"><link href="//cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css"><link href="/css/mailchimp-form-override.css" rel="stylesheet"><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"></head><body><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">unit and acceptance testing, automation, productivity</div><div class="links"><a href="/archive.html">Archive</a><a href="/tags.html">Tags</a><a href="http://giovannilodi.com">About</a><a href="#subscribe">Subscribe</a><a href="/feed.xml"><i class="fa fa-rss"></i></a></div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/explicit-dependencies">Explicit Dependencies for Code with No Surprises</a></h2><p class="post-meta"><span class="post-date">Tue Aug 11 2015&nbsp;</span><a href="/tag/Testing/index.html" class="post-tag">-Testing</a><a href="/tag/Objective-C/index.html" class="post-tag">-Objective-C</a><a href="/tag/Software-Design/index.html" class="post-tag">-Software-Design</a></p><div class="post"><p>Imagine you go back to your childhood bedroom, and find a cardboard box with &quot;Marvel Comics&quot; written on its lid, in fat black marker. You open the box and what you find is your collection of Spiderman, Daredevil, X-Men comics, but also your old Game Boy, a crayon, your sister&#39;s favourite Barbie, and a bag of lollies that is clearly past its due date. That is not what you were expecting. Inside that box there were a lot of hidden, and in case of the lollies disappointing, surprises.</p>
+<p>Like that box, our classes, and structs, can expose deceivingly simple interfaces, while hiding a blob of spaghetti code, complexity and dependencies in their implementations.</p>
+<p><img src="https://s3.amazonaws.com/mokacoding/2015-08-11-mistrey-box-implementation.jpg" alt="What lies under the hood of your interface"></p>
+<p>In this post we are going to see how to make an object&#39;s dependencies <em>explicit</em>, why it is a good idea, and the trade-offs we make when choosing such a design.</p>
+<p>Consider this interface:</p>
+<pre><code class=" hljs objc"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">void</span> (^Completion)(<span class="hljs-built_in">NSArray</span> *products, <span class="hljs-built_in">NSError</span> *error);
+
+<span class="hljs-class"><span class="hljs-keyword">@interface</span> <span class="hljs-title">ProductsService</span>: <span class="hljs-title">NSObject</span></span>
+
+- (<span class="hljs-keyword">void</span>)allProducts:(Completion)completion;
+
+<span class="hljs-keyword">@end</span>
 </code></pre>
-<p>There you go. 😎</p>
-</div><div class="bottom-box no-border"><div class="col-12"><a href="https://twitter.com/share" data-url="http://www.mokacoding.com/blog/swift-array-string-characters" data-via="mokacoding" datacount-url="http://www.mokacoding.com/blog/swift-array-string-characters" data-text="Swift array of characters from String" class="twitter-share-button"><Tweet></Tweet></a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+<p>It looks fairly simple, right? Let&#39;s have a look at the implementation:</p>
+<pre><code class=" hljs objc"><span class="hljs-class"><span class="hljs-keyword">@implementation</span> <span class="hljs-title">ProductsService</span></span>
+
+- (<span class="hljs-keyword">void</span>)allProducts:(Completion)completion {
+    User *user = [[AppStateService sharedInstance] currentUser];
+    [NetworkService sharedInstance] getAllProductsForUser:user withSuccess:^(<span class="hljs-built_in">NSDictionary</span> *responseDictionary) {
+      Parser *parser = [Parser alloc] init];
+      <span class="hljs-built_in">NSArray</span> *products = [parser parseProducts:responseDictionary];
+      completion(products, <span class="hljs-literal">nil</span>);
+    } failure:^(<span class="hljs-built_in">NSError</span> *error) {
+      completion(<span class="hljs-literal">nil</span>, error);
+    }];
+}
+
+<span class="hljs-keyword">@end</span>
+</code></pre>
+<p>See what&#39;s going on in there? Apart from the disgusting <code>sharedInstance</code>s, the <code>-allProducts:</code> method is using other three objects in its internals: <code>AppStateService</code>, <code>Parser</code> and <code>NetworkService</code>.</p>
+<p>Now, there is conceptually nothing wrong with this. You could say that <code>ProductsService</code> is acting as a <a href="https://en.wikipedia.org/wiki/Facade_pattern">facade</a> and that is the embodiment of the <a href="https://en.wikipedia.org/wiki/Information_hiding">information hiding principle</a>. And you would be right.</p>
+<p>However, there is a high <em>surprise effect</em> between what the interface exposes and what the implementation does. Hiding all the components involved in the process can make it harder to see all the moving parts of the system, reason about it, and understand how to make changes safely.</p>
+<h2 id="how-to-make-dependencies-explicit">How to make dependencies explicit</h2>
+<p>Making a class&#39;s dependencies explicit is quite simple. Let&#39;s look at the <code>ProductService</code> from above.</p>
+<pre><code class=" hljs objc"><span class="hljs-class"><span class="hljs-keyword">@interface</span> <span class="hljs-title">ProductsService</span>: <span class="hljs-title">NSObject</span></span>
+
+- (instancetype)initWithParser:(Parser *)parser
+                  stateService:(AppStateService *)stateService
+                networkService:(NetworkService *)networkService;
+
+<span class="hljs-comment">//...</span>
+
+<span class="hljs-keyword">@end</span>
+
+<span class="hljs-class"><span class="hljs-keyword">@implementation</span> <span class="hljs-title">ProductsSevrice</span></span>
+
+- (instancetype)initWithParser:(Parser *)parser
+                  stateService:(AppStateService *)stateService
+                  networkService:(NetworkService *)networkService {
+  <span class="hljs-keyword">self</span> = [<span class="hljs-keyword">super</span> init];
+  <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">self</span>) { <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>; }
+
+  <span class="hljs-keyword">self</span><span class="hljs-variable">.parser</span> = parser;
+  <span class="hljs-keyword">self</span><span class="hljs-variable">.stateService</span> = stateService;
+  <span class="hljs-keyword">self</span><span class="hljs-variable">.networkService</span> = networkService;
+
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">self</span>
+}
+
+<span class="hljs-comment">//...</span>
+
+<span class="hljs-keyword">@end</span>
+</code></pre>
+<p>And we can then rewrite <code>allProducts</code> like this:</p>
+<pre><code class=" hljs objc">- (<span class="hljs-keyword">void</span>)allProducts:(Completion)completion {
+    User *user = [<span class="hljs-keyword">self</span><span class="hljs-variable">.stateService</span> currentUser];
+    [<span class="hljs-keyword">self</span><span class="hljs-variable">.networkService</span> getAllProductsForUser:user withSuccess:^(<span class="hljs-built_in">NSDictionary</span> *responseDictionary) {
+      <span class="hljs-built_in">NSArray</span> *products = [<span class="hljs-keyword">self</span><span class="hljs-variable">.parser</span> parseProducts:responseDictionary];
+      completion(products, <span class="hljs-literal">nil</span>);
+    } failure:^(<span class="hljs-built_in">NSError</span> *error) {
+      completion(<span class="hljs-literal">nil</span>, error);
+    }];
+}
+</code></pre>
+<p>The idea is simple, instead of instantiating the objects used in the method&#39;s internals, we simply pass them as <code>init</code> arguments, that will be stored in instance properties.</p>
+<h2 id="the-benefits-of-explicit-dependencies">The benefits of explicit dependencies</h2>
+<p><strong>Dependencies are clear in the interface.</strong> By exposing all the objects our class needs in its internals either in the <code>init</code> or as method parameters we provide readers of the interfaces all the information and all the context around the class.</p>
+<p><strong>Testability.</strong> This is probably the bigger advantage of explicit dependencies. By doing this we provide what <a href="http://objectmentor.com/omTeam/feathers_m.html">Michael Feathers</a> calls <em>seams</em> in <a href="http://www.amazon.com/gp/product/0131177052/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=0131177052&linkCode=as2&tag=mokacoding09-20&linkId=N5TQLGWRTPQNXM7B">Working Effectively with Legacy Code</a><img src="http://ir-na.amazon-adsystem.com/e/ir?t=mokacoding09-20&l=as2&o=1&a=0131177052" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important; display: inline;" />. We can now use mocks or fakes when testing, therefore controlling the inputs our class receives and making sure the test is deterministic.</p>
+<h2 id="when-to-use-this-approach">When to use this approach</h2>
+<p>Software development is all about tradeoffs, as <a href="https://twitter.com/kentbeck">Kent Beck</a> reminds us:</p>
+<p><img src="https://s3.amazonaws.com/mokacoding/tradeoffs.gif" alt="Kent Beck tradeoffs gif"></p>
+<p>We already touched on the fact that by making all the dependencies explicit we lose some of the benefits of information hiding, and our code takes more time do deal with, we have to instantiate or pass around all those instances. What we lose from that side we gain in clarity, flexibility, and testability.</p>
+<p>So the question is when to choose which?</p>
+<p>My rule of thumb is that when working with <em>application code</em>, code that implements the functionality of the product, that is strictly related to the problem space the app is addressing, and that is not intended to be used in other projects, all the dependencies should be explicit. This makes it easier to put into context, and marries well with a test driven development style.</p>
+<p>When instead the code is for a library, or when there is the need to add a layer of abstraction, for example to provide a simpler set of APIs, <em>hiding</em> complexity, than that&#39;s a good case for hiding dependencies.</p>
+<h2 id="there-is-a-middle-ground">There is a middle ground</h2>
+<p>Turns out you can have your pie and eat it too when it comes to explicit dependencies and simple interfaces.</p>
+<p>For example you can make the dependencies explicit in the <a href="https://developer.apple.com/library/mac/documentation/General/Conceptual/CocoaEncyclopedia/Initialization/Initialization.html#//apple_ref/doc/uid/TP40010810-CH6-SW3">designated initializer</a>, and provide a convenience factory method that does all the hard work for you.</p>
+<pre><code class=" hljs objc"><span class="hljs-class"><span class="hljs-keyword">@interface</span> <span class="hljs-title">ProductsService</span>: <span class="hljs-title">NSObject</span></span>
+
+- (instancetype)initWithParser:(Parser *)parser
+                  stateService:(AppStateService *)stateService
+                networkService:(NetworkService *)networkService <span class="hljs-built_in">NS_DESIGNATED_INITIALIZER</span>;
+
+<span class="hljs-comment">//...</span>
+
+<span class="hljs-keyword">@end</span>
+
+<span class="hljs-class"><span class="hljs-keyword">@interface</span> <span class="hljs-title">ProductsService</span> (<span class="hljs-title">Convenience</span>)</span>
+
++ (instanceType)productsService;
+
+<span class="hljs-keyword">@end</span>
+</code></pre>
+<p>I personally like to put factory methods in a category extension, just to make the separation from the core code of the class clearer.</p>
+<p>When designing code is important to remember that being too smart is not a clever idea. Code that does too much, with side effects, or with implementations that don&#39;t behave as one would expect when looking at the interface are dangerous. When writing code we should think of our readers and apply the <a href="https://en.wikipedia.org/wiki/Principle_of_least_astonishment">principle of least astonishment</a>, everything should behave as the they would expect. Making the dependencies of your classes explicit is one good technique to make sure that once the interface lid is lifted and we take a look at the implementation there are no surprises.</p>
+<p><em>Leave the codebase better than you found it.</em></p>
+</div><div class="bottom-box no-border"><div class="col-12"><a href="https://twitter.com/share" data-url="http://www.mokacoding.com/blog/explicit-dependencies" data-via="mokacoding" datacount-url="http://www.mokacoding.com/blog/explicit-dependencies" data-text="Explicit Dependencies for Code with No Surprises" class="twitter-share-button"><Tweet></Tweet></a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
 </script></div></div><div class="bottom-box no-border"><div class="col-12"><script async="true" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins style="display:block" data-ad-client="ca-pub-1350647337420416" data-ad-slot="4912767686" data-ad-format="auto" class="adsbygoogle"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});
-</script></div></div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"></div><div class="col-6"><div style="text-align: right"><a href="/blog/explicit-dependencies">Explicit Dependencies for Code with No Surprises&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin MailChimp Signup Form -->
+</script></div></div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"><div><a href="/blog/swift-array-string-characters"><<&nbsp;Swift array of characters from String</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/terminal-reusing-last-command-parameter">How to reuse the last parameter in a terminal command&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin MailChimp Signup Form -->
 <div id="mc_embed_signup">
   <form action="//mokacoding.us10.list-manage.com/subscribe/post?u=45a265e2a9d2b9dbec5f98d51&amp;id=0f2ccfb0fa" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
     <div id="mc_embed_signup_scroll">
