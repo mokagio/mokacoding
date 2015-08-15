@@ -1,0 +1,62 @@
+<!DOCTYPE html><html lang="en"><head><title>How to have multiple iTunes Connect accounts, and submit apps | mokacoding</title><meta name="description" content="A blog where we write about testing, iOS development, productivity, and blabber about software in general."><link href="/css/griddy.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet"><link href="/css/font-awesome.min.css" rel="stylesheet"><link href="/css/zenburn.css" rel="stylesheet"><link href="//cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css"><link href="/css/mailchimp-form-override.css" rel="stylesheet"><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"></head><body><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">unit and acceptance testing, automation, productivity</div><div class="links"><a href="/archive.html">Archive</a><a href="/espresso.html">Espresso</a><a href="/tags.html">Tags</a><a href="http://giovannilodi.com">About</a><a href="#subscribe">Subscribe</a><a href="/feed.xml"><i class="fa fa-rss"></i></a></div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/itunes-connect-multiple-accounts">How to have multiple iTunes Connect accounts, and submit apps</a></h2><p class="post-meta"><span class="post-date">Sat Aug 15 2015&nbsp;</span><a href="/tag/Espresso/index.html" class="post-tag">-Espresso</a><a href="/tag/iTunes-Connect/index.html" class="post-tag">-iTunes Connect</a></p><div class="post"><p><strong>TL;DR</strong> You can&#39;t! There is no <em>Apple way</em> to do it, and this is yet another frustration of working in this platform. The steps described below are just a workaround to handle multiple iTunes Connect accounts in a sane-<em>ish</em> way.</p>
+<h2 id="step-0-understand-the-problem">Step 0: Understand the problem</h2>
+<p>As you might now, despite the fact that they can be access with the same Apple ID, iTunes Connect and the Developer Portal are <strong>two different environments</strong>, and that&#39;s why for example you need to login in one even if you&#39;re already logged in the other.</p>
+<p>Now, the Developer Portal handles the user case of a developer being in multiple team decently. There is a drop down that allows you to switch teams, and Xcode will download and keep all the Certificates and Provisioning Profiles up to date for you.</p>
+<p>That&#39;s not the case for iTunes Connect, there is no drop down there. So if your client needs you to take care of the submission process for them, you&#39;ll need a bit of extra work:</p>
+<ol>
+<li>Create a new Apple ID to be part of the client&#39;s iTunes Connect</li>
+<li>Export the app <code>.ipa</code></li>
+<li>Submit it to iTunes Connect using Application Loader</li>
+</ol>
+<h2 id="step-1-get-an-invitation-to-join-the-team-s-itunes-connect">Step 1: Get an invitation to join the team&#39;s iTunes Connect</h2>
+<p>As we said, there is no concept of multiple teams a user can belong to in iTunes Connect, so the only way to get access to the client&#39;s iTunes Connect is to create a new Apple ID.</p>
+<p>The best way I found to do that is:</p>
+<ol>
+<li>Ask the client to invite you as part of their iTunes Connect.</li>
+<li>Have them use an email alias, something like your.email<strong>+client</strong>@gmail.com.</li>
+<li>Setup the new Apple ID with the invitation link received.</li>
+</ol>
+<p>The key here is the email alias trick. Note that while this trick is know to be supported by gmail, it might not work with other providers.</p>
+<p>In my humble opinion the alias is a nice way to overload one email address with multiple clients and be somehow able to filter them.</p>
+<h2 id="step-2-export-the-app">Step 2: Export the app</h2>
+<p>Xcode won&#39;t be able to submit the app for you, as the <code>+client</code> Apple ID you just created is related only to iTunes Connect, and the Xcode accounts are the Developer Portal ones instead.</p>
+<p>But don&#39;t panic, there is another way 👍</p>
+<p>One of the tools shipped with Xcode is Application Loader, which is a simple app to submit <code>.ipa</code> files to iTune Connect. You can find it in the Xcode &gt; Open Developer Tools menu.</p>
+<p>The way you get an <code>.ipa</code> files is by exporting an archive. You can create the archive for the app the usual way, then from the Organizer window, use the Export... button and select &quot;Save for iOS App Store deployment&quot;. You&#39;ll then be able to save the <code>.ipa</code> file where you want.</p>
+<h2 id="step-3-submit-the-app-using-application-loader">Step 3: Submit the app using Application Loader</h2>
+<p>Now that you have your nice <code>.ipa</code> package you can open Application Loader, login with the <code>+client</code> credentials.</p>
+<p>To submit to iTunes Connect select the &quot;Deliver Your App&quot; <em>template</em>, press &quot;Choose&quot;, the select the previously saved <code>.ipa</code>.</p>
+<p>That&#39;s all.</p>
+<h3 id="food-for-thought">Food for thought</h3>
+<ul>
+<li>How to automate this process, have a look at <a href="https://fastlane.tools/">fastlane</a>.</li>
+</ul>
+</div><div class="bottom-box no-border"><div class="col-12"><a href="https://twitter.com/share" data-url="http://www.mokacoding.com/blog/itunes-connect-multiple-accounts" data-via="mokacoding" datacount-url="http://www.mokacoding.com/blog/itunes-connect-multiple-accounts" data-text="How to have multiple iTunes Connect accounts, and submit apps" class="twitter-share-button"><Tweet></Tweet></a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+</script></div></div><div class="bottom-box no-border"><div class="col-12"><script async="true" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins style="display:block" data-ad-client="ca-pub-1350647337420416" data-ad-slot="4912767686" data-ad-format="auto" class="adsbygoogle"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div></div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"></div><div class="col-6"><div style="text-align: right"><a href="/blog/swift-array-string-characters">Swift array of characters from String&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin MailChimp Signup Form -->
+<div id="mc_embed_signup">
+  <form action="//mokacoding.us10.list-manage.com/subscribe/post?u=45a265e2a9d2b9dbec5f98d51&amp;id=0f2ccfb0fa" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+    <label for="mce-EMAIL">Subscribe to our mailing list</label>
+    <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;"><input type="text" name="b_45a265e2a9d2b9dbec5f98d51_0f2ccfb0fa" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+  </form>
+</div>
+</div><div class="bottom-box"><div id="disqus_thread"></div><script type="text/javascript" src="/js/disqus.js"></script><noscript>Please enable JavaScript to view the<a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></div></div></div><div class="row-12 footer"><div class="col-12"><h3><a href="/">mokacoding</a></h3></div><div id="copy" class="col-9"><p>Hi I&#39;m <a href="http://giovannilodi.com">Giovanni Lodi</a> and this is my blog. I write here at least once a month, on software testing, productivity, and iOS development.</p>
+<p>I&#39;m a freelance iOS engineer, and <a href="mailto:giovanni.lodi42+blog@gmail.com">I&#39;m available for contract work</a>.</p>
+<p>Check out my <a href="http://mokagio.github.io/tech-journal">tech journal</a>, and my app <a href="https://itunes.apple.com/au/app/fineants-savings-tracker/id888444078?mt=8">Fineants</a>.</p>
+</div><div id="links" class="col-3"><p><i class="fa fa-twitter"></i>&nbsp;<a href="https://twitter.com/mokagio">@mokagio</a></p><p><i class="fa fa-github"></i>&nbsp;<a href="https://github.com/mokagio">mokagio</a></p></div></div></div></body><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-43554041-1', 'auto');
+ga('send', 'pageview');</script><script>var external_links = document.querySelectorAll('a:not([href^="/"]):not([href$="#subscribe"])');
+// external_links is an HTMLCollection, not an Array, so we can't call forEach
+for (var i = 0; i < external_links.length; i++) {
+  var link = external_links[i];
+  link.setAttribute("target", "_blank");
+}</script></html>
