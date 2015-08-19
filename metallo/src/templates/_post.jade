@@ -38,7 +38,19 @@
 
   .bottom-box
     #disqus_thread
-    script(type="text/javascript", src="#{baseUrl}js/disqus.js")
+    //- We need the script defined in the template because it needs to access the URL of the post
+    script.
+      var disqus_shortname = "mokacoding";
+      // Neet do add the / at the end to maintain compatibility with previous version
+      // of the blog that didn't define disqus_url, letting Disqus set it automatically
+      // using window.location.href
+      var disqus_url = "http://www.mokacoding.com/#{post.path}/";
+
+      (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
     noscript
       | Please enable JavaScript to view the
       a(href="https://disqus.com/?ref_noscript") comments powered by Disqus.
