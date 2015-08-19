@@ -1,0 +1,88 @@
+<!DOCTYPE html><html lang="en"><head><title>AFNetworking custom response serializer to add error information | mokacoding</title><meta name="description" content="How to implement a custom AFNetworking response serializer to read the failure response data and populate the callback error with it."><link href="/css/griddy.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet"><link href="/css/font-awesome.min.css" rel="stylesheet"><link href="/css/zenburn.css" rel="stylesheet"><link href="//cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css"><link href="/css/mailchimp-form-override.css" rel="stylesheet"><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"></head><body><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">unit and acceptance testing, automation, productivity</div><div class="links"><a href="/archive.html">Archive</a><a href="/espresso.html">Espresso</a><a href="/tags.html">Tags</a><a href="http://giovannilodi.com">About</a><a href="#subscribe">Subscribe</a><a href="/feed.xml"><i class="fa fa-rss"></i></a></div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/custom-afnetworking-response-serializer-for-errors">AFNetworking custom response serializer to add error information</a></h2><p class="post-meta"><span class="post-date">Wed Aug 19 2015&nbsp;</span><a href="/tag/Espresso/index.html" class="post-tag">-Espresso</a><a href="/tag/iOS/index.html" class="post-tag">-iOS</a><a href="/tag/Objective-C/index.html" class="post-tag">-Objective-C</a></p><div class="post"><p>Good network APIs add helpful messages to failing responses. For example:</p>
+<pre><code class="">{
+  "<span class="hljs-attribute">error</span>": <span class="hljs-value"><span class="hljs-string">"You are not authorized to access this resource."</span>
+</span>}
+</code></pre><p>A possible approach to notify the user of an iOS app consuming network APIs that an error has been returned by the server is to show such error data in some way.</p>
+<p>When using <a href="https://github.com/AFNetworking/AFNetworking">AFNetworking</a> the first thought that might come to mind is: I&#39;ll read the response data in the failure callback. But that is not possible, unlike the success callback the failure one doesn&#39;t have a <code>responseObject</code> parameter.</p>
+<p><a href="https://github.com/AFNetworking/AFNetworking/issues/2410">This issue</a> is relevant to the topic, and in particular <a href="https://github.com/AFNetworking/AFNetworking/issues/2410#issuecomment-63304245">Mattt&#39;s comment</a>.</p>
+<blockquote>
+<p>[...] the intended strategy is for API consumers to create their own response serializers to handle failures in such a way that populates the resulting <code>NSError</code> in the failure case with all necessary information to either communicate or recover from that particular error.</p>
+<p>If, for example, an API were to send an error message as JSON, the response serializer might populate the localizedDescription and/or localizedFailureReason from fields in that document.</p>
+</blockquote>
+<p>That makes sense. So how to create a custom response serializer?</p>
+<p>Since our example talks of JSON APIs the simplest thing to do is to subclass <code>AFJSONResponseSerializer</code>. Another option would be to roll out our own <code>NSObject</code> conforming to <code>AFURLResponseSerialization</code>, which is the protocol all serializers need to conform to.</p>
+<p>A serializer object needs to conform to <code>AFURLResponseSerialization</code>. So one option is to use a PONSO, plain old <code>NSObject</code>, and make it conform to the protocol. On the other hand what we are trying to achieve is adding a bit of functionality, adding info from the response to the failure callback error, to the standard JSON serialiation. So let&#39;s simply subclass <code>AFJSONResponseSerializer</code>.</p>
+<pre><code class=" hljs objc"><span class="hljs-class"><span class="hljs-keyword">@interface</span> <span class="hljs-title">CustomJSONSerializer</span>: <span class="hljs-title">AFJSONResponseSerializer</span></span>
+<span class="hljs-keyword">@end</span>
+
+<span class="hljs-class"><span class="hljs-keyword">@implementation</span> <span class="hljs-title">CustomJSONSerializer</span></span>
+
+- (<span class="hljs-keyword">id</span>)responseObjectForResponse:(<span class="hljs-built_in">NSURLResponse</span> *)response
+                           data:(<span class="hljs-built_in">NSData</span> *)data
+                          error:(<span class="hljs-built_in">NSError</span> *__autoreleasing *)error {
+  <span class="hljs-comment">// Let the superclass do its work.</span>
+  <span class="hljs-comment">// Run the custom code only if there is an error.</span>
+  <span class="hljs-keyword">id</span> responseToReturn = [<span class="hljs-keyword">super</span> responseObjectForResponse:response
+                                                    data:data
+                                                   error:error];
+  <span class="hljs-keyword">if</span> (!*error) { <span class="hljs-keyword">return</span> responseToReturn; }
+
+  <span class="hljs-built_in">NSError</span> *parsingError;
+  <span class="hljs-built_in">NSDictionary</span> *JSONResponse = [<span class="hljs-built_in">NSJSONSerialization</span> JSONObjectWithData:data
+                                                               options:<span class="hljs-built_in">NSJSONReadingAllowFragments</span>
+                                                                 error:&amp;parsingError];
+
+  <span class="hljs-keyword">if</span> (parsingError) { <span class="hljs-keyword">return</span> responseToReturn; }
+
+  <span class="hljs-comment">// Populate the error's userInfo using the parsed JSON</span>
+  <span class="hljs-built_in">NSMutableDictionary</span> *userInfo = [(*error)<span class="hljs-variable">.userInfo</span> mutableCopy];
+  <span class="hljs-built_in">NSString</span> *errorDescription = JSONResponse[<span class="hljs-string">@"error"</span>];
+  userInfo[<span class="hljs-built_in">NSLocalizedDescriptionKey</span>] = errorDescription;
+
+  <span class="hljs-built_in">NSError</span> *annotatedError = [<span class="hljs-built_in">NSError</span> errorWithDomain:(*error)<span class="hljs-variable">.domain</span>
+                                                code:(*error)<span class="hljs-variable">.code</span>
+                                            userInfo:userInfo];
+  (*error) = annotatedError;
+
+  <span class="hljs-keyword">return</span> responseToReturn;
+}
+
+<span class="hljs-keyword">@end</span>
+</code></pre>
+<p>That&#39;s it 👌.</p>
+<p>Note how the error is managed. Because it is a <code>NSError *__autoreleasing *</code> instance we need to access is like this: <code>(*error)</code>.</p>
+<h2 id="food-for-thought">Food for Thought</h2>
+<ul>
+<li>Dig down into why we need to use <code>(*error)</code>.</li>
+<li>What other options do we have to achieve the same result? For example using the <code>AFNetworkingOperationFailingURLResponseDataErrorKey</code> key in the default failure callback <code>NSError</code>&#39;s <code>userInfo</code>.</li>
+<li>How does <a href="https://github.com/Alamofire/Alamofire">Alamofire</a>.</li>
+</ul>
+</div><div class="bottom-box no-border"><div class="col-12"><a href="https://twitter.com/share" data-url="http://www.mokacoding.com/blog/custom-afnetworking-response-serializer-for-errors" data-via="mokacoding" datacount-url="http://www.mokacoding.com/blog/custom-afnetworking-response-serializer-for-errors" data-text="AFNetworking custom response serializer to add error information" class="twitter-share-button"><Tweet></Tweet></a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+</script></div></div><div class="bottom-box no-border"><div class="col-12"><script async="true" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins style="display:block" data-ad-client="ca-pub-1350647337420416" data-ad-slot="4912767686" data-ad-format="auto" class="adsbygoogle"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div></div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"></div><div class="col-6"><div style="text-align: right"><a href="/blog/explicit-dependencies-swift">Explicit Dependencies, Swift Edition&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin MailChimp Signup Form -->
+<div id="mc_embed_signup">
+  <form action="//mokacoding.us10.list-manage.com/subscribe/post?u=45a265e2a9d2b9dbec5f98d51&amp;id=0f2ccfb0fa" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+    <label for="mce-EMAIL">Subscribe to our mailing list</label>
+    <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;"><input type="text" name="b_45a265e2a9d2b9dbec5f98d51_0f2ccfb0fa" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+  </form>
+</div>
+</div><div class="bottom-box"><div id="disqus_thread"></div><script type="text/javascript" src="/js/disqus.js"></script><noscript>Please enable JavaScript to view the<a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></div></div></div><div class="row-12 footer"><div class="col-12"><h3><a href="/">mokacoding</a></h3></div><div id="copy" class="col-9"><p>Hi I&#39;m <a href="http://giovannilodi.com">Giovanni Lodi</a> and this is my blog. I write here at least once a month, on software testing, productivity, and iOS development.</p>
+<p>I&#39;m a freelance iOS engineer, and <a href="mailto:giovanni.lodi42+blog@gmail.com">I&#39;m available for contract work</a>.</p>
+<p>Check out my <a href="http://mokagio.github.io/tech-journal">tech journal</a>, and my app <a href="https://itunes.apple.com/au/app/fineants-savings-tracker/id888444078?mt=8">Fineants</a>.</p>
+</div><div id="links" class="col-3"><p><i class="fa fa-twitter"></i>&nbsp;<a href="https://twitter.com/mokagio">@mokagio</a></p><p><i class="fa fa-github"></i>&nbsp;<a href="https://github.com/mokagio">mokagio</a></p></div></div></div></body><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-43554041-1', 'auto');
+ga('send', 'pageview');</script><script>var external_links = document.querySelectorAll('a:not([href^="/"]):not([href$="#subscribe"])');
+// external_links is an HTMLCollection, not an Array, so we can't call forEach
+for (var i = 0; i < external_links.length; i++) {
+  var link = external_links[i];
+  link.setAttribute("target", "_blank");
+}</script></html>
