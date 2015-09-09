@@ -1,0 +1,67 @@
+<!DOCTYPE html><html lang="en"><head><title>How to install Xcode Command Line Tools without GUI or Xcode</title><meta name="description" content="Here's a little script that will allow you to install the Xcode Command Line Tools without having to install Xcode, nor having a logged GUI. This can come pretty handy in automated scripts or when provisioning virtual machines."><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"><!-- Open Graph meta tags--><meta property="og:title" content="How to install Xcode Command Line Tools without GUI or Xcode"><meta property="og:description" content="Here's a little script that will allow you to install the Xcode Command Line Tools without having to install Xcode, nor having a logged GUI. This can come pretty handy in automated scripts or when provisioning virtual machines."><meta property="og:url" content="/"><meta property="og:type" content="article"><meta property="og:site_name" content="mokacoding"><!-- Stylesheets--><link href="/css/griddy.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet"><link href="/css/font-awesome.min.css" rel="stylesheet"><link href="/css/zenburn.css" rel="stylesheet"><!-- Mailchimp Stylesheets--><link href="//cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css"><link href="/css/mailchimp-form-override.css" rel="stylesheet"></head><body><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">unit and acceptance testing, automation, productivity</div><div class="links"><a href="/archive.html">Archive</a><a href="/espresso.html">Espresso</a><a href="/tags.html">Tags</a><a href="http://giovannilodi.com">About</a><a href="#subscribe">Subscribe</a><a href="/feed.xml"><i class="fa fa-rss"></i></a></div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/how-to-install-xcode-cli-tools-without-gui">How to install Xcode Command Line Tools without GUI or Xcode</a></h2><p class="post-meta"><span class="post-date">Wed Sep 09 2015&nbsp;</span><a href="/tag/Espresso/index.html" class="post-tag">-Espresso</a><a href="/tag/Xcode/index.html" class="post-tag">-Xcode</a><a href="/tag/Automation/index.html" class="post-tag">-Automation</a></p><div class="post"><p>If you are in the business of setting up new development machines or virtual machines you probably know that to do almost anything you need to have the <strong>Xcode Command Line Tools</strong>.</p>
+<p>Being something that only devs need Apple doesn&#39;t ship them with OS X, as far as Yosemite at least, so you need to install them yourself.</p>
+<p>The canonical way to do it is to install Xcode itself, but that means downloading a couple of GB of app from the store, which might take time.</p>
+<p><a href="http://railsapps.github.io/xcode-command-line-tools.html">Another option</a> is to open a Terminal and type <code>xcode-select --install</code>.</p>
+<p>Both the options above have a flaw: they require a GUI. That is not optimal when trying to setup a VM in an automated way.</p>
+<p>In <a href="http://apple.stackexchange.com/questions/107307/how-can-i-install-the-command-line-tools-completely-from-the-command-line">this AskDifferent answer</a> a solution without GUI is proposed, and here you can find my spin on it:</p>
+<pre><code class=""><span class="hljs-shebang">#!/bin/bash
+</span>
+<span class="hljs-comment"># See http://apple.stackexchange.com/questions/107307/how-can-i-install-the-command-line-tools-completely-from-the-command-line</span>
+
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"Checking Xcode CLI tools"</span>
+<span class="hljs-comment"># Only run if the tools are not installed yet</span>
+<span class="hljs-comment"># To check that try to print the SDK path</span>
+xcode-select -p &amp;&gt; /dev/null
+<span class="hljs-keyword">if</span> [ $? <span class="hljs-operator">-ne</span> <span class="hljs-number">0</span> ]; <span class="hljs-keyword">then</span>
+  <span class="hljs-built_in">echo</span> <span class="hljs-string">"Xcode CLI tools not found. Installing them..."</span>
+  touch /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress;
+  PROD=$(softwareupdate <span class="hljs-operator">-l</span> |
+    grep <span class="hljs-string">"\*.*Command Line"</span> |
+    head -n <span class="hljs-number">1</span> | awk -F<span class="hljs-string">"*"</span> <span class="hljs-string">'{print $2}'</span> |
+    sed <span class="hljs-operator">-e</span> <span class="hljs-string">'s/^ *//'</span> |
+    tr <span class="hljs-operator">-d</span> <span class="hljs-string">'\n'</span>)
+  softwareupdate -i <span class="hljs-string">"<span class="hljs-variable">$PROD</span>"</span> -v;
+<span class="hljs-keyword">else</span>
+  <span class="hljs-built_in">echo</span> <span class="hljs-string">"Xcode CLI tools OK"</span>
+<span class="hljs-keyword">fi</span>
+</code></pre><p>Easy peasy ☺️ I also made a gist with this, which you can download <a href="https://gist.github.com/mokagio/b974620ee8dcf5c0671f">here</a>.</p>
+<p><em>Happy coding, and leave the codebase better than you found it</em></p>
+</div><div class="bottom-box no-border"><div class="col-12"><a href="https://twitter.com/share" data-url="http://www.mokacoding.com/blog/how-to-install-xcode-cli-tools-without-gui" data-via="mokacoding" datacount-url="http://www.mokacoding.com/blog/how-to-install-xcode-cli-tools-without-gui" data-text="How to install Xcode Command Line Tools without GUI or Xcode" class="twitter-share-button"><Tweet></Tweet></a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+</script></div></div><div class="bottom-box no-border"><div class="col-12"><script async="true" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins style="display:block" data-ad-client="ca-pub-1350647337420416" data-ad-slot="4912767686" data-ad-format="auto" class="adsbygoogle"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div></div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"></div><div class="col-6"><div style="text-align: right"><a href="/blog/devworld2015-notes-of-a-testing-fanboy">/dev/world/2015 notes of a testing fanboy&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin MailChimp Signup Form -->
+<div id="mc_embed_signup">
+  <form action="//mokacoding.us10.list-manage.com/subscribe/post?u=45a265e2a9d2b9dbec5f98d51&amp;id=0f2ccfb0fa" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+    <label for="mce-EMAIL">Subscribe to our mailing list</label>
+    <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;"><input type="text" name="b_45a265e2a9d2b9dbec5f98d51_0f2ccfb0fa" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+  </form>
+</div>
+</div><div class="bottom-box"><div id="disqus_thread"></div><script>var disqus_shortname = "mokacoding";
+// Neet do add the / at the end to maintain compatibility with previous version
+// of the blog that didn't define disqus_url, letting Disqus set it automatically
+// using window.location.href
+var disqus_url = "http://www.mokacoding.com/blog/how-to-install-xcode-cli-tools-without-gui/";
+
+(function() {
+  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><noscript>Please enable JavaScript to view the<a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></div></div></div><div class="row-12 footer"><div class="col-12"><h3><a href="/">mokacoding</a></h3></div><div id="copy" class="col-9"><p>Hi I&#39;m <a href="http://giovannilodi.com">Giovanni Lodi</a> and this is my blog. I write here at least once a month, on software testing, productivity, and iOS development.</p>
+<p>I&#39;m a freelance iOS engineer, and <a href="mailto:giovanni.lodi42+blog@gmail.com">I&#39;m available for contract work</a>.</p>
+<p>Check out my <a href="http://mokagio.github.io/tech-journal">tech journal</a>, and my app <a href="https://itunes.apple.com/au/app/fineants-savings-tracker/id888444078?mt=8">Fineants</a>.</p>
+</div><div id="links" class="col-3"><p><i class="fa fa-twitter"></i>&nbsp;<a href="https://twitter.com/mokagio">@mokagio</a></p><p><i class="fa fa-github"></i>&nbsp;<a href="https://github.com/mokagio">mokagio</a></p></div></div></div></body><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-43554041-1', 'auto');
+ga('send', 'pageview');</script><script>var external_links = document.querySelectorAll('a:not([href^="/"]):not([href$="#subscribe"])');
+// external_links is an HTMLCollection, not an Array, so we can't call forEach
+for (var i = 0; i < external_links.length; i++) {
+  var link = external_links[i];
+  link.setAttribute("target", "_blank");
+}</script></html>
