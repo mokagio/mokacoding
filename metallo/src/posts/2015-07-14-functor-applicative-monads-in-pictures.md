@@ -3,6 +3,9 @@ layout: post
 title: Swift Functors, Applicatives, and Monads in Pictures
 description: "In this port to Swift of the great of Haskell's \"Functors, Applicatives, And Monads In Pictures\" we are going to look at these functional programming concepts aided by some very helpful pictures."
 date: 2015-07-14
+tags:
+  - Swift
+  - Functional Programming
 ---
 
 > This is a translation of [Functors, Applicatives, And Monads In Pictures](http://adit.io/posts/2013-04-17-functors,_applicatives,_and_monads_in_pictures.html) from [Haskell](https://www.haskell.org/) into Swift. 
