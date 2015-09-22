@@ -11,6 +11,10 @@ This post is the result of a talk I have given in various forms in the past mont
 
 The goal is to demystify scary terms associated with functional programming, and show a practical application of the underlying concepts when used with array and optionals.
 
+You can follow along on the [Playground](https://github.com/mokagio/yow-connected-2015) I used for the YOW! talk.
+
+_Note:_ All the code above is written for Swift 2 and Xcode 7.
+
 ## Nasty if let
 
 Probably one of the most disruptive features of Swift compared to Objective-C is the presence of optionals. Having a type _wrapped_ in an optional adds an extra layer of context. A constant or variable of type `Something?` could be nil, and consumers have to account for that.
