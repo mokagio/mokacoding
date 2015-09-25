@@ -136,3 +136,8 @@ h3 {
 .clearfixed:after {
   clear: both;
 }
+
+/* Share buttons */
+#share-buttons iframe {
+  margin-right: 10px;
+}

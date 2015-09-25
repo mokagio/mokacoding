@@ -4,16 +4,25 @@
   include _post_meta
   .post!= post.contents
 
-  .bottom-box.no-border
+  .bottom-box.no-border#share-buttons
     .col-12
       a.twitter-share-button(href="https://twitter.com/share",
       'data-url'="http://www.mokacoding.com/#{post.path}",
       'data-via'="mokacoding",
       'datacount-url'="http://www.mokacoding.com/#{post.path}",
-      'data-text'="#{post.title}")
+      'data-text'="#{post.title}").
         Tweet
       script.
         !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+
+      a.hn-button(href="https://news.ycombinator.com/submit",
+        'data-title'="#{post.title}",
+        'data-url'="http://www.mokacoding.com/#{post.path}",
+        'data-count'="horizontal",
+        'data-style'="twitter").
+          Vote on Hacker News
+      script.
+        var HN=[];HN.factory=function(e){return function(){HN.push([e].concat(Array.prototype.slice.call(arguments,0)))};},HN.on=HN.factory("on"),HN.once=HN.factory("once"),HN.off=HN.factory("off"),HN.emit=HN.factory("emit"),HN.load=function(){var e="hn-button.js";if(document.getElementById(e))return;var t=document.createElement("script");t.id=e,t.src="//hn-button.herokuapp.com/hn-button.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n)},HN.load();
 
   .bottom-box.no-border
     .col-12
