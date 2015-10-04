@@ -17,6 +17,7 @@ rss(version="2.0", xmlns:atom="http://www.w3.org/2005/Atom")
         title=post.title
         description=post.description
         pubDate=post.date.toUTCString()
+        link="http://www.mokacoding.com/blog/" + post.slug
         guid(isPermaLink="true")="http://www.mokacoding.com/blog/" + post.slug
         for tag in post.tags
           category=tag
