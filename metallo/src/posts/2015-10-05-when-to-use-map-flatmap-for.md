@@ -12,6 +12,8 @@ When I realised how easy it was to use `map` in Swift I fell victim of one of th
 
 > When you have a new hammer, everything looks like a needle, including screws.
 
+![Thor smashing his hammer](https://media.giphy.com/media/1Nclw5CJ3N77G/giphy.gif)
+
 I started to `map` everything, and got disappointed at the coffee shop when I couldn't `flatMap` my espresso with milk to get a flat white.
 
 Why even bother having a `for` loop construct in the language when you can use `map`?!
