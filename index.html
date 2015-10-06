@@ -1,23 +1,59 @@
-<!DOCTYPE html><html lang="en"><head><title></title><meta name="description" content="A blog about testing, iOS development, productivity, and blabber about software in general."><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"><!-- Open Graph meta tags--><meta property="og:title" content="undefined"><meta property="og:description" content="A blog about testing, iOS development, productivity, and blabber about software in general."><meta property="og:url" content="/"><meta property="og:type" content="article"><meta property="og:site_name" content="mokacoding"><!-- Stylesheets--><link href="/css/griddy.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet"><link href="/css/font-awesome.min.css" rel="stylesheet"><link href="/css/zenburn.css" rel="stylesheet"><!-- Mailchimp Stylesheets--><link href="//cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css"><link href="/css/mailchimp-form-override.css" rel="stylesheet"><!-- SumoMe--><script src="//load.sumome.com/" data-sumo-site-id="dd80959300db03e20c8bc3dd899f1424fd764d261e6c3c41923c96482a270dba" async="async"></script></head><body><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">unit and acceptance testing, automation, productivity</div><div class="links"><a href="/archive.html">Archive</a><a href="/espresso.html">Espresso</a><a href="/tags.html">Tags</a><a href="http://giovannilodi.com">About</a><a href="#subscribe">Subscribe</a><a href="/feed.xml"><i class="fa fa-rss"></i></a></div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/some-ruby-tricks-i-learnt"></a></h2><p class="post-meta"><span class="post-date">Thu Oct 08 2015&nbsp;</span></p><div class="post"><h2 id="how-to-split-an-array-into-slices">How to split an array into slices</h2>
-<pre><code class="">slices = array.<span class="hljs-function"><span class="hljs-title">each_slice</span><span class="hljs-params">(n)</span></span>
-</code></pre><h2 id="get-a-random-number-of-element-out-of-an-array">Get a random number of element out of an array</h2>
-<pre><code class=" hljs ruby">array.sample(n)
+<!DOCTYPE html><html lang="en"><head><title></title><meta name="description" content="A blog about testing, iOS development, productivity, and blabber about software in general."><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"><!-- Open Graph meta tags--><meta property="og:title" content="undefined"><meta property="og:description" content="A blog about testing, iOS development, productivity, and blabber about software in general."><meta property="og:url" content="/"><meta property="og:type" content="article"><meta property="og:site_name" content="mokacoding"><!-- Stylesheets--><link href="/css/griddy.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet"><link href="/css/font-awesome.min.css" rel="stylesheet"><link href="/css/zenburn.css" rel="stylesheet"><!-- Mailchimp Stylesheets--><link href="//cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css"><link href="/css/mailchimp-form-override.css" rel="stylesheet"><!-- SumoMe--><script src="//load.sumome.com/" data-sumo-site-id="dd80959300db03e20c8bc3dd899f1424fd764d261e6c3c41923c96482a270dba" async="async"></script></head><body><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">unit and acceptance testing, automation, productivity</div><div class="links"><a href="/archive.html">Archive</a><a href="/espresso.html">Espresso</a><a href="/tags.html">Tags</a><a href="http://giovannilodi.com">About</a><a href="#subscribe">Subscribe</a><a href="/feed.xml"><i class="fa fa-rss"></i></a></div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/when-to-use-map-flatmap-for">When to use map, flatMap, or for loops in Swift</a></h2><p class="post-meta"><span class="post-date">Mon Oct 05 2015&nbsp;</span><a href="/tag/Swift/index.html" class="post-tag">-Swift</a></p><div class="post"><p>I am a <a href="http://www.mokacoding.com/blog/functor-applicative-monads-in-pictures/">big fan of <code>map</code> and <code>flatMap</code></a>, and of the cleaner code that <a href="http://www.mokacoding.com/blog/demistifying-swift-functor/">they allow to write</a>.</p>
+<p>When I realised how easy it was to use <code>map</code> in Swift I fell victim of one of the most common engineer disease: the shiny new thing syndrome.</p>
+<blockquote>
+<p>When you have a new hammer, everything looks like a needle, including screws.</p>
+</blockquote>
+<p><img src="https://media.giphy.com/media/1Nclw5CJ3N77G/giphy.gif" alt="Thor smashing his hammer"></p>
+<p>I started to <code>map</code> everything, and got disappointed at the coffee shop when I couldn&#39;t <code>flatMap</code> my espresso with milk to get a flat white.</p>
+<p>Why even bother having a <code>for</code> loop construct in the language when you can use <code>map</code>?!</p>
+<p>Once I recovered from my diseased, making arguable coding choices along the way, I realised that <code>map</code> and <code>for</code> deserve the same respect, and serve different purposes. So here&#39;s the rule of thumb on when to use <code>map</code> and when to use <code>for</code>.</p>
+<h2 id="use-map-when-you-need-to-transform-arrays">Use map when you need to transform arrays</h2>
+<pre><code class=" hljs swift"><span class="hljs-keyword">let</span> arrayOfNumbers = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>]
+<span class="hljs-keyword">let</span> arrayOfString = arrayOfNumbers.<span class="hljs-built_in">map</span> { <span class="hljs-string">"<span class="hljs-subst">\($<span class="hljs-number">0</span>)</span>"</span> }
 </code></pre>
-<h2 id="filter-an-array">Filter an array</h2>
-<pre><code class=" hljs ruby">array.select { |element| element &gt; <span class="hljs-number">10</span> }
+<p>In the context of <code>Array</code> <code>map</code> get an array, applies a transformation function to every element, and returns a new array with the resulting elements. That&#39;s the best use case for map.</p>
+<p>The cool thing about <code>map</code> is how you can chain multiple transformation together and have code that clearly express what it does.</p>
+<pre><code class=" hljs swift"><span class="hljs-keyword">let</span> awesomeImages = averageImage
+  .<span class="hljs-built_in">map</span>(cropIntoSquare)
+  .<span class="hljs-built_in">map</span>(bumpContrast)
+  .<span class="hljs-built_in">map</span>(applySecretFilter)
 </code></pre>
-<h2 id="get-last-pash-component">Get last pash component</h2>
-<pre><code class=" hljs ruby">uri.split(<span class="hljs-string">'/'</span>).last
+<h2 id="use-for-loops-when-there-are-side-effects-">Use for loops when there are &quot;side effects&quot;</h2>
+<p>Without going <a href="https://en.wikipedia.org/wiki/Side_effect_(computer_science">into details</a> an operation has a <a href="http://programmers.stackexchange.com/questions/40297/what-is-a-side-effect">side effect</a> if it results in some kind of state changing somewhere, for example changing the value of a variable, writing to disk, or updating the UI. In such case using a for loop is more appropriate.</p>
+<pre><code class=" hljs swift"><span class="hljs-keyword">for</span> number <span class="hljs-keyword">in</span> arrayOfNumbers {
+  <span class="hljs-built_in">print</span>(number)
+}
 </code></pre>
-<h2 id="parsing-rss">Parsing RSS</h2>
-<p>There&#39;s a <a href="http://ruby-doc.org/stdlib-1.9.3/libdoc/rss/rdoc/RSS.html">module for that</a> in the standard library!</p>
-</div><div id="share-buttons" class="bottom-box no-border"><div class="col-12"><a href="https://twitter.com/share" data-url="http://www.mokacoding.com/blog/some-ruby-tricks-i-learnt" data-via="mokacoding" datacount-url="http://www.mokacoding.com/blog/some-ruby-tricks-i-learnt" data-text="undefined" class="twitter-share-button">Tweet</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
-</script><a href="https://news.ycombinator.com/submit" data-title="undefined" data-url="http://www.mokacoding.com/blog/some-ruby-tricks-i-learnt" data-count="horizontal" data-style="twitter" class="hn-button">Vote on Hacker News</a><script>var HN=[];HN.factory=function(e){return function(){HN.push([e].concat(Array.prototype.slice.call(arguments,0)))};},HN.on=HN.factory("on"),HN.once=HN.factory("once"),HN.off=HN.factory("off"),HN.emit=HN.factory("emit"),HN.load=function(){var e="hn-button.js";if(document.getElementById(e))return;var t=document.createElement("script");t.id=e,t.src="//hn-button.herokuapp.com/hn-button.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n)},HN.load();
-</script><script type="text/javascript">reddit_url="http://www.mokacoding.com/blog/some-ruby-tricks-i-learnt";
-reddit_title=""
+<h2 id="and-what-about-flatmap-">And what about flatMap?</h2>
+<p>Everything said above stand true for <code>flatMap</code> as well.</p>
+<p>When you need to transform the contents of an array of arrays, into a linear array use <code>flatMap</code>:</p>
+<pre><code class=" hljs swift"><span class="hljs-keyword">let</span> users: [<span class="hljs-type">User</span>] = ...
+<span class="hljs-keyword">let</span> allEmails = users.flatMap { $<span class="hljs-number">0</span>.emails }
+</code></pre>
+<p>When the code needs to perform some action that has side effects use <code>for</code>, and here&#39;s a nice trick to avoid nesting:</p>
+<pre><code class=" hljs swift"><span class="hljs-keyword">for</span> element <span class="hljs-keyword">in</span> nestedArray.flatten() {
+  updateUI(withElement: element)
+}
+</code></pre>
+<h2 id="performances-">Performances?</h2>
+<p>I run some quick tests and I couldn&#39;t see any relevant performance difference between <code>map</code> and a <code>for</code> loop in Swift. The Swift compiler is probably smart enough to use the best performing loop operation regardless of the code we wrote.</p>
+<hr>
+<p>To recap, here&#39;s my rule of thumb: <strong>if there&#39;s a side effect you probably want to use <code>for</code>, otherwise <code>map</code> seems a better fit</strong></p>
+<p>What is your experience with <code>map</code> vs <code>for</code> loops? Do you agree with me or have a different opinion, if so why? Get in touch on Twitter <a href="http://twitter.com/mokagio">@mokagio</a> or leave a comment below.</p>
+<h2 id="update-foreach">Update: forEach</h2>
+<p><a href="https://twitter.com/RGfox">Richard Fox</a> on Twitter and on the comments below points out that Swift provides a <code>forEach</code> method too. The <code>for</code> loop above could be rewritten as:</p>
+<pre><code class=" hljs swift">arrayOfNumbers.forEach { <span class="hljs-built_in">print</span>($<span class="hljs-number">0</span>) }
+</code></pre>
+<p>I left out <code>forEach</code> because in my humble opinion the loop version reads better. <em>For element in array do stuff</em> seems better to me than <em>array for each do stuff</em>. Nevertheless <code>forEach</code> is as valid Swift as a <code>for</code> loop. You could rewrite all what we&#39;ve said already using <code>forEach</code> instead of the loop and everything would still stand.</p>
+<p>It is up to you and your team to decide which convention to use, and choose the appropriate construct depending on what you are trying to achieve.</p>
+<p><em>Happy coding, and leave the codebase better than you found it.</em></p>
+</div><div id="share-buttons" class="bottom-box no-border"><div class="col-12"><a href="https://twitter.com/share" data-url="http://www.mokacoding.com/blog/when-to-use-map-flatmap-for" data-via="mokacoding" datacount-url="http://www.mokacoding.com/blog/when-to-use-map-flatmap-for" data-text="When to use map, flatMap, or for loops in Swift" class="twitter-share-button">Tweet</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+</script><a href="https://news.ycombinator.com/submit" data-title="When to use map, flatMap, or for loops in Swift" data-url="http://www.mokacoding.com/blog/when-to-use-map-flatmap-for" data-count="horizontal" data-style="twitter" class="hn-button">Vote on Hacker News</a><script>var HN=[];HN.factory=function(e){return function(){HN.push([e].concat(Array.prototype.slice.call(arguments,0)))};},HN.on=HN.factory("on"),HN.once=HN.factory("once"),HN.off=HN.factory("off"),HN.emit=HN.factory("emit"),HN.load=function(){var e="hn-button.js";if(document.getElementById(e))return;var t=document.createElement("script");t.id=e,t.src="//hn-button.herokuapp.com/hn-button.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n)},HN.load();
+</script><script type="text/javascript">reddit_url="http://www.mokacoding.com/blog/when-to-use-map-flatmap-for";
+reddit_title="When to use map, flatMap, or for loops in Swift"
 reddit_target="iOSProgramming"
 reddit_newwindow='1';</script><script type="text/javascript" src="//www.redditstatic.com/button/button1.js"></script></div></div><div class="bottom-box no-border"><div class="col-12"><script async="true" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins style="display:block" data-ad-client="ca-pub-1350647337420416" data-ad-slot="4912767686" data-ad-format="auto" class="adsbygoogle"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});
-</script></div></div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"></div><div class="col-6"><div style="text-align: right"><a href="/blog/when-to-use-map-flatmap-for">When to use map, flatMap, or for loops in Swift&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin MailChimp Signup Form -->
+</script></div></div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"></div><div class="col-6"><div style="text-align: right"><a href="/blog/nerdtree-relative-numbers">How to display relative line numbers in NERDTree&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin MailChimp Signup Form -->
 <div id="mc_embed_signup">
   <form action="//mokacoding.us10.list-manage.com/subscribe/post?u=45a265e2a9d2b9dbec5f98d51&amp;id=0f2ccfb0fa" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
     <div id="mc_embed_signup_scroll">
@@ -33,7 +69,7 @@ reddit_newwindow='1';</script><script type="text/javascript" src="//www.redditst
 // Neet do add the / at the end to maintain compatibility with previous version
 // of the blog that didn't define disqus_url, letting Disqus set it automatically
 // using window.location.href
-var disqus_url = "http://www.mokacoding.com/blog/some-ruby-tricks-i-learnt/";
+var disqus_url = "http://www.mokacoding.com/blog/when-to-use-map-flatmap-for/";
 
 (function() {
   var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
