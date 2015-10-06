@@ -77,4 +77,16 @@ To recap, here's my rule of thumb: **if there's a side effect you probably want 
 
 What is your experience with `map` vs `for` loops? Do you agree with me or have a different opinion, if so why? Get in touch on Twitter [@mokagio](http://twitter.com/mokagio) or leave a comment below.
 
+## Update: forEach
+
+[Richard Fox](https://twitter.com/RGfox) on Twitter and on the comments below points out that Swift provides a `forEach` method too. The `for` loop above could be rewritten as:
+
+```swift
+arrayOfNumbers.forEach { print($0) }
+```
+
+I left out `forEach` because in my humble opinion the loop version reads better. _For element in array do stuff_ seems better to me than _array for each do stuff_. Nevertheless `forEach` is as valid Swift as a `for` loop. You could rewrite all what we've said already using `forEach` instead of the loop and everything would still stand.
+
+It is up to you and your team to decide which convention to use, and choose the appropriate construct depending on what you are trying to achieve.
+
 _Happy coding, and leave the codebase better than you found it._
