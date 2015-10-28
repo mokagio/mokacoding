@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Fixing Bugs Driven By Test (in Swift)
+title: Fixing Bugs Driven By Tests in Swift
 description: "Unit and acceptance test are powerful tools that can be used to identify and fix bugs. Let's see how using a bugged Swift app as an example."
 tags:
   - Testing
