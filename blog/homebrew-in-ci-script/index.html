@@ -1,0 +1,66 @@
+<!DOCTYPE html><html lang="en"><head><title>How to use Homebrew in CI</title><meta name="description" content="A quick guide on how to safely use Homebrew in CI."><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"><!-- Open Graph meta tags--><meta property="og:title" content="How to use Homebrew in CI"><meta property="og:description" content="A quick guide on how to safely use Homebrew in CI."><meta property="og:url" content="/"><meta property="og:type" content="article"><meta property="og:site_name" content="mokacoding"><!-- Stylesheets--><link href="/css/griddy.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet"><link href="/css/font-awesome.min.css" rel="stylesheet"><link href="/css/zenburn.css" rel="stylesheet"><!-- Mailchimp Stylesheets--><link href="//cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css"><link href="/css/mailchimp-form-override.css" rel="stylesheet"><!-- SumoMe--><script src="//load.sumome.com/" data-sumo-site-id="dd80959300db03e20c8bc3dd899f1424fd764d261e6c3c41923c96482a270dba" async="async"></script></head><body><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">unit and acceptance testing, automation, productivity</div><div class="links"><a href="/archive.html">Archive</a><a href="/espresso.html">Espresso</a><a href="/tags.html">Tags</a><a href="http://giovannilodi.com">About</a><a href="#subscribe">Subscribe</a><a href="/feed.xml"><i class="fa fa-rss"></i></a></div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/homebrew-in-ci-script">How to use Homebrew in CI</a></h2><p class="post-meta"><span class="post-date">Wed Nov 04 2015&nbsp;</span><a href="/tag/CI/index.html" class="post-tag">-CI</a><a href="/tag/Homebrew/index.html" class="post-tag">-Homebrew</a><a href="/tag/Espresso/index.html" class="post-tag">-Espresso</a></p><div class="post"><h3 id="tl-dr">TL;DR</h3>
+<p>If your CI has <code>&lt;tool_name&gt;</code> installed already:</p>
+<pre><code class="">brew <span class="hljs-operator"><span class="hljs-keyword">update</span> || brew <span class="hljs-keyword">update</span>
+brew outdated &lt;tool_name&gt; || brew <span class="hljs-keyword">upgrade</span> &lt;tool_name&gt;</span>
+</code></pre><p>otherwise:</p>
+<pre><code class="">brew <span class="hljs-operator"><span class="hljs-keyword">update</span> || brew <span class="hljs-keyword">update</span>
+brew <span class="hljs-keyword">install</span> &lt;tool_name&gt;</span>
+</code></pre><h3 id="ts-wr">TS;WR</h3>
+<p>Ideally you would have everything your scripts depend upon checked in with the repo, but let&#39;s be honest, this is sometimes not practical.</p>
+<p>Some tools, for example <code>xctool</code>, can either be fetched as a git submodule, with all the problems coming with this approach, or via <a href="http://brew.sh/">Homebrew</a> in a simpler way.</p>
+<p>What the two lines at the start of the post do is downloading the latest version of <code>&lt;tool_name&gt;</code>. Let&#39;s look at them in more detail.</p>
+<pre><code class=""><span class="hljs-title">brew</span> update
+</code></pre><p><code>brew update</code> will fetch the latest formulae, making sure that if you are running on the latest version of a tool, but your CI isn&#39;t, the latest version will be the one downloaded by the upgrade command later.</p>
+<pre><code class="">brew <span class="hljs-keyword">update</span> || brew <span class="hljs-keyword">update</span>
+</code></pre><p>We are doing <code>brew update || brew update</code> because sometimes a formula might break the first run of the update command, but running it a second time will succeed. More on this issue <a href="https://github.com/Homebrew/homebrew/issues/45616">here</a>.</p>
+<p><code>||</code> is the logical OR that we use in everyday programming as well. Every command line operation has a return code of <code>0</code> if everything went fine, non <code>0</code> otherwise. This means that if your execute <code>command a || command b</code> and <code>command a</code> returns fails returning something that is not <code>0</code> then <code>command b</code> is executed. If instead <code>command a</code> succeeds then the OR is already true, and <code>command b</code> will not run. This is quite a neat trick.</p>
+<p>Using <code>||</code> in the first line makes sure that if the first update fails, then a second attempt will be made.</p>
+<pre><code class="">brew install <span class="hljs-tag">&lt;<span class="hljs-title">tool_name</span>&gt;</span>
+</code></pre><p>The second line differs depending on whether your CI provider gives you a box with the tool you are after already installed. If that&#39;s not the case then you&#39;ll simply have to install it yourself with <code>brew install</code>, otherwise you will need to update it, or in Homebrew terminology <code>upgrade</code>.</p>
+<pre><code class="">brew outdated <span class="hljs-tag">&lt;<span class="hljs-title">tool_name</span>&gt;</span> || brew upgrade <span class="hljs-tag">&lt;<span class="hljs-title">tool_name</span>&gt;</span>
+</code></pre><p>Since attempting to upgrade and up to date formula would result in a failure, you&#39;ll have to check if the local version is outdated. This can be done using the same <code>||</code> expedient. If <code>brew outdated</code> doesn&#39;t return <code>0</code> then it means that the tool is not up to date, and should be updates using <code>brew upgrade</code>.</p>
+<p>That&#39;s all folks. If you have any questions please do leave a comment below, or even better, reach me out on Twitter <a href="https://twitter.com/mokagio">@mokagio</a>.</p>
+<p><em>Happy coding, and leave the codebase better than you found it.</em></p>
+</div><div id="share-buttons" class="bottom-box no-border"><div class="col-12"><a href="https://twitter.com/share" data-url="http://www.mokacoding.com/blog/homebrew-in-ci-script" data-via="mokacoding" datacount-url="http://www.mokacoding.com/blog/homebrew-in-ci-script" data-text="How to use Homebrew in CI" class="twitter-share-button">Tweet</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+</script><a href="https://news.ycombinator.com/submit" data-title="How to use Homebrew in CI" data-url="http://www.mokacoding.com/blog/homebrew-in-ci-script" data-count="horizontal" data-style="twitter" class="hn-button">Vote on Hacker News</a><script>var HN=[];HN.factory=function(e){return function(){HN.push([e].concat(Array.prototype.slice.call(arguments,0)))};},HN.on=HN.factory("on"),HN.once=HN.factory("once"),HN.off=HN.factory("off"),HN.emit=HN.factory("emit"),HN.load=function(){var e="hn-button.js";if(document.getElementById(e))return;var t=document.createElement("script");t.id=e,t.src="//hn-button.herokuapp.com/hn-button.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n)},HN.load();
+</script><script type="text/javascript">reddit_url="http://www.mokacoding.com/blog/homebrew-in-ci-script";
+reddit_title="How to use Homebrew in CI"
+reddit_target="iOSProgramming"
+reddit_newwindow='1';</script><script type="text/javascript" src="//www.redditstatic.com/button/button1.js"></script></div></div><div class="bottom-box no-border"><div class="col-12"><script async="true" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins style="display:block" data-ad-client="ca-pub-1350647337420416" data-ad-slot="4912767686" data-ad-format="auto" class="adsbygoogle"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div></div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"></div><div class="col-6"><div style="text-align: right"><a href="/blog/circle-ci-ios-testing">How to configure CircleCI for iOS testing&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin MailChimp Signup Form -->
+<div id="mc_embed_signup">
+  <form action="//mokacoding.us10.list-manage.com/subscribe/post?u=45a265e2a9d2b9dbec5f98d51&amp;id=0f2ccfb0fa" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+    <label for="mce-EMAIL">Subscribe to our mailing list</label>
+    <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;"><input type="text" name="b_45a265e2a9d2b9dbec5f98d51_0f2ccfb0fa" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+  </form>
+</div>
+</div><div class="bottom-box"><div id="disqus_thread"></div><script>var disqus_shortname = "mokacoding";
+// Neet do add the / at the end to maintain compatibility with previous version
+// of the blog that didn't define disqus_url, letting Disqus set it automatically
+// using window.location.href
+var disqus_url = "http://www.mokacoding.com/blog/homebrew-in-ci-script/";
+
+(function() {
+  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><noscript>Please enable JavaScript to view the<a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></div></div></div><div class="row-12 footer"><div class="col-12"><h3><a href="/">mokacoding</a></h3></div><div id="copy" class="col-9"><p>Hi I&#39;m <a href="http://giovannilodi.com">Giovanni Lodi</a> and this is my blog. I write here at least once a month, on software testing, productivity, and iOS development.</p>
+<p>I&#39;m a freelance iOS engineer, and <a href="mailto:giovanni.lodi42+blog@gmail.com">I&#39;m available for contract work</a>.</p>
+<p>Check out my <a href="http://mokagio.github.io/tech-journal">tech journal</a>, and my app <a href="https://itunes.apple.com/au/app/fineants-savings-tracker/id888444078?mt=8">Fineants</a>.</p>
+</div><div id="links" class="col-3"><p><i class="fa fa-twitter"></i>&nbsp;<a href="https://twitter.com/mokagio">@mokagio</a></p><p><i class="fa fa-github"></i>&nbsp;<a href="https://github.com/mokagio">mokagio</a></p></div></div></div></body><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-43554041-1', 'auto');
+ga('send', 'pageview');</script><script>var external_links = document.querySelectorAll('a:not([href^="/"]):not([href$="#subscribe"])');
+// external_links is an HTMLCollection, not an Array, so we can't call forEach
+for (var i = 0; i < external_links.length; i++) {
+  var link = external_links[i];
+  link.setAttribute("target", "_blank");
+}</script></html>
