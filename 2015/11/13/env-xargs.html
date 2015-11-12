@@ -1,0 +1,68 @@
+<!DOCTYPE html><html lang="en"><head><title>Injecting environment variables from a file with xargs</title><meta name="description" content="How to provide environment variables stored in a .env file as an input for a command execution without having to export then, with a deep look at the shell commands used."><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"><!-- Open Graph meta tags--><meta property="og:title" content="Injecting environment variables from a file with xargs"><meta property="og:description" content="How to provide environment variables stored in a .env file as an input for a command execution without having to export then, with a deep look at the shell commands used."><meta property="og:url" content="/"><meta property="og:type" content="article"><meta property="og:site_name" content="mokacoding"><!-- Stylesheets--><link href="/css/griddy.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet"><link href="/css/font-awesome.min.css" rel="stylesheet"><link href="/css/zenburn.css" rel="stylesheet"><!-- Mailchimp Stylesheets--><link href="//cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css"><link href="/css/mailchimp-form-override.css" rel="stylesheet"><!-- SumoMe--><script src="//load.sumome.com/" data-sumo-site-id="dd80959300db03e20c8bc3dd899f1424fd764d261e6c3c41923c96482a270dba" async="async"></script></head><body><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">unit and acceptance testing, automation, productivity</div><div class="links"><a href="/archive.html">Archive</a><a href="/espresso.html">Espresso</a><a href="/tags.html">Tags</a><a href="http://giovannilodi.com">About</a><a href="#subscribe">Subscribe</a><a href="/feed.xml"><i class="fa fa-rss"></i></a></div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/env-xargs">Injecting environment variables from a file with xargs</a></h2><p class="post-meta"><span class="post-date">Fri Nov 13 2015&nbsp;</span><a href="/tag/Espresso/index.html" class="post-tag">-Espresso</a><a href="/tag/Shell/index.html" class="post-tag">-Shell</a><a href="/tag/Tooling/index.html" class="post-tag">-Tooling</a></p><div class="post"><h2 id="tl-dr">TL;DR</h2>
+<p>You can use</p>
+<pre><code class=" hljs bash">env $(cat .env | grep -v <span class="hljs-string">"#"</span> | xargs) your_<span class="hljs-built_in">command</span>_expecting_env_vars
+</code></pre>
+<p>to run <code>your_command_expecting_env_vars</code> providing it the content of <code>.env</code> like you would do when running <code>FOO=1 BAR=2 your_command_expecting_env_vars</code>.</p>
+<h2 id="ts-wr">TS;WR</h2>
+<p>Many command lines tool can read, or even expect, values set in environment variables.</p>
+<p>It is a common practice to place environment variables contextual to a project in a <code>.env</code> file in the project root, and there are tools like <a href="https://github.com/bkeepers/dotenv"><code>dotenv</code></a> that allow you to load those variables into your application.</p>
+<p>Sometimes thought you just need to set a handful of values and cannot be bothered typing <code>FOO=1 BAR=2 BAZ=3 bundle exec foobarbaz</code>. Or maybe your cli tool expects a token that you don&#39;t want to store in the repo, but at the same time cannot type every time.</p>
+<p>In such cases it might be useful to place those environment variables in a <code>.env</code> file, but how to load them?</p>
+<p>This is one possible way:</p>
+<pre><code class=""><span class="hljs-keyword">env</span> <span class="hljs-variable">$(</span>cat .<span class="hljs-keyword">env</span> | grep -v <span class="hljs-string">"#"</span> | xargs) your_command_expecting_env_var
+</code></pre><p>Let&#39;s disassemble this long command, shall we?</p>
+<p><code>$(...)</code> will be evaluate it&#39;s content before the command is interpreted and run, and replaced with the result, so that what actually is run will be <code>env result your_command_expecting_env_var</code>.</p>
+<p><code>cat .env</code> will put the content of the <code>.env</code> file into the standard output. This would normally be the screen, but in this case there is a pipe operator.</p>
+<p><code>grep -v &quot;#&quot;</code> is an inverted match grep. By default <code>grep</code> selects lines containing the given pattern, the string <code>#</code> in our case, from its standard input. With the <code>-v</code>, or <code>--invert-match</code> it will select the lines not matching the given string.</p>
+<p>So <code>cat .env | grep -v &quot;#&quot;</code> results in the content of <code>.env</code> apart from comment lines sent to the standard output, where <code>xargs</code> is there to wait for it. <code>xargs</code> builds an argument list out of its standard input.</p>
+<p>This argument list is fed to <code>env</code>. The synopsis of this command is:</p>
+<pre><code class=" hljs bash">env [-i] [name=value ...] [utility [argument ...]]
+</code></pre>
+<p>What <code>env</code> does is executing <code>utility</code> after modifying the environment as specified by the <code>name=value ...</code> list. And that is exactly the end result that we are looking for 😎</p>
+<p>A nice thing to notice is that <code>env</code> doesn&#39;t export the <code>name=value</code> inputs, so that the environment is not polluted.</p>
+<p>Hope you found this article useful, <a href="http://stackoverflow.com/questions/19331497/set-environment-variables-from-file/#answer-20909045">this</a> is the SO answer that inspired and helped me with this approach.</p>
+<p>If you need help get in touch with me on Twitter <a href="https://twitter.com/mokagio">@mokagio</a>, or leave a comment below. And don&#39;t forget to hit the share button 😉.</p>
+<p><em>Happy coding, and leave the codebase better than you found it.</em></p>
+</div><div id="share-buttons" class="bottom-box no-border"><div class="col-12"><a href="https://twitter.com/share" data-url="http://www.mokacoding.com/blog/env-xargs" data-via="mokacoding" datacount-url="http://www.mokacoding.com/blog/env-xargs" data-text="Injecting environment variables from a file with xargs" class="twitter-share-button">Tweet</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+</script><a href="https://news.ycombinator.com/submit" data-title="Injecting environment variables from a file with xargs" data-url="http://www.mokacoding.com/blog/env-xargs" data-count="horizontal" data-style="twitter" class="hn-button">Vote on Hacker News</a><script>var HN=[];HN.factory=function(e){return function(){HN.push([e].concat(Array.prototype.slice.call(arguments,0)))};},HN.on=HN.factory("on"),HN.once=HN.factory("once"),HN.off=HN.factory("off"),HN.emit=HN.factory("emit"),HN.load=function(){var e="hn-button.js";if(document.getElementById(e))return;var t=document.createElement("script");t.id=e,t.src="//hn-button.herokuapp.com/hn-button.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n)},HN.load();
+</script><script type="text/javascript">reddit_url="http://www.mokacoding.com/blog/env-xargs";
+reddit_title="Injecting environment variables from a file with xargs"
+reddit_target="iOSProgramming"
+reddit_newwindow='1';</script><script type="text/javascript" src="//www.redditstatic.com/button/button1.js"></script></div></div><div class="bottom-box no-border"><div class="col-12"><script async="true" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins style="display:block" data-ad-client="ca-pub-1350647337420416" data-ad-slot="4912767686" data-ad-format="auto" class="adsbygoogle"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div></div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"></div><div class="col-6"><div style="text-align: right"><a href="/blog/travis-ci-ios-testing">How to configure Travis CI for iOS testing&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin MailChimp Signup Form -->
+<div id="mc_embed_signup">
+  <form action="//mokacoding.us10.list-manage.com/subscribe/post?u=45a265e2a9d2b9dbec5f98d51&amp;id=0f2ccfb0fa" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+    <label for="mce-EMAIL">Subscribe to our mailing list</label>
+    <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;"><input type="text" name="b_45a265e2a9d2b9dbec5f98d51_0f2ccfb0fa" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+  </form>
+</div>
+</div><div class="bottom-box"><div id="disqus_thread"></div><script>var disqus_shortname = "mokacoding";
+// Neet do add the / at the end to maintain compatibility with previous version
+// of the blog that didn't define disqus_url, letting Disqus set it automatically
+// using window.location.href
+var disqus_url = "http://www.mokacoding.com/blog/env-xargs/";
+
+(function() {
+  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><noscript>Please enable JavaScript to view the<a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></div></div></div><div class="row-12 footer"><div class="col-12"><h3><a href="/">mokacoding</a></h3></div><div id="copy" class="col-9"><p>Hi I&#39;m <a href="http://giovannilodi.com">Giovanni Lodi</a> and this is my blog. I write here at least once a month, on software testing, productivity, and iOS development.</p>
+<p>I&#39;m a freelance iOS engineer, and <a href="mailto:giovanni.lodi42+blog@gmail.com">I&#39;m available for contract work</a>.</p>
+<p>Check out my <a href="http://mokagio.github.io/tech-journal">tech journal</a>, and my app <a href="https://itunes.apple.com/au/app/fineants-savings-tracker/id888444078?mt=8">Fineants</a>.</p>
+</div><div id="links" class="col-3"><p><i class="fa fa-twitter"></i>&nbsp;<a href="https://twitter.com/mokagio">@mokagio</a></p><p><i class="fa fa-github"></i>&nbsp;<a href="https://github.com/mokagio">mokagio</a></p></div></div></div></body><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-43554041-1', 'auto');
+ga('send', 'pageview');</script><script>var external_links = document.querySelectorAll('a:not([href^="/"]):not([href$="#subscribe"])');
+// external_links is an HTMLCollection, not an Array, so we can't call forEach
+for (var i = 0; i < external_links.length; i++) {
+  var link = external_links[i];
+  link.setAttribute("target", "_blank");
+}</script></html>
