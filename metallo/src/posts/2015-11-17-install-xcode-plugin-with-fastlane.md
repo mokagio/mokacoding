@@ -19,7 +19,7 @@ I'm a big fan and user of [Fastlane](https://fastlane.tools/), an ever growing c
 
 At its core Fastlane has a `Fastfile`, a `Rakefile`-like file written in a Ruby DSL, where you can define _lanes_, which are the equivalent of Rake's tasks, and in each lane you can perform _actions_, such as running the test for the app, taking screenshot, distributing a beta version, and much more.
 
-One of the available actions is `install_xcode_plygin`, which takes the URL of a zip file containing an Xcode plugin and downloads then install it for you.
+One of the available actions is `install_xcode_plugin`, which takes the URL of a zip file containing an Xcode plugin and downloads then install it for you.
 
 By leveraging this action we can write a sort of `rc` file with the list of our favourite plugins, and automatically install them on new machines.
 

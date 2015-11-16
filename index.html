@@ -3,8 +3,8 @@
 <p>CLI and rc <a href="https://github.com/alcatraz/Alcatraz/issues/201">are planned</a> for Alcatraz&#39;s version 2 release, but in the meantime here&#39;s an alternative way.</p>
 <h2 id="fastlane-to-the-rescue">Fastlane to the rescue</h2>
 <p>I&#39;m a big fan and user of <a href="https://fastlane.tools/">Fastlane</a>, an ever growing collection of tools that reduce friction in iOS and OS X development by automating mundane and error prone tasks, such as managing Provisioning Profiles, or taking screenshots for every device size.</p>
-<p>At its core Fastlane has a <code>Fstfile</code>, a <code>Rakefile</code>-like file written in a Ruby DSL, where you can define <em>lanes</em>, which are the equivalent of Rake&#39;s tasks, and in each lane you can perform <em>actions</em>, such as running the test for the app, taking screenshot, distributing a beta version, and much more.</p>
-<p>One of the available actions is <code>install_xcode_plygin</code>, which takes the URL of a zip file containing an Xcode plugin and downloads then install it for you.</p>
+<p>At its core Fastlane has a <code>Fastfile</code>, a <code>Rakefile</code>-like file written in a Ruby DSL, where you can define <em>lanes</em>, which are the equivalent of Rake&#39;s tasks, and in each lane you can perform <em>actions</em>, such as running the test for the app, taking screenshot, distributing a beta version, and much more.</p>
+<p>One of the available actions is <code>install_xcode_plugin</code>, which takes the URL of a zip file containing an Xcode plugin and downloads then install it for you.</p>
 <p>By leveraging this action we can write a sort of <code>rc</code> file with the list of our favourite plugins, and automatically install them on new machines.</p>
 <p>Here&#39;s how <a href="https://github.com/mokagio/dotfiles/blob/master/Fastlane/Fastfile">mine</a> looks like:</p>
 <pre><code class=" hljs ruby">lane <span class="hljs-symbol">:install_xcode_plugins</span> <span class="hljs-keyword">do</span>
