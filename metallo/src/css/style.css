@@ -145,3 +145,31 @@ h3 {
 iframe[src*="reddit"] {
   margin-bottom: -2px;
 }
+
+/* Top of the page message */
+.sticky-header {
+	position: fixed;
+	width: 100%;
+  max-width: 100%;
+	margin: -8px 0 0 -8px;
+	padding: 6px;
+	background-color: #27ae60;
+	color: white;
+	text-align: center;
+  z-index: 1000;
+}
+
+.sticky-header .page .row-12:only-child {
+  margin-bottom: 0;
+}
+
+.sticky-header a {
+  color: white;
+}
+
+a.bordered-button {
+  display: inline-block;
+  border: 1px solid white;
+  border-radius: 4px;
+  padding: 8px 12px;
+}
