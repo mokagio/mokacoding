@@ -2,7 +2,7 @@
 layout: post
 title: How to use a double slash in xcconfig files
 description: "A short post showing how to use a double slash in xcconfig files, for example to write URLs like http://mokacoding.com"
-tag: [ xcode, espresso ]
+tags: [ Xcode, Espresso ]
 ---
 
 _This is the first Espresso post of 2016 🎉_

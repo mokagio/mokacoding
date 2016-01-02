@@ -2,7 +2,7 @@
 layout: post
 title: 2015 Retrospective
 tags:
-  - retrospective
+  - Retrospective
 description: A retrospective on my consulting business in 2015. What when well, what didn't and how to act on it, how to move forward in 2016. I think my personal experience could be valuable for every iOS freelancer, I have done a couple of things right that helped my business a lot.
 date: 2015-12-30
 ---
