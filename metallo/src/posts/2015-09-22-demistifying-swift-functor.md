@@ -106,7 +106,7 @@ let plusTwo: Int -> Int = { $0 + 2 }
 let four = plusTwo(2) // => 4
 ```
 
-The code above defines a variable of type `Int -> Int`, or `(Int) -> Int` if you prefer, and assigns it a closure.
+The code above defines a constant of type `Int -> Int`, or `(Int) -> Int` if you prefer, and assigns it a closure.
 
 ## Functions as input
 
