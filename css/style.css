@@ -173,3 +173,12 @@ a.bordered-button {
   border-radius: 4px;
   padding: 8px 12px;
 }
+
+.sticky-header .close-button {
+  float: right;
+  top: 0;
+  right: 0;
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+}
