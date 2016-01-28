@@ -1,0 +1,94 @@
+<!DOCTYPE html><html lang="en"><head><title>How To Fix Fabric Crashing On Startup When Installed Via CocoaPods</title><meta name="description" content="If you are experiencing crashes with a version of Fabric and Crashlytics installed via CocoaPods chances are you are missing required information in the Info.plist. This post shows how to solve this issue."><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"><!-- Open Graph meta tags--><meta property="og:title" content="How To Fix Fabric Crashing On Startup When Installed Via CocoaPods"><meta property="og:description" content="If you are experiencing crashes with a version of Fabric and Crashlytics installed via CocoaPods chances are you are missing required information in the Info.plist. This post shows how to solve this issue."><meta property="og:url" content="/"><meta property="og:type" content="article"><meta property="og:site_name" content="mokacoding"><!-- Stylesheets--><link href="/css/griddy.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet"><link href="/css/font-awesome.min.css" rel="stylesheet"><link href="/css/zenburn.css" rel="stylesheet"><!-- Mailchimp Stylesheets--><link href="//cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css"><link href="/css/mailchimp-form-override.css" rel="stylesheet"><!-- SumoMe--><script src="//load.sumome.com/" data-sumo-site-id="dd80959300db03e20c8bc3dd899f1424fd764d261e6c3c41923c96482a270dba" async="async"></script></head><body><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">unit and acceptance testing, automation, productivity</div><div class="links"><a href="/archive.html">Archive</a><a href="/espresso.html">Espresso</a><a href="/tags.html">Tags</a><a href="http://giovannilodi.com">About</a><a href="#subscribe">Subscribe</a><a href="http://theiostimes.com">The iOS Times</a><a href="/feed.xml"><i class="fa fa-rss"></i></a></div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/how-to-fix-fabric-startup-crash">How To Fix Fabric Crashing On Startup When Installed Via CocoaPods</a></h2><p class="post-meta"><span class="post-date">Thu Jan 28 2016&nbsp;</span><a href="/tag/Espresso/index.html" class="post-tag">-Espresso</a><a href="/tag/iOS/index.html" class="post-tag">-iOS</a></p><div class="post"><p><strong>TL;DR</strong></p>
+<p>If the version of the Fabric and Crashlytics SDK installed via CocoaPods is
+crashing on you throwing a <code>SIGABRT</code> like this:</p>
+<p><img src="https://s3.amazonaws.com/mokacoding/2016-01-28-fabric-crashlytics-crash.png" alt="Screenshot of the crash from within Xcode"></p>
+<p>Then chances are you forgot to add the information Fabric needs to your app&#39;s <code>Info.plist</code>.</p>
+<p>Add this code to your <code>Info.plist</code>, clean and run again.</p>
+<pre><code class=" hljs plist"><span class="hljs-tag">&lt;<span class="hljs-title">key</span>&gt;</span>Fabric<span class="hljs-tag">&lt;/<span class="hljs-title">key</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">dict</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">key</span>&gt;</span>APIKey<span class="hljs-tag">&lt;/<span class="hljs-title">key</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">string</span>&gt;</span>YOUR_API_KEY<span class="hljs-tag">&lt;/<span class="hljs-title">string</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">key</span>&gt;</span>Kits<span class="hljs-tag">&lt;/<span class="hljs-title">key</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">array</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">dict</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">key</span>&gt;</span>KitInfo<span class="hljs-tag">&lt;/<span class="hljs-title">key</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">dict</span>/&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">key</span>&gt;</span>KitName<span class="hljs-tag">&lt;/<span class="hljs-title">key</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">string</span>&gt;</span>Crashlytics<span class="hljs-tag">&lt;/<span class="hljs-title">string</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">dict</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">array</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">dict</span>&gt;</span>
+</code></pre>
+<p><img src="https://s3.amazonaws.com/mokacoding/2016-01-28-fabric-crashlytics-info-plist.png" alt="The Fabric section of the Info.plist from the editor in Xcode"></p>
+<p><strong>TS;WR</strong></p>
+<p>I recently spent a too long amount of time puzzled by the <a href="https://fabric.io">Fabric</a>
+iOS SDK crashing at startup for no apparent reason.</p>
+<p>The line of code crashing was taken from their setup guide, and the only Fabric related instruction I added in the project yet. The only difference between the guide and mine setup was that I used <a href="https://cocoapods.org/">CocoaPods</a>, which is listed as one of the supported methods of installation.</p>
+<p>Since their SDK is closed source, <em>who knows what kind of evil user tracking
+code is in there</em>, I had no way to get more information on the crash.</p>
+<p>The solution to my issue came from my friend and fellow developer <a href="https://twitter.com/argentumko">Vlas Voloshin</a>.</p>
+<p>Vlas was able to look at the problem from a higher point of focus than mine,
+and rightly point out that Fabric and Crashlytics need an API key to work, and that I wasn&#39;t setting it anywhere in the app.</p>
+<p><em>Once somebody tells you it sounds obvious doesn&#39;t it?</em> 😳</p>
+<p>When you setup Fabric using their annoying Mac app, the <code>Info.plist</code> is automatically updated with the required information. When using a less magic approach the file is not updated, so you have to do it yourself.</p>
+<p>Many thanks to Vlas for, once again, helping me out realising the obvious.</p>
+<p><em>Leave the codebase better than you found it.</em></p>
+</div><div id="share-buttons" class="bottom-box no-border"><div class="col-12"><a href="https://twitter.com/share" data-url="http://www.mokacoding.com/blog/how-to-fix-fabric-startup-crash" data-via="mokacoding" datacount-url="http://www.mokacoding.com/blog/how-to-fix-fabric-startup-crash" data-text="How To Fix Fabric Crashing On Startup When Installed Via CocoaPods" class="twitter-share-button">Tweet</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+</script><a href="https://news.ycombinator.com/submit" data-title="How To Fix Fabric Crashing On Startup When Installed Via CocoaPods" data-url="http://www.mokacoding.com/blog/how-to-fix-fabric-startup-crash" data-count="horizontal" data-style="twitter" class="hn-button">Vote on Hacker News</a><script>var HN=[];HN.factory=function(e){return function(){HN.push([e].concat(Array.prototype.slice.call(arguments,0)))};},HN.on=HN.factory("on"),HN.once=HN.factory("once"),HN.off=HN.factory("off"),HN.emit=HN.factory("emit"),HN.load=function(){var e="hn-button.js";if(document.getElementById(e))return;var t=document.createElement("script");t.id=e,t.src="//hn-button.herokuapp.com/hn-button.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n)},HN.load();
+</script><script type="text/javascript">reddit_url="http://www.mokacoding.com/blog/how-to-fix-fabric-startup-crash";
+reddit_title="How To Fix Fabric Crashing On Startup When Installed Via CocoaPods"
+reddit_target="iOSProgramming"
+reddit_newwindow='1';</script><script type="text/javascript" src="//www.redditstatic.com/button/button1.js"></script></div></div><div class="bottom-box no-border"><div class="col-12"><script async="true" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins style="display:block" data-ad-client="ca-pub-1350647337420416" data-ad-slot="4912767686" data-ad-format="auto" class="adsbygoogle"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div></div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"></div><div class="col-6"><div style="text-align: right"><a href="/blog/async-testing-with-quick-and-nimble">Async Testing with Quick and Nimble&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin MailChimp Signup Form -->
+<div id="mc_embed_signup">
+  <form action="//mokacoding.us10.list-manage.com/subscribe/post?u=45a265e2a9d2b9dbec5f98d51&amp;id=0f2ccfb0fa" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+    <label for="mce-EMAIL">Subscribe to our mailing list</label>
+    <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;"><input type="text" name="b_45a265e2a9d2b9dbec5f98d51_0f2ccfb0fa" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+  </form>
+</div>
+</div><div class="bottom-box"><div id="disqus_thread"></div><script>var disqus_shortname = "mokacoding";
+// Neet do add the / at the end to maintain compatibility with previous version
+// of the blog that didn't define disqus_url, letting Disqus set it automatically
+// using window.location.href
+var disqus_url = "http://www.mokacoding.com/blog/how-to-fix-fabric-startup-crash/";
+
+(function() {
+  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><noscript>Please enable JavaScript to view the<a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></div></div></div><div class="row-12 footer"><div class="col-12"><h3><a href="/">mokacoding</a></h3></div><div id="copy" class="col-9"><p>Hi I&#39;m <a href="http://giovannilodi.com">Giovanni Lodi</a> and this is my blog. I write here at least once a month, on software testing, productivity, and iOS development.</p>
+<p>I&#39;m a freelance iOS engineer, and <a href="mailto:giovanni.lodi42+blog@gmail.com">I&#39;m available for contract work</a>.</p>
+<p>Check out my <a href="http://mokagio.github.io/tech-journal">tech journal</a>, and my app <a href="https://itunes.apple.com/au/app/fineants-savings-tracker/id888444078?mt=8">Fineants</a>.</p>
+</div><div id="links" class="col-3"><p><i class="fa fa-twitter"></i>&nbsp;<a href="https://twitter.com/mokagio">@mokagio</a></p><p><i class="fa fa-github"></i>&nbsp;<a href="https://github.com/mokagio">mokagio</a></p></div></div></div></body><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-43554041-1', 'auto');
+ga('send', 'pageview');</script><script>var external_links = document.querySelectorAll('a:not([href^="/"]):not([href$="#subscribe"])');
+// external_links is an HTMLCollection, not an Array, so we can't call forEach
+for (var i = 0; i < external_links.length; i++) {
+  var link = external_links[i];
+  link.setAttribute("target", "_blank");
+}
+</script><script>var toggle = function(elm){
+  var y = elm.style && elm.style.display ? elm.style.display : 'block';
+  if (y == 'block'){
+    elm.style.opacity='0';
+    setTimeout( function(){ elm.style.display = 'none'; }, 300 );
+  }
+  else {
+    elm.style.display='block';
+    setTimeout( function(){ elm.style.opacity = '1'; }, 10 );
+  }
+}
+
+document.getElementById('close').onclick = function(){
+  toggle(document.getElementById('sticky-header'));
+  toggle(document.getElementById('sticky-header-padding-hack'));
+}</script></html>
