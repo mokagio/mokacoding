@@ -6,8 +6,9 @@ tags:
 - Testing
 ---
 
-Most of our iOS application have to interact with at least one serve through
-_the network_. The amount of apps consuming web services is only bound to grow.
+Most of our iOS application have to interact with at least one server or
+service through _the network_. The amount of apps consuming web services is
+only bound to grow.
 
 When testing code that hits the network you expose yourself to all sort of
 problems, such as delays, timeouts, unexpected failures.
