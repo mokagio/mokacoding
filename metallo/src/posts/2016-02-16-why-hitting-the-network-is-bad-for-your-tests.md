@@ -24,7 +24,7 @@ out to the network goes against some of these principles.
 Having your tests hit the network adds the network speed as a constraint
 to how fast your tests can run, hence how quick your feedback cycle is.
 
-### Indeterministic
+### Nondeterministic
 
 Having your tests hit the network also adds a dependency on the data returned
 by the server. You can never be sure that the data returned is actually what
