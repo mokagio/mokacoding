@@ -10,7 +10,7 @@ out to the network goes against some of these principles.</p>
 <h3 id="slow">Slow</h3>
 <p>Having your tests hit the network adds the network speed as a constraint
 to how fast your tests can run, hence how quick your feedback cycle is.</p>
-<h3 id="indeterministic">Indeterministic</h3>
+<h3 id="nondeterministic">Nondeterministic</h3>
 <p>Having your tests hit the network also adds a dependency on the data returned
 by the server. You can never be sure that the data returned is actually what
 you are expecting, unless you started a dedicated server only for the test
@@ -39,7 +39,8 @@ you have at least two options: using a stub library, or fake the network yoursel
 or <a href="https://github.com/luisobo/Nocilla">Nocilla</a> to hijack network requests
 made by your app and prevent them from hit the real server by providing a
 stubbed response.</p>
-<p>We&#39;ll look more into OHHTTPStubs in an upcoming post.</p>
+<p>Head over to <a href="http://mokacoding.com/blog/ohhttpstubs/">the next post</a> for a
+deeper look into OHHTTPStubs.</p>
 <h3 id="roll-your-own">Roll your own</h3>
 <p>Another option is to centralise all the network operations behind one single
 interface conforming to a protocol, for example:</p>
@@ -75,7 +76,7 @@ development. I would really appreciate feedback on it, so please head over to
 reddit_title="Why hitting the network is bad for your test, and what to do about it"
 reddit_target="iOSProgramming"
 reddit_newwindow='1';</script><script type="text/javascript" src="//www.redditstatic.com/button/button1.js"></script></div></div><div class="bottom-box no-border"><div class="col-12"><script async="true" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins style="display:block" data-ad-client="ca-pub-1350647337420416" data-ad-slot="4912767686" data-ad-format="auto" class="adsbygoogle"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});
-</script></div></div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"></div><div class="col-6"><div style="text-align: right"><a href="/blog/ruby-for-ios-developers-bundler">Ruby for iOS Developers - Managing Ruby Tools with Bundler&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin MailChimp Signup Form -->
+</script></div></div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"><div><a href="/blog/ohhttpstubs"><<&nbsp;Getting Started With OHHTTPStubs</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/ruby-for-ios-developers-bundler">Ruby for iOS Developers - Managing Ruby Tools with Bundler&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin MailChimp Signup Form -->
 <div id="mc_embed_signup">
   <form action="//mokacoding.us10.list-manage.com/subscribe/post?u=45a265e2a9d2b9dbec5f98d51&amp;id=0f2ccfb0fa" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
     <div id="mc_embed_signup_scroll">
