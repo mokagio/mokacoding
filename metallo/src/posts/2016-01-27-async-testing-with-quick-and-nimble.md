@@ -103,6 +103,7 @@ helped you with that. If you have any comments, questions, corrections or would
 like help with asynchronous code testing leave a comment below, or get in touch
 on Twitter [@mokagio](https://twitter.com/mokagio).
 
-Stay tuned for the next article in which well see how to decouple ourselves
-from the server when testing network related code.
+Stay tuned for the [next article](http://www.mokacoding.com/blog/why-hitting-the-network-is-bad-for-your-tests/)
+in which well see how to decouple ourselves from the server when testing
+network related code.
 
