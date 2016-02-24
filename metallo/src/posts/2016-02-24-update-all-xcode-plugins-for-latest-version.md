@@ -7,7 +7,7 @@ tags:
 - Xcode
 ---
 
-Today I installed the latest beta version of Xcode, Xcode 7 beta 4. As usual
+Today I installed the latest beta version of Xcode, Xcode 7.3 beta 4. As usual
 none of my plug-ins worked, which makes me really unproductive.
 
 So I went back to [this post](http://www.mokacoding.com/blog/xcode-plugins-update/)
