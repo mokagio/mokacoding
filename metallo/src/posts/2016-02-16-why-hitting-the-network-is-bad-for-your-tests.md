@@ -75,7 +75,7 @@ interface conforming to a protocol, for example:
 
 ```swift
 protocol NetworkService {
-  func performRequest
+  func performRequest(
 		url: NSURL,
 		method: Method,
 		parameters: [String: AnyObject]?,
