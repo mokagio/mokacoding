@@ -8,9 +8,9 @@ tags:
 - Espresso
 ---
 
-_I always had to look this up, so I though I should write a little memo post about it_ 😊.
+_I always have to look this up, so I though I should write a little memo post about it_ 😊.
 
-As mobile developer we often have to work with JSON APIs, and they often have
+As mobile developers we often have to work with JSON APIs, and they usually have
 dates.
 
 JSON itself doesn't have a date type, so dates are represented as strings. The
@@ -49,5 +49,7 @@ func testProperty() {
 	XCTAssertEqualWithAccuracy(sut.dateFromString(nowToJSON)!.timeIntervalSince1970, now.timeIntervalSince1970, accuracy: 0.001)
 }
 ```
+
+You can see this code live [here](https://github.com/mokagio/NSDateFormatterJSON).
 
 _Leave the codebase better than you found it._
