@@ -7,6 +7,8 @@ tags:
 - Talks
 ---
 
+**Update:** I published a post version of the talk, [check it out](http://mokacoding.com/blog/functional-core-reactive-shell).
+
 These are some links and credits for my recent talk "Functional Core, Reactive Shell", also called "Pizza Driven Development".
 
 [Ken Scambler](https://twitter.com/kenscambler) has done some great work in providing a constructive critique to mocks and stubs, and how to write code that doesn't need them.
