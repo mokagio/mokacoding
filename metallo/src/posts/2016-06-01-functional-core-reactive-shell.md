@@ -1,3 +1,14 @@
+---
+title: Functional Core Reactive Shell
+description: 'This is a blogpost version of the content of my talk "Functional Core, Reactive Shell"'
+tags:
+- Functional Programming
+- Functional Reactive Programming
+- Talks
+- Swift
+- Software Design
+date: 2016-06-01
+---
 
 During the past couple of months I gave a talk named "Functional Core, Reactive
 Shell" (or something similar) at a number of (3) events. I think is my best
