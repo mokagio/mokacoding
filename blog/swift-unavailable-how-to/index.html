@@ -1,0 +1,91 @@
+<!DOCTYPE html><html lang="en"><head><title>How to make Swift methods unavailable</title><meta name="description" content="A quick post showing how to use the Swift availability attribute to mark objects and functions as unavailable."><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"><!-- Open Graph meta tags--><meta property="og:title" content="How to make Swift methods unavailable"><meta property="og:description" content="A quick post showing how to use the Swift availability attribute to mark objects and functions as unavailable."><meta property="og:url" content="/"><meta property="og:type" content="article"><meta property="og:site_name" content="mokacoding"><!-- Stylesheets--><link href="/css/griddy.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet"><link href="/css/font-awesome.min.css" rel="stylesheet"><link href="/css/zenburn.css" rel="stylesheet"><!-- Mailchimp Stylesheets--><link href="//cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css"><link href="/css/mailchimp-form-override.css" rel="stylesheet"><!-- SumoMe--><script src="//load.sumome.com/" data-sumo-site-id="dd80959300db03e20c8bc3dd899f1424fd764d261e6c3c41923c96482a270dba" async="async"></script></head><body><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">unit and acceptance testing, automation, productivity</div><div class="links"><a href="/archive.html">Archive</a><a href="/espresso.html">Espresso</a><a href="/tags.html">Tags</a><a href="http://giovannilodi.com">About</a><a href="#subscribe">Subscribe</a><a href="http://theiostimes.com">The iOS Times</a><a href="/feed.xml"><i class="fa fa-rss"></i></a></div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/swift-unavailable-how-to">How to make Swift methods unavailable</a></h2><p class="post-meta"><span class="post-date">Tue Jun 07 2016&nbsp;</span><a href="/tag/Swift/index.html" class="post-tag">-Swift</a><a href="/tag/Espresso/index.html" class="post-tag">-Espresso</a></p><div class="post"><p>It is sometimes handy to make a piece of code unavailable without actually deleting it. Two use cases come to mind:</p>
+<ul>
+<li>A subclass making methods of the superclass unavailable.</li>
+<li>Legacy code that we need to keep in the source to keep supporting old versions or documentation.</li>
+</ul>
+<p>In such cases we can use Swift&#39;s <code>available</code> declaration attribute to tell the compiler that code using the marked object or function should not compile.</p>
+<pre><code class=" hljs swift"><span class="hljs-comment">// Swift 2.2</span>
+@available(&lt;platform&gt;, unavailable=&lt;version&gt;, message=&lt;message&gt;)
+
+<span class="hljs-comment">// Swift 3</span>
+@available(&lt;platform&gt;, unavailable: &lt;version&gt;, message: &lt;message&gt;)
+</code></pre>
+<p>For example, if you have to subclass <code>NSObject</code> into something that has a stored constant which needs to be passed at initialization, and don&#39;t want to allow consumers to call <code>init</code> because it doesn&#39;t make sense to set a default value for the constant, you can make <code>init</code> unavailable to its consumers:</p>
+<pre><code class=" hljs swift"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Dummy</span>: <span class="hljs-title">NSObject</span> </span>{
+
+  <span class="hljs-keyword">let</span> foo: <span class="hljs-type">String</span>
+
+  <span class="hljs-keyword">init</span>(foo: <span class="hljs-type">String</span>) {
+    <span class="hljs-keyword">self</span>.foo = foo
+  }
+
+    @available(*, unavailable)
+    <span class="hljs-keyword">override</span> <span class="hljs-keyword">init</span>() {
+    fatalError()
+  }
+}
+</code></pre>
+<p>Note how the <code>platform</code> parameter has <code>*</code> value, which means <em>any platform</em>, and <code>unavailable</code> has no version value, which means that the methods is unavailable regardless of the current version.</p>
+<p>Unfortunately, as of 2.2, this kind of availability declaration is not converted into an Objective-C attribute, so Objective-C consumers will still see the methods and classes as available.</p>
+<p>If you are reading this and know a way to make Swift code unavailable to both Swift and Objective-C callers, please let me know by leaving a comment below, or getting in touch on Twitter <a href="https://twitter.com/mokagio">@mokagio</a>. Thanks.</p>
+<p>More on Swift&#39;s declaration attributes can be found <a href="https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Attributes.html#//apple_ref/doc/uid/TP40014097-CH35-ID347">on the Apple&#39;s documentation page</a>.</p>
+<p><em>Leave the codebase better than you found it.</em></p>
+</div><div id="share-buttons" class="bottom-box no-border"><div class="col-12"><a href="https://twitter.com/share" data-url="http://www.mokacoding.com/blog/swift-unavailable-how-to" data-via="mokacoding" datacount-url="http://www.mokacoding.com/blog/swift-unavailable-how-to" data-text="How to make Swift methods unavailable" class="twitter-share-button">Tweet</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+</script><a href="https://news.ycombinator.com/submit" data-title="How to make Swift methods unavailable" data-url="http://www.mokacoding.com/blog/swift-unavailable-how-to" data-count="horizontal" data-style="twitter" class="hn-button">Vote on Hacker News</a><script>var HN=[];HN.factory=function(e){return function(){HN.push([e].concat(Array.prototype.slice.call(arguments,0)))};},HN.on=HN.factory("on"),HN.once=HN.factory("once"),HN.off=HN.factory("off"),HN.emit=HN.factory("emit"),HN.load=function(){var e="hn-button.js";if(document.getElementById(e))return;var t=document.createElement("script");t.id=e,t.src="//hn-button.herokuapp.com/hn-button.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n)},HN.load();
+</script><script type="text/javascript">reddit_url="http://www.mokacoding.com/blog/swift-unavailable-how-to";
+reddit_title="How to make Swift methods unavailable"
+reddit_target="iOSProgramming"
+reddit_newwindow='1';</script><script type="text/javascript" src="//www.redditstatic.com/button/button1.js"></script></div></div><div class="bottom-box no-border"><div class="col-12"><script async="true" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins style="display:block" data-ad-client="ca-pub-1350647337420416" data-ad-slot="4912767686" data-ad-format="auto" class="adsbygoogle"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div></div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"></div><div class="col-6"><div style="text-align: right"><a href="/blog/functional-core-reactive-shell">Functional Core Reactive Shell&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin MailChimp Signup Form -->
+<div id="mc_embed_signup">
+  <form action="//mokacoding.us10.list-manage.com/subscribe/post?u=45a265e2a9d2b9dbec5f98d51&amp;id=0f2ccfb0fa" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+    <label for="mce-EMAIL">Subscribe to our mailing list</label>
+    <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;"><input type="text" name="b_45a265e2a9d2b9dbec5f98d51_0f2ccfb0fa" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+  </form>
+</div>
+</div><div class="bottom-box"><div id="disqus_thread"></div><script>var disqus_shortname = "mokacoding";
+// Neet do add the / at the end to maintain compatibility with previous version
+// of the blog that didn't define disqus_url, letting Disqus set it automatically
+// using window.location.href
+var disqus_url = "http://www.mokacoding.com/blog/swift-unavailable-how-to/";
+
+(function() {
+  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><noscript>Please enable JavaScript to view the<a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></div></div></div><div class="row-12 footer"><div class="col-12"><h3><a href="/">mokacoding</a></h3></div><div id="copy" class="col-9"><p>Hi I&#39;m <a href="http://giovannilodi.com">Giovanni Lodi</a> and this is my blog. I write here at least once a month, on software testing, productivity, and iOS development.</p>
+<p>I&#39;m a freelance iOS engineer, and <a href="mailto:giovanni.lodi42+blog@gmail.com">I&#39;m available for contract work</a>.</p>
+<p>Check out my <a href="http://mokagio.github.io/tech-journal">tech journal</a>, and my app <a href="https://itunes.apple.com/au/app/fineants-savings-tracker/id888444078?mt=8">Fineants</a>.</p>
+</div><div id="links" class="col-3"><p><i class="fa fa-twitter"></i>&nbsp;<a href="https://twitter.com/mokagio">@mokagio</a></p><p><i class="fa fa-github"></i>&nbsp;<a href="https://github.com/mokagio">mokagio</a></p></div></div></div></body><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-43554041-1', 'auto');
+ga('send', 'pageview');</script><script>var external_links = document.querySelectorAll('a:not([href^="/"]):not([href$="#subscribe"])');
+// external_links is an HTMLCollection, not an Array, so we can't call forEach
+for (var i = 0; i < external_links.length; i++) {
+  var link = external_links[i];
+  link.setAttribute("target", "_blank");
+}
+</script><script>var toggle = function(elm){
+  var y = elm.style && elm.style.display ? elm.style.display : 'block';
+  if (y == 'block'){
+    elm.style.opacity='0';
+    setTimeout( function(){ elm.style.display = 'none'; }, 300 );
+  }
+  else {
+    elm.style.display='block';
+    setTimeout( function(){ elm.style.opacity = '1'; }, 10 );
+  }
+}
+
+document.getElementById('close').onclick = function(){
+  toggle(document.getElementById('sticky-header'));
+  toggle(document.getElementById('sticky-header-padding-hack'));
+}</script></html>
