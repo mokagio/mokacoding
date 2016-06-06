@@ -33,8 +33,8 @@ class Dummy: NSObject {
     self.foo = foo
   }
 
-	@available(*, unavailable)
-	override init() {
+  @available(*, unavailable)
+  override init() {
     fatalError()
   }
 }
