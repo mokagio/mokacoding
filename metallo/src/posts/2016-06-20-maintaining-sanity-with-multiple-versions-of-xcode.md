@@ -1,5 +1,5 @@
 ---
-title: Keeping Sanity with Multiple Versions of Xcode
+title: Maintaining Sanity with Multiple Versions of Xcode
 description: Working with Xcode and Xcode-beta on the same machine can sometimes be confusing, this post shares some tools to help make it less so.
 tags:
 - Xcode
