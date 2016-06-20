@@ -71,10 +71,10 @@ You can read more about these and the other features of `swiftenv` on its [docum
 ---
 
 I'd really like all of us to always download and try each new beta version of
-Xcode. We all know how useful it is to share beta of the apps we made with
-users or clients to receive feedback. The same stand true for the Apple
+Xcode. We all know how useful it is to share betas of the apps we made with
+users or clients to receive feedback. The same stands true for the Apple
 developers in the Xcode team, our feedback is very valuable for them, and it
-is in our best interest to let them know which kind of feature we need, and
+is in our best interest to let them know which kind of features we need, and
 what doesn't work.
 
 On top of that starting to work now on the toolchain you'll need in 3 months
@@ -84,5 +84,7 @@ have to stress and rush into moving from one version to the other.
 If you know of another tool or trick to make working with Xcode-beta easier
 please share it in the comments below, or get in touch with me on Twitter
 [@mokagio](https://twitter.com/mokagio).
+
+A special thanks to [Pete Goldsmith](https://twitter.com/_petegoldsmith) for the feedback on the draft of this post 💚.
 
 _Keep the codebase better than you found it._
