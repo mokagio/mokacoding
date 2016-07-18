@@ -54,6 +54,8 @@ usage for either: injecting extra cells in a table or collection view.
 
 ## Injecting cells in a table view using Either
 
+![screenshot of app using Either to inject ad banner cells in table view](https://s3.amazonaws.com/mokacoding/2016-07-18-either-table-view.png)
+
 Sometimes we need to display lists in table or collection views with extra
 cells dedicated to call to action, or advertisement banners, which we'll let the
 user remove through in-app purchase (a dev still needs to pay the bills right?).
