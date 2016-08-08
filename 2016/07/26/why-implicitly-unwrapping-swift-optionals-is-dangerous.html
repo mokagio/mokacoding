@@ -1,4 +1,13 @@
-<!DOCTYPE html><html lang="en"><head><title>Why Implicitly Unwrapping Swift Optionals Is Dangerous</title><meta name="description" content="A look at what implicitly unwrapping an Optional value means and why it should be avoided."><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"><!-- Open Graph meta tags--><meta property="og:title" content="Why Implicitly Unwrapping Swift Optionals Is Dangerous"><meta property="og:description" content="A look at what implicitly unwrapping an Optional value means and why it should be avoided."><meta property="og:url" content="/"><meta property="og:type" content="article"><meta property="og:site_name" content="mokacoding"><!-- Stylesheets--><link href="/css/griddy.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet"><link href="/css/font-awesome.min.css" rel="stylesheet"><link href="/css/zenburn.css" rel="stylesheet"><!-- Mailchimp Stylesheets--><link href="//cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css"><link href="/css/mailchimp-form-override.css" rel="stylesheet"><!-- SumoMe--><script src="//load.sumome.com/" data-sumo-site-id="dd80959300db03e20c8bc3dd899f1424fd764d261e6c3c41923c96482a270dba" async="async"></script></head><body><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">unit and acceptance testing, automation, productivity</div><div class="links"><a href="/archive.html">Archive</a><a href="/espresso.html">Espresso</a><a href="/tags.html">Tags</a><a href="http://giovannilodi.com">About</a><a href="#subscribe">Subscribe</a><a href="http://theiostimes.com">The iOS Times</a><a href="/feed.xml"><i class="fa fa-rss"></i></a></div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/why-implicitly-unwrapping-swift-optionals-is-dangerous">Why Implicitly Unwrapping Swift Optionals Is Dangerous</a></h2><p class="post-meta"><span class="post-date">Tue Jul 26 2016&nbsp;</span><a href="/tag/Swift/index.html" class="post-tag">-Swift</a></p><div class="post"><p>This post is the third and last part of the little series on Swift&#39;s <code>Optional</code>
+<!DOCTYPE html><html lang="en"><head><title>Why Implicitly Unwrapping Swift Optionals Is Dangerous</title><meta name="description" content="A look at what implicitly unwrapping an Optional value means and why it should be avoided."><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"><!-- Open Graph meta tags--><meta property="og:title" content="Why Implicitly Unwrapping Swift Optionals Is Dangerous"><meta property="og:description" content="A look at what implicitly unwrapping an Optional value means and why it should be avoided."><meta property="og:url" content="/"><meta property="og:type" content="article"><meta property="og:site_name" content="mokacoding"><!-- Stylesheets--><link href="/css/griddy.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet"><link href="/css/font-awesome.min.css" rel="stylesheet"><link href="/css/zenburn.css" rel="stylesheet"><!-- Mailchimp Stylesheets--><link href="//cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css"><link href="/css/mailchimp-form-override.css" rel="stylesheet"><!-- SumoMe--><script src="//load.sumome.com/" data-sumo-site-id="dd80959300db03e20c8bc3dd899f1424fd764d261e6c3c41923c96482a270dba" async="async"></script></head><body><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">unit and acceptance testing, automation, productivity</div><div class="links"><a href="/archive.html">Archive</a><a href="/espresso.html">Espresso</a><a href="/tags.html">Tags</a><a href="http://giovannilodi.com">About</a><a href="#subscribe">Subscribe</a><a href="http://theiostimes.com">The iOS Times</a><a href="/feed.xml"><i class="fa fa-rss"></i></a></div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/why-implicitly-unwrapping-swift-optionals-is-dangerous">Why Implicitly Unwrapping Swift Optionals Is Dangerous</a></h2><p class="post-meta"><span class="post-date">Tue Jul 26 2016&nbsp;</span><a href="/tag/Swift/index.html" class="post-tag">-Swift</a></p><div class="post"><h2 id="update">Update</h2>
+<p>The terminology used in this post is not entirely correct. In most of the
+occasions where &quot;implicitly unwrapping&quot; it&#39;s used what should actually be used
+is &quot;force unwrap&quot;.</p>
+<p>You can read more about the difference between the two
+<a href="http://mokacoding.com/blog/impliticly-vs-force-unwrapping-swift-optionals.md">here</a>.</p>
+<p>The message of the post doesn&#39;t change though. Implicitly and force unwrapping
+Swift optionals is dangerous. Read along to find out why.</p>
+<hr>
+<p>This post is the third and last part of the little series on Swift&#39;s <code>Optional</code>
 type that I&#39;ve been writing over the past few weeks.</p>
 <ul>
 <li><a href="http://www.mokacoding.com/blog/what-is-an-optional-value-in-swift/">What is an optional value in Swift</a></li>
@@ -59,15 +68,16 @@ the compiler error suggests.</p>
 </code></pre>
 <p>The type returned by that code is <code>Optional&lt;Bool&gt;</code>, it carries the optional
 wrapping with it.</p>
-<p>What does <code>!</code> mean then? The <code>!</code> syntax allows us to <em>implicitly unwrap</em>
-optional values.</p>
+<p>What does <code>!</code> mean then? The <code>!</code> syntax allows us to <del><em>implicitly
+unwrap</em></del> <em>force unwrap</em> optional values.</p>
 <pre><code class=" hljs swift">someString!.isEmpty
 </code></pre>
 <p>The type returned by the code with <code>!</code> is <code>Bool</code> now, the optional wrapping has
 been removed by the compiler.</p>
 <p>The important difference is that while when using <code>if</code> or <code>guard</code> we are
 actually unwrapping the value out of the optional container and deal with the
-case in which it is <code>nil</code>, using implicitly unwrapping we are not.</p>
+case in which it is <code>nil</code>, using <del>implicitly unwrapping</del> force unwrap
+we are not.</p>
 <p>When you write a <code>!</code> you&#39;re telling the compiler &quot;Dude, chill about these
 <code>nil</code>, I assure you that there&#39;s a value in there. Trust me!&quot;. And the compiler
 like every other good machine will do what its told and proceed to unwrap the
@@ -90,10 +100,11 @@ Current stack trace:
 ...
 </code></pre><p>This is the reason I told my colleagues &quot;The <code>!</code>s are <strong>very dangerous</strong>, and
 should be used only in extreme circumstances.&quot;.</p>
-<p>Implicitly unwrapping gives you the power to treat optional values as actual
-values, but from great powers come great responsibilities. You need to be 100%
-sure that the value you implicitly unwrapped will never be nil, or you&#39;re app
-will crash, and you&#39;re users will be unhappy.</p>
+<p><del>Implicitly unwrapping</del> Force unwrap gives you the power to treat
+optional values as actual values, but from great powers come great
+responsibilities. You need to be 100% sure that the value you
+<del>implicitly</del> force unwrapped will never be nil, or you&#39;re app will
+crash, and you&#39;re users will be unhappy.</p>
 <p>Personally I prefer to spend that little extra time to write code to handle
 nullability and make my app more robust. I don&#39;t trust my assumptions, and I
 don&#39;t trust values getting into my code from third parties.</p>
