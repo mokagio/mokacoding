@@ -5,6 +5,20 @@ tags:
 - Swift
 ---
 
+## Update
+
+The terminology used in this post is not entirely correct. In most of the
+occasions where "implicitly unwrapping" it's used what should actually be used
+is "force unwrap".
+
+You can read more about the difference between the two
+[here](http://mokacoding.com/blog/impliticly-vs-force-unwrapping-swift-optionals.md).
+
+The message of the post doesn't change though. Implicitly and force unwrapping
+Swift optionals is dangerous. Read along to find out why.
+
+---
+
 This post is the third and last part of the little series on Swift's `Optional`
 type that I've been writing over the past few weeks.
 
@@ -90,8 +104,8 @@ someString?.isEmpty
 The type returned by that code is `Optional<Bool>`, it carries the optional
 wrapping with it.
 
-What does `!` mean then? The `!` syntax allows us to _implicitly unwrap_
-optional values.
+What does `!` mean then? The `!` syntax allows us to <del>_implicitly
+unwrap_</del> _force unwrap_ optional values.
 
 ```swift
 someString!.isEmpty
@@ -102,7 +116,8 @@ been removed by the compiler.
 
 The important difference is that while when using `if` or `guard` we are
 actually unwrapping the value out of the optional container and deal with the
-case in which it is `nil`, using implicitly unwrapping we are not.
+case in which it is `nil`, using <del>implicitly unwrapping</del> force unwrap
+we are not.
 
 When you write a `!` you're telling the compiler "Dude, chill about these
 `nil`, I assure you that there's a value in there. Trust me!". And the compiler
@@ -136,10 +151,11 @@ Current stack trace:
 This is the reason I told my colleagues "The `!`s are **very dangerous**, and
 should be used only in extreme circumstances.".
 
-Implicitly unwrapping gives you the power to treat optional values as actual
-values, but from great powers come great responsibilities. You need to be 100%
-sure that the value you implicitly unwrapped will never be nil, or you're app
-will crash, and you're users will be unhappy.
+<del>Implicitly unwrapping</del> Force unwrap gives you the power to treat
+optional values as actual values, but from great powers come great
+responsibilities. You need to be 100% sure that the value you
+<del>implicitly</del> force unwrapped will never be nil, or you're app will
+crash, and you're users will be unhappy.
 
 Personally I prefer to spend that little extra time to write code to handle
 nullability and make my app more robust. I don't trust my assumptions, and I
