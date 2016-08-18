@@ -154,8 +154,8 @@ should be used only in extreme circumstances.".
 <del>Implicitly unwrapping</del> Force unwrap gives you the power to treat
 optional values as actual values, but from great powers come great
 responsibilities. You need to be 100% sure that the value you
-<del>implicitly</del> force unwrapped will never be nil, or you're app will
-crash, and you're users will be unhappy.
+<del>implicitly</del> force unwrapped will never be nil, or your app will
+crash, and your users will be unhappy.
 
 Personally I prefer to spend that little extra time to write code to handle
 nullability and make my app more robust. I don't trust my assumptions, and I
