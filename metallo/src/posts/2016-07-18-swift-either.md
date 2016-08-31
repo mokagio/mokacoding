@@ -70,7 +70,7 @@ Or we could use `Either`.
 Rather than an array of cell models we could feed the data source an array of `Either<CellModel, BannerModel>`.
 
 ```swift
-let data: Either<CellModel, BannerModel> = ...
+let data: [Either<CellModel, BannerModel>] = ...
 
 func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
   return data.count

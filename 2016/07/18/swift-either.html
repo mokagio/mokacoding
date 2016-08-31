@@ -42,7 +42,7 @@ display from the array of data based on the number of banner cells that we&#39;v
 already displayed.</p>
 <p>Or we could use <code>Either</code>.</p>
 <p>Rather than an array of cell models we could feed the data source an array of <code>Either&lt;CellModel, BannerModel&gt;</code>.</p>
-<pre><code class=" hljs swift"><span class="hljs-keyword">let</span> data: <span class="hljs-type">Either</span>&lt;<span class="hljs-type">CellModel</span>, <span class="hljs-type">BannerModel</span>&gt; = ...
+<pre><code class=" hljs swift"><span class="hljs-keyword">let</span> data: [<span class="hljs-type">Either</span>&lt;<span class="hljs-type">CellModel</span>, <span class="hljs-type">BannerModel</span>&gt;] = ...
 
 <span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">tableView</span><span class="hljs-params">(<span class="hljs-number">_</span> tableView: UITableView, numberOfRowsInSection section: Int)</span></span> -&gt; <span class="hljs-type">Int</span> {
   <span class="hljs-keyword">return</span> data.<span class="hljs-built_in">count</span>
