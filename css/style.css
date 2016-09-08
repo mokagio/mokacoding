@@ -149,6 +149,10 @@ iframe[src*="reddit"] {
 /* Top of the page message */
 .sticky-header {
 	position: fixed;
+  z-index: 1000;
+}
+
+.special-header {
 	width: 100%;
   max-width: 100%;
 	margin: -8px 0 0 -8px;
@@ -156,14 +160,13 @@ iframe[src*="reddit"] {
 	background-color: #27ae60;
 	color: white;
 	text-align: center;
-  z-index: 1000;
 }
 
-.sticky-header .page .row-12:only-child {
+.special-header .page .row-12:only-child {
   margin-bottom: 0;
 }
 
-.sticky-header a {
+.special-header a {
   color: white;
 }
 
@@ -174,7 +177,7 @@ a.bordered-button {
   padding: 8px 12px;
 }
 
-.sticky-header .close-button {
+.special-header .close-button {
   float: right;
   top: 0;
   right: 0;
