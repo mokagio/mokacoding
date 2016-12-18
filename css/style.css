@@ -185,14 +185,3 @@ a.bordered-button {
   height: 16px;
   margin-right: 8px;
 }
-
-ul li {
-  list-style-type: none;
-}
-ul li:before {
-  /* Unicode bullet symbol */
-  content: '\2022 ';
-  /* Bullet color */
-  color: #838383; 
-  padding-right: 0.6em;
-}
