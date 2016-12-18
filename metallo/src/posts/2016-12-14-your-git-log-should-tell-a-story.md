@@ -14,9 +14,9 @@ There are different ways to do this, a quick one is to run `git log` and to
 skim through the commit messages looking for something suspicious. That is, if
 the commit messages tell something useful.
 
-We software developer take a lot of care in crafting readable and efficient
-code, but too often not enough in writing informative commits. Is not uncommon
-to see logs like this (ficticious) one:
+We software developers take a lot of care in crafting readable and efficient
+code, but too often not enough in writing informative commits. It is not
+uncommon to see logs like this (fictitious) one:
 
 ```
 $ git log --format=oneline --abbrev-commit
