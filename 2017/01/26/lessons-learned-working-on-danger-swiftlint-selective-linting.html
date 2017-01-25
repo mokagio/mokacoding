@@ -1,0 +1,111 @@
+<!DOCTYPE html><html lang="en"><head><title>Lessons learned working on danger-switling selective linting</title><meta name="description" content="A little post to share some things I learnt while working on a PR for danger-swiftlint to allow selective linting."><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"><!-- Open Graph meta tags--><meta property="og:title" content="Lessons learned working on danger-switling selective linting"><meta property="og:description" content="A little post to share some things I learnt while working on a PR for danger-swiftlint to allow selective linting."><meta property="og:url" content="/"><meta property="og:type" content="article"><meta property="og:site_name" content="mokacoding"><!-- Stylesheets--><link href="/css/griddy.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet"><link href="/css/font-awesome.min.css" rel="stylesheet"><link href="/css/zenburn.css" rel="stylesheet"><!-- Mailchimp Stylesheets--><link href="//cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css"><link href="/css/mailchimp-form-override.css" rel="stylesheet"><!-- SumoMe--><script src="//load.sumome.com/" data-sumo-site-id="dd80959300db03e20c8bc3dd899f1424fd764d261e6c3c41923c96482a270dba" async="async"></script></head><body><!-- Use this to render an extra header in special occasions--><!-- include _special-header--><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">unit and acceptance testing, automation, productivity</div><div class="links"><a href="/archive.html">Archive</a><a href="/espresso.html">Espresso</a><a href="/tags.html">Tags</a><a href="http://giovannilodi.com">About</a><a href="#subscribe">Subscribe</a><a href="http://theiostimes.com">The iOS Times</a><a href="/feed.xml"><i class="fa fa-rss"></i></a></div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/lessons-learned-working-on-danger-swiftlint-selective-linting">Lessons learned working on danger-switling selective linting</a></h2><p class="post-meta"><span class="post-date">Thu Jan 26 2017&nbsp;</span><a href="/tag/Espresso/index.html" class="post-tag">-Espresso</a><a href="/tag/Ruby/index.html" class="post-tag">-Ruby</a><a href="/tag/Open-Source/index.html" class="post-tag">-Open Source</a></p><div class="post"><p>A few weeks ago I opened a PR on <a href="https://github.com/ashfurrow/danger-swiftlint">danger-swiftlint</a>, a plugin for <a href="https://github.com/danger/danger">Danger</a> that runs as part of your CI and will post a comments with all the style violations reported by <a href="https://github.com/realm/SwiftLint">SwiftLint</a> on the files touched by the PR. This work gave me the chance to learn more about Ruby development and testing, and I&#39;d like to share my findings here.</p>
+<p>The changes my PR made aimed to address the problem described in <a href="https://github.com/ashfurrow/danger-swiftlint/issues/16">this issue</a>. The previous version of the plugin used to run the linting on all the files in the project due to a <a href="https://github.com/realm/SwiftLint/issues/551">limitation</a> in how SwiftLint itself handles command line options while also given a config file.</p>
+<p>In the issue there was also a proposed solution. We can workaround the SwiftLint limitation by providing a configuration file that would not conflict with the options used to run the tool.</p>
+<p>What my PR did was exactly that. First look for a configuration file, and if found generate a copy on the fly that does not include the node specifying which paths to inspect, and then call SwiftLint using the newly generated configuration file.</p>
+<p>This is not rocket science, and the Ruby code to implement this is fairly trivial. What I find worth sharing is the way the code is tested.</p>
+<p>The way the plugin is tested is through heavy use of <a href="http://rspec.info/">RSpec</a> stubs and mocks. Each possible way in which the plugin can run is an example in which the <code>swiftlint</code> binary is mocked to be allowed to be invoked in a certain fashion, and return a certain value. This allows us to test two things, that SwiftLint is called in the right way, and that the data manipulation performed by the plugin behaves as expected.</p>
+<p>When contributing to someone else&#39;s codebase it is important to be aware of the style used, and try to stay in line with it. This is not the style of testing that I would use, but it was interesting and fun to force myself to work in that fashion.</p>
+<p>What I found challenging during my work on the PR was how to mock the behaviour of <code>Tempfile</code> in order to test that my code used it properly.</p>
+<h2 id="how-to-mock-ruby-tempfile-open-block-in-rspec">How to mock Ruby Tempfile open block in RSpec</h2>
+<p>As said above the new code added by my PR generates a new configuration file on the fly and uses it instead of the one present in the repository. To do this we use <a href="http://ruby-doc.org/stdlib-1.9.3/libdoc/tempfile/rdoc/Tempfile.html"><code>Tempfile</code></a>.</p>
+<p>When working with files in Ruby it is always important to clean after yourself, that is, to ensure that the files are properly close after you are done working with them. My favourite way to do so is to use API that accept a block, and that take care of closing the file for you. I find this more robust to changes that using <code>begin ensure end</code>.</p>
+<p>Now here&#39;s the problem I had to solve while writing the tests. Unit testing is all about controlling the inputs given to the system under test, and verifying the outputs it generates are as expected. The behaviours I needed to test were:</p>
+<ul>
+<li>The configuration file generated on the fly does not contain the configuration node that results in clashes with the CLI option</li>
+<li><code>swiftlint</code> is invoked by passing it the newly generated configuration file</li>
+</ul>
+<p>Central to testing both these behaviour is knowing the path of the temporary file, so that we can ready it and compare it with the one used in the invocation.</p>
+<p>To do so we need to stub the method used to generate such temporary file, <a href="http://ruby-doc.org/stdlib-1.9.3/libdoc/tempfile/rdoc/Tempfile.html#method-i-open"><code>Tempfile#open</code></a>.</p>
+<p>RSpec provides a way to stub a method call response by <a href="https://www.relishapp.com/rspec/rspec-mocks/v/3-2/docs/configuring-responses/block-implementation#yield-to-the-caller&#39;s-block">yelding to the caller&#39;s block</a>:</p>
+<p>That&#39;s all I needed 😄.</p>
+<pre><code class=" hljs ruby">fake_temp_file = <span class="hljs-constant">Tempfile</span>.new(<span class="hljs-string">'fake.yml'</span>)
+
+<span class="hljs-comment"># Using begin-ensure-end here to avoid confusingly calling Tempfile.open and</span>
+<span class="hljs-comment"># stubbing it at the same time.</span>
+<span class="hljs-keyword">begin</span>
+  allow(<span class="hljs-constant">Tempfile</span>).to receive(<span class="hljs-symbol">:open</span>) { |&amp;block| block.call(fake_temp_file) }
+  <span class="hljs-comment"># Rest of the test...</span>
+<span class="hljs-keyword">ensure</span>
+  fake_temp_file.close
+  fake_temp_file.unlink
+<span class="hljs-keyword">end</span>
+</code></pre>
+<h2 id="how-to-remove-keys-from-a-ruby-hash">How to remove keys from a Ruby hash</h2>
+<p>Part of what the PR needed to do was to generate a new configuration YAML file that wouldn&#39;t include the node that the CLI option cannot override.</p>
+<p>To do so the original configuration file is read and put into an hash. The hash is then mutated removing the key corresponding to the setting that needs to be overridden via CLI. Finally the hash is converted back into YAML and wrote into the temporary file.</p>
+<p>I naively thought that setting its value to nil would have been enough to remove a key from an hash. I should have though about it for longer that one second.</p>
+<p>Setting a key&#39;s value to nil… sets it&#39;s value to nil 😅 The key is still there.</p>
+<p>This is usually ok in code because we usually do things like <code>unless hash[:key].nil? do ...</code>. In the case of serialization to YAML that&#39;s no good though, as what we&#39;d get is a YAML with an empty node corresponding to the key with nil value.</p>
+<pre><code class=" hljs ruby"><span class="hljs-keyword">require</span> <span class="hljs-string">'yaml'</span>
+
+hash = { <span class="hljs-symbol">foo:</span> <span class="hljs-keyword">nil</span> }
+
+hash.to_yaml
+<span class="hljs-comment"># =&gt; "---\n:foo: \n"</span>
+</code></pre>
+<p>The correct way to remove a key from an hash is to use <code>tap</code>.</p>
+<pre><code class=" hljs ruby">{ <span class="hljs-symbol">foo:</span> <span class="hljs-keyword">nil</span>, <span class="hljs-symbol">bar:</span> <span class="hljs-string">'baz'</span> }.tap { |hash| hash.delete(<span class="hljs-symbol">:foo</span>) }
+<span class="hljs-comment"># =&gt; { :bar =&gt;"baz" }</span>
+</code></pre>
+<hr>
+<p>I love open source and being able to support the projects I use by contributing to them. Submitting pull requests is always a great occasion to learn new things and to grow as a developer. I encourage you to do the same!</p>
+<p>If you know of a better way of achieving the same results as I did, or if you have any other  please leave a comment below or get in touch on Twitter <a href="https://twitter.com/mokagio">@mokagio</a>.</p>
+</div><div id="share-buttons" class="bottom-box no-border"><div class="col-12"><a href="https://twitter.com/share" data-url="http://www.mokacoding.com/blog/lessons-learned-working-on-danger-swiftlint-selective-linting" data-via="mokacoding" datacount-url="http://www.mokacoding.com/blog/lessons-learned-working-on-danger-swiftlint-selective-linting" data-text="Lessons learned working on danger-switling selective linting" class="twitter-share-button">Tweet</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+</script><a href="https://news.ycombinator.com/submit" data-title="Lessons learned working on danger-switling selective linting" data-url="http://www.mokacoding.com/blog/lessons-learned-working-on-danger-swiftlint-selective-linting" data-count="horizontal" data-style="twitter" class="hn-button">Vote on Hacker News</a><script>var HN=[];HN.factory=function(e){return function(){HN.push([e].concat(Array.prototype.slice.call(arguments,0)))};},HN.on=HN.factory("on"),HN.once=HN.factory("once"),HN.off=HN.factory("off"),HN.emit=HN.factory("emit"),HN.load=function(){var e="hn-button.js";if(document.getElementById(e))return;var t=document.createElement("script");t.id=e,t.src="//hn-button.herokuapp.com/hn-button.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n)},HN.load();
+</script><script type="text/javascript">reddit_url="http://www.mokacoding.com/blog/lessons-learned-working-on-danger-swiftlint-selective-linting";
+reddit_title="Lessons learned working on danger-switling selective linting"
+reddit_target="iOSProgramming"
+reddit_newwindow='1';</script><script type="text/javascript" src="//www.redditstatic.com/button/button1.js"></script></div></div><div class="bottom-box no-border"><div class="col-12"><script async="true" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins style="display:block" data-ad-client="ca-pub-1350647337420416" data-ad-slot="4912767686" data-ad-format="auto" class="adsbygoogle"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div></div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"></div><div class="col-6"><div style="text-align: right"><a href="/blog/your-git-log-should-tell-a-story">Your Git Log Should Tell A Story&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin MailChimp Signup Form -->
+<div id="mc_embed_signup">
+  <form action="//mokacoding.us10.list-manage.com/subscribe/post?u=45a265e2a9d2b9dbec5f98d51&amp;id=0f2ccfb0fa" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+    <label for="mce-EMAIL">Subscribe to our mailing list</label>
+    <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;"><input type="text" name="b_45a265e2a9d2b9dbec5f98d51_0f2ccfb0fa" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+  </form>
+</div>
+</div><div class="bottom-box"><div id="disqus_thread"></div><script>var disqus_shortname = "mokacoding";
+// Neet do add the / at the end to maintain compatibility with previous version
+// of the blog that didn't define disqus_url, letting Disqus set it automatically
+// using window.location.href
+var disqus_url = "http://www.mokacoding.com/blog/lessons-learned-working-on-danger-swiftlint-selective-linting/";
+
+(function() {
+  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><noscript>Please enable JavaScript to view the<a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></div></div></div><div class="row-12 footer"><div class="col-12"><h3><a href="/">mokacoding</a></h3></div><div id="copy" class="col-9"><p>Hi I&#39;m <a href="http://giovannilodi.com">Giovanni Lodi</a> and this is my blog. I write here at least once a month, on software testing, productivity, and iOS development.</p>
+<p>I&#39;m a freelance iOS engineer, and <a href="mailto:giovanni.lodi42+blog@gmail.com">I&#39;m available for contract work</a>.</p>
+<p>Check out my <a href="http://mokagio.github.io/tech-journal">tech journal</a>, and my app <a href="https://itunes.apple.com/au/app/fineants-savings-tracker/id888444078?mt=8">Fineants</a>.</p>
+</div><div id="links" class="col-3"><p><i class="fa fa-twitter"></i>&nbsp;<a href="https://twitter.com/mokagio">@mokagio</a></p><p><i class="fa fa-github"></i>&nbsp;<a href="https://github.com/mokagio">mokagio</a></p></div></div></div></body><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-43554041-1', 'auto');
+ga('send', 'pageview');</script><script>var external_links = document.querySelectorAll('a:not([href^="/"]):not([href$="#subscribe"])');
+// external_links is an HTMLCollection, not an Array, so we can't call forEach
+for (var i = 0; i < external_links.length; i++) {
+  var link = external_links[i];
+  link.setAttribute("target", "_blank");
+}
+</script><script>var toggle = function(elm){
+  var y = elm.style && elm.style.display ? elm.style.display : 'block';
+  if (y == 'block'){
+    elm.style.opacity='0';
+    setTimeout( function(){ elm.style.display = 'none'; }, 300 );
+  }
+  else {
+    elm.style.display='block';
+    setTimeout( function(){ elm.style.opacity = '1'; }, 10 );
+  }
+}
+
+document.getElementById('close').onclick = function(){
+  toggle(document.getElementById('sticky-header'));
+  toggle(document.getElementById('sticky-header-padding-hack'));
+}</script></html>
