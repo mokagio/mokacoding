@@ -1,52 +1,50 @@
 ---
 date: 2013-01-05
 title: CocoaPods!
+description: A brief introduction to CocoaPods, the Objective-C dependencies manager.
 tags:
 - CocoaPods
 - iOS
 ---
 
-<h2>description: A brief introduction to CocoaPods, the Objective-C dependencies manager.</h2>
+## What is CocoaPods?
 
-<h2>What is CocoaPods?</h2>
+> CocoaPods: The best way to manage library dependencies in Objective-C projects.</p>
 
-<blockquote>
-  <p>CocoaPods: The best way to manage library dependencies in Objective-C projects.</p>
-</blockquote>
+If you're familiar with Ruby on Rails, it's the same thing as <a href="http://gembundler.com/">Bundler</a>, or it's lame copy attempt for Symfony 2, <a href="http://getcomposer.org/">Composer</a>.
 
-<p>If you're familiar with Ruby on Rails, it's the same thing as <a href="http://gembundler.com/">Bundler</a>, or it's lame copy attempt for Symfony 2, <a href="http://getcomposer.org/">Composer</a>.</p>
+If you're not, and you haven't sorted it out from the quote above, CocoaPods is a tool that's let us manage our libraries and their dependencies in our Objective-C projects. This means:
 
-<p>If you're not, and you haven't sorted it out from the quote above, CocoaPods is a tool that's let us manage our libraries and their dependencies in our Objective-C projects. This means:</p>
+1. No more wasted time downloading all the libraries the one we want to use depends on.
+2. Smart and safe version management, specially when we're working on a project with other people, which is 90% of the time.
 
-<ol>
-<li>No more wasted time downloading all the libraries the one we want to use depends on.</li>
-<li>Smart and safe version management, specially when we're working on a project with other people, which is 90% of the time.</li>
-</ol>
+To _"get my hands dirty"_ with CocoaPods I made this little project called <a href="https://github.com/mokagio/justninegags">JustNineGags</a>, feel free to check it out on GitHub.
 
-<p>To <em>"get my hands dirty"</em> with CocoaPods I made this little project called <a href="https://github.com/mokagio/justninegags">JustNineGags</a>, feel free to check it out on GitHub.</p>
-
-<h2>Why should I use it?</h2>
+## Why should I use it?
 
 <p>Because it's awesome! It makes development faster and easier, and also safer! It easier to work in teams and keep the libraries versions even. Should I go on? Ok! Just think about this: you won't download and move in your project a library anymore, <code>pod</code> will do it all for you!</p>
 
-<h2>Installing CocoaPods</h2>
+## Installing CocoaPods
 
 <p>Installing CocoaPods is as simple as installing all the other Ruby Gems, I shouldn't even writing this, as what's written in the <a href="http://cocoapods.org/#install">install section</a> is more than enough, anyway:</p>
 
-<div class="highlight"><pre lang="">gem install cocoapods
-</pre></div>
+```
+gem install cocoapods
+```
 
 <p>Once the installation is completed run:</p>
 
-<div class="highlight"><pre lang="">pod setup
-</pre></div>
+```
+pod setup
+```
 
 <p>This will, guess what, setup everything CocoaPods needs on your system. You should see an output like this:</p>
 
-<div class="highlight"><pre lang="">Setting up CocoaPods master repo
-Cloning spec repo `master' from `<a href='https://github.com/CocoaPods/Specs.git'>https://github.com/CocoaPods/Specs.git</a>' (branch `master')
+```
+Setting up CocoaPods master repo
+Cloning spec repo 'master' from '<a href='https://github.com/CocoaPods/Specs.git'>https://github.com/CocoaPods/Specs.git</a>' (branch 'master')
 Setup completed (read-only access)
-</pre></div>
+```
 
 <p>Done! :)</p>
 
@@ -58,11 +56,11 @@ Setup completed (read-only access)
 
 <p>Go in the root folder of your Objective-C project and create a file named <code>Podfile</code>, with whatever editor you like. We'll use this file to list all the libraries, <em>pods</em>, we need in the project. The JustNineGags <code>Podfile</code> content is:</p>
 
-<pre><code>
+```ruby
 platform :ios
 pod 'MBProgressHUD', '~> 0.5'
 pod 'Reachability',  '~> 3.1.0'
-</code></pre>
+```
 
 <h3>Adding a Pod</h3>
 
@@ -72,8 +70,9 @@ pod 'Reachability',  '~> 3.1.0'
 
 <p>Right now we've told CocoaPods the Pods we need but they aren't yet in out project. So let's run</p>
 
-<div class="highlight"><pre lang="">pod install
-</pre></div>
+```
+pod install
+```
 
 <p>This will download all the libraries we've asked for, and all their dependencies. Sweet!</p>
 
