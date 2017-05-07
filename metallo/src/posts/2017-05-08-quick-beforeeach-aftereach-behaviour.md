@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Quick beforeEach and afterEach behaviours
+title: Quick beforeEach and afterEach behaviour
 description: "A look at how nested beforeEach and afterEach behave in the Quick testing framework."
 tags:
 - Quick
