@@ -1,46 +1,30 @@
-<!DOCTYPE html><html lang="en"><head><title>CocoaPods!</title><meta name="description" content="A blog about testing, iOS development, productivity, and blabber about software in general."><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"><!-- Open Graph meta tags--><meta property="og:title" content="CocoaPods!"><meta property="og:description" content="A blog about testing, iOS development, productivity, and blabber about software in general."><meta property="og:url" content="/"><meta property="og:type" content="article"><meta property="og:site_name" content="mokacoding"><!-- Stylesheets--><link href="/css/griddy.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet"><link href="/css/font-awesome.min.css" rel="stylesheet"><link href="/css/zenburn.css" rel="stylesheet"><!-- Mailchimp Stylesheets--><link href="//cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css"><link href="/css/mailchimp-form-override.css" rel="stylesheet"><!-- SumoMe--><script src="//load.sumome.com/" data-sumo-site-id="dd80959300db03e20c8bc3dd899f1424fd764d261e6c3c41923c96482a270dba" async="async"></script></head><body><!-- Use this to render an extra header in special occasions--><!-- include _special-header--><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">unit and acceptance testing, automation, productivity</div><div class="links"><a href="/archive.html">Archive</a><a href="/espresso.html">Espresso</a><a href="/tags.html">Tags</a><a href="http://giovannilodi.com">About</a><a href="#subscribe">Subscribe</a><a href="http://theiostimes.com">The iOS Times</a><a href="/feed.xml"><i class="fa fa-rss"></i></a></div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/cocoapods">CocoaPods!</a></h2><p class="post-meta"><span class="post-date">Sat Jan 05 2013&nbsp;</span><a href="/tag/CocoaPods/index.html" class="post-tag">-CocoaPods</a><a href="/tag/iOS/index.html" class="post-tag">-iOS</a></p><div class="post"><h2>description: A brief introduction to CocoaPods, the Objective-C dependencies manager.</h2>
-
-<h2>What is CocoaPods?</h2>
-
+<!DOCTYPE html><html lang="en"><head><title>CocoaPods!</title><meta name="description" content="A brief introduction to CocoaPods, the Objective-C dependencies manager."><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"><!-- Open Graph meta tags--><meta property="og:title" content="CocoaPods!"><meta property="og:description" content="A brief introduction to CocoaPods, the Objective-C dependencies manager."><meta property="og:url" content="/"><meta property="og:type" content="article"><meta property="og:site_name" content="mokacoding"><!-- Stylesheets--><link href="/css/griddy.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet"><link href="/css/font-awesome.min.css" rel="stylesheet"><link href="/css/zenburn.css" rel="stylesheet"><!-- Mailchimp Stylesheets--><link href="//cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css"><link href="/css/mailchimp-form-override.css" rel="stylesheet"><!-- SumoMe--><script src="//load.sumome.com/" data-sumo-site-id="dd80959300db03e20c8bc3dd899f1424fd764d261e6c3c41923c96482a270dba" async="async"></script></head><body><!-- Use this to render an extra header in special occasions--><!-- include _special-header--><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">unit and acceptance testing, automation, productivity</div><div class="links"><a href="/archive.html">Archive</a><a href="/espresso.html">Espresso</a><a href="/tags.html">Tags</a><a href="http://giovannilodi.com">About</a><a href="#subscribe">Subscribe</a><a href="http://theiostimes.com">The iOS Times</a><a href="/feed.xml"><i class="fa fa-rss"></i></a></div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/cocoapods">CocoaPods!</a></h2><p class="post-meta"><span class="post-date">Sat Jan 05 2013&nbsp;</span><a href="/tag/CocoaPods/index.html" class="post-tag">-CocoaPods</a><a href="/tag/iOS/index.html" class="post-tag">-iOS</a></p><div class="post"><h2 id="what-is-cocoapods-">What is CocoaPods?</h2>
 <blockquote>
-  <p>CocoaPods: The best way to manage library dependencies in Objective-C projects.</p>
+<p>CocoaPods: The best way to manage library dependencies in Objective-C projects.</p></p>
 </blockquote>
-
 <p>If you&#39;re familiar with Ruby on Rails, it&#39;s the same thing as <a href="http://gembundler.com/">Bundler</a>, or it&#39;s lame copy attempt for Symfony 2, <a href="http://getcomposer.org/">Composer</a>.</p>
-
 <p>If you&#39;re not, and you haven&#39;t sorted it out from the quote above, CocoaPods is a tool that&#39;s let us manage our libraries and their dependencies in our Objective-C projects. This means:</p>
-
 <ol>
 <li>No more wasted time downloading all the libraries the one we want to use depends on.</li>
 <li>Smart and safe version management, specially when we&#39;re working on a project with other people, which is 90% of the time.</li>
 </ol>
-
 <p>To <em>&quot;get my hands dirty&quot;</em> with CocoaPods I made this little project called <a href="https://github.com/mokagio/justninegags">JustNineGags</a>, feel free to check it out on GitHub.</p>
-
-<h2>Why should I use it?</h2>
-
+<h2 id="why-should-i-use-it-">Why should I use it?</h2>
 <p>Because it&#39;s awesome! It makes development faster and easier, and also safer! It easier to work in teams and keep the libraries versions even. Should I go on? Ok! Just think about this: you won&#39;t download and move in your project a library anymore, <code>pod</code> will do it all for you!</p>
 
-<h2>Installing CocoaPods</h2>
-
+<h2 id="installing-cocoapods">Installing CocoaPods</h2>
 <p>Installing CocoaPods is as simple as installing all the other Ruby Gems, I shouldn&#39;t even writing this, as what&#39;s written in the <a href="http://cocoapods.org/#install">install section</a> is more than enough, anyway:</p>
 
-<div class="highlight"><pre lang="">gem install cocoapods
-</pre></div>
+<pre><code class="">gem <span class="hljs-keyword">install</span> cocoapods
+</code></pre><p>Once the installation is completed run:</p>
 
-<p>Once the installation is completed run:</p>
+<pre><code class=""><span class="hljs-title">pod</span> setup
+</code></pre><p>This will, guess what, setup everything CocoaPods needs on your system. You should see an output like this:</p>
 
-<div class="highlight"><pre lang="">pod setup
-</pre></div>
-
-<p>This will, guess what, setup everything CocoaPods needs on your system. You should see an output like this:</p>
-
-<div class="highlight"><pre lang="">Setting up CocoaPods master repo
-Cloning spec repo <code>master&#39; from</code><a href='https://github.com/CocoaPods/Specs.git'>https://github.com/CocoaPods/Specs.git</a>&#39; (branch `master&#39;)
-Setup completed (read-only access)
-</pre></div>
-
-<p>Done! :)</p>
+<pre><code class="">Setting <span class="hljs-keyword">up</span> CocoaPods master repo
+Cloning spec repo <span class="hljs-string">'master'</span> from <span class="hljs-string">'&lt;a href='</span>http<span class="hljs-variable">s:</span>//github.<span class="hljs-keyword">com</span>/CocoaPods/Specs.git<span class="hljs-string">'&gt;https://github.com/CocoaPods/Specs.git&lt;/a&gt;'</span> (branch <span class="hljs-string">'master'</span>)
+Setup completed (<span class="hljs-keyword">read</span>-<span class="hljs-keyword">only</span> access)
+</code></pre><p>Done! :)</p>
 
 <p><em>You should avoid using <code>sudo</code> otherwise everything else you&#39;ll do with <code>pod</code> will need to use <code>sudo</code> as well. And this mean that the folders and file that are gonna be created will be owend by <code>root</code> instead that by you.</em></p>
 
@@ -50,12 +34,10 @@ Setup completed (read-only access)
 
 <p>Go in the root folder of your Objective-C project and create a file named <code>Podfile</code>, with whatever editor you like. We&#39;ll use this file to list all the libraries, <em>pods</em>, we need in the project. The JustNineGags <code>Podfile</code> content is:</p>
 
-<pre><code>
-platform :ios
-pod 'MBProgressHUD', '~> 0.5'
-pod 'Reachability',  '~> 3.1.0'
+<pre><code class=" hljs ruby">platform <span class="hljs-symbol">:ios</span>
+pod <span class="hljs-string">'MBProgressHUD'</span>, <span class="hljs-string">'~&gt; 0.5'</span>
+pod <span class="hljs-string">'Reachability'</span>,  <span class="hljs-string">'~&gt; 3.1.0'</span>
 </code></pre>
-
 <h3>Adding a Pod</h3>
 
 <p>As you can see adding a Pod is really easy, just go on <a href="http://cocoapods.org">CocoaPods website</a>, look for the it, and then add it to the <code>Podfile</code> using it&#39;s name and the version you need.</p>
@@ -64,10 +46,8 @@ pod 'Reachability',  '~> 3.1.0'
 
 <p>Right now we&#39;ve told CocoaPods the Pods we need but they aren&#39;t yet in out project. So let&#39;s run</p>
 
-<div class="highlight"><pre lang="">pod install
-</pre></div>
-
-<p>This will download all the libraries we&#39;ve asked for, and all their dependencies. Sweet!</p>
+<pre><code class="">pod <span class="hljs-keyword">install</span>
+</code></pre><p>This will download all the libraries we&#39;ve asked for, and all their dependencies. Sweet!</p>
 
 <p>The first time we run <code>pod install</code> something else will happen, a <code>Pods/</code> folder, a <code>Podfile.lock</code>, and a <code>YourProjectName.xcworkspace</code> will be created.</p>
 
