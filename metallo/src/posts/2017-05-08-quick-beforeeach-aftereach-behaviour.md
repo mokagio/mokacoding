@@ -108,3 +108,7 @@ That's important to keep in mind and can open the door to some interesting simpl
 _I set out to write this post to share what I thought was a gotcha with the behaviour of `beforeEach` and `afterEach` have in [Quick](https://github.com/quick/quick), but the [example project](https://github.com/mokacoding/quick-beforeeach-aftereach-behaviour) that I made to verify it revealed that my mental model was incorrect. That's for the best, as the actual behaviour is better than what I thought it was._
 
 Get in touch on Twitter [@mokagio](https://twitter.com/mokagio) or leave a comment below if you want to chat about testing with Quick.
+
+Until next time:
+
+_👋 Leave the codebase better than you found it._
