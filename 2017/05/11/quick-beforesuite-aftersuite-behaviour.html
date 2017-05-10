@@ -1,0 +1,143 @@
+<!DOCTYPE html><html lang="en"><head><title>Quick beforeSuite and afterSuite behaviour</title><meta name="description" content="A look at how beforeSuite and afterSuite behave in the Quick testing framework, and the dangers of using them"><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"><!-- Open Graph meta tags--><meta property="og:title" content="Quick beforeSuite and afterSuite behaviour"><meta property="og:description" content="A look at how beforeSuite and afterSuite behave in the Quick testing framework, and the dangers of using them"><meta property="og:url" content="/"><meta property="og:type" content="article"><meta property="og:site_name" content="mokacoding"><!-- Stylesheets--><link href="/css/griddy.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet"><link href="/css/font-awesome.min.css" rel="stylesheet"><link href="/css/zenburn.css" rel="stylesheet"><!-- Mailchimp Stylesheets--><link href="//cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css"><link href="/css/mailchimp-form-override.css" rel="stylesheet"><!-- SumoMe--><script src="//load.sumome.com/" data-sumo-site-id="dd80959300db03e20c8bc3dd899f1424fd764d261e6c3c41923c96482a270dba" async="async"></script></head><body><!-- Use this to render an extra header in special occasions--><!-- include _special-header--><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">unit and acceptance testing, automation, productivity</div><div class="links"><a href="/archive.html">Archive</a><a href="/espresso.html">Espresso</a><a href="/tags.html">Tags</a><a href="http://giovannilodi.com">About</a><a href="#subscribe">Subscribe</a><a href="http://theiostimes.com">The iOS Times</a><a href="/feed.xml"><i class="fa fa-rss"></i></a></div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/quick-beforesuite-aftersuite-behaviour">Quick beforeSuite and afterSuite behaviour</a></h2><p class="post-meta"><span class="post-date">Thu May 11 2017&nbsp;</span><a href="/tag/Quick/index.html" class="post-tag">-Quick</a><a href="/tag/Espresso/index.html" class="post-tag">-Espresso</a><a href="/tag/Testing/index.html" class="post-tag">-Testing</a></p><div class="post"><p>After I shared <a href="http://www.mokacoding.com/blog/quick-beforeeach-aftereach-behaviour/">this little post about Quick beforeEach and afterEach</a> with the team at <a href="https://twitter.com/iflixdevs">iflix</a>, Gerald popped a question in our chat:</p>
+<p><img src="https://s3.amazonaws.com/mokacoding/2017-05-11-beforesuite-aftersuite-question.jpg" alt="Gerald&#39;s question: how does beforeSuite fits in the calls hierarchy?"></p>
+<p>Here&#39;s the documentation these two functionalities:</p>
+<blockquote>
+<p><code>beforeSuite</code></p>
+<p>Defines a closure to be run <strong>prior to</strong> any examples in the test suite.
+You may define an unlimited number of these closures, but there is no guarantee as to the order in which they&#39;re run.</p>
+<p><code>afterSuite</code></p>
+<p>Defines a closure to be run <strong>after all</strong> of the examples in the test suite.
+You may define an unlimited number of these closures, but there is no guarantee as to the order in which they&#39;re run.</p>
+</blockquote>
+<p>The <a href="https://github.com/mokacoding/quick-beforeEach-afterEach-behaviour">example code</a> from the previous example has been updated adding calls to <code>beforeSuite</code> and <code>afterSuite</code>.</p>
+<pre><code class=" hljs swift"><span class="hljs-keyword">import</span> <span class="hljs-type">Quick</span>
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Spec</span>: <span class="hljs-title">QuickSpec</span> </span>{
+  <span class="hljs-keyword">override</span> <span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">spec</span><span class="hljs-params">()</span></span> {
+    beforeSuite {
+      <span class="hljs-built_in">print</span>(<span class="hljs-string">"☕️ before suite"</span>)
+    }
+
+    describe(<span class="hljs-string">"beforeEach and afterEach behaviour"</span>) {
+      beforeEach {
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">"⭐️ top before each"</span>)
+      }
+
+      context(<span class="hljs-string">"some context"</span>) {
+        beforeEach {
+          <span class="hljs-built_in">print</span>(<span class="hljs-string">"👉 context before each"</span>)
+        }
+
+        <span class="hljs-comment">// ...</span>
+      }
+
+      afterEach {
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">"⭐️ top after each"</span>)
+      }
+    }
+
+    afterSuite {
+      <span class="hljs-built_in">print</span>(<span class="hljs-string">"🗑 after suite"</span>)
+    }
+  }
+}
+</code></pre>
+<p>In the code above <code>beforeSuite</code> and <code>afterSuite</code> are positioned at the very top and very bottom of the test, but you can put them anywhere inside a <code>describe</code> or <code>context</code>.</p>
+<p>Can you guess how the console log will look like?</p>
+<pre><code class="">☕️ before suite
+😈 an <span class="hljs-keyword">after</span> suite call you weren<span class="hljs-attribute">'t</span> aware <span class="hljs-keyword">of</span>
+
+behaviour - some <span class="hljs-keyword">context</span> - example <span class="hljs-number">1</span>
+⭐️ top before each
+👉 <span class="hljs-keyword">context</span> before each
+😊 example <span class="hljs-number">1</span>
+👉 <span class="hljs-keyword">context</span> <span class="hljs-keyword">after</span> each
+⭐️ top <span class="hljs-keyword">after</span> each
+
+...
+
+behaviour - other <span class="hljs-keyword">context</span> - example <span class="hljs-number">2</span>
+⭐️ top before each
+🍎 <span class="hljs-keyword">context</span> before each
+😜 example <span class="hljs-number">2</span>
+🍎 <span class="hljs-keyword">context</span> <span class="hljs-keyword">after</span> each
+⭐️ top <span class="hljs-keyword">after</span> each
+
+🗑 <span class="hljs-keyword">after</span> suite
+😈 an <span class="hljs-keyword">after</span> suite call you weren<span class="hljs-attribute">'t</span> aware <span class="hljs-keyword">of</span>
+</code></pre><p>Hang on a second, where do those 😈 logs come from?!</p>
+<h3 id="the-danger-of-using-beforesuite-and-aftersuite-">The danger of using <code>beforeSuite</code> and <code>afterSuite</code></h3>
+<p>Quick will look for all the <code>beforeSuite</code> and <code>afterSuite</code> calls in all your test suite, and run them respectively all at the start and all at the end.</p>
+<p>Those unexpected 😈 console logs are simply defined in another spec in the project.</p>
+<p>This is one of the danger of <code>beforeSuite</code> and <code>afterSuite</code>, there is no way other that by doing a text search to know how many such calls there are and where.</p>
+<p>As time passes one might even forget having added those calls. That&#39;s a recipe for issues that are hard do debug.</p>
+<p>The other danger is that being able to fiddle with state in the unit tests can lead us to write tests that are not as isolated and robust as they should be. If unit tests are isolated and simple to setup then the code they test will be simple and easy to setup as well.</p>
+<p>Yes, <code>beforeSuite</code> and <code>afterSuite</code> can be life savers when you need to get started writing test on legacy code and you really cannot take out certain assupmtions baked in it. They allow you to work around them, and get the job done.</p>
+<p>In such cases though, I would encourage you to leave a big FIXME note there:</p>
+<pre><code class=""><span class="hljs-pi">// FIXME: Doing this now because the app makes assumptions that impact each
+//</span> unit test.
+<span class="hljs-pi">//
+//</span> Need <span class="hljs-keyword">to</span> allocate proper time <span class="hljs-keyword">to</span> refactor <span class="hljs-keyword">for</span> isolation.
+<span class="hljs-pi">//
+//</span> If you are reading <span class="hljs-keyword">this</span> comment after &lt;date&gt; get <span class="hljs-keyword">in</span> touch <span class="hljs-keyword">with</span> &lt;person&gt;.
+</code></pre><p>Until next time:</p>
+<p>👋 <em>Leave the codebase bettern than you found it</em></p>
+</div><div id="share-buttons" class="bottom-box no-border"><div class="col-12"><a href="https://twitter.com/share" data-url="http://www.mokacoding.com/blog/quick-beforesuite-aftersuite-behaviour" data-via="mokacoding" datacount-url="http://www.mokacoding.com/blog/quick-beforesuite-aftersuite-behaviour" data-text="Quick beforeSuite and afterSuite behaviour" class="twitter-share-button">Tweet</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+</script><a href="https://news.ycombinator.com/submit" data-title="Quick beforeSuite and afterSuite behaviour" data-url="http://www.mokacoding.com/blog/quick-beforesuite-aftersuite-behaviour" data-count="horizontal" data-style="twitter" class="hn-button">Vote on Hacker News</a><script>var HN=[];HN.factory=function(e){return function(){HN.push([e].concat(Array.prototype.slice.call(arguments,0)))};},HN.on=HN.factory("on"),HN.once=HN.factory("once"),HN.off=HN.factory("off"),HN.emit=HN.factory("emit"),HN.load=function(){var e="hn-button.js";if(document.getElementById(e))return;var t=document.createElement("script");t.id=e,t.src="//hn-button.herokuapp.com/hn-button.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n)},HN.load();
+</script><script type="text/javascript">reddit_url="http://www.mokacoding.com/blog/quick-beforesuite-aftersuite-behaviour";
+reddit_title="Quick beforeSuite and afterSuite behaviour"
+reddit_target="iOSProgramming"
+reddit_newwindow='1';</script><script type="text/javascript" src="//www.redditstatic.com/button/button1.js"></script></div></div><div class="bottom-box no-border"><div class="col-12"><script async="true" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins style="display:block" data-ad-client="ca-pub-1350647337420416" data-ad-slot="4912767686" data-ad-format="auto" class="adsbygoogle"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div></div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"></div><div class="col-6"><div style="text-align: right"><a href="/blog/quick-beforeeach-aftereach-behaviour">Quick beforeEach and afterEach behaviour&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin MailChimp Signup Form -->
+<div id="mc_embed_signup">
+  <form action="//mokacoding.us10.list-manage.com/subscribe/post?u=45a265e2a9d2b9dbec5f98d51&amp;id=0f2ccfb0fa" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+    <label for="mce-EMAIL">Subscribe to our mailing list</label>
+    <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;"><input type="text" name="b_45a265e2a9d2b9dbec5f98d51_0f2ccfb0fa" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+  </form>
+</div>
+</div><div class="bottom-box"><div id="disqus_thread"></div><script>var disqus_shortname = "mokacoding";
+// Neet do add the / at the end to maintain compatibility with previous version
+// of the blog that didn't define disqus_url, letting Disqus set it automatically
+// using window.location.href
+var disqus_url = "http://www.mokacoding.com/blog/quick-beforesuite-aftersuite-behaviour/";
+
+(function() {
+  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><noscript>Please enable JavaScript to view the<a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></div></div></div><div class="row-12 footer"><div class="col-12"><h3><a href="/">mokacoding</a></h3></div><div id="copy" class="col-9"><p>Hi I&#39;m <a href="http://giovannilodi.com">Giovanni Lodi</a> and this is my blog. I write here at least once a month, on software testing, productivity, and iOS development.</p>
+<p>I&#39;m a freelance iOS engineer, and <a href="mailto:giovanni.lodi42+blog@gmail.com">I&#39;m available for contract work</a>.</p>
+<p>Check out my <a href="http://mokagio.github.io/tech-journal">tech journal</a>, and my app <a href="https://itunes.apple.com/au/app/fineants-savings-tracker/id888444078?mt=8">Fineants</a>.</p>
+</div><div id="links" class="col-3"><p><i class="fa fa-twitter"></i>&nbsp;<a href="https://twitter.com/mokagio">@mokagio</a></p><p><i class="fa fa-github"></i>&nbsp;<a href="https://github.com/mokagio">mokagio</a></p></div></div></div></body><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-43554041-1', 'auto');
+ga('send', 'pageview');</script><script>var external_links = document.querySelectorAll('a:not([href^="/"]):not([href$="#subscribe"])');
+// external_links is an HTMLCollection, not an Array, so we can't call forEach
+for (var i = 0; i < external_links.length; i++) {
+  var link = external_links[i];
+  link.setAttribute("target", "_blank");
+}
+</script><script>var toggle = function(elm){
+  var y = elm.style && elm.style.display ? elm.style.display : 'block';
+  if (y == 'block'){
+    elm.style.opacity='0';
+    setTimeout( function(){ elm.style.display = 'none'; }, 300 );
+  }
+  else {
+    elm.style.display='block';
+    setTimeout( function(){ elm.style.opacity = '1'; }, 10 );
+  }
+}
+
+document.getElementById('close').onclick = function(){
+  toggle(document.getElementById('sticky-header'));
+  toggle(document.getElementById('sticky-header-padding-hack'));
+}</script></html>
