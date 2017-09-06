@@ -8,13 +8,13 @@ description: A little guide on how to edit an existing model adding a new has_ma
 slug: rails-add-has_many-association-to-existing-model
 ---
 
-I'm gonna quick go through the process of how to evolve an existing schema adding new models and association in Ruby on Rails. I had to do this for work this morning and had to put together pieces from the [Rails Guides](http://guides.rubyonrails.org/index.html) and other resources.
+This post shows how to evolve an existing schema adding new models and association in Ruby on Rails. I did this today at work, had to put together pieces from the [Rails Guides](http://guides.rubyonrails.org/index.html) and other resources.
 
 The starting point is a schema with a single **items** table. We want to have a **level** system, where each level is made up by a group of **challenges**, and each challenge contains a number of items.
 
 Note: I'm using [rspec](https://github.com/rspec/rspec) and [shoulda](https://github.com/thoughtbot/shoulda) to write the tests.
 
-###Step 1 - Create the `Challenge` model
+### Step 1 - Create the `Challenge` model
 
 Creating a new empty model is easy, just run
 
@@ -28,7 +28,7 @@ and the resulting migration
 rake db:migrate RAILS_ENV=development
 ```
 
-###Step 2 - Add the association "challenge has many items"
+### Step 2 - Add the association "challenge has many items"
 
 We want to have a model that makes these tests pass:
 
@@ -66,7 +66,7 @@ class AddItemsAssociationToChallenge < ActiveRecord::Migration
   	add_column :items, :challenge_id, :integer
   	add_index 'items', ['challenge_id'], :name => 'index_challenge_id' 
   end
-  
+
   def self.down
   	remove_column :items, :challenge_id
   end
@@ -75,7 +75,7 @@ end
 
 Finally let's run `rake db:migrate` and `rspec` (because we're using [binstub](http://mislav.uniqpath.com/2013/01/understanding-binstubs/) aren't we?) and everything should be fine.
 
-###Step 3 – The Levels
+### Step 3 – The Levels
 
 The process for the levels will be the same as before, a good way to commit the steps to memory. We want this specs to pass:
 
@@ -103,7 +103,7 @@ class AddChallengeAssociationToLevel < ActiveRecord::Migration
   	add_column :challenges, :level_id, :integer
   	add_index 'challenges', ['level_id'], :name => 'index_level_id' 
   end
-  
+
   def self.down
   	remove_column :challenges, :level_id
   end
