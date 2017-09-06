@@ -123,4 +123,4 @@ class Challenge < ActiveRecord::Base
 end
 ```
 
-That's all. Nothing incredibly hard, but still not obvious for someone who manly writes Objective-C. Happy coding!
+That's all. Nothing incredibly hard, but still not obvious for someone who mainly writes Objective-C. Happy coding!
