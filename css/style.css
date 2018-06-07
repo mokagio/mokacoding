@@ -160,6 +160,7 @@ iframe[src*="reddit"] {
 	background-color: #27ae60;
 	color: white;
 	text-align: center;
+  font-size: large;
 }
 
 .special-header .page .row-12:only-child {
@@ -168,6 +169,7 @@ iframe[src*="reddit"] {
 
 .special-header a {
   color: white;
+  text-decoration: underline;
 }
 
 a.bordered-button {
