@@ -27,3 +27,7 @@ When working on big projects in a team it's easy to get sucked into our own part
 The next action with the most impact might be touching base with another team, double down on manual testing to discover edge cases, or prepare a showcase to ensure the progress is in line with what's expected.
 
 You are the sum of your actions. Being able to take ones that are the most effective with consistency is guaranteed to help achieving better results sooner. Using the focusing question is one way to identify such impactful actions.
+
+---
+
+If you love books and learning from them you'll like my ads free [monthly newsletter](http://eepurl.com/dDfszn) with book recommendations and lessons learnt from them. Subscribe [here](http://eepurl.com/dDfszn).
