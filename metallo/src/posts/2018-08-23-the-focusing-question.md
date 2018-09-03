@@ -8,13 +8,13 @@ Being productive is not about being busy, but rather working on valuable things.
 
 The **focusing question** is a tool to help with prioritization introduced by Gary W. Keller in his book "[The ONE Thing](https://amzn.to/2BNET03)".
 
-> **What is the single thing that I can do for <x> so that everything else will become easier or unnecessary?**
+> **What is the single thing that I can do for `<x>` so that everything else will become easier or unnecessary?**
 
 It might seem like a simple question. Let's take it apart to see how powerful it is.
 
 "What is the single thing that I _can do_..." By framing the question in the realm of things that can be done rather than could be done it forces you **think in actionable terms**. It also requires you to pick one and only one.
 
-"..._for <x>_..." Stating out the object of your focus ensures you **don't trail off in other directions**.
+"..._for `<x>`_..." Stating out the object of your focus ensures you **don't trail off in other directions**.
 
 "...so that everything else will become _easier_..." Once you have a list of actions to take you should find the ones with the **biggest return of investment**.
 
