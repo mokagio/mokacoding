@@ -1,0 +1,86 @@
+<!DOCTYPE html><html lang="en"><head><title>How to choose what to refactor</title><meta name="description" content="A way to identify the areas of code to refactor with the highest return of investment using the &quot;focusing question&quot; technique."><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"><!-- Open Graph meta tags--><meta property="og:title" content="How to choose what to refactor"><meta property="og:description" content="A way to identify the areas of code to refactor with the highest return of investment using the &quot;focusing question&quot; technique."><meta property="og:url" content="/"><meta property="og:type" content="article"><meta property="og:site_name" content="mokacoding"><!-- Stylesheets--><link href="/css/griddy.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet"><link href="/css/font-awesome.min.css" rel="stylesheet"><link href="/css/zenburn.css" rel="stylesheet"><!-- Mailchimp Stylesheets--><link href="//cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css"><link href="/css/mailchimp-form-override.css" rel="stylesheet"><!-- SumoMe--><script src="//load.sumome.com/" data-sumo-site-id="dd80959300db03e20c8bc3dd899f1424fd764d261e6c3c41923c96482a270dba" async="async"></script></head><body><!-- Use this to render an extra header in special occasions--><div class="special-header"><div class="page"><div class="row-12"><div class="col-12"><p><p><a href="https://goo.gl/forms/lCLlJd9hqCUYoTME2">What is your biggest struggle right now with building software?</a></p>
+</p></div></div></div></div><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">unit and acceptance testing, automation, productivity</div><div class="links"><a href="/archive.html">Archive</a><a href="/espresso.html">Espresso</a><a href="/tags.html">Tags</a><a href="http://giovannilodi.com">About</a><a href="#subscribe">Subscribe</a><a href="http://theiostimes.com">The iOS Times</a><a href="/feed.xml"><i class="fa fa-rss"></i></a></div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/how-to-choose-what-to-refactor">How to choose what to refactor</a></h2><p class="post-meta"><span class="post-date">Tue Sep 04 2018&nbsp;</span><a href="/tag/Refactoring/index.html" class="post-tag">-Refactoring</a><a href="/tag/Books/index.html" class="post-tag">-Books</a><a href="/tag/Productivity/index.html" class="post-tag">-Productivity</a></p><div class="post"><p>In his book <a href="https://amzn.to/2Bc09MF">The ONE Thing</a> author Gary Keller defines a technique for identifying the most valuable work called <em>focusing question</em>.</p>
+<blockquote>
+<p><strong>What is the one thing you can do right now for <code>&lt;x&gt;</code> that will make everything else easier or unnecessary?</strong></p>
+</blockquote>
+<p>It&#39;s a simple yet powerful tool. You can use it to discover the best thing to work on next. It&#39;s an exercise that makes you re-frame your list of possible tasks in the context of <strong>how actionable they are right now, and what impact they&#39;ll have</strong>.</p>
+<p>You can read more about how to apply the focusing question in <a href="http://www.mokacoding.com/blog/the-focusing-question/">this post</a>. This technique is also valuable when thinking about <strong>refactoring</strong>.</p>
+<p>When starting to work on a new feature or task look at the code you have and ask yourself if there is <strong>something that if improved would make the rest of the work for this project easier or unnecessary</strong>.</p>
+<p>Have a look at the areas of code that you will be interacting with.</p>
+<ul>
+<li>Is everything you&#39;ll need available already? You might need to <a href="https://refactoring.com/catalog/extractMethod.html">extract a method</a>, or <a href="https://refactoring.com/catalog/extractClass.html">a class</a>, or make a parameter injectable.</li>
+<li>Is there some duplication that could be removed so it doesn&#39;t get in your way?</li>
+<li>Is the type signature of the components involved strong enough?</li>
+<li>Are there unit tests in place that will ensure your changes won&#39;t accidentally break the components involved?</li>
+</ul>
+<p>When applying the focusing question to identify refactoring opportunities it is important to remember the &quot;for <code>&lt;x&gt;</code>&quot; part. Don&#39;t look for generic improvements, only for changes making the execution of the project you are working on easier.</p>
+<p>I&#39;m not trying to discourage you from improving your codebase. &quot;Leave the codebase better then you found it&quot;, right? I want you to stay focused on the job ahead though. Don&#39;t write code for code sake, there needs to be purpose behind what you do. You can collect all the other improvement ideas in your project&#39;s issue tracker or in a Trello board.</p>
+<p>Once you have implemented the changes identified with the focusing question, submit them in a <strong>dedicated PR</strong>. It will help your team review them, and ensure they are real refactors, that is, changes to the code implementation that don&#39;t affect its behaviour.</p>
+<p>Remember Kent Beck&#39;s advice: first make the change easy (warning: this might be hard), then make the easy change.</p>
+<p><blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">for each desired change, make the change easy (warning: this may be hard), then make the easy change</p>&mdash; Kent Beck (@KentBeck) <a href="https://twitter.com/KentBeck/status/250733358307500032?ref_src=twsrc%5Etfw">September 25, 2012</a></blockquote></p>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<hr>
+<p>It&#39;s easy to get lost and sidetracked while refactoring. We always want to make things better, and there is always room for improvement. A pragmatic developer is one able to identify those improvements that will deliver value right now from the vanity ones.</p>
+<p>Is the refactoring work you are about to begin going to benefit the customers? Will it make working on the project easier? Or are you just updating some part of the codebase that no one touches because it doesn&#39;t look right?</p>
+<p>Asking yourself &quot;what can I do right now that will make working on my next task easier or unnecessary&quot; will help you understand which refactoring ideas are valuable and which are less so.</p>
+<p>Have you got some refactoring experience that you&#39;d like to share? Need some help with reshaping some code? Get in touch on Twitter <a href="https://twitter.com/mokagio">@mokagio</a>, or leave a comment below.</p>
+<p><em>Leave the codebase better than you found it</em></p>
+</div><div id="share-buttons" class="bottom-box no-border"><div class="col-12"><a href="https://twitter.com/share" data-url="http://www.mokacoding.com/blog/how-to-choose-what-to-refactor" data-via="mokacoding" datacount-url="http://www.mokacoding.com/blog/how-to-choose-what-to-refactor" data-text="How to choose what to refactor" class="twitter-share-button">Tweet</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+</script><a href="https://news.ycombinator.com/submit" data-title="How to choose what to refactor" data-url="http://www.mokacoding.com/blog/how-to-choose-what-to-refactor" data-count="horizontal" data-style="twitter" class="hn-button">Vote on Hacker News</a><script>var HN=[];HN.factory=function(e){return function(){HN.push([e].concat(Array.prototype.slice.call(arguments,0)))};},HN.on=HN.factory("on"),HN.once=HN.factory("once"),HN.off=HN.factory("off"),HN.emit=HN.factory("emit"),HN.load=function(){var e="hn-button.js";if(document.getElementById(e))return;var t=document.createElement("script");t.id=e,t.src="//hn-button.herokuapp.com/hn-button.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n)},HN.load();
+</script><script type="text/javascript">reddit_url="http://www.mokacoding.com/blog/how-to-choose-what-to-refactor";
+reddit_title="How to choose what to refactor"
+reddit_target="iOSProgramming"
+reddit_newwindow='1';</script><script type="text/javascript" src="//www.redditstatic.com/button/button1.js"></script></div></div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"></div><div class="col-6"><div style="text-align: right"><a href="/blog/the-focusing-question">How to get better at setting priorities&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin MailChimp Signup Form -->
+<div id="mc_embed_signup">
+  <form action="//mokacoding.us10.list-manage.com/subscribe/post?u=45a265e2a9d2b9dbec5f98d51&amp;id=0f2ccfb0fa" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+    <label for="mce-EMAIL">Subscribe to our mailing list</label>
+    <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;"><input type="text" name="b_45a265e2a9d2b9dbec5f98d51_0f2ccfb0fa" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+  </form>
+</div>
+</div><div class="bottom-box"><div id="disqus_thread"></div><script>var disqus_shortname = "mokacoding";
+// Neet do add the / at the end to maintain compatibility with previous version
+// of the blog that didn't define disqus_url, letting Disqus set it automatically
+// using window.location.href
+var disqus_url = "http://www.mokacoding.com/blog/how-to-choose-what-to-refactor/";
+
+(function() {
+  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><noscript>Please enable JavaScript to view the<a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></div></div></div><div class="row-12 footer"><div class="col-12"><h3><a href="/">mokacoding</a></h3></div><div id="copy" class="col-9"><p>Hi I&#39;m <a href="http://giovannilodi.com">Giovanni Lodi</a> and this is my blog. I write here at least once a month, on software testing, productivity, and iOS development.</p>
+<p>I&#39;m a freelance iOS engineer, and <a href="mailto:giovanni.lodi42+blog@gmail.com">I&#39;m available for contract work</a>.</p>
+<p>Check out my <a href="http://mokagio.github.io/tech-journal">tech journal</a>, and my app <a href="https://itunes.apple.com/au/app/fineants-savings-tracker/id888444078?mt=8">Fineants</a>.</p>
+</div><div id="links" class="col-3"><p><i class="fa fa-twitter"></i>&nbsp;<a href="https://twitter.com/mokagio">@mokagio</a></p><p><i class="fa fa-github"></i>&nbsp;<a href="https://github.com/mokagio">mokagio</a></p></div></div></div></body><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-43554041-1', 'auto');
+ga('send', 'pageview');</script><script>var external_links = document.querySelectorAll('a:not([href^="/"]):not([href$="#subscribe"])');
+// external_links is an HTMLCollection, not an Array, so we can't call forEach
+for (var i = 0; i < external_links.length; i++) {
+  var link = external_links[i];
+  link.setAttribute("target", "_blank");
+}
+</script><script>var toggle = function(elm){
+  var y = elm.style && elm.style.display ? elm.style.display : 'block';
+  if (y == 'block'){
+    elm.style.opacity='0';
+    setTimeout( function(){ elm.style.display = 'none'; }, 300 );
+  }
+  else {
+    elm.style.display='block';
+    setTimeout( function(){ elm.style.opacity = '1'; }, 10 );
+  }
+}
+
+document.getElementById('close').onclick = function(){
+  toggle(document.getElementById('sticky-header'));
+  toggle(document.getElementById('sticky-header-padding-hack'));
+}</script></html>
