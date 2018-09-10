@@ -1,4 +1,3 @@
-# Action focused protocols enhance testability 
 ---
 title: Action focused protocols enhance testability 
 description: "Using protocols describing a single capability or action that can be performed enhance local reasoning and testability"
