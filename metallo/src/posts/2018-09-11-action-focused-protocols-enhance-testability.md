@@ -1,6 +1,6 @@
 ---
 title: Action focused protocols enhance testability 
-description: "Using protocols describing a single capability or action that can be performed enhance local reasoning and testability"
+description: "Using protocols describing a single capability or action that can be performed is a way to enhance local reasoning and facilitate testability"
 data: 2018-09-11
 tags:
   - Testing
