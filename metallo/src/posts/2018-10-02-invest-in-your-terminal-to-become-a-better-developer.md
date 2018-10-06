@@ -1,5 +1,5 @@
 ---
-title: Invest in you terminal to become a better developer
+title: Invest in your terminal to become a better developer
 description: "One of the best things you could do to improve as a software developer is constantly investing in your terminal setup and skills."
 tags:
   - Productivity
@@ -13,7 +13,7 @@ tags:
 
 This conversation often happens while working with Git. There many great Git GUI clients, but none of them will ever be as powerful as Git from the terminal. Git is a command line tool. GUI clients are calling it under the hood, and always making compromises in the process.
 
-Over the years I built aliases, scripts, and muscle memory now making me faster and more efficient at using Git from the terminal than I could ever be from a GUI. I wrote all those so they'd fit in my workflow. Each of us as a different way of working, when using a GUI we need to adapt to what it offers. It's like the difference between a tailor made shirt and one bought at a shopping center.
+Over the years I built aliases, scripts, and muscle memory now making me faster and more efficient at using Git from the terminal than I could ever be from a GUI. I wrote all those so they'd fit in my workflow. Each of us has a different way of working, when using a GUI we need to adapt to what it offers. It's like the difference between a tailor made shirt and one bought at a shopping center.
 
 ## Blank canvas
 
@@ -27,7 +27,7 @@ I've seen people [check Twitter](https://github.com/orakaro/rainbowstream), [rea
 
 Every improvement you make to your terminal setup adds up over time. This is called [compounding effect](https://en.wikipedia.org/wiki/Compound_interest) and it's a key concept for financial investments.
 
-Back in 2015 I [aliased `git commit` to `gc`](https://github.com/mokagio/dotfiles/commit/0d4b88804bd733f1d4cd43dbb77a5ff7ae1d1595). Every time I madde a commit since then I saved 8 keystrokes.
+Back in 2015 I [aliased `git commit` to `gc`](https://github.com/mokagio/dotfiles/commit/0d4b88804bd733f1d4cd43dbb77a5ff7ae1d1595). Every time I made a commit since then I saved 8 keystrokes.
 
 Over the past year I made 1074 commits in the main repository I work on. I saved **8592 keystrokes** in that repo alone, more than twice the amount of keystrokes it took me to write this post.
 
