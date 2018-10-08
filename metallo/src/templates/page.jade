@@ -1,21 +1,23 @@
 doctype html
 html(lang="en")
   head
-    - var meta_title = "mokacoding"
-    if !title
-      - meta_title = title + " | mokacoding"
+    - var page_title = "mokacoding"
+    - var og_title = "mokacoding"
+    if (typeof(title) !== 'undefined')
+      - page_title = title + " | mokacoding"
+      - og_title = title
 
     if !description
       - description = "A blog about testing, iOS development, productivity, and blabber about software in general."
 
-    title= title
+    title= page_title
     meta(name="description", content="#{description}")
 
     meta(http-equiv="content-type" content="text/html; charset=utf-8")
     meta(name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1")
 
     // Open Graph meta tags
-    meta(property="og:title" content="#{title}")
+    meta(property="og:title" content="#{og_title}")
     meta(property="og:description" content="#{description}")
     meta(property="og:url" content="#{baseUrl}")
     meta(property="og:type" content="article")
