@@ -22,6 +22,8 @@ html(lang="en")
     meta(property="og:url" content="#{baseUrl}")
     meta(property="og:type" content="article")
     meta(property="og:site_name" content="mokacoding")
+    if (typeof(og_image) !== 'undefined')
+      meta(property="og:image" content="#{og_image}")
 
     // Twitter meta tags
     meta(property="twitter:card" content="summary")

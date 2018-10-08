@@ -1,6 +1,7 @@
 ---
 title: Streamlining tests setup with fixtures in Swift
 description: "Keeping tests short and focused is important for the health of the test suite. A fixture method to generate instances with default values in the tests helps keeping the setup code short, focused, and readable"
+og_image: https://s3.amazonaws.com/mokacoding/2018-10-09-swift-fixtures-naming-convention.png
 tags:
   - Testing
   - Swift
