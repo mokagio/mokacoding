@@ -112,6 +112,8 @@ pizza = create(<span class="hljs-symbol">:pizza</span>, <span class="hljs-symbol
 <h3 id="where-to-put-the-fixtures-">Where to put the fixtures?</h3>
 <p>You can either put all the fixture extensions in a <code>Fixtures.swift</code> file in the test target, or used a dedicated <code>Type+Fixture.swift</code> file for each. I prefer the latter.</p>
 <p><img src="https://s3.amazonaws.com/mokacoding/2018-10-09-swift-fixtures-naming-convention.png" alt="Screenshot of the Xcode navigator showing Swift fixture files with the +Fixture suffix"></p>
+<h3 id="live-demo">Live Demo</h3>
+<p>You can play around with the code in the post checkout <a href="https://github.com/mokacoding/Swift-Fixtures-Example/">this example project</a>. Also notice in <a href="https://github.com/mokacoding/Swift-Fixtures-Example/pull/1/files">this PR</a> the difference in the code surface using fixtures makes.</p>
 <h2 id="conclusion">Conclusion</h2>
 <p>If you want to be serious about testing you should put as much effort in your test code as in your production one. The test suite needs to be tidy, its code reading in a way that surfaces what the tests are about, without distracting the reader with irrelevant setup details.</p>
 <p>The use of fixtures to initialize test inputs with the ability to set only the relevant parameters, leaving the others as default, is a technique that will help you maintain focus and order in your test code.</p>

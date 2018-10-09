@@ -156,6 +156,10 @@ You can either put all the fixture extensions in a `Fixtures.swift` file in the 
 
 ![Screenshot of the Xcode navigator showing Swift fixture files with the +Fixture suffix](https://s3.amazonaws.com/mokacoding/2018-10-09-swift-fixtures-naming-convention.png)
 
+### Live Demo
+
+You can play around with the code in the post checkout [this example project](https://github.com/mokacoding/Swift-Fixtures-Example/). Also notice in [this PR](https://github.com/mokacoding/Swift-Fixtures-Example/pull/1/files) the difference in the code surface using fixtures makes.
+
 ## Conclusion
 
 If you want to be serious about testing you should put as much effort in your test code as in your production one. The test suite needs to be tidy, its code reading in a way that surfaces what the tests are about, without distracting the reader with irrelevant setup details.
