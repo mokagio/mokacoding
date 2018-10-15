@@ -1,6 +1,6 @@
 ---
 title: How to write code faster using snippets
-description: "Most IDEs and text editors offer the ability of using snippets to write out long common code structures via keyboard shortcuts. Leveraging snippets is a way to get faster at writing code and free mental resources for problem solving."
+description: 'Leveraging "snippets" is a way to get faster at writing code and free mental resources for problem solving. Most IDEs and text editor offer this feature, where you can write code scaffolding with a keyboard shortcut.'
 tags:
   - Productivity
   - Xcode
