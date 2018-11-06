@@ -130,3 +130,5 @@ Every software developer should read [On Writing](https://amzn.to/2JoNgzh). You 
 Let me leave you with one final quote from Stephen King:
 
 > But if you don't want to work your ass off, you have no business trying to write well.
+
+_If you enjoyed this post with key takeaways from On Writing you'll like my [monthly newsletter](https://mokacoding.us10.list-manage.com/subscribe?u=45a265e2a9d2b9dbec5f98d51&id=325d8c0fd4) where I share lessons learnt and food from thought from the books I've been reading. [Subscribe here](https://mokacoding.us10.list-manage.com/subscribe?u=45a265e2a9d2b9dbec5f98d51&id=325d8c0fd4).
