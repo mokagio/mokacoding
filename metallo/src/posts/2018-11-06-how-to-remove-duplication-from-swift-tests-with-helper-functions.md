@@ -23,7 +23,7 @@ func testLoggerLogsMessageWithPizza() {
 
   logger.log(Pizza())
 
-  expect(storageMock.hasBeenLogged("Pizza is delicious")) == true
+  XCTAssert(storageMock.hasBeenLogged("Pizza is delicious"))
 }
 ```
 
@@ -40,7 +40,7 @@ func testLoggerLogsMessageWithPasta() {
 
   logger.log(Pasta())
 
-  expect(storageMock.hasBeenLogged("There's nothing like home made pasta")) == true
+  XCTAssert(storageMock.hasBeenLogged("There's nothing like home made pasta"))
 }
 
 func testLoggerLogsMessageWithGelato() {
@@ -49,7 +49,7 @@ func testLoggerLogsMessageWithGelato() {
 
   logger.log(Gelato())
 
-  expect(storageMock.hasBeenLogged("I love gelato any time of the year")) == true
+  XCTAssert(storageMock.hasBeenLogged("I love gelato any time of the year"))
 }
 
 // etc...
@@ -83,10 +83,11 @@ func testLoggerLogsMessageBehaviour() {
   expectLogger(toLog: "There's nothing like home made pasta", forInput: Pasta())
   expectLogger(toLog: "Pizza is awesome!", forInput: Pizza())
   expectLogger(toLog: "I love gelato any time of the year", forInput: Gelato())
+  expectLogger(toLog: "Cappuccino warms and delights me", forInput: Cappuccino())
 }
 ```
 
-Nice. There's a little problem though. If the test fails Xcode will show the failure in the expectation function body, not at the call site. 
+Nice. There's a little problem though. If the test fails Xcode will show the failure in the expectation function body, not at the call site.
 
 ![📸 Screenshot of a test failure reported in the helper function body](https://s3.amazonaws.com/mokacoding/2018-11-06-test-helper-inline-failure.png)
 

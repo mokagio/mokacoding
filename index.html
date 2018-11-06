@@ -8,7 +8,7 @@
 
   logger.log(<span class="hljs-type">Pizza</span>())
 
-  expect(storageMock.hasBeenLogged(<span class="hljs-string">"Pizza is delicious"</span>)) == <span class="hljs-built_in">true</span>
+  <span class="hljs-type">XCTAssert</span>(storageMock.hasBeenLogged(<span class="hljs-string">"Pizza is delicious"</span>))
 }
 </code></pre>
 <p><em>This code is also available <a href="https://github.com/mokagio/removing-duplications-in-swift-examples">on GitHub</a>.</em></p>
@@ -20,7 +20,7 @@
 
   logger.log(<span class="hljs-type">Pasta</span>())
 
-  expect(storageMock.hasBeenLogged(<span class="hljs-string">"There's nothing like home made pasta"</span>)) == <span class="hljs-built_in">true</span>
+  <span class="hljs-type">XCTAssert</span>(storageMock.hasBeenLogged(<span class="hljs-string">"There's nothing like home made pasta"</span>))
 }
 
 <span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">testLoggerLogsMessageWithGelato</span><span class="hljs-params">()</span></span> {
@@ -29,7 +29,7 @@
 
   logger.log(<span class="hljs-type">Gelato</span>())
 
-  expect(storageMock.hasBeenLogged(<span class="hljs-string">"I love gelato any time of the year"</span>)) == <span class="hljs-built_in">true</span>
+  <span class="hljs-type">XCTAssert</span>(storageMock.hasBeenLogged(<span class="hljs-string">"I love gelato any time of the year"</span>))
 }
 
 <span class="hljs-comment">// etc...</span>
@@ -53,9 +53,10 @@
   expectLogger(toLog: <span class="hljs-string">"There's nothing like home made pasta"</span>, forInput: <span class="hljs-type">Pasta</span>())
   expectLogger(toLog: <span class="hljs-string">"Pizza is awesome!"</span>, forInput: <span class="hljs-type">Pizza</span>())
   expectLogger(toLog: <span class="hljs-string">"I love gelato any time of the year"</span>, forInput: <span class="hljs-type">Gelato</span>())
+  expectLogger(toLog: <span class="hljs-string">"Cappuccino warms and delights me"</span>, forInput: <span class="hljs-type">Cappuccino</span>())
 }
 </code></pre>
-<p>Nice. There&#39;s a little problem though. If the test fails Xcode will show the failure in the expectation function body, not at the call site. </p>
+<p>Nice. There&#39;s a little problem though. If the test fails Xcode will show the failure in the expectation function body, not at the call site.</p>
 <p><img src="https://s3.amazonaws.com/mokacoding/2018-11-06-test-helper-inline-failure.png" alt="📸 Screenshot of a test failure reported in the helper function body"></p>
 <p>Even worse if you have more than one failure, it requires you to click on the message to expand it an learn which tests failed.</p>
 <p><img src="https://s3.amazonaws.com/mokacoding/2018-11-06-test-helper-inline-failure-multiple.png" alt="📸 Screenshot of multiple test failures reported in the helper function body"></p>
