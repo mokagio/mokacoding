@@ -1,121 +1,122 @@
 <!DOCTYPE html><html lang="en"><head><title>mokacoding</title><meta name="description" content="A blog about testing, iOS development, productivity, and blabber about software in general."><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"><!-- Open Graph meta tags--><meta property="og:title" content="mokacoding"><meta property="og:description" content="A blog about testing, iOS development, productivity, and blabber about software in general."><meta property="og:url" content="/"><meta property="og:type" content="article"><meta property="og:site_name" content="mokacoding"><!-- Twitter meta tags--><meta property="twitter:card" content="summary"><meta property="twitter:site" content="@mokacoding"><meta property="twitter:creator" content="@mokagio"><!-- Stylesheets--><link href="/css/griddy.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet"><link href="/css/font-awesome.min.css" rel="stylesheet"><link href="/css/zenburn.css" rel="stylesheet"><!-- FavIcon--><!-- Thanks to https://www.favicon-generator.org/ & https://html2jade.org/--><link rel="apple-touch-icon" sizes="57x57" href="https://s3.amazonaws.com/mokacoding/apple-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="https://s3.amazonaws.com/mokacoding/apple-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="https://s3.amazonaws.com/mokacoding/apple-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="https://s3.amazonaws.com/mokacoding/apple-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="https://s3.amazonaws.com/mokacoding/apple-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="https://s3.amazonaws.com/mokacoding/apple-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="https://s3.amazonaws.com/mokacoding/apple-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="https://s3.amazonaws.com/mokacoding/apple-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" href="https://s3.amazonaws.com/mokacoding/apple-icon-180x180.png"><link rel="icon" type="image/png" sizes="192x192" href="https://s3.amazonaws.com/mokacoding/android-icon-192x192.png"><link rel="icon" type="image/png" sizes="32x32" href="https://s3.amazonaws.com/mokacoding/favicon-32x32.png"><link rel="icon" type="image/png" sizes="96x96" href="https://s3.amazonaws.com/mokacoding/favicon-96x96.png"><link rel="icon" type="image/png" sizes="16x16" href="https://s3.amazonaws.com/mokacoding/favicon-16x16.png"><link rel="manifest" href="https://s3.amazonaws.com/mokacoding/manifest.json"><meta name="msapplication-TileColor" content="#ffffff"><meta name="msapplication-TileImage" content="https://s3.amazonaws.com/mokacoding/ms-icon-144x144.png"><meta name="theme-color" content="#ffffff"><!-- Mailchimp Stylesheets--><link href="//cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css"><link href="/css/mailchimp-form-override.css" rel="stylesheet"><!-- SumoMe--><script src="//load.sumome.com/" data-sumo-site-id="dd80959300db03e20c8bc3dd899f1424fd764d261e6c3c41923c96482a270dba" async="async"></script></head><body><!-- Use this to render an extra header in special occasions--><div class="special-header"><div class="page"><div class="row-12"><div class="col-12"><p><p><a href="https://goo.gl/forms/lCLlJd9hqCUYoTME2">What is your biggest struggle right now with building software?</a></p>
-</p></div></div></div></div><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">unit and acceptance testing, automation, productivity</div><div class="links"><a href="/archive.html">Archive</a><a href="/espresso.html">Espresso</a><a href="/tags.html">Tags</a><a href="http://giovannilodi.com">About</a><a href="#subscribe">Subscribe</a><a href="http://theiostimes.com">The iOS Times</a><a href="/feed.xml"><i class="fa fa-rss"></i></a></div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/how-to-remove-duplication-from-swift-tests-with-helper-functions">How to remove duplication from Swift tests with helper functions</a></h2><p class="post-meta"><span class="post-date">Tue Nov 06 2018&nbsp;</span><a href="/tag/Testing/index.html" class="post-tag">-Testing</a><a href="/tag/Xcode/index.html" class="post-tag">-Xcode</a><a href="/tag/Swift/index.html" class="post-tag">-Swift</a><a href="/tag/XCTest/index.html" class="post-tag">-XCTest</a></p><div class="post"><p>As your codebase grows so will your test suite. Production code is often refactored to stay simple to work with. The same care should be applied to the test code.</p>
-<p>Your unit test suite should be kept as tidy as your production code. Let&#39;s see how to remove duplication from tests using helper functions.</p>
-<p>Imagine you have a logging component and you want to ensure it logs the expected message for the given inputs to the provided storage layer.</p>
+</p></div></div></div></div><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">unit and acceptance testing, automation, productivity</div><div class="links"><a href="/archive.html">Archive</a><a href="/espresso.html">Espresso</a><a href="/tags.html">Tags</a><a href="http://giovannilodi.com">About</a><a href="#subscribe">Subscribe</a><a href="http://theiostimes.com">The iOS Times</a><a href="/feed.xml"><i class="fa fa-rss"></i></a></div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/how-to-split-decision-and-action-logic-with-the-swift-type-system">How to split decision and action logic with the Swift type system</a></h2><p class="post-meta"><span class="post-date">Tue Nov 13 2018&nbsp;</span><a href="/tag/Swift/index.html" class="post-tag">-Swift</a><a href="/tag/Testing/index.html" class="post-tag">-Testing</a><a href="/tag/Refactoring/index.html" class="post-tag">-Refactoring</a></p><div class="post"><p>As your codebase grows so will your test suite. Production code is often refactored to stay simple to work with. The same care should be applied to the test code.</p>
+<p>Your unit test suite should be kept as tidy as your production code. We already saw <a href="https://www.mokacoding.com/blog/how-to-remove-duplication-from-swift-tests-with-helper-functions/">how to remove duplication from tests using test helpers</a>, functions extracting common functionalities in your test suite to avoid duplication.</p>
+<p>Test helpers are an invaluable tool to make the tests suite easy to read and to expand without requiring extra work. I encourage you to use them.</p>
+<p>Still, tests are a feedback on how our software is designed. Having to do a lot of work to test a component is usually a signal the its design can be improved.</p>
+<h2 id="split-decision-logic-from-action-logic">Split decision logic from action logic</h2>
+<p>Let&#39;s pick up the test for the <code>Logger</code> component of the <a href="https://www.mokacoding.com/blog/how-to-remove-duplication-from-swift-tests-with-helper-functions/">test helper example</a>.</p>
 <pre><code class=" hljs swift"><span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">testLoggerLogsMessageWithPizza</span><span class="hljs-params">()</span></span> {
   <span class="hljs-keyword">let</span> storageMock = <span class="hljs-type">StorageMock</span>()
   <span class="hljs-keyword">let</span> logger = <span class="hljs-type">Logger</span>(storage: storageMock())
 
   logger.log(<span class="hljs-type">Pizza</span>())
 
-  <span class="hljs-type">XCTAssert</span>(storageMock.hasBeenLogged(<span class="hljs-string">"Pizza is delicious"</span>))
+  <span class="hljs-type">XCTAssert</span>(storageMock.hasBeenLogged(<span class="hljs-string">"Pizza is delicious"</span>)
 }
 </code></pre>
-<p><em>This code is also available <a href="https://github.com/mokagio/removing-duplications-in-swift-examples">on GitHub</a>.</em></p>
-<p>Now, let&#39;s say in this system it&#39;s important to ensure the logger behaves as expected with inputs of type <code>Pasta</code>, <code>Gelato</code>, and <code>Cappuccino</code>.</p>
-<p>One way to do it is to duplicate the test for <code>Pizza</code> for each of those inputs.</p>
-<pre><code class=" hljs swift"><span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">testLoggerLogsMessageWithPasta</span><span class="hljs-params">()</span></span> {
-  <span class="hljs-keyword">let</span> storageMock = <span class="hljs-type">StorageMock</span>()
-  <span class="hljs-keyword">let</span> logger = <span class="hljs-type">Logger</span>(storage: storageMock())
+<p>The test is verifying calling <code>log(_:)</code> writes the expected value using the storage component given to <code>Logger</code>.</p>
+<p>You could argue there are two behaviours being tested here. The act of logging, and the decision on what to log.</p>
+<p>A good rule of thumb to build systems simple to work with is to have components do only one thing. Let&#39;s rewrite <code>Logger</code> so the only thing it does is logging, leaving the responsibility to decide what to log to some other component.</p>
+<pre><code class=" hljs swift"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Logger</span> </span>{
 
-  logger.log(<span class="hljs-type">Pasta</span>())
+  <span class="hljs-keyword">let</span> transformation: (<span class="hljs-type">Any</span>) -&gt; <span class="hljs-type">String</span>
+  <span class="hljs-keyword">let</span> storage: <span class="hljs-type">StorageService</span>
 
-  <span class="hljs-type">XCTAssert</span>(storageMock.hasBeenLogged(<span class="hljs-string">"There's nothing like home made pasta"</span>))
-}
+  <span class="hljs-keyword">init</span>(transformation: (<span class="hljs-type">Any</span>) -&gt; <span class="hljs-type">String</span>, storage: <span class="hljs-type">StorageService</span>) {
+    <span class="hljs-keyword">self</span>.transformation = transformation
+    <span class="hljs-keyword">self</span>.storage = storage
+  }
 
-<span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">testLoggerLogsMessageWithGelato</span><span class="hljs-params">()</span></span> {
-  <span class="hljs-keyword">let</span> storageMock = <span class="hljs-type">StorageMock</span>()
-  <span class="hljs-keyword">let</span> logger = <span class="hljs-type">Logger</span>(storage: storageMock())
-
-  logger.log(<span class="hljs-type">Gelato</span>())
-
-  <span class="hljs-type">XCTAssert</span>(storageMock.hasBeenLogged(<span class="hljs-string">"I love gelato any time of the year"</span>))
-}
-
-<span class="hljs-comment">// etc...</span>
-</code></pre>
-<p>While <a href="https://www.sandimetz.com/blog/2016/1/20/the-wrong-abstraction">there&#39;s nothing bad with a bit of duplication</a> in the case of a mechanical behaviour like this one you could do worst than spending a bit of time to remove those duplicated test code.</p>
-<p>This is worth doing. You&#39;ll end up with code that is easier to read and change in the future. All with little time investment upfront. Bargain!</p>
-<h2 id="extracting-expectation-from-tests">Extracting expectation from tests</h2>
-<p>Have a look at those three tests, you&#39;ll see they all look the same. The only differences are the input of the system under test and its expected behaviour.</p>
-<p>You can extract the test in a function of those parameters:</p>
-<pre><code class=" hljs swift"><span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">expectLogger</span><span class="hljs-params">(toLog output: String, forInput input: Any)</span></span> {
-  <span class="hljs-keyword">let</span> storageMock = <span class="hljs-type">StorageMock</span>()
-  <span class="hljs-keyword">let</span> logger = <span class="hljs-type">Logger</span>(storage: storageMock())
-
-  logger.log(input)
-
-  <span class="hljs-type">XCTAssert</span>(storageMock.hasStored(output), <span class="hljs-string">"\"<span class="hljs-subst">\(output)</span>\" was not logged."</span>)
+  <span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">log</span><span class="hljs-params">(<span class="hljs-number">_</span> input: Any)</span></span> {
+    storage.perist(transformation(input))
+  }
 }
 </code></pre>
-<p>You can then write a single test in which to call the encapsulated expectation for each of the inputs you care about.</p>
+<p>The new <code>Logger</code> expects an input <code>(Any) -&gt; String</code> function to use to get the <code>String</code> to log for the given <code>input</code>.</p>
+<p>The only thing to do to test <code>Logger</code> is to pass an arbitrary <code>transformation</code> and verify it uses it properly<sup><a href="#fn1">1</a></sup>.</p>
 <pre><code class=" hljs swift"><span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">testLoggerLogsMessageBehaviour</span><span class="hljs-params">()</span></span> {
-  expectLogger(toLog: <span class="hljs-string">"There's nothing like home made pasta"</span>, forInput: <span class="hljs-type">Pasta</span>())
-  expectLogger(toLog: <span class="hljs-string">"Pizza is awesome!"</span>, forInput: <span class="hljs-type">Pizza</span>())
-  expectLogger(toLog: <span class="hljs-string">"I love gelato any time of the year"</span>, forInput: <span class="hljs-type">Gelato</span>())
-  expectLogger(toLog: <span class="hljs-string">"Cappuccino warms and delights me"</span>, forInput: <span class="hljs-type">Cappuccino</span>())
-}
-</code></pre>
-<p>Nice. There&#39;s a little problem though. If the test fails Xcode will show the failure in the expectation function body, not at the call site.</p>
-<p><img src="https://s3.amazonaws.com/mokacoding/2018-11-06-test-helper-inline-failure.png" alt="📸 Screenshot of a test failure reported in the helper function body"></p>
-<p>Even worse if you have more than one failure, it requires you to click on the message to expand it an learn which tests failed.</p>
-<p><img src="https://s3.amazonaws.com/mokacoding/2018-11-06-test-helper-inline-failure-multiple.png" alt="📸 Screenshot of multiple test failures reported in the helper function body"></p>
-<p>When writing unit tests the easier you make failures to be discovered the better off you&#39;ll be.</p>
-<h2 id="accurate-failures-with-file-and-line-">Accurate failures with <code>#file</code> and <code>#line</code></h2>
-<p>Not having duplicated code is great, but not knowing which of the <code>expectLogger(toLog:, forInput:)</code> calls failed makes understanding -and eventually fixing- the test failures harder.</p>
-<p>Wouldn&#39;t it be great if the failures were reported at the call site of the test helper method?</p>
-<p>The documentation for the <code>XCTAsser-</code> family of methods shows how to do it. Xcode&#39;s code completion when calling an <code>XCTAssert-</code> method shows this:</p>
-<p><img src="https://s3.amazonaws.com/mokacoding/2018-11-06-xctassert-autocompletion.png" alt="📸 Screenshot of multiple test failures reported in the helper function body"></p>
-<p>There are other two input parameters the functions can accept. They don&#39;t come up in the autocompletion view because they have a default value.</p>
-<pre><code class=" hljs swift"><span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">XCTAssert</span><span class="hljs-params">(
-  <span class="hljs-number">_</span> expression: @autoclosure <span class="hljs-params">()</span></span></span> throws -&gt; <span class="hljs-type">Bool</span>,
-  <span class="hljs-number">_</span> message: @autoclosure () -&gt; <span class="hljs-type">String</span> = <span class="hljs-keyword">default</span>,
-  file: <span class="hljs-type">StaticString</span> = #file,
-  line: <span class="hljs-type">UInt</span> = #line
-)
-</code></pre>
-<p>The <a href="https://developer.apple.com/documentation/xctest/1500669-xctassert">documentation</a> reads:</p>
-<blockquote>
-<p><strong><code>file</code></strong> The file in which failure occurred. Defaults to the file name of the test case in which this function was called.</p>
-<p><strong><code>line</code></strong> The line number on which failure occurred. Defaults to the line number on which this function was called.</p>
-</blockquote>
-<p>Armed with this knowledge you can pass the call site details to the test helper, so it can relay that information when calling an <code>XCTAssert-</code> or <code>XCTFail</code>.</p>
-<pre><code class=" hljs swift">private <span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">expectLogger</span><span class="hljs-params">(
-  toLog output: String,
-  forInput input: Any,
-  file: StaticString = #file,
-  line: UInt = #line
-)</span></span> {
   <span class="hljs-keyword">let</span> storageMock = <span class="hljs-type">StorageMock</span>()
-  <span class="hljs-keyword">let</span> logger = <span class="hljs-type">Logger</span>(storage: storageMock)
-
-  logger.log(input)
-
-  <span class="hljs-type">XCTAssert</span>(
-    storageMock.hasStored(output),
-    <span class="hljs-string">"\"<span class="hljs-subst">\(output)</span>\" was not logged."</span>,
-    file: file,
-    line: line
+  <span class="hljs-keyword">let</span> logger = <span class="hljs-type">Logger</span>(
+    transformation: { <span class="hljs-keyword">return</span> <span class="hljs-string">"something"</span> },
+    storage: storageMock()
   )
+
+  logger.log(<span class="hljs-string">"any input"</span>)
+
+  <span class="hljs-type">XCTAssert</span>(storageMock.hasBeenLogged(<span class="hljs-string">"something"</span>))
 }
 </code></pre>
-<p>Now the test failures are reported where <code>expectLogger(toLog:, forInput:)</code> is called. This makes it clearer where to start looking for the issue.</p>
-<p><img src="https://s3.amazonaws.com/mokacoding/2018-11-06-test-helper-failure-in-call-site.png" alt="📸 Screenshot of multiple test failures reported in the helper function body"></p>
+<p>Notice how <code>Logger</code> is now not only simpler to test but also simpler to maintain. <code>Logger</code> itself needs to change only if the mechanic of logging changes, e.g. from one storage to two. Adding support for a new log input can be done in the <code>transformation</code> function.</p>
+<p>Ease of testability and maintainability go hand in hand.</p>
+<h2 id="splitting-decision-from-action-using-a-swift-protocol">Splitting decision from action using a Swift protocol</h2>
+<p>Splitting the code performing the action from the one making the decision on what the output should be is neat, simplifies the testing, and makes the design of our component easier to scale.</p>
+<p>Speaking of scaling, if we expect to have many different types of input being logged with our <code>Logger</code> we&#39;ll also see the <code>transformation</code> function growing in length and complexity.</p>
+<pre><code class=" hljs swift"><span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">extractLogMessage</span><span class="hljs-params">(fromInput input: Any)</span></span> -&gt; <span class="hljs-type">String</span> {
+  <span class="hljs-keyword">switch</span> input {
+  <span class="hljs-keyword">case</span> <span class="hljs-keyword">is</span> <span class="hljs-type">Pasta</span>:
+    <span class="hljs-keyword">return</span> <span class="hljs-string">"There's nothing like home made pasta"</span>
+  <span class="hljs-keyword">case</span> <span class="hljs-keyword">is</span> <span class="hljs-type">Pizza</span>:
+    <span class="hljs-keyword">return</span> <span class="hljs-string">"Pizza is awesome!"</span>
+  <span class="hljs-comment">// more and more cases here...</span>
+  <span class="hljs-keyword">case</span> <span class="hljs-number">_</span>:
+    <span class="hljs-keyword">return</span> <span class="hljs-string">"<span class="hljs-subst">\(input)</span>"</span>
+  }
+}
+
+<span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">testTransformation</span><span class="hljs-params">()</span></span> {
+  <span class="hljs-type">XCTAssertEqual</span>(
+    extractLogMessage(fromInput: <span class="hljs-type">Pasta</span>()), <span class="hljs-string">"There's nothing like home made pasta"</span>
+  )
+  <span class="hljs-type">XCTAssertEqual</span>(
+    extractLogMessage(fromInput: <span class="hljs-type">Pizza</span>()), <span class="hljs-string">"Pizza is awesome!"</span>
+  )
+  <span class="hljs-comment">// more and more of the assertions like the ones above here...</span>
+}
+</code></pre>
+<p>We have moved the long test from <code>Logger</code> where it originally was in the first example to <code>transformation</code>.</p>
+<p>Moreover, the fact it accepts <code>Any</code> as its input leaves the door open for future developers using <code>log(_:)</code> without adding support for the input type to the transformation.</p>
+<p>Swift offers a way to clean all this up by using a protocol.</p>
+<p>We can make <code>log(_:)</code> accept inputs conforming to a protocol describing the ability of generating a log message.</p>
+<pre><code class=" hljs swift"><span class="hljs-class"><span class="hljs-keyword">protocol</span> <span class="hljs-title">Loggable</span> </span>{
+  <span class="hljs-keyword">var</span> message: <span class="hljs-type">String</span> { <span class="hljs-keyword">get</span> }
+}
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Logger</span> </span>{
+
+  <span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">log</span><span class="hljs-params">(<span class="hljs-number">_</span> input: Loggable)</span></span> {
+    storage.persist(input.message)
+  }
+}
+</code></pre>
+<p>Now our test for <code>Logger</code> can become</p>
+<pre><code class=" hljs swift"><span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">testLoggerLogsMessageBehaviour</span><span class="hljs-params">()</span></span> {
+  <span class="hljs-keyword">let</span> storageMock = <span class="hljs-type">StorageMock</span>()
+  <span class="hljs-keyword">let</span> logger = <span class="hljs-type">Logger</span>(storage: storageMock())
+
+  logger.log(<span class="hljs-type">DummyLoggable</span>())
+
+  expect(storageMock.hasBeenLogged(<span class="hljs-string">"a message"</span>)) == <span class="hljs-built_in">true</span>
+}
+
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">DummyLoggable</span>: <span class="hljs-title">Loggable</span> </span>{
+  <span class="hljs-keyword">var</span> message { <span class="hljs-string">"a message"</span> }
+}
+</code></pre>
+<p>This approach decentralizes the knowledge of the input-output conversion by encapsulating it in a <code>protocol</code>.</p>
+<p>Using a <code>protocol</code> also ensures the compiler will enforce that any input provided to <code>log(_:)</code> has logic to generate its message because it needs to conform to <code>Loggable</code>.</p>
+<p>As Manuel Chakravarty argues in his excellent talk <a href="http://justtesting.org/post/153668237436/here-is-the-video-of-my-talk-a-type-is-worth-a">A Type is Worth a Thousand Tests</a> we should leverage the type system and the compiler whenever possible. We can forget to write a test, or write a buggy test resulting in a false positive. The compiler is harder to fool.</p>
 <hr>
-<p>As a developer who cares about your craft you&#39;ll be already spending a lot of time refactoring your production code to make it as pleasant and simple as possible to work with. You ought to do the same with your test suite.</p>
-<p>When extracting code calling an <code>XCTest</code> assertion method you want failures to be reported at the call site, not in the helper function. This can be done by passing the <code>#file</code> and <code>#line</code> values through.</p>
-<p>This technique will help keeping the tests tidy and avoid extra work when adding new ones.</p>
-<p>On the other hand, tests are a window on the ergonomics of your software. If something is hard to test it&#39;s likely its design can be improved.</p>
-<p>You should always be paying attention to how your tests feel to write and read. When they become painful or require extra work ask yourself whether the design can be improved.</p>
-<p>In next week&#39;s post we&#39;ll look at how to rewrite the <code>Logger</code> component in a way to make testing it -and as a direct effect using it- easier.</p>
-<p>👉 <a href="http://eepurl.com/dEr0DH">Subscribe to the email list</a> to avoid missing out!</p>
-<p>In the meantime, what do you think of test helpers? Is there anywhere in your test suite where you could use them? Or maybe you are already using them and want to share how they&#39;re working out for you. Leave a comment below or get in touch <a href="https://twitter.com/mokagio">on Twitter</a>, I&#39;d love to hear from you.</p>
-</div><div id="share-buttons" class="bottom-box no-border"><div class="col-12"><a href="https://twitter.com/share" data-url="http://www.mokacoding.com/blog/how-to-remove-duplication-from-swift-tests-with-helper-functions" data-via="mokacoding" datacount-url="http://www.mokacoding.com/blog/how-to-remove-duplication-from-swift-tests-with-helper-functions" data-text="How to remove duplication from Swift tests with helper functions" class="twitter-share-button">Tweet</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
-</script><a href="https://news.ycombinator.com/submit" data-title="How to remove duplication from Swift tests with helper functions" data-url="http://www.mokacoding.com/blog/how-to-remove-duplication-from-swift-tests-with-helper-functions" data-count="horizontal" data-style="twitter" class="hn-button">Vote on Hacker News</a><script>var HN=[];HN.factory=function(e){return function(){HN.push([e].concat(Array.prototype.slice.call(arguments,0)))};},HN.on=HN.factory("on"),HN.once=HN.factory("once"),HN.off=HN.factory("off"),HN.emit=HN.factory("emit"),HN.load=function(){var e="hn-button.js";if(document.getElementById(e))return;var t=document.createElement("script");t.id=e,t.src="//hn-button.herokuapp.com/hn-button.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n)},HN.load();
-</script><script type="text/javascript">reddit_url="http://www.mokacoding.com/blog/how-to-remove-duplication-from-swift-tests-with-helper-functions";
-reddit_title="How to remove duplication from Swift tests with helper functions"
+<p>Between this and <a href="https://www.mokacoding.com/blog/how-to-remove-duplication-from-swift-tests-with-helper-functions/">the previous post</a> we saw three different approaches to avoid duplication in tests, ranging from the use of an helper function to encapsulate an expectation repeated multiple times, to the use of the type system to split the code taking decisions on the output from the code actioning it.</p>
+<p>Each is valuable, and each comes with different trade-offs. That&#39;s the beauty of software development, multiple solutions for the same problem, which one to pick is up to us.</p>
+<p>If you ask my opinion, when using a language like Swift <strong>relying on the type system is your best option</strong>.</p>
+<p>Have you got other approaches to suggest to remove duplication in this example? Or have you got tests with duplication and would like to chat about ways to remove it? Leave a comment below, get in touch <a href="https://twitter.com/mokagio">on Twitter at @mokagio</a>, or write to <a href="mailto:gio@mokacoding.com">gio@mokacoding.com</a>.</p>
+<p style="font-size: smaller"><a id="fn1">1</a>: One could argue the test in the example could tricked by making the <code>log(:)</code> body return <code>&quot;something&quot;</code>, the value returned by the test <code>transformation</code> function. While that&#39;s true it leads us into a spiral of more and more refined tests which might eventually turn into the need for generative testing. Let&#39;s just assume no one is trying to intentionally trick the tests and compromise using this single simpler one.</p>
+</div><div id="share-buttons" class="bottom-box no-border"><div class="col-12"><a href="https://twitter.com/share" data-url="http://www.mokacoding.com/blog/how-to-split-decision-and-action-logic-with-the-swift-type-system" data-via="mokacoding" datacount-url="http://www.mokacoding.com/blog/how-to-split-decision-and-action-logic-with-the-swift-type-system" data-text="How to split decision and action logic with the Swift type system" class="twitter-share-button">Tweet</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+</script><a href="https://news.ycombinator.com/submit" data-title="How to split decision and action logic with the Swift type system" data-url="http://www.mokacoding.com/blog/how-to-split-decision-and-action-logic-with-the-swift-type-system" data-count="horizontal" data-style="twitter" class="hn-button">Vote on Hacker News</a><script>var HN=[];HN.factory=function(e){return function(){HN.push([e].concat(Array.prototype.slice.call(arguments,0)))};},HN.on=HN.factory("on"),HN.once=HN.factory("once"),HN.off=HN.factory("off"),HN.emit=HN.factory("emit"),HN.load=function(){var e="hn-button.js";if(document.getElementById(e))return;var t=document.createElement("script");t.id=e,t.src="//hn-button.herokuapp.com/hn-button.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n)},HN.load();
+</script><script type="text/javascript">reddit_url="http://www.mokacoding.com/blog/how-to-split-decision-and-action-logic-with-the-swift-type-system";
+reddit_title="How to split decision and action logic with the Swift type system"
 reddit_target="iOSProgramming"
-reddit_newwindow='1';</script><script type="text/javascript" src="//www.redditstatic.com/button/button1.js"></script></div></div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"></div><div class="col-6"><div style="text-align: right"><a href="/blog/stephen-king-advice-to-software-developers">Stephen King's Advice To Software Developers&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin MailChimp Signup Form -->
+reddit_newwindow='1';</script><script type="text/javascript" src="//www.redditstatic.com/button/button1.js"></script></div></div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"></div><div class="col-6"><div style="text-align: right"><a href="/blog/how-to-remove-duplication-from-swift-tests-with-helper-functions">How to remove duplication from Swift tests with helper functions&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin MailChimp Signup Form -->
 <div id="mc_embed_signup">
   <form action="//mokacoding.us10.list-manage.com/subscribe/post?u=45a265e2a9d2b9dbec5f98d51&amp;id=0f2ccfb0fa" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
     <div id="mc_embed_signup_scroll">
@@ -131,7 +132,7 @@ reddit_newwindow='1';</script><script type="text/javascript" src="//www.redditst
 // Neet do add the / at the end to maintain compatibility with previous version
 // of the blog that didn't define disqus_url, letting Disqus set it automatically
 // using window.location.href
-var disqus_url = "http://www.mokacoding.com/blog/how-to-remove-duplication-from-swift-tests-with-helper-functions/";
+var disqus_url = "http://www.mokacoding.com/blog/how-to-split-decision-and-action-logic-with-the-swift-type-system/";
 
 (function() {
   var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -146,7 +147,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
 ga('create', 'UA-43554041-1', 'auto');
-ga('send', 'pageview');</script><script>var external_links = document.querySelectorAll('a:not([href^="/"]):not([href$="#subscribe"])');
+ga('send', 'pageview');</script><script>var external_links = document.querySelectorAll('a:not([href^="/"]):not([href^="#"])');
 // external_links is an HTMLCollection, not an Array, so we can't call forEach
 for (var i = 0; i < external_links.length; i++) {
   var link = external_links[i];
