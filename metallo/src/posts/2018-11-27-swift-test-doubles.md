@@ -176,7 +176,7 @@ If you are working on a dynamic language chances are there's a mocking framework
 
 I would **discourage you from using mocks**, and this is why I won't provide a code example for them.
 
-With mocks you write tests for whether or not your object class certain methods of the mocked one. This kind of testing focuses on implementation rather than behaviour. It can be handy while TDDing certain components, or when you're dealing with massive legacy code you can't refactor yet, but in the long run it will make your tests rigid. Every time you'll change that method signature you'll have to update all the mock usages, not to mention the tests you'll have to rewrite if you'll remove the method.
+With mocks you write tests for whether or not your object calls certain methods of the mocked one. This kind of testing focuses on implementation rather than behaviour. It can be handy while TDDing certain components, or when you're dealing with massive legacy code you can't refactor yet, but in the long run it will make your tests rigid. Every time you'll change that method signature you'll have to update all the mock usages, not to mention the tests you'll have to rewrite if you'll remove the method.
 
 I hope you don't think I'm a snob, throwing shit on the work of people using mocks. They're great tools, I just think there's a limited range of scenarios where they're the best one to use.
 
