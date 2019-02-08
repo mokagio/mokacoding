@@ -73,8 +73,8 @@
 <pre><code class=" hljs swift"><span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">testRowsInSection</span><span class="hljs-params">()</span></span> {
     <span class="hljs-keyword">let</span> dataSource = <span class="hljs-type">MenuDataSource</span>()
     <span class="hljs-type">XCTAssertEqual</span>(dataSource.numberOfRows(inSection: <span class="hljs-number">0</span>), <span class="hljs-number">3</span>)
-  <span class="hljs-comment">// 🔴 Value of type 'MenuDataSource' has no member 'numberOfRows';</span>
-  <span class="hljs-comment">// did you mean numberOfSections'?</span>
+    <span class="hljs-comment">// 🔴 Value of type 'MenuDataSource' has no member 'numberOfRows';</span>
+    <span class="hljs-comment">// did you mean numberOfSections'?</span>
 }
 </code></pre>
 <p>Once again the simplest way to make the test pass it to hardcode the result to be 3.</p>

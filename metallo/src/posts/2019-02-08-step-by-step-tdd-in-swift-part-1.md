@@ -1,9 +1,10 @@
 ---
 title: "How to TDD in Swift, a step by step guide"
-description: Test driven development allows you to write high quality software in small shippable steps. Let's see how to get started.
+description: With test driven development you can write high quality software in small shippable steps. Here's how to get started.
 tags:
 - TDD
 - Swift
+og_image: https://s3.amazonaws.com/mokacoding/2019-02-08-test-succeded.jpg
 ---
 
 There is a way of writing software that minimizes the chances of bugs and unexpected behaviours creeping in. Developing this way also results in small easy to change components.
@@ -117,10 +118,10 @@ Before solving that problem let's bring the test to a successful state. Let's ju
 
 ```swift
 func testRowsInSection() {
-	let dataSource = MenuDataSource()
-	XCTAssertEqual(dataSource.numberOfRows(inSection: 0), 3)
-  // 🔴 Value of type 'MenuDataSource' has no member 'numberOfRows';
-  // did you mean numberOfSections'?
+    let dataSource = MenuDataSource()
+    XCTAssertEqual(dataSource.numberOfRows(inSection: 0), 3)
+    // 🔴 Value of type 'MenuDataSource' has no member 'numberOfRows';
+    // did you mean numberOfSections'?
 }
 ```
 
