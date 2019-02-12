@@ -8,9 +8,8 @@ block contents
   br
 
   for post in posts
-    if post.tags.indexOf("Espresso") == -1
-      .post-container.tag
-        h2.post-title
-          a(href=baseUrl + post.path)= post.title
-        include _post_meta
-        p.post-description= post.description
+    .post-container.tag
+      h2.post-title
+        a(href=baseUrl + post.path)= post.title
+      include _post_meta
+      p.post-description= post.description
