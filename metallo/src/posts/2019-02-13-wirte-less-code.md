@@ -1,6 +1,6 @@
 ---
 title: Write Less Code
-description: "The best thing you can do as a software developer is not writing code, but removing it. Here's why"
+description: "The best thing you can do as a software developer is not writing code, but removing it. Here's why."
 tags:
 - Productivity
 - Refactoring
