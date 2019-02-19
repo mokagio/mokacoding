@@ -8,7 +8,7 @@ tags:
   - Productivity
 ---
 
-In his book [The ONE Thing](https://amzn.to/2Bc09MF) author Gary Keller defines a technique for identifying the most valuable work called _focusing question_.
+In his book [The ONE Thing](https://geni.us/tgjnLb) author Gary Keller defines a technique for identifying the most valuable work called _focusing question_.
 
 > **What is the one thing you can do right now for `<x>` that will make everything else easier or unnecessary?**
 
