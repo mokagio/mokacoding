@@ -1,6 +1,6 @@
 ---
 title: Code Coverage Is A Broken Metric
-description: "But you should use it anyways."
+description: "But you should track it anyways."
 tags:
 - Testing
 - Refactoring
