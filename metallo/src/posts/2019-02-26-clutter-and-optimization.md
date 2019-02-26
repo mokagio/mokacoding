@@ -11,11 +11,11 @@ In his book [Digital Minimalism](https://geni.us/7HNOJAz) Cal Newport defines a 
 
 ## Clutter is costly
 
-Cal Newport argues that by mindlessly signing up for every new service and using every new app we clutter our digital lives. The overwhelming number of technologies we use dilutes the benefits that the few ones actually valuable to us could provide. Clutter is costly in software development too, and we should avoid it as much as possible.
+Cal Newport argues that by mindlessly signing up for every new service and using every new app you clutter your digital life. The overwhelming number of technologies you use dilutes the benefits that the few ones actually valuable to you could provide. Clutter is costly in software development too, and you should avoid it as much as possible.
 
 Strive to keep your functions short, and your types and objects focused on [doing only one thing](https://en.wikipedia.org/wiki/Single_responsibility_principle). Take into account the mental overhead required to read and understand the code. The more clutter, the harder the code is to parse, which makes it harder and slower to work with. For everything you write consider its _local reasoning_ cost, ideally when you look at the code, right in front of you, you shouldn't "have to think about how the rest of your code interacts with that one function" as [Apple engineers put it](https://developer.apple.com/videos/play/wwdc2016/419/)
 
-Every third party dependency comes with a hidden cost to be kept up to date, and the possibility of introducing bugs. Don't get me wrong, libraries and frameworks are often fundamental in building good software. After all, we should be focusing on solving our domain problems, not in reinventing the wheel. I just want you to be aware of the tradeoff you're making when you offload the responsibility to get something done to code you don't control. Remember the [`left-pad` incident](https://blog.npmjs.org/post/141577284765/kik-left-pad-and-npm), when a single module being removed from npm broke the majority of the frameworks in the JavaScript echo system.
+Every third party dependency comes with a hidden cost to be kept up to date, and the possibility of introducing bugs. Don't get me wrong, libraries and frameworks are often fundamental in building good software. After all, you should be focusing on solving your domain problems, not in reinventing the wheel. I just want you to be aware of the tradeoff you're making when you offload the responsibility to get something done to code you don't control. Remember the [`left-pad` incident](https://blog.npmjs.org/post/141577284765/kik-left-pad-and-npm), when a single module being removed from npm broke the majority of the frameworks in the JavaScript echo system.
 
 Care with dependencies should not restrict to third-party code. Always try to keep the number of domain concepts a single object depends upon in check. Clutter makes software less flexible, say you want to extract part of your logic in a dedicated module so that you can work on it in isolation and with a faster feedback cycle. If your code is not well isolated, you'll have a lot of work in front of you to extract it, often carrying along domain concepts unrelated with what your original code is concerned.
 
@@ -37,7 +37,7 @@ Aim to master version control as well. Learning to use Git will make it much eas
 
 Tune your compilation and test phases, so they are as fast as possible. You want to the feedback tests and compiler provide to be timely. Staring at a progress bar is a challenge to anyone's self-control to stay focused on the task at hand instead of going off to social media. So don't make it harder on yourself to do your best work, don't let your builds and tests become slow.
 
-<p style="text-align: center;"><em>***</em></p>
+<p style="text-align: center;">***</p>
 
 Take a leaf from the digital minimalist playbook. Reduce clutter to avoid paying its mental overhead price. Optimize how you use your tools and workflows to get feedback fast, and get things done even faster. Less is more, aim to be better, not bigger.
 
