@@ -1,6 +1,7 @@
 ---
 title: "3 Lessons on Software Development from the New England Patriots"
 description: "The New England Patriots are one of the most costistently successful American Football franchises. By looking at how they operate we can learn useful lessons to apply to our job as software developers."
+og_image: https://s3.amazonaws.com/mokacoding/2019-03-05-tom-brady.webp
 ---
 
 On the 3rd of February 2019 the New England Patriots won their 6th Super Bowl. The Pats have appeared in [11 Super Bowls](https://www.si.com/nfl/2018/01/21/patriots-how-many-super-bowl-appearances), 9 of which in the past 18 seasons, and won 6 of them. Sally Jenkins defines the franchise "[_a snarling, unkillable monster_](https://www.washingtonpost.com/sports/the-patriots-secret-is-focusing-on-the-details-every-last-detail/2019/01/31/87726362-255d-11e9-ad53-824486280311_story.html?noredirect=on&utm_term=.4848d471bf64)".
