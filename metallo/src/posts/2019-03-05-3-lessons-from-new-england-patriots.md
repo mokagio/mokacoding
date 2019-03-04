@@ -1,6 +1,6 @@
 ---
 title: "3 Lessons on Software Development from the New England Patriots"
-description: "The New England Patriots are one of the most costistently successful American Football franchises. By looking at how they operate we can learn useful lessons to apply to our job as software developers."
+description: "By looking at how the consistently successful New England Patriots operate we can learn useful lessons to apply to our job as software developers."
 og_image: https://s3.amazonaws.com/mokacoding/2019-03-05-tom-brady.webp
 ---
 
