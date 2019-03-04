@@ -9,6 +9,8 @@ What makes a team so consistently successful? What can we learn from the Pats an
 
 ![a picture of Tom Brady, the Patriots' quarterback](https://s3.amazonaws.com/mokacoding/2019-03-05-tom-brady.webp)
 
+_This photo comes from the [New England Patriots official website](https://www.patriots.com/press-room/history-logo-uniform)._
+
 The bad news is nobody really knows the recipe for the New England Patriots success, the so called [Patriots Way](https://www.theplayerstribune.com/en-us/articles/kevin-faulk-patriots-way), and that's by design. Coach Bill Belichick is intentionally secretive, after all, this is a huge competitive advantage of his. Still, we can a paint picture by piecing together accounts from previous players and assistant coaches and learn 3 important lessons.
 
 ## Be Disciplined
@@ -17,7 +19,7 @@ The New England Patriots are described as:
 
 > a team that simply practices at a more extreme cadence than others and is zealous at even the most minor-seeming tasks.
 
-They train harder and with more focus than the other teams. 
+They train harder and with more focus than the other teams.
 
 To write software we need a computer and an internet connection. This is a great danger for us, because it makes it far too easy to get distracted. The browser with social media and the chat apps are one click away. The temptation to check our feeds while the code compiles or the tests run is always there.
 
