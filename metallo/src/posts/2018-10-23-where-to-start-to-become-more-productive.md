@@ -17,7 +17,7 @@ Productivity is first and foremost a mindset shift. Getting a lot of stuff is be
 
 At work this means identifying those tasks that move the needle, being aware that often they are not what you'd like to work on. In the personal life it's about spending time defining what really matters to you, your values, then constantly checking you are acting according to those.
 
-[Essentialism](https://amzn.to/2q28lXg) by Greg McKeown and [The ONE Thing](https://amzn.to/2R5MREp) by Gray Keller are a good place to start. They teach tools to identify what really matters and makes a difference, [how to prioritize](http://www.mokacoding.com/blog/the-focusing-question/), as well as touching on the value of habits, sleeping, and taking breaks.
+[Essentialism](https://geni.us/ny7S) by Greg McKeown and [The ONE Thing](https://geni.us/tgjnLb) by Gray Keller are a good place to start. They teach tools to identify what really matters and makes a difference, [how to prioritize](http://www.mokacoding.com/blog/the-focusing-question/), as well as touching on the value of habits, sleeping, and taking breaks.
 
 ## Use a system
 
@@ -25,7 +25,7 @@ To become more productive you need to know the limitation of your brain and how 
 
 One limitation is our brains are great a coming up with ideas, but not so good at storing things. The brain served our hunter-gatherers ancestor well in remembering which mushrooms were safe to eat, but often lets us down with the overwhelming amount of tasks, events, and news we need to remember in our modern day.
 
-[Getting Things Done](https://amzn.to/2R463Cq) by David Allen tackle this topic. The book is a productivity classic, it has been in print since 2001, and inspired products such as [OmniFocus](https://www.omnigroup.com/omnifocus/) and [Nozbe](https://nozbe.com).
+[Getting Things Done](https://geni.us/m6O7) by David Allen tackle this topic. The book is a productivity classic, it has been in print since 2001, and inspired products such as [OmniFocus](https://www.omnigroup.com/omnifocus/) and [Nozbe](https://nozbe.com).
 
 In GTD Allen defines a framework for decluttering the brain from all the thoughts, ideas, and things to do by putting them on a **trusted system**, identifying the next action to take to make progress, and review them on a schedule.
 
@@ -37,7 +37,7 @@ The shift from a reactive to a proactive approach is another productivity pillar
 
 In business execution can make or break products. The same goes for everything else we do in life. Knowing what to work on is only one piece of the puzzle, you need to execute on it effectively.
 
-In [Deep Work](https://amzn.to/2EBPc8K) Cal Newport argues our ability to focus is being compromised by the rise of tools like emails and instant messaging at work, and by social media and infotainment sites outside of it. His antidote are strategies and tactics to re-train your brain to focus and stay focused.
+In [Deep Work](https://geni.us/FITEF) Cal Newport argues our ability to focus is being compromised by the rise of tools like emails and instant messaging at work, and by social media and infotainment sites outside of it. His antidote are strategies and tactics to re-train your brain to focus and stay focused.
 
 I applied these tactics from the book and saw huge impact in focus, productivity, and head space:
 
@@ -54,7 +54,7 @@ Habits are the building blocks of human behaviour. A good habit like walking at 
 
 Becoming aware of your habits, then promoting the good ones and replacing the bad ones will lay the foundation allowing you to be more effectively.
 
-[The Power of Habits](https://amzn.to/2CYh19E) by Charles Duhigg is an engaging introduction to what habits are and how they affect us. James Clear's latest book [Atomic Habits](https://amzn.to/2R8NGfZ) has a practical framework to build good habits and break bad ones. _Disclaimer, I haven't received my paperback copy yet. Unlike all the other books in this post -which I've read sometimes more than once- I'm recommending it because of the reviewes I've seen from people I trust and the excellent track record James has on the topic of habits formation._
+[The Power of Habits](https://geni.us/uVLcHP) by Charles Duhigg is an engaging introduction to what habits are and how they affect us. James Clear's latest book [Atomic Habits](https://geni.us/SAAVEdT) has a practical framework to build good habits and break bad ones. Atomic Habits has been the best book I read in 2018, I wholeheartedly recommend it.
 
 ---
 

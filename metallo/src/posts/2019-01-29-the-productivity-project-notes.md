@@ -6,7 +6,7 @@ tags:
 - Books
 ---
 
-_These are my notes from [The Productivity Project](https://www.goodreads.com/book/show/25733994-the-productivity-project) by [Chris Bailey](https://alifeofproductivity.com/)._
+_These are my notes from [The Productivity Project](https://geni.us/SSWObQ) by [Chris Bailey](https://alifeofproductivity.com/)._
 
 Productivity is the **management of time, focus, and energy**. To be productive means being deliberate, stop working and living in autopilot.
 
@@ -23,7 +23,7 @@ Disclaimer: you need to know your values, and you need to understand what impact
 > Becoming more productive is a process of understanding your constraints, and observing how much time, attention, and energy you have will help you adjust accordingly.
 
 ### Three tasks a day
-This is the same idea as "[The ONE Thing](https://www.goodreads.com/book/show/16256798-the-one-thing)" and "[Eat that Frog](https://www.goodreads.com/book/show/95887.Eat_That_Frog_)". Identify 1 to 3 most valuable things to achieve on the day. You productivity is measured on whether you get the done.
+This is the same idea as "[The ONE Thing](https://geni.us/tgjnLb)" and "[Eat that Frog](https://geni.us/iwKV)". Identify 1 to 3 most valuable things to achieve on the day. You productivity is measured on whether you get the done.
 
 ### Cozying up to ugly tasks
 > This is a simple reality of not working in a factory: the more valuable your work, the more aversive it will be.
@@ -46,7 +46,7 @@ Author's strategies to defeat procrastination (in this example procrastinating o
 * Lacking in Personal Meaning: If I expect to get a refund, think about how much money I will get back, and make a list of the meaningful things I'll spend that money on. 
 * Lacking in Intrinsic Rewards: For every fifteen minutes I spend on my taxes, I set aside $ 2.50 to treat myself or reward myself in some meaningful way for reaching milestones.
 
-See also the idea of taking ownership on the task you feel like procrastinating on by making a decision, any decision, on it to stimulate the motivation center of the brain from [Smarter, Faster, Better](https://www.goodreads.com/book/show/25733966-smarter-faster-better).
+See also the idea of taking ownership on the task you feel like procrastinating on by making a decision, any decision, on it to stimulate the motivation center of the brain from [Smarter, Faster, Better](https://geni.us/s9Zyw).
 
 ### Meet yourself, from the future
 The idea here is to do a lot of visualization of how your future self will be to avoid seeing it as someone else and overloading it (you) with work.
@@ -122,7 +122,7 @@ A rule of thumb suggested to evaluate whether delegating or outsourcing a task i
 > How much would I be willing to pay in order to buy back one hour of my life?
 
 ### Emptying your brain
-This chapter makes the argument for using a **trysted system** a la [GTD](https://www.goodreads.com/book/show/1633.Getting_Things_Done) by David Allen, focusing on the value of collecting ideas in an inbox and the processing the inbox creating projects with actions from those ideas.
+This chapter makes the argument for using a **trysted system** a la [GTD](https://geni.us/m6O7) by David Allen, focusing on the value of collecting ideas in an inbox and the processing the inbox creating projects with actions from those ideas.
 
 > To summarize decades' worth of complex neurological research in one sentence, our brains are built for solving problems, connecting dots, and forming new ideas—not for holding on to information that we can simply externalize.
 
