@@ -1,9 +1,10 @@
 ---
 title: Better tests for delegates
-description: "When testing delegates we are asserting rigid implementation details. Here's a way to make those tests more flexible."
+description: "When testing delegates, we are asserting rigid implementation details. Here's a way to make those tests more flexible."
 tags:
 - Swift
 - Testing
+og_image: https://s3.amazonaws.com/mokacoding/2019-03-12-delegate-spy.png
 ---
 
 [Delegation](https://en.wikipedia.org/wiki/Delegation_pattern) is a powerful design patter.
@@ -162,7 +163,7 @@ we could use something like this:
 
 ```swift
 // ResourceFetcherTests.swift
-func test_delegate_success_call() {
+func testCallsDelegateOnSuccess() {
   let resourceFecther = ResourceFetcher()
   let delegateSpy = ResourceFetcherDelegateSpy()
   resourceFecther.delegate = delegateSpy
