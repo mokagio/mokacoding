@@ -131,7 +131,7 @@ towards the kind of behavior the delegate is notified about.</p>
 <p>In the <code>ResourceFetcher</code> example above
 we could use something like this:</p>
 <pre><code class=" hljs swift"><span class="hljs-comment">// ResourceFetcherTests.swift</span>
-<span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">test_delegate_success_call</span><span class="hljs-params">()</span></span> {
+<span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">testCallsDelegateOnSuccess</span><span class="hljs-params">()</span></span> {
   <span class="hljs-keyword">let</span> resourceFecther = <span class="hljs-type">ResourceFetcher</span>()
   <span class="hljs-keyword">let</span> delegateSpy = <span class="hljs-type">ResourceFetcherDelegateSpy</span>()
   resourceFecther.delegate = delegateSpy
