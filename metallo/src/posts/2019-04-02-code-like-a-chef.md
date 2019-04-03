@@ -4,6 +4,7 @@ title: Code Like A Chef
 description: "Professional chefs keep their benches clean because clutter will get in the way of their work. Software developers should do the same."
 tags:
 - Productivity
+og_image: "https://s3.amazonaws.com/mokacoding/2019-04-02-cook-like-a-chef.jpg"
 ---
 
 In [this excellent episode of The Ruby Testing Podcast](http://www.rubytestingpodcast.com/chris-toomey) host [Jason Swett](https://www.codewithjason.com/start-here/) discusses TDD and refactoring with [Chris Toomey](https://ctoomey.com/).
