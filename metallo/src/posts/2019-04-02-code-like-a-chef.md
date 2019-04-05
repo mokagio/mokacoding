@@ -85,9 +85,9 @@ A typo fix can be a dedicated commit.
 
 Keeping those cleanup changes in dedicated commits also makes it easier to look at the diff of the other commits in a pull request, because they will be free from that noise.
 
-## Never commit commented code
+## Never commit commented out code
 
-Commented code clutters your codebase for no reason.
+Commented out code clutters your codebase for no reason.
 It makes it harder to scroll through files and can create false positives when doing text searches.
 
 If an inner voice whispers "you might need it later," scream "[YAGNI](https://en.wikipedia.org/wiki/You_aren%27t_gonna_need_it)" at it.
