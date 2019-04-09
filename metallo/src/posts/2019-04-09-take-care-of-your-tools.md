@@ -5,15 +5,12 @@ tags:
 - Productivity
 ---
 
-In this scene from the science fiction book [Tiamat's Wrath](https://geni.us/W3BUuU), Teresa finds her space mechanic friend who lives off the grid in a cave doing maintenance on one of his machines.
+In the science fiction book [Tiamat's Wrath](https://geni.us/W3BUuU), one of the characters, Teresa, finds her space mechanic friend who lives off the grid in a cave doing maintenance on one of his food recycler.
+When she points out that he spends a lot of time taking his machines apart and putting them back together, he replies:
 
-> His food recycler was in pieces laid out on a blanket, [...] He rolled a bright silver cone about the size of a thumb in his palm and scowled.
-> "What is it?" she asked.
-> "Injector's getting a little ragged at the mouth is all," Timothy said. "I can touch it up. Just means I'll be drinking my yeast patties more than eating them."
-> "You spend a lot of time with that thing."
 > "You take care of your tools, your tools take care of you."
 
-Timothy takes care of his food recycler because his survival depends on it.
+Teresa's friend takes care of his food recycler because his survival depends on it.
 Our survival as software developers depends on how well we care for our codebase and the tools with use in it.
 
 Software developers have many tools.
