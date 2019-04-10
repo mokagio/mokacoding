@@ -3,6 +3,7 @@ title: Take care of your tools
 description: '"You take care of your tools, your tools take care of you."'
 tags:
 - Productivity
+og_image: "https://s3.amazonaws.com/mokacoding/2019-04-09-open-graph-cover.png"
 ---
 
 In the science fiction book [Tiamat's Wrath](https://geni.us/W3BUuU), one of the characters, Teresa, finds her space mechanic friend who lives off the grid in a cave doing maintenance on one of his food recycler.
@@ -95,6 +96,6 @@ If you are committed to building a software project for the long run, a codebase
 Notice the word invest.
 This is not bikeshedding, or the geeky need to always be on the latest version of everything because it's shiny.
 Keeping the codebase and its tools in the best shape you can is a matter of efficiency.
-It's an investment time now that will pay off by saving time later.
+It's an investment of time now that will pay off by saving time later.
 
 _"You take care of your tools, your tools take care of you."_
