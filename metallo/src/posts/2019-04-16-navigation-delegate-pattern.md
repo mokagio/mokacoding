@@ -18,7 +18,7 @@ Those and other little gotchas make the tests harder to write and reason about, 
 
 You can use a simple and cheap pattern to easily test how your view controllers trigger navigation, making your code easier to work with in the process.
 
-## The `NavigationDelegate`
+## `NavigationDelegate`
 
 The key to make navigations between view controllers easy to test lies in appreciating that **view controllers be responsible for presenting other view controllers**.
 
