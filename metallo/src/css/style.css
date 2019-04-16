@@ -57,6 +57,9 @@ h3 {
   text-align: justify; }
   .post-container h2, .post-container h3 {
     text-align: left; }
+  .post-container h2 code, .post-container h3 code {
+    font-size: 1.4em;
+  }
   .post-container h2.post-title {
     margin-bottom: 5px; }
   .post-container h2:not(.post-title) {
