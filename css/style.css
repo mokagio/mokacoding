@@ -190,3 +190,14 @@ a.bordered-button {
   height: 16px;
   margin-right: 8px;
 }
+
+#related-posts {
+  margin-bottom: 2.5em; }
+
+  #related-posts li {
+    font-size: 1.2em; }
+
+    #related-posts li a {
+      color: #303030;
+      text-decoration: underline;
+      text-underline-position: under; }
