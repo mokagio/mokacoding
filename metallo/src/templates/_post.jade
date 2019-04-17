@@ -4,6 +4,14 @@
   include _post_meta
   .post!= post.contents
 
+  if post.related !== undefined && post.related.length > 0
+    #related-posts
+      h2 Related Articles
+      ul
+        for related in post.related
+          li
+            a(href=baseUrl + related.path)= related.title
+
   .bottom-box#paginator.clearfixed
     .col-6
       if post.previous
