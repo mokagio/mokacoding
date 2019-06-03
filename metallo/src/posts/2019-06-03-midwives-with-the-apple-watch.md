@@ -8,7 +8,7 @@ tags:
 
 During the labor for the birth of our daughter Olive, mum and bub's heartbeats had to be continuously monitored, a technique called [cardiotocography](https://en.wikipedia.org/wiki/Cardiotocography), or CTG.
 
-The labor went on for eleven grueling hours, across two shifts of midwives.
+The active labor went on for eleven grueling hours, across two shifts of midwives.
 They were all professional, helpful, and friendly.
 
 One of them had an Apple Watch.
