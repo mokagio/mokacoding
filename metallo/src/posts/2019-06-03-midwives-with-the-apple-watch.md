@@ -45,7 +45,7 @@ The fewer, the better.
 The effort spent in customizing a whitelist of a selected few services allowed to interrupt you will pay off manifold in the results you can achieve by having prolonged focus.
 
 An approach to finding out which notifications are really useful to you is to disable all of them for a week, and then re-enable only those that you really missed.
-Check out this post from [Tony Stubblebine](https://www.coach.me/tony) for a heap of ways in which to streamline your notifications and take back control of the time you spend with your phone.
+Check out [this post](https://medium.com/better-humans/how-to-set-up-your-iphone-for-productivity-focus-and-your-own-longevity-bb27a68cc3d8) from [Tony Stubblebine](https://www.coach.me/tony) for a heap of ways in which to streamline your notifications and take back control of the time you spend with your phone.
 
 At this point, you may ask about Slack and other work instant messaging. What about the need to be reachable by your colleagues to answer questions and help out?
 Disabling those notifications doesn't mean that you won't be able to check your work chat anymore during the day.
