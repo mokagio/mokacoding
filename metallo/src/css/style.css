@@ -205,3 +205,57 @@ a.bordered-button {
       color: #303030;
       text-decoration: underline;
       text-underline-position: under; }
+
+/* Sendfox */
+#sendfox_embed_signup{
+  background:#fff;
+  clear:left;
+  color: #838383;
+  font-size: 14px; }
+
+#sendfox_embed_signup .form_title {
+  margin-bottom: .25rem;
+  color: #303030; }
+
+#sendfox_embed_signup p {
+  margin-top: 0;
+  margin-bottom: .25rem;
+  font-style: italic; }
+
+#sendfox_embed_signup form {
+  padding: 0; }
+
+
+#sendfox_embed_signup input.email {
+    display: block;
+    padding: 8px 0;
+    margin: 0 4% 10px 0;
+    text-indent: 5px;
+    width: 58%;
+    min-width: 130px;
+    border: 1px solid #999;
+    -webkit-appearance: none; }
+
+#sendfox_embed_signup button {
+  background-color: #27ae60;
+  display: block;
+  width: 35%;
+  margin: 0 0 10px 0;
+  min-width: 90px;
+  clear: both;
+  border: 0 none;
+  border-radius: 4px;
+  color: #FFFFFF;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: bold;
+  height: 32px;
+  line-height: 32px;
+  padding: 0;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: top;
+  white-space: nowrap; }
+
+  #sendfox_embed_signup button:hover {
+    background-color: #16a085; }
