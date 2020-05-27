@@ -63,12 +63,12 @@ This is the code to put in the resulting migartion file
 ```ruby
 class AddItemsAssociationToChallenge < ActiveRecord::Migration
   def self.up
-  	add_column :items, :challenge_id, :integer
-  	add_index 'items', ['challenge_id'], :name => 'index_challenge_id' 
+    add_column :items, :challenge_id, :integer
+    add_index 'items', ['challenge_id'], :name => 'index_challenge_id'
   end
 
   def self.down
-  	remove_column :items, :challenge_id
+    remove_column :items, :challenge_id
   end
 end
 ```
@@ -100,12 +100,12 @@ and we write this inside it
 ```ruby
 class AddChallengeAssociationToLevel < ActiveRecord::Migration
   def self.up
-  	add_column :challenges, :level_id, :integer
-  	add_index 'challenges', ['level_id'], :name => 'index_level_id' 
+    add_column :challenges, :level_id, :integer
+    add_index 'challenges', ['level_id'], :name => 'index_level_id'
   end
 
   def self.down
-  	remove_column :challenges, :level_id
+    remove_column :challenges, :level_id
   end
 end
 ```
