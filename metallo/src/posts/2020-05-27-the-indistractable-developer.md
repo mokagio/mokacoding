@@ -1,8 +1,9 @@
 ---
 title: The Indistractable Developer
-description: Reaching a maintaining deep focus time can greatly improve the quality of our work. The Indistractable framework by Nir Eyal is an approach to make focus the core of our work days.
+description: The quality of your focus time is directly proportional to your value in the market. Become Indistractable to maximize it.
 tags:
 - Productivity
+og_image: "https://mokacoding.s3.amazonaws.com/2020-05-27-indistractable-og_image.jpg"
 ---
 
 Have you ever gotten to the end of a workday exhausted but at the same time feeling like you didn't accomplish anything?
@@ -44,6 +45,7 @@ One way to increase both the time you spend focused and its intensity is to foll
 > **To be Indistractable means to be able to do what you set out to do while avoiding those things that pull you away from your goals.**
 
 ![Visual representation of the Indistractable model by Nir Eyal](https://mokacoding.s3.amazonaws.com/2020-05-27-indistractable.jpg)
+
 _Image sourced from [this post](https://onezero.medium.com/being-indistractable-will-be-the-skill-of-the-future-a07780cf36f4) by the author._
 
 "Traction" are those activities that move you forward towards your objective, while distractions are those that pull you away.
@@ -56,7 +58,8 @@ Let's look at the four areas of the model individually, starting from the more p
 
 ### Make Time for Traction
 
-_drop a quote from Essentialism here: if you don't control your schedule, someone else will_
+> “If you don’t prioritize your life someone else will”
+> <br/>_– Greg McKeown, [Essentialism](https://geni.us/ny7S)_
 
 If you want to prioritize something in life, you'll have to be intentional.
 You'll need to make time for it.
@@ -112,7 +115,7 @@ The best way to master distraction is simply to accept that it's a normal behavi
 
 I often procrastinate or get distracted when I have to do some tasks that I don't like, say pruning the Jira backlog.
 Needless to say, neither procrastinating nor getting distracted helps to get rid of the annoying task sooner.
-Eyal practical suggestion to stay focused and tackle this annoying work is to **reimagine the task**.
+Eyal practical suggestion to stay focused and tackle this annoying work is to reimagine the task.
 
 While pruning the Jira backlog might not be the most interesting work for me, there are ways to make it a bit more so.
 For example, I can challenge myself to do so only using keyboard shortcuts.
