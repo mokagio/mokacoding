@@ -22,23 +22,23 @@
 }
 </code></pre><p>The <code>objects</code> part is the real deal. Everything about the project is in there. All stored again in a dictionary fashion, with hexadecimal identifiers. A common parameter is the <code>isa</code> key. Here&#39;s an example:</p>
 <pre><code class="">CDAC634017A0EF4C00F5452A /<span class="hljs-keyword">*</span> KZPropertyMapper.m in Sources <span class="hljs-keyword">*</span>/ = {
-    isa = PBXBuildFile; 
+    isa = PBXBuildFile;
     fileRef = CDAC633F17A0EF4C00F5452A /<span class="hljs-keyword">*</span> KZPropertyMapper.m <span class="hljs-keyword">*</span>/;
 };
 </code></pre><p>Lucky for us Xcode adds some comments to make the things a bit more readable for humans. <em>Note:</em> I&#39;m sure they&#39;re comment and not part of the way stuff is written because I actually tried changing one and everything run fine.</p>
-<p>The <code>objects</code> has many sections, each wrapped between <code>/* Begin SectionName section */</code> and <code>/* End SectionName section */</code> comments. </p>
+<p>The <code>objects</code> has many sections, each wrapped between <code>/* Begin SectionName section */</code> and <code>/* End SectionName section */</code> comments.</p>
 <p>Here&#39;s the ones I found more interesting, the <a href="http://docs.cocoapods.org/xcodeproj/index.html">xcodeproj</a> gem documentation used by <a href="http://cocoapods.org/">CocoaPods</a> has been really helpful in understanding what some sections were about:</p>
 <h4 id="-pbxfilereference-"><code>PBXFileReference</code></h4>
 <p>All the files in the project are in this list.</p>
 <pre><code class="">CDAC633F17A0EF4C00F5452A <span class="hljs-comment">/* KZPropertyMapper.m */</span> = {
     <span class="hljs-variable">isa =</span> PBXFileReference;
-    <span class="hljs-variable">fileEncoding =</span> <span class="hljs-number">4</span>; 
-    <span class="hljs-variable">lastKnownFileType =</span> sourcecode.c.objc; 
-    <span class="hljs-variable">path =</span> KZPropertyMapper.m; 
-    <span class="hljs-variable">sourceTree =</span> <span class="hljs-string">"&lt;group&gt;"</span>; 
+    <span class="hljs-variable">fileEncoding =</span> <span class="hljs-number">4</span>;
+    <span class="hljs-variable">lastKnownFileType =</span> sourcecode.c.objc;
+    <span class="hljs-variable">path =</span> KZPropertyMapper.m;
+    <span class="hljs-variable">sourceTree =</span> <span class="hljs-string">"&lt;group&gt;"</span>;
 };
 </code></pre><h4 id="-pbxgroup-"><code>PBXGroup</code></h4>
-<p>This section has the groups tree. The groups are those fake folders that are useful only to create confusion on how the filesystem is oraganized. A PBXGroup can contain <code>PBXFirleReference</code>s, as well as other <code>PBXGroup</code>s. </p>
+<p>This section has the groups tree. The groups are those fake folders that are useful only to create confusion on how the filesystem is oraganized. A PBXGroup can contain <code>PBXFirleReference</code>s, as well as other <code>PBXGroup</code>s.</p>
 <h4 id="-pbxnativetarget-"><code>PBXNativeTarget</code></h4>
 <p>In this section we have the settings of the <em>Targets</em> of the project, in particular there&#39;s references to <code>buildPhases</code> and <code>buildRules</code>, like in the UI.</p>
 <h4 id="-pbxshellscriptbuildphase-"><code>PBXShellScriptBuildPhase</code></h4>
@@ -46,12 +46,12 @@
 <h4 id="-pbxvariantgroup-"><code>PBXVariantGroup</code></h4>
 <p>I found it hard to guess from the name, but here we have the information about the localized files.</p>
 <p>That&#39;s it, more or less… The <code>project.pbxproj</code> file stores all the informations regarding the project we&#39;re working on, and it&#39;s organized in a lot of meaningful sections related together by keeping track of the objects identifiers in form of hex hashes. Let&#39;s move on to the workspace then.</p>
-<p>I first came across an Xcode workspace when I used <a href="http://www.kobold2d.com/display/KKSITE/Home">Kobold2d</a> to develop a simple and unsuccesful game of iOS. It&#39;s easy to guess what a workspace might be. </p>
+<p>I first came across an Xcode workspace when I used <a href="http://www.kobold2d.com/display/KKSITE/Home">Kobold2d</a> to develop a simple and unsuccesful game of iOS. It&#39;s easy to guess what a workspace might be.</p>
 <p>The <a href="https://developer.apple.com/library/ios/featuredarticles/XcodeConcepts/Concept-Workspace.html">Apple Documentation</a> sais:</p>
 <blockquote>
 <p>A workspace is an Xcode document that groups projects and other documents so you can work on them together. A workspace can contain any number of Xcode projects, plus any other files you want to include. In addition to organizing all the files in each Xcode project, a workspace provides implicit and explicit relationships among the included projects and their targets.</p>
 </blockquote>
-<p>The <code>.xcworkspace</code> from <a href="https://github.com/krzysztofzablocki/KZPropertyMapper/tree/master/Example/Example.xcworkspace">KZPropertyMapper</a> is too tiny, so let&#39;s  take a look at another one, <a href="https://github.com/AFNetworking/AFNetworking/blob/master/AFNetworking.xcworkspace/contents.xcworkspacedata">AFNetworking</a>. As for the project the workspace is nothing but a folder, grouping configuration files. The interesting file here is <code>contents.xcworkspacedata</code>. Let&#39;s open it… Surprise! Unlike the project file this one is a more readable <a href="http://en.wikipedia.org/wiki/XML">XML</a>. Inside there&#39;s a list of the workspace components. </p>
+<p>The <code>.xcworkspace</code> from <a href="https://github.com/krzysztofzablocki/KZPropertyMapper/tree/master/Example/Example.xcworkspace">KZPropertyMapper</a> is too tiny, so let&#39;s  take a look at another one, <a href="https://github.com/AFNetworking/AFNetworking/blob/master/AFNetworking.xcworkspace/contents.xcworkspacedata">AFNetworking</a>. As for the project the workspace is nothing but a folder, grouping configuration files. The interesting file here is <code>contents.xcworkspacedata</code>. Let&#39;s open it… Surprise! Unlike the project file this one is a more readable <a href="http://en.wikipedia.org/wiki/XML">XML</a>. Inside there&#39;s a list of the workspace components.</p>
 <pre><code class=" hljs xml"><span class="hljs-pi">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">Workspace</span>
     <span class="hljs-attribute">version</span> = "<span class="hljs-attribute">1.0</span>"&gt;</span>
@@ -79,7 +79,7 @@
     ...
     <span class="hljs-tag">&lt;<span class="hljs-title">FileRef</span>
         <span class="hljs-attribute">location</span> = "<span class="hljs-attribute">group:Tests</span>/<span class="hljs-attribute">AFNetworking</span> <span class="hljs-attribute">Tests.xcodeproj</span>"&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-title">FileRef</span>&gt;</span>    
+    <span class="hljs-tag">&lt;/<span class="hljs-title">FileRef</span>&gt;</span>
     ...
 <span class="hljs-tag">&lt;/<span class="hljs-title">Workspace</span>&gt;</span>
 </code></pre>
@@ -92,9 +92,9 @@
 <h3 id="references">References</h3>
 <ul>
 <li>The <a href="http://docs.cocoapods.org/xcodeproj/index.html">xcodeproj</a> gem used by <a href="">CocoaPods</a>.</li>
-<li><a href="https://github.com/rayh/xcoder">xcoder</a>, another gem to manipulate an Xcode project. </li>
+<li><a href="https://github.com/rayh/xcoder">xcoder</a>, another gem to manipulate an Xcode project.</li>
 </ul>
-</div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"><div><a href="/blog/rails-add-has-many-association-to-existing-model"><<&nbsp;Rails: adding a new has_many association to an existing model</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/october-questions">October's Questions&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin Sendfox Signup Form -->
+</div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"><div><a href="/blog/things-learned-in-october"><<&nbsp;Some things I learned in October</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/october-questions">October's Questions&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin Sendfox Signup Form -->
 <div id="sendfox_embed_signup">
   <h4 class="form_title">Want more of these posts?</h4>
   <p class="form_caption">Subscribe to receive new posts in your inbox.</p>
