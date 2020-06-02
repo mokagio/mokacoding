@@ -58,9 +58,6 @@ Let's look at the four areas of the model individually, starting from the more p
 
 ### Make Time for Traction
 
-> “If you don’t prioritize your life someone else will”
-> <br/>_– Greg McKeown, [Essentialism](https://geni.us/ny7S)_
-
 If you want to prioritize something in life, you'll have to be intentional.
 You'll need to make time for it.
 When it comes to making time for focus, your calendar is your best friend.
@@ -115,7 +112,7 @@ The best way to master distraction is simply to accept that it's a normal behavi
 
 I often procrastinate or get distracted when I have to do some tasks that I don't like, say pruning the Jira backlog.
 Needless to say, neither procrastinating nor getting distracted helps to get rid of the annoying task sooner.
-Eyal practical suggestion to stay focused and tackle this annoying work is to reimagine the task.
+Eyal's practical suggestion to stay focused and tackle this annoying work is to reimagine the task.
 
 While pruning the Jira backlog might not be the most interesting work for me, there are ways to make it a bit more so.
 For example, I can challenge myself to do so only using keyboard shortcuts.
