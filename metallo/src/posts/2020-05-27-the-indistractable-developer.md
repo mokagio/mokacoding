@@ -58,9 +58,6 @@ Let's look at the four areas of the model individually, starting from the more p
 
 ### Make Time for Traction
 
-> “If you don’t prioritize your life someone else will”
-> <br/>_– Greg McKeown, [Essentialism](https://geni.us/ny7S)_
-
 If you want to prioritize something in life, you'll have to be intentional.
 You'll need to make time for it.
 When it comes to making time for focus, your calendar is your best friend.
