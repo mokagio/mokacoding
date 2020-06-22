@@ -7,7 +7,7 @@ tags:
 - Expecta
 ---
 
-In the last post we looked at [Expecta, a matcher library that speakes English](http://www.mokacoding.com/blog/expecta/), and we noticed how easy it is to use it to write test expectations that explain themselves.
+In the last post we looked at [Expecta, a matcher library that speakes English](https://www.mokacoding.com/blog/expecta/), and we noticed how easy it is to use it to write test expectations that explain themselves.
 
 We can bring clarity one step forward. Expecta, in fact, allows users to write _custom matchers_, we can extend Expecta with our very own `expect().to.beSomethingSomething()`. The reasons you might want to do that could be:
 

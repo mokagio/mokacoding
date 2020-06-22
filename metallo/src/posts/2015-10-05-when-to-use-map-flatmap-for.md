@@ -6,7 +6,7 @@ tags:
   - Swift
 ---
 
-I am a [big fan of `map` and `flatMap`](http://www.mokacoding.com/blog/functor-applicative-monads-in-pictures/), and of the cleaner code that [they allow to write](http://www.mokacoding.com/blog/demistifying-swift-functor/).
+I am a [big fan of `map` and `flatMap`](https://www.mokacoding.com/blog/functor-applicative-monads-in-pictures/), and of the cleaner code that [they allow to write](https://www.mokacoding.com/blog/demistifying-swift-functor/).
 
 When I realised how easy it was to use `map` in Swift I fell victim of one of the most common engineer disease: the shiny new thing syndrome.
 

@@ -8,7 +8,7 @@ tags:
 - XCTest
 ---
 
-In the [previous post](http://www.mokacoding.com/blog/testing-callbacks-in-swift-with-xctest/)
+In the [previous post](https://www.mokacoding.com/blog/testing-callbacks-in-swift-with-xctest/)
 of the **Practical Testing in Swift** series we saw how to test asynchronous
 code that calls a callback using XCTest.
 
@@ -44,7 +44,7 @@ class SomethingWithDelegate {
 ```
 
 To test this behaviour we will need to combine the `XCTestExpectation` API we
-saw [in the previous post](http://www.mokacoding.com/blog/testing-callbacks-in-swift-with-xctest/) with a test pattern called **Spy**.
+saw [in the previous post](https://www.mokacoding.com/blog/testing-callbacks-in-swift-with-xctest/) with a test pattern called **Spy**.
 
 This pattern is defined as:
 
@@ -86,7 +86,7 @@ class SpyDelegate: Delegate {
 ```
 
 The actual test will simply need to instantiate and configure a `SpyDelegate`
-and exercise the method under test [in an asynchronous way](http://www.mokacoding.com/blog/testing-callbacks-in-swift-with-xctest/).
+and exercise the method under test [in an asynchronous way](https://www.mokacoding.com/blog/testing-callbacks-in-swift-with-xctest/).
 
 ```swift
 class DelegateTestExample: XCTestCase {

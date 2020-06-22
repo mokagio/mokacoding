@@ -25,7 +25,7 @@ Combining [IFTTT](https://ifttt.com/recipes) and [Pocket](https://getpocket.com/
 
 ![IFTTT + RSS + POCKET](https://s3.amazonaws.com/mokacoding/2015-10-08-ifttt-rss-pocket.jpg)
 
-You can use [this recipe](https://ifttt.com/recipes/330296-mokacoding-rss-to-pocket) to send new [mokacoding](http://mokacoding.com) posts to you Pocket reading list, and duplicate it to subscribe to your favourite blogs.
+You can use [this recipe](https://ifttt.com/recipes/330296-mokacoding-rss-to-pocket) to send new [mokacoding](https://www.mokacoding.com) posts to you Pocket reading list, and duplicate it to subscribe to your favourite blogs.
 
 And you know what the cool thing? You can use this workflow with other channels, like [Readability](https://ifttt.com/readability), [Feedly](https://ifttt.com/feedly), the [iOS reading list](https://ifttt.com/ios_reading_list), [Instapaper](https://ifttt.com/instapaper), and many more.
 

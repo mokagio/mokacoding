@@ -9,7 +9,7 @@ tags:
   - UI Testing
 ---
 
-In the past months there have been a number of articles here on [mokacoding](http://mokacoding.com) regarding testing, like ["Enhancing XCTest test cases with Nimble matchers"](http://www.mokacoding.com/blog/xctest-nimble/), ["Xcode 7 UI testing, a first look"](http://www.mokacoding.com/blog/xcode-7-ui-testing/), and ["Better tests with Specta"](http://www.mokacoding.com/blog/better-tests-with-specta/).
+In the past months there have been a number of articles here on [mokacoding](https://www.mokacoding.com) regarding testing, like ["Enhancing XCTest test cases with Nimble matchers"](https://www.mokacoding.com/blog/xctest-nimble/), ["Xcode 7 UI testing, a first look"](https://www.mokacoding.com/blog/xcode-7-ui-testing/), and ["Better tests with Specta"](https://www.mokacoding.com/blog/better-tests-with-specta/).
 
 It is clear that I'm a big TDD fan boy, and if we meet in person I'll probably try to _convert_ you. In this post though I will introduce another use for unit and acceptance tests that you might not have considered yet. Unit and acceptance tests can be used as a tool to fix bug.
 

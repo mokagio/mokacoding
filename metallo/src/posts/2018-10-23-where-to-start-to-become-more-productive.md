@@ -17,7 +17,7 @@ Productivity is first and foremost a mindset shift. Getting a lot of stuff is be
 
 At work this means identifying those tasks that move the needle, being aware that often they are not what you'd like to work on. In the personal life it's about spending time defining what really matters to you, your values, then constantly checking you are acting according to those.
 
-[Essentialism](https://geni.us/ny7S) by Greg McKeown and [The ONE Thing](https://geni.us/tgjnLb) by Gray Keller are a good place to start. They teach tools to identify what really matters and makes a difference, [how to prioritize](http://www.mokacoding.com/blog/the-focusing-question/), as well as touching on the value of habits, sleeping, and taking breaks.
+[Essentialism](https://geni.us/ny7S) by Greg McKeown and [The ONE Thing](https://geni.us/tgjnLb) by Gray Keller are a good place to start. They teach tools to identify what really matters and makes a difference, [how to prioritize](https://www.mokacoding.com/blog/the-focusing-question/), as well as touching on the value of habits, sleeping, and taking breaks.
 
 ## Use a system
 

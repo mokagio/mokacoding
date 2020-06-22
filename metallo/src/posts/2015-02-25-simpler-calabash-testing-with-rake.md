@@ -8,7 +8,7 @@ tags:
 - Productivity
 ---
 
-Not too long ago I wrote about how to [setup Calabash in our project](http://www.mokacoding.com/blog/calabash-ios-with-cocoapods-and-build-configurations/) in an unobtrusive and easy to maintain way.
+Not too long ago I wrote about how to [setup Calabash in our project](https://www.mokacoding.com/blog/calabash-ios-with-cocoapods-and-build-configurations/) in an unobtrusive and easy to maintain way.
 
 In this post we'll see how to streamline our testing flow by saving a lot of typing thanks to Rake tasks.
 

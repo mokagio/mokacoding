@@ -14,13 +14,13 @@ If you've done some kind of Ruby development you'll probably be familiar with [R
 
 We can refer to this style of testing as to _xSpec_ style.
 
-Languages other than Ruby now have their xSpec frameworks, in "[The state of iOS testing in 2015](http://www.mokacoding.com/blog/ios-testing-in-2015/)" we mentioned [Specta](https://github.com/specta/specta) and [Kiwi](https://github.com/Kiwi-BDD/Kiwi) for Objective-C, and [Quick](https://github.com/Quick/Quick) for Swift.
+Languages other than Ruby now have their xSpec frameworks, in "[The state of iOS testing in 2015](https://www.mokacoding.com/blog/ios-testing-in-2015/)" we mentioned [Specta](https://github.com/specta/specta) and [Kiwi](https://github.com/Kiwi-BDD/Kiwi) for Objective-C, and [Quick](https://github.com/Quick/Quick) for Swift.
 
 In this post we're going to use Specta. We'll first write a test in the XCTest way, then rewrite it using Specta, and see the difference.
 
 ### The task
 
-Let's go back to [Bench](https://github.com/mokacoding/Bench), our playground app introduced in the "[Setting up KIF for iOS acceptance testing](http://www.mokacoding.com/blog/setting-up-kif-for-ios-acceptance-testing/) post.
+Let's go back to [Bench](https://github.com/mokacoding/Bench), our playground app introduced in the "[Setting up KIF for iOS acceptance testing](https://www.mokacoding.com/blog/setting-up-kif-for-ios-acceptance-testing/) post.
 
 Bench shows a list with the elements of the periodic table in a `[symbol] name (atomic number)` format. So far that data has been hardcoded in Bench as an array of string. Yuck! 😨😷
 

@@ -18,7 +18,7 @@ While being incredibly versatile, easy to pick up, and optimized for
 developers' happiness, Ruby has some pitfalls when it comes to managing
 versions and gems, Ruby's name for libraries.
 
-In the [previous post](http://www.mokacoding.com/blog/ruby-for-ios-developers/)
+In the [previous post](https://www.mokacoding.com/blog/ruby-for-ios-developers/)
 we saw how to depart from the default system Ruby and take control and manage
 the Ruby versions on our machine.
 

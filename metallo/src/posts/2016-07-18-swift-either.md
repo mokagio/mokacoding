@@ -12,8 +12,8 @@ us to use it in some nifty way.
 
 One example of the power of `enum` is the `Optional` type, which we've seen in
 detail in
-[previous](http://www.mokacoding.com/blog/what-is-an-optional-value-in-swift/)
-[posts](http://www.mokacoding.com/blog/writing-your-own-swift-if-let/).
+[previous](https://www.mokacoding.com/blog/what-is-an-optional-value-in-swift/)
+[posts](https://www.mokacoding.com/blog/writing-your-own-swift-if-let/).
 
 `Optional` is defined as an `enum` with two cases. The case `None` represents
 the absence of value, while `Some` the presence of value. `Some` _wraps_ the

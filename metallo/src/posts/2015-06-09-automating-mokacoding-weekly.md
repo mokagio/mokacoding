@@ -7,7 +7,7 @@ tags:
 - Productivity
 ---
 
-This week on [mokacoding](http://mokacoding.com) we are going to keep Xcode closed, the iPhones in our pockets, and look at the [automated workflow](https://github.com/mokacoding/mokacoding-weekly) that we use to create "mokacoding weekly", the newsletter that every week reaches your inbox with the latest articles from the blog and other interesting links from the testing, automation, productivity, and software development world.
+This week on [mokacoding](https://www.mokacoding.com) we are going to keep Xcode closed, the iPhones in our pockets, and look at the [automated workflow](https://github.com/mokacoding/mokacoding-weekly) that we use to create "mokacoding weekly", the newsletter that every week reaches your inbox with the latest articles from the blog and other interesting links from the testing, automation, productivity, and software development world.
 
 At the end of March 2015 "mokacoding weekly" issue 1 was sent to 49 subscribers.
 

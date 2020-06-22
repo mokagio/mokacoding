@@ -106,7 +106,7 @@ In my opinion you should consider writing acceptance tests if:
 
 ![Where do I begin?](https://s3.amazonaws.com/mokacoding/2015-06-23-where-to-start.png)
 
-Getting started with acceptance testing on iOS is becoming easier and easier. Apple [just released a new UI testing framework](http://www.mokacoding.com/blog/xcode-7-ui-testing/) which allows you to automagically write tests cases simply by running the app on the Simulator and interacting with it. It is fully integrated with `XCTest`, and being completely detached, is on another target, from your Release code, is a safe way where to write some Swift code without the problems of Objective-C interoperability.
+Getting started with acceptance testing on iOS is becoming easier and easier. Apple [just released a new UI testing framework](https://www.mokacoding.com/blog/xcode-7-ui-testing/) which allows you to automagically write tests cases simply by running the app on the Simulator and interacting with it. It is fully integrated with `XCTest`, and being completely detached, is on another target, from your Release code, is a safe way where to write some Swift code without the problems of Objective-C interoperability.
 
 For the past years [KIF](https://github.com/kif-framework/KIF) has been one of the best open source frameworks to use to write tests for the behaviour of your apps. The community around it is pretty active, and I'm looking forward to see how we're gonna be able to leverage the new APIs provided by UI testing to make KIF an even better framework.
 
@@ -125,6 +125,6 @@ Acceptance testing is a practice that can increase the quality of your process, 
 
 I hope you found this post interesting and informative. If you have any experience to share on acceptance testing going well or incredibly wrong, please tweet me [@mokagio](https://twitter.com/mokagio) or leave a comment below.
 
-This blog has other articles regarding more practical aspects of acceptance testing for iOS, [check them out](http://www.mokacoding.com/tag/Acceptance-Testing/index.html).
+This blog has other articles regarding more practical aspects of acceptance testing for iOS, [check them out](https://www.mokacoding.com/tag/Acceptance-Testing/index.html).
 
 _Happy coding, and leave the codebase better than you found it._

@@ -14,7 +14,7 @@ In his book [The ONE Thing](https://geni.us/tgjnLb) author Gary Keller defines a
 
 It's a simple yet powerful tool. You can use it to discover the best thing to work on next. It's an exercise that makes you re-frame your list of possible tasks in the context of **how actionable they are right now, and what impact they'll have**.
 
-You can read more about how to apply the focusing question in [this post](http://www.mokacoding.com/blog/the-focusing-question/). This technique is also valuable when thinking about **refactoring**.
+You can read more about how to apply the focusing question in [this post](https://www.mokacoding.com/blog/the-focusing-question/). This technique is also valuable when thinking about **refactoring**.
 
 When starting to work on a new feature or task look at the code you have and ask yourself if there is **something that if improved would make the rest of the work for this project easier or unnecessary**.
 

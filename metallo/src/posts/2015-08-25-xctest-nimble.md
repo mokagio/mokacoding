@@ -8,11 +8,11 @@ tags:
   - Nimble
 ---
 
-Here on mokacoding we've talked a number of times about the benefits of the [xSpec style](http://www.mokacoding.com/blog/better-tests-with-specta/) when writing unit tests.
+Here on mokacoding we've talked a number of times about the benefits of the [xSpec style](https://www.mokacoding.com/blog/better-tests-with-specta/) when writing unit tests.
 
 There is a catch though. Because XCTest does not provide a DSL for xSpec style testing we need to use a third party library to write in this wonderful style. The best xSpec frameworks for Objective-C are, in alphabetical order, [Cedar](https://github.com/pivotal/cedar), [Kiwi](https://github.com/kiwi-bdd/Kiwi), and [Specta](https://github.com/specta/specta), while on Swift [Quick](https://github.com/Quick/Quick) is the one with the biggest traction.
 
-Unfortunately the iOS world [doesn't have a strong testing culture](http://www.mokacoding.com/blog/ios-testing-in-2015/), **yet**, and is not uncommon to join a team where unit testing had to be introduced _from scratch_.
+Unfortunately the iOS world [doesn't have a strong testing culture](https://www.mokacoding.com/blog/ios-testing-in-2015/), **yet**, and is not uncommon to join a team where unit testing had to be introduced _from scratch_.
 
 In such case dropping a framework combo like Specta + Expecta + [OCMock](http://ocmock.org/) might be too much for the team to handle in one go. It might be better to stick with XCTest and work on the team testing workflow instead.
 
