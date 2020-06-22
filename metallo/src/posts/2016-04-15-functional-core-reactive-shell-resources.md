@@ -7,7 +7,7 @@ tags:
 - Talks
 ---
 
-**Update:** I published a post version of the talk, [check it out](http://mokacoding.com/blog/functional-core-reactive-shell).
+**Update:** I published a post version of the talk, [check it out](https://www.mokacoding.com/blog/functional-core-reactive-shell).
 
 These are some links and credits for my recent talk "Functional Core, Reactive Shell", also called "Pizza Driven Development".
 

@@ -26,4 +26,4 @@ Through some friends I came across these interesting websites.
 
 ##A final word
 
-I also failed to fullfit my commitment to answer [4 questions I asked myself](http://www.mokacoding.com/blog/2013-10-06-october-questions). I won't make any commitment this month.
+I also failed to fullfit my commitment to answer [4 questions I asked myself](https://www.mokacoding.com/blog/2013-10-06-october-questions). I won't make any commitment this month.

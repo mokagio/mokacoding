@@ -23,7 +23,7 @@ And here's how the [UtilSnip Vim plugin](https://github.com/sirver/UltiSnips) pr
 
 ![Example of how the UtilSnip plugin provides snippets for Vim](https://camo.githubusercontent.com/296aecf30e1607233814196db6bd3f5f47e70c73/68747470733a2f2f7261772e6769746875622e636f6d2f5369725665722f756c7469736e6970732f6d61737465722f646f632f64656d6f2e676966)
 
-Like [investing in your terminal setup](http://www.mokacoding.com/blog/invest-in-your-terminal-to-become-a-better-developer/) configuring things such as aliases and scripts, having a wide array of snippets at your disposals is a great way to improve your productivity as a software developer.
+Like [investing in your terminal setup](https://www.mokacoding.com/blog/invest-in-your-terminal-to-become-a-better-developer/) configuring things such as aliases and scripts, having a wide array of snippets at your disposals is a great way to improve your productivity as a software developer.
 
 A single snippet might not save you much typing, but as you add more and more their contribution becomes relevant. All these micro optimization **compound over time**.
 

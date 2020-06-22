@@ -10,7 +10,7 @@ tags:
 Today I installed the latest beta version of Xcode, Xcode 7.3 beta 4. As usual
 none of my plug-ins worked, which makes me really unproductive.
 
-So I went back to [this post](http://www.mokacoding.com/blog/xcode-plugins-update/)
+So I went back to [this post](https://www.mokacoding.com/blog/xcode-plugins-update/)
 in which I showed how to update a plug-in to be compatible to the latest version
 of Xcode. I made an handy script out of it that will update all plug-ins to
 be compatible with the version of Xcode and Xcode-beta installed on your machine.

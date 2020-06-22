@@ -7,7 +7,7 @@ tags:
 - Espresso
 ---
 
-In the [previous post](http://www.mokacoding.com/blog/what-is-an-optional-value-in-swift/) we looked under the hood of Swift's optionals, and discovered
+In the [previous post](https://www.mokacoding.com/blog/what-is-an-optional-value-in-swift/) we looked under the hood of Swift's optionals, and discovered
 that writing `String?` actually means writing `Optional<String>`. `Optional` is
 a type in its own right, defined as an enum.
 

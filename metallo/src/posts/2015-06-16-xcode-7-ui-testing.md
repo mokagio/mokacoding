@@ -10,7 +10,7 @@ tags:
 
 _**Note:** the code below uses Xcode 7 Beta 1, and Swift 2.0. I'll do my best to keep it up to date with the new release, but if I miss something please leave a comment below._
 
-WWDC '15 might not have been as full of surprises as the previous one, but it certainly brought us good news. In [The state of iOS testing in 2015](http://www.mokacoding.com/blog/ios-testing-in-2015/) I wrote:
+WWDC '15 might not have been as full of surprises as the previous one, but it certainly brought us good news. In [The state of iOS testing in 2015](https://www.mokacoding.com/blog/ios-testing-in-2015/) I wrote:
 
 > While in the past two year unit testing for iOS and OS X has become better and better, the acceptance testing side of things hasn't made any improvements.
 
@@ -28,7 +28,7 @@ The new tests that we're going to write are based on the same principles as the 
 
 Before we get started, at the cost of being called captain obvious, I'd like to remind you that to use these features you need Xcode 7 and a project targeting iOS 9.
 
-In this post we will re-write the existing acceptance tests we have in [Bench](https://github.com/mokacoding/Bench/tree/xcode-7) using the UI testing framework. If you want to know more about the process of writing those test checkout [these](http://www.mokacoding.com/blog/setting-up-kif-for-ios-acceptance-testing/) [two](http://www.mokacoding.com/blog/job-stories-acceptance-tests-with-kif-and-specta/) posts.
+In this post we will re-write the existing acceptance tests we have in [Bench](https://github.com/mokacoding/Bench/tree/xcode-7) using the UI testing framework. If you want to know more about the process of writing those test checkout [these](https://www.mokacoding.com/blog/setting-up-kif-for-ios-acceptance-testing/) [two](https://www.mokacoding.com/blog/job-stories-acceptance-tests-with-kif-and-specta/) posts.
 
 The first thing we need to do is add a new test target. You'll be pleased to see that Xcode 7 finally has a dedicated section for the test targets 🎉
 
@@ -160,6 +160,6 @@ Tests that we could find in real world application will have to include some for
 
 Other interesting things to explore would be how UI testing behaves when launched from the command line, and in CI environments.
 
-For this and much more keep an eye on this blog, as we will try to cover those topics in the next weeks. _Tip: you can subscribe to the [newsletter](#subscribe) or to the [RSS feed](http://www.mokacoding.com/feed.xml).
+For this and much more keep an eye on this blog, as we will try to cover those topics in the next weeks. _Tip: you can subscribe to the [newsletter](#subscribe) or to the [RSS feed](https://www.mokacoding.com/feed.xml).
 
 _Happy coding, and leave the codebase better than you found it._

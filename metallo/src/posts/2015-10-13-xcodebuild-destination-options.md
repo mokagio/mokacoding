@@ -62,7 +62,7 @@ xcodebuild \
 
 ### iOS Simulator
 
-`iOS Simulator` is the platform I use more often. It supports the same `id` and `name` mutually exclusive keys as `iOS`, plus an `OS` key. `OS` expects a target version number, like `9.1`, or [`latest`](http://www.mokacoding.com/blog/how-to-always-run-latest-simulator-cli/), which is the default.
+`iOS Simulator` is the platform I use more often. It supports the same `id` and `name` mutually exclusive keys as `iOS`, plus an `OS` key. `OS` expects a target version number, like `9.1`, or [`latest`](https://www.mokacoding.com/blog/how-to-always-run-latest-simulator-cli/), which is the default.
 
 ```
 xcodebuild \

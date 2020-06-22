@@ -2,10 +2,10 @@
 </p></div></div></div></div><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">unit and acceptance testing, automation, productivity</div><div class="links"><a href="/archive.html">Archive</a><a href="/tags.html">Tags</a><a href="https://gio.codes">About</a><a href="#subscribe">Subscribe</a><a href="/feed.xml"><i class="fa fa-rss"></i></a></div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/better-tests-with-specta">Better tests with Specta</a></h2><p class="post-meta"><span class="post-date">Tue Apr 14 2015&nbsp;</span><a href="/tag/Testing/index.html" class="post-tag">-Testing</a><a href="/tag/Specta/index.html" class="post-tag">-Specta</a><a href="/tag/XCTest/index.html" class="post-tag">-XCTest</a></p><div class="post"><p>In this post we&#39;re going to explore an approach to writing unit tests different for the Apple standard, using what can be called <em>xSpec syntax</em>, and what advantages it can bring us.</p>
 <p>If you&#39;ve done some kind of Ruby development you&#39;ll probably be familiar with <a href="http://rspec.info/">RSpec</a>. The aim of RSpec is to provide a framework for <em><a href="http://en.wikipedia.org/wiki/Behavior-driven_development">Behaviour Driven Development</a></em>. Without using buzz words we can say that RSpec allows us to write tests in a way that <strong>focuses on the behaviour of the system under test</strong>, producing more descriptive test cases.</p>
 <p>We can refer to this style of testing as to <em>xSpec</em> style.</p>
-<p>Languages other than Ruby now have their xSpec frameworks, in &quot;<a href="http://www.mokacoding.com/blog/ios-testing-in-2015/">The state of iOS testing in 2015</a>&quot; we mentioned <a href="https://github.com/specta/specta">Specta</a> and <a href="https://github.com/Kiwi-BDD/Kiwi">Kiwi</a> for Objective-C, and <a href="https://github.com/Quick/Quick">Quick</a> for Swift.</p>
+<p>Languages other than Ruby now have their xSpec frameworks, in &quot;<a href="https://www.mokacoding.com/blog/ios-testing-in-2015/">The state of iOS testing in 2015</a>&quot; we mentioned <a href="https://github.com/specta/specta">Specta</a> and <a href="https://github.com/Kiwi-BDD/Kiwi">Kiwi</a> for Objective-C, and <a href="https://github.com/Quick/Quick">Quick</a> for Swift.</p>
 <p>In this post we&#39;re going to use Specta. We&#39;ll first write a test in the XCTest way, then rewrite it using Specta, and see the difference.</p>
 <h3 id="the-task">The task</h3>
-<p>Let&#39;s go back to <a href="https://github.com/mokacoding/Bench">Bench</a>, our playground app introduced in the &quot;<a href="http://www.mokacoding.com/blog/setting-up-kif-for-ios-acceptance-testing/">Setting up KIF for iOS acceptance testing</a> post.</p>
+<p>Let&#39;s go back to <a href="https://github.com/mokacoding/Bench">Bench</a>, our playground app introduced in the &quot;<a href="https://www.mokacoding.com/blog/setting-up-kif-for-ios-acceptance-testing/">Setting up KIF for iOS acceptance testing</a> post.</p>
 <p>Bench shows a list with the elements of the periodic table in a <code>[symbol] name (atomic number)</code> format. So far that data has been hardcoded in Bench as an array of string. Yuck! 😨😷</p>
 <p>The task for this example will be to read that data from a JSON file, and to then parse each entry, which will be a dictionary, into a string formatted as per specification.</p>
 <p>For the sake of brevity we&#39;ll skip reading from file part and focus only on the formatting bit.</p>
@@ -157,7 +157,7 @@ expect([formatter formattedElementString:data])<span class="hljs-variable">.to</
 // Neet do add the / at the end to maintain compatibility with previous version
 // of the blog that didn't define disqus_url, letting Disqus set it automatically
 // using window.location.href
-var disqus_url = "http://www.mokacoding.com/blog/better-tests-with-specta/";
+var disqus_url = "https://www.mokacoding.com/blog/better-tests-with-specta/";
 
 (function() {
   var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

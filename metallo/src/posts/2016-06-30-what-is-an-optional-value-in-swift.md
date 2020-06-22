@@ -7,7 +7,7 @@ tags:
 
 _Note: this is the first of a short series of short posts on Swift `Optional`,
 [subscribe to the newsletter](#subscribe) or [RSS
-feed](http://www.mokacoding.com/feed.xml) to avoid missing out on the next
+feed](https://www.mokacoding.com/feed.xml) to avoid missing out on the next
 ones._
 
 Optional values are definitely one of my favourite things about Swift.
@@ -87,7 +87,7 @@ we would be calling it on the wrong object.
 
 The fact that `Optional` is a type means that it has its own methods, for
 example `map` and `flatMap`. If you are curious about what they do [check out
-this post](http://www.mokacoding.com/blog/demistifying-swift-functor/).
+this post](https://www.mokacoding.com/blog/demistifying-swift-functor/).
 
 ## What does "unwrapping optionals" really mean
 

@@ -8,11 +8,11 @@ tags:
 - Swift
 ---
 
-In [last week's post](http://www.mokacoding.com/blog/explicit-dependencies/) we talked about [explicit dependencies](http://www.mokacoding.com/blog/explicit-dependencies/).
+In [last week's post](https://www.mokacoding.com/blog/explicit-dependencies/) we talked about [explicit dependencies](https://www.mokacoding.com/blog/explicit-dependencies/).
 
 To make a struct or class dependencies explicit means to pass all the objects needed as initialization parameters. By doing so a reader of the code, and let's remember that we all spend more time reading code than writing it, can contextualise the class simply by looking at the interface, there are no surprises in the implementation. Testability also becomes easier, we can simply pass mocks or fakes, and be sure that the system under test internals are not going to instantiate other objects.
 
-The [post](http://www.mokacoding.com/blog/explicit-dependencies/) is written in Objective-C to stress the separation between interface and implementation. It is easier to visualise when they are in two different files!
+The [post](https://www.mokacoding.com/blog/explicit-dependencies/) is written in Objective-C to stress the separation between interface and implementation. It is easier to visualise when they are in two different files!
 
 Unlike Objective-C, Swift's code is all in one file, interfaces and implementation are merged together, except when looking at a compiled framework. Nevertheless everything we said for Objective-C explicit dependencies is true for Swift as well.
 

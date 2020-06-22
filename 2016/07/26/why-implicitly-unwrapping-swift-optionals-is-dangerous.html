@@ -4,15 +4,15 @@
 occasions where &quot;implicitly unwrapping&quot; it&#39;s used what should actually be used
 is &quot;force unwrap&quot;.</p>
 <p>You can read more about the difference between the two
-<a href="http://mokacoding.com/blog/impliticly-vs-force-unwrapping-swift-optionals.md">here</a>.</p>
+<a href="https://www.mokacoding.com/blog/impliticly-vs-force-unwrapping-swift-optionals.md">here</a>.</p>
 <p>The message of the post doesn&#39;t change though. Implicitly and force unwrapping
 Swift optionals is dangerous. Read along to find out why.</p>
 <hr>
 <p>This post is the third and last part of the little series on Swift&#39;s <code>Optional</code>
 type that I&#39;ve been writing over the past few weeks.</p>
 <ul>
-<li><a href="http://www.mokacoding.com/blog/what-is-an-optional-value-in-swift/">What is an optional value in Swift</a></li>
-<li><a href="http://www.mokacoding.com/blog/writing-your-own-swift-if-let/">Writing your own Swift &quot;if let&quot;</a></li>
+<li><a href="https://www.mokacoding.com/blog/what-is-an-optional-value-in-swift/">What is an optional value in Swift</a></li>
+<li><a href="https://www.mokacoding.com/blog/writing-your-own-swift-if-let/">Writing your own Swift &quot;if let&quot;</a></li>
 </ul>
 <p>The idea to start writing about <code>Optional</code> came from a code review conversation
 at my current client:</p>
@@ -22,7 +22,7 @@ at my current client:</p>
 circumstances.</p>
 <p><strong>[Team Member]</strong> @gio what does <code>!</code> mean as opposed to <code>?</code> or nothing at all?</p>
 </blockquote>
-<p>In &quot;<a href="http://www.mokacoding.com/blog/what-is-an-optional-value-in-swift/">What is an optional value in
+<p>In &quot;<a href="https://www.mokacoding.com/blog/what-is-an-optional-value-in-swift/">What is an optional value in
 Swift</a>&quot; we
 introduced Swift&#39;s <code>Optional</code> enum, and saw how it is used to <em>wrap</em> values to
 express their nullability: <code>Optional&lt;Type&gt;</code>.</p>
@@ -36,7 +36,7 @@ can be sure that a value of such type won&#39;t be nil.</p>
 you don&#39;t have to worry about nullability. This takes away a lot of mental load
 when writing and reading code, and saves us from always checking for <code>!= nil</code>
 like we did in Objective-C.</p>
-<p><a href="http://www.mokacoding.com/blog/what-is-an-optional-value-in-swift/">In the previous
+<p><a href="https://www.mokacoding.com/blog/what-is-an-optional-value-in-swift/">In the previous
 post</a> we
 also saw that <code>?</code> is just syntactic sugar for the full <code>Optional</code> declaration.</p>
 <p>These lines do the same thing:</p>
@@ -133,7 +133,7 @@ it to see the crashes and compiler errors we&#39;ve been talking about.</p>
 // Neet do add the / at the end to maintain compatibility with previous version
 // of the blog that didn't define disqus_url, letting Disqus set it automatically
 // using window.location.href
-var disqus_url = "http://www.mokacoding.com/blog/why-implicitly-unwrapping-swift-optionals-is-dangerous/";
+var disqus_url = "https://www.mokacoding.com/blog/why-implicitly-unwrapping-swift-optionals-is-dangerous/";
 
 (function() {
   var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

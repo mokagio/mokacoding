@@ -6,7 +6,7 @@ tags:
 ---
 
 This post is a followup to a ["Why Implicitly Unwrapping Swift Optionals Is
-Dangerous"](http://www.mokacoding.com/blog/why-implicitly-unwrapping-swift-optionals-is-dangerous/).
+Dangerous"](https://www.mokacoding.com/blog/why-implicitly-unwrapping-swift-optionals-is-dangerous/).
 [Daniel H Steinberg ](http://dimsumthinking.com/), on Twitter as
 [@dimsumthinking](https://twitter.com/dimsumthinking),
 pointed out to me that the terminology used in the poost wasn't accurate:
@@ -79,7 +79,7 @@ and you force unwrap a value which has `Optional` type.
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 As said in the `IBOutlet` example and in [the previous
-post](http://www.mokacoding.com/blog/why-implicitly-unwrapping-swift-optionals-is-dangerous/),
+post](https://www.mokacoding.com/blog/why-implicitly-unwrapping-swift-optionals-is-dangerous/),
 unwrapping an `Optional` value without taking into account its nullability is
 dangerous, it can in fact crash your app.
 

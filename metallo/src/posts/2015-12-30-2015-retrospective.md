@@ -61,7 +61,7 @@ The corner stones of my branding strategy have been blogging and public speaking
 
 ### Blogging
 
-I had been writing on [mokacoding.com](http://mokacoding.com) for 2 years already, about whatever technical topic I felt like, but in a very sporadic and unstructured way.
+I had been writing on [mokacoding.com](https://www.mokacoding.com) for 2 years already, about whatever technical topic I felt like, but in a very sporadic and unstructured way.
 
 I decided to keep the blog, too much effort to build a new one, and I wrote down a list on [Trello](https://trello.com) of all the testing and automation related topics I could write about, or wanted to look into. Each week I picked one topic from the list and wrote about it. As simple as that.
 
@@ -73,7 +73,7 @@ Sticking to a weekly schedule and focusing on a narrow area of content have been
 
 ![mokacoding sessions in 2015](https://s3.amazonaws.com/mokacoding/2015-12-30-mokacoding-sessions-2015.jpg)
 
-_mokacoding.com sessions by month in 2015, the spike in July is due to [one of the articles](http://www.mokacoding.com/blog/functor-applicative-monads-in-pictures) being on the [Hacker New's frontpage](https://news.ycombinator.com/item?id=9887728)._
+_mokacoding.com sessions by month in 2015, the spike in July is due to [one of the articles](https://www.mokacoding.com/blog/functor-applicative-monads-in-pictures) being on the [Hacker New's frontpage](https://news.ycombinator.com/item?id=9887728)._
 
 ### Public Speaking
 
@@ -108,7 +108,7 @@ I think I might be on the right way for this goal, but I haven't found the right
 
 ### Not Enough Focus
 
-I wrote about my blogging and public speaking experiences above, they've been great and rewarding, but looking back at the stats what got the highest interest have been posts and talks related to functional programming in Swift. "[Swift Functors, Applicatives, and Monads in Pictures](http://www.mokacoding.com/blog/functor-applicative-monads-in-pictures)" and "[Swift Optionals, Functional Programming, and You](http://www.mokacoding.com/blog/demistifying-swift-functor)" in particular. Yes, I learnt a lot, met great people, and overall got more visits on my blog, but "the guy that explained flatMap using pizza examples" is not the branding I was trying to build.
+I wrote about my blogging and public speaking experiences above, they've been great and rewarding, but looking back at the stats what got the highest interest have been posts and talks related to functional programming in Swift. "[Swift Functors, Applicatives, and Monads in Pictures](https://www.mokacoding.com/blog/functor-applicative-monads-in-pictures)" and "[Swift Optionals, Functional Programming, and You](https://www.mokacoding.com/blog/demistifying-swift-functor)" in particular. Yes, I learnt a lot, met great people, and overall got more visits on my blog, but "the guy that explained flatMap using pizza examples" is not the branding I was trying to build.
 
 In 2016 I will need to bring back my public speaking focus on testing and automation, and either stop writing about topics outside this area, or more likely find another outlet for those, blogs are cheap to build after all.
 
@@ -167,7 +167,7 @@ I feel very positive for what 2016 has in store, and I am determined to make it 
 
 ---
 
-Thank you all for reading [mokacoding.com](http://mokacoding.com) in 2015 and for the great feedback you've given me. I have a lot of things I want to write about. I'll see you in 2016.
+Thank you all for reading [mokacoding.com](https://www.mokacoding.com) in 2015 and for the great feedback you've given me. I have a lot of things I want to write about. I'll see you in 2016.
 
 Have a wonderful end of the year!
 

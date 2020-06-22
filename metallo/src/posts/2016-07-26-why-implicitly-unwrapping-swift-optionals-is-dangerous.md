@@ -12,7 +12,7 @@ occasions where "implicitly unwrapping" it's used what should actually be used
 is "force unwrap".
 
 You can read more about the difference between the two
-[here](http://mokacoding.com/blog/impliticly-vs-force-unwrapping-swift-optionals.md).
+[here](https://www.mokacoding.com/blog/impliticly-vs-force-unwrapping-swift-optionals.md).
 
 The message of the post doesn't change though. Implicitly and force unwrapping
 Swift optionals is dangerous. Read along to find out why.
@@ -22,8 +22,8 @@ Swift optionals is dangerous. Read along to find out why.
 This post is the third and last part of the little series on Swift's `Optional`
 type that I've been writing over the past few weeks.
 
-- [What is an optional value in Swift](http://www.mokacoding.com/blog/what-is-an-optional-value-in-swift/)
-- [Writing your own Swift "if let"](http://www.mokacoding.com/blog/writing-your-own-swift-if-let/)
+- [What is an optional value in Swift](https://www.mokacoding.com/blog/what-is-an-optional-value-in-swift/)
+- [Writing your own Swift "if let"](https://www.mokacoding.com/blog/writing-your-own-swift-if-let/)
 
 The idea to start writing about `Optional` came from a code review conversation
 at my current client:
@@ -36,7 +36,7 @@ at my current client:
 > **[Team Member]** @gio what does `!` mean as opposed to `?` or nothing at all?
 
 In "[What is an optional value in
-Swift](http://www.mokacoding.com/blog/what-is-an-optional-value-in-swift/)" we
+Swift](https://www.mokacoding.com/blog/what-is-an-optional-value-in-swift/)" we
 introduced Swift's `Optional` enum, and saw how it is used to _wrap_ values to
 express their nullability: `Optional<Type>`.
 
@@ -56,7 +56,7 @@ when writing and reading code, and saves us from always checking for `!= nil`
 like we did in Objective-C.
 
 [In the previous
-post](http://www.mokacoding.com/blog/what-is-an-optional-value-in-swift/) we
+post](https://www.mokacoding.com/blog/what-is-an-optional-value-in-swift/) we
 also saw that `?` is just syntactic sugar for the full `Optional` declaration.
 
 These lines do the same thing:
