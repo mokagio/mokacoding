@@ -9,14 +9,14 @@
 <h4 id="generating-code-coverage-reports">Generating code coverage reports</h4>
 <p>If you work with enterprise clients chances are that they&#39;ll require you to produce documentation regarding your test coverage. Tools like <a href="https://github.com/SlatherOrg/slather">slather</a> can be used to generate a report based on Xcode code coverage. You can even go a step further and manipulate the gathered data into a pdf and automatically send it via email.</p>
 <h4 id="running-unit-and-acceptance-test">Running unit and acceptance test</h4>
-<p>To generate test coverage reports you need to have run the tests first, and its always best to run them as a pre-step before every code coverage data generation. Running your tests via a script is <a href="http://www.mokacoding.com/blog/running-tests-from-the-terminal/">very simple</a>, and once you have it in place hooking up a CI system will be as easy as configuring it to run your script.</p>
+<p>To generate test coverage reports you need to have run the tests first, and its always best to run them as a pre-step before every code coverage data generation. Running your tests via a script is <a href="https://www.mokacoding.com/blog/running-tests-from-the-terminal/">very simple</a>, and once you have it in place hooking up a CI system will be as easy as configuring it to run your script.</p>
 <h4 id="building-archiving-and-exporting-your-app-for-distribution">Building, archiving, and exporting your app for distribution</h4>
 <p>This is a good example of a process that requires multiple steps, and in which an error in one step might compromise the next one. Stop manually changing the code signing identity and provisioning profile, waiting for the archive action to complete and its result window to appear, and then click the export button. Define which configuration, identity and provisioning profile to use in a script, and let it string together the steps needed to produce an ipa.</p>
 <h4 id="distributing-your-app-to-betatesters">Distributing your app to betatesters</h4>
 <p>Uploading a build to a beta distribution platform usually requires using an app provided by them, or going on their website. Chances are your provider has APIs that you can use to upload the build from a script instead, so that you only have to press one button.</p>
 <p>The nice thing about this is that it can be added as an extra step to the previous one, so that you can build an ipa and distribute it all in one go.</p>
 <h4 id="environment-bootstrap">Environment Bootstrap</h4>
-<p>Another example of processes that require multiple steps and for which the documentation might not be up to date is setting up the development environment after a fresh clone of the repository. You might be needing extra tool installable via <a href="http://brew.sh">Homebrew</a>, <a href="http://www.mokacoding.com/blog/ruby-for-ios-developers-bundler/">Ruby gems</a>, etc., fetching dependencies. It is easy to write a script that checks for every required tools, installing them when possible, and calls any other command with multiple parameters required to bootstrap the dev environment.</p>
+<p>Another example of processes that require multiple steps and for which the documentation might not be up to date is setting up the development environment after a fresh clone of the repository. You might be needing extra tool installable via <a href="http://brew.sh">Homebrew</a>, <a href="https://www.mokacoding.com/blog/ruby-for-ios-developers-bundler/">Ruby gems</a>, etc., fetching dependencies. It is easy to write a script that checks for every required tools, installing them when possible, and calls any other command with multiple parameters required to bootstrap the dev environment.</p>
 <hr>
 <p>These are only some ideas to help you get started automating your workflow and increasing your productivity. Ideally everything that can be automated should be automated, just pick some low hanging fruit and start gaining back time.</p>
 <p>Another cool thing is that automation works as effectively for individuals as it does for teams, so you can practice by yourself and then introduce your automation scripts to the rest of the team when you think they&#39;re good enough to share.</p>
@@ -39,7 +39,7 @@
 // Neet do add the / at the end to maintain compatibility with previous version
 // of the blog that didn't define disqus_url, letting Disqus set it automatically
 // using window.location.href
-var disqus_url = "http://www.mokacoding.com/blog/getting-started-with-automation/";
+var disqus_url = "https://www.mokacoding.com/blog/getting-started-with-automation/";
 
 (function() {
   var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

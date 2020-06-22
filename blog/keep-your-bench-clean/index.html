@@ -19,7 +19,7 @@
 <h2 id="remove-unused-code-when-you-find-it">Remove unused code when you find it</h2>
 <p>Unused code slows you down. Keeping unused code does to your project the same thing never throwing away anything does to your house, it makes it a messy place. As soon as you notice unused or unneeded code you should delete it. This is sometimes referred to as <a href="http://programmer.97things.oreilly.com/wiki/index.php/The_Boy_Scout_Rule"><strong>the boy scout rule</strong></a>, &quot;<em>Always leave the campground cleaner than you found it.</em>&quot; If you find a mess on the ground, you clean it up regardless of who might have made the mess. Notice how this rule works for unused code, but extends easily to messy code. When you remove unused code or clean messy methods and classes you should commit this edit in its own dedicated commit, which brings us to the next tip.</p>
 <h2 id="make-small-atomic-commits">Make small atomic commits</h2>
-<p>An atomic commit is a commit that does one single thing. We <a href="http://www.mokacoding.com/blog/5-habits-that-will-make-you-a-better-software-developer/">already talked</a> about the value of small atomic commits. Small atomic commits tell the story of the codebase in a clear sequential way, they are easy to follow, and more importantly easy to revert.</p>
+<p>An atomic commit is a commit that does one single thing. We <a href="https://www.mokacoding.com/blog/5-habits-that-will-make-you-a-better-software-developer/">already talked</a> about the value of small atomic commits. Small atomic commits tell the story of the codebase in a clear sequential way, they are easy to follow, and more importantly easy to revert.</p>
 <h2 id="never-commit-commented-code">Never commit commented code</h2>
 <p>Like unused code, commented code is a smell in your codebase, it clutters your files for no reason. &quot;<em>But I might need it later!</em>&quot; some developer say. First of all, that turns out be true not so often, and apart from that <strong>git remembers everything</strong>. We just touched on how useful small atomic commits are, and this is yet another proof of that. Instead of commenting code, <strong>delete it in a single commit</strong>, give it a clear title and explain why you deleted it in the message. If you really feel like you will need to look at this code again <a href="https://git-scm.com/book/en/v2/Git-Basics-Tagging">tag the commit</a>, or write its <a href="https://schacon.github.io/gitbook/1_the_git_object_model.html">SHA</a> somewhere.</p>
 <h2 id="keep-your-classes-and-methods-short">Keep your classes and methods short</h2>
@@ -49,7 +49,7 @@
 // Neet do add the / at the end to maintain compatibility with previous version
 // of the blog that didn't define disqus_url, letting Disqus set it automatically
 // using window.location.href
-var disqus_url = "http://www.mokacoding.com/blog/keep-your-bench-clean/";
+var disqus_url = "https://www.mokacoding.com/blog/keep-your-bench-clean/";
 
 (function() {
   var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

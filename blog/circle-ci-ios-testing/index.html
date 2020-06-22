@@ -16,9 +16,9 @@
 </code></pre>
 <p>That&#39;s it. This configuration file will make sure that your build will run on a machine with Xcode 7.0, the run the executable script located at <code>bin/tests</code>.</p>
 <p>Using a script file where the test commands are rather than letting CircleCI guess how to run them itself has a number of advantages. First and foremost, it makes it so that you can run the same command the CI will use on your machine, which is important because you want to personally test your CI setup. On top of that it keeps the configuration file decoupled by the implementation details how the tests should run, and makes it more readable.</p>
-<p>Checkout <a href="http://www.mokacoding.com/blog/running-tests-from-the-terminal/">this post</a> for a closer look on how to write such a script.</p>
+<p>Checkout <a href="https://www.mokacoding.com/blog/running-tests-from-the-terminal/">this post</a> for a closer look on how to write such a script.</p>
 <h2 id="other-configurations">Other configurations</h2>
-<p>The <a href="https://github.com/mokacoding/Bench/blob/master/circle.yml"><code>circle.yml</code></a> of <a href="https://github.com/mokacoding/Bench">Bench</a>, one of the example projects used to in posts like &quot;<a href="http://www.mokacoding.com/blog/xcode-7-ui-testing/">Xcode 7 UI testing, a first look</a>&quot; and &quot;<a href="http://www.mokacoding.com/blog/job-stories-acceptance-tests-with-kif-and-specta/">Job stories acceptance tests using KIF and Specta</a>&quot;, adds is similar to the one above, but with an extra section:</p>
+<p>The <a href="https://github.com/mokacoding/Bench/blob/master/circle.yml"><code>circle.yml</code></a> of <a href="https://github.com/mokacoding/Bench">Bench</a>, one of the example projects used to in posts like &quot;<a href="https://www.mokacoding.com/blog/xcode-7-ui-testing/">Xcode 7 UI testing, a first look</a>&quot; and &quot;<a href="https://www.mokacoding.com/blog/job-stories-acceptance-tests-with-kif-and-specta/">Job stories acceptance tests using KIF and Specta</a>&quot;, adds is similar to the one above, but with an extra section:</p>
 <pre><code class=" hljs yml"><span class="hljs-attribute">machine</span>:
   <span class="hljs-attribute">xcode</span>:
     <span class="hljs-attribute">version</span>: <span class="hljs-string">"7.0"</span>
@@ -75,7 +75,7 @@
 // Neet do add the / at the end to maintain compatibility with previous version
 // of the blog that didn't define disqus_url, letting Disqus set it automatically
 // using window.location.href
-var disqus_url = "http://www.mokacoding.com/blog/circle-ci-ios-testing/";
+var disqus_url = "https://www.mokacoding.com/blog/circle-ci-ios-testing/";
 
 (function() {
   var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
