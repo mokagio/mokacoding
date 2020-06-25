@@ -1,6 +1,6 @@
 ---
 title: 'Should you change your branch name to "main"?'
-description: "In Xcode 12, the default branch name is main instead of master. This little language change has deeper implications and stirred up an hornets'."
+description: "In Xcode 12, the default branch name is main instead of master. This little language change has deeper implications and stirred up an hornets' nest."
 og_image: "https://mokacoding.s3.amazonaws.com/git-branch-m.png"
 ---
 
