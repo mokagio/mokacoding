@@ -31,7 +31,7 @@ I'd like to say a few words here, though.
 
 
 Moving away from the name `master` in repositories is a recent trend it tech.
-[GitHub is working on a similar change](https://www.zdnet.com/) and so is [Automattic](https://automattic.com), where I work.
+[GitHub is working on a similar change](https://www.theregister.com/2020/06/15/github_replaces_master_with_main/) and so is [Automattic](https://automattic.com), where I work.
 WordPress.org has already [opted to use `trunk` ](https://make.wordpress.org/core/2020/06/18/proposal-update-all-git-repositories-to-use-main-instead-of-master/) instead.
 
 The topic of language in software development is older, though.
