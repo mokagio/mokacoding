@@ -48,6 +48,11 @@ In his book [Peak: Secrets from the New Science of Expertise]() he and coauthor 
 One of the example they bring is a study done on radiologists.
 ...
 
+Training radiologist in interpreting mammograms more effectively.
+Didn't have the chance to "practice their readings over and over agan, getting accurate feedback with each attempt."
+Build a digital library of mammograms to work as test question on whether a cancer is present or not to give trainees to work through.
+If the trainee gave a wrong answer, the training program could display images with similar caracteristics, so that the doctor could drill on their weaknesses.
+
 If getting feedback fast and in great quantity is a key part of effective learning, and unit testing is the best way to do so in the context of software, where do you begin writing tests?
 
 ## Where to begin writing tests
