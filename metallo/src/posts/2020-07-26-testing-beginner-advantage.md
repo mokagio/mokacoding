@@ -5,7 +5,7 @@ tags:
 - Learning
 ---
 
-Recently, I had the privilege of [taking part]() in a Q&A session on testing with a class from the [Ray Wenderlich iOS bootcamp]().
+Recently, I had the privilege of taking part in a Q&A session on testing with a class from the [Ray Wenderlich iOS bootcamp](https://www.raywenderlich.com/).
 We talked about the value of testing, code coverage, unit vs. UI testing, and Test-Driven Development.
 
 Afterwards, I felt like I didn't do as good a job as I ought to have at explaining two core concepts: why writing unit tests is a critical advantage when learning a new technology and where to get started.
@@ -42,8 +42,8 @@ As it turns out, a lot.
 
 ### Feedback speed matters
 
-The late [Anders Ericsson]() was one of the world's authorities on the science of learning and dedicated his career to studying how people learn and how to become a top performer.
-In his book [Peak: Secrets from the New Science of Expertise]() he and coauthor Robert Pool dive deep into the key role of feedback in the learning process.
+The late Anders Ericsson was one of the world's authorities on the science of learning and dedicated his career to studying how people learn and how to become a top performer.
+In his book [Peak: Secrets from the New Science of Expertise](https://geni.us/l8FSc) he and co-author Robert Pool dive deep into the key role of feedback in the learning process.
 
 In the book, Ericsson takes a look at how radiologists interpret X-rays.
 The problem with X-ray diagnosis is that the radiologists performing them seldom have the chance to learn whether they were right or wrong.
@@ -63,7 +63,7 @@ The good new is, **to learn the craft of testing, quantity matters more than qua
 It doesn't matter if you write your tests after the fact or if you use Test-Driven Develpoment, or whether you start testing new code or add tests to code that was already in the codebase.
 The learning comes from the act of writing the test itself.
 
-In their book [Art and Fear]() David Bayles and Ted Orland tell the story of a ceramics class divided in two groups:
+In their book [Art and Fear](https://geni.us/kazN2) David Bayles and Ted Orland tell the story of a ceramics class divided in two groups:
 one group would be judged on the quantity of pots they made, literally using a scale measure, the other would have to deliver only one pot and would be judged on its quality.
 Something surprising happened, the best pots all came from the students judged on quantity.
 While the quantity group churned out work, always experimenting and learning from their mistakes, the quality group had sat theorizing and in the end had little to show for their efforts than "grandiose theories and a pile of dead clay".
@@ -75,7 +75,7 @@ The more you can perform these tasks with ease, the better you are getting at wr
 
 ### Code that is simple to test
 
-If you want down-to-earth advice, start writing tests for those pieces of code that are [pure functions](), functions where the output depends only on the input.
+If you want down-to-earth advice, start writing tests for those pieces of code that are [pure functions](https://en.wikipedia.org/wiki/Pure_function), functions where the output depends only on the input.
 Here's an example:
 
 ```swift
