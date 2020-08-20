@@ -117,7 +117,12 @@ metalsmith(__dirname)
         var month = post.date.getMonth() + 1;
         if (month < 10) { month = "0" + month; }
 
-        var path = post.date.getFullYear() + "/" + month + "/" + day + "/" + post.slug + ".html";
+        let year = post.date.getFullYear();
+        var path = year + "/" + month + "/" + day + "/" + post.slug + ".html";
+
+        if (year > 2013) {
+          continue;
+        }
 
         var retrocompatible_post = {};
         for (var _key in post) {
