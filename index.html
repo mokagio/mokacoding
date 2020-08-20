@@ -1,24 +1,53 @@
 <!DOCTYPE html><html lang="en"><head><title>mokacoding</title><meta name="description" content="A blog about testing, iOS development, productivity, and blabber about software in general."><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"><!-- Open Graph meta tags--><meta property="og:title" content="mokacoding"><meta property="og:description" content="A blog about testing, iOS development, productivity, and blabber about software in general."><meta property="og:url" content="/"><meta property="og:type" content="article"><meta property="og:site_name" content="mokacoding"><!-- Twitter meta tags--><meta property="twitter:card" content="summary"><meta property="twitter:site" content="@mokacoding"><meta property="twitter:creator" content="@mokagio"><!-- Stylesheets--><link href="/css/griddy.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet"><link href="/css/font-awesome.min.css" rel="stylesheet"><link href="/css/zenburn.css" rel="stylesheet"><!-- FavIcon--><!-- Thanks to https://www.favicon-generator.org/ & https://html2jade.org/--><link rel="apple-touch-icon" sizes="57x57" href="https://s3.amazonaws.com/mokacoding/apple-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="https://s3.amazonaws.com/mokacoding/apple-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="https://s3.amazonaws.com/mokacoding/apple-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="https://s3.amazonaws.com/mokacoding/apple-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="https://s3.amazonaws.com/mokacoding/apple-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="https://s3.amazonaws.com/mokacoding/apple-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="https://s3.amazonaws.com/mokacoding/apple-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="https://s3.amazonaws.com/mokacoding/apple-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" href="https://s3.amazonaws.com/mokacoding/apple-icon-180x180.png"><link rel="icon" type="image/png" sizes="192x192" href="https://s3.amazonaws.com/mokacoding/android-icon-192x192.png"><link rel="icon" type="image/png" sizes="32x32" href="https://s3.amazonaws.com/mokacoding/favicon-32x32.png"><link rel="icon" type="image/png" sizes="96x96" href="https://s3.amazonaws.com/mokacoding/favicon-96x96.png"><link rel="icon" type="image/png" sizes="16x16" href="https://s3.amazonaws.com/mokacoding/favicon-16x16.png"><link rel="manifest" href="https://s3.amazonaws.com/mokacoding/manifest.json"><meta name="msapplication-TileColor" content="#ffffff"><meta name="msapplication-TileImage" content="https://s3.amazonaws.com/mokacoding/ms-icon-144x144.png"><meta name="theme-color" content="#ffffff"><!-- SumoMe--><script src="//load.sumome.com/" data-sumo-site-id="dd80959300db03e20c8bc3dd899f1424fd764d261e6c3c41923c96482a270dba" async="async"></script></head><body><!-- Use this to render an extra header in special occasions--><div class="special-header"><div class="page"><div class="row-12"><div class="col-12"><p><p><a href="https://goo.gl/forms/lCLlJd9hqCUYoTME2">What is your biggest struggle right now with building software?</a></p>
-</p></div></div></div></div><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">unit and acceptance testing, automation, productivity</div><div class="links"><a href="/archive.html">Archive</a><a href="/tags.html">Tags</a><a href="https://gio.codes">About</a><a href="#subscribe">Subscribe</a><a href="/feed.xml"><i class="fa fa-rss"></i></a></div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/honesty-oriented-programming">Honesty-Oriented Programming</a></h2><p class="post-meta"><span class="post-date">Mon Jul 13 2020&nbsp;</span><a href="/tag/Software-Design/index.html" class="post-tag">-Software Design</a></p><div class="post"><p>If you focus on writing <em>honest</em> code, regardless of the language and paradigm you work in, you&#39;ll end up with software that is easier to understand and work with.</p>
-<p>In his post <a href="https://michaelfeathers.silvrback.com/functional-code-is-honest-code"><em>Functional code is honest code</em></a>, <a href="https://geni.us/WcwM">Michael Feathers</a> identifies common threads among the different philosophies and implementations of functional programming:
-immutability, referential transparency, and a strong type systems.
-Of course, a language doesn&#39;t have to feature them all to be functional, but having at least two of those working together is &quot;<em>enough to give us Good Stuff™</em>.&quot;</p>
-<p><a href="https://www.mokacoding.com/blog/referential-transparency-in-swift">Referential transparency</a>, in particular, has the advantage of making the code honest.</p>
+</p></div></div></div></div><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">unit and acceptance testing, automation, productivity</div><div class="links"><a href="/archive.html">Archive</a><a href="/tags.html">Tags</a><a href="https://gio.codes">About</a><a href="#subscribe">Subscribe</a><a href="/feed.xml"><i class="fa fa-rss"></i></a></div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/referential-transparency-in-swift">Referential Transparency in Swift</a></h2><p class="post-meta"><span class="post-date">Mon Jul 13 2020&nbsp;</span><a href="/tag/Swift/index.html" class="post-tag">-Swift</a></p><div class="post"><p>The <a href="https://en.wikipedia.org/wiki/Referential_transparency">Wikipedia</a> definition for referential transparency is</p>
 <blockquote>
-<p>That is, to say, [the code] is honest. You can look at the signatures and see what is possible.</p>
+<p>An expression [that] can be replaced with its corresponding value without changing the program&#39;s behavior.</p>
 </blockquote>
-<p>Techniques to make the code more testable, such as <a href="https://www.mokacoding.com/blog/explicit-dependencies/">making its dependencies explicit</a>, have the side effect of making it more referentially transparent.</p>
-<p>Most of the code you read calls other code.
-When you look at those calls and know that they do what they say in their interface, without hidden side effects, you gain confidence.
-It becomes easier to reason about the code.
-You don&#39;t need to drill in and out of implementations to make sure there aren&#39;t other things going on under the hood, you can just follow the code.</p>
-<p>If you don&#39;t work in a language enforcing referential transparency like <a href="https://www.haskell.org/">Haskell</a> or <a href="https://elm-lang.org/">Elm</a>, you&#39;ll need the discipline to make sure all the dependencies of your code are explicit and all its side effects exposed in a return type.
-That takes hard work and extra code but it&#39;s all worth it in terms of future understandability and maintainability.</p>
-<blockquote>
-<p>That’s the goal, really. Simplify understanding. <a href="https://www.mokacoding.com/blog/explicit-dependencies/">No surprises</a>. Honest code.</p>
-</blockquote>
-<p>It&#39;s time to end the paradigms war, set aside language preferences, and focus on practicing Honesty-Oriented Programming instead.</p>
-</div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"><div><a href="/blog/how-to-check-if-ruby-array-contains-element"><<&nbsp;How to check if array contains element with block in Ruby</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/referential-transparency-in-swift">Referential Transparency in Swift&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin Sendfox Signup Form -->
+<p>Here&#39;s an example in Swift:</p>
+<pre><code class=" hljs swift"><span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">rtIncrement</span><span class="hljs-params">(<span class="hljs-number">_</span> number: Int)</span></span> -&gt; <span class="hljs-type">Int</span> {
+    <span class="hljs-keyword">return</span> number + <span class="hljs-number">1</span>
+}
+</code></pre>
+<p>Functions that are not referentially transparent are referentially opaque.</p>
+<pre><code class=""><span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>
+
+<span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">roIncrement</span><span class="hljs-params">(<span class="hljs-number">_</span> number: Int)</span></span> -&gt; <span class="hljs-type">Int</span> {
+    i += <span class="hljs-number">1</span>
+    <span class="hljs-keyword">return</span> number + i
+}
+</code></pre><p>Take these two expressions:</p>
+<pre><code class=" hljs swift"><span class="hljs-keyword">let</span> a = rtIncrement(x) + rtIncrement(y) * (rtIncrement(x) - rtIncrement(x))
+<span class="hljs-keyword">let</span> b = rtIncrement(x)
+</code></pre>
+<p>Referential transparency means that we can replace an invocation of <code>rtIncrement</code> with its value.
+That way, we can simplify <code>a</code> into:</p>
+<pre><code class=" hljs swift">rtIncrement(x) + rtIncrement(y) * <span class="hljs-number">0</span>
+</code></pre>
+<p>and then into:</p>
+<pre><code class=" hljs swift">rtIncrement(x) + <span class="hljs-number">0</span>
+</code></pre>
+<p>Because of referential transparency, <code>a == b</code> is true; the two expressions are equivalent.</p>
+<p>The same cannot be said for the referentially opaque counterpart.</p>
+<pre><code class=" hljs swift"><span class="hljs-keyword">let</span> a = roIncrement(x) + roIncrement(y) * (roIncrement(x) - roIncrement(x))
+<span class="hljs-keyword">let</span> b = roIncrement(x)
+</code></pre>
+<p>Every time <code>roIncrement</code> is called, the global value <code>i</code> changes.
+So, <code>roIncrement(x) - roIncrement(x)</code> is not equal to 0, but -1 (<code>x + i - (x + (i + 1)) = x + i - x - i - 1</code>).</p>
+<p>So what?
+Being able to simplify expressions might be interesting for mathematicians and  people building compiler optimizations, but what does it mean for the everyday software development like you and I?</p>
+<p>In practical terms, <strong>code that is not referentially transparent is harder to reason about</strong>.</p>
+<p>The function signature of referentially opaque code doesn&#39;t tell the whole story.
+It&#39;s not <a href="https://www.mokacoding.com/blog/honesty-oriented-programming">honest</a>.
+You cannot trust that a function does only what it says by only looking at its input and output types, you need to drill into the implementation.</p>
+<p>In the real world, <code>roIncrement</code> could be a <code>loadData()</code> function to load the data for the UI which toggles a flag in the global state in its implementation.
+Reading the code calling <code>loadData()</code> you wouldn&#39;t know the flag has been toggled already, so you might end up toggling it again resulting in an incorrect state of the system.
+The only way to know that flag had already been changed, is to ready the implementation of <code>loadData()</code>.
+This takes more effort and time.</p>
+<p>Languages like <a href="https://www.haskell.org/">Haskell</a> and <a href="https://elm-lang.org/">Elm</a> enforce referential transparency.
+In other languages, referential transparency can be achieved with techniques such as <a href="https://www.mokacoding.com/blog/explicit-dependencies/">making all the dependencies explicit</a>.</p>
+<p>When you go back to your IDE after reading this post and find yourself writing a new method, think about its dependencies and side effects.
+Can you make it referentially transparent?</p>
+</div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"><div><a href="/blog/how-to-check-if-ruby-array-contains-element"><<&nbsp;How to check if array contains element with block in Ruby</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/honesty-oriented-programming">Honesty-Oriented Programming&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin Sendfox Signup Form -->
 <div id="sendfox_embed_signup">
   <h4 class="form_title">Want more of these posts?</h4>
   <p class="form_caption">Subscribe to receive new posts in your inbox.</p>
@@ -35,7 +64,7 @@ That takes hard work and extra code but it&#39;s all worth it in terms of future
 // Neet do add the / at the end to maintain compatibility with previous version
 // of the blog that didn't define disqus_url, letting Disqus set it automatically
 // using window.location.href
-var disqus_url = "https://www.mokacoding.com/blog/honesty-oriented-programming/";
+var disqus_url = "https://www.mokacoding.com/blog/referential-transparency-in-swift/";
 
 (function() {
   var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
