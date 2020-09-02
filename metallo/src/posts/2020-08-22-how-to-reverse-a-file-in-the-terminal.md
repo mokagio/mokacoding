@@ -17,8 +17,8 @@ b
 c
 
 $ tac file.txt
-b
 c
+b
 a
 ```
 
