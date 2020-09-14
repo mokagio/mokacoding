@@ -67,35 +67,35 @@ in the order they need to be.</p>
 <p>You can make your scripts output compilation errors or warnings the same way
 Xcode does. I learnt this a while ago <a href="http://briksoftware.com/blog/?p=120">from this
 post</a>.</p>
-<pre><code class=""><span class="hljs-built_in">echo</span> <span class="hljs-string">"error: Your error message"</span>
-<span class="hljs-built_in">echo</span> <span class="hljs-string">"warning: Your warning message"</span>
+<pre><code class=""><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;error: Your error message&quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;warning: Your warning message&quot;</span>
 </code></pre><p>This ability is quite handy, it allows you to communicate with the other
 developers using the script. You can use this for example to fail the build
 when required software is missing.</p>
 <h2 id="ensure-required-tools-are-available">Ensure required tools are available</h2>
 <p>A common use of run script build phases is to integrate third party tools into the build process, but what happens when such tools are not present in the developer&#39;s machine? It&#39;s a good idea to fail the build and inform them that their setup is incomplete. This is how you can do it:</p>
-<pre><code class=" hljs bash"><span class="hljs-built_in">set</span> <span class="hljs-operator">-e</span>
+<pre><code class=" hljs bash"><span class="hljs-built_in">set</span> -e
 
 <span class="hljs-keyword">if</span> ! <span class="hljs-built_in">which</span> &lt;your tool&gt; &gt; /dev/null; <span class="hljs-keyword">then</span>
-  <span class="hljs-built_in">echo</span> <span class="hljs-string">"error: &lt;your tool&gt; is missing"</span>
-  <span class="hljs-built_in">exit</span> <span class="hljs-number">1</span>
+  <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;error: &lt;your tool&gt; is missing&quot;</span>
+  <span class="hljs-built_in">exit</span> 1
 <span class="hljs-keyword">fi</span>
 </code></pre>
 <p>For example if you want to make sure new developers have SwiftLint installed, you can use this script:</p>
-<pre><code class=" hljs bash"><span class="hljs-built_in">set</span> <span class="hljs-operator">-e</span>
+<pre><code class=" hljs bash"><span class="hljs-built_in">set</span> -e
 
 <span class="hljs-keyword">if</span> ! <span class="hljs-built_in">which</span> swiftlint &gt; /dev/null; <span class="hljs-keyword">then</span>
-  <span class="hljs-built_in">echo</span> <span class="hljs-string">"error: SwiftLint is not installed. Vistit http://github.com/realm/SwiftLint to learn more."</span>
-  <span class="hljs-built_in">exit</span> <span class="hljs-number">1</span>
+  <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;error: SwiftLint is not installed. Vistit http://github.com/realm/SwiftLint to learn more.&quot;</span>
+  <span class="hljs-built_in">exit</span> 1
 <span class="hljs-keyword">fi</span>
 
 swiftlint
 </code></pre>
 <p>Or if you feel that failing the build is too harsh, you can just throw a warning:</p>
-<pre><code class=" hljs bash"><span class="hljs-built_in">set</span> <span class="hljs-operator">-e</span>
+<pre><code class=" hljs bash"><span class="hljs-built_in">set</span> -e
 
 <span class="hljs-keyword">if</span> ! <span class="hljs-built_in">which</span> swiftlint &gt; /dev/null; <span class="hljs-keyword">then</span>
-  <span class="hljs-built_in">echo</span> <span class="hljs-string">"warning: SwiftLint is not installed. Vistit http://github.com/realm/SwiftLint to learn more."</span>
+  <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;warning: SwiftLint is not installed. Vistit http://github.com/realm/SwiftLint to learn more.&quot;</span>
 <span class="hljs-keyword">else</span>
   swiftlint
 <span class="hljs-keyword">fi</span>

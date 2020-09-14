@@ -17,10 +17,10 @@
 <pre><code class=" hljs swift"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">NotesDataSourceTest</span>: <span class="hljs-title">XCTestCase</span> </span>{
 
   <span class="hljs-comment">// it sorts the notes by updated date</span>
-  <span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">testSortsNotesByUpdatesDate</span><span class="hljs-params">()</span></span> {
-    <span class="hljs-keyword">let</span> firstNote = <span class="hljs-type">Note</span>(name: <span class="hljs-string">"any name"</span>, content: <span class="hljs-string">"any content"</span>, lastUpdated: <span class="hljs-type">NSDate</span>().dateByAddingTimeInterval(<span class="hljs-number">60</span>))
-    <span class="hljs-keyword">let</span> secondNote = <span class="hljs-type">Note</span>(name: <span class="hljs-string">"any other name"</span>, content: <span class="hljs-string">"any content"</span>, lastUpdated: <span class="hljs-type">NSDate</span>())
-    <span class="hljs-keyword">let</span> thirdNote = <span class="hljs-type">Note</span>(name: <span class="hljs-string">"yet another name"</span>, content: <span class="hljs-string">"any content"</span>, lastUpdated: <span class="hljs-type">NSDate</span>().dateByAddingTimeInterval(-<span class="hljs-number">60</span>))
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">testSortsNotesByUpdatesDate</span><span class="hljs-params">()</span></span> {
+    <span class="hljs-keyword">let</span> firstNote = <span class="hljs-type">Note</span>(name: <span class="hljs-string">&quot;any name&quot;</span>, content: <span class="hljs-string">&quot;any content&quot;</span>, lastUpdated: <span class="hljs-type">NSDate</span>().dateByAddingTimeInterval(<span class="hljs-number">60</span>))
+    <span class="hljs-keyword">let</span> secondNote = <span class="hljs-type">Note</span>(name: <span class="hljs-string">&quot;any other name&quot;</span>, content: <span class="hljs-string">&quot;any content&quot;</span>, lastUpdated: <span class="hljs-type">NSDate</span>())
+    <span class="hljs-keyword">let</span> thirdNote = <span class="hljs-type">Note</span>(name: <span class="hljs-string">&quot;yet another name&quot;</span>, content: <span class="hljs-string">&quot;any content&quot;</span>, lastUpdated: <span class="hljs-type">NSDate</span>().dateByAddingTimeInterval(-<span class="hljs-number">60</span>))
 
     <span class="hljs-keyword">let</span> sut = <span class="hljs-type">NotesDataSource</span>(notes: [thirdNote, firstNote, secondNote])
 
@@ -29,7 +29,7 @@
     <span class="hljs-built_in">assert</span>(sut.noteAtIndexPath(<span class="hljs-type">NSIndexPath</span>(forRow: <span class="hljs-number">2</span>, inSection: <span class="hljs-number">0</span>)), isEqualTo: thirdNote)
   }
 
-  private <span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">assert</span><span class="hljs-params">(note: Note, isEqualTo otherNote: Note)</span></span> {
+  <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">assert</span><span class="hljs-params">(note: Note, isEqualTo otherNote: Note)</span></span> {
     <span class="hljs-type">XCTAssertEqual</span>(note.name, otherNote.name)
   }
 }
@@ -39,18 +39,18 @@
 <h2 id="fix-a-bug-with-an-acceptance-test">Fix a bug with an acceptance test</h2>
 <p>If you run Simple Notes you&#39;ll notice that nothing happens when selecting a note. That is outrageous! The expected behaviour is for the app to transition to a screen showing the details of the note.</p>
 <p>This kind of bug is related to the navigation of the application rather that its logic, and we can easily write an acceptance test. For example:</p>
-<pre><code class=" hljs swift"><span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">testShowsNotesDetails</span><span class="hljs-params">()</span></span> {
+<pre><code class=" hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">testShowsNotesDetails</span><span class="hljs-params">()</span></span> {
   <span class="hljs-comment">// From the notes list screen</span>
   <span class="hljs-keyword">let</span> app = <span class="hljs-type">XCUIApplication</span>()
 
-  <span class="hljs-type">XCTAssertTrue</span>(app.anyViewWithIdentifier(<span class="hljs-string">"notes_list_screen"</span>).exists)
+  <span class="hljs-type">XCTAssertTrue</span>(app.anyViewWithIdentifier(<span class="hljs-string">&quot;notes_list_screen&quot;</span>).exists)
 
   <span class="hljs-comment">// When tapping on a note</span>
   app.cells.elementBoundByIndex(<span class="hljs-number">1</span>).tap()
 
   <span class="hljs-comment">// It goes to the note details screen</span>
-  <span class="hljs-type">XCTAssertFalse</span>(app.anyViewWithIdentifier(<span class="hljs-string">"notes_list_screen"</span>).exists)
-  <span class="hljs-type">XCTAssertTrue</span>(app.anyViewWithIdentifier(<span class="hljs-string">"note_screen"</span>).exists)
+  <span class="hljs-type">XCTAssertFalse</span>(app.anyViewWithIdentifier(<span class="hljs-string">&quot;notes_list_screen&quot;</span>).exists)
+  <span class="hljs-type">XCTAssertTrue</span>(app.anyViewWithIdentifier(<span class="hljs-string">&quot;note_screen&quot;</span>).exists)
 
   <span class="hljs-comment">// Go back</span>
   app.backButton().tap()

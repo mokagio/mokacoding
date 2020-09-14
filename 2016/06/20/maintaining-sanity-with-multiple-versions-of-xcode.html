@@ -15,14 +15,14 @@ failing because they&#39;ve been run with the wrong version of <code>xcodebuild<
 (@schwa)</a> is smart wrapper around <code>xcode-select
 --switch</code> that simplifies switching between toolchain versions.</p>
 <pre><code class="">$ xcode-toggle -t
-Switching to: /Applications/Xcode-beta<span class="hljs-class">.app</span>
-/Applications/Xcode-beta<span class="hljs-class">.app</span> [Current]
-/Applications/Xcode<span class="hljs-class">.app</span>
+Switching to: <span class="hljs-regexp">/Applications/</span>Xcode-beta.app
+<span class="hljs-regexp">/Applications/</span>Xcode-beta.app [Current]
+<span class="hljs-regexp">/Applications/</span>Xcode.app
 
 $ xcode-toggle -t
-Switching to: /Applications/Xcode<span class="hljs-class">.app</span>
-/Applications/Xcode-beta<span class="hljs-class">.app</span>
-/Applications/Xcode<span class="hljs-class">.app</span> [Current]
+Switching to: <span class="hljs-regexp">/Applications/</span>Xcode.app
+<span class="hljs-regexp">/Applications/</span>Xcode-beta.app
+<span class="hljs-regexp">/Applications/</span>Xcode.app [Current]
 </code></pre><p>It&#39;s called <em>toggle</em> but it works with more than two versions of Xcode as well.</p>
 <h3 id="-betawarpaint-xcode-plugin-https-github-com-zats-betawarpaint-"><a href="https://github.com/zats/BetaWarpaint">BetaWarpaint Xcode plugin</a></h3>
 <p>This simple yet brilliant plugin by <a href="https://twitter.com/zats">Sash Zats

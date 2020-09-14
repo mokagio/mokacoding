@@ -19,11 +19,11 @@
 <pre><code class="">gem <span class="hljs-keyword">install</span> cocoapods
 </code></pre><p>Once the installation is completed run:</p>
 
-<pre><code class=""><span class="hljs-title">pod</span> setup
+<pre><code class="">pod <span class="hljs-built_in">setup</span>
 </code></pre><p>This will, guess what, setup everything CocoaPods needs on your system. You should see an output like this:</p>
 
 <pre><code class="">Setting <span class="hljs-keyword">up</span> CocoaPods master repo
-Cloning spec repo <span class="hljs-string">'master'</span> from <span class="hljs-string">'&lt;a href='</span>http<span class="hljs-variable">s:</span>//github.<span class="hljs-keyword">com</span>/CocoaPods/Specs.git<span class="hljs-string">'&gt;https://github.com/CocoaPods/Specs.git&lt;/a&gt;'</span> (branch <span class="hljs-string">'master'</span>)
+Cloning spec repo <span class="hljs-string">&#x27;master&#x27;</span> from <span class="hljs-string">&#x27;&lt;a href=&#x27;</span>http<span class="hljs-variable">s:</span>//github.<span class="hljs-keyword">com</span>/CocoaPods/Specs.git<span class="hljs-string">&#x27;&gt;https://github.com/CocoaPods/Specs.git&lt;/a&gt;&#x27;</span> (branch <span class="hljs-string">&#x27;master&#x27;</span>)
 Setup completed (<span class="hljs-keyword">read</span>-<span class="hljs-keyword">only</span> access)
 </code></pre><p>Done! :)</p>
 
@@ -36,8 +36,8 @@ Setup completed (<span class="hljs-keyword">read</span>-<span class="hljs-keywor
 <p>Go in the root folder of your Objective-C project and create a file named <code>Podfile</code>, with whatever editor you like. We&#39;ll use this file to list all the libraries, <em>pods</em>, we need in the project. The JustNineGags <code>Podfile</code> content is:</p>
 
 <pre><code class=" hljs ruby">platform <span class="hljs-symbol">:ios</span>
-pod <span class="hljs-string">'MBProgressHUD'</span>, <span class="hljs-string">'~&gt; 0.5'</span>
-pod <span class="hljs-string">'Reachability'</span>,  <span class="hljs-string">'~&gt; 3.1.0'</span>
+pod <span class="hljs-string">&#x27;MBProgressHUD&#x27;</span>, <span class="hljs-string">&#x27;~&gt; 0.5&#x27;</span>
+pod <span class="hljs-string">&#x27;Reachability&#x27;</span>,  <span class="hljs-string">&#x27;~&gt; 3.1.0&#x27;</span>
 </code></pre>
 <h3>Adding a Pod</h3>
 

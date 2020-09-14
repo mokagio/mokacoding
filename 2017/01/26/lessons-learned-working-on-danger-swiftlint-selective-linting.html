@@ -19,12 +19,12 @@
 <p>To do so we need to stub the method used to generate such temporary file, <a href="http://ruby-doc.org/stdlib-1.9.3/libdoc/tempfile/rdoc/Tempfile.html#method-i-open"><code>Tempfile#open</code></a>.</p>
 <p>RSpec provides a way to stub a method call response by <a href="https://www.relishapp.com/rspec/rspec-mocks/v/3-2/docs/configuring-responses/block-implementation#yield-to-the-caller&#39;s-block">yelding to the caller&#39;s block</a>:</p>
 <p>That&#39;s all I needed 😄.</p>
-<pre><code class=" hljs ruby">fake_temp_file = <span class="hljs-constant">Tempfile</span>.new(<span class="hljs-string">'fake.yml'</span>)
+<pre><code class=" hljs ruby">fake_temp_file = Tempfile.new(<span class="hljs-string">&#x27;fake.yml&#x27;</span>)
 
 <span class="hljs-comment"># Using begin-ensure-end here to avoid confusingly calling Tempfile.open and</span>
 <span class="hljs-comment"># stubbing it at the same time.</span>
 <span class="hljs-keyword">begin</span>
-  allow(<span class="hljs-constant">Tempfile</span>).to receive(<span class="hljs-symbol">:open</span>) { |&amp;block| block.call(fake_temp_file) }
+  allow(Tempfile).to receive(<span class="hljs-symbol">:open</span>) { <span class="hljs-params">|&amp;block|</span> block.call(fake_temp_file) }
   <span class="hljs-comment"># Rest of the test...</span>
 <span class="hljs-keyword">ensure</span>
   fake_temp_file.close
@@ -37,16 +37,16 @@
 <p>I naively thought that setting its value to nil would have been enough to remove a key from an hash. I should have though about it for longer that one second.</p>
 <p>Setting a key&#39;s value to nil… sets it&#39;s value to nil 😅 The key is still there.</p>
 <p>This is usually ok in code because we usually do things like <code>unless hash[:key].nil? do ...</code>. In the case of serialization to YAML that&#39;s no good though, as what we&#39;d get is a YAML with an empty node corresponding to the key with nil value.</p>
-<pre><code class=" hljs ruby"><span class="hljs-keyword">require</span> <span class="hljs-string">'yaml'</span>
+<pre><code class=" hljs ruby"><span class="hljs-keyword">require</span> <span class="hljs-string">&#x27;yaml&#x27;</span>
 
-hash = { <span class="hljs-symbol">foo:</span> <span class="hljs-keyword">nil</span> }
+hash = { <span class="hljs-symbol">foo:</span> <span class="hljs-literal">nil</span> }
 
 hash.to_yaml
-<span class="hljs-comment"># =&gt; "---\n:foo: \n"</span>
+<span class="hljs-comment"># =&gt; &quot;---\n:foo: \n&quot;</span>
 </code></pre>
 <p>The correct way to remove a key from an hash is to use <code>tap</code>.</p>
-<pre><code class=" hljs ruby">{ <span class="hljs-symbol">foo:</span> <span class="hljs-keyword">nil</span>, <span class="hljs-symbol">bar:</span> <span class="hljs-string">'baz'</span> }.tap { |hash| hash.delete(<span class="hljs-symbol">:foo</span>) }
-<span class="hljs-comment"># =&gt; { :bar =&gt;"baz" }</span>
+<pre><code class=" hljs ruby">{ <span class="hljs-symbol">foo:</span> <span class="hljs-literal">nil</span>, <span class="hljs-symbol">bar:</span> <span class="hljs-string">&#x27;baz&#x27;</span> }.tap { <span class="hljs-params">|hash|</span> hash.delete(<span class="hljs-symbol">:foo</span>) }
+<span class="hljs-comment"># =&gt; { :bar =&gt;&quot;baz&quot; }</span>
 </code></pre>
 <hr>
 <p>I love open source and being able to support the projects I use by contributing to them. Submitting pull requests is always a great occasion to learn new things and to grow as a developer. I encourage you to do the same!</p>

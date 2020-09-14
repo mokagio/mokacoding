@@ -39,13 +39,13 @@
 {% endhighlight %}
 </code></pre><h4 id="call-the-facebook-sdk-method-to-login">Call the Facebook SDK method to login</h4>
 <p>Easy peasy:</p>
-<pre><code class=""><span class="hljs-collection">{% highlight objective-c %}</span>
-<span class="hljs-collection">[FBSession openActiveSessionWithReadPermissions:nil
+<pre><code class="">{% highlight objective-c %}
+[FBSession openActiveSessionWithReadPermissions:nil
                                    allowLoginUI:YES
-                              completionHandler:^<span class="hljs-list">(<span class="hljs-keyword">FBSession</span> *session, FBSessionState state, NSError *error)</span> <span class="hljs-collection">{
+                              completionHandler:^(<span class="hljs-name">FBSession</span> *session, FBSessionState state, NSError *error) {
      // handle stuff here
- }</span>]</span><span class="hljs-comment">;</span>
- <span class="hljs-collection">{% endhighlight %}</span>
+ }]<span class="hljs-comment">;</span>
+ {% endhighlight %}
 </code></pre><p>In the completion handler we should… handle the result of the open active session. I think that this really depends on what our app will do, so I&#39;m not gonna write any snippet here.</p>
 <h4 id="come-back-to-the-app-and-handle-the-result">Come back to the app and handle the result</h4>
 <p>If you&#39;re user&#39;s are using iOS 5 -I hope they&#39;re not-, or if they&#39;re so dumb they haven&#39;t installed the native Facebook app for iOS, the login will occur with a sort of modal window in your app. In all the rest of the cases the</p>

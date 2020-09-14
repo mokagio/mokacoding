@@ -13,8 +13,8 @@ so that we can write our tests in a more descriptive way; Nimble brings to the
 table a rich and powerful set of expectations and matchers. Read <a href="https://www.mokacoding.com/blog/testing-delegates-in-swift-with-xctest/">this post</a>
 if you want to know more.</p>
 <h3 id="testing-callbacks-with-quick-and-nimble">Testing Callbacks with Quick and Nimble</h3>
-<pre><code class=" hljs swift">describe(<span class="hljs-string">"Callback testing"</span>) {
-    it(<span class="hljs-string">"can test callbacks using waitUntil"</span>) {
+<pre><code class=" hljs swift">describe(<span class="hljs-string">&quot;Callback testing&quot;</span>) {
+    it(<span class="hljs-string">&quot;can test callbacks using waitUntil&quot;</span>) {
         <span class="hljs-keyword">let</span> service = <span class="hljs-type">SomeService</span>()
 
         waitUntil { done <span class="hljs-keyword">in</span>
@@ -48,9 +48,9 @@ and how better our test can feel by using this library.</p>
 <p>The example below uses the <em>spy delegate</em> technique introduced in the <a href="https://www.mokacoding.com/blog/testing-delegates-in-swift-with-xctest/">previous post</a>,
 head over there to read more about it, or checkout the <a href="https://github.com/mokacoding/PracticalTesting">example project</a>
 for this post to see the full code.</p>
-<pre><code class=" hljs swift">describe(<span class="hljs-string">"Delegate testing"</span>) {
-    context(<span class="hljs-string">"property setting"</span>) {
-        it(<span class="hljs-string">"can be tested with toEventually"</span>) {
+<pre><code class=" hljs swift">describe(<span class="hljs-string">&quot;Delegate testing&quot;</span>) {
+    context(<span class="hljs-string">&quot;property setting&quot;</span>) {
+        it(<span class="hljs-string">&quot;can be tested with toEventually&quot;</span>) {
             <span class="hljs-keyword">let</span> something = <span class="hljs-type">SomethingWithDelegate</span>()
             <span class="hljs-keyword">let</span> spyDelegate = <span class="hljs-type">SpyDelegate</span>()
             something.delegate = spyDelegate

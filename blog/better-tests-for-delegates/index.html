@@ -9,12 +9,12 @@ use it to keep track of the methods called, and parameters passed to them,
 assert the behavior you are expecting by looking into the state of the spy.</p>
 <p>For example,
 we can test how a <code>ResourceFetcher</code> type calls its delegate upon a successful fetch like this.</p>
-<pre><code class=" hljs swift"><span class="hljs-keyword">import</span> <span class="hljs-type">XCTest</span>
-<span class="hljs-keyword">import</span> <span class="hljs-type">Nimble</span>
+<pre><code class=" hljs swift"><span class="hljs-keyword">import</span> XCTest
+<span class="hljs-keyword">import</span> Nimble
 
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ResourceFetcherTests</span>: <span class="hljs-title">XCTestCase</span> </span>{
 
-  <span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">testCallsDelegateOnSuccess</span><span class="hljs-params">()</span></span> {
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">testCallsDelegateOnSuccess</span><span class="hljs-params">()</span></span> {
     <span class="hljs-keyword">let</span> resourceFecther = <span class="hljs-type">ResourceFetcher</span>()
     <span class="hljs-keyword">let</span> delegateSpy = <span class="hljs-type">ResourceFetcherDelegateSpy</span>()
     resourceFecther.delegate = delegateSpy
@@ -28,17 +28,17 @@ we can test how a <code>ResourceFetcher</code> type calls its delegate upon a su
 
 <span class="hljs-class"><span class="hljs-keyword">protocol</span> <span class="hljs-title">ResourceFetcherDelegate</span>: <span class="hljs-title">class</span> </span>{
 
-  <span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">resourceFetcher</span><span class="hljs-params">(<span class="hljs-number">_</span> resourceFetcher: ResourceFetcher, fetched resource: Resource)</span></span>
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">resourceFetcher</span><span class="hljs-params">(<span class="hljs-number">_</span> resourceFetcher: ResourceFetcher, fetched resource: Resource)</span></span>
 }
 
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ResourceFetcher</span> </span>{
 
-  <span class="hljs-keyword">weak</span> <span class="hljs-keyword">var</span> delegate: <span class="hljs-type">ResourceFetcherDelegate</span>?
+  <span class="hljs-keyword">weak</span> <span class="hljs-keyword">var</span> delegate: <span class="hljs-type">ResourceFetcherDelegate?</span>
 
-  <span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">fetch</span><span class="hljs-params">()</span></span> {
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">fetch</span><span class="hljs-params">()</span></span> {
     <span class="hljs-comment">// In a real system, you would have something like a network request here.</span>
     <span class="hljs-type">DispatchQueue</span>.global(qos: .background).asyncAfter(deadline: .now() + <span class="hljs-number">0.1</span>) { [<span class="hljs-keyword">weak</span> <span class="hljs-keyword">self</span>] <span class="hljs-keyword">in</span>
-      guard <span class="hljs-keyword">let</span> <span class="hljs-keyword">self</span> = <span class="hljs-keyword">self</span> <span class="hljs-keyword">else</span> { <span class="hljs-keyword">return</span> }
+      <span class="hljs-keyword">guard</span> <span class="hljs-keyword">let</span> <span class="hljs-keyword">self</span> = <span class="hljs-keyword">self</span> <span class="hljs-keyword">else</span> { <span class="hljs-keyword">return</span> }
 
       <span class="hljs-keyword">self</span>.delegate?.resourceFetcher(<span class="hljs-keyword">self</span>, didFetch: <span class="hljs-type">Resource</span>(id: <span class="hljs-number">1</span>))
     }
@@ -47,11 +47,11 @@ we can test how a <code>ResourceFetcher</code> type calls its delegate upon a su
 
 lass <span class="hljs-type">ResourceFetcherDelegateSpy</span>: <span class="hljs-type">ResourceFetcherDelegate</span> {
 
-  private(<span class="hljs-keyword">set</span>) <span class="hljs-keyword">var</span> didCallResourceFetched = <span class="hljs-built_in">false</span>
-  private(<span class="hljs-keyword">set</span>) <span class="hljs-keyword">var</span> didCallResourceFetchedValue: <span class="hljs-type">Resource</span>?
+  <span class="hljs-keyword">private</span>(<span class="hljs-keyword">set</span>) <span class="hljs-keyword">var</span> didCallResourceFetched = <span class="hljs-literal">false</span>
+  <span class="hljs-keyword">private</span>(<span class="hljs-keyword">set</span>) <span class="hljs-keyword">var</span> didCallResourceFetchedValue: <span class="hljs-type">Resource?</span>
 
-  <span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">resourceFetcher</span><span class="hljs-params">(<span class="hljs-number">_</span> resourceFetcher: ResourceFetcher, didFetch resource: Resource)</span></span> {
-    didCallResourceFetched = <span class="hljs-built_in">true</span>
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">resourceFetcher</span><span class="hljs-params">(<span class="hljs-number">_</span> resourceFetcher: ResourceFetcher, didFetch resource: Resource)</span></span> {
+    didCallResourceFetched = <span class="hljs-literal">true</span>
     didCallResourceFetchedValue = resource
   }
 }
@@ -131,7 +131,7 @@ towards the kind of behavior the delegate is notified about.</p>
 <p>In the <code>ResourceFetcher</code> example above
 we could use something like this:</p>
 <pre><code class=" hljs swift"><span class="hljs-comment">// ResourceFetcherTests.swift</span>
-<span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">testCallsDelegateOnSuccess</span><span class="hljs-params">()</span></span> {
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">testCallsDelegateOnSuccess</span><span class="hljs-params">()</span></span> {
   <span class="hljs-keyword">let</span> resourceFecther = <span class="hljs-type">ResourceFetcher</span>()
   <span class="hljs-keyword">let</span> delegateSpy = <span class="hljs-type">ResourceFetcherDelegateSpy</span>()
   resourceFecther.delegate = delegateSpy
@@ -145,13 +145,13 @@ we could use something like this:</p>
 <span class="hljs-comment">// ResourceFetcherDelegateSpy.swift</span>
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ResourceFetcherDelegateSpy</span>: <span class="hljs-title">ResourceFetcherDelegate</span> </span>{
 
-  private <span class="hljs-keyword">var</span> fetchedResource: <span class="hljs-type">Resource</span>?
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">var</span> fetchedResource: <span class="hljs-type">Resource?</span>
 
-  <span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">wasCalledForSuccessfulFetch</span><span class="hljs-params">(of resource: Resource)</span></span> -&gt; <span class="hljs-type">Bool</span> {
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">wasCalledForSuccessfulFetch</span><span class="hljs-params">(of resource: Resource)</span></span> -&gt; <span class="hljs-type">Bool</span> {
     <span class="hljs-keyword">return</span> fetchedResource == resource
   }
 
-  <span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">resourceFetcher</span><span class="hljs-params">(<span class="hljs-number">_</span> resourceFetcher: ResourceFetcher, didFetch resource: Resource)</span></span> {
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">resourceFetcher</span><span class="hljs-params">(<span class="hljs-number">_</span> resourceFetcher: ResourceFetcher, didFetch resource: Resource)</span></span> {
       fetchedResource = resource
   }
 }

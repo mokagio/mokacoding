@@ -7,11 +7,11 @@
 <p>In his article <a href="http://mislav.uniqpath.com/2014/02/hidden-documentation/">&quot;Every line of code is always documented&quot;</a> Mislav Marohnić shows how by using <code>git blame</code> and <code>git show</code> he understood the reasons behind a cryptic line of code, and how important it was for the behaviour of the software.</p>
 <p>The repository is the history of the codebase. Some TV shows have a &quot;previously on ...&quot;, that&#39;s the same when we read the <code>git log</code> after a pull, we get up to date with the latest developments of the project.</p>
 <p>What we don&#39;t want is a summary of the changes happened while we were away written like this:</p>
-<pre><code class="">Doesn<span class="hljs-attribute">'t</span> work!
+<pre><code class="">Doesn<span class="hljs-comment">&#x27;t work!</span>
 
 <span class="hljs-keyword">End</span> <span class="hljs-keyword">of</span> day commit
 
-Checking this <span class="hljs-keyword">in</span> because it<span class="hljs-attribute">'s</span> <span class="hljs-typename">time</span> <span class="hljs-keyword">for</span> a beer
+Checking this <span class="hljs-keyword">in</span> because it<span class="hljs-comment">&#x27;s time for a beer</span>
 </code></pre><p>Equally bad is getting a single gianormous commit that adds a bug fix, three feature, and removes a bunch of unused files.</p>
 <p>So here&#39;s some starting points to use when writing a project&#39;s Git-iquette.</p>
 <h2 id="how-to-write-a-git-iquette">How to write a Git-iquette</h2>
@@ -24,11 +24,11 @@ Checking this <span class="hljs-keyword">in</span> because it<span class="hljs-a
 <h3 id="commit-title-style">Commit title style</h3>
 <p>Given for granted that we all agree on the fact commits should be small and atomic, we need some rules on how to write the commit message.</p>
 <p>First of all, which verb to use? When reading a book it&#39;d be confusing if the author kept changing the verbs tense, and the same stands for our <code>git log</code>. Choose a style:</p>
-<pre><code class=""><span class="hljs-built_in">Add</span> <span class="bash">awesome feature
-</span>
-Adds awesome feature
+<pre><code class="">Add awesome <span class="hljs-built_in">feature</span>
 
-Added awesome feature
+Adds awesome <span class="hljs-built_in">feature</span>
+
+Added awesome <span class="hljs-built_in">feature</span>
 </code></pre><p>They&#39;re all legit and reasonable, the important thing is to be consistent. <em>My preference is to use imperative verbs, because it&#39;s the same thing git does in it&#39;s generated commit messages.</em></p>
 <h3 id="merge-vs-rebase">Merge vs Rebase</h3>
 <p>Merge vs rebase is an open discussion in the community, and both options have their pros and cons. Again the important thing is to be consistent, and to provide rules on when it&#39;s acceptable to merge instead of reabsing, or vice versa.</p>

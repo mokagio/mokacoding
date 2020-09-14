@@ -15,7 +15,7 @@
         <span class="hljs-keyword">self</span>.appStateService = appStateService
     }
 
-    convenience <span class="hljs-keyword">init</span>() {
+    <span class="hljs-keyword">convenience</span> <span class="hljs-keyword">init</span>() {
         <span class="hljs-keyword">self</span>.<span class="hljs-keyword">init</span>(appStateService: <span class="hljs-type">AppStateService</span>.sharedInstance(),
             networkService: <span class="hljs-type">NetworkService</span>.sharedInstance(),
             parser: <span class="hljs-type">Parser</span>())
@@ -23,7 +23,7 @@
 
     <span class="hljs-comment">// MARK: -</span>
 
-    <span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">allProducts</span><span class="hljs-params">(completion: <span class="hljs-params">([Product]?, ErrorType?)</span></span></span> -&gt; ()) {
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">allProducts</span><span class="hljs-params">(completion: <span class="hljs-params">([Product]?, ErrorType?)</span></span></span> -&gt; ()) {
         <span class="hljs-keyword">let</span> currentUser = appStateService.currentUser()
         <span class="hljs-keyword">let</span> success: ([<span class="hljs-type">String</span>: <span class="hljs-type">AnyObject</span>]) -&gt; () = { response <span class="hljs-keyword">in</span>
             completion(<span class="hljs-keyword">self</span>.parser.parseProducts(response), .<span class="hljs-type">None</span>)
@@ -38,7 +38,7 @@
 <p>Let&#39;s appreciate the fact that by declaring <code>parser</code>, <code>appStateService</code>, and <code>networkService</code> as class properties we see them at the very top of the code. <em>This is just a convention, the same code with the properties defiend at the very bottom would sitll compile.</em></p>
 <p>Another little detail to underline is the use of the <code>convenience</code> keyword. That make is clear to the reader, and the compiler, that that initializer is not the <em>proper</em> one, but a more convenient one to use.</p>
 <p>I am a bit conflicted on the use of that one in place of a convenience factory method:</p>
-<pre><code class=" hljs swift"><span class="hljs-keyword">static</span> <span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">configuredService</span><span class="hljs-params">()</span></span> -&gt; <span class="hljs-type">ProductService</span> {
+<pre><code class=" hljs swift"><span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">configuredService</span><span class="hljs-params">()</span></span> -&gt; <span class="hljs-type">ProductService</span> {
     <span class="hljs-keyword">return</span> <span class="hljs-type">ProcutService</span>(appStateService: <span class="hljs-type">AppStateService</span>.sharedInstance(),
         networkService: <span class="hljs-type">NetworkService</span>.sharedInstance(),
         parser: <span class="hljs-type">Parser</span>())

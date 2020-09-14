@@ -6,17 +6,17 @@
 <h2 id="nasty-if-let">Nasty if let</h2>
 <p>Probably one of the most disruptive features of Swift compared to Objective-C is the presence of optionals. Having a type <em>wrapped</em> in an optional adds an extra layer of context. A constant or variable of type <code>Something?</code> could be nil, and consumers have to account for that.</p>
 <p>The most common way to deal with optionals is by using an <code>if let</code>:</p>
-<pre><code class=" hljs swift"><span class="hljs-keyword">var</span> input: <span class="hljs-type">String</span>? = <span class="hljs-string">"foo bar"</span>
+<pre><code class=" hljs swift"><span class="hljs-keyword">var</span> input: <span class="hljs-type">String?</span> = <span class="hljs-string">&quot;foo bar&quot;</span>
 <span class="hljs-keyword">var</span> output: <span class="hljs-type">String</span>
 
 <span class="hljs-keyword">if</span> <span class="hljs-keyword">let</span> someInput = input {
-    output = <span class="hljs-string">"🐷 "</span> + someInput
+    output = <span class="hljs-string">&quot;🐷 &quot;</span> + someInput
 } <span class="hljs-keyword">else</span> {
-    output = <span class="hljs-string">"😔"</span>
+    output = <span class="hljs-string">&quot;😔&quot;</span>
 }
 </code></pre>
 <p>This construct can lead to a nasty nested indentation spiral of doom:</p>
-<pre><code class=" hljs swift"><span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">fancifiedEmojiForCurrentUser</span><span class="hljs-params">()</span></span> -&gt; <span class="hljs-type">String</span>? {
+<pre><code class=" hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">fancifiedEmojiForCurrentUser</span><span class="hljs-params">()</span></span> -&gt; <span class="hljs-type">String?</span> {
 
     <span class="hljs-comment">// currentUser: -&gt; User?</span>
     <span class="hljs-keyword">if</span> <span class="hljs-keyword">let</span> actuallyAUser = currentUser() {
@@ -35,10 +35,10 @@
 </code></pre>
 <p>In my opinion the code above, while being simple, is not easy to digest.</p>
 <p>Swift 2 added the <code>guard</code> statement, which allows us to rewrite our example like this:</p>
-<pre><code class=" hljs swift"><span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">fancifiedEmojiForCurrentUser</span><span class="hljs-params">()</span></span> -&gt; <span class="hljs-type">String</span>? {
+<pre><code class=" hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">fancifiedEmojiForCurrentUser</span><span class="hljs-params">()</span></span> -&gt; <span class="hljs-type">String?</span> {
 
     <span class="hljs-comment">// currentUser: -&gt; User?</span>
-    guard <span class="hljs-keyword">let</span> actuallyAUser = currentUser() <span class="hljs-keyword">else</span> {
+    <span class="hljs-keyword">guard</span> <span class="hljs-keyword">let</span> actuallyAUser = currentUser() <span class="hljs-keyword">else</span> {
       <span class="hljs-keyword">return</span> .<span class="hljs-type">None</span>
     }
 
@@ -46,7 +46,7 @@
     <span class="hljs-keyword">let</span> joinedUserName = joinedNameForUser(actuallyAUser)
 
     <span class="hljs-comment">// emojiFromString: String -&gt; Emoji?</span>
-    guard <span class="hljs-keyword">let</span> emojiForUser = emojiFromString(joinedUserName) {
+    <span class="hljs-keyword">guard</span> <span class="hljs-keyword">let</span> emojiForUser = emojiFromString(joinedUserName) {
       <span class="hljs-keyword">return</span> .<span class="hljs-type">None</span>
     }
 
@@ -61,7 +61,7 @@
 <p>Then cryptic words like functors and monads started to appear in my Twitter feed, and the cool kids started making jokes I couldn&#39;t understand.</p>
 <p>Good news everybody, functional programming is not about academia, abstract programs, or monadic laws. It is all about <strong>functions</strong>. For a programming language to be functional, or at least functional friendly, it simply needs to treat functions as first class citizens.</p>
 <p>In Swift we can define a function like this:</p>
-<pre><code class=" hljs swift"><span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">plusOne</span><span class="hljs-params">(addend: Int)</span></span> -&gt; <span class="hljs-type">Int</span> {
+<pre><code class=" hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">plusOne</span><span class="hljs-params">(addend: Int)</span></span> -&gt; <span class="hljs-type">Int</span> {
   <span class="hljs-keyword">return</span> addend + <span class="hljs-number">1</span>
 }
 </code></pre>
@@ -73,7 +73,7 @@
 <p>The code above defines a constant of type <code>Int -&gt; Int</code>, or <code>(Int) -&gt; Int</code> if you prefer, and assigns it a closure.</p>
 <h2 id="functions-as-input">Functions as input</h2>
 <p>The ability of assigning functions to variables and constants means that we can also pass them as arguments to other functions. For example:</p>
-<pre><code class=" hljs swift"><span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">sumTwice</span><span class="hljs-params">(addend: Int, f: Int -&gt; Int)</span></span> -&gt; <span class="hljs-type">Int</span> {
+<pre><code class=" hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">sumTwice</span><span class="hljs-params">(addend: Int, f: Int -&gt; Int)</span></span> -&gt; <span class="hljs-type">Int</span> {
   <span class="hljs-keyword">return</span> f(addend) + f(addend)
 }
 
@@ -83,7 +83,7 @@
 </code></pre>
 <h2 id="functions-as-output">Functions as output</h2>
 <p>The same holds true for functions that return other functions:</p>
-<pre><code class=" hljs swift"><span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">multiplier</span><span class="hljs-params">(base: Int)</span></span> -&gt; (<span class="hljs-type">Int</span> -&gt; <span class="hljs-type">Int</span>) {
+<pre><code class=" hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">multiplier</span><span class="hljs-params">(base: Int)</span></span> -&gt; (<span class="hljs-type">Int</span> -&gt; <span class="hljs-type">Int</span>) {
   <span class="hljs-keyword">return</span> { x <span class="hljs-keyword">in</span>
     <span class="hljs-keyword">return</span> base * x
   }
@@ -101,17 +101,17 @@
 <h2 id="map">map</h2>
 <p>Let&#39;s say you have an array of, for example, <code>Int</code>, and a certain transformation function that takes <code>Int</code> as input and return any other type, for example <code>String</code>. And let&#39;s say that you need to apply the given transformation function to each element of the array, and collect the result into another array. One option you have is to use an ugly for each loop, a more concise option is to use map.</p>
 <pre><code class=" hljs swift"><span class="hljs-keyword">let</span> numbers = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]
-<span class="hljs-keyword">let</span> <span class="hljs-built_in">toString</span>: <span class="hljs-type">Int</span> -&gt; <span class="hljs-type">String</span> = { <span class="hljs-string">"\$0"</span> }
+<span class="hljs-keyword">let</span> <span class="hljs-built_in">toString</span>: <span class="hljs-type">Int</span> -&gt; <span class="hljs-type">String</span> = { <span class="hljs-string">&quot;\$0&quot;</span> }
 
-<span class="hljs-keyword">let</span> strings = numbers.<span class="hljs-built_in">map</span>(<span class="hljs-built_in">toString</span>) <span class="hljs-comment">// =&gt; ["1", "2", "3"]</span>
+<span class="hljs-keyword">let</span> strings = numbers.<span class="hljs-built_in">map</span>(<span class="hljs-built_in">toString</span>) <span class="hljs-comment">// =&gt; [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;]</span>
 </code></pre>
 <p>Or for the one liner fans:</p>
-<pre><code class=" hljs swift"><span class="hljs-keyword">let</span> strings = numbers.<span class="hljs-built_in">map</span> { <span class="hljs-string">"\$0"</span> }
+<pre><code class=" hljs swift"><span class="hljs-keyword">let</span> strings = numbers.<span class="hljs-built_in">map</span> { <span class="hljs-string">&quot;\$0&quot;</span> }
 </code></pre>
 <p><code>map</code> is pretty cool, but also a bit picky. The example below won&#39;t compile, can you guess why?</p>
 <pre><code class=" hljs swift"><span class="hljs-keyword">let</span> getLength: <span class="hljs-type">String</span> -&gt; <span class="hljs-type">Int</span> = { $<span class="hljs-number">0</span>.characters.<span class="hljs-built_in">count</span> }
 
-<span class="hljs-keyword">let</span> lenghts = numbers.<span class="hljs-built_in">map</span>(getLength) <span class="hljs-comment">// [!] won't compile</span>
+<span class="hljs-keyword">let</span> lenghts = numbers.<span class="hljs-built_in">map</span>(getLength) <span class="hljs-comment">// [!] won&#x27;t compile</span>
 </code></pre>
 <p>We will come back to this in a moment.</p>
 <h2 id="the-array-type">The Array type</h2>
@@ -126,11 +126,11 @@
 <h2 id="the-optional-type">The Optional type</h2>
 <p>Like for <code>Array</code> it might be easy to overlook the fact that optionals variable and constants actually have type <code>Optional&lt;T&gt;</code>, where <code>T</code> is the type of the value <em>wrapped</em> by the optional.</p>
 <p>These definitions are equivalent:</p>
-<pre><code class=" hljs swift"><span class="hljs-keyword">let</span> x: <span class="hljs-type">String</span>? = <span class="hljs-string">"an optional string"</span>
+<pre><code class=" hljs swift"><span class="hljs-keyword">let</span> x: <span class="hljs-type">String?</span> = <span class="hljs-string">&quot;an optional string&quot;</span>
 
-<span class="hljs-keyword">let</span> y: <span class="hljs-type">Optional</span>&lt;<span class="hljs-type">String</span>&gt; = <span class="hljs-string">"another optional string"</span>
+<span class="hljs-keyword">let</span> y: <span class="hljs-type">Optional</span>&lt;<span class="hljs-type">String</span>&gt; = <span class="hljs-string">&quot;another optional string&quot;</span>
 
-<span class="hljs-keyword">let</span> z = <span class="hljs-type">Opional</span>.<span class="hljs-type">Some</span>(<span class="hljs-string">"yet another optional string"</span>)
+<span class="hljs-keyword">let</span> z = <span class="hljs-type">Opional</span>.<span class="hljs-type">Some</span>(<span class="hljs-string">&quot;yet another optional string&quot;</span>)
 </code></pre>
 <p>As you might have notice the definition of optional and array variables are quite similar.</p>
 <pre><code class=" hljs swift"><span class="hljs-keyword">let</span> a: <span class="hljs-type">Array</span>&lt;<span class="hljs-type">Int</span>&gt; = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]
@@ -159,7 +159,7 @@ x.<span class="hljs-built_in">map</span>(q) <span class="hljs-comment">// [!] do
 <p>Like for higher order functions, once you look into it there is nothing daunting about functor at all. It is just the name for a type that respect certain laws, with the practical result of exposing <code>map</code>.</p>
 <h2 id="better-if-let">Better if let</h2>
 <p>Let&#39;s look back at <code>fancifiedEmojiForCurrentUser</code>.</p>
-<pre><code class=" hljs swift"><span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">fancifiedEmojiForCurrentUser</span><span class="hljs-params">()</span></span> -&gt; <span class="hljs-type">String</span>? {
+<pre><code class=" hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">fancifiedEmojiForCurrentUser</span><span class="hljs-params">()</span></span> -&gt; <span class="hljs-type">String?</span> {
 
   <span class="hljs-comment">// currentUser: -&gt; User?</span>
   <span class="hljs-keyword">if</span> <span class="hljs-keyword">let</span> actuallyAUser = currentUser() {
@@ -178,7 +178,7 @@ x.<span class="hljs-built_in">map</span>(q) <span class="hljs-comment">// [!] do
 </code></pre>
 <p>The <code>currentUser</code> function returns a <code>User?</code>, <em>as there migth not be a logged user</em>, and <code>joinedNameForUser</code> gets a <code>User</code> as input, and returns a <code>String</code>. We can use <code>map</code> there.</p>
 <p><code>emojyFromString</code> as type signature <code>String -&gt; Emoji?</code>, <em>apparently not all the strings can be converted into emojis</em>, and <code>fancifyEmoji</code> expects an input of type <code>Emoji</code>. We can use <code>map</code> on them too.</p>
-<pre><code class=" hljs swift"><span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">fancifiedEmojiForCurrentUser</span><span class="hljs-params">()</span></span> -&gt; <span class="hljs-type">String</span>? {
+<pre><code class=" hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">fancifiedEmojiForCurrentUser</span><span class="hljs-params">()</span></span> -&gt; <span class="hljs-type">String?</span> {
 
   <span class="hljs-keyword">if</span> <span class="hljs-keyword">let</span> joinedUserName = currentUser.<span class="hljs-built_in">map</span>(joinedNameForUser) {
     <span class="hljs-keyword">return</span> emojiFromString(joinedUserName).<span class="hljs-built_in">map</span>(fancifyEmoji)
@@ -200,7 +200,7 @@ x.<span class="hljs-built_in">map</span>(q) <span class="hljs-comment">// [!] do
 </code></pre>
 <p>What we get is an array of arrays, or nested array.</p>
 <p>Sometimes nested arrays are the data structure we need in our code, other times they are not an what we need is a linear array. The operation of converting a nested array into a linear one is called <em>flattening</em>.</p>
-<pre><code class=" hljs swift"><span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">flat</span><span class="hljs-generics">&lt;T&gt;</span><span class="hljs-params">(array nestedArray: [ [T] ])</span></span> -&gt; [<span class="hljs-type">T</span>] {
+<pre><code class=" hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">flat</span>&lt;T&gt;<span class="hljs-params">(array nestedArray: [ [T] ])</span></span> -&gt; [<span class="hljs-type">T</span>] {
   <span class="hljs-keyword">var</span> linearArray: [<span class="hljs-type">T</span>] = []
   <span class="hljs-keyword">for</span> array <span class="hljs-keyword">in</span> nestedArray {
     <span class="hljs-keyword">for</span> element <span class="hljs-keyword">in</span> array {
@@ -221,7 +221,7 @@ x.<span class="hljs-built_in">map</span>(q) <span class="hljs-comment">// [!] do
 <h2 id="flatmap-on-optionals">flatMap on optionals</h2>
 <p>Given an <code>Optional&lt;T&gt;</code>, <code>flatMap</code> expects a <code>T -&gt; Optional&lt;U&gt;</code> as input, and has output of type <code>Optional&lt;U&gt;</code></p>
 <p>For example, consider this function <code>half</code> that returns an <code>Int?</code> because it attempts to divide by to only if the <code>number</code> parameter is even:</p>
-<pre><code class=" hljs swift"><span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">half</span><span class="hljs-params">(number: Int)</span></span> -&gt; <span class="hljs-type">Int</span>? {
+<pre><code class=" hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">half</span><span class="hljs-params">(number: Int)</span></span> -&gt; <span class="hljs-type">Int?</span> {
   <span class="hljs-keyword">switch</span> number % <span class="hljs-number">2</span> {
   <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>: <span class="hljs-keyword">return</span> number / <span class="hljs-number">2</span>
   <span class="hljs-keyword">default</span>: <span class="hljs-keyword">return</span> .<span class="hljs-type">None</span>
@@ -238,7 +238,7 @@ x.<span class="hljs-built_in">map</span>(q) <span class="hljs-comment">// [!] do
 <p>Like for functors, there is actually a very solid mathematical definition behind monads, with a set of <a href="https://en.wikipedia.org/wiki/Monad_%28functional_programming%29#Monad_laws">monadic laws</a> governing them. For the everyday Swift developer like you and me though, a monad is a type on which we can <code>map</code> and <code>flatMap</code>, like <code>Array</code> and <code>Optional</code>.</p>
 <h2 id="even-better-if-let">Even better if let</h2>
 <p>We left our <code>fancifiedEmojiForCurrentUser</code> for current user in this state:</p>
-<pre><code class=" hljs swift"><span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">fancifiedEmojiForCurrentUser</span><span class="hljs-params">()</span></span> -&gt; <span class="hljs-type">String</span>? {
+<pre><code class=" hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">fancifiedEmojiForCurrentUser</span><span class="hljs-params">()</span></span> -&gt; <span class="hljs-type">String?</span> {
 
   <span class="hljs-keyword">if</span> <span class="hljs-keyword">let</span> joinedUserName = currentUser.<span class="hljs-built_in">map</span>(joinedNameForUser) {
     <span class="hljs-keyword">return</span> emojiFromString(joinedUserName).<span class="hljs-built_in">map</span>(fancifyEmoji)
@@ -248,7 +248,7 @@ x.<span class="hljs-built_in">map</span>(q) <span class="hljs-comment">// [!] do
 }
 </code></pre>
 <p>We tried to chain everything together with <code>map</code> but got stuck when we got a nested optional <code>Emoji</code>. Now that we know <code>flatMap</code> we can achieve that result, in fact <code>currentUser.map(joinedNameForUser)</code> returns <code>String?</code> and <code>emojiFromString</code> has type signature <code>String -&gt; Emoji?</code>, this looks like a good use case for <code>flatMap</code>.</p>
-<pre><code class=" hljs swift"><span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">fancifiedEmojiForCurrentUser</span><span class="hljs-params">()</span></span> -&gt; <span class="hljs-type">String</span>? {
+<pre><code class=" hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">fancifiedEmojiForCurrentUser</span><span class="hljs-params">()</span></span> -&gt; <span class="hljs-type">String?</span> {
 
   <span class="hljs-keyword">return</span> currentUser
     .<span class="hljs-built_in">map</span>(joinedNameForUser)

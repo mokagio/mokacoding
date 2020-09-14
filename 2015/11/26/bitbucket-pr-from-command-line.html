@@ -3,13 +3,13 @@
 <p>One thing I love about GitHub is how easy it is to create a pull request. You can go on the project&#39;s repo and see the button to do it if you recently pushed on a branch that is not the main one, or use the <a href="https://github.com/github/hub"><code>hub</code> gem</a> and do it from the terminal.</p>
 <p>Once you get used to this convenience switching to BitBucket can be quite annoying.</p>
 <p>I wrote a simple little script to open a PR to a BitBucket repo from the terminal:</p>
-<pre><code class=" hljs bash"><span class="hljs-shebang">#!/bin/bash
-</span>
+<pre><code class=" hljs bash"><span class="hljs-meta">#!/bin/bash</span>
+
 org=YOUR_ORG
 project=PROJECT_NAME
 branch=$(git rev-parse --abbrev-ref HEAD)
 
-open <span class="hljs-string">"https://bitbucket.org/<span class="hljs-variable">${org}</span>/<span class="hljs-variable">${project}</span>/pull-request/new?source=<span class="hljs-variable">${branch}</span>&amp;t=1"</span>
+open <span class="hljs-string">&quot;https://bitbucket.org/<span class="hljs-variable">${org}</span>/<span class="hljs-variable">${project}</span>/pull-request/new?source=<span class="hljs-variable">${branch}</span>&amp;t=1&quot;</span>
 </code></pre>
 <p>Running this script, which I usually call <code>pr.sh</code>, will open your browser on a configured page to create a pull request on BitBucket.</p>
 <p>Unfortunately you have to specify the organization and the project name in the script. This is quite annoying, but is a one off operation.</p>

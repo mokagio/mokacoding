@@ -2,17 +2,17 @@
 </p></div></div></div></div><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">unit and acceptance testing, automation, productivity</div><div class="links"><a href="/archive.html">Archive</a><a href="/tags.html">Tags</a><a href="https://gio.codes">About</a><a href="#subscribe">Subscribe</a><a href="/feed.xml"><i class="fa fa-rss"></i></a></div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/how-to-reverse-a-file-in-the-terminal">How to reverse a file in the terminal</a></h2><p class="post-meta"><span class="post-date">Sat Aug 22 2020&nbsp;</span><a href="/tag/Espresso/index.html" class="post-tag">-Espresso</a></p><div class="post"><p>Today, I used <code>grep</code> to filter the <code>git log</code> output to only get the changes made on a certain value holding the version number for an app.</p>
 <p>The <code>git log</code> output is sorted newest to oldest, but I was interested in how the changes progressed, that is, oldest to newest.</p>
 <p><strong>You can use <a href="https://www.gnu.org/software/coreutils/manual/coreutils.html#tac-invocation"><code>tac</code></a> to reverse a file or the standard input.</strong></p>
-<pre><code class="">$ cat file<span class="hljs-class">.txt</span>
-<span class="hljs-tag">a</span>
-<span class="hljs-tag">b</span>
+<pre><code class="">$ cat file<span class="hljs-selector-class">.txt</span>
+<span class="hljs-selector-tag">a</span>
+<span class="hljs-selector-tag">b</span>
 c
 
-$ tac file<span class="hljs-class">.txt</span>
+$ tac file<span class="hljs-selector-class">.txt</span>
 c
-<span class="hljs-tag">b</span>
+<span class="hljs-selector-tag">b</span>
 a
 </code></pre><p>Here&#39;s how it works when used with a pipe.</p>
-<pre><code class="">echo <span class="hljs-string">"a\nb\nc"</span> <span class="hljs-string">| tac</span>
+<pre><code class="">echo <span class="hljs-string">&quot;a<span class="hljs-subst">\n</span>b<span class="hljs-subst">\n</span>c&quot;</span> | tac
 c
 b
 a

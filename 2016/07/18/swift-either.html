@@ -45,13 +45,13 @@ already displayed.</p>
 <p>Rather than an array of cell models we could feed the data source an array of <code>Either&lt;CellModel, BannerModel&gt;</code>.</p>
 <pre><code class=" hljs swift"><span class="hljs-keyword">let</span> data: [<span class="hljs-type">Either</span>&lt;<span class="hljs-type">CellModel</span>, <span class="hljs-type">BannerModel</span>&gt;] = ...
 
-<span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">tableView</span><span class="hljs-params">(<span class="hljs-number">_</span> tableView: UITableView, numberOfRowsInSection section: Int)</span></span> -&gt; <span class="hljs-type">Int</span> {
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">tableView</span><span class="hljs-params">(<span class="hljs-number">_</span> tableView: UITableView, numberOfRowsInSection section: Int)</span></span> -&gt; <span class="hljs-type">Int</span> {
   <span class="hljs-keyword">return</span> data.<span class="hljs-built_in">count</span>
 }
 </code></pre>
 <p>In the <code>tableView(_:cellForRowAt:)</code> method we could then get the item for the
 current index path and simply switch and behave accordingly to its type.</p>
-<pre><code class=" hljs swift"><span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">tableView</span><span class="hljs-params">(<span class="hljs-number">_</span> tableView: UITableView, cellForRowAt indexPath: IndexPath)</span></span> -&gt; <span class="hljs-type">UITableViewCell</span> {
+<pre><code class=" hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">tableView</span><span class="hljs-params">(<span class="hljs-number">_</span> tableView: UITableView, cellForRowAt indexPath: IndexPath)</span></span> -&gt; <span class="hljs-type">UITableViewCell</span> {
     <span class="hljs-keyword">let</span> item = data[indexPath.row]
 
     <span class="hljs-keyword">let</span> identifier: <span class="hljs-type">String</span> = {

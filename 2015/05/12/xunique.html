@@ -17,7 +17,7 @@
 </code></pre><p>Before doing that you might want to make sure that your Python toolchain is up to date. I&#39;d reccomend using <a href="http://brew.sh/">homebrew</a> for that.</p>
 <h3 id="uniquifying-the-project">Uniquifying the project</h3>
 <p>With xUnique now installed you can &quot;<em>uniquify</em>&quot; the <code>project.pbxproj</code> like this:</p>
-<pre><code class="">python -mxUnique MyAwesomeApp.xcodeproj/<span class="hljs-keyword">project</span>.pbxproj
+<pre><code class="">python -mxUnique <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">MyAwesomeApp</span>.</span></span>xcodeproj/project.pbxproj
 </code></pre><p>The first thing you&#39;ll see is that all your groups and files in Xcode have been sorted alphabetically, and if you&#39;ll look at the <code>git diff</code> you&#39;ll see that all the identifiers in the project file have changed.</p>
 <p>And example diff can be seen <a href="https://github.com/mokacoding/xUnique-Example/commit/9401746461b6d3728d88364338f842b915c0bbc0">here</a>, in the example project we setup for the occasion.</p>
 <h2 id="automating-the-process">Automating the process</h2>
@@ -29,10 +29,10 @@
 <p>I like to have my run scripts in their own file rather than in the Run Script text view, it makes it easier to edit them with your text editor of choice.</p>
 <pre><code class=" hljs sh"><span class="hljs-comment"># uniquify.sh</span>
 
-<span class="hljs-shebang">#!/bin/bash
-</span>
+<span class="hljs-comment">#!/bin/bash</span>
+
 <span class="hljs-comment"># uniquify and sort the Xcode projct files</span>
-python -mxUnique <span class="hljs-string">"<span class="hljs-variable">${PROJECT_FILE_PATH}</span>/project.pbxproj"</span>
+python -mxUnique <span class="hljs-string">&quot;<span class="hljs-variable">${PROJECT_FILE_PATH}</span>/project.pbxproj&quot;</span>
 </code></pre>
 <p><img src="https://s3.amazonaws.com/mokacoding/2015-05-12-xUnique-run-script.png" alt="Add Run Script with xUnique"></p>
 <p>The version of the script above uses the <code>PROJECT_FILE_PATH</code> environmet variable provided by Xcode to the Run Scripts. If you want to be able to run the script yourself replace it with <code>MyAwesomeApp.xcodeproj</code>.</p>

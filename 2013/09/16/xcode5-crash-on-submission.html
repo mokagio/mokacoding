@@ -29,10 +29,10 @@ ipa build -c Release
 <p><img src="http://mokacoding.s3.amazonaws.com/2013-09-16-the-terrible-dialog.jpg" alt="The terrible dialog"></p>
 <p>And guess what? Both those buttons resulted in Xcode crashing, right there, with no explanation, no progress bar, nothing, Boom!</p>
 <p>Out of curiosity I opened the crash log that got generated and…</p>
-<pre><code class="">Crashed <span class="hljs-string">Thread:</span>  <span class="hljs-number">0</span>  Dispatch <span class="hljs-string">queue:</span> com.apple.main-thread
+<pre><code class="">Crashed <span class="hljs-attr">Thread:</span>  <span class="hljs-number">0</span>  Dispatch <span class="hljs-attr">queue:</span> com.apple.main-thread
 
-Exception <span class="hljs-string">Type:</span>  EXC_BAD_ACCESS (SIGSEGV)
-Exception <span class="hljs-string">Codes:</span> EXC_I386_GPFLT
+Exception <span class="hljs-attr">Type:</span>  EXC_BAD_ACCESS (SIGSEGV)
+Exception <span class="hljs-attr">Codes:</span> EXC_I386_GPFLT
 </code></pre><p>Whenever I get an <code>EXC_BAD_ACCESS (SIGSEGV)</code> I feel like punching myself in the face, it&#39;s a memory issue, and I must have been really dumb to produce something like that in the ARC era.</p>
 <p>But let&#39;s not waste time complaining about those things, risking to be kicked out of the dev program, and look for a solution.</p>
 <h3 id="the-workaround">The workaround</h3>
@@ -40,7 +40,7 @@ Exception <span class="hljs-string">Codes:</span> EXC_I386_GPFLT
 <p>I never used it before, but I was faced with a problem straightaway. Application Loader need an <code>.ipa</code>, which we can generate only through the Organizer in Xcode.</p>
 <p><em>&quot;which we can generate only through the Organizer in Xcode.&quot;</em>. Are you sure about it? </p>
 <p>Actually <code>xcodebuild</code>, Xcode CLI, let us build ipas, in a very complex way. <code>xctool</code> buy the Facebook iOS team makes the task easier, but it the usual suspect, good guy <a href="https://github.com/mattt">Mattt</a> that has the real solution for that. With his gem <a href="https://github.com/nomad/shenzhen">shenzhen</a> we can build an ipa from command line without spending too much time specifing options or reading through the <code>--help</code> guide.</p>
-<pre><code class="">ipa build -c <span class="hljs-keyword">Release</span>
+<pre><code class=""><span class="hljs-attribute">ipa build -c Release</span>
 </code></pre><p>That&#39;s all we need to generate our <code>.ipa</code>.</p>
 <p>Once we have our package we can send it to the Apples servers through Application Loader, bypassing Organizer and the frustrating crash. Smart!</p>
 <p><br/>

@@ -7,7 +7,7 @@ In this scenario, you end up with a Boolean value that can be true, false, <em>o
 As long as our ORM does its job properly, a nullable Boolean column translates to an <code>Optional&lt;Bool&gt;</code> value, and we&#39;re always forced to deal with its nullability.</p>
 <p>Regardless of how strong the type system is, an <code>Optional&lt;Bool&gt;</code>, or <code>Bool?</code>, doesn&#39;t solve the ambiguity of the null state: what should the code do when the value is neither <code>true</code> nor <code>false</code>?</p>
 <p>Let&#39;s make this practical; here&#39;s some code to prepare a meal:</p>
-<pre><code class=" hljs swift">guard <span class="hljs-keyword">let</span> prefersVegetarian: <span class="hljs-type">Bool</span>? = user.prefersVegetarian() <span class="hljs-keyword">else</span> {
+<pre><code class=" hljs swift"><span class="hljs-keyword">guard</span> <span class="hljs-keyword">let</span> prefersVegetarian: <span class="hljs-type">Bool?</span> = user.prefersVegetarian() <span class="hljs-keyword">else</span> {
   <span class="hljs-keyword">return</span> askForVegeratarianPreference()
 }
 
@@ -18,7 +18,7 @@ As long as our ORM does its job properly, a nullable Boolean column translates t
 }
 </code></pre>
 <p>Here&#39;s a different approach:</p>
-<pre><code class=" hljs swift"><span class="hljs-keyword">let</span> prefersVegetarian: user.prefersVegetarian() ?? <span class="hljs-built_in">true</span>
+<pre><code class=" hljs swift"><span class="hljs-keyword">let</span> prefersVegetarian: user.prefersVegetarian() ?? <span class="hljs-literal">true</span>
 
 <span class="hljs-keyword">if</span> prefersVegetarian() {
   prepareFalafel()
@@ -37,15 +37,15 @@ Without extra context, there&#39;s a two-in-three chance of making a mistake whe
 <p>We could compensate for this ambiguity by adding documentation to the method, but what&#39;s the guarantee consumers are actually going to read it?</p>
 <p>There is a simple solution to the Three-state Boolean ambiguity, one which also makes the code clearer without leaving room for error: use an <code>enum</code> instead.</p>
 <pre><code class=" hljs swift"><span class="hljs-class"><span class="hljs-keyword">enum</span> <span class="hljs-title">Preference</span> </span>{
-  <span class="hljs-keyword">case</span> `<span class="hljs-built_in">true</span>`
-  <span class="hljs-keyword">case</span> `<span class="hljs-built_in">false</span>`
+  <span class="hljs-keyword">case</span> `<span class="hljs-literal">true</span>`
+  <span class="hljs-keyword">case</span> `<span class="hljs-literal">false</span>`
   <span class="hljs-keyword">case</span> notAsked
 }
 </code></pre>
 <pre><code class=" hljs swift"><span class="hljs-keyword">switch</span> user.prefersVegetarian() {
 <span class="hljs-keyword">case</span> .notAsked: askForVegeratarianPreference()
-<span class="hljs-keyword">case</span> .<span class="hljs-built_in">true</span>: prepareFalafel()
-<span class="hljs-keyword">case</span> .<span class="hljs-built_in">false</span>: prepareSteak()
+<span class="hljs-keyword">case</span> .<span class="hljs-literal">true</span>: prepareFalafel()
+<span class="hljs-keyword">case</span> .<span class="hljs-literal">false</span>: prepareSteak()
 }
 </code></pre>
 <p>If we don&#39;t want to make an assumption on the default value when the preference is missing, then defining an <code>enum</code> to model the scenario removes the ambiguity.

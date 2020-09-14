@@ -8,7 +8,7 @@ appreciated.</em></p>
 <p>Say that you have a class that perform an asynchronous operation and executes
 a closure callback closure passed as a method parameter.</p>
 <pre><code class=" hljs swift"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SomeService</span> </span>{
-  <span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">doSomethingAsync</span><span class="hljs-params">(completion: <span class="hljs-params">(success: Bool)</span></span></span> -&gt; ()) { ...  }
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">doSomethingAsync</span><span class="hljs-params">(completion: <span class="hljs-params">(success: Bool)</span></span></span> -&gt; ()) { ...  }
 }
 
 <span class="hljs-keyword">let</span> service = <span class="hljs-type">SomeService</span>()
@@ -29,29 +29,29 @@ framework provides us with an handy API to test the behaviour of asynchronous
 code: <code>XCTestExpectation</code>.</p>
 <p>Let&#39;s have a look at how to test <code>doSomethingAsync</code> using <code>XCTestExpectation</code>.
 You can also follow along with the <a href="https://github.com/mokacoding/PracticalTesting">example project for this post</a>.</p>
-<pre><code class=" hljs swift"><span class="hljs-keyword">import</span> <span class="hljs-type">XCTest</span>
-@testable <span class="hljs-keyword">import</span> <span class="hljs-type">MyApp</span>
+<pre><code class=" hljs swift"><span class="hljs-keyword">import</span> XCTest
+<span class="hljs-meta">@testable</span> <span class="hljs-keyword">import</span> MyApp
 
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CallbackTest</span>: <span class="hljs-title">XCTestCase</span> </span>{
 
-  <span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">testAsyncCalback</span><span class="hljs-params">()</span></span> {
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">testAsyncCalback</span><span class="hljs-params">()</span></span> {
     <span class="hljs-keyword">let</span> service = <span class="hljs-type">SomeService</span>()
 
     <span class="hljs-comment">// 1. Define an expectation</span>
-    <span class="hljs-keyword">let</span> expectation = expectationWithDescription(<span class="hljs-string">"SomeService does stuff and runs the callback closure"</span>)
+    <span class="hljs-keyword">let</span> expectation = expectationWithDescription(<span class="hljs-string">&quot;SomeService does stuff and runs the callback closure&quot;</span>)
 
     <span class="hljs-comment">// 2. Exercise the asynchronous code</span>
     service.doSomethingAsync { success <span class="hljs-keyword">in</span>
       <span class="hljs-type">XCTAssertTrue</span>(success)
 
-      <span class="hljs-comment">// Don't forget to fulfill the expectation in the async callback</span>
+      <span class="hljs-comment">// Don&#x27;t forget to fulfill the expectation in the async callback</span>
       expectation.fulfill()
     }
 
     <span class="hljs-comment">// 3. Wait for the expectation to be fulfilled</span>
     waitForExpectationsWithTimeout(<span class="hljs-number">1</span>) { error <span class="hljs-keyword">in</span>
       <span class="hljs-keyword">if</span> <span class="hljs-keyword">let</span> error = error {
-        <span class="hljs-type">XCTFail</span>(<span class="hljs-string">"waitForExpectationsWithTimeout errored: <span class="hljs-subst">\(error)</span>"</span>)
+        <span class="hljs-type">XCTFail</span>(<span class="hljs-string">&quot;waitForExpectationsWithTimeout errored: \(error)&quot;</span>)
       }
     }
   }
@@ -65,7 +65,7 @@ You can also follow along with the <a href="https://github.com/mokacoding/Practi
 </ol>
 <p>It is important to provide a meaningful description because such description is
 reported in the failure message of an unfulfilled expectation:</p>
-<pre><code class=""><span class="hljs-keyword">error</span>: -[PracticalTestingTests.CallbackTest testAsyncCalback] : Asynchronous wait failed: Exceeded <span class="hljs-keyword">timeout</span> <span class="hljs-keyword">of</span> <span class="hljs-number">1</span> seconds, <span class="hljs-keyword">with</span> unfulfilled expectations: <span class="hljs-string">"SomeService does stuff and succeeds"</span>.
+<pre><code class=""><span class="hljs-keyword">error: </span>-[PracticalTestingTests.CallbackTest testAsyncCalback] : Asynchronous wait failed: Exceeded timeout of 1 seconds, with unfulfilled expectations: &quot;SomeService does stuff and succeeds&quot;.
 </code></pre><p>When testing having descriptive failure messages is very important to make your
 future self and the rest of the team identify the failure reason as soon as
 possible.</p>

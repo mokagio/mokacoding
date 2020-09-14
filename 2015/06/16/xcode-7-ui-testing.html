@@ -22,25 +22,25 @@
 <p>The code that gets generated for that interaction is:</p>
 <pre><code class=" hljs swift">testSayHello() {
   <span class="hljs-keyword">let</span> app = <span class="hljs-type">XCUIApplication</span>()
-  app.buttons[<span class="hljs-string">"say hello"</span>].tap()
-  app.alerts[<span class="hljs-string">"Hello"</span>].collectionViews.buttons[<span class="hljs-string">"Dismiss"</span>].tap()
+  app.buttons[<span class="hljs-string">&quot;say hello&quot;</span>].tap()
+  app.alerts[<span class="hljs-string">&quot;Hello&quot;</span>].collectionViews.buttons[<span class="hljs-string">&quot;Dismiss&quot;</span>].tap()
 }
 </code></pre>
 <p>As you can see the syntax is pretty straightforward. If we now run the test we&#39;ll have an output like this in the Console:</p>
-<pre><code class="">Test Case <span class="hljs-string">'-[BenchUITests.BenchUITests testSayHello]'</span> started.
-<span class="hljs-number">2015</span>-<span class="hljs-number">06</span>-<span class="hljs-number">15</span> <span class="hljs-number">19</span>:<span class="hljs-number">36</span>:<span class="hljs-number">13.494</span> XCTRunner[<span class="hljs-number">3123</span>:<span class="hljs-number">9611325</span>] Continuing <span class="hljs-built_in">to</span> run tests <span class="hljs-operator">in</span> <span class="hljs-operator">the</span> background <span class="hljs-operator">with</span> task ID <span class="hljs-number">1</span>
-  t =     <span class="hljs-number">1.60</span>s     Wait <span class="hljs-keyword">for</span> app <span class="hljs-built_in">to</span> idle
-  t =     <span class="hljs-number">1.81</span>s     Tap <span class="hljs-operator">the</span> <span class="hljs-string">"say hello"</span> Button
-  t =     <span class="hljs-number">1.81</span>s         Wait <span class="hljs-keyword">for</span> app <span class="hljs-built_in">to</span> idle
-  t =     <span class="hljs-number">1.81</span>s         Find <span class="hljs-operator">the</span> <span class="hljs-string">"say hello"</span> Button
-  t =     <span class="hljs-number">1.84</span>s         Dispatch <span class="hljs-operator">the</span> event
-  t =     <span class="hljs-number">2.08</span>s         Wait <span class="hljs-keyword">for</span> app <span class="hljs-built_in">to</span> idle
-  t =     <span class="hljs-number">2.10</span>s     Tap <span class="hljs-operator">the</span> <span class="hljs-string">"Dismiss"</span> Button
-  t =     <span class="hljs-number">2.10</span>s         Wait <span class="hljs-keyword">for</span> app <span class="hljs-built_in">to</span> idle
-  t =     <span class="hljs-number">2.56</span>s         Find <span class="hljs-operator">the</span> <span class="hljs-string">"Dismiss"</span> Button
-  t =     <span class="hljs-number">2.57</span>s         Dispatch <span class="hljs-operator">the</span> event
-  t =     <span class="hljs-number">2.81</span>s         Wait <span class="hljs-keyword">for</span> app <span class="hljs-built_in">to</span> idle
-Test Case <span class="hljs-string">'-[BenchUITests.BenchUITests testSayHello]'</span> passed (<span class="hljs-number">3.215</span> <span class="hljs-built_in">seconds</span>).
+<pre><code class=""><span class="hljs-attribute">Test</span> Case &#x27;-[BenchUITests.BenchUITests testSayHello]&#x27; started.
+<span class="hljs-attribute">2015</span>-<span class="hljs-number">06</span>-<span class="hljs-number">15</span> <span class="hljs-number">19</span>:<span class="hljs-number">36</span>:<span class="hljs-number">13</span>.<span class="hljs-number">494</span> XCTRunner[<span class="hljs-number">3123</span>:<span class="hljs-number">9611325</span>] Continuing to run tests in the background with task ID <span class="hljs-number">1</span>
+  <span class="hljs-attribute">t</span> =     <span class="hljs-number">1</span>.<span class="hljs-number">60</span>s     Wait for app to idle
+  <span class="hljs-attribute">t</span> =     <span class="hljs-number">1</span>.<span class="hljs-number">81</span>s     Tap the <span class="hljs-string">&quot;say hello&quot;</span> Button
+  <span class="hljs-attribute">t</span> =     <span class="hljs-number">1</span>.<span class="hljs-number">81</span>s         Wait for app to idle
+  <span class="hljs-attribute">t</span> =     <span class="hljs-number">1</span>.<span class="hljs-number">81</span>s         Find the <span class="hljs-string">&quot;say hello&quot;</span> Button
+  <span class="hljs-attribute">t</span> =     <span class="hljs-number">1</span>.<span class="hljs-number">84</span>s         Dispatch the event
+  <span class="hljs-attribute">t</span> =     <span class="hljs-number">2</span>.<span class="hljs-number">08</span>s         Wait for app to idle
+  <span class="hljs-attribute">t</span> =     <span class="hljs-number">2</span>.<span class="hljs-number">10</span>s     Tap the <span class="hljs-string">&quot;Dismiss&quot;</span> Button
+  <span class="hljs-attribute">t</span> =     <span class="hljs-number">2</span>.<span class="hljs-number">10</span>s         Wait for app to idle
+  <span class="hljs-attribute">t</span> =     <span class="hljs-number">2</span>.<span class="hljs-number">56</span>s         Find the <span class="hljs-string">&quot;Dismiss&quot;</span> Button
+  <span class="hljs-attribute">t</span> =     <span class="hljs-number">2</span>.<span class="hljs-number">57</span>s         Dispatch the event
+  <span class="hljs-attribute">t</span> =     <span class="hljs-number">2</span>.<span class="hljs-number">81</span>s         Wait for app to idle
+<span class="hljs-attribute">Test</span> Case &#x27;-[BenchUITests.BenchUITests testSayHello]&#x27; passed (<span class="hljs-number">3</span>.<span class="hljs-number">215</span> seconds).
 </code></pre><p>The output reports the action taken on the UI and their time delta since the start of the test case. This could become really useful while inspecting failures in apps in which time matters, like an egg counter for example.</p>
 <p>You can access this from the test reporter as well, and if you click on the inspector icon you&#39;ll see a screenshot of the state of the app when the test failed.</p>
 <p><img src="https://s3.amazonaws.com/mokacoding/2015-06-16-xcode-7-test-report.png" alt="Test reporter screenshot"></p>
@@ -48,13 +48,13 @@ Test Case <span class="hljs-string">'-[BenchUITests.BenchUITests testSayHello]'<
 <h2 id="asserting-the-app-state">Asserting the app state</h2>
 <p>Bench&#39;s second acceptance criteria, in the form of a <a href="https://medium.com/the-job-to-be-done/replacing-the-user-story-with-the-job-story-af7cdee10c27">job story</a>, is &quot;<em>When I tap the &#39;show elements&#39; button, I see a list of elements</em>&quot;.</p>
 <p>The recorded code for this test is:</p>
-<pre><code class=" hljs swift"><span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">testShowElements</span><span class="hljs-params">()</span></span> {
+<pre><code class=" hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">testShowElements</span><span class="hljs-params">()</span></span> {
   <span class="hljs-keyword">let</span> app = <span class="hljs-type">XCUIApplication</span>()
-  app.buttons[<span class="hljs-string">"show elements"</span>].tap()
-  app.tables.staticTexts[<span class="hljs-string">"[N] Nitrogen (7)"</span>].swipeUp()
-  app.tables.staticTexts[<span class="hljs-string">"[Ir] Iridium (77)"</span>].swipeUp()
-  app.tables.staticTexts[<span class="hljs-string">"[Tl] Thallium (81)"</span>].swipeUp()
-  app.tables.staticTexts[<span class="hljs-string">"[Uut] Ununtrium (113)"</span>].swipeUp()
+  app.buttons[<span class="hljs-string">&quot;show elements&quot;</span>].tap()
+  app.tables.staticTexts[<span class="hljs-string">&quot;[N] Nitrogen (7)&quot;</span>].swipeUp()
+  app.tables.staticTexts[<span class="hljs-string">&quot;[Ir] Iridium (77)&quot;</span>].swipeUp()
+  app.tables.staticTexts[<span class="hljs-string">&quot;[Tl] Thallium (81)&quot;</span>].swipeUp()
+  app.tables.staticTexts[<span class="hljs-string">&quot;[Uut] Ununtrium (113)&quot;</span>].swipeUp()
 }
 </code></pre>
 <p>This again is not very useful, and quite coupled with the formatting of the cell content.</p>
@@ -63,7 +63,7 @@ Test Case <span class="hljs-string">'-[BenchUITests.BenchUITests testSayHello]'<
 <pre><code class=" hljs swift"><span class="hljs-keyword">let</span> app = <span class="hljs-type">XCUIApplication</span>()
 </code></pre>
 <p><code>XCUIApplication</code> is a proxy to the running app, and is what we can use to query and interact with it.</p>
-<pre><code class=" hljs swift">app.buttons[<span class="hljs-string">"show elements"</span>].tap()
+<pre><code class=" hljs swift">app.buttons[<span class="hljs-string">&quot;show elements&quot;</span>].tap()
 </code></pre>
 <p><code>.buttons[&quot;show elements&quot;]</code> is a <code>XCUIElementQuery</code> provided by the <code>XCUIApplication</code> instance. We can combine it with subscripting to look for a button named &quot;show elements&quot;, it will fail unless one and only one button matching that name is found. If a single button is found the query will return a <code>XCUIElement</code> proxy to that button. We can then tap the button through it&#39;s proxy with the <code>tap()</code> method.</p>
 <p><code>XCUIApplication</code>, <code>XCUIElementQuery</code>, and <code>XCUIElement</code> are the three APIs that make UI testing possible. You can find out more about them looking at their headers through Xcode.</p>
@@ -77,9 +77,9 @@ Test Case <span class="hljs-string">'-[BenchUITests.BenchUITests testSayHello]'<
 </code></pre>
 <p>And that&#39;s it for our first UI tests with Xcode 7.</p>
 <p>This test function all together look like:</p>
-<pre><code class=" hljs swift"><span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">testShowElements</span><span class="hljs-params">()</span></span> {
+<pre><code class=" hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">testShowElements</span><span class="hljs-params">()</span></span> {
   <span class="hljs-keyword">let</span> app = <span class="hljs-type">XCUIApplication</span>()
-  app.buttons[<span class="hljs-string">"show elements"</span>].tap()
+  app.buttons[<span class="hljs-string">&quot;show elements&quot;</span>].tap()
 
   <span class="hljs-type">XCTAssertEqual</span>(app.tables.<span class="hljs-built_in">count</span>, <span class="hljs-number">1</span>)
 

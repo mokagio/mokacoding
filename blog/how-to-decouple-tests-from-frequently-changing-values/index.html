@@ -14,24 +14,24 @@ a scenario in which using the R.swift generated value directly might be better i
 
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">GrannyMessageTests</span>: <span class="hljs-title">XCTestCase</span> </span>{
 
-    <span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">testWhenWeatherIsRainyMessageIsGetUmbrella</span><span class="hljs-params">()</span></span> {
-        <span class="hljs-type">XCTAssertEqual</span>(getMessage(weather: .rainy), <span class="hljs-string">"Don't forget the umbrella"</span>)
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">testWhenWeatherIsRainyMessageIsGetUmbrella</span><span class="hljs-params">()</span></span> {
+        <span class="hljs-type">XCTAssertEqual</span>(getMessage(weather: .rainy), <span class="hljs-string">&quot;Don&#x27;t forget the umbrella&quot;</span>)
     }
 
-    <span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">testWhenWeatherIsSunnyMessageIsGetHat</span><span class="hljs-params">()</span></span> {
-        <span class="hljs-type">XCTAssertEqual</span>(getMessage(weather: .sunny), <span class="hljs-string">"You should wear a hat"</span>)
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">testWhenWeatherIsSunnyMessageIsGetHat</span><span class="hljs-params">()</span></span> {
+        <span class="hljs-type">XCTAssertEqual</span>(getMessage(weather: .sunny), <span class="hljs-string">&quot;You should wear a hat&quot;</span>)
     }
 
-    <span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">testWhenWeatherIsWindyMessageIsGetJacket</span><span class="hljs-params">()</span></span> {
-        <span class="hljs-type">XCTAssertEqual</span>(getMessage(weather: .windy), <span class="hljs-string">"Wear a jacket or you'll catch a cold"</span>)
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">testWhenWeatherIsWindyMessageIsGetJacket</span><span class="hljs-params">()</span></span> {
+        <span class="hljs-type">XCTAssertEqual</span>(getMessage(weather: .windy), <span class="hljs-string">&quot;Wear a jacket or you&#x27;ll catch a cold&quot;</span>)
     }
 }
 
-<span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">getMessage</span><span class="hljs-params">(weather: Weather)</span></span> -&gt; <span class="hljs-type">String</span> {
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">getMessage</span><span class="hljs-params">(weather: Weather)</span></span> -&gt; <span class="hljs-type">String</span> {
     <span class="hljs-keyword">switch</span> weather {
-    <span class="hljs-keyword">case</span> .rainy: <span class="hljs-keyword">return</span> <span class="hljs-string">"Don't forget the umbrella"</span>
-    <span class="hljs-keyword">case</span> .sunny: <span class="hljs-keyword">return</span> <span class="hljs-string">"You should wear a hat"</span>
-    <span class="hljs-keyword">case</span> .windy: <span class="hljs-keyword">return</span> <span class="hljs-string">"Wear your jacket or you'll catch a cold"</span>
+    <span class="hljs-keyword">case</span> .rainy: <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Don&#x27;t forget the umbrella&quot;</span>
+    <span class="hljs-keyword">case</span> .sunny: <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;You should wear a hat&quot;</span>
+    <span class="hljs-keyword">case</span> .windy: <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Wear your jacket or you&#x27;ll catch a cold&quot;</span>
     }
 }
 </code></pre>
@@ -44,13 +44,13 @@ In a sense, the message content is the end product of choosing the right message
     <span class="hljs-keyword">let</span> windy: <span class="hljs-type">String</span>
 
     <span class="hljs-keyword">static</span> <span class="hljs-keyword">let</span> `<span class="hljs-keyword">default</span>` = <span class="hljs-type">Messages</span>(
-        rainy: <span class="hljs-string">"Don't forget the umbrella"</span>,
-        sunny: <span class="hljs-string">"You should wear a hat"</span>,
-        windy: <span class="hljs-string">"Wear a jacket or you'll catch a cold"</span>
+        rainy: <span class="hljs-string">&quot;Don&#x27;t forget the umbrella&quot;</span>,
+        sunny: <span class="hljs-string">&quot;You should wear a hat&quot;</span>,
+        windy: <span class="hljs-string">&quot;Wear a jacket or you&#x27;ll catch a cold&quot;</span>
     )
 }
 
-<span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">getMessage</span><span class="hljs-params">(weather: Weather, greetings: Messages = .<span class="hljs-keyword">default</span>)</span></span> -&gt; <span class="hljs-type">String</span> {
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">getMessage</span><span class="hljs-params">(weather: Weather, greetings: Messages = .<span class="hljs-keyword">default</span>)</span></span> -&gt; <span class="hljs-type">String</span> {
     <span class="hljs-keyword">switch</span> weather {
     <span class="hljs-keyword">case</span> .rainy: <span class="hljs-keyword">return</span> greetings.rainy
     <span class="hljs-keyword">case</span> .sunny: <span class="hljs-keyword">return</span> greetings.sunny
@@ -60,19 +60,19 @@ In a sense, the message content is the end product of choosing the right message
 </code></pre>
 <p>The call site for <code>getMessage(weather:)</code> doesn&#39;t need to change, because we have extracted the existing messages in the <code>default</code> instance of <code>Messages</code>.
 In the tests, can now focus on the matching rather than the content of the messages by passing a <a href="https://www.mokacoding.com/blog/swift-test-doubles/">dummy instance</a> of <code>Messages</code>.</p>
-<pre><code class=" hljs swift"><span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">testWhenWeatherIsRainyUsesCopyForRainyState</span><span class="hljs-params">()</span></span> {
-    <span class="hljs-keyword">let</span> dummyMessages = <span class="hljs-type">Messages</span>(rainy: <span class="hljs-string">"rainy"</span>, sunny: <span class="hljs-string">"sunny"</span>, windy: <span class="hljs-string">"windy"</span>)
-    <span class="hljs-type">XCTAssertEqual</span>(getMessage(weather: .rainy, messages: dummyMessages), <span class="hljs-string">"rainy"</span>)
+<pre><code class=" hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">testWhenWeatherIsRainyUsesCopyForRainyState</span><span class="hljs-params">()</span></span> {
+    <span class="hljs-keyword">let</span> dummyMessages = <span class="hljs-type">Messages</span>(rainy: <span class="hljs-string">&quot;rainy&quot;</span>, sunny: <span class="hljs-string">&quot;sunny&quot;</span>, windy: <span class="hljs-string">&quot;windy&quot;</span>)
+    <span class="hljs-type">XCTAssertEqual</span>(getMessage(weather: .rainy, messages: dummyMessages), <span class="hljs-string">&quot;rainy&quot;</span>)
 }
 
-<span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">testWhenWeatherIsSunnyUsesCopyForSunnyState</span><span class="hljs-params">()</span></span> {
-    <span class="hljs-keyword">let</span> dummyMessages = <span class="hljs-type">Messages</span>(rainy: <span class="hljs-string">"rainy"</span>, sunny: <span class="hljs-string">"sunny"</span>, windy: <span class="hljs-string">"windy"</span>)
-    <span class="hljs-type">XCTAssertEqual</span>(getMessage(weather: .sunny, messages: dummyMessages), <span class="hljs-string">"sunny"</span>)
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">testWhenWeatherIsSunnyUsesCopyForSunnyState</span><span class="hljs-params">()</span></span> {
+    <span class="hljs-keyword">let</span> dummyMessages = <span class="hljs-type">Messages</span>(rainy: <span class="hljs-string">&quot;rainy&quot;</span>, sunny: <span class="hljs-string">&quot;sunny&quot;</span>, windy: <span class="hljs-string">&quot;windy&quot;</span>)
+    <span class="hljs-type">XCTAssertEqual</span>(getMessage(weather: .sunny, messages: dummyMessages), <span class="hljs-string">&quot;sunny&quot;</span>)
 }
 
-<span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">testWhenWeatherIsWindyUsesCopyForWindyState</span><span class="hljs-params">()</span></span> {
-    <span class="hljs-keyword">let</span> dummyMessages = <span class="hljs-type">Messages</span>(rainy: <span class="hljs-string">"rainy"</span>, sunny: <span class="hljs-string">"sunny"</span>, windy: <span class="hljs-string">"windy"</span>)
-    <span class="hljs-type">XCTAssertEqual</span>(getMessage(weather: .windy, messages: dummyMessages), <span class="hljs-string">"windy"</span>)
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">testWhenWeatherIsWindyUsesCopyForWindyState</span><span class="hljs-params">()</span></span> {
+    <span class="hljs-keyword">let</span> dummyMessages = <span class="hljs-type">Messages</span>(rainy: <span class="hljs-string">&quot;rainy&quot;</span>, sunny: <span class="hljs-string">&quot;sunny&quot;</span>, windy: <span class="hljs-string">&quot;windy&quot;</span>)
+    <span class="hljs-type">XCTAssertEqual</span>(getMessage(weather: .windy, messages: dummyMessages), <span class="hljs-string">&quot;windy&quot;</span>)
 }
 </code></pre>
 <p>With the separation layer provided by <code>Messages</code>, when the copy changes, only the <code>default</code> instance needs to change, with no need to update the tests.</p>

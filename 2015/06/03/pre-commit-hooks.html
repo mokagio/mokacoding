@@ -9,52 +9,52 @@
 <p>The main use case for this hook is doing some validation of the changes to be committed, and failing the commit if something is not acceptable. We can fail the commit by making <code>pre-commit</code> return a non zero value.</p>
 <h3 id="running-xunique-as-a-pre-commit-hook">Running xUnique as a pre-commit hook</h3>
 <p>As we just said, running code before a commit is as easy as writing the command in the <code>pre-commit</code> hook file.</p>
-<pre><code class=" hljs bash"><span class="hljs-shebang">#!/bin/sh
-</span>
+<pre><code class=" hljs bash"><span class="hljs-meta">#!/bin/sh</span>
+
 <span class="hljs-comment"># uniquify and sort the Xcode projct files</span>
-python -mxUnique -u <span class="hljs-operator">-s</span> <span class="hljs-string">"MyAwesomeApp.xcodeproj/project.pbxproj"</span> &amp;&gt; /dev/null
+python -mxUnique -u -s <span class="hljs-string">&quot;MyAwesomeApp.xcodeproj/project.pbxproj&quot;</span> &amp;&gt; /dev/null
 </code></pre>
 <p><em>As usual you can follow along using the <a href="https://github.com/mokacoding/xUnique-Example">example project</a> on GitHub.</em></p>
 <p>If you try that you&#39;ll notice that the <code>project.pbxproj</code> that is committed is not uniquified. That is because even if <code>xUnique</code> runs, the changes are not automatically added to the commit. And that&#39;s a good thing! Since Git allows users to <a href="https://git-scm.com/book/en/v2/Git-Tools-Interactive-Staging">commit only a subset of the changes made to a file</a> is better to always let the user decide what they want to commit. At least that&#39;s my opinion in most of the scenarios I&#39;ve seen.</p>
 <p>Lucky for us <code>xUnique</code> has an option to return 1 if the project needed to be uniquified, and therefore fail the commit.</p>
-<pre><code class=" hljs bash"><span class="hljs-shebang">#!/bin/sh
-</span>
-<span class="hljs-comment"># uniquify and sort the Xcode projct files</span>
-python -mxUnique -u <span class="hljs-operator">-s</span> -c <span class="hljs-string">"xUnique.xcodeproj/project.pbxproj"</span> &amp;&gt; /dev/null
+<pre><code class=" hljs bash"><span class="hljs-meta">#!/bin/sh</span>
 
-<span class="hljs-keyword">if</span> [ $? <span class="hljs-operator">-ne</span> <span class="hljs-number">0</span> ]; <span class="hljs-keyword">then</span>
+<span class="hljs-comment"># uniquify and sort the Xcode projct files</span>
+python -mxUnique -u -s -c <span class="hljs-string">&quot;xUnique.xcodeproj/project.pbxproj&quot;</span> &amp;&gt; /dev/null
+
+<span class="hljs-keyword">if</span> [ $? -ne 0 ]; <span class="hljs-keyword">then</span>
   cat &lt;&lt;EOF
 This commit has been aborted because the project file needed to be uniquified.
 You can add those changes and commit again.
 EOF
-  <span class="hljs-built_in">exit</span> <span class="hljs-number">1</span>
+  <span class="hljs-built_in">exit</span> 1
 <span class="hljs-keyword">fi</span>
 </code></pre>
 <p>The <code>&lt;&lt;EOF</code> is called <a href="http://tldp.org/LDP/abs/html/here-docs.html">here document</a> and it&#39;s a good way to keep shell scripts that need to output a lot of text clean.</p>
 <h2 id="running-multiple-scripts-in-a-hook">Running multiple scripts in a hook</h2>
 <p>Once you&#39;ll get into pre-commit hooks you&#39;ll want to use more, you are going to want to run multiple scripts before your commits. A naive way to do this is to write all the scripts one after the other in the <code>pre-commit</code>, but we can do better than that, right?</p>
 <p>We could for example have a single file for each script, and have the hook file simply run them in sequence.</p>
-<pre><code class=" hljs bash"><span class="hljs-shebang">#!/bin/sh
-</span>
-<span class="hljs-keyword">for</span> hook <span class="hljs-keyword">in</span> <span class="hljs-string">"uniquify-hook.sh"</span> <span class="hljs-string">"trailing-whitespace-hook.sh"</span>;
+<pre><code class=" hljs bash"><span class="hljs-meta">#!/bin/sh</span>
+
+<span class="hljs-keyword">for</span> hook <span class="hljs-keyword">in</span> <span class="hljs-string">&quot;uniquify-hook.sh&quot;</span> <span class="hljs-string">&quot;trailing-whitespace-hook.sh&quot;</span>;
 <span class="hljs-keyword">do</span>
-  sh <span class="hljs-string">"<span class="hljs-variable">$(pwd)</span>/git-hooks/<span class="hljs-variable">$hook</span>"</span>
-  <span class="hljs-keyword">if</span> [ $? <span class="hljs-operator">-ne</span> <span class="hljs-number">0</span> ]; <span class="hljs-keyword">then</span>
-    <span class="hljs-built_in">exit</span> <span class="hljs-number">1</span>
+  sh <span class="hljs-string">&quot;<span class="hljs-subst">$(pwd)</span>/git-hooks/<span class="hljs-variable">$hook</span>&quot;</span>
+  <span class="hljs-keyword">if</span> [ $? -ne 0 ]; <span class="hljs-keyword">then</span>
+    <span class="hljs-built_in">exit</span> 1
   <span class="hljs-keyword">fi</span>
 <span class="hljs-keyword">done</span>
 </code></pre>
 <h2 id="bootstrap-script">Bootstrap script</h2>
 <p>What&#39;s the point of this setup if we are the only one that use it? In the case of running commands like xUnique or <a href="http://clang.llvm.org/docs/ClangFormat.html">clang-format</a> in our pre-commit hook if we are the only ones that does that in the team the result would be counter productive. We want to share the hooks, and to be sure that all the team sets them up.</p>
 <p>A way to achieve this is of course to simplify the setup process down to a single command, running a bootstrap script for example.</p>
-<pre><code class=" hljs bash"><span class="hljs-shebang">#!/bin/sh
-</span>
-<span class="hljs-built_in">echo</span> <span class="hljs-string">"Configuring pre-commit hook..."</span>
+<pre><code class=" hljs bash"><span class="hljs-meta">#!/bin/sh</span>
+
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Configuring pre-commit hook...&quot;</span>
 
 <span class="hljs-comment"># make a symbolic link with the pre-commit hook</span>
-<span class="hljs-keyword">if</span> [ ! <span class="hljs-operator">-f</span> ./git/hooks/pre-commit ]; <span class="hljs-keyword">then</span>
+<span class="hljs-keyword">if</span> [ ! -f ./git/hooks/pre-commit ]; <span class="hljs-keyword">then</span>
   ln git-hooks/pre-commit.sh .git/hooks/pre-commit
-  <span class="hljs-built_in">echo</span> <span class="hljs-string">"Done"</span>
+  <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Done&quot;</span>
 <span class="hljs-keyword">else</span>
   cat &lt;&lt;EOF
 A pre-commit hook exists already.
@@ -68,15 +68,15 @@ EOF
 <p>Color is so important that some TDD practitioners believe that the &quot;red-green-refactor&quot; mantra should reflect in the color of the test runner output. When a test fails the output should be red, to keep the developer under pressure, and when the tests are all successful the output should be green, to relax and reward the developer. Seeing the red in the terminal, they say, makes them a little bit uncomfortable, and it works as a push to develop the implementation faster, to get back to the green relaxing state.</p>
 <p>The way is color our shell scripts is using the ANSII colors, see <a href="https://en.wikipedia.org/wiki/ANSI_escape_code#Colors">this</a> and <a href="http://misc.flogisoft.com/bash/tip_colors_and_formatting">this</a>.</p>
 <p>I would usually use the red color. <code>\e[31m</code>.</p>
-<pre><code class=" hljs bash">red=<span class="hljs-string">"\033[31m"</span>
-reset=<span class="hljs-string">"\033[m"</span>
+<pre><code class=" hljs bash">red=<span class="hljs-string">&quot;\033[31m&quot;</span>
+reset=<span class="hljs-string">&quot;\033[m&quot;</span>
 
-<span class="hljs-built_in">printf</span> <span class="hljs-string">"<span class="hljs-variable">$red</span>"</span>
+<span class="hljs-built_in">printf</span> <span class="hljs-string">&quot;<span class="hljs-variable">$red</span>&quot;</span>
 cat &lt;&lt;EOF
 This commit has been aborted because the project file needed to be uniquified.
 You can add those changes and commit again.
 EOF
-<span class="hljs-built_in">printf</span> <span class="hljs-string">"<span class="hljs-variable">$reset</span>"</span>
+<span class="hljs-built_in">printf</span> <span class="hljs-string">&quot;<span class="hljs-variable">$reset</span>&quot;</span>
 </code></pre>
 <p>Notice the final usage of <code>\e[39m</code>, that resets the foreground color to the default one, and the ... echo option which simply makes is not print the trailing newline.</p>
 <p>You can find a complete example of this multiple and colored pre-commit setup in the <a href="https://github.com/mokacoding/xUnique-Example">companion project</a> on GitHub.</p>

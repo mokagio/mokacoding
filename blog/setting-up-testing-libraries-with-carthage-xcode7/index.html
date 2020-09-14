@@ -9,8 +9,8 @@
 </code></pre>
 <h2 id="the-cartfile">The Cartfile</h2>
 <p>The way to specify the dependencies in Carthage is with a <code>Cartfile</code>. This is how our looks like:</p>
-<pre><code class=""><span class="hljs-title">github</span> <span class="hljs-string">"Quick/Quick"</span> <span class="hljs-string">"v0.5.0"</span>
-github <span class="hljs-string">"Quick/Nimble"</span> <span class="hljs-string">"v2.0.0-rc.1"</span>
+<pre><code class=""><span class="hljs-attribute">github</span> <span class="hljs-string">&quot;Quick/Quick&quot;</span> <span class="hljs-string">&quot;v0.5.0&quot;</span>
+github <span class="hljs-string">&quot;Quick/Nimble&quot;</span> <span class="hljs-string">&quot;v2.0.0-rc.1&quot;</span>
 </code></pre><p>Note how we are specifying exact version numbers. This is because Swift 2 support has been added only in those version, and being all a work in progress we want to make sure we use a <em>stable</em> version.</p>
 <p>The Cartfile supports the usual operators for version requirements such as <code>~&gt;</code>, <code>&gt;=</code>, etc. You can read more about all the valid options <a href="https://github.com/Carthage/Carthage/blob/master/Documentation/Artifacts.md#cartfile">here</a></p>
 <h2 id="getting-the-frameworks">Getting the frameworks</h2>
@@ -38,17 +38,17 @@ $(SRCROOT)<span class="hljs-regexp">/Carthage/</span>Build<span class="hljs-rege
 <p>After that, we need to add the Carthage&#39;s build folder (<code>$(SRCROOT)/Carthage/Build/iOS</code>) to Framework Search Path, in recursive mode. This is apparently due to a regression (or is it a feature?) introduced by Xcode 7, more <a href="https://github.com/Quick/Quick/issues/347">here</a>.</p>
 <p><img src="https://s3.amazonaws.com/mokacoding/2015-07-21-carthage-search-path-small.png" alt="Framework Search Path screenshot">
 Once that is done we can happily import our testing frameworks in the test target:</p>
-<pre><code class=" hljs swift"><span class="hljs-keyword">import</span> <span class="hljs-type">Quick</span>
-<span class="hljs-keyword">import</span> <span class="hljs-type">Nimble</span>
+<pre><code class=" hljs swift"><span class="hljs-keyword">import</span> Quick
+<span class="hljs-keyword">import</span> Nimble
 
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">QuickNimbleCarthageSpec</span>: <span class="hljs-title">QuickSpec</span> </span>{
-  <span class="hljs-keyword">override</span> <span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">spec</span><span class="hljs-params">()</span></span> {
-    describe(<span class="hljs-string">"Setting up Quick and Nimble for testing using Carthage"</span>) {
-      it(<span class="hljs-string">"is not very hard"</span>) {
-        expect(<span class="hljs-built_in">true</span>).to(beTruthy())
+  <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">spec</span><span class="hljs-params">()</span></span> {
+    describe(<span class="hljs-string">&quot;Setting up Quick and Nimble for testing using Carthage&quot;</span>) {
+      it(<span class="hljs-string">&quot;is not very hard&quot;</span>) {
+        expect(<span class="hljs-literal">true</span>).to(beTruthy())
       }
 
-      it(<span class="hljs-string">"works very well"</span>) {
+      it(<span class="hljs-string">&quot;works very well&quot;</span>) {
         expect(<span class="hljs-number">20</span> * <span class="hljs-number">2</span> + <span class="hljs-number">3</span> - <span class="hljs-number">1</span>).to(<span class="hljs-built_in">equal</span>(<span class="hljs-number">42</span>))
       }
     }

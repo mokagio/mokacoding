@@ -17,7 +17,7 @@ means something slighltly different.</p>
 <h2 id="implicitly-unwrapping">Implicitly Unwrapping</h2>
 <p>You define an <code>Optional</code> as impliticly unwrapped when you define its type like
 this:</p>
-<pre><code class=" hljs swift"><span class="hljs-keyword">let</span> x: <span class="hljs-type">String</span>!
+<pre><code class=" hljs swift"><span class="hljs-keyword">let</span> x: <span class="hljs-type">String!</span>
 </code></pre>
 <p>This technique allows you to tell the compiler to automatically unwrap that
 value, as if it wasn&#39;t optional at all.</p>
@@ -25,8 +25,8 @@ value, as if it wasn&#39;t optional at all.</p>
 equivalent to <code>ImplicitlyUnwrappedOptional&lt;Type&gt;</code>.</p>
 <p>A common example of implicitly unwrapped optionals is how view controller
 define their <code>IBOutlet</code>s:</p>
-<pre><code class=" hljs swift"><span class="hljs-preprocessor">@IBOutlet</span> <span class="hljs-keyword">var</span> messageLabel: <span class="hljs-type">UILabel</span>!
-<span class="hljs-preprocessor">@IBOutlet</span> <span class="hljs-keyword">var</span> actionButton: <span class="hljs-type">UIButton</span>!
+<pre><code class=" hljs swift"><span class="hljs-meta">@IBOutlet</span> <span class="hljs-keyword">var</span> messageLabel: <span class="hljs-type">UILabel!</span>
+<span class="hljs-meta">@IBOutlet</span> <span class="hljs-keyword">var</span> actionButton: <span class="hljs-type">UIButton!</span>
 </code></pre>
 <p>It makes sense to define the outlets as implicitly unwrapped optionals because
 their are going to be instantiated by Interface Builder. It would be cumbersome
@@ -39,7 +39,7 @@ when you try to access it in the view controller.</p>
 of <a href="">the previous post</a> was actually about. It consist in adding a <code>!</code> after
 an <code>Optional</code> value, to automatically unwrap it, without having to check
 whether it is <code>nil</code> or not.</p>
-<pre><code class=" hljs swift"><span class="hljs-keyword">let</span> strings = [<span class="hljs-string">"mokacoding"</span>, <span class="hljs-string">"is"</span>, <span class="hljs-string">"a"</span>, <span class="hljs-string">"blog"</span>]
+<pre><code class=" hljs swift"><span class="hljs-keyword">let</span> strings = [<span class="hljs-string">&quot;mokacoding&quot;</span>, <span class="hljs-string">&quot;is&quot;</span>, <span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-string">&quot;blog&quot;</span>]
 <span class="hljs-keyword">let</span> firstLength: <span class="hljs-type">Int</span> = strings.first!.length
 </code></pre>
 <p>Like implicitly unwrapping, force unwrap uses a <code>!</code> and makes the compiler

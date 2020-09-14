@@ -10,7 +10,7 @@
 <p>Once I recovered from my diseased, making arguable coding choices along the way, I realised that <code>map</code> and <code>for</code> deserve the same respect, and serve different purposes. So here&#39;s the rule of thumb on when to use <code>map</code> and when to use <code>for</code>.</p>
 <h2 id="use-map-when-you-need-to-transform-arrays">Use map when you need to transform arrays</h2>
 <pre><code class=" hljs swift"><span class="hljs-keyword">let</span> arrayOfNumbers = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>]
-<span class="hljs-keyword">let</span> arrayOfString = arrayOfNumbers.<span class="hljs-built_in">map</span> { <span class="hljs-string">"<span class="hljs-subst">\($<span class="hljs-number">0</span>)</span>"</span> }
+<span class="hljs-keyword">let</span> arrayOfString = arrayOfNumbers.<span class="hljs-built_in">map</span> { <span class="hljs-string">&quot;\($0)&quot;</span> }
 </code></pre>
 <p>In the context of <code>Array</code> <code>map</code> get an array, applies a transformation function to every element, and returns a new array with the resulting elements. That&#39;s the best use case for map.</p>
 <p>The cool thing about <code>map</code> is how you can chain multiple transformation together and have code that clearly express what it does.</p>

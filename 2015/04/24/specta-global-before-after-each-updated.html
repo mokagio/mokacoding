@@ -5,36 +5,36 @@
 <p>Say that we have a <code>Banana</code> class, and that we want to test it&#39;s <em>looks yellow</em> behaviour. We get a banana from the fruit bowl, and wherever we put it it should still look yellow.</p>
 <p>Unfortunately our <code>Banana</code> is a stateful fruit, so to make the test accurate we have to put it back in the fruit bowl every time.</p>
 <p>A Specta spec to describe this behaviour might look like this:</p>
-<pre><code class=" hljs objc">describe(<span class="hljs-string">@"Banana"</span>, ^{
-  it(<span class="hljs-string">@"should look yellow when put on the table"</span>, ^{
+<pre><code class=" hljs objc">describe(<span class="hljs-string">@&quot;Banana&quot;</span>, ^{
+  it(<span class="hljs-string">@&quot;should look yellow when put on the table&quot;</span>, ^{
     [banana removeFromTheFruitBowl];
     [banana putOnTheTable];
-    expect([banana looksYellow])<span class="hljs-variable">.to</span><span class="hljs-variable">.beTruthy</span>();
+    expect([banana looksYellow]).to.beTruthy();
     [banana putInTheFruitBowl];
   });
 
-  it(<span class="hljs-string">@"should look yellow when put on the snack bag"</span>, ^{
+  it(<span class="hljs-string">@&quot;should look yellow when put on the snack bag&quot;</span>, ^{
     [banana removeFromTheFruitBowl];
     [banana putInTheSnackBag];
-    expect([banana looksYellow])<span class="hljs-variable">.to</span><span class="hljs-variable">.beTruthy</span>();
+    expect([banana looksYellow]).to.beTruthy();
     [banana putInTheFruitBowl];
   });
 });
 </code></pre>
 <p>This spec looks a bit dense, and <a href="http://en.wikipedia.org/wiki/Don%27t_repeat_yourself#DRY_vs_WET_solutions">wet</a>. Thanks to the <code>beforeEach</code> and <code>afterEach</code> hooks we can write it in a clearer and drier way:</p>
-<pre><code class=" hljs objc">describe(<span class="hljs-string">@"Banana"</span>, ^{
+<pre><code class=" hljs objc">describe(<span class="hljs-string">@&quot;Banana&quot;</span>, ^{
   beforeEach(^{
     [banana removeFromTheFruitBowl];
   });
 
-  it(<span class="hljs-string">@"should look yellow when put on the table"</span>, ^{
+  it(<span class="hljs-string">@&quot;should look yellow when put on the table&quot;</span>, ^{
     [banana putOnTheTable];
-    expect([banana looksYellow])<span class="hljs-variable">.to</span><span class="hljs-variable">.beTruthy</span>();
+    expect([banana looksYellow]).to.beTruthy();
   });
 
-  it(<span class="hljs-string">@"should look yellow when put on the snack bag"</span>, ^{
+  it(<span class="hljs-string">@&quot;should look yellow when put on the snack bag&quot;</span>, ^{
     [banana putInTheSnackBag];
-    expect([banana looksYellow])<span class="hljs-variable">.to</span><span class="hljs-variable">.beTruthy</span>();
+    expect([banana looksYellow]).to.beTruthy();
   });
 
   afterEach(^{

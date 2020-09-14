@@ -4,14 +4,14 @@
 <p>An expression [that] can be replaced with its corresponding value without changing the program&#39;s behavior.</p>
 </blockquote>
 <p>Here&#39;s an example in Swift:</p>
-<pre><code class=" hljs swift"><span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">rtIncrement</span><span class="hljs-params">(<span class="hljs-number">_</span> number: Int)</span></span> -&gt; <span class="hljs-type">Int</span> {
+<pre><code class=" hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">rtIncrement</span><span class="hljs-params">(<span class="hljs-number">_</span> number: Int)</span></span> -&gt; <span class="hljs-type">Int</span> {
     <span class="hljs-keyword">return</span> number + <span class="hljs-number">1</span>
 }
 </code></pre>
 <p>Functions that are not referentially transparent are referentially opaque.</p>
 <pre><code class=""><span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>
 
-<span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">roIncrement</span><span class="hljs-params">(<span class="hljs-number">_</span> number: Int)</span></span> -&gt; <span class="hljs-type">Int</span> {
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">roIncrement</span><span class="hljs-params">(<span class="hljs-number">_</span> number: Int)</span></span> -&gt; <span class="hljs-type">Int</span> {
     i += <span class="hljs-number">1</span>
     <span class="hljs-keyword">return</span> number + i
 }
@@ -47,7 +47,7 @@ This takes more effort and time.</p>
 In other languages, referential transparency can be achieved with techniques such as <a href="https://www.mokacoding.com/blog/explicit-dependencies/">making all the dependencies explicit</a>.</p>
 <p>When you go back to your IDE after reading this post and find yourself writing a new method, think about its dependencies and side effects.
 Can you make it referentially transparent?</p>
-</div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"><div><a href="/blog/how-to-check-if-ruby-array-contains-element"><<&nbsp;How to check if array contains element with block in Ruby</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/honesty-oriented-programming">Honesty-Oriented Programming&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin Sendfox Signup Form -->
+</div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"><div><a href="/blog/honesty-oriented-programming"><<&nbsp;Honesty-Oriented Programming</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/main-vs-master-xcode-12">Should you change your branch name to &quot;main&quot;?&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin Sendfox Signup Form -->
 <div id="sendfox_embed_signup">
   <h4 class="form_title">Want more of these posts?</h4>
   <p class="form_caption">Subscribe to receive new posts in your inbox.</p>

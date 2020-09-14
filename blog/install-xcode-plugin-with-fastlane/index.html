@@ -11,25 +11,25 @@
 <pre><code class=" hljs ruby">lane <span class="hljs-symbol">:install_xcode_plugins</span> <span class="hljs-keyword">do</span>
   [
     <span class="hljs-comment"># The Xcode plugins manager</span>
-    <span class="hljs-string">'https://github.com/alcatraz/Alcatraz/archive/1.1.12.zip'</span>,
+    <span class="hljs-string">&#x27;https://github.com/alcatraz/Alcatraz/archive/1.1.12.zip&#x27;</span>,
 
     <span class="hljs-comment"># Plugins</span>
     <span class="hljs-comment"># Vim keybindings for Xcode</span>
-    <span class="hljs-string">'https://github.com/XVimProject/XVim/archive/v1.0-beta.zip'</span>,
+    <span class="hljs-string">&#x27;https://github.com/XVimProject/XVim/archive/v1.0-beta.zip&#x27;</span>,
     <span class="hljs-comment"># Better fuzzy autocompletion</span>
-    <span class="hljs-string">'https://github.com/FuzzyAutocomplete/FuzzyAutocompletePlugin/releases/download/v2.1.1/FuzzyAutocomplete-2.1.1.zip'</span>,
+    <span class="hljs-string">&#x27;https://github.com/FuzzyAutocomplete/FuzzyAutocompletePlugin/releases/download/v2.1.1/FuzzyAutocomplete-2.1.1.zip&#x27;</span>,
     <span class="hljs-comment"># Generate documentation stubs</span>
-    <span class="hljs-string">'https://github.com/onevcat/VVDocumenter-Xcode/archive/0.6.zip'</span>,
+    <span class="hljs-string">&#x27;https://github.com/onevcat/VVDocumenter-Xcode/archive/0.6.zip&#x27;</span>,
     <span class="hljs-comment"># Show a color annotation on the gutter matching the code status in git</span>
-    <span class="hljs-string">'https://github.com/johnno1962/GitDiff/archive/v2.2.zip'</span>,
+    <span class="hljs-string">&#x27;https://github.com/johnno1962/GitDiff/archive/v2.2.zip&#x27;</span>,
     <span class="hljs-comment"># Show the color of a `UIColor` when the cursor is on it</span>
-    <span class="hljs-string">'https://github.com/NorthernRealities/ColorSenseRainbow/archive/v1.1.0.zip'</span>,
+    <span class="hljs-string">&#x27;https://github.com/NorthernRealities/ColorSenseRainbow/archive/v1.1.0.zip&#x27;</span>,
 
     <span class="hljs-comment"># Themes</span>
-    <span class="hljs-string">'https://github.com/bojan/xcode-one-dark/archive/v2.zip'</span>,
-    <span class="hljs-string">'https://github.com/ArtSabintsev/Solarized-Dark-for-Xcode/archive/2.0.0.zip'</span>,
+    <span class="hljs-string">&#x27;https://github.com/bojan/xcode-one-dark/archive/v2.zip&#x27;</span>,
+    <span class="hljs-string">&#x27;https://github.com/ArtSabintsev/Solarized-Dark-for-Xcode/archive/2.0.0.zip&#x27;</span>,
   ]
-  .each <span class="hljs-keyword">do</span> |plugin_url|
+  .each <span class="hljs-keyword">do</span> <span class="hljs-params">|plugin_url|</span>
     install_xcode_plugin(<span class="hljs-symbol">url:</span> plugin_url)
   <span class="hljs-keyword">end</span>
 <span class="hljs-keyword">end</span>

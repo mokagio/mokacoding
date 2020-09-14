@@ -5,13 +5,13 @@
 <p>Still, tests are a feedback on how our software is designed. Having to do a lot of work to test a component is usually a signal the its design can be improved.</p>
 <h2 id="split-decision-logic-from-action-logic">Split decision logic from action logic</h2>
 <p>Let&#39;s pick up the test for the <code>Logger</code> component of the <a href="https://www.mokacoding.com/blog/how-to-remove-duplication-from-swift-tests-with-helper-functions/">test helper example</a>.</p>
-<pre><code class=" hljs swift"><span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">testLoggerLogsMessageWithPizza</span><span class="hljs-params">()</span></span> {
+<pre><code class=" hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">testLoggerLogsMessageWithPizza</span><span class="hljs-params">()</span></span> {
   <span class="hljs-keyword">let</span> storageMock = <span class="hljs-type">StorageMock</span>()
   <span class="hljs-keyword">let</span> logger = <span class="hljs-type">Logger</span>(storage: storageMock())
 
   logger.log(<span class="hljs-type">Pizza</span>())
 
-  <span class="hljs-type">XCTAssert</span>(storageMock.hasBeenLogged(<span class="hljs-string">"Pizza is delicious"</span>)
+  <span class="hljs-type">XCTAssert</span>(storageMock.hasBeenLogged(<span class="hljs-string">&quot;Pizza is delicious&quot;</span>)
 }
 </code></pre>
 <p>The test is verifying calling <code>log(_:)</code> writes the expected value using the storage component given to <code>Logger</code>.</p>
@@ -27,23 +27,23 @@
     <span class="hljs-keyword">self</span>.storage = storage
   }
 
-  <span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">log</span><span class="hljs-params">(<span class="hljs-number">_</span> input: Any)</span></span> {
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">log</span><span class="hljs-params">(<span class="hljs-number">_</span> input: <span class="hljs-keyword">Any</span>)</span></span> {
     storage.perist(transformation(input))
   }
 }
 </code></pre>
 <p>The new <code>Logger</code> expects an input <code>(Any) -&gt; String</code> function to use to get the <code>String</code> to log for the given <code>input</code>.</p>
 <p>The only thing to do to test <code>Logger</code> is to pass an arbitrary <code>transformation</code> and verify it uses it properly<sup><a href="#fn1">1</a></sup>.</p>
-<pre><code class=" hljs swift"><span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">testLoggerLogsMessageBehaviour</span><span class="hljs-params">()</span></span> {
+<pre><code class=" hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">testLoggerLogsMessageBehaviour</span><span class="hljs-params">()</span></span> {
   <span class="hljs-keyword">let</span> storageMock = <span class="hljs-type">StorageMock</span>()
   <span class="hljs-keyword">let</span> logger = <span class="hljs-type">Logger</span>(
-    transformation: { <span class="hljs-keyword">return</span> <span class="hljs-string">"something"</span> },
+    transformation: { <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;something&quot;</span> },
     storage: storageMock()
   )
 
-  logger.log(<span class="hljs-string">"any input"</span>)
+  logger.log(<span class="hljs-string">&quot;any input&quot;</span>)
 
-  <span class="hljs-type">XCTAssert</span>(storageMock.hasBeenLogged(<span class="hljs-string">"something"</span>))
+  <span class="hljs-type">XCTAssert</span>(storageMock.hasBeenLogged(<span class="hljs-string">&quot;something&quot;</span>))
 }
 </code></pre>
 <p>Notice how <code>Logger</code> is now not only simpler to test but also simpler to maintain. <code>Logger</code> itself needs to change only if the mechanic of logging changes, e.g. from one storage to two. Adding support for a new log input can be done in the <code>transformation</code> function.</p>
@@ -51,24 +51,24 @@
 <h2 id="splitting-decision-from-action-using-a-swift-protocol">Splitting decision from action using a Swift protocol</h2>
 <p>Splitting the code performing the action from the one making the decision on what the output should be is neat, simplifies the testing, and makes the design of our component easier to scale.</p>
 <p>Speaking of scaling, if we expect to have many different types of input being logged with our <code>Logger</code> we&#39;ll also see the <code>transformation</code> function growing in length and complexity.</p>
-<pre><code class=" hljs swift"><span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">extractLogMessage</span><span class="hljs-params">(fromInput input: Any)</span></span> -&gt; <span class="hljs-type">String</span> {
+<pre><code class=" hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">extractLogMessage</span><span class="hljs-params">(fromInput input: <span class="hljs-keyword">Any</span>)</span></span> -&gt; <span class="hljs-type">String</span> {
   <span class="hljs-keyword">switch</span> input {
   <span class="hljs-keyword">case</span> <span class="hljs-keyword">is</span> <span class="hljs-type">Pasta</span>:
-    <span class="hljs-keyword">return</span> <span class="hljs-string">"There's nothing like home made pasta"</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;There&#x27;s nothing like home made pasta&quot;</span>
   <span class="hljs-keyword">case</span> <span class="hljs-keyword">is</span> <span class="hljs-type">Pizza</span>:
-    <span class="hljs-keyword">return</span> <span class="hljs-string">"Pizza is awesome!"</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Pizza is awesome!&quot;</span>
   <span class="hljs-comment">// more and more cases here...</span>
   <span class="hljs-keyword">case</span> <span class="hljs-number">_</span>:
-    <span class="hljs-keyword">return</span> <span class="hljs-string">"<span class="hljs-subst">\(input)</span>"</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;\(input)&quot;</span>
   }
 }
 
-<span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">testTransformation</span><span class="hljs-params">()</span></span> {
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">testTransformation</span><span class="hljs-params">()</span></span> {
   <span class="hljs-type">XCTAssertEqual</span>(
-    extractLogMessage(fromInput: <span class="hljs-type">Pasta</span>()), <span class="hljs-string">"There's nothing like home made pasta"</span>
+    extractLogMessage(fromInput: <span class="hljs-type">Pasta</span>()), <span class="hljs-string">&quot;There&#x27;s nothing like home made pasta&quot;</span>
   )
   <span class="hljs-type">XCTAssertEqual</span>(
-    extractLogMessage(fromInput: <span class="hljs-type">Pizza</span>()), <span class="hljs-string">"Pizza is awesome!"</span>
+    extractLogMessage(fromInput: <span class="hljs-type">Pizza</span>()), <span class="hljs-string">&quot;Pizza is awesome!&quot;</span>
   )
   <span class="hljs-comment">// more and more of the assertions like the ones above here...</span>
 }
@@ -83,23 +83,23 @@
 
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Logger</span> </span>{
 
-  <span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">log</span><span class="hljs-params">(<span class="hljs-number">_</span> input: Loggable)</span></span> {
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">log</span><span class="hljs-params">(<span class="hljs-number">_</span> input: Loggable)</span></span> {
     storage.persist(input.message)
   }
 }
 </code></pre>
 <p>Now our test for <code>Logger</code> can become</p>
-<pre><code class=" hljs swift"><span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">testLoggerLogsMessageBehaviour</span><span class="hljs-params">()</span></span> {
+<pre><code class=" hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">testLoggerLogsMessageBehaviour</span><span class="hljs-params">()</span></span> {
   <span class="hljs-keyword">let</span> storageMock = <span class="hljs-type">StorageMock</span>()
   <span class="hljs-keyword">let</span> logger = <span class="hljs-type">Logger</span>(storage: storageMock())
 
   logger.log(<span class="hljs-type">DummyLoggable</span>())
 
-  expect(storageMock.hasBeenLogged(<span class="hljs-string">"a message"</span>)) == <span class="hljs-built_in">true</span>
+  expect(storageMock.hasBeenLogged(<span class="hljs-string">&quot;a message&quot;</span>)) == <span class="hljs-literal">true</span>
 }
 
 <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">DummyLoggable</span>: <span class="hljs-title">Loggable</span> </span>{
-  <span class="hljs-keyword">var</span> message { <span class="hljs-string">"a message"</span> }
+  <span class="hljs-keyword">var</span> message { <span class="hljs-string">&quot;a message&quot;</span> }
 }
 </code></pre>
 <p>This approach decentralizes the knowledge of the input-output conversion by encapsulating it in a <code>protocol</code>.</p>

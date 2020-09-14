@@ -5,23 +5,23 @@
 <pre><code class=" hljs swift"><span class="hljs-comment">//</span>
 <span class="hljs-comment">// main.swift</span>
 <span class="hljs-comment">//</span>
-<span class="hljs-keyword">import</span> <span class="hljs-type">UIKit</span>
+<span class="hljs-keyword">import</span> UIKit
 
-private <span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">delegateClassName</span><span class="hljs-params">()</span></span> -&gt; <span class="hljs-type">String</span>? {
-  <span class="hljs-keyword">return</span> <span class="hljs-type">NSClassFromString</span>(<span class="hljs-string">"XCTestCase"</span>) == <span class="hljs-built_in">nil</span> ? <span class="hljs-type">NSStringFromClass</span>(<span class="hljs-type">AppDelegate</span>.<span class="hljs-keyword">self</span>) : <span class="hljs-built_in">nil</span>
+<span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">delegateClassName</span><span class="hljs-params">()</span></span> -&gt; <span class="hljs-type">String?</span> {
+  <span class="hljs-keyword">return</span> <span class="hljs-type">NSClassFromString</span>(<span class="hljs-string">&quot;XCTestCase&quot;</span>) == <span class="hljs-literal">nil</span> ? <span class="hljs-type">NSStringFromClass</span>(<span class="hljs-type">AppDelegate</span>.<span class="hljs-keyword">self</span>) : <span class="hljs-literal">nil</span>
 }
 
 <span class="hljs-number">_</span> = <span class="hljs-type">UIApplicationMain</span>(
   <span class="hljs-type">CommandLine</span>.argc,
   <span class="hljs-type">CommandLine</span>.unsafeArgv,
-  <span class="hljs-built_in">nil</span>,
+  <span class="hljs-literal">nil</span>,
   delegateClassName()
 )
 
 <span class="hljs-comment">//</span>
 <span class="hljs-comment">// AppDelegate.swift</span>
 <span class="hljs-comment">//</span>
-<span class="hljs-keyword">import</span> <span class="hljs-type">UIKit</span>
+<span class="hljs-keyword">import</span> UIKit
 
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AppDelegate</span>: <span class="hljs-title">UIResponder</span>, <span class="hljs-title">UIApplicationDelegate</span> </span>{
   <span class="hljs-comment">// ...</span>

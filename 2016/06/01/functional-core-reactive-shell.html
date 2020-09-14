@@ -73,7 +73,7 @@ results are what we actually care about.</p>
 <p>Isn&#39;t one of the points of tests to enable us to change the implementation of
 our components without changing the system&#39;s behaviour?</p>
 <p>If you were to test a method with this signature:</p>
-<pre><code class=" hljs swift"><span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">sum</span><span class="hljs-params">(a: Int, b: Int)</span></span> -&gt; <span class="hljs-type">Int</span>
+<pre><code class=" hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">sum</span><span class="hljs-params">(a: Int, b: Int)</span></span> -&gt; <span class="hljs-type">Int</span>
 </code></pre>
 <p>Would you assert that <code>+</code> is called, or that given 1 and 2 the result is 3?</p>
 <p>Smarter people than me have tackled the issue of mocking, one of those is <a href="https://twitter.com/kenscambler">Ken
@@ -133,7 +133,7 @@ testing the logic, pure functions, producing <code>DatabaseAction</code> values.
 <p>The action can then be performed by something like this:</p>
 <pre><code class=" hljs swift"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DatabaseService</span> </span>{
 
-  <span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">performAction</span><span class="hljs-params">(action: DatabaseAction)</span></span> {
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">performAction</span><span class="hljs-params">(action: DatabaseAction)</span></span> {
     <span class="hljs-keyword">switch</span> action.mode {
     <span class="hljs-keyword">case</span> .<span class="hljs-type">Delete</span>: <span class="hljs-comment">// ...</span>
     <span class="hljs-keyword">case</span> .<span class="hljs-type">Insert</span>: <span class="hljs-comment">// ...</span>

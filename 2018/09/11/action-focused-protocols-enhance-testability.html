@@ -6,9 +6,9 @@
 <p>For a long time I used to name this kind of protocols with the <code>-Type</code> suffix.</p>
 <pre><code class=" hljs swift"><span class="hljs-class"><span class="hljs-keyword">protocol</span> <span class="hljs-title">PizzaServiceType</span> </span>{
 
-  <span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">getPizzas</span><span class="hljs-params">(<span class="hljs-number">_</span> completion: <span class="hljs-params">(Result&lt;[Pizza], PizzaAPIError&gt;)</span></span></span> -&gt; ()) { ... }
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">getPizzas</span><span class="hljs-params">(<span class="hljs-number">_</span> completion: <span class="hljs-params">(Result&lt;[Pizza], PizzaAPIError&gt;)</span></span></span> -&gt; ()) { ... }
 
-  <span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">order</span><span class="hljs-params">(<span class="hljs-number">_</span> pizza: Pizza, completion: <span class="hljs-params">(Result&lt;Order, PizzaAPIError&gt;)</span></span></span> -&gt; ()) { ... }
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">order</span><span class="hljs-params">(<span class="hljs-number">_</span> pizza: Pizza, completion: <span class="hljs-params">(Result&lt;Order, PizzaAPIError&gt;)</span></span></span> -&gt; ()) { ... }
 }
 
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PizzaService</span>: <span class="hljs-title">PizzaServiceType</span> </span>{ ... }
@@ -28,12 +28,12 @@
 <p>It does two things. Getting pizzas and making orders. These two behaviours are what the protocol should be about. Since we have two different behaviours, why not having two protocols too?</p>
 <pre><code class=" hljs swift"><span class="hljs-class"><span class="hljs-keyword">protocol</span> <span class="hljs-title">PizzasGetter</span> </span>{
 
-  <span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">getPizzas</span><span class="hljs-params">(<span class="hljs-number">_</span> completion: <span class="hljs-params">(Result&lt;[Pizza], PizzaAPIError&gt;)</span></span></span> -&gt; ()) { ... }
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">getPizzas</span><span class="hljs-params">(<span class="hljs-number">_</span> completion: <span class="hljs-params">(Result&lt;[Pizza], PizzaAPIError&gt;)</span></span></span> -&gt; ()) { ... }
 }
 
 <span class="hljs-class"><span class="hljs-keyword">protocol</span> <span class="hljs-title">OrderMaker</span> </span>{
 
-  <span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">order</span><span class="hljs-params">(<span class="hljs-number">_</span> pizzas: [Pizza], completion: <span class="hljs-params">(Result&lt;Order, PizzaAPIError&gt;)</span></span></span> -&gt; ()) { ... }
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">order</span><span class="hljs-params">(<span class="hljs-number">_</span> pizzas: [Pizza], completion: <span class="hljs-params">(Result&lt;Order, PizzaAPIError&gt;)</span></span></span> -&gt; ()) { ... }
 }
 
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PizzaService</span>: <span class="hljs-title">PizzasGetter</span>, <span class="hljs-title">OrderMaker</span> </span>{ ... }
@@ -50,7 +50,7 @@
 
   <span class="hljs-keyword">init</span>(orderMaker: <span class="hljs-type">OrderMaker</span>) { ... }
 
-  <span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">submitOrder</span><span class="hljs-params">(<span class="hljs-keyword">for</span> pizzas: [Pizza], completion: <span class="hljs-params">(Result&lt;Order, PizzaAPIError&gt;)</span></span></span> -&gt; ()) {
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">submitOrder</span><span class="hljs-params">(<span class="hljs-keyword">for</span> pizzas: [Pizza], completion: <span class="hljs-params">(Result&lt;Order, PizzaAPIError&gt;)</span></span></span> -&gt; ()) {
     orderMaker.order(pizzas, completion: completion)
   }
 }

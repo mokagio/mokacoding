@@ -46,7 +46,7 @@ deeper look into OHHTTPStubs.</p>
 <p>Another option is to centralise all the network operations behind one single
 interface conforming to a protocol, for example:</p>
 <pre><code class=" hljs swift"><span class="hljs-class"><span class="hljs-keyword">protocol</span> <span class="hljs-title">NetworkService</span> </span>{
-  <span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">performRequest</span><span class="hljs-params">(
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">performRequest</span><span class="hljs-params">(
         url: NSURL,
         method: Method,
         parameters: [String: AnyObject]?,

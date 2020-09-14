@@ -8,18 +8,18 @@ the commit messages tell something useful.</p>
 <p>We software developers take a lot of care in crafting readable and efficient
 code, but too often not enough in writing informative commits. It is not
 uncommon to see logs like this (fictitious) one:</p>
-<pre><code class="">$ git <span class="hljs-built_in">log</span> <span class="hljs-comment">--format=oneline --abbrev-commit</span>
+<pre><code class=""><span class="hljs-meta">$</span> <span class="hljs-string">git log --format=oneline --abbrev-commit</span>
 
-<span class="hljs-number">5</span>ab4e81 Cleanup
-<span class="hljs-number">66105</span>f6 Updated based <span class="hljs-command"><span class="hljs-keyword">on</span> <span class="hljs-title">PR</span> <span class="hljs-title">comments</span></span>
-aecb4de Forgot <span class="hljs-built_in">to</span> <span class="hljs-built_in">add</span> <span class="hljs-operator">a</span> <span class="hljs-built_in">file</span>
-<span class="hljs-number">63194e8</span> Tweaked custom pop animation parms
-<span class="hljs-number">344</span>eafd Implement <span class="hljs-built_in">new</span> navigation style
-<span class="hljs-number">43e06</span>b3 Actually make status bar white
-<span class="hljs-number">2e01356</span> Needs beer
-aca1ff6 Not working
-<span class="hljs-number">17107</span>ab Fix status bar <span class="hljs-operator">not</span> being white
-<span class="hljs-number">9</span>c7f5d1 Make status bar white
+<span class="hljs-attr">5ab4e81</span> <span class="hljs-string">Cleanup</span>
+<span class="hljs-attr">66105f6</span> <span class="hljs-string">Updated based on PR comments</span>
+<span class="hljs-attr">aecb4de</span> <span class="hljs-string">Forgot to add a file</span>
+<span class="hljs-attr">63194e8</span> <span class="hljs-string">Tweaked custom pop animation parms</span>
+<span class="hljs-attr">344eafd</span> <span class="hljs-string">Implement new navigation style</span>
+<span class="hljs-attr">43e06b3</span> <span class="hljs-string">Actually make status bar white</span>
+<span class="hljs-attr">2e01356</span> <span class="hljs-string">Needs beer</span>
+<span class="hljs-attr">aca1ff6</span> <span class="hljs-string">Not working</span>
+<span class="hljs-attr">17107ab</span> <span class="hljs-string">Fix status bar not being white</span>
+<span class="hljs-attr">9c7f5d1</span> <span class="hljs-string">Make status bar white</span>
 </code></pre><p>While it might be funny to read that the committer felt like beer at the time
 they were writing the code, that is not very useful for someone looking at it.</p>
 <p>What could a commit titled &quot;Not working&quot; have introduced in the codebase? No
@@ -28,12 +28,12 @@ idea. The only way to know is to look at the commit changes.</p>
 PRs? In this case reading at what that commit introduced will not be enough,
 one would need a link to the pull request to understand the full picture.</p>
 <p>What I would like to see would be something more like this:</p>
-<pre><code class="">$ git <span class="hljs-built_in">log</span> <span class="hljs-comment">--format=oneline --abbrev-commit</span>
+<pre><code class="">$ git <span class="hljs-built_in">log</span> --format=oneline --abbrev-commit
 
-a6104f6 Extract custom durations <span class="hljs-operator">in</span> constants
-<span class="hljs-number">63194e8</span> Tweak custom pop animation <span class="hljs-built_in">params</span>
-<span class="hljs-number">344</span>eafd Implement <span class="hljs-built_in">new</span> navigation style
-ac5f5d3 Make status bar white
+a6104f6 Extract custom durations <span class="hljs-keyword">in</span> constants
+<span class="hljs-number">63194e8</span> Tweak custom <span class="hljs-built_in">pop</span> <span class="hljs-built_in">animation</span> params
+344eafd Implement <span class="hljs-built_in">new</span> navigation <span class="hljs-built_in">style</span>
+ac5f5d3 Make <span class="hljs-built_in">status</span> bar white
 </code></pre><p>This log <strong>tells a story</strong> which is straightforward and easy to follow. Any
 reader of this log, which includes future-you which will have forgotten the
 details of that code, will get the idea of what happened there just by reading

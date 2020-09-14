@@ -35,7 +35,7 @@
 <p>Making a class&#39;s dependencies explicit is quite simple. Let&#39;s look at the <code>ProductService</code> from above.</p>
 <pre><code class=" hljs objc"><span class="hljs-class"><span class="hljs-keyword">@interface</span> <span class="hljs-title">ProductsService</span>: <span class="hljs-title">NSObject</span></span>
 
-- (instancetype)initWithParser:(Parser *)parser
+- (<span class="hljs-keyword">instancetype</span>)initWithParser:(Parser *)parser
                   stateService:(AppStateService *)stateService
                 networkService:(NetworkService *)networkService;
 
@@ -45,15 +45,15 @@
 
 <span class="hljs-class"><span class="hljs-keyword">@implementation</span> <span class="hljs-title">ProductsSevrice</span></span>
 
-- (instancetype)initWithParser:(Parser *)parser
+- (<span class="hljs-keyword">instancetype</span>)initWithParser:(Parser *)parser
                   stateService:(AppStateService *)stateService
                   networkService:(NetworkService *)networkService {
   <span class="hljs-keyword">self</span> = [<span class="hljs-keyword">super</span> init];
   <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">self</span>) { <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>; }
 
-  <span class="hljs-keyword">self</span><span class="hljs-variable">.parser</span> = parser;
-  <span class="hljs-keyword">self</span><span class="hljs-variable">.stateService</span> = stateService;
-  <span class="hljs-keyword">self</span><span class="hljs-variable">.networkService</span> = networkService;
+  <span class="hljs-keyword">self</span>.parser = parser;
+  <span class="hljs-keyword">self</span>.stateService = stateService;
+  <span class="hljs-keyword">self</span>.networkService = networkService;
 
   <span class="hljs-keyword">return</span> <span class="hljs-keyword">self</span>
 }
@@ -64,9 +64,9 @@
 </code></pre>
 <p>And we can then rewrite <code>allProducts</code> like this:</p>
 <pre><code class=" hljs objc">- (<span class="hljs-keyword">void</span>)allProducts:(Completion)completion {
-    User *user = [<span class="hljs-keyword">self</span><span class="hljs-variable">.stateService</span> currentUser];
-    [<span class="hljs-keyword">self</span><span class="hljs-variable">.networkService</span> getAllProductsForUser:user withSuccess:^(<span class="hljs-built_in">NSDictionary</span> *responseDictionary) {
-      <span class="hljs-built_in">NSArray</span> *products = [<span class="hljs-keyword">self</span><span class="hljs-variable">.parser</span> parseProducts:responseDictionary];
+    User *user = [<span class="hljs-keyword">self</span>.stateService currentUser];
+    [<span class="hljs-keyword">self</span>.networkService getAllProductsForUser:user withSuccess:^(<span class="hljs-built_in">NSDictionary</span> *responseDictionary) {
+      <span class="hljs-built_in">NSArray</span> *products = [<span class="hljs-keyword">self</span>.parser parseProducts:responseDictionary];
       completion(products, <span class="hljs-literal">nil</span>);
     } failure:^(<span class="hljs-built_in">NSError</span> *error) {
       completion(<span class="hljs-literal">nil</span>, error);
@@ -89,7 +89,7 @@
 <p>For example you can make the dependencies explicit in the <a href="https://developer.apple.com/library/mac/documentation/General/Conceptual/CocoaEncyclopedia/Initialization/Initialization.html#//apple_ref/doc/uid/TP40010810-CH6-SW3">designated initializer</a>, and provide a convenience factory method that does all the hard work for you.</p>
 <pre><code class=" hljs objc"><span class="hljs-class"><span class="hljs-keyword">@interface</span> <span class="hljs-title">ProductsService</span>: <span class="hljs-title">NSObject</span></span>
 
-- (instancetype)initWithParser:(Parser *)parser
+- (<span class="hljs-keyword">instancetype</span>)initWithParser:(Parser *)parser
                   stateService:(AppStateService *)stateService
                 networkService:(NetworkService *)networkService <span class="hljs-built_in">NS_DESIGNATED_INITIALIZER</span>;
 

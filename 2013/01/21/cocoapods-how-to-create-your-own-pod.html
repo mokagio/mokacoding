@@ -5,41 +5,41 @@
 The first step is to have something to make a pod of, I guess every developer has his own little set of smart methods that make his life easier. Don&#39;t be greedy, share them with the community!</p>
 <p><h3>Step 2 - Tag your pod properly</h3>
 Since we&#39;re gonna work with a dependency manager we need to take care of the version number of our pod.</p>
-<pre><code class="">git tag -<span class="hljs-tag">a</span> <span class="hljs-number">1.0</span>.<span class="hljs-number">0</span> -m <span class="hljs-string">"Tag release 1.0.0"</span>
+<pre><code class=""><span class="hljs-attribute">git</span> tag -a <span class="hljs-number">1</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span> -m <span class="hljs-string">&quot;Tag release 1.0.0&quot;</span>
 </code></pre><p>Take a couple of minutes to read through the <a href="http://semver.org/">Semantic Versioning</a> to learn how to use tagging for version numbers properly and in a way that allows for <a href="https://github.com/CocoaPods/Specs/wiki/Cross-dependencies-resolution-example">resolution of cross-dependencies</a>.</p>
 <p><h3>Step 3 - The podspec</h3>
 Once our project is tagged properly we can create the <code>.podspec</code> file. The extension name explains that it will contain the &quot;specs&quot; of our &quot;pod&quot;.</p>
-<pre><code class="">pod spec create <span class="hljs-keyword">Do</span><span class="hljs-label">nut</span>
+<pre><code class="">pod <span class="hljs-keyword">spec</span> create Donut
 </code></pre><p>This will generate the <code>Donut.podspec</code> file.</p>
 <p>You can also generate the <code>podspec</code> from a GitHub repo using the GitHub url instead of the name.</p>
 <p><h3>Step 4 - Leave your mark on the podspec</h3>
 If you open the freshly generated <code>Donut.podspec</code> you&#39;ll find a lot of comments explaining the information you need to provide. There are a lot of options, but you don&#39;t need to set them all. You&#39;ll also notice that its nothing more that a Ruby file.</p>
 <p>Here&#39;s how the podspec of my toy framework, looks like.</p>
-<pre><code class="">{<span class="hljs-subst">%</span> highlight objective<span class="hljs-attribute">-c</span> <span class="hljs-subst">%</span>}
-Pod<span class="hljs-tag">::Spec.new</span> <span class="hljs-keyword">do</span> <span class="hljs-subst">|</span>s<span class="hljs-subst">|</span>
-  s<span class="hljs-built_in">.</span>name         <span class="hljs-subst">=</span> <span class="hljs-string">"MGCraftman"</span>
-  s<span class="hljs-built_in">.</span>version      <span class="hljs-subst">=</span> <span class="hljs-string">"0.1.0"</span>
-  s<span class="hljs-built_in">.</span>summary      <span class="hljs-subst">=</span> <span class="hljs-string">"A framework to speedup development when you can't (or don't want to) use Interface Builder."</span>
-  s<span class="hljs-built_in">.</span>homepage     <span class="hljs-subst">=</span> <span class="hljs-string">"https://github.com/mokagio/MGCraftman"</span>
+<pre><code class="">{% highlight objective-c %}
+Pod::Spec.new <span class="hljs-keyword">do</span> <span class="hljs-params">|s|</span>
+  s.name         = <span class="hljs-string">&quot;MGCraftman&quot;</span>
+  s.version      = <span class="hljs-string">&quot;0.1.0&quot;</span>
+  s.summary      = <span class="hljs-string">&quot;A framework to speedup development when you can&#x27;t (or don&#x27;t want to) use Interface Builder.&quot;</span>
+  s.homepage     = <span class="hljs-string">&quot;https://github.com/mokagio/MGCraftman&quot;</span>
 
-  s<span class="hljs-built_in">.</span>license      <span class="hljs-subst">=</span> { :<span class="hljs-keyword">type</span> <span class="hljs-subst">=&amp;</span><span class="hljs-literal">gt</span>; <span class="hljs-string">'MIT'</span>, :file <span class="hljs-subst">=&amp;</span><span class="hljs-literal">gt</span>; <span class="hljs-string">'LICENSE'</span> }
+  s.license      = { <span class="hljs-symbol">:type</span> =&amp;gt; <span class="hljs-string">&#x27;MIT&#x27;</span>, <span class="hljs-symbol">:file</span> =&amp;gt; <span class="hljs-string">&#x27;LICENSE&#x27;</span> }
 
-  s<span class="hljs-built_in">.</span>author       <span class="hljs-subst">=</span> { <span class="hljs-string">"Giovanni Lodi"</span> <span class="hljs-subst">=&amp;</span><span class="hljs-literal">gt</span>; <span class="hljs-string">"mokagio42@gmail.com"</span> }
+  s.author       = { <span class="hljs-string">&quot;Giovanni Lodi&quot;</span> =&amp;gt; <span class="hljs-string">&quot;mokagio42@gmail.com&quot;</span> }
 
-  s<span class="hljs-built_in">.</span>source       <span class="hljs-subst">=</span> { :git <span class="hljs-subst">=&amp;</span><span class="hljs-literal">gt</span>; <span class="hljs-string">"https://github.com/mokagio/MGCraftman.git"</span>, :<span class="hljs-built_in">tag</span> <span class="hljs-subst">=&amp;</span><span class="hljs-literal">gt</span>; <span class="hljs-string">"0.1.0"</span> }
-  s<span class="hljs-built_in">.</span>source_files <span class="hljs-subst">=</span> <span class="hljs-string">'MGCraftman/*.{h,m}'</span>
+  s.source       = { <span class="hljs-symbol">:git</span> =&amp;gt; <span class="hljs-string">&quot;https://github.com/mokagio/MGCraftman.git&quot;</span>, <span class="hljs-symbol">:tag</span> =&amp;gt; <span class="hljs-string">&quot;0.1.0&quot;</span> }
+  s.source_files = <span class="hljs-string">&#x27;MGCraftman/*.{h,m}&#x27;</span>
 
-  s<span class="hljs-built_in">.</span>platform     <span class="hljs-subst">=</span> :ios
-end
-{<span class="hljs-subst">%</span> endhighlight <span class="hljs-subst">%</span>}
+  s.platform     = <span class="hljs-symbol">:ios</span>
+<span class="hljs-keyword">end</span>
+{% endhighlight %}
 </code></pre><p><h3>Step 5 - Is my podspec ok?</h3>
 Once your <code>podspec</code> its ready validate it running</p>
-<pre><code class=""><span class="hljs-title">pod</span> spec lint Peanut.podspec
+<pre><code class="">pod spec lint <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Peanut</span>.</span></span>podspec
 </code></pre><p>If everything is fine you&#39;ll read</p>
-<pre><code class="">pod spec lint Peanut<span class="hljs-class">.podspec</span> 
--&gt; Peanut (<span class="hljs-number">1.0</span>.<span class="hljs-number">0</span>)
-Analyzed <span class="hljs-number">1</span> podspec.
-Peanut<span class="hljs-class">.podspec</span> passed validation.
+<pre><code class=""><span class="hljs-selector-tag">pod</span> <span class="hljs-selector-tag">spec</span> <span class="hljs-selector-tag">lint</span> <span class="hljs-selector-tag">Peanut</span><span class="hljs-selector-class">.podspec</span> 
+<span class="hljs-selector-tag">-</span>&gt; <span class="hljs-selector-tag">Peanut</span> (1<span class="hljs-selector-class">.0</span><span class="hljs-selector-class">.0</span>)
+<span class="hljs-selector-tag">Analyzed</span> 1 <span class="hljs-selector-tag">podspec</span>.
+<span class="hljs-selector-tag">Peanut</span><span class="hljs-selector-class">.podspec</span> <span class="hljs-selector-tag">passed</span> <span class="hljs-selector-tag">validation</span>.
 </code></pre><p>Otherwise <code>pod spec</code> will explain the error or warning, as everything is so simple also fixing the problems will be. Anyway the error report is already formatted in <a href="http://daringfireball.net/projects/markdown/">Markdown</a> so you can copy it and paste it in an issue on the <a href="https://github.com/CocoaPods/CocoaPods/issues/new">CocoaPods Issues page</a>.</p>
 <p><h3>Step 6 - Let your pod fly</h3>
 We&#39;re almost done here. Now to make our pod available to the community, or just to ourselves and feel cool, we have two options. The rookie way is open an issue, but we&#39;ve just coded an iOS library, with it&#39;s own repo on GitHub, and generated the <code>podspec</code> fetching the data from there, so we&#39;re not rookies. The second option is to fork the <a href="https://github.com/CocoaPods/Specs">Specs repo</a>, add our pod, submit the PR and wait.</p>

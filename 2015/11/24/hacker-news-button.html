@@ -4,28 +4,28 @@
 <p>You can go to their <a href="https://segment.io/">Hacker News Button website</a> to use a wizard to configure the button and get the code, or use the same one I use for mokacoding.</p>
 <p><a href="http://jade-lang.com/">Jade</a> version:</p>
 <pre><code class=" hljs jade">script.
-  !<span class="hljs-reserved">function</span>(d,s,id){<span class="hljs-reserved">var</span> js,fjs=d.getElementsByTagName(s)[<span class="hljs-number">0</span>],p=<span class="hljs-regexp">/^http:/</span>.test(d.location)?<span class="hljs-string">'http'</span>:<span class="hljs-string">'https'</span>;<span class="hljs-keyword">if</span>(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+<span class="hljs-string">'://platform.twitter.com/widgets.js'</span>;fjs.parentNode.insertBefore(js,fjs);}}(<span class="hljs-built_in">document</span>, <span class="hljs-string">'script'</span>, <span class="hljs-string">'twitter-wjs'</span>);
+  !<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">d,s,id</span>)</span>{<span class="hljs-keyword">var</span> js,fjs=d.getElementsByTagName(s)[<span class="hljs-number">0</span>],p=<span class="hljs-regexp">/^http:/</span>.test(d.location)?<span class="hljs-string">&#x27;http&#x27;</span>:<span class="hljs-string">&#x27;https&#x27;</span>;<span class="hljs-keyword">if</span>(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+<span class="hljs-string">&#x27;://platform.twitter.com/widgets.js&#x27;</span>;fjs.parentNode.insertBefore(js,fjs);}}(<span class="hljs-built_in">document</span>, <span class="hljs-string">&#x27;script&#x27;</span>, <span class="hljs-string">&#x27;twitter-wjs&#x27;</span>);
 
-a.hn-button(href=<span class="hljs-string">"https://news.ycombinator.com/submit"</span>,
-  <span class="hljs-string">'data-title'</span>=<span class="hljs-string">"<span class="hljs-subst">#{post.title}</span>"</span>,
-  <span class="hljs-string">'data-url'</span>=<span class="hljs-string">"<span class="hljs-subst">#{post.url}</span>"</span>,
-  <span class="hljs-string">'data-count'</span>=<span class="hljs-string">"horizontal"</span>,
-  <span class="hljs-string">'data-style'</span>=<span class="hljs-string">"twitter"</span>).
-      Vote <span class="hljs-literal">on</span> Hacker News
+a.hn-button(href=<span class="hljs-string">&quot;https://news.ycombinator.com/submit&quot;</span>,
+  <span class="hljs-string">&#x27;data-title&#x27;</span>=<span class="hljs-string">&quot;#{post.title}&quot;</span>,
+  <span class="hljs-string">&#x27;data-url&#x27;</span>=<span class="hljs-string">&quot;#{post.url}&quot;</span>,
+  <span class="hljs-string">&#x27;data-count&#x27;</span>=<span class="hljs-string">&quot;horizontal&quot;</span>,
+  <span class="hljs-string">&#x27;data-style&#x27;</span>=<span class="hljs-string">&quot;twitter&quot;</span>).
+      Vote <span class="hljs-keyword">on</span> Hacker News
 </code></pre>
 <p>HTML version:</p>
-<pre><code class=" hljs html"><span class="hljs-tag">&lt;<span class="hljs-title">script</span>&gt;</span><span class="javascript">
-  !<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d,s,id)</span></span>{<span class="hljs-keyword">var</span> js,fjs=d.getElementsByTagName(s)[<span class="hljs-number">0</span>],p=<span class="hljs-regexp">/^http:/</span>.test(d.location)?<span class="hljs-string">'http'</span>:<span class="hljs-string">'https'</span>;<span class="hljs-keyword">if</span>(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+<span class="hljs-string">'://platform.twitter.com/widgets.js'</span>;fjs.parentNode.insertBefore(js,fjs);}}(<span class="hljs-built_in">document</span>, <span class="hljs-string">'script'</span>, <span class="hljs-string">'twitter-wjs'</span>);
-</span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
+<pre><code class=" hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+  !<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">d,s,id</span>)</span>{<span class="hljs-keyword">var</span> js,fjs=d.getElementsByTagName(s)[<span class="hljs-number">0</span>],p=<span class="hljs-regexp">/^http:/</span>.test(d.location)?<span class="hljs-string">&#x27;http&#x27;</span>:<span class="hljs-string">&#x27;https&#x27;</span>;<span class="hljs-keyword">if</span>(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+<span class="hljs-string">&#x27;://platform.twitter.com/widgets.js&#x27;</span>;fjs.parentNode.insertBefore(js,fjs);}}(<span class="hljs-built_in">document</span>, <span class="hljs-string">&#x27;script&#x27;</span>, <span class="hljs-string">&#x27;twitter-wjs&#x27;</span>);
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
 
-<span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"hn-button"</span>
-  <span class="hljs-attribute">href</span>=<span class="hljs-value">"https://news.ycombinator.com/submit"</span>
-  <span class="hljs-attribute">data-title</span>=<span class="hljs-value">"POST TITLE"</span>
-  <span class="hljs-attribute">data-url</span>=<span class="hljs-value">"http://your.blog.com/post"</span>
-  <span class="hljs-attribute">data-count</span>=<span class="hljs-value">"horizontal"</span><span class="hljs-value">,</span>
-  <span class="hljs-attribute">data-style</span>=<span class="hljs-value">"twitter"</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;hn-button&quot;</span>
+  <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;https://news.ycombinator.com/submit&quot;</span>
+  <span class="hljs-attr">data-title</span>=<span class="hljs-string">&quot;POST TITLE&quot;</span>
+  <span class="hljs-attr">data-url</span>=<span class="hljs-string">&quot;http://your.blog.com/post&quot;</span>
+  <span class="hljs-attr">data-count</span>=<span class="hljs-string">&quot;horizontal&quot;</span>,
+  <span class="hljs-attr">data-style</span>=<span class="hljs-string">&quot;twitter&quot;</span>&gt;</span>
   Vote on Hacker News
-<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
 </code></pre>
 <p>There you go. If you found this post useful I would really appreciate if you could hit my Hacker News button, and the ones next to it too 😎.</p>
 <p><em>Happy coding, and leave the codebase better than you found it.</em></p>

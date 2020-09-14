@@ -28,7 +28,7 @@
 <p>When a value is wrapped in a context, you can’t apply a normal function to it:</p>
 <p><img src="http://adit.io/imgs/functors/no_fmap_ouch.png" alt=""></p>
 <p>This is where <code>map</code> comes in (<code>fmap</code> in Haskell). <code>map</code> is from the street, <code>map</code> is hip to contexts. <code>map</code> knows how to apply functions to values that are wrapped in a context. For example, suppose you want to apply a function that adds 3 to <code>.Some(2)</code>. Use <code>map</code>:</p>
-<pre><code class=" hljs swift"><span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">plusThree</span><span class="hljs-params">(addend: Int)</span></span> -&gt; <span class="hljs-type">Int</span> {
+<pre><code class=" hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">plusThree</span><span class="hljs-params">(addend: Int)</span></span> -&gt; <span class="hljs-type">Int</span> {
   <span class="hljs-keyword">return</span> addend + <span class="hljs-number">3</span>
 }
 
@@ -49,7 +49,7 @@
 <span class="hljs-comment">// =&gt; .Some(5)</span>
 </code></pre>
 <p>And <code>map</code> magically applies this function, because <code>Optional</code> is a Functor. It specifies how <code>map</code> applies to <code>Some</code>s and <code>None</code>s:</p>
-<pre><code class=" hljs swift"><span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">map</span><span class="hljs-generics">&lt;U&gt;</span><span class="hljs-params">(f: T -&gt; U)</span></span> -&gt; <span class="hljs-type">U</span>? {
+<pre><code class=" hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">map</span>&lt;U&gt;<span class="hljs-params">(f: T -&gt; U)</span></span> -&gt; <span class="hljs-type">U?</span> {
   <span class="hljs-keyword">switch</span> <span class="hljs-keyword">self</span> {
   <span class="hljs-keyword">case</span> .<span class="hljs-type">Some</span>(<span class="hljs-keyword">let</span> x): <span class="hljs-keyword">return</span> f(x)
   <span class="hljs-keyword">case</span> .<span class="hljs-type">None</span>: <span class="hljs-keyword">return</span> .<span class="hljs-type">None</span>
@@ -65,11 +65,11 @@
 <p><img src="http://adit.io/imgs/functors/bill.png" alt=""></p>
 <p><em>Bill O’Reilly being totally ignorant about the Maybe functor</em></p>
 <p>Like Morpheus in the Matrix, <code>map</code> knows just what to do; you start with <code>None</code>, and you end up with <code>None</code>! <code>map</code> is zen. Now it makes sense why the <code>Optional</code> type exists. For example, here’s how you work with a database record in a language without <code>Optional</code>, like Ruby:</p>
-<pre><code class=" hljs ruby">let post = <span class="hljs-constant">Post</span>.findByID(<span class="hljs-number">1</span>)
-<span class="hljs-keyword">if</span> post != <span class="hljs-keyword">nil</span> {
+<pre><code class=" hljs ruby">let post = Post.findByID(<span class="hljs-number">1</span>)
+<span class="hljs-keyword">if</span> post != <span class="hljs-literal">nil</span> {
   <span class="hljs-keyword">return</span> post.title
 } <span class="hljs-keyword">else</span> {
-  <span class="hljs-keyword">return</span> <span class="hljs-keyword">nil</span>
+  <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
 }
 </code></pre>
 <p>But in with Swift using the <code>Optional</code> functor:</p>
@@ -79,7 +79,7 @@
 <p>We can even define an infix operator for <code>map</code>, <code>&lt;^&gt;</code> (<code>&lt;$&gt;</code> in Haskell), and do this instead:</p>
 <pre><code class=" hljs swift"><span class="hljs-keyword">infix</span> <span class="hljs-keyword">operator</span> &lt;^&gt; { <span class="hljs-keyword">associativity</span> <span class="hljs-keyword">left</span> }
 
-<span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-generics">&lt;^&gt;</span><span class="hljs-generics">&lt;T, U&gt;</span><span class="hljs-params">(f: T -&gt; U, a: T?)</span></span> -&gt; <span class="hljs-type">U</span>? {
+<span class="hljs-function"><span class="hljs-keyword">func</span> &lt;^&gt;&lt;T, U&gt;<span class="hljs-params">(f: T -&gt; U, a: T?)</span></span> -&gt; <span class="hljs-type">U?</span> {
   <span class="hljs-keyword">return</span> a.<span class="hljs-built_in">map</span>(f)
 }
 
@@ -102,7 +102,7 @@ getPostTitle &lt;^&gt; findPost(<span class="hljs-number">1</span>)
 <p>The result is just another function!</p>
 <pre><code class=" hljs swift"><span class="hljs-keyword">typealias</span> <span class="hljs-type">IntFunction</span> = <span class="hljs-type">Int</span> -&gt; <span class="hljs-type">Int</span>
 
-<span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">map</span><span class="hljs-params">(f: IntFunction, <span class="hljs-number">_</span> g: IntFunction)</span></span> -&gt; <span class="hljs-type">IntFunction</span> {
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">map</span><span class="hljs-params">(f: IntFunction, <span class="hljs-number">_</span> g: IntFunction)</span></span> -&gt; <span class="hljs-type">IntFunction</span> {
   <span class="hljs-keyword">return</span> { x <span class="hljs-keyword">in</span> f(g(x)) }
 }
 
@@ -118,7 +118,7 @@ foo(<span class="hljs-number">10</span>)
 <p><img src="http://adit.io/imgs/functors/function_and_context.png" alt=""></p>
 <p>Yeah. Let that sink in. Applicatives don’t kid around. Unlike Haskell, Swift doesn&#39;t have <em>yet</em> a built-in way to deal with Applicative. But it is very easy to add one! We can define an <code>apply</code> function for every type supporting Applicative, which knows how to apply a function wrapped in the context of the type to a value wrapped in the same context:</p>
 <pre><code class=" hljs swift"><span class="hljs-class"><span class="hljs-keyword">extension</span> <span class="hljs-title">Optional</span> </span>{
-  <span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">apply</span><span class="hljs-generics">&lt;U&gt;</span><span class="hljs-params">(f: <span class="hljs-params">(T -&gt; U)</span></span></span>?) -&gt; <span class="hljs-type">U</span>? {
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">apply</span>&lt;U&gt;<span class="hljs-params">(f: <span class="hljs-params">(T -&gt; U)</span></span></span>?) -&gt; <span class="hljs-type">U?</span> {
     <span class="hljs-keyword">switch</span> f {
       <span class="hljs-keyword">case</span> .<span class="hljs-type">Some</span>(<span class="hljs-keyword">let</span> someF): <span class="hljs-keyword">return</span> <span class="hljs-keyword">self</span>.<span class="hljs-built_in">map</span>(someF)
       <span class="hljs-keyword">case</span> .<span class="hljs-type">None</span>: <span class="hljs-keyword">return</span> .<span class="hljs-type">None</span>
@@ -127,7 +127,7 @@ foo(<span class="hljs-number">10</span>)
 }
 
 <span class="hljs-class"><span class="hljs-keyword">extension</span> <span class="hljs-title">Array</span> </span>{
-  <span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">apply</span><span class="hljs-generics">&lt;U&gt;</span><span class="hljs-params">(fs: [Element -&gt; U])</span></span> -&gt; [<span class="hljs-type">U</span>] {
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">apply</span>&lt;U&gt;<span class="hljs-params">(fs: [Element -&gt; U])</span></span> -&gt; [<span class="hljs-type">U</span>] {
     <span class="hljs-keyword">var</span> result = [<span class="hljs-type">U</span>]()
       <span class="hljs-keyword">for</span> f <span class="hljs-keyword">in</span> fs {
         <span class="hljs-keyword">for</span> element <span class="hljs-keyword">in</span> <span class="hljs-keyword">self</span>.<span class="hljs-built_in">map</span>(f) {
@@ -142,11 +142,11 @@ foo(<span class="hljs-number">10</span>)
 <p>We can also define <code>&lt;*&gt;</code>, to do the same thing:</p>
 <pre><code class=" hljs swift"><span class="hljs-keyword">infix</span> <span class="hljs-keyword">operator</span> &lt;*&gt; { <span class="hljs-keyword">associativity</span> <span class="hljs-keyword">left</span> }
 
-<span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-generics">&lt;*&gt;</span><span class="hljs-generics">&lt;T, U&gt;</span><span class="hljs-params">(f: <span class="hljs-params">(T -&gt; U)</span></span></span>?, a: <span class="hljs-type">T</span>?) -&gt; <span class="hljs-type">U</span>? {
+<span class="hljs-function"><span class="hljs-keyword">func</span> &lt;*&gt;&lt;T, U&gt;<span class="hljs-params">(f: <span class="hljs-params">(T -&gt; U)</span></span></span>?, a: <span class="hljs-type">T?</span>) -&gt; <span class="hljs-type">U?</span> {
   <span class="hljs-keyword">return</span> a.apply(f)
 }
 
-<span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-generics">&lt;*&gt;</span><span class="hljs-generics">&lt;T, U&gt;</span><span class="hljs-params">(f: [T -&gt; U], a: [T])</span></span> -&gt; [<span class="hljs-type">U</span>] {
+<span class="hljs-function"><span class="hljs-keyword">func</span> &lt;*&gt;&lt;T, U&gt;<span class="hljs-params">(f: [T -&gt; U], a: [T])</span></span> -&gt; [<span class="hljs-type">U</span>] {
   <span class="hljs-keyword">return</span> a.apply(f)
 }
 </code></pre>
@@ -165,18 +165,18 @@ foo(<span class="hljs-number">10</span>)
 <p><strong>Note:</strong> the original article now shows how Applicatives are more powerful than Functors in that they allow function application with multiple parameters. Again this is not feasible in vanilla Swift, but we can work around it by defining the function we want to handle in a <a href="https://en.wikipedia.org/wiki/Currying">curried way</a>. </p>
 </blockquote>
 <p>Here’s something you can do with Applicatives that you can’t do with Functors. How do you apply a function that takes two arguments to two wrapped values?</p>
-<pre><code class=" hljs swift"><span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">curriedAddition</span><span class="hljs-params">(a: Int)</span></span>(b: <span class="hljs-type">Int</span>) -&gt; <span class="hljs-type">Int</span> {
+<pre><code class=" hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">curriedAddition</span><span class="hljs-params">(a: Int)</span></span>(b: <span class="hljs-type">Int</span>) -&gt; <span class="hljs-type">Int</span> {
   <span class="hljs-keyword">return</span> a + b
 }
 
 curriedAddition &lt;^&gt; <span class="hljs-type">Optional</span>(<span class="hljs-number">2</span>) &lt;^&gt; <span class="hljs-type">Optional</span>(<span class="hljs-number">3</span>)
-<span class="hljs-comment">// =&gt; COMPILER ERROR: Value of optional type '(Int -&gt; Int)? not unwrapped; did you mean to use '!' or '??'</span>
+<span class="hljs-comment">// =&gt; COMPILER ERROR: Value of optional type &#x27;(Int -&gt; Int)? not unwrapped; did you mean to use &#x27;!&#x27; or &#x27;??&#x27;</span>
 </code></pre>
 <p>Applicatives:</p>
 <pre><code class=" hljs swift">curriedAddition &lt;^&gt; <span class="hljs-type">Optional</span>(<span class="hljs-number">2</span>) &lt;*&gt; <span class="hljs-type">Optional</span>(<span class="hljs-number">3</span>)
 </code></pre>
 <p><code>Applicative</code> pushes <code>Functor</code> aside. “Big boys can use functions with any number of arguments,” it says. “Armed with <code>&lt;^&gt;</code> and <code>&lt;*&gt;</code>, I can take any function that expects any number of unwrapped values. Then I pass it all wrapped values, and I get a wrapped value out! AHAHAHAHAH!”</p>
-<pre><code class=" hljs swift"><span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">curriedTimes</span><span class="hljs-params">(a: Int)</span></span>(b: <span class="hljs-type">Int</span>) -&gt; <span class="hljs-type">Int</span> {
+<pre><code class=" hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">curriedTimes</span><span class="hljs-params">(a: Int)</span></span>(b: <span class="hljs-type">Int</span>) -&gt; <span class="hljs-type">Int</span> {
   <span class="hljs-keyword">return</span> a * b
 }
 
@@ -197,7 +197,7 @@ curriedTimes &lt;^&gt; <span class="hljs-type">Optional</span>(<span class="hljs
 <p>Monads have a function <code>flatMap</code> (<code>liftM</code> in Haskell) to do this. And we can define an infix operator <code>&gt;&gt;-</code> (<code>&gt;&gt;=</code> in Haskell) for it.</p>
 <pre><code class=" hljs swift"><span class="hljs-keyword">infix</span> <span class="hljs-keyword">operator</span> &gt;&gt;- { <span class="hljs-keyword">associativity</span> <span class="hljs-keyword">left</span> }
 
-<span class="hljs-func"><span class="hljs-keyword">func</span> &gt;&gt;-<span class="hljs-generics">&lt;T, U&gt;</span><span class="hljs-params">(a: T?, f: T -&gt; U?)</span></span> -&gt; <span class="hljs-type">U</span>? {
+<span class="hljs-function"><span class="hljs-keyword">func</span> &gt;&gt;-&lt;T, U&gt;<span class="hljs-params">(a: T?, f: T -&gt; U?)</span></span> -&gt; <span class="hljs-type">U?</span> {
   <span class="hljs-keyword">return</span> a.flatMap(f)
 }
 </code></pre>
@@ -208,7 +208,7 @@ curriedTimes &lt;^&gt; <span class="hljs-type">Optional</span>(<span class="hljs
 <p><img src="http://adit.io/imgs/functors/context.png" alt=""></p>
 <p>Just a monad hanging out</p>
 <p>Suppose <code>half</code> is a function that only works on even numbers:</p>
-<pre><code class=" hljs swift"><span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">half</span><span class="hljs-params">(a: Int)</span></span> -&gt; <span class="hljs-type">Int</span>? {
+<pre><code class=" hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">half</span><span class="hljs-params">(a: Int)</span></span> -&gt; <span class="hljs-type">Int?</span> {
   <span class="hljs-keyword">return</span> a % <span class="hljs-number">2</span> == <span class="hljs-number">0</span> ? a / <span class="hljs-number">2</span> : .<span class="hljs-type">None</span>
 }
 </code></pre>
@@ -227,10 +227,10 @@ curriedTimes &lt;^&gt; <span class="hljs-type">Optional</span>(<span class="hljs
 </code></pre>
 <p>What&#39;s happening inside? Let&#39;s look at <code>&gt;&gt;-</code>&#39;s (<code>&gt;&gt;=</code> in Haskell) signature again:</p>
 <pre><code class=" hljs swift"><span class="hljs-comment">// For Optional</span>
-<span class="hljs-func"><span class="hljs-keyword">func</span> &gt;&gt;-<span class="hljs-generics">&lt;T, U&gt;</span><span class="hljs-params">(a: T?, f: T -&gt; U?)</span></span> -&gt; <span class="hljs-type">U</span>?
+<span class="hljs-function"><span class="hljs-keyword">func</span> &gt;&gt;-&lt;T, U&gt;<span class="hljs-params">(a: T?, f: T -&gt; U?)</span></span> -&gt; <span class="hljs-type">U?</span>
 
 <span class="hljs-comment">// For Array</span>
-<span class="hljs-func"><span class="hljs-keyword">func</span> &gt;&gt;-<span class="hljs-generics">&lt;T, U&gt;</span><span class="hljs-params">(a: [T], f: T -&gt; [U])</span></span> -&gt; [<span class="hljs-type">U</span>]
+<span class="hljs-function"><span class="hljs-keyword">func</span> &gt;&gt;-&lt;T, U&gt;<span class="hljs-params">(a: [T], f: T -&gt; [U])</span></span> -&gt; [<span class="hljs-type">U</span>]
 </code></pre>
 <p><img src="http://adit.io/imgs/functors/bind_def.png" alt=""></p>
 <p>So <code>Optional</code> is a Monad. Here it is in action with a <code>.Some(3)</code>!</p>

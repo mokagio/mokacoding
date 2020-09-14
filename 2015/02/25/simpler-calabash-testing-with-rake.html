@@ -10,126 +10,126 @@
 <li>Never forget the syntax and options for a command, they are all written in the Rakefile.</li>
 </ul>
 <p>These tasks will build and run the tests on the Simulator, specifying that we want an iPhone 6 Simulator running iOS 8.1, and that it should be reset before each test case.</p>
-<pre><code class=" hljs ruby"><span class="hljs-variable">@build_dir</span> = ...
-<span class="hljs-variable">@workspace</span> = ...
-<span class="hljs-variable">@scheme</span> = ...
-<span class="hljs-variable">@configuration</span> = ...
-<span class="hljs-variable">@app_name</span> = ...
+<pre><code class=" hljs ruby">@build_dir = ...
+@workspace = ...
+@scheme = ...
+@configuration = ...
+@app_name = ...
 
-desc <span class="hljs-string">'Build a "calabashed" version of the app'</span>
+desc <span class="hljs-string">&#x27;Build a &quot;calabashed&quot; version of the app&#x27;</span>
 task <span class="hljs-symbol">:build</span> <span class="hljs-keyword">do</span>
-  build_fat_binary = &lt;&lt;<span class="hljs-constant">COMMAND</span>
+  build_fat_binary = <span class="hljs-string">&lt;&lt;COMMAND
 xcrun xcodebuild \
--<span class="hljs-constant">SYMROOT</span>=<span class="hljs-comment">#{<span class="hljs-yardoctag">@build</span>_dir} \</span>
--derivedDataPath <span class="hljs-string">"<span class="hljs-subst">#{<span class="hljs-variable">@build_dir</span>}</span>"</span> \
-  <span class="hljs-constant">ARCHS</span>=<span class="hljs-string">"i386 x86_64"</span> \
-  <span class="hljs-constant">VALID_ARCHS</span>=<span class="hljs-string">"i386 x86_64"</span> \
-  <span class="hljs-constant">ONLY_ACTIVE_ARCH</span>=<span class="hljs-constant">NO</span> \
-  -workspace <span class="hljs-comment">#{<span class="hljs-yardoctag">@workspace</span>} \</span>
-  -scheme <span class="hljs-comment">#{<span class="hljs-yardoctag">@scheme</span>} \</span>
+-SYMROOT=<span class="hljs-subst">#{@build_dir}</span> \
+-derivedDataPath &quot;<span class="hljs-subst">#{@build_dir}</span>&quot; \
+  ARCHS=&quot;i386 x86_64&quot; \
+  VALID_ARCHS=&quot;i386 x86_64&quot; \
+  ONLY_ACTIVE_ARCH=NO \
+  -workspace <span class="hljs-subst">#{@workspace}</span> \
+  -scheme <span class="hljs-subst">#{@scheme}</span> \
   -sdk iphonesimulator \
   clean build
-<span class="hljs-constant">COMMAND</span>
+COMMAND</span>
 
   sh build_fat_binary
 <span class="hljs-keyword">end</span>
 
-desc <span class="hljs-string">'Run all the calabash/cucumber acceptance tests on the simulator.'</span>
+desc <span class="hljs-string">&#x27;Run all the calabash/cucumber acceptance tests on the simulator.&#x27;</span>
 task <span class="hljs-symbol">:simulator_tests</span> =&gt; [<span class="hljs-symbol">:build</span>] <span class="hljs-keyword">do</span>
-  app_path = <span class="hljs-string">"<span class="hljs-subst">#{<span class="hljs-variable">@build_dir</span>}</span>/Build/Products/<span class="hljs-subst">#{<span class="hljs-variable">@configuration</span>}</span>-iphonesimulator/<span class="hljs-subst">#{<span class="hljs-variable">@app_name</span>}</span>.app"</span>
+  app_path = <span class="hljs-string">&quot;<span class="hljs-subst">#{@build_dir}</span>/Build/Products/<span class="hljs-subst">#{@configuration}</span>-iphonesimulator/<span class="hljs-subst">#{@app_name}</span>.app&quot;</span>
 
-  run_tests = &lt;&lt;<span class="hljs-constant">COMMAND</span>
+  run_tests = <span class="hljs-string">&lt;&lt;COMMAND
 bundle exec cucumber \
-<span class="hljs-constant">RESET_BETWEEN_SCENARIOS</span>=<span class="hljs-number">1</span> \
-<span class="hljs-constant">DEVICE_TARGET</span>=<span class="hljs-string">'iPhone 6 (8.1 Simulator)'</span> \
-<span class="hljs-constant">APP_BUNDLE_PATH</span>=<span class="hljs-string">"<span class="hljs-subst">#{app_path}</span>"</span> \
-<span class="hljs-constant">COMMAND</span>
+RESET_BETWEEN_SCENARIOS=1 \
+DEVICE_TARGET=&#x27;iPhone 6 (8.1 Simulator)&#x27; \
+APP_BUNDLE_PATH=&quot;<span class="hljs-subst">#{app_path}</span>&quot; \
+COMMAND</span>
 
   sh run_tests
 <span class="hljs-keyword">end</span>
 </code></pre>
 <p>Now instead of typing <code>bundle exec cucumber DEVICE_TARGET=...</code> and all the rest, we can simply do <code>rake simulator_tests</code>. I consider this a huge win.</p>
 <p>When it comes to run tests on device you could use this task.</p>
-<pre><code class=" hljs ruby"><span class="hljs-variable">@ip</span> = ...
-<span class="hljs-variable">@uuid</span> = ...
-<span class="hljs-variable">@bundle_id</span> = ...
+<pre><code class=" hljs ruby">@ip = ...
+@uuid = ...
+@bundle_id = ...
 
-desc <span class="hljs-string">'Run all the calabash/cucumber acceptance tests on the connected device.'</span>
+desc <span class="hljs-string">&#x27;Run all the calabash/cucumber acceptance tests on the connected device.&#x27;</span>
 task <span class="hljs-symbol">:device_tests</span> =&gt; <span class="hljs-keyword">do</span>
-  run_tests = &lt;&lt;<span class="hljs-constant">COMMAND</span>
+  run_tests = <span class="hljs-string">&lt;&lt;COMMAND
 bundle exec cucumber \
-  <span class="hljs-constant">BUNDLE_ID</span>=<span class="hljs-string">"<span class="hljs-subst">#{bundle_id}</span> \
-  DEVICE_ENDPOINT=http://<span class="hljs-subst">#{<span class="hljs-variable">@ip</span>}</span>:37265 \
-  DEVICE_TARGET='<span class="hljs-subst">#{<span class="hljs-variable">@uuid</span>}</span>'
-COMMAND
+  BUNDLE_ID=&quot;<span class="hljs-subst">#{bundle_id}</span> \
+  DEVICE_ENDPOINT=http://<span class="hljs-subst">#{@ip}</span>:37265 \
+  DEVICE_TARGET=&#x27;<span class="hljs-subst">#{@uuid}</span>&#x27;
+COMMAND</span>
 
   sh run_tests
-end</span>
+<span class="hljs-keyword">end</span>
 </code></pre>
 <p>The above tasks has two flaws, the device UUID and ip are hard-coded, and it assumes the app is already on the device.</p>
 <p>We can fix the first issue by moving the configurations in a <code>.yml</code> file.</p>
-<pre><code class=" hljs yaml"><span class="hljs-method">uuid:</span> <span class="hljs-comment">"device UUID"</span>
-<span class="hljs-method">ip:</span> <span class="hljs-comment">"device IP when on the same network as the machine running the tests"</span>
+<pre><code class=" hljs yaml"><span class="hljs-attr">uuid:</span> <span class="hljs-string">&quot;device UUID&quot;</span>
+<span class="hljs-attr">ip:</span> <span class="hljs-string">&quot;device IP when on the same network as the machine running the tests&quot;</span>
 </code></pre>
-<pre><code class=" hljs ruby">desc <span class="hljs-string">'Run all the calabash/cucumber acceptance tests on the connected device.'</span>
+<pre><code class=" hljs ruby">desc <span class="hljs-string">&#x27;Run all the calabash/cucumber acceptance tests on the connected device.&#x27;</span>
 task <span class="hljs-symbol">:device_tests</span> =&gt; <span class="hljs-keyword">do</span>
-  settings_file = <span class="hljs-constant">Dir</span>.pwd + <span class="hljs-string">'/.calabash_device_config.yml'</span>
-  raise <span class="hljs-string">"Missing calabash)device_config.yml in root folder."</span> <span class="hljs-keyword">unless</span> <span class="hljs-constant">File</span>.exists? settings_file
+  settings_file = Dir.pwd + <span class="hljs-string">&#x27;/.calabash_device_config.yml&#x27;</span>
+  raise <span class="hljs-string">&quot;Missing calabash)device_config.yml in root folder.&quot;</span> <span class="hljs-keyword">unless</span> File.exists? settings_file
 
-  configs = <span class="hljs-constant">YAML</span>.load_file settings_file
+  configs = YAML.load_file settings_file
 
-  run_tests = &lt;&lt;<span class="hljs-constant">COMMAND</span>
+  run_tests = <span class="hljs-string">&lt;&lt;COMMAND
 bundle exec cucumber \
-  <span class="hljs-constant">BUNDLE_ID</span>=<span class="hljs-string">"<span class="hljs-subst">#{bundle_id}</span> \
-  DEVICE_ENDPOINT=http://<span class="hljs-subst">#{configs[<span class="hljs-string">'ip'</span>]}</span>:37265 \
-  DEVICE_TARGET='<span class="hljs-subst">#{configs[<span class="hljs-string">'uuid'</span>]}</span>'
-COMMAND
+  BUNDLE_ID=&quot;<span class="hljs-subst">#{bundle_id}</span> \
+  DEVICE_ENDPOINT=http://<span class="hljs-subst">#{configs[<span class="hljs-string">&#x27;ip&#x27;</span>]}</span>:37265 \
+  DEVICE_TARGET=&#x27;<span class="hljs-subst">#{configs[<span class="hljs-string">&#x27;uuid&#x27;</span>]}</span>&#x27;
+COMMAND</span>
 
   sh run_tests
-end</span>
+<span class="hljs-keyword">end</span>
 </code></pre>
 <p>To make this setup team friendly we can add the <code>.yml</code> file to the <code>.gitignore</code> of the project, and track a copy of it with dummy values and <code>.yml.sample</code> instead.</p>
 <p>We&#39;ve removed the need to hardcode UUID and IP, but we&#39;re still depending on the fact that the app is already installed on the device.</p>
 <p>As of Xcode 6.1.1 Apple has not provided a tool to deploy an app on device from the command line  Lucky enough the open source community has a solution for that. <a href="https://github.com/phonegap/ios-deploy">ios-deploy</a>, previously known as <a href="https://github.com/ghughes/fruitstrap">fruitstrap</a>, and maintained by the PhoneGap community, lets you deploy an ipa on a connected device as easily as <code>ios-deploy -b MyApp.ipa</code>.</p>
 <p><em>ios-deploy is distribute via npm, but if you&#39;d like two add it to your project&#39;s Gemfile you can do it thanks to <a href="https://github.com/mokagio/ios-deploy-gem">this gem</a>.</em></p>
 <p>The missing piece of the puzzle is how to build the app in a format that can be deployed to the device. To keep things simple we&#39;re gonna use the <a href="https://github.com/nomad/shenzhen">shenzhen</a> gem. The command needed to build is:</p>
-<pre><code class=""><span class="hljs-comment">ipa</span> <span class="hljs-comment">build</span> <span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-comment">workpace</span> <span class="hljs-string">.</span><span class="hljs-string">.</span><span class="hljs-string">.</span> <span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-comment">configuration</span> <span class="hljs-string">.</span><span class="hljs-string">.</span><span class="hljs-string">.</span> <span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-comment">scheme</span> <span class="hljs-string">.</span><span class="hljs-string">.</span> <span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-comment">archive</span> <span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-comment">sdk</span> <span class="hljs-comment">iphoneos</span> <span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-comment">ipa</span> <span class="hljs-comment">"MyApp</span><span class="hljs-string">.</span><span class="hljs-comment">ipa"</span>
+<pre><code class="">ipa build <span class="hljs-params">--workpace</span> <span class="hljs-string">...</span> <span class="hljs-params">--configuration</span> <span class="hljs-string">...</span> <span class="hljs-params">--scheme</span> <span class="hljs-string">..</span> <span class="hljs-params">--archive</span> <span class="hljs-params">--sdk</span> iphoneos <span class="hljs-params">--ipa</span> <span class="hljs-string">&quot;MyApp.ipa&quot;</span>
 </code></pre><p>Putting it all together:</p>
-<pre><code class=" hljs ruby">desc <span class="hljs-string">'Run all the calabash/cucumber acceptance tests on the connected device.'</span>
+<pre><code class=" hljs ruby">desc <span class="hljs-string">&#x27;Run all the calabash/cucumber acceptance tests on the connected device.&#x27;</span>
 task <span class="hljs-symbol">:device_tests</span> =&gt; <span class="hljs-keyword">do</span>
-  settings_file = <span class="hljs-constant">Dir</span>.pwd + <span class="hljs-string">'/.calabash_device_config.yml'</span>
-  raise <span class="hljs-string">"Missing calabash)device_config.yml in root folder."</span> <span class="hljs-keyword">unless</span> <span class="hljs-constant">File</span>.exists? settings_file
+  settings_file = Dir.pwd + <span class="hljs-string">&#x27;/.calabash_device_config.yml&#x27;</span>
+  raise <span class="hljs-string">&quot;Missing calabash)device_config.yml in root folder.&quot;</span> <span class="hljs-keyword">unless</span> File.exists? settings_file
 
-  configs = <span class="hljs-constant">YAML</span>.load_file settings_file
+  configs = YAML.load_file settings_file
 
   ipa_name = ...
-  archive = &lt;&lt;<span class="hljs-constant">COMMAND</span>
+  archive = <span class="hljs-string">&lt;&lt;COMMAND
 bundle exec ipa build \
   --workpace ... \
   --configuration ... \
   --scheme .. \
   --archive \
   --sdk iphoneos \
-  --ipa <span class="hljs-string">"<span class="hljs-subst">#{ipa_name}</span>"</span>
-<span class="hljs-constant">COMMAND</span>
+  --ipa &quot;<span class="hljs-subst">#{ipa_name}</span>&quot;
+COMMAND</span>
 
-  send_to_device = &lt;&lt;<span class="hljs-constant">COMMAND</span>
+  send_to_device = <span class="hljs-string">&lt;&lt;COMMAND
 bundle exec ios-deploy \
-  --bundle <span class="hljs-comment">#{ipa_name} \</span>
-  --id <span class="hljs-comment">#{configs['uuid']}</span>
-<span class="hljs-constant">COMMAND</span>
+  --bundle <span class="hljs-subst">#{ipa_name}</span> \
+  --id <span class="hljs-subst">#{configs[<span class="hljs-string">&#x27;uuid&#x27;</span>]}</span>
+COMMAND</span>
 
-  run_tests = &lt;&lt;<span class="hljs-constant">COMMAND</span>
+  run_tests = <span class="hljs-string">&lt;&lt;COMMAND
 bundle exec cucumber \
-  <span class="hljs-constant">BUNDLE_ID</span>=<span class="hljs-string">"<span class="hljs-subst">#{bundle_id}</span> \
-  DEVICE_ENDPOINT=http://<span class="hljs-subst">#{configs[<span class="hljs-string">'ip'</span>]}</span>:37265 \
-  DEVICE_TARGET='<span class="hljs-subst">#{configs[<span class="hljs-string">'uuid'</span>]}</span>'
-COMMAND
+  BUNDLE_ID=&quot;<span class="hljs-subst">#{bundle_id}</span> \
+  DEVICE_ENDPOINT=http://<span class="hljs-subst">#{configs[<span class="hljs-string">&#x27;ip&#x27;</span>]}</span>:37265 \
+  DEVICE_TARGET=&#x27;<span class="hljs-subst">#{configs[<span class="hljs-string">&#x27;uuid&#x27;</span>]}</span>&#x27;
+COMMAND</span>
 
   sh archive
   sh send_to_device
   sh run_tests
-end</span>
+<span class="hljs-keyword">end</span>
 </code></pre>
 <p>The task above is doing a lot, imagine if you had to do it every time you want to run tests on the device!</p>
 <p>Setting up these tasks will save you the effort of remembering all the cucumber option, save you typing, and also make the running the acceptance test easy for the team members that don&#39;t know about cucumber and calabash.</p>

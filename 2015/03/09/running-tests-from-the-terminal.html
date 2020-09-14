@@ -10,12 +10,12 @@
 <p>Test a scheme from the build root (SYMROOT).  This requires specifying a scheme and optionally a destination.</p>
 </blockquote>
 <p>After a bit more reading through <code>xcodebuild</code> man page and Apple&#39;s <a href="https://developer.apple.com/library/prerelease/ios/documentation/DeveloperTools/Conceptual/testing_with_xcode/A2-command_line_testing/A2-command_line_testing.html">Command-Line Testing resource</a> we can write the minimum viable command to run our tests:</p>
-<pre><code class="">xcodebuild \
-  -<span class="ruby">workspace <span class="hljs-constant">MyAwesomeApp</span>.xcworkspace \
-</span>  -<span class="ruby">scheme <span class="hljs-constant">MyAwesomeApp</span> \
-</span>  -<span class="ruby">sdk iphonesimulator \
-</span>  -<span class="ruby">destination <span class="hljs-string">'platform=iOS Simulator,name=iPhone 6,OS=8.1'</span> \
-</span>  test
+<pre><code class="">xcodebuild <span class="hljs-string">\</span>
+  -workspace MyAwesomeApp.xcworkspace <span class="hljs-string">\</span>
+  -scheme MyAwesomeApp <span class="hljs-string">\</span>
+  -sdk iphonesimulator <span class="hljs-string">\</span>
+  -destination <span class="hljs-string">&#x27;platform=iOS Simulator,name=iPhone 6,OS=8.1&#x27;</span> <span class="hljs-string">\</span>
+  test
 </code></pre><p>Note that we&#39;re assuming that MyAwesomeApp uses CocoaPods, therefore we&#39;re using the <code>-workspace</code> option, which then requires to use <code>-scheme</code>.</p>
 <p>You can use <code>instruments -s devices</code> to see a list of know devices to use in the <code>-destination</code> option, <a href="http://mokagio.github.io/tech-journal/2015/03/12/xcode-list-available-devices.html">more here</a>.</p>
 <p>If you try to do this you&#39;ll see something like this:</p>
@@ -23,20 +23,20 @@
 <p>Not a very pleasant output is it?</p>
 <p>This is where <a href="https://github.com/supermarin/xcpretty"><code>xcpretty</code></a> comes to the rescue. <code>xcpretty</code> is a tool designed to format <code>xcodebuild</code>&#39;s output, and make it human readable.</p>
 <p>Using <code>xcpretty</code> is very simple:</p>
-<pre><code class="">xcodebuild \
-  -<span class="ruby">workspace <span class="hljs-constant">MyAwesomeApp</span>.xcworkspace \
-</span>  -<span class="ruby">scheme <span class="hljs-constant">MyAwesomeApp</span> \
-</span>  -<span class="ruby">sdk iphonesimulator \
-</span>  -<span class="ruby">destination <span class="hljs-string">'platform=iOS Simulator,name=iPhone 6,OS=8.1'</span> \
-</span>  test | xcpretty
+<pre><code class="">xcodebuild <span class="hljs-string">\</span>
+  -workspace MyAwesomeApp.xcworkspace <span class="hljs-string">\</span>
+  -scheme MyAwesomeApp <span class="hljs-string">\</span>
+  -sdk iphonesimulator <span class="hljs-string">\</span>
+  -destination <span class="hljs-string">&#x27;platform=iOS Simulator,name=iPhone 6,OS=8.1&#x27;</span> <span class="hljs-string">\</span>
+  test | xcpretty
 </code></pre><p><img src="https://s3.amazonaws.com/mokacoding/xcodebuild-xcpretty.gif" alt="xcodebuild test with xcpretty output"></p>
 <p>If you&#39;re an <a href="http://rspec.info/">RSpec</a> fan like me, that you&#39;ll want <em>the green dots</em> in your tests output:</p>
-<pre><code class="">xcodebuild \
-  -<span class="ruby">workspace <span class="hljs-constant">MyAwesomeApp</span>.xcworkspace \
-</span>  -<span class="ruby">scheme <span class="hljs-constant">MyAwesomeApp</span> \
-</span>  -<span class="ruby">sdk iphonesimulator \
-</span>  -<span class="ruby">destination <span class="hljs-string">'platform=iOS Simulator,name=iPhone 6,OS=8.1'</span> \
-</span>  test | xcpretty --test --color
+<pre><code class="">xcodebuild <span class="hljs-string">\</span>
+  -workspace MyAwesomeApp.xcworkspace <span class="hljs-string">\</span>
+  -scheme MyAwesomeApp <span class="hljs-string">\</span>
+  -sdk iphonesimulator <span class="hljs-string">\</span>
+  -destination <span class="hljs-string">&#x27;platform=iOS Simulator,name=iPhone 6,OS=8.1&#x27;</span> <span class="hljs-string">\</span>
+  test | xcpretty --test --color
 </code></pre><p><img src="https://s3.amazonaws.com/mokacoding/xcodebuild-xcpretty-test.gif" alt="xcodebuild test with xcpretty RSpec style output"></p>
 <p>You might now ask <em>&quot;This is all interesting and colorful, but why should I use it?&quot;</em>. Here&#39;s some reasons why I like running tests from the terminal, and why you might like it too:</p>
 <h4 id="that-s-what-the-ci-is-doing">That&#39;s what the CI is doing</h4>

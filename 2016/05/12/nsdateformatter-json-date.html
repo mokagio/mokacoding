@@ -7,23 +7,23 @@ standard way to formate date strings in JSON is to use the same format as
 Javascript&#39;s <code>Date</code>
 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toJSON"><code>toJSON</code></a>
 method, whic is <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> compliant.</p>
-<pre><code class="">2016<span class="hljs-tag">-05-11T19</span><span class="hljs-pseudo">:02</span><span class="hljs-pseudo">:16</span><span class="hljs-class">.238Z</span>
+<pre><code class=""><span class="hljs-attribute">2016</span>-<span class="hljs-number">05</span>-<span class="hljs-number">11</span>T<span class="hljs-number">19</span>:<span class="hljs-number">02</span>:<span class="hljs-number">16</span>.<span class="hljs-number">238</span>Z
 </code></pre><p>Here&#39;s how to configure <code>NSDateFormatter</code> to handle this date format:</p>
-<pre><code class=" hljs swift"><span class="hljs-keyword">import</span> <span class="hljs-type">Foundation</span>
+<pre><code class=" hljs swift"><span class="hljs-keyword">import</span> Foundation
 
 <span class="hljs-class"><span class="hljs-keyword">extension</span> <span class="hljs-title">NSDateFormatter</span> </span>{
 
-  <span class="hljs-keyword">static</span> <span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">formatterForJSONDate</span><span class="hljs-params">()</span></span> -&gt; <span class="hljs-type">NSDateFormatter</span> {
+  <span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">formatterForJSONDate</span><span class="hljs-params">()</span></span> -&gt; <span class="hljs-type">NSDateFormatter</span> {
     <span class="hljs-keyword">let</span> formatter = <span class="hljs-type">NSDateFormatter</span>()
-    formatter.dateFormat = <span class="hljs-string">"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"</span>
+    formatter.dateFormat = <span class="hljs-string">&quot;yyyy-MM-dd&#x27;T&#x27;HH:mm:ss.SSS&#x27;Z&#x27;&quot;</span>
     formatter.timeZone = <span class="hljs-type">NSTimeZone</span>(forSecondsFromGMT: <span class="hljs-number">0</span>)
-    formatter.locale = <span class="hljs-type">NSLocale</span>(localeIdentifier: <span class="hljs-string">"en_US_POSIX"</span>)
+    formatter.locale = <span class="hljs-type">NSLocale</span>(localeIdentifier: <span class="hljs-string">&quot;en_US_POSIX&quot;</span>)
     <span class="hljs-keyword">return</span> formatter
   }
 }
 </code></pre>
 <p>And here&#39;s a test for it:</p>
-<pre><code class=" hljs swift"><span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">testProperty</span><span class="hljs-params">()</span></span> {
+<pre><code class=" hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">testProperty</span><span class="hljs-params">()</span></span> {
     <span class="hljs-keyword">let</span> now = <span class="hljs-type">NSDate</span>()
     <span class="hljs-keyword">let</span> nowToJSON = sut.stringFromDate(now)
     <span class="hljs-type">XCTAssertEqualWithAccuracy</span>(sut.dateFromString(nowToJSON)!.timeIntervalSince1970, now.timeIntervalSince1970, accuracy: <span class="hljs-number">0.001</span>)

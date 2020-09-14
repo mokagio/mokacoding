@@ -2,25 +2,25 @@
 </p></div></div></div></div><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">unit and acceptance testing, automation, productivity</div><div class="links"><a href="/archive.html">Archive</a><a href="/tags.html">Tags</a><a href="https://gio.codes">About</a><a href="#subscribe">Subscribe</a><a href="/feed.xml"><i class="fa fa-rss"></i></a></div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/upgrading-podfile">A caveat when upgrading a Podfile</a></h2><p class="post-meta"><span class="post-date">Fri Mar 28 2014&nbsp;</span><a href="/tag/CocoaPods/index.html" class="post-tag">-CocoaPods</a></p><div class="post"><p>I recently went through the process of upgrading a <code>Podfile</code> from a legacy codebase and bumped into an issue with a very simple solution, for those who understand how <a href="http://cocoapods.org">CocoaPods</a> works under the hood.</p>
 <p>I made an example project to show the behaviour, check it out <a href="https://github.com/mokagio/mokacoding-samples/tree/podfile-upgrade">here</a>.</p>
 <p>The <code>Podfile</code> looked like this:</p>
-<pre><code class=" hljs ruby">link_with [<span class="hljs-string">'MyProject'</span>, <span class="hljs-string">'MyProjectTests'</span>]
+<pre><code class=" hljs ruby">link_with [<span class="hljs-string">&#x27;MyProject&#x27;</span>, <span class="hljs-string">&#x27;MyProjectTests&#x27;</span>]
 
-pod <span class="hljs-string">'AFNetworking'</span>
-pod <span class="hljs-string">'Kiwi'</span>
+pod <span class="hljs-string">&#x27;AFNetworking&#x27;</span>
+pod <span class="hljs-string">&#x27;Kiwi&#x27;</span>
 </code></pre>
 <p>(<em>it was actually longer an messier, with random newlines a lot of pods commented out, but no need to inflict you with that</em>)</p>
 <p>Apart from the obsolete <code>Podfile</code> style, there&#39;s one big issue; <a href="https://github.com/allending/Kiwi">Kiwi</a> should be linked only in the test target, as it is a testing framework.</p>
 <p>Updating the <code>Podfile</code> into a more semantic and not leaky one was simple:</p>
 <pre><code class=" hljs ruby">target <span class="hljs-symbol">:MyProject</span> <span class="hljs-keyword">do</span>
-  pod <span class="hljs-string">'AFNetworking'</span>
+  pod <span class="hljs-string">&#x27;AFNetworking&#x27;</span>
 <span class="hljs-keyword">end</span>
 
-target <span class="hljs-symbol">:MyProjectTests</span>, <span class="hljs-symbol">:exclusive</span> =&gt; <span class="hljs-keyword">true</span> <span class="hljs-keyword">do</span>
-  pod <span class="hljs-string">'Kiwi'</span>
+target <span class="hljs-symbol">:MyProjectTests</span>, <span class="hljs-symbol">:exclusive</span> =&gt; <span class="hljs-literal">true</span> <span class="hljs-keyword">do</span>
+  pod <span class="hljs-string">&#x27;Kiwi&#x27;</span>
 <span class="hljs-keyword">end</span>
 </code></pre>
 <p>So far so good, but at that point after running <code>pod install</code> the project didn&#39;t build anymore! The error was:</p>
-<pre><code class="">ld: <span class="hljs-keyword">library</span> <span class="hljs-keyword">not</span> found <span class="hljs-keyword">for</span> -lPods
-clang: error: linker command failed <span class="hljs-keyword">with</span> <span class="hljs-keyword">exit</span> code <span class="hljs-number">1</span> (<span class="hljs-keyword">use</span> -v <span class="hljs-keyword">to</span> see invocation)
+<pre><code class="">ld: library not found <span class="hljs-keyword">for</span> -lPods
+clang: error: linker command failed with <span class="hljs-keyword">exit</span> code <span class="hljs-number">1</span> (use -v to see invocation)
 </code></pre><p>This happens to be a pretty common error, specially for newbies, and in the <a href="http://guides.cocoapods.org/using/troubleshooting.html#using-the-cocoapods-project">CocoaPods Troubleshooting page</a> there&#39;s a solution for it...</p>
 <p>...that in our case doesn&#39;t work!</p>
 <p>After a non irrelevant amount of time spent deleting Derived Data and googling I went back to the error and asked myself: <em>what does <code>library not found for -lPods</code> mean?</em> It means that something that should be there is not there anymore! <em>And what&#39;s missing?__ <code>library not found</code>. _And where are the libraries?</em> In the &quot;Link Binary With Libraries&quot; section of the target build phase. Daaah.</p>

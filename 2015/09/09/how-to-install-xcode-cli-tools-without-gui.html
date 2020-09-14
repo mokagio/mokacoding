@@ -5,25 +5,25 @@
 <p><a href="http://railsapps.github.io/xcode-command-line-tools.html">Another option</a> is to open a Terminal and type <code>xcode-select --install</code>.</p>
 <p>Both the options above have a flaw: they require a GUI. That is not optimal when trying to setup a VM in an automated way.</p>
 <p>In <a href="http://apple.stackexchange.com/questions/107307/how-can-i-install-the-command-line-tools-completely-from-the-command-line">this AskDifferent answer</a> a solution without GUI is proposed, and here you can find my spin on it:</p>
-<pre><code class=""><span class="hljs-shebang">#!/bin/bash
-</span>
+<pre><code class=""><span class="hljs-meta">#!/bin/bash</span>
+
 <span class="hljs-comment"># See http://apple.stackexchange.com/questions/107307/how-can-i-install-the-command-line-tools-completely-from-the-command-line</span>
 
-<span class="hljs-built_in">echo</span> <span class="hljs-string">"Checking Xcode CLI tools"</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Checking Xcode CLI tools&quot;</span>
 <span class="hljs-comment"># Only run if the tools are not installed yet</span>
 <span class="hljs-comment"># To check that try to print the SDK path</span>
 xcode-select -p &amp;&gt; /dev/null
-<span class="hljs-keyword">if</span> [ $? <span class="hljs-operator">-ne</span> <span class="hljs-number">0</span> ]; <span class="hljs-keyword">then</span>
-  <span class="hljs-built_in">echo</span> <span class="hljs-string">"Xcode CLI tools not found. Installing them..."</span>
+<span class="hljs-keyword">if</span> [ $? -ne 0 ]; <span class="hljs-keyword">then</span>
+  <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Xcode CLI tools not found. Installing them...&quot;</span>
   touch /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress;
-  PROD=$(softwareupdate <span class="hljs-operator">-l</span> |
-    grep <span class="hljs-string">"\*.*Command Line"</span> |
-    head -n <span class="hljs-number">1</span> | awk -F<span class="hljs-string">"*"</span> <span class="hljs-string">'{print $2}'</span> |
-    sed <span class="hljs-operator">-e</span> <span class="hljs-string">'s/^ *//'</span> |
-    tr <span class="hljs-operator">-d</span> <span class="hljs-string">'\n'</span>)
-  softwareupdate -i <span class="hljs-string">"<span class="hljs-variable">$PROD</span>"</span> -v;
+  PROD=$(softwareupdate -l |
+    grep <span class="hljs-string">&quot;\*.*Command Line&quot;</span> |
+    head -n 1 | awk -F<span class="hljs-string">&quot;*&quot;</span> <span class="hljs-string">&#x27;{print $2}&#x27;</span> |
+    sed -e <span class="hljs-string">&#x27;s/^ *//&#x27;</span> |
+    tr -d <span class="hljs-string">&#x27;\n&#x27;</span>)
+  softwareupdate -i <span class="hljs-string">&quot;<span class="hljs-variable">$PROD</span>&quot;</span> -v;
 <span class="hljs-keyword">else</span>
-  <span class="hljs-built_in">echo</span> <span class="hljs-string">"Xcode CLI tools OK"</span>
+  <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Xcode CLI tools OK&quot;</span>
 <span class="hljs-keyword">fi</span>
 </code></pre><p>Easy peasy ☺️ I also made a gist with this, which you can download <a href="https://gist.github.com/mokagio/b974620ee8dcf5c0671f">here</a>.</p>
 <p><em>Happy coding, and leave the codebase better than you found it</em></p>

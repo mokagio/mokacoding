@@ -6,12 +6,12 @@
 <p>A question I often get asked is &quot;what code coverage value should we use?&quot;. Code coverage is like IQ, it&#39;s an incomplete metric for how good a codebase and its test suite actually are.</p>
 <p>Here&#39;s an example of code coverage false positives:</p>
 <pre><code class=" hljs swift"><span class="hljs-comment">// Source.swift</span>
-<span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">element</span><span class="hljs-params">(atIndex index: Int, of array: [Int])</span></span> -&gt; <span class="hljs-type">Int</span> {
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">element</span><span class="hljs-params">(atIndex index: Int, of array: [Int])</span></span> -&gt; <span class="hljs-type">Int</span> {
     <span class="hljs-keyword">return</span> array[index]
 }
 
 <span class="hljs-comment">// Tests.swift</span>
-<span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">testArrayAccess</span><span class="hljs-params">()</span></span> {
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">testArrayAccess</span><span class="hljs-params">()</span></span> {
     <span class="hljs-type">XCTAssertEqual</span>(element(atIndex: <span class="hljs-number">0</span>, of: [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]), <span class="hljs-number">1</span>)
 }
 </code></pre>
@@ -28,14 +28,14 @@
 <span class="hljs-class"><span class="hljs-keyword">extension</span> <span class="hljs-title">Post</span> </span>{
 
     <span class="hljs-keyword">init</span>?(fromJSON json: <span class="hljs-type">String</span>) {
-        <span class="hljs-comment">// TODO: remove dummy implementation</span>
-        <span class="hljs-keyword">self</span>.title = <span class="hljs-string">"dummy"</span>
-        <span class="hljs-keyword">self</span>.body = <span class="hljs-string">"lorem ipsum"</span>
+        <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> remove dummy implementation</span>
+        <span class="hljs-keyword">self</span>.title = <span class="hljs-string">&quot;dummy&quot;</span>
+        <span class="hljs-keyword">self</span>.body = <span class="hljs-string">&quot;lorem ipsum&quot;</span>
     }
 }
 
 <span class="hljs-comment">// Tests.swift</span>
-<span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">testPostFromJSON</span><span class="hljs-params">()</span></span> {
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">testPostFromJSON</span><span class="hljs-params">()</span></span> {
   <span class="hljs-keyword">let</span> post = <span class="hljs-type">Post</span>(fromJSON: loadJSONFixture())
   <span class="hljs-type">XCTAssertNotNil</span>(post)
 }

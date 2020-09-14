@@ -14,15 +14,15 @@ operation.</p>
 <p>The object and its delegate protocol usually look something like this:</p>
 <pre><code class=" hljs swift"><span class="hljs-class"><span class="hljs-keyword">protocol</span> <span class="hljs-title">Delegate</span>: <span class="hljs-title">class</span> </span>{
 
-  <span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">somethingWithDelegate</span><span class="hljs-params">(something: SomethingWithDelegate, didAsyncStuffWithResult result: Bool)</span></span>
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">somethingWithDelegate</span><span class="hljs-params">(something: SomethingWithDelegate, didAsyncStuffWithResult result: Bool)</span></span>
 }
 
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SomethingWithDelegate</span> </span>{
-  <span class="hljs-keyword">weak</span> <span class="hljs-keyword">var</span> delegate: <span class="hljs-type">Delegate</span>?
+  <span class="hljs-keyword">weak</span> <span class="hljs-keyword">var</span> delegate: <span class="hljs-type">Delegate?</span>
 
-  <span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">doAsyncStuff</span><span class="hljs-params">()</span></span> {
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">doAsyncStuff</span><span class="hljs-params">()</span></span> {
         <span class="hljs-comment">// does async operation, and when operation is completed...</span>
-        <span class="hljs-keyword">self</span>.delegate?.somethingWithDelegate(<span class="hljs-keyword">self</span>, didAsyncStuffWithResult: <span class="hljs-built_in">true</span>)
+        <span class="hljs-keyword">self</span>.delegate?.somethingWithDelegate(<span class="hljs-keyword">self</span>, didAsyncStuffWithResult: <span class="hljs-literal">true</span>)
   }
 }
 </code></pre>
@@ -44,16 +44,16 @@ is still appropriate though, because of the capturing behaviour.</p>
 <pre><code class=" hljs swift"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SpyDelegate</span>: <span class="hljs-title">Delegate</span> </span>{
 
   <span class="hljs-comment">// Setting .None is unnecessary, but helps with clarity imho</span>
-  <span class="hljs-keyword">var</span> somethingWithDelegateAsyncResult: <span class="hljs-type">Bool</span>? = .<span class="hljs-type">None</span>
+  <span class="hljs-keyword">var</span> somethingWithDelegateAsyncResult: <span class="hljs-type">Bool?</span> = .<span class="hljs-type">None</span>
 
   <span class="hljs-comment">// Async test code needs to fulfill the XCTestExpecation used for the test</span>
     <span class="hljs-comment">// when all the async operations have been completed. For this reason we need</span>
     <span class="hljs-comment">// to store a reference to the expectation</span>
-  <span class="hljs-keyword">var</span> asyncExpectation: <span class="hljs-type">XCTestExpectation</span>?
+  <span class="hljs-keyword">var</span> asyncExpectation: <span class="hljs-type">XCTestExpectation?</span>
 
-  <span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">somethingWithDelegate</span><span class="hljs-params">(something: SomethingWithDelegate, didAsyncStuffWithResult result: Bool)</span></span> {
-    guard <span class="hljs-keyword">let</span> expectation = asyncExpectation <span class="hljs-keyword">else</span> {
-      <span class="hljs-type">XCTFail</span>(<span class="hljs-string">"SpyDelegate was not setup correctly. Missing XCTExpectation reference"</span>)
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">somethingWithDelegate</span><span class="hljs-params">(something: SomethingWithDelegate, didAsyncStuffWithResult result: Bool)</span></span> {
+    <span class="hljs-keyword">guard</span> <span class="hljs-keyword">let</span> expectation = asyncExpectation <span class="hljs-keyword">else</span> {
+      <span class="hljs-type">XCTFail</span>(<span class="hljs-string">&quot;SpyDelegate was not setup correctly. Missing XCTExpectation reference&quot;</span>)
       <span class="hljs-keyword">return</span>
     }
 
@@ -66,23 +66,23 @@ is still appropriate though, because of the capturing behaviour.</p>
 and exercise the method under test <a href="https://www.mokacoding.com/blog/testing-callbacks-in-swift-with-xctest/">in an asynchronous way</a>.</p>
 <pre><code class=" hljs swift"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DelegateTestExample</span>: <span class="hljs-title">XCTestCase</span> </span>{
 
-  <span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">testDelegateMethodIsCalledAsync</span><span class="hljs-params">()</span></span> {
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">testDelegateMethodIsCalledAsync</span><span class="hljs-params">()</span></span> {
     <span class="hljs-keyword">let</span> something = <span class="hljs-type">SomethingWithDelegate</span>()
     <span class="hljs-keyword">let</span> spyDelegate = <span class="hljs-type">SpyDelegate</span>()
     something.delegate = spyDelegate
 
-    <span class="hljs-keyword">let</span> expectation = expectationWithDescription(<span class="hljs-string">"SomethingWithDelegate calls the delegate as the result of an async method completion"</span>)
+    <span class="hljs-keyword">let</span> expectation = expectationWithDescription(<span class="hljs-string">&quot;SomethingWithDelegate calls the delegate as the result of an async method completion&quot;</span>)
     spyDelegate.asyncExpectation = expectation
 
     something.doAsyncStuff()
 
     waitForExpectationsWithTimeout(<span class="hljs-number">1</span>) { error <span class="hljs-keyword">in</span>
       <span class="hljs-keyword">if</span> <span class="hljs-keyword">let</span> error = error {
-        <span class="hljs-type">XCTFail</span>(<span class="hljs-string">"waitForExpectationsWithTimeout errored: <span class="hljs-subst">\(error)</span>"</span>)
+        <span class="hljs-type">XCTFail</span>(<span class="hljs-string">&quot;waitForExpectationsWithTimeout errored: \(error)&quot;</span>)
       }
 
-      guard <span class="hljs-keyword">let</span> result = spyDelegate.somethingWithDelegateAsyncResult <span class="hljs-keyword">else</span> {
-        <span class="hljs-type">XCTFail</span>(<span class="hljs-string">"Expected delegate to be called"</span>)
+      <span class="hljs-keyword">guard</span> <span class="hljs-keyword">let</span> result = spyDelegate.somethingWithDelegateAsyncResult <span class="hljs-keyword">else</span> {
+        <span class="hljs-type">XCTFail</span>(<span class="hljs-string">&quot;Expected delegate to be called&quot;</span>)
         <span class="hljs-keyword">return</span>
       }
 
@@ -97,20 +97,20 @@ for testing async code executing a callback, but they are conceptually identical
 <p>The same approach can be used to test that a class with a delegate properly sets
 the value of a property or calls a synchronous method on it.</p>
 <pre><code class=" hljs swift"><span class="hljs-class"><span class="hljs-keyword">protocol</span> <span class="hljs-title">Delegate</span>: <span class="hljs-title">class</span> </span>{
-    <span class="hljs-keyword">var</span> property: <span class="hljs-type">Int</span>? { <span class="hljs-keyword">get</span> <span class="hljs-keyword">set</span> }
+    <span class="hljs-keyword">var</span> property: <span class="hljs-type">Int?</span> { <span class="hljs-keyword">get</span> <span class="hljs-keyword">set</span> }
 }
 
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DelegateTestExample</span>: <span class="hljs-title">XCTestCase</span> </span>{
 
-    <span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">testDelegatePropertySet</span><span class="hljs-params">()</span></span> {
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">testDelegatePropertySet</span><span class="hljs-params">()</span></span> {
         <span class="hljs-keyword">let</span> something = <span class="hljs-type">SomethingWithDelegate</span>()
         <span class="hljs-keyword">let</span> spyDelegate = <span class="hljs-type">SpyDelegate</span>()
         something.delegate = spyDelegate
 
         something.methodResultingInDelegatePropertySet()
 
-        guard <span class="hljs-keyword">let</span> propertyValue = spyDelegate.property <span class="hljs-keyword">else</span> {
-            <span class="hljs-type">XCTFail</span>(<span class="hljs-string">"Expected delegate to be called"</span>)
+        <span class="hljs-keyword">guard</span> <span class="hljs-keyword">let</span> propertyValue = spyDelegate.property <span class="hljs-keyword">else</span> {
+            <span class="hljs-type">XCTFail</span>(<span class="hljs-string">&quot;Expected delegate to be called&quot;</span>)
             <span class="hljs-keyword">return</span>
         }
 

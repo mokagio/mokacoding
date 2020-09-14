@@ -29,8 +29,8 @@ express their nullability: <code>Optional&lt;Type&gt;</code>.</p>
 <p>The cool thing about Swift and Optionals is that if a type is not optional, you
 can be sure that a value of such type won&#39;t be nil.</p>
 <p>This code <strong>will not compile</strong>:</p>
-<pre><code class=" hljs swift"><span class="hljs-keyword">let</span> x: <span class="hljs-type">String</span> = <span class="hljs-built_in">nil</span>
-<span class="hljs-comment">// error: nil cannot initialize specified type 'String'</span>
+<pre><code class=" hljs swift"><span class="hljs-keyword">let</span> x: <span class="hljs-type">String</span> = <span class="hljs-literal">nil</span>
+<span class="hljs-comment">// error: nil cannot initialize specified type &#x27;String&#x27;</span>
 </code></pre>
 <p>This is pretty cool. It means that if you receive a type that is not <code>Optional</code>
 you don&#39;t have to worry about nullability. This takes away a lot of mental load
@@ -42,16 +42,16 @@ also saw that <code>?</code> is just syntactic sugar for the full <code>Optional
 <p>These lines do the same thing:</p>
 <pre><code class=" hljs swift"><span class="hljs-keyword">let</span> a: <span class="hljs-type">Optional</span>&lt;<span class="hljs-type">Int</span>&gt; = <span class="hljs-number">42</span>
 
-<span class="hljs-keyword">let</span> b: <span class="hljs-type">Int</span>? = <span class="hljs-number">42</span>
+<span class="hljs-keyword">let</span> b: <span class="hljs-type">Int?</span> = <span class="hljs-number">42</span>
 </code></pre>
 <p>The compiler helps us out when dealing with optionals by preventing us from
 using an optional value as if it was an actual value:</p>
-<pre><code class=" hljs swift"><span class="hljs-keyword">var</span> x: <span class="hljs-type">String</span>? = <span class="hljs-string">"abc"</span>
+<pre><code class=" hljs swift"><span class="hljs-keyword">var</span> x: <span class="hljs-type">String?</span> = <span class="hljs-string">&quot;abc&quot;</span>
 
 x.isEmpty
-<span class="hljs-comment">// ^__ won't compile:</span>
+<span class="hljs-comment">// ^__ won&#x27;t compile:</span>
 <span class="hljs-comment">//</span>
-<span class="hljs-comment">// error: value of optional type 'Optional&lt;String&gt;' not unwrapped; did you mean to use '!' or '?'?</span>
+<span class="hljs-comment">// error: value of optional type &#x27;Optional&lt;String&gt;&#x27; not unwrapped; did you mean to use &#x27;!&#x27; or &#x27;?&#x27;?</span>
 </code></pre>
 <p>We can&#39;t call <code>isEmpty</code> directly on our <code>String?</code> value, because we don&#39;t know
 if it&#39;s nil or not.</p>
@@ -61,7 +61,7 @@ the compiler error suggests.</p>
 <pre><code class=" hljs swift"><span class="hljs-keyword">if</span> <span class="hljs-keyword">let</span> someString = x {
   someString.isEmpty
 } <span class="hljs-keyword">else</span> {
-  <span class="hljs-built_in">print</span>(<span class="hljs-string">"Sorry mate, x is nil"</span>)
+  <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Sorry mate, x is nil&quot;</span>)
 }
 </code></pre>
 <p>Another option is to access it like this:</p>
@@ -87,18 +87,18 @@ like every other good machine will do what its told and proceed to unwrap the
 than not proved wrong, leaving your software to deal with a <code>nil</code> value at
 runtime.  And there&#39;s only one result there: it will crash.</p>
 <p>Consider this:</p>
-<pre><code class=" hljs swift"><span class="hljs-keyword">let</span> sneakyNilValue: <span class="hljs-type">Optional</span>&lt;<span class="hljs-type">String</span>&gt; = <span class="hljs-built_in">nil</span>
+<pre><code class=" hljs swift"><span class="hljs-keyword">let</span> sneakyNilValue: <span class="hljs-type">Optional</span>&lt;<span class="hljs-type">String</span>&gt; = <span class="hljs-literal">nil</span>
 <span class="hljs-keyword">let</span> x: <span class="hljs-type">Bool</span> = sneakyNilValue!.isEmpty
 </code></pre>
 <p>The compiler will consider <code>sneakyNilValue!</code> as unwrappable without needing to
 check, and compile all right. At runtime <code>.isEmpty</code> will be called on what is
 expected to be a <code>String</code>, but is actually <code>nil</code>, with this result:</p>
-<pre><code class="">fatal error: unexpectedly found nil while unwrapping an Optional value
-Current stack trace:
-<span class="hljs-number">0</span>    libswiftCore<span class="hljs-class">.dylib</span>                 <span class="hljs-number">0</span>x000000010a2fd730 swift_reportError + <span class="hljs-number">132</span>
-<span class="hljs-number">1</span>    libswiftCore<span class="hljs-class">.dylib</span>                 <span class="hljs-number">0</span>x000000010a319cf0 _swift_stdlib_reportFatalError + <span class="hljs-number">61</span>
-<span class="hljs-number">2</span>    libswiftCore<span class="hljs-class">.dylib</span>                 <span class="hljs-number">0</span>x000000010a11e300 specialized specialized StaticString.withUTF8Buffer&lt;A&gt; (invoke : (UnsafeBufferPointer&lt;UInt8&gt;) -&gt; A) -&gt; A + <span class="hljs-number">351</span>
-...
+<pre><code class=""><span class="hljs-attr">fatal error:</span> <span class="hljs-string">unexpectedly</span> <span class="hljs-string">found</span> <span class="hljs-string">nil</span> <span class="hljs-string">while</span> <span class="hljs-string">unwrapping</span> <span class="hljs-string">an</span> <span class="hljs-string">Optional</span> <span class="hljs-string">value</span>
+<span class="hljs-attr">Current stack trace:</span>
+<span class="hljs-number">0</span>    <span class="hljs-string">libswiftCore.dylib</span>                 <span class="hljs-number">0x000000010a2fd730</span> <span class="hljs-string">swift_reportError</span> <span class="hljs-string">+</span> <span class="hljs-number">132</span>
+<span class="hljs-number">1</span>    <span class="hljs-string">libswiftCore.dylib</span>                 <span class="hljs-number">0x000000010a319cf0</span> <span class="hljs-string">_swift_stdlib_reportFatalError</span> <span class="hljs-string">+</span> <span class="hljs-number">61</span>
+<span class="hljs-number">2</span>    <span class="hljs-string">libswiftCore.dylib</span>                 <span class="hljs-number">0x000000010a11e300</span> <span class="hljs-string">specialized</span> <span class="hljs-string">specialized</span> <span class="hljs-string">StaticString.withUTF8Buffer&lt;A&gt;</span> <span class="hljs-string">(invoke</span> <span class="hljs-string">:</span> <span class="hljs-string">(UnsafeBufferPointer&lt;UInt8&gt;)</span> <span class="hljs-string">-&gt;</span> <span class="hljs-string">A)</span> <span class="hljs-string">-&gt;</span> <span class="hljs-string">A</span> <span class="hljs-string">+</span> <span class="hljs-number">351</span>
+<span class="hljs-string">...</span>
 </code></pre><p>This is the reason I told my colleagues &quot;The <code>!</code>s are <strong>very dangerous</strong>, and
 should be used only in extreme circumstances.&quot;.</p>
 <p><del>Implicitly unwrapping</del> Force unwrap gives you the power to treat

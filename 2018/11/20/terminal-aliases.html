@@ -21,10 +21,10 @@
 </ul>
 <p>Notice how they are all just a few letters long. That&#39;s the power of aliases, they make running long commands a matter of typing a few keystrokes.</p>
 <p>My longest alias is <code>glg</code>. It prints the Git log formatted in a compact way which also shows branches relationship.</p>
-<pre><code class="">alias glg=<span class="hljs-string">"git log \
+<pre><code class="">alias glg=<span class="hljs-string">&quot;git log \
   --graph \
-  --pretty=format:'<span class="hljs-variable">%Cred</span><span class="hljs-variable">%h</span><span class="hljs-variable">%Creset</span> -<span class="hljs-variable">%C</span>(yellow)<span class="hljs-variable">%d</span><span class="hljs-variable">%Creset</span> <span class="hljs-variable">%s</span> <span class="hljs-variable">%Cgreen</span>(<span class="hljs-variable">%cr</span>) <span class="hljs-variable">%C</span>(bold blue) <span class="hljs-variable">%an</span><span class="hljs-variable">%Creset</span>' \
-  --abbrev-commit"</span>
+  --pretty=format:&#x27;%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue) %an%Creset&#x27; \
+  --abbrev-commit&quot;</span>
 </code></pre><p>Imaging having to write all that instead!</p>
 <p>If you&#39;re looking for inspiration to create aliases you can find all mine <a href="https://github.com/mokagio/dotfiles/blob/master/aliases">here</a>.</p>
 <p>While working be mindful of the commands you used the most. Once you find yourself using a command a few times during the day create an alias for it. After a week or two you&#39;ll have aliases for 80% of what you do in the terminal and you&#39;ll be very drastically faster and more productive.</p>

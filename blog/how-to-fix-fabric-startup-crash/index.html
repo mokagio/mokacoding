@@ -5,20 +5,20 @@ crashing on you throwing a <code>SIGABRT</code> like this:</p>
 <p><img src="https://s3.amazonaws.com/mokacoding/2016-01-28-fabric-crashlytics-crash.png" alt="Screenshot of the crash from within Xcode"></p>
 <p>Then chances are you forgot to add the information Fabric needs to your app&#39;s <code>Info.plist</code>.</p>
 <p>Add this code to your <code>Info.plist</code>, clean and run again.</p>
-<pre><code class=" hljs plist"><span class="hljs-tag">&lt;<span class="hljs-title">key</span>&gt;</span>Fabric<span class="hljs-tag">&lt;/<span class="hljs-title">key</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">dict</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">key</span>&gt;</span>APIKey<span class="hljs-tag">&lt;/<span class="hljs-title">key</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">string</span>&gt;</span>YOUR_API_KEY<span class="hljs-tag">&lt;/<span class="hljs-title">string</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">key</span>&gt;</span>Kits<span class="hljs-tag">&lt;/<span class="hljs-title">key</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">array</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">dict</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-title">key</span>&gt;</span>KitInfo<span class="hljs-tag">&lt;/<span class="hljs-title">key</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-title">dict</span>/&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-title">key</span>&gt;</span>KitName<span class="hljs-tag">&lt;/<span class="hljs-title">key</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-title">string</span>&gt;</span>Crashlytics<span class="hljs-tag">&lt;/<span class="hljs-title">string</span>&gt;</span>
-        <span class="hljs-tag">&lt;/<span class="hljs-title">dict</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-title">array</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">dict</span>&gt;</span>
+<pre><code class=" hljs plist"><span class="hljs-tag">&lt;<span class="hljs-name">key</span>&gt;</span>Fabric<span class="hljs-tag">&lt;/<span class="hljs-name">key</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">dict</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">key</span>&gt;</span>APIKey<span class="hljs-tag">&lt;/<span class="hljs-name">key</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>YOUR_API_KEY<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">key</span>&gt;</span>Kits<span class="hljs-tag">&lt;/<span class="hljs-name">key</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">array</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">dict</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">key</span>&gt;</span>KitInfo<span class="hljs-tag">&lt;/<span class="hljs-name">key</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">dict</span>/&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">key</span>&gt;</span>KitName<span class="hljs-tag">&lt;/<span class="hljs-name">key</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>Crashlytics<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">dict</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">array</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">dict</span>&gt;</span>
 </code></pre>
 <p><img src="https://s3.amazonaws.com/mokacoding/2016-01-28-fabric-crashlytics-info-plist.png" alt="The Fabric section of the Info.plist from the editor in Xcode"></p>
 <p><strong>TS;WR</strong></p>

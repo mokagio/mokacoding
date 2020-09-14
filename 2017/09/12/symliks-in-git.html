@@ -4,11 +4,11 @@
 <p>If you are not familiar with symbolic links, symlinks for short, I recommend reading the manpage for the <code>ln</code> command, or <a href="https://kb.iu.edu/d/abbe">this post</a>.</p>
 <p>Git can track symlinks as well as any other text files. After all, as the documentation says, a symbolic link is nothing but a file with special mode containing the path to the referenced file. Knowing how to handle links is the OS job.</p>
 <p>There is an important caveat when creating symlinks that are meant to be tracked under Git. <strong>The reference path of the source file should be relative to the repository</strong>, not absolute to the machine.</p>
-<pre><code class=""># <span class="hljs-flow">Not</span> good <span class="hljs-flow">for</span> Git repositories
-ln -s /Users/gio/repo/foo.<span class="hljs-built_in">md</span> ./bar/foo.<span class="hljs-built_in">md</span>
+<pre><code class=""><span class="hljs-comment"># Not good for Git repositories</span>
+ln -s <span class="hljs-regexp">/Users/gi</span>o<span class="hljs-regexp">/repo/</span>foo.md .<span class="hljs-regexp">/bar/</span>foo.md
 
-# Good <span class="hljs-flow">for</span> Git repositories
-<span class="hljs-built_in">cd</span> ./bar &amp;&amp; ln -s ../foo.<span class="hljs-built_in">md</span> foo.<span class="hljs-built_in">md</span>
+<span class="hljs-comment"># Good for Git repositories</span>
+cd .<span class="hljs-regexp">/bar &amp;&amp; ln -s ../</span>foo.md foo.md
 </code></pre><p>The reason for this is that given that a symlink contains the path to the referenced file, if the path is relative to a specific machine the link won&#39;t work on others. If it&#39;s relative to the repository itself on the other hand, the OS will always be able to find the source.</p>
 <p>Have a look at <a href="https://github.com/mokacoding/symlinks">this example repo</a> to play around with these ideas.</p>
 <p><em>Leave the codebase better than you found it.</em></p>

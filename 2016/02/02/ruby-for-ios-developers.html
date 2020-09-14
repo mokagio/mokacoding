@@ -45,7 +45,7 @@ harmony.</p>
 <p>Both <code>ruby-install</code> and <code>chruby</code> can be easily installed via <a href="http://brew.sh">Homebrew</a>.</p>
 <pre><code class="">brew <span class="hljs-keyword">install</span> ruby-<span class="hljs-keyword">install</span>
 </code></pre><p>You can now easily install versions of Ruby system wise like this:</p>
-<pre><code class=""><span class="hljs-keyword">ruby</span>-install --<span class="hljs-built_in">system</span> <span class="hljs-keyword">ruby</span> <span class="hljs-number">2.3</span>.<span class="hljs-number">0</span>
+<pre><code class=""><span class="hljs-attribute">ruby</span>-install --system ruby <span class="hljs-number">2</span>.<span class="hljs-number">3</span>.<span class="hljs-number">0</span>
 </code></pre><p>You can leave the <code>--system</code> option out if want to install it only for your
 local user.</p>
 <p><strong>Pro-tip</strong>: <code>ruby-install --system --latest ruby</code> will install the latest
@@ -53,13 +53,13 @@ version.</p>
 <p>Installing Rubies is only half of our job, now we need to reliably set the
 proper version and swap between them. This is <code>chruby</code>&#39;s job.</p>
 <h2 id="chruby-setup">chruby setup</h2>
-<pre><code class="">brew <span class="hljs-keyword">install</span> chruby
+<pre><code class=""><span class="hljs-keyword">brew </span><span class="hljs-keyword">install </span>chruby
 </code></pre><p>Once brew has installed <code>chruby</code>, open your <code>.bashrc</code> or <code>.zshrc</code> and paste
 these two lines at the bottom. If you don&#39;t know what those files are you
 should read <a href="http://superuser.com/questions/49289/what-is-the-bashrc-file">this</a>
 first.</p>
-<pre><code class="">source <span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/opt/</span>chruby<span class="hljs-regexp">/share/</span>chruby/chruby.sh
-source <span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/opt/</span>chruby<span class="hljs-regexp">/share/</span>chruby/auto.sh
+<pre><code class=""><span class="hljs-keyword">source</span> <span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/opt/</span>chruby<span class="hljs-regexp">/share/</span>chruby/chruby.sh
+<span class="hljs-keyword">source</span> <span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/opt/</span>chruby<span class="hljs-regexp">/share/</span>chruby/auto.sh
 </code></pre><p>The first line will make sure that <code>chruby</code> is loaded in your shell. The
 second makes <code>chruby</code> automatically switch Ruby version based on the content
 of the <code>.ruby-version</code> file in the current directory. Automatically switching
@@ -68,7 +68,7 @@ think it can be useful.</p>
 <p>Since you just edited the configuration of your shell you will need to open a
 new terminal window to load them. Alternatively you can <code>source ~/.bashrc</code>.</p>
 <p>Congratulations, you can now set and change your Ruby version using:</p>
-<pre><code class=""><span class="hljs-title">chruby</span> <span class="hljs-number">2</span>.<span class="hljs-number">3</span>.<span class="hljs-number">0</span>
+<pre><code class=""><span class="hljs-attribute">chruby</span> <span class="hljs-number">2</span>.<span class="hljs-number">3</span>.<span class="hljs-number">0</span>
 </code></pre><p>That&#39;s it.</p>
 <hr>
 <p>This post showed you how to gain control on your Ruby so that you can reliably

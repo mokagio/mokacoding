@@ -4,25 +4,25 @@ that writing <code>String?</code> actually means writing <code>Optional&lt;Strin
 a type in its own right, defined as an enum.</p>
 <p>To consolidate our understanding of how optional works let&#39;s try to implement
 a custom version of Swift&#39;s <code>if let ... else</code> construct.</p>
-<pre><code class=" hljs swift"><span class="hljs-keyword">let</span> optionalString: <span class="hljs-type">String</span>? = ...
+<pre><code class=" hljs swift"><span class="hljs-keyword">let</span> optionalString: <span class="hljs-type">String?</span> = ...
 <span class="hljs-keyword">if</span> <span class="hljs-keyword">let</span> string = optionalString {
   <span class="hljs-built_in">print</span>(string)
 } <span class="hljs-keyword">else</span> {
-  <span class="hljs-built_in">print</span>(<span class="hljs-string">"Wooops! No string"</span>)
+  <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Wooops! No string&quot;</span>)
 }
 </code></pre>
 <p>We can imagine <code>if let ... else</code> as a function that takes a <code>String?</code> as its
 input, together with two other functions. One will be <code>String -&gt; ()</code>, the
 <em>then</em> branch of the conditional which executes if the unwrapping of the input
 value is successful; the other <code>() -&gt; ()</code>, which executes otherwise.</p>
-<pre><code class=" hljs swift"><span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">ifLet</span><span class="hljs-params">(<span class="hljs-number">_</span> value: String?, then: String -&gt; <span class="hljs-params">()</span></span></span>, <span class="hljs-keyword">else</span> elseFunc: () -&gt; ()) {
+<pre><code class=" hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">ifLet</span><span class="hljs-params">(<span class="hljs-number">_</span> value: String?, then: String -&gt; <span class="hljs-params">()</span></span></span>, <span class="hljs-keyword">else</span> elseFunc: () -&gt; ()) {
   <span class="hljs-comment">// ...</span>
 }
 </code></pre>
 <p>How do we find out if <code>value</code> is null or not, without using <code>if let</code>? We could
 check for nullability like <code>if (value == null)</code>, or we could remember that
 <code>Optional</code> is an enum type, and use pattern matching, which is way neater:</p>
-<pre><code class=" hljs swift"><span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">ifLet</span><span class="hljs-params">(<span class="hljs-number">_</span> value: String?, then: String -&gt; <span class="hljs-params">()</span></span></span>, <span class="hljs-keyword">else</span> elseFunc: () -&gt; ()) {
+<pre><code class=" hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">ifLet</span><span class="hljs-params">(<span class="hljs-number">_</span> value: String?, then: String -&gt; <span class="hljs-params">()</span></span></span>, <span class="hljs-keyword">else</span> elseFunc: () -&gt; ()) {
     <span class="hljs-keyword">switch</span> value {
     <span class="hljs-keyword">case</span> .some(<span class="hljs-keyword">let</span> string): then(string)
     <span class="hljs-keyword">case</span> .<span class="hljs-keyword">none</span>: elseFunc()
@@ -32,14 +32,14 @@ check for nullability like <code>if (value == null)</code>, or we could remember
 <p>We can use our custom <code>if let</code> like this:</p>
 <pre><code class=" hljs swift">ifLet(optionalString,
     then: { <span class="hljs-built_in">print</span>($<span class="hljs-number">0</span>) },
-    <span class="hljs-keyword">else</span>: { <span class="hljs-built_in">print</span>(<span class="hljs-string">"Wooops! No string"</span>) }
+    <span class="hljs-keyword">else</span>: { <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Wooops! No string&quot;</span>) }
 )
 </code></pre>
 <p>Our <code>ifLet(value: then: else:)</code> is restricted to <code>String?</code> as its input, but
 what if we wanted to use it with other types of optionals? <code>Int?</code>, <code>Double?</code>,
 <code>NSDate?</code>, etc.</p>
 <p>Let&#39;s make it generic!</p>
-<pre><code class=" hljs swift"><span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">ifLet</span><span class="hljs-generics">&lt;T&gt;</span><span class="hljs-params">(value: T?, then: T -&gt; <span class="hljs-params">()</span></span></span>, <span class="hljs-keyword">else</span> elseFunc: () -&gt; ()) {
+<pre><code class=" hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">ifLet</span>&lt;T&gt;<span class="hljs-params">(value: T?, then: T -&gt; <span class="hljs-params">()</span></span></span>, <span class="hljs-keyword">else</span> elseFunc: () -&gt; ()) {
     <span class="hljs-keyword">switch</span> value {
     <span class="hljs-keyword">case</span> .some(<span class="hljs-keyword">let</span> x): then(x)
     <span class="hljs-keyword">case</span> .<span class="hljs-keyword">none</span>: elseFunc()
@@ -48,7 +48,7 @@ what if we wanted to use it with other types of optionals? <code>Int?</code>, <c
 </code></pre>
 <p>Nice ☺️. Now we can pass any kind of inputs of our <code>ifLet</code>. But we&#39;re still a
 bit constrained, for example we couldn&#39;t replicate this behaviour:</p>
-<pre><code class=" hljs swift"><span class="hljs-keyword">let</span> input: <span class="hljs-type">String</span>? = <span class="hljs-string">"a string"</span>
+<pre><code class=" hljs swift"><span class="hljs-keyword">let</span> input: <span class="hljs-type">String?</span> = <span class="hljs-string">&quot;a string&quot;</span>
 <span class="hljs-keyword">let</span> output: <span class="hljs-type">Int</span> = {
     <span class="hljs-keyword">if</span> <span class="hljs-keyword">let</span> string = input  {
     <span class="hljs-keyword">return</span> <span class="hljs-type">Array</span>(string.characters).<span class="hljs-built_in">count</span>
@@ -58,7 +58,7 @@ bit constrained, for example we couldn&#39;t replicate this behaviour:</p>
 }()
 </code></pre>
 <p>So let&#39;s add a return value in the mix, generic of course:</p>
-<pre><code class=" hljs swift"><span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">ifLet</span><span class="hljs-generics">&lt;T, U&gt;</span><span class="hljs-params">(
+<pre><code class=" hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">ifLet</span>&lt;T, U&gt;<span class="hljs-params">(
     <span class="hljs-number">_</span> value: Optional&lt;T&gt;,
     then thenFunction: <span class="hljs-params">(T)</span></span></span> -&gt; <span class="hljs-type">U</span>,
     <span class="hljs-keyword">else</span> elseFunction: () -&gt; <span class="hljs-type">U</span>) -&gt; <span class="hljs-type">U</span> {

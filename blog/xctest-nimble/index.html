@@ -23,16 +23,16 @@ expect(aBool).to(beTrue())
 
 expect(anotherBool).to(beFalsy())
 </code></pre>
-<pre><code class=" hljs swift"><span class="hljs-type">XCTAssertEqual</span>(aString, <span class="hljs-string">"expected value"</span>)
+<pre><code class=" hljs swift"><span class="hljs-type">XCTAssertEqual</span>(aString, <span class="hljs-string">&quot;expected value&quot;</span>)
 
-expect(aString) == <span class="hljs-string">"expected value"</span>
+expect(aString) == <span class="hljs-string">&quot;expected value&quot;</span>
 </code></pre>
 <p>They read quite better, and in particular the relationship between actual and expected value is explicit. Plus, how neat is it to use <code>==</code> to test for equality? 😎</p>
 <p>And it doesn&#39;t end here, Nimble provide syntactic candies like:</p>
 <p><strong>Negative forms</strong></p>
-<pre><code class=" hljs swift">expect(batman.name).toNot(<span class="hljs-built_in">equal</span>(<span class="hljs-string">"Peter Parker"</span>))
-expect(ironman.name).notTo(<span class="hljs-built_in">equal</span>(<span class="hljs-string">"Barry Allen"</span>))
-expect(greenArrow.name) != <span class="hljs-string">"Matt Murdok"</span>
+<pre><code class=" hljs swift">expect(batman.name).toNot(<span class="hljs-built_in">equal</span>(<span class="hljs-string">&quot;Peter Parker&quot;</span>))
+expect(ironman.name).notTo(<span class="hljs-built_in">equal</span>(<span class="hljs-string">&quot;Barry Allen&quot;</span>))
+expect(greenArrow.name) != <span class="hljs-string">&quot;Matt Murdok&quot;</span>
 </code></pre>
 <p><strong>Math comparisons</strong></p>
 <pre><code class=" hljs swift">expect(actual).to(beLessThan(expected))
@@ -56,7 +56,7 @@ expect(actual) == expected ± delta
 <pre><code class=" hljs swift">expect(systemUnderTest.someState).toEventually(beTruthy(), timeout: <span class="hljs-number">3</span>)
 </code></pre>
 <p><strong>Swift 2 error handling</strong></p>
-<pre><code class=" hljs swift">expect{ try somethingThatThrows()  }.to(throwError())
+<pre><code class=" hljs swift">expect{ <span class="hljs-keyword">try</span> somethingThatThrows()  }.to(throwError())
 </code></pre>
 <p>You can learn about all the awesome matchers that Nimble provides out of the box in the <a href="https://github.com/Quick/Nimble#built-in-matcher-functions">README</a>, and if you need more expressive power you can even <a href="https://github.com/Quick/Nimble#writing-your-own-matchers">write your own</a>.</p>
 <h2 id="conclusion">Conclusion</h2>

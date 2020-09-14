@@ -27,32 +27,32 @@ evaluate whether or not a request made by the app should be hijacked, and the
 stubbed response to return. For example:</p>
 <pre><code class=" hljs swift">stub(isMethodGET()) { <span class="hljs-number">_</span> <span class="hljs-keyword">in</span>
   <span class="hljs-keyword">return</span> <span class="hljs-type">OHHTTPStubsResponse</span>(
-    <span class="hljs-type">JSONObject</span>: [<span class="hljs-string">"key"</span>: <span class="hljs-string">"value"</span>],
+    <span class="hljs-type">JSONObject</span>: [<span class="hljs-string">&quot;key&quot;</span>: <span class="hljs-string">&quot;value&quot;</span>],
     statusCode: <span class="hljs-number">200</span>,
-    headers: [ <span class="hljs-string">"Content-Type"</span>: <span class="hljs-string">"application/json"</span> ]
+    headers: [ <span class="hljs-string">&quot;Content-Type&quot;</span>: <span class="hljs-string">&quot;application/json&quot;</span> ]
   )
 }
 </code></pre>
 <p>Will intercept any GET request and return a simple JSON object <code>{ &quot;key&quot;: &quot;value&quot; }</code>.
 Another example:</p>
-<pre><code class=" hljs swift">stub(isHost(<span class="hljs-string">"api.myserver.com"</span>) &amp;&amp; isPath(<span class="hljs-string">"/resource"</span>)) { <span class="hljs-number">_</span> <span class="hljs-keyword">in</span>
-    guard <span class="hljs-keyword">let</span> path = <span class="hljs-type">OHPathForFile</span>(<span class="hljs-string">"success_resource_response.json"</span>, <span class="hljs-keyword">self</span>.<span class="hljs-keyword">dynamicType</span>) <span class="hljs-keyword">else</span> {
-            preconditionFailure(<span class="hljs-string">"Could not find expected file in test bundle"</span>)
+<pre><code class=" hljs swift">stub(isHost(<span class="hljs-string">&quot;api.myserver.com&quot;</span>) &amp;&amp; isPath(<span class="hljs-string">&quot;/resource&quot;</span>)) { <span class="hljs-number">_</span> <span class="hljs-keyword">in</span>
+    <span class="hljs-keyword">guard</span> <span class="hljs-keyword">let</span> path = <span class="hljs-type">OHPathForFile</span>(<span class="hljs-string">&quot;success_resource_response.json&quot;</span>, <span class="hljs-keyword">self</span>.<span class="hljs-keyword">dynamicType</span>) <span class="hljs-keyword">else</span> {
+            <span class="hljs-built_in">preconditionFailure</span>(<span class="hljs-string">&quot;Could not find expected file in test bundle&quot;</span>)
     }
 
     <span class="hljs-keyword">return</span> <span class="hljs-type">OHHTTPStubsResponse</span>(
             fileAtPath: path,
             statusCode: <span class="hljs-number">200</span>,
-            headers: [ <span class="hljs-string">"Content-Type"</span>: <span class="hljs-string">"application/json"</span> ]
+            headers: [ <span class="hljs-string">&quot;Content-Type&quot;</span>: <span class="hljs-string">&quot;application/json&quot;</span> ]
     )
 }
 </code></pre>
 <p>Will intercept any request towards <code>api.myserver.com/resource</code> and return
 the content of the JSON file <code>success_resource_response.json</code> located in the
 test bundle.</p>
-<pre><code class=" hljs swift">stub(isPath(<span class="hljs-string">"/foo/bar"</span>)) { <span class="hljs-number">_</span> <span class="hljs-keyword">in</span>
+<pre><code class=" hljs swift">stub(isPath(<span class="hljs-string">&quot;/foo/bar&quot;</span>)) { <span class="hljs-number">_</span> <span class="hljs-keyword">in</span>
     <span class="hljs-keyword">let</span> error = <span class="hljs-type">NSError</span>(
-        domain: <span class="hljs-string">"test"</span>,
+        domain: <span class="hljs-string">&quot;test&quot;</span>,
         code: <span class="hljs-number">42</span>,
         userInfo: [:]
     )
@@ -77,18 +77,18 @@ and the <code>error</code> will have the value of the received network or server
 Pretty standard networking code.</p>
 <p>Here&#39;s a possible test for the behaviour of <code>APIClient</code> when the request
 succeeds:</p>
-<pre><code class=" hljs swift"><span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">testGetResourceSuccess</span><span class="hljs-params">()</span></span> {
+<pre><code class=" hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">testGetResourceSuccess</span><span class="hljs-params">()</span></span> {
   <span class="hljs-comment">// Arrange</span>
   <span class="hljs-comment">//</span>
   <span class="hljs-comment">// Setup network stubs</span>
-  <span class="hljs-keyword">let</span> testHost = <span class="hljs-string">"te.st"</span>
-  <span class="hljs-keyword">let</span> id = <span class="hljs-string">"42-abc"</span>
+  <span class="hljs-keyword">let</span> testHost = <span class="hljs-string">&quot;te.st&quot;</span>
+  <span class="hljs-keyword">let</span> id = <span class="hljs-string">&quot;42-abc&quot;</span>
   <span class="hljs-keyword">let</span> stubbedJSON = [
-    <span class="hljs-string">"id"</span>: id,
-    <span class="hljs-string">"foo"</span>: <span class="hljs-string">"some text"</span>,
-    <span class="hljs-string">"bar"</span>: <span class="hljs-string">"some other text"</span>,
+    <span class="hljs-string">&quot;id&quot;</span>: id,
+    <span class="hljs-string">&quot;foo&quot;</span>: <span class="hljs-string">&quot;some text&quot;</span>,
+    <span class="hljs-string">&quot;bar&quot;</span>: <span class="hljs-string">&quot;some other text&quot;</span>,
   ]
-  stub(isHost(testHost) &amp;&amp; isPath(<span class="hljs-string">"/resources/<span class="hljs-subst">\(id)</span>"</span>)) { <span class="hljs-number">_</span> <span class="hljs-keyword">in</span>
+  stub(isHost(testHost) &amp;&amp; isPath(<span class="hljs-string">&quot;/resources/\(id)&quot;</span>)) { <span class="hljs-number">_</span> <span class="hljs-keyword">in</span>
     <span class="hljs-keyword">return</span> <span class="hljs-type">OHHTTPStubsResponse</span>(
       <span class="hljs-type">JSONObject</span>: stubbedJSON,
       statusCode: <span class="hljs-number">200</span>,
@@ -96,8 +96,8 @@ succeeds:</p>
     )
   }
   <span class="hljs-comment">// Setup system under test</span>
-  <span class="hljs-keyword">let</span> client = <span class="hljs-type">APIClient</span>(baseURL: <span class="hljs-type">NSURL</span>(string: <span class="hljs-string">"http://<span class="hljs-subst">\(testHost)</span>"</span>)!)
-  <span class="hljs-keyword">let</span> expectation = <span class="hljs-keyword">self</span>.expectationWithDescription(<span class="hljs-string">"calls the callback with a resource object"</span>)
+  <span class="hljs-keyword">let</span> client = <span class="hljs-type">APIClient</span>(baseURL: <span class="hljs-type">NSURL</span>(string: <span class="hljs-string">&quot;http://\(testHost)&quot;</span>)!)
+  <span class="hljs-keyword">let</span> expectation = <span class="hljs-keyword">self</span>.expectationWithDescription(<span class="hljs-string">&quot;calls the callback with a resource object&quot;</span>)
 
   <span class="hljs-comment">// Act</span>
   <span class="hljs-comment">//</span>
@@ -106,9 +106,9 @@ succeeds:</p>
     <span class="hljs-comment">// Assert</span>
     <span class="hljs-comment">//</span>
     <span class="hljs-type">XCTAssertNil</span>(error)
-    <span class="hljs-type">XCTAssertEqual</span>(resource?.id, stubbedJSON[<span class="hljs-string">"id"</span>])
-    <span class="hljs-type">XCTAssertEqual</span>(resource?.aProperty, stubbedJSON[<span class="hljs-string">"foo"</span>])
-    <span class="hljs-type">XCTAssertEqual</span>(resource?.anotherPropert, stubbedJSON[<span class="hljs-string">"bar"</span>])
+    <span class="hljs-type">XCTAssertEqual</span>(resource?.id, stubbedJSON[<span class="hljs-string">&quot;id&quot;</span>])
+    <span class="hljs-type">XCTAssertEqual</span>(resource?.aProperty, stubbedJSON[<span class="hljs-string">&quot;foo&quot;</span>])
+    <span class="hljs-type">XCTAssertEqual</span>(resource?.anotherPropert, stubbedJSON[<span class="hljs-string">&quot;bar&quot;</span>])
 
     expectation.fulfill()
   }

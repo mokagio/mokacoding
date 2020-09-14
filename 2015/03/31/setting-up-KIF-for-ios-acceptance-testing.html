@@ -32,17 +32,17 @@
 <p>You&#39;ll probably want to share the scheme as well, in order for it to be tracked in the source control and be available by the other members of the team, and the CI machine. You can do that from the &quot;Edit Scemes...&quot; window.</p>
 <h2 id="add-kif-with-cocoapods">Add KIF with CocoaPods</h2>
 <p>Now that the preparation work is done we can install KIF. <a href="http://cocoapods.org/">CocoaPods</a> is the tool of choice.</p>
-<pre><code class=" hljs ruby">target <span class="hljs-string">'BenchKIF'</span>, <span class="hljs-symbol">exclusive:</span> <span class="hljs-keyword">true</span> <span class="hljs-keyword">do</span>
-  pod <span class="hljs-string">'KIF'</span>, <span class="hljs-string">'~&gt; 3.2.0'</span>
+<pre><code class=" hljs ruby">target <span class="hljs-string">&#x27;BenchKIF&#x27;</span>, <span class="hljs-symbol">exclusive:</span> <span class="hljs-literal">true</span> <span class="hljs-keyword">do</span>
+  pod <span class="hljs-string">&#x27;KIF&#x27;</span>, <span class="hljs-string">&#x27;~&gt; 3.2.0&#x27;</span>
 <span class="hljs-keyword">end</span>
 </code></pre>
 <p>Notice the <code>exclusive: true</code>, KIF uses private APIs an we don&#39;t want it to leak into the production build! Also since it&#39;s not needed by the main target there&#39;s no reason to add it there.</p>
 <p>Now let&#39;s run <code>pod install</code> and get ready to write our first test.</p>
 <h2 id="the-first-test">The first test</h2>
 <p>The simplest thing we can test is the state of the UI, let&#39;s make sure that the elements in the view are showing the text we&#39;re expecting.</p>
-<pre><code class=" hljs objc"><span class="hljs-preprocessor">#import <span class="hljs-title">&lt;UIKit/UIKit.h&gt;</span></span>
-<span class="hljs-preprocessor">#import <span class="hljs-title">&lt;XCTest/XCTest.h&gt;</span></span>
-<span class="hljs-preprocessor">#import <span class="hljs-title">&lt;KIF.h&gt;</span></span>
+<pre><code class=" hljs objc"><span class="hljs-meta">#import <span class="hljs-meta-string">&lt;UIKit/UIKit.h&gt;</span></span>
+<span class="hljs-meta">#import <span class="hljs-meta-string">&lt;XCTest/XCTest.h&gt;</span></span>
+<span class="hljs-meta">#import <span class="hljs-meta-string">&lt;KIF.h&gt;</span></span>
 
 <span class="hljs-class"><span class="hljs-keyword">@interface</span> <span class="hljs-title">MainScreenTest</span> : <span class="hljs-title">XCTestCase</span></span>
 
@@ -51,10 +51,10 @@
 <span class="hljs-class"><span class="hljs-keyword">@implementation</span> <span class="hljs-title">MainScreenTest</span></span>
 
 - (<span class="hljs-keyword">void</span>)testUI {
-  [tester waitForViewWithAccessibilityLabel:<span class="hljs-string">@"Bench"</span>];
-  [tester waitForViewWithAccessibilityLabel:<span class="hljs-string">@"say hello"</span>];
-  [tester waitForViewWithAccessibilityLabel:<span class="hljs-string">@"show elements"</span>];
-  [tester waitForViewWithAccessibilityLabel:<span class="hljs-string">@"mokacoding.com"</span>];
+  [tester waitForViewWithAccessibilityLabel:<span class="hljs-string">@&quot;Bench&quot;</span>];
+  [tester waitForViewWithAccessibilityLabel:<span class="hljs-string">@&quot;say hello&quot;</span>];
+  [tester waitForViewWithAccessibilityLabel:<span class="hljs-string">@&quot;show elements&quot;</span>];
+  [tester waitForViewWithAccessibilityLabel:<span class="hljs-string">@&quot;mokacoding.com&quot;</span>];
 }
 
 <span class="hljs-keyword">@end</span>
@@ -68,36 +68,36 @@
 <p>Let&#39;s be honest, the test we just wrote is not very useful. One could actually argue that if that&#39;s what we mean with acceptance testing it&#39;s actually a waste of time. So let&#39;s try to test something that actually makes sense, let&#39;s see if the app is behaving as it should.</p>
 <p>Bench does two things, shows a greetings alert to the user, and a list of the elements of the periodic table.</p>
 <pre><code class=" hljs objc"><span class="hljs-comment">/**
- *  When I tap the "say hello" button, I see a greetings alert, so that I can be happier :)
+ *  When I tap the &quot;say hello&quot; button, I see a greetings alert, so that I can be happier :)
  */</span>
 - (<span class="hljs-keyword">void</span>)testSayHello {
-  [tester tapViewWithAccessibilityLabel:<span class="hljs-string">@"say hello"</span>];
+  [tester tapViewWithAccessibilityLabel:<span class="hljs-string">@&quot;say hello&quot;</span>];
 
-  [tester waitForViewWithAccessibilityLabel:<span class="hljs-string">@"Hello"</span>];
-  [tester waitForViewWithAccessibilityLabel:<span class="hljs-string">@"Sup?"</span>];
-  [tester waitForViewWithAccessibilityLabel:<span class="hljs-string">@"Dismiss"</span>];
+  [tester waitForViewWithAccessibilityLabel:<span class="hljs-string">@&quot;Hello&quot;</span>];
+  [tester waitForViewWithAccessibilityLabel:<span class="hljs-string">@&quot;Sup?&quot;</span>];
+  [tester waitForViewWithAccessibilityLabel:<span class="hljs-string">@&quot;Dismiss&quot;</span>];
 
-  [tester tapViewWithAccessibilityLabel:<span class="hljs-string">@"Dismiss"</span>];
+  [tester tapViewWithAccessibilityLabel:<span class="hljs-string">@&quot;Dismiss&quot;</span>];
 
-  [tester waitForAbsenceOfViewWithAccessibilityLabel:<span class="hljs-string">@"Hello"</span>];
-  [tester waitForAbsenceOfViewWithAccessibilityLabel:<span class="hljs-string">@"Sup?"</span>];
-  [tester waitForAbsenceOfViewWithAccessibilityLabel:<span class="hljs-string">@"Dismiss"</span>];
+  [tester waitForAbsenceOfViewWithAccessibilityLabel:<span class="hljs-string">@&quot;Hello&quot;</span>];
+  [tester waitForAbsenceOfViewWithAccessibilityLabel:<span class="hljs-string">@&quot;Sup?&quot;</span>];
+  [tester waitForAbsenceOfViewWithAccessibilityLabel:<span class="hljs-string">@&quot;Dismiss&quot;</span>];
 }
 
 <span class="hljs-comment">/**
- *  When I tap the "show elements" button, I see a listt of elements, so I can expand my knowledge
+ *  When I tap the &quot;show elements&quot; button, I see a listt of elements, so I can expand my knowledge
  */</span>
 - (<span class="hljs-keyword">void</span>)testShowElements {
-  [tester tapViewWithAccessibilityLabel:<span class="hljs-string">@"show elements"</span>];
+  [tester tapViewWithAccessibilityLabel:<span class="hljs-string">@&quot;show elements&quot;</span>];
 
-  [tester waitForViewWithAccessibilityLabel:<span class="hljs-string">@"Elements"</span>];
-  [tester waitForViewWithAccessibilityLabel:<span class="hljs-string">@"[H] Hydrogen (1)"</span> ];
-  [tester waitForViewWithAccessibilityLabel:<span class="hljs-string">@"[Uuo] Ununoctium (118)"</span>];
-  [tester waitForViewWithAccessibilityLabel:<span class="hljs-string">@"Back"</span>];
+  [tester waitForViewWithAccessibilityLabel:<span class="hljs-string">@&quot;Elements&quot;</span>];
+  [tester waitForViewWithAccessibilityLabel:<span class="hljs-string">@&quot;[H] Hydrogen (1)&quot;</span> ];
+  [tester waitForViewWithAccessibilityLabel:<span class="hljs-string">@&quot;[Uuo] Ununoctium (118)&quot;</span>];
+  [tester waitForViewWithAccessibilityLabel:<span class="hljs-string">@&quot;Back&quot;</span>];
 
-  [tester tapViewWithAccessibilityLabel:<span class="hljs-string">@"Back"</span>];
+  [tester tapViewWithAccessibilityLabel:<span class="hljs-string">@&quot;Back&quot;</span>];
 
-  [tester waitForAbsenceOfViewWithAccessibilityLabel:<span class="hljs-string">@"Elements"</span>];
+  [tester waitForAbsenceOfViewWithAccessibilityLabel:<span class="hljs-string">@&quot;Elements&quot;</span>];
 }
 </code></pre>
 <p>Notice how in both tests we&#39;re bringing the app back to it&#39;s original state, that&#39;s an important thing to keep in mind when writing acceptance tests.</p>

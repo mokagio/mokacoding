@@ -7,7 +7,7 @@
 <p>Tests the actual value using a matcher to match by checking continuously at each pollInterval until the timeout is reached.</p>
 </blockquote>
 <p>It can be used like:</p>
-<pre><code class=" hljs swift">expect(foo).toEventually(<span class="hljs-built_in">equal</span>(<span class="hljs-string">"something"</span>))
+<pre><code class=" hljs swift">expect(foo).toEventually(<span class="hljs-built_in">equal</span>(<span class="hljs-string">&quot;something&quot;</span>))
 
 expect(array).toEventually(beEmpty())
 </code></pre>
@@ -40,52 +40,52 @@ expect(array).toEventually(beEmpty())
 
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AsyncService</span> </span>{
 
-  <span class="hljs-keyword">weak</span> <span class="hljs-keyword">var</span> delegate: <span class="hljs-type">AsyncServiceDelegate</span>?
+  <span class="hljs-keyword">weak</span> <span class="hljs-keyword">var</span> delegate: <span class="hljs-type">AsyncServiceDelegate?</span>
 
-  <span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">callThatResultsInSideEffect</span><span class="hljs-params">()</span></span> {
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">callThatResultsInSideEffect</span><span class="hljs-params">()</span></span> {
     <span class="hljs-type">DispatchQueue</span>.global(qos: .background).asyncAfter(deadline: .now() + <span class="hljs-number">0.1</span>) { [<span class="hljs-keyword">weak</span> <span class="hljs-keyword">self</span>] <span class="hljs-keyword">in</span>
-      <span class="hljs-keyword">self</span>?.delegate?.aProperty = <span class="hljs-string">"bazinga"</span>
+      <span class="hljs-keyword">self</span>?.delegate?.aProperty = <span class="hljs-string">&quot;bazinga&quot;</span>
     }
   }
 }
 </code></pre>
 <p>A good way to test the implementation of <code>callThatResultsInSideEffect</code> is to create a fake delegate, pass it to the service, call the method, and finally verify that the value <em>eventually</em> matches our expectation.</p>
 <pre><code class=" hljs swift"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FakeDelegate</span>: <span class="hljs-title">AsyncServiceDelegate</span> </span>{
-  <span class="hljs-keyword">var</span> aProperty: <span class="hljs-type">String</span> = <span class="hljs-string">"unset"</span>
+  <span class="hljs-keyword">var</span> aProperty: <span class="hljs-type">String</span> = <span class="hljs-string">&quot;unset&quot;</span>
 }
 
-<span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">testToEventually</span><span class="hljs-params">()</span></span> {
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">testToEventually</span><span class="hljs-params">()</span></span> {
     <span class="hljs-keyword">let</span> delegate = <span class="hljs-type">FakeDelegate</span>()
     <span class="hljs-keyword">let</span> service = <span class="hljs-type">AsyncService</span>()
     service.delegate = delegate
 
     service.callThatResultsInSideEffect()
 
-    expect(delegate.aProperty).toEventually(<span class="hljs-built_in">equal</span>(<span class="hljs-string">"bazinga"</span>))
+    expect(delegate.aProperty).toEventually(<span class="hljs-built_in">equal</span>(<span class="hljs-string">&quot;bazinga&quot;</span>))
 }
 </code></pre>
 <p>Let&#39;s now add a new asynchronous function to our service. One that takes a callback as input and will call it once the async work is done. For the sake of the example let&#39;s imagine that this async work is fetching a certain <code>String</code>, and the callback receives a <code>Result</code> type (<em>have a look at <a href="https://github.com/antitypical/Result">this library</a> for a proper implementation</em>).</p>
 <pre><code class=" hljs swift"><span class="hljs-class"><span class="hljs-keyword">extension</span> <span class="hljs-title">AsyncService</span> </span>{
-  <span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">doStuff</span><span class="hljs-params">(<span class="hljs-number">_</span> completion: @escaping <span class="hljs-params">(Result&lt;String&gt;)</span></span></span> -&gt; ()) {
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">doStuff</span><span class="hljs-params">(<span class="hljs-number">_</span> completion: @escaping <span class="hljs-params">(Result&lt;String&gt;)</span></span></span> -&gt; ()) {
     <span class="hljs-type">DispatchQueue</span>.global(qos: .background).asyncAfter(deadline: .now() + <span class="hljs-number">0.1</span>) {
-      completion(<span class="hljs-type">Result</span>&lt;<span class="hljs-type">String</span>&gt;.success(<span class="hljs-string">"bazinga"</span>))
+      completion(<span class="hljs-type">Result</span>&lt;<span class="hljs-type">String</span>&gt;.success(<span class="hljs-string">&quot;bazinga&quot;</span>))
     }
   }
 }
 </code></pre>
 <p>To test that <code>doStuff(_ completion:)</code> behaves properly using <code>toEventually</code> we could writing something like:</p>
-<pre><code class=" hljs swift"><span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">testDoStuffWithToEventually</span><span class="hljs-params">()</span></span> {
+<pre><code class=" hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">testDoStuffWithToEventually</span><span class="hljs-params">()</span></span> {
   <span class="hljs-keyword">let</span> service = <span class="hljs-type">AsyncService</span>()
 
-  <span class="hljs-keyword">var</span> callbackValue: <span class="hljs-type">String</span>? = .<span class="hljs-keyword">none</span>
+  <span class="hljs-keyword">var</span> callbackValue: <span class="hljs-type">String?</span> = .<span class="hljs-keyword">none</span>
   service.doStuff { result <span class="hljs-keyword">in</span>
     <span class="hljs-keyword">switch</span> result {
     <span class="hljs-keyword">case</span> .success(<span class="hljs-keyword">let</span> value): callbackValue = value
-    <span class="hljs-keyword">case</span> .error(<span class="hljs-keyword">let</span> error): fail(<span class="hljs-string">"Expected call to doStuff to succeed."</span>)
+    <span class="hljs-keyword">case</span> .error(<span class="hljs-keyword">let</span> error): fail(<span class="hljs-string">&quot;Expected call to doStuff to succeed.&quot;</span>)
     }
   }
 
-  expect(callbackValue).toEventually(<span class="hljs-built_in">equal</span>(<span class="hljs-string">"bazinga"</span>))
+  expect(callbackValue).toEventually(<span class="hljs-built_in">equal</span>(<span class="hljs-string">&quot;bazinga&quot;</span>))
 }
 </code></pre>
 <p>There are two issues with this test.</p>
@@ -94,17 +94,17 @@ expect(array).toEventually(beEmpty())
 <p>Using this technique we might have to define a number of variables to contain the values received by the callback. This extra work makes the test harder to write and maintain.</p>
 <p>The second problem is that the test doesn&#39;t read well. &quot;<em>setup, define a variable, make async call with callback that says to copy the received value, expect copy of received value to eventually equal &#39;bazinga&#39;</em>&quot;.</p>
 <p>In a case like this using <code>waitUntil</code> results in a better test, where with better we mean with less setup needed, and reading closer to natural language.</p>
-<pre><code class=" hljs swift"><span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">testAsyncCallResult</span><span class="hljs-params">()</span></span> {
+<pre><code class=" hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">testAsyncCallResult</span><span class="hljs-params">()</span></span> {
   <span class="hljs-keyword">let</span> service = <span class="hljs-type">AsyncService</span>()
 
   waitUntil { done <span class="hljs-keyword">in</span>
     service.doStuff { result <span class="hljs-keyword">in</span>
       <span class="hljs-keyword">switch</span> result {
       <span class="hljs-keyword">case</span> .success(<span class="hljs-keyword">let</span> value):
-        expect(value) == <span class="hljs-string">"bazinga"</span>
+        expect(value) == <span class="hljs-string">&quot;bazinga&quot;</span>
         done()
       <span class="hljs-keyword">case</span> .error:
-        fail(<span class="hljs-string">"Expected call to doStuff to suceeded, but it failed"</span>)
+        fail(<span class="hljs-string">&quot;Expected call to doStuff to suceeded, but it failed&quot;</span>)
       }
     }
   }

@@ -4,8 +4,8 @@
 <p>There is a problem though, the syntax in which to write xcconfigs files is not very powerful.</p>
 <p>A common issue is being unable to write URLs due to the double slash in &quot;http://&quot; being interpreted as a comment.</p>
 <p>This is my solution:</p>
-<pre><code class=""><span class="hljs-constant">SLASH</span> = /
-<span class="hljs-constant">URL</span> = https:<span class="hljs-variable">$(SLASH)</span>/mokacoding.com
+<pre><code class=""><span class="hljs-attr">SLASH</span> = /
+<span class="hljs-attr">URL</span> = https:$(SLASH)/mokacoding.com
 </code></pre><p>It looks ugly and silly, but it does work.</p>
 <p>Let me know if you have better options, or how this approach works out for you.</p>
 <p><em>Leave the codebase better than you found it.</em></p>

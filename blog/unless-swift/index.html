@@ -6,15 +6,15 @@
 <span class="hljs-keyword">end</span>
 </code></pre>
 <p>One could be tempted to say that Swift&#39;s <code>guard</code> is the same thing as Ruby&#39;s <code>unless</code>, but that&#39;s not the case.</p>
-<pre><code class=" hljs swift">guard condition <span class="hljs-keyword">else</span> {
+<pre><code class=" hljs swift"><span class="hljs-keyword">guard</span> condition <span class="hljs-keyword">else</span> {
   something()
   <span class="hljs-keyword">return</span>
 }
 </code></pre>
 <p><code>guard</code> is not simply a <code>if condition == false</code>, but a tool to <strong>enforce early returns</strong>. A <code>guard</code> statement will not compile without a <code>return</code>.</p>
 <p>For this reason I hacked together a Swift version of unless. As you can imagine the code is pretty simple:</p>
-<pre><code class=" hljs swift"><span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">unless</span><span class="hljs-params">(<span class="hljs-number">_</span> condition: <span class="hljs-params">()</span></span></span> -&gt; <span class="hljs-type">Bool</span>, <span class="hljs-keyword">do</span> closure: @escaping () -&gt; ()) {
-  guard condition() == <span class="hljs-built_in">false</span> <span class="hljs-keyword">else</span> {
+<pre><code class=" hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">unless</span><span class="hljs-params">(<span class="hljs-number">_</span> condition: <span class="hljs-params">()</span></span></span> -&gt; <span class="hljs-type">Bool</span>, <span class="hljs-keyword">do</span> closure: @escaping () -&gt; ()) {
+  <span class="hljs-keyword">guard</span> condition() == <span class="hljs-literal">false</span> <span class="hljs-keyword">else</span> {
     <span class="hljs-keyword">return</span>
   }
 

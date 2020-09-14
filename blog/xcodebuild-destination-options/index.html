@@ -16,53 +16,53 @@
 </ul>
 <h3 id="os-x">OS X</h3>
 <p>The Mac OS X platform accepts an <code>arch</code> keyword, which can be either <code>x86_64</code> or <code>i386</code>. <code>x86_64</code> is the default.</p>
-<pre><code class="">xcodebuild \
-  -<span class="ruby">workspace <span class="hljs-constant">MyMacApp</span>.xcworkspace \
-</span>  -<span class="ruby">scheme <span class="hljs-constant">MyMacApp</span> \
-</span>  -<span class="ruby">destination <span class="hljs-string">'platform=OS X,arch=x86_64'</span> \
-</span>  clean test
+<pre><code class="">xcodebuild <span class="hljs-string">\</span>
+  -workspace MyMacApp.xcworkspace <span class="hljs-string">\</span>
+  -scheme MyMacApp <span class="hljs-string">\</span>
+  -destination <span class="hljs-string">&#x27;platform=OS X,arch=x86_64&#x27;</span> <span class="hljs-string">\</span>
+  clean test
 </code></pre><h3 id="ios">iOS</h3>
 <p>The <code>iOS</code> platform should be used when you want to run tests on a connected device.  It supports two keys, <code>id</code> and <code>name</code>. Either one of the two must be provided, but not both.</p>
 <p>Use <code>name</code> to target a device using it&#39;s name, <code>id</code> to use its UUID.</p>
-<pre><code class="">xcodebuild \
-  -<span class="ruby">workspace <span class="hljs-constant">MyApp</span>.xcworkspace \
-</span>  -<span class="ruby">scheme <span class="hljs-constant">MyApp</span> \
-</span>  -<span class="ruby">destination <span class="hljs-string">"platform=iOS,name=Gio's iPhone"</span> \
-</span>  clean test
-</code></pre><pre><code class="">xcodebuild \
-  -<span class="ruby">workspace <span class="hljs-constant">MyApp</span>.xcworkspace \
-</span>  -<span class="ruby">scheme <span class="hljs-constant">MyApp</span> \
-</span>  -<span class="ruby">destination <span class="hljs-string">'platform=iOS,id=YOUR_PHONE_UUID'</span> \
-</span>  clean test
+<pre><code class="">xcodebuild <span class="hljs-string">\</span>
+  -workspace MyApp.xcworkspace <span class="hljs-string">\</span>
+  -scheme MyApp <span class="hljs-string">\</span>
+  -destination <span class="hljs-string">&quot;platform=iOS,name=Gio&#x27;s iPhone&quot;</span> <span class="hljs-string">\</span>
+  clean test
+</code></pre><pre><code class="">xcodebuild <span class="hljs-string">\</span>
+  -workspace MyApp.xcworkspace <span class="hljs-string">\</span>
+  -scheme MyApp <span class="hljs-string">\</span>
+  -destination <span class="hljs-string">&#x27;platform=iOS,id=YOUR_PHONE_UUID&#x27;</span> <span class="hljs-string">\</span>
+  clean test
 </code></pre><h3 id="ios-simulator">iOS Simulator</h3>
 <p><code>iOS Simulator</code> is the platform I use more often. It supports the same <code>id</code> and <code>name</code> mutually exclusive keys as <code>iOS</code>, plus an <code>OS</code> key. <code>OS</code> expects a target version number, like <code>9.1</code>, or <a href="https://www.mokacoding.com/blog/how-to-always-run-latest-simulator-cli/"><code>latest</code></a>, which is the default.</p>
-<pre><code class="">xcodebuild \
-  -<span class="ruby">workspace <span class="hljs-constant">MyApp</span>.xcworkspace \
-</span>  -<span class="ruby">scheme <span class="hljs-constant">MyApp</span> \
-</span>  -<span class="ruby">destination <span class="hljs-string">'platform=iOS Simulator,name=iPhone 6,OS=9.1'</span> \
-</span>  clean test
+<pre><code class="">xcodebuild <span class="hljs-string">\</span>
+  -workspace MyApp.xcworkspace <span class="hljs-string">\</span>
+  -scheme MyApp <span class="hljs-string">\</span>
+  -destination <span class="hljs-string">&#x27;platform=iOS Simulator,name=iPhone 6,OS=9.1&#x27;</span> <span class="hljs-string">\</span>
+  clean test
 </code></pre><h3 id="tvos-and-tvos-simulator">tvOS and tvOS Simulator</h3>
 <p>The <code>tvOS</code> and <code>tvOS Simulator</code> platforms expect the same parameters as their iOS counter parts.</p>
 <h3 id="watchos-and-watchos-simulator">watchOS and watchOS Simulator</h3>
 <p><code>watchOS</code> and <code>watchOS Simulator</code> have a slightly different behaviour. Since a watchOS app is always build and deployed nested inside of an iOS app to use such a destination you will need to specify a scheme which is configured to run a WatchKit app, and specify the platform destination that is paired with the watchOS device you want to use.</p>
 <pre><code class="">xcodebuild \
-  -<span class="ruby">workspace <span class="hljs-constant">MyApp</span>.xcworkspace \
-</span>  -<span class="ruby">scheme <span class="hljs-constant">MyWatchKitApp</span>
-</span>  -<span class="ruby">destination <span class="hljs-string">'platform=iOS Simulator,name=iPhone 6,OS=9.1'</span> \
+  -<span class="ruby">workspace MyApp.xcworkspace \
+</span>  -<span class="ruby">scheme MyWatchKitApp
+</span>  -<span class="ruby">destination <span class="hljs-string">&#x27;platform=iOS Simulator,name=iPhone 6,OS=9.1&#x27;</span> \
 </span>  build
 </code></pre><h3 id="unable-to-find-destination">Unable to find destination</h3>
 <p>When in doubt with the destination parameter a good trick is to write some nonsense in as the destination specifier. <code>xcodebuild</code> will fail and then list all the available destinations for the given scheme:</p>
-<pre><code class=""><span class="hljs-string">xcodebuild:</span> <span class="hljs-string">error:</span> Unable to find a destination matching the provided destination <span class="hljs-string">specifier:</span>
-        { <span class="hljs-string">platform:</span>jibberish }
+<pre><code class=""><span class="hljs-attr">xcodebuild:</span> <span class="hljs-attr">error:</span> Unable to find a destination matching the provided destination <span class="hljs-attr">specifier:</span>
+        { <span class="hljs-attr">platform:</span>jibberish }
 
     The requested device could not be found because no available devices matched the request.
 
-    Available destinations <span class="hljs-keyword">for</span> the <span class="hljs-string">"MyApp"</span> <span class="hljs-string">scheme:</span>
-        { <span class="hljs-string">platform:</span>iOS Simulator, <span class="hljs-string">id:</span><span class="hljs-number">5</span>BBA1401-<span class="hljs-number">0</span>C74-<span class="hljs-number">47</span>A7-<span class="hljs-number">8709</span>-<span class="hljs-number">9</span>F6C1D9C9CBB, <span class="hljs-string">OS:</span><span class="hljs-number">9.1</span>, <span class="hljs-string">name:</span>iPhone <span class="hljs-number">6</span>s }
-        { <span class="hljs-string">platform:</span>iOS Simulator, <span class="hljs-string">id:</span><span class="hljs-number">28</span>FF0903-<span class="hljs-number">97</span>D6-<span class="hljs-number">459</span>B-<span class="hljs-number">8</span>F34-D9436AEA3B87, <span class="hljs-string">OS:</span><span class="hljs-number">9.1</span>, <span class="hljs-string">name:</span>iPhone <span class="hljs-number">6</span>s Plus }
+    Available destinations <span class="hljs-keyword">for</span> the <span class="hljs-string">&quot;MyApp&quot;</span> <span class="hljs-attr">scheme:</span>
+        { <span class="hljs-attr">platform:</span>iOS Simulator, <span class="hljs-attr">id:</span><span class="hljs-number">5</span>BBA1401<span class="hljs-number">-0</span>C74<span class="hljs-number">-47</span>A7<span class="hljs-number">-8709</span><span class="hljs-number">-9</span>F6C1D9C9CBB, <span class="hljs-attr">OS:</span><span class="hljs-number">9.1</span>, <span class="hljs-attr">name:</span>iPhone <span class="hljs-number">6</span>s }
+        { <span class="hljs-attr">platform:</span>iOS Simulator, <span class="hljs-attr">id:</span><span class="hljs-number">28</span>FF0903<span class="hljs-number">-97</span>D6<span class="hljs-number">-459</span>B<span class="hljs-number">-8</span>F34-D9436AEA3B87, <span class="hljs-attr">OS:</span><span class="hljs-number">9.1</span>, <span class="hljs-attr">name:</span>iPhone <span class="hljs-number">6</span>s Plus }
 </code></pre><h2 id="generic-platform">Generic Platform</h2>
 <p>There are some <code>xcodebuild</code> actions, like <code>build</code>, that may be performed without an actual device. To target a platform generically prefix the destination specifier with <code>generic/</code>.</p>
-<pre><code class=""><span class="hljs-deletion">-destination generic/platform=iOS</span>
+<pre><code class="">-destination <span class="hljs-keyword">generic</span>/<span class="hljs-keyword">platform</span>=iOS
 </code></pre><h2 id="multiple-destinations">Multiple Destinations</h2>
 <p>You can specify multiple <code>-destination</code> options to make <code>xcodebuild</code> perform the action on multiple destinations.</p>
 <h2 id="timeout">Timeout</h2>
@@ -71,12 +71,12 @@
 <p>If <code>-destination</code> is omitted, <code>xcodebuild</code> defaults to a destination compatible with the selected scheme. But, do you really trust Xcode to do the right thing for you? 😕</p>
 <h2 id="list-all-available-destinations">List All Available Destinations</h2>
 <p>To list all the known destination you can use <code>instruments -s devices</code>. The output is a list in the format <code>name (OS) [UUID]</code>.</p>
-<pre><code class=""><span class="hljs-name">Giovanni</span>’<span class="hljs-atom">s</span> <span class="hljs-name">Retina</span> <span class="hljs-name">MacBook</span> <span class="hljs-name">Pro</span> [<span class="hljs-number">37</span><span class="hljs-name">B86DB5</span>-<span class="hljs-name">FB69</span>-<span class="hljs-number">56</span><span class="hljs-name">F7</span>-<span class="hljs-name">A023</span>-<span class="hljs-name">ECC6B90C3486</span>]
-<span class="hljs-name">Apple</span> <span class="hljs-name">TV</span> <span class="hljs-number">1080</span><span class="hljs-atom">p</span> (<span class="hljs-number">9.0</span>) [<span class="hljs-name">BCFBA897</span>-<span class="hljs-number">9E8</span><span class="hljs-name">D</span>-<span class="hljs-number">43</span><span class="hljs-name">BA</span>-<span class="hljs-number">9</span><span class="hljs-name">EE0</span>-<span class="hljs-name">A93B39615ECA</span>]
-<span class="hljs-name">Apple</span> <span class="hljs-name">Watch</span> - <span class="hljs-number">38</span><span class="hljs-atom">mm</span> (<span class="hljs-number">2.0</span>) [<span class="hljs-number">9366</span><span class="hljs-name">B46E</span>-<span class="hljs-name">EB1D</span>-<span class="hljs-number">4</span><span class="hljs-name">CF3</span>-<span class="hljs-name">B7EE</span>-<span class="hljs-number">6E1</span><span class="hljs-name">BCEE0F89E</span>]
+<pre><code class="">Giovanni’s Retina MacBook Pro [<span class="hljs-number">37</span>B86DB5-FB69<span class="hljs-number">-56</span>F7-A023-ECC6B90C3486]
+Apple TV <span class="hljs-number">1080</span>p (<span class="hljs-number">9.0</span>) [BCFBA897<span class="hljs-number">-9E8</span>D<span class="hljs-number">-43</span>BA<span class="hljs-number">-9</span>EE0-A93B39615ECA]
+Apple Watch - <span class="hljs-number">38</span>mm (<span class="hljs-number">2.0</span>) [<span class="hljs-number">9366</span>B46E-EB1D<span class="hljs-number">-4</span>CF3-B7EE<span class="hljs-number">-6E1</span>BCEE0F89E]
 ...
-<span class="hljs-atom">iPhone</span> <span class="hljs-number">6</span><span class="hljs-atom">s</span> (<span class="hljs-number">9.1</span>) [<span class="hljs-number">5</span><span class="hljs-name">BBA1401</span>-<span class="hljs-number">0</span><span class="hljs-name">C74</span>-<span class="hljs-number">47</span><span class="hljs-name">A7</span>-<span class="hljs-number">8709</span>-<span class="hljs-number">9</span><span class="hljs-name">F6C1D9C9CBB</span>]
-<span class="hljs-atom">iPhone</span> <span class="hljs-number">6</span><span class="hljs-atom">s</span> (<span class="hljs-number">9.1</span>) + <span class="hljs-name">Apple</span> <span class="hljs-name">Watch</span> - <span class="hljs-number">38</span><span class="hljs-atom">mm</span> (<span class="hljs-number">2.0</span>) [<span class="hljs-number">303</span><span class="hljs-name">CB525</span>-<span class="hljs-name">E04F</span>-<span class="hljs-number">463</span><span class="hljs-name">D</span>-<span class="hljs-name">B0E5</span>-<span class="hljs-number">22E19278</span><span class="hljs-name">E88C</span>]
+iPhone <span class="hljs-number">6</span>s (<span class="hljs-number">9.1</span>) [<span class="hljs-number">5</span>BBA1401<span class="hljs-number">-0</span>C74<span class="hljs-number">-47</span>A7<span class="hljs-number">-8709</span><span class="hljs-number">-9</span>F6C1D9C9CBB]
+iPhone <span class="hljs-number">6</span>s (<span class="hljs-number">9.1</span>) + Apple Watch - <span class="hljs-number">38</span>mm (<span class="hljs-number">2.0</span>) [<span class="hljs-number">303</span>CB525-E04F<span class="hljs-number">-463</span>D-B0E5<span class="hljs-number">-22E19278</span>E88C]
 ...
 </code></pre><hr>
 <p>You can find more information about the <code>-destination</code> option and <code>xcodebuild</code> itself by reading the <a href="https://developer.apple.com/library/mac/documentation/Darwin/Reference/ManPages/man1/xcodebuild.1.html">tool&#39;s manpage</a>: <code>man xcodebuild</code>.</p>

@@ -11,33 +11,33 @@
 </code></pre>
 <h3 id="step-2-add-the-association-challenge-has-many-items-">Step 2 - Add the association &quot;challenge has many items&quot;</h3>
 <p>We want to have a model that makes these tests pass:</p>
-<pre><code class=" hljs ruby">describe <span class="hljs-constant">Challenge</span> <span class="hljs-keyword">do</span>
+<pre><code class=" hljs ruby">describe Challenge <span class="hljs-keyword">do</span>
   it { should have_many <span class="hljs-symbol">:items</span> }
 <span class="hljs-keyword">end</span>
 
-describe <span class="hljs-constant">Item</span> <span class="hljs-keyword">do</span>
+describe Item <span class="hljs-keyword">do</span>
   it { should belong_to <span class="hljs-symbol">:challenge</span> }
 <span class="hljs-keyword">end</span>
 </code></pre>
 <p>The first thing would be to write a migration, but there is no way to generate a migration for an association with the <code>rails generate migration</code> command. So we have to do it manually, and then write the migration to update the db and schema.</p>
-<pre><code class=" hljs ruby"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Challenge</span> <span class="hljs-inheritance">&lt; <span class="hljs-parent">ActiveRecord::Base</span></span></span>
+<pre><code class=" hljs ruby"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Challenge</span> &lt; ActiveRecord::Base</span>
     has_many <span class="hljs-symbol">:items</span>
 <span class="hljs-keyword">end</span>
 
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Item</span> <span class="hljs-inheritance">&lt; <span class="hljs-parent">ActiveRecord::Base</span></span></span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Item</span> &lt; ActiveRecord::Base</span>
     belongs_to <span class="hljs-symbol">:challenge</span>
 <span class="hljs-keyword">end</span>
 </code></pre>
 <pre><code class=" hljs bash">rails g migration AddItemsAssociationToChallenge
 </code></pre>
 <p>This is the code to put in the resulting migartion file</p>
-<pre><code class=" hljs ruby"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AddItemsAssociationToChallenge</span> <span class="hljs-inheritance">&lt; <span class="hljs-parent">ActiveRecord::Migration</span></span></span>
-  <span class="hljs-function"><span class="hljs-keyword">def</span> </span><span class="hljs-keyword">self</span>.up
+<pre><code class=" hljs ruby"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AddItemsAssociationToChallenge</span> &lt; ActiveRecord::Migration</span>
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">self</span>.<span class="hljs-title">up</span></span>
     add_column <span class="hljs-symbol">:items</span>, <span class="hljs-symbol">:challenge_id</span>, <span class="hljs-symbol">:integer</span>
-    add_index <span class="hljs-string">'items'</span>, [<span class="hljs-string">'challenge_id'</span>], <span class="hljs-symbol">:name</span> =&gt; <span class="hljs-string">'index_challenge_id'</span>
+    add_index <span class="hljs-string">&#x27;items&#x27;</span>, [<span class="hljs-string">&#x27;challenge_id&#x27;</span>], <span class="hljs-symbol">:name</span> =&gt; <span class="hljs-string">&#x27;index_challenge_id&#x27;</span>
   <span class="hljs-keyword">end</span>
 
-  <span class="hljs-function"><span class="hljs-keyword">def</span> </span><span class="hljs-keyword">self</span>.down
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">self</span>.<span class="hljs-title">down</span></span>
     remove_column <span class="hljs-symbol">:items</span>, <span class="hljs-symbol">:challenge_id</span>
   <span class="hljs-keyword">end</span>
 <span class="hljs-keyword">end</span>
@@ -45,11 +45,11 @@ describe <span class="hljs-constant">Item</span> <span class="hljs-keyword">do</
 <p>Finally let&#39;s run <code>rake db:migrate</code> and <code>rspec</code> (because we&#39;re using <a href="http://mislav.uniqpath.com/2013/01/understanding-binstubs/">binstub</a> aren&#39;t we?) and everything should be fine.</p>
 <h3 id="step-3-the-levels">Step 3 – The Levels</h3>
 <p>The process for the levels will be the same as before, a good way to commit the steps to memory. We want this specs to pass:</p>
-<pre><code class=" hljs ruby">describe <span class="hljs-constant">Level</span> <span class="hljs-keyword">do</span>
+<pre><code class=" hljs ruby">describe Level <span class="hljs-keyword">do</span>
     it { should have_many <span class="hljs-symbol">:challenges</span> }
 <span class="hljs-keyword">end</span>
 
-describe <span class="hljs-constant">Challenge</span> <span class="hljs-keyword">do</span>
+describe Challenge <span class="hljs-keyword">do</span>
     it { should belong_to <span class="hljs-symbol">:level</span> }
 <span class="hljs-keyword">end</span>
 </code></pre>
@@ -57,23 +57,23 @@ describe <span class="hljs-constant">Challenge</span> <span class="hljs-keyword"
 <pre><code class=" hljs bash">rails g migration AddChallengesAssociationToLevel
 </code></pre>
 <p>and we write this inside it</p>
-<pre><code class=" hljs ruby"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AddChallengeAssociationToLevel</span> <span class="hljs-inheritance">&lt; <span class="hljs-parent">ActiveRecord::Migration</span></span></span>
-  <span class="hljs-function"><span class="hljs-keyword">def</span> </span><span class="hljs-keyword">self</span>.up
+<pre><code class=" hljs ruby"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AddChallengeAssociationToLevel</span> &lt; ActiveRecord::Migration</span>
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">self</span>.<span class="hljs-title">up</span></span>
     add_column <span class="hljs-symbol">:challenges</span>, <span class="hljs-symbol">:level_id</span>, <span class="hljs-symbol">:integer</span>
-    add_index <span class="hljs-string">'challenges'</span>, [<span class="hljs-string">'level_id'</span>], <span class="hljs-symbol">:name</span> =&gt; <span class="hljs-string">'index_level_id'</span>
+    add_index <span class="hljs-string">&#x27;challenges&#x27;</span>, [<span class="hljs-string">&#x27;level_id&#x27;</span>], <span class="hljs-symbol">:name</span> =&gt; <span class="hljs-string">&#x27;index_level_id&#x27;</span>
   <span class="hljs-keyword">end</span>
 
-  <span class="hljs-function"><span class="hljs-keyword">def</span> </span><span class="hljs-keyword">self</span>.down
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">self</span>.<span class="hljs-title">down</span></span>
     remove_column <span class="hljs-symbol">:challenges</span>, <span class="hljs-symbol">:level_id</span>
   <span class="hljs-keyword">end</span>
 <span class="hljs-keyword">end</span>
 </code></pre>
 <p>finally we cannot forget to manually update our models</p>
-<pre><code class=" hljs ruby"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Level</span> <span class="hljs-inheritance">&lt; <span class="hljs-parent">ActiveRecord::Base</span></span></span>
+<pre><code class=" hljs ruby"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Level</span> &lt; ActiveRecord::Base</span>
     has_many <span class="hljs-symbol">:challenges</span>
 <span class="hljs-keyword">end</span>
 
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Challenge</span> <span class="hljs-inheritance">&lt; <span class="hljs-parent">ActiveRecord::Base</span></span></span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Challenge</span> &lt; ActiveRecord::Base</span>
     has_many <span class="hljs-symbol">:items</span>
     belongs_to <span class="hljs-symbol">:level</span>
 <span class="hljs-keyword">end</span>

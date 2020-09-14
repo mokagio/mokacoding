@@ -10,10 +10,10 @@
 <p>In Swift it is actually possible to define a reference to an actual type, rather than to an instance.</p>
 <pre><code class=" hljs swift"><span class="hljs-comment">//...</span>
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Foo</span> </span>{
-  <span class="hljs-keyword">static</span> <span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">bar</span><span class="hljs-params">()</span></span>
+  <span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">bar</span><span class="hljs-params">()</span></span>
 }
 
-<span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">f</span><span class="hljs-params">(fooClass: Foo.<span class="hljs-keyword">Type</span> = Foo.<span class="hljs-keyword">self</span>)</span></span> {
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">f</span><span class="hljs-params">(fooClass: Foo.<span class="hljs-keyword">Type</span> = Foo.<span class="hljs-keyword">self</span>)</span></span> {
   fooClass.bar()
 }
 </code></pre>
@@ -21,17 +21,17 @@
 <p>Once we know how to refer to actual types, we can apply the same &quot;protocol-inject-mock&quot; pattern that we&#39;re already familiar with to add test coverage to legacy code that we&#39;re not able to restructure at this point.</p>
 <pre><code class=" hljs swift"><span class="hljs-comment">// GlobalHelper.swift</span>
 <span class="hljs-class"><span class="hljs-keyword">protocol</span> <span class="hljs-title">GlobalHelper</span> </span>{
-    <span class="hljs-keyword">static</span> <span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">someSideEffect</span><span class="hljs-params">()</span></span>
+    <span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">someSideEffect</span><span class="hljs-params">()</span></span>
 }
 
 <span class="hljs-comment">// LegacyGlobalHelper.swift</span>
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LegacyGlobalHelper</span>: <span class="hljs-title">GlobalHelper</span> </span>{
-    <span class="hljs-keyword">static</span> <span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">someSideEffect</span><span class="hljs-params">()</span></span> { }
+    <span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">someSideEffect</span><span class="hljs-params">()</span></span> { }
 }
 
 <span class="hljs-comment">// MyService.swift</span>
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyService</span> </span>{
-    <span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">doStuffWithSideEffect</span><span class="hljs-params">(globalHelper: GlobalHelper.<span class="hljs-keyword">Type</span> = LegacyGlobalHelper.<span class="hljs-keyword">self</span>)</span></span> {
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">doStuffWithSideEffect</span><span class="hljs-params">(globalHelper: GlobalHelper.<span class="hljs-keyword">Type</span> = LegacyGlobalHelper.<span class="hljs-keyword">self</span>)</span></span> {
         <span class="hljs-comment">// ...</span>
         globalHelper.someSideEffect()
         <span class="hljs-comment">// ...</span>
@@ -40,23 +40,23 @@
 
 <span class="hljs-comment">// MyServiceSpec.swift</span>
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">GlobalHelperMock</span>: <span class="hljs-title">GlobalHelper</span> </span>{
-    <span class="hljs-keyword">static</span> <span class="hljs-keyword">var</span> someSideEffectCalled = <span class="hljs-built_in">false</span>
+    <span class="hljs-keyword">static</span> <span class="hljs-keyword">var</span> someSideEffectCalled = <span class="hljs-literal">false</span>
 
-    <span class="hljs-keyword">static</span> <span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">someSideEffect</span><span class="hljs-params">()</span></span> {
-        someSideEffectCalled = <span class="hljs-built_in">true</span>
+    <span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">someSideEffect</span><span class="hljs-params">()</span></span> {
+        someSideEffectCalled = <span class="hljs-literal">true</span>
     }
 }
 
 <span class="hljs-comment">// ...</span>
-describe(<span class="hljs-string">"MyService"</span>) {
-  context(<span class="hljs-string">"when doing stuff"</span>) {
-    it(<span class="hljs-string">"performs a side effect"</span>) {
+describe(<span class="hljs-string">&quot;MyService&quot;</span>) {
+  context(<span class="hljs-string">&quot;when doing stuff&quot;</span>) {
+    it(<span class="hljs-string">&quot;performs a side effect&quot;</span>) {
       <span class="hljs-keyword">let</span> service = <span class="hljs-type">MyService</span>()
       <span class="hljs-keyword">let</span> mockHelper = <span class="hljs-type">GlobalHelperMock</span>.<span class="hljs-keyword">self</span>
 
       service.doStuffWithSideEffect(globalHelper: mockHelper)
 
-      expect(mockHelper.someSideEffectCalled) == <span class="hljs-built_in">true</span>
+      expect(mockHelper.someSideEffectCalled) == <span class="hljs-literal">true</span>
     }
   }
 }

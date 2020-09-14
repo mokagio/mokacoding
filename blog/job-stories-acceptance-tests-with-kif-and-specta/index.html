@@ -9,49 +9,49 @@ So that I can expand my knowledge</p>
 </blockquote>
 <p>The test we wrote was this:</p>
 <pre><code class=" hljs objc"><span class="hljs-comment">/**
- *  When I tap the "show elements" button, I see a listt of elements, so I can expand my knowledge
+ *  When I tap the &quot;show elements&quot; button, I see a listt of elements, so I can expand my knowledge
  */</span>
 - (<span class="hljs-keyword">void</span>)testShowElements {
-  [tester tapViewWithAccessibilityLabel:<span class="hljs-string">@"show elements"</span>];
+  [tester tapViewWithAccessibilityLabel:<span class="hljs-string">@&quot;show elements&quot;</span>];
 
-  [tester waitForViewWithAccessibilityLabel:<span class="hljs-string">@"Elements"</span>];
-  [tester waitForViewWithAccessibilityLabel:<span class="hljs-string">@"[H] Hydrogen (1)"</span> ];
-  [tester waitForViewWithAccessibilityLabel:<span class="hljs-string">@"[Uuo] Ununoctium (118)"</span>];
+  [tester waitForViewWithAccessibilityLabel:<span class="hljs-string">@&quot;Elements&quot;</span>];
+  [tester waitForViewWithAccessibilityLabel:<span class="hljs-string">@&quot;[H] Hydrogen (1)&quot;</span> ];
+  [tester waitForViewWithAccessibilityLabel:<span class="hljs-string">@&quot;[Uuo] Ununoctium (118)&quot;</span>];
   <span class="hljs-comment">// Code to restore the app to the default state</span>
 }
 </code></pre>
 <p>The only way we have to tie the test to the story is by using a comment. The terminal output for it will be:</p>
-<pre><code class="">Test <span class="hljs-keyword">Case</span> <span class="hljs-string">'-[MainScreenTest testShowElements]'</span> started.
-Test <span class="hljs-keyword">Case</span> <span class="hljs-string">'-[MainScreenTest testShowElements]'</span> passed (<span class="hljs-number">1.720</span> seconds).
+<pre><code class=""><span class="hljs-keyword">Test </span>Case &#x27;-[MainScreenTest testShowElements]&#x27; started.
+<span class="hljs-keyword">Test </span>Case &#x27;-[MainScreenTest testShowElements]&#x27; passed (1.720 seconds).
 </code></pre><p>This output does not give use any information on the story.</p>
 <p>Let&#39;s now see what we could do using Specta has the harness for the test. The simplest implementation we could write is be something like this:</p>
-<pre><code class=" hljs objc">describe(<span class="hljs-string">@"When I tap the 'show elements' button, I see a list of elements, so I can expand my knowledge"</span>, ^{
-  it(<span class="hljs-string">@"should do what's expected"</span>, ^{
-    [tester tapViewWithAccessibilityLabel:<span class="hljs-string">@"show elements"</span>];
+<pre><code class=" hljs objc">describe(<span class="hljs-string">@&quot;When I tap the &#x27;show elements&#x27; button, I see a list of elements, so I can expand my knowledge&quot;</span>, ^{
+  it(<span class="hljs-string">@&quot;should do what&#x27;s expected&quot;</span>, ^{
+    [tester tapViewWithAccessibilityLabel:<span class="hljs-string">@&quot;show elements&quot;</span>];
 
-    [tester waitForViewWithAccessibilityLabel:<span class="hljs-string">@"Elements"</span>];
-    [tester waitForViewWithAccessibilityLabel:<span class="hljs-string">@"[H] Hydrogen (1)"</span> ];
-    [tester waitForViewWithAccessibilityLabel:<span class="hljs-string">@"[Uuo] Ununoctium (118)"</span>];
+    [tester waitForViewWithAccessibilityLabel:<span class="hljs-string">@&quot;Elements&quot;</span>];
+    [tester waitForViewWithAccessibilityLabel:<span class="hljs-string">@&quot;[H] Hydrogen (1)&quot;</span> ];
+    [tester waitForViewWithAccessibilityLabel:<span class="hljs-string">@&quot;[Uuo] Ununoctium (118)&quot;</span>];
     <span class="hljs-comment">// Code to restore the app to the default state</span>
   });
 });
 </code></pre>
 <p>Which outputs:</p>
-<pre><code class="">Test <span class="hljs-keyword">Case</span> <span class="hljs-string">'-[MainScreenSpec test_When_I_tap_the_show_elements_button_I_see_a_list_of_elements_so_that_I_can_expand_my_knowledge__should_do_whats_expected]'</span> started.
-Test <span class="hljs-keyword">Case</span> <span class="hljs-string">'-[MainScreenSpec test_When_I_tap_the_show_elements_button_I_see_a_list_of_elements_so_that_I_can_expand_my_knowledge__should_do_whats_expected]'</span> passed (<span class="hljs-number">1.703</span> seconds).
+<pre><code class=""><span class="hljs-keyword">Test </span>Case &#x27;-[MainScreenSpec test_When_I_tap_the_show_elements_button_I_see_a_list_of_elements_so_that_I_can_expand_my_knowledge__should_do_whats_expected]&#x27; started.
+<span class="hljs-keyword">Test </span>Case &#x27;-[MainScreenSpec test_When_I_tap_the_show_elements_button_I_see_a_list_of_elements_so_that_I_can_expand_my_knowledge__should_do_whats_expected]&#x27; passed (1.703 seconds).
 </code></pre><p>Now, I&#39;m not gonna say that this console output <em>reads better</em> than the previous one, but you can&#39;t deny that, once you digest the <a href="http://en.wikipedia.org/wiki/Snake_case">snake casing</a>, the story is expressed there.</p>
 <p>However, there are some issues, that <code>@&quot;should do what&#39;s expected&quot;</code> is a bit out of place, and doesn&#39;t really add any value. Also, the test body is as long as its XCTest counterpart.</p>
 <p>When can leverage on the xSpec syntax that Specta provides use to write a test case that flows in a nicer way.</p>
-<pre><code class=" hljs objc">describe(<span class="hljs-string">@"Main screen"</span>, ^{
-  context(<span class="hljs-string">@"when I tap the 'show elements' button"</span>, ^{
+<pre><code class=" hljs objc">describe(<span class="hljs-string">@&quot;Main screen&quot;</span>, ^{
+  context(<span class="hljs-string">@&quot;when I tap the &#x27;show elements&#x27; button&quot;</span>, ^{
     before(^{
-      [tester tapViewWithAccessibilityLabel:<span class="hljs-string">@"show elements"</span>];
+      [tester tapViewWithAccessibilityLabel:<span class="hljs-string">@&quot;show elements&quot;</span>];
     });
 
-    it(<span class="hljs-string">@"I see a list of elements, so I can expand my knowledge"</span>, ^{
-      [tester waitForViewWithAccessibilityLabel:<span class="hljs-string">@"Elements"</span>];
-      [tester waitForViewWithAccessibilityLabel:<span class="hljs-string">@"[H] Hydrogen (1)"</span> ];
-      [tester waitForViewWithAccessibilityLabel:<span class="hljs-string">@"[Uuo] Ununoctium (118)"</span>];
+    it(<span class="hljs-string">@&quot;I see a list of elements, so I can expand my knowledge&quot;</span>, ^{
+      [tester waitForViewWithAccessibilityLabel:<span class="hljs-string">@&quot;Elements&quot;</span>];
+      [tester waitForViewWithAccessibilityLabel:<span class="hljs-string">@&quot;[H] Hydrogen (1)&quot;</span> ];
+      [tester waitForViewWithAccessibilityLabel:<span class="hljs-string">@&quot;[Uuo] Ununoctium (118)&quot;</span>];
     });
 
     after(^{
@@ -63,8 +63,8 @@ Test <span class="hljs-keyword">Case</span> <span class="hljs-string">'-[MainScr
 <p>The code of this test really <em>reads better</em>, what I especially like is how this syntax allows us to separate the operations that we need to perform to reach the screen or feature under test from the assertion itself. The same stands true for the code to restore the app into the default state, from which the next test, whatever it will be, can reliably start.</p>
 <p>Notice how we removed the useless <code>@&quot;should do what&#39;s exepceted&quot;</code> and how more horizontally compact the code is, no need to move your eyes left and right to read it, or to horizontally scroll.</p>
 <p>The console output is still long and with all the <code>_</code>, but at least it only carries useful information:</p>
-<pre><code class="">Test <span class="hljs-keyword">Case</span> <span class="hljs-string">'-[MainScreenSpec test_Main_screen__when_I_tap_the_show_elements_button__I_see_a_list_of_elements_so_I_can_expand_my_knowledge]'</span> started.
-Test <span class="hljs-keyword">Case</span> <span class="hljs-string">'-[MainScreenSpec test_Main_screen__when_I_tap_the_show_elements_button__I_see_a_list_of_elements_so_I_can_expand_my_knowledge]'</span> passed (<span class="hljs-number">1.724</span> seconds).
+<pre><code class=""><span class="hljs-keyword">Test </span>Case &#x27;-[MainScreenSpec test_Main_screen__when_I_tap_the_show_elements_button__I_see_a_list_of_elements_so_I_can_expand_my_knowledge]&#x27; started.
+<span class="hljs-keyword">Test </span>Case &#x27;-[MainScreenSpec test_Main_screen__when_I_tap_the_show_elements_button__I_see_a_list_of_elements_so_I_can_expand_my_knowledge]&#x27; passed (1.724 seconds).
 </code></pre><p>You can have a look at <a href="https://github.com/mokacoding/Bench/blob/KIF%2BSpecta/BenchKIF/MainScreenSpec.m">the other tests</a> on Bench to have a better idea of how this kind of tests look.</p>
 <hr>
 <p>Acceptance testing on iOS is an field which is still evolving and taking a proper form, both the tools and the process are not yet mature and up to the task. This approach to writing acceptance tests using a job story style, with KIF and Specta as tools of choice, is only one of the possible ones, and it&#39;s not said that it&#39;s the best one. Although without experimenting and trying new approaches we risk to stagnate, and progress comes from experimentation. I&#39;ve been using this approach in a handful of projects and have been quite happy with the results.</p>

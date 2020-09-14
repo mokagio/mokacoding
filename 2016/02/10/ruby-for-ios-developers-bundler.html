@@ -35,7 +35,7 @@ to make sure they&#39;ll use it as well. It&#39;s time to setup Bundler!</p>
 <pre><code class="">gem <span class="hljs-keyword">install</span> bundler
 </code></pre><p>Once installed you can setup your project to use Bundler with this command from
 the root of your project:</p>
-<pre><code class=""><span class="hljs-title">bundle</span> init
+<pre><code class="">bundle <span class="hljs-keyword">init</span>
 </code></pre><p>Note how the executable is called <code>bundle</code> while the tool is call Bundler. If
 you think about it it does make sense, as you us a bundler to bundle things,
 but we can all agree that it is a confusing name choice.</p>
@@ -43,10 +43,10 @@ but we can all agree that it is a confusing name choice.</p>
 actually a Ruby file in which you can use a special <a href="https://en.wikipedia.org/wiki/Domain-specific_language">DSL</a>
 to specify which dependencies you are using, and their version.</p>
 <p>This is how a <code>Gemfile</code> for an iOS project might look like:</p>
-<pre><code class=" hljs ruby">source <span class="hljs-string">"https://rubygems.org"</span>
+<pre><code class=" hljs ruby">source <span class="hljs-string">&quot;https://rubygems.org&quot;</span>
 
-gem <span class="hljs-string">'cocoapods'</span>, <span class="hljs-string">'1.0.0.beta.3'</span>
-gem <span class="hljs-string">'fastlane'</span>, <span class="hljs-string">'~&gt; 1.57.0'</span>
+gem <span class="hljs-string">&#x27;cocoapods&#x27;</span>, <span class="hljs-string">&#x27;1.0.0.beta.3&#x27;</span>
+gem <span class="hljs-string">&#x27;fastlane&#x27;</span>, <span class="hljs-string">&#x27;~&gt; 1.57.0&#x27;</span>
 </code></pre>
 <p>The string after the gem names informs Bundler on the version requirement. In
 our case CocoaPods should be exactly at version 1.0.0.beta.3, while Fastlane

@@ -4,7 +4,7 @@
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 <p><a href="https://twitter.com/joar_at_work">Joar</a>&#39;s tweet is enlightening but doesn&#39;t show any code, so let&#39;s see how to do that. You can checkout the <a href="https://github.com/mokacoding/UI-Test-View-Change">example project</a> as well if you want.</p>
-<pre><code class=" hljs swift"><span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">expectationForPredicate</span><span class="hljs-params">(predicate: NSPredicate, evaluatedWithObject object: AnyObject, handler: XCPredicateExpectationHandler?)</span></span> -&gt; <span class="hljs-type">XCTestExpectation</span>
+<pre><code class=" hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">expectationForPredicate</span><span class="hljs-params">(predicate: NSPredicate, evaluatedWithObject object: AnyObject, handler: XCPredicateExpectationHandler?)</span></span> -&gt; <span class="hljs-type">XCTestExpectation</span>
 </code></pre>
 <p>The header for this method reads: creates an expectation that is fulfilled if the predicate returns true when evaluated with the given object. The expectation periodically evaluates the predicate and also may use notifications or other events to optimistically re-evaluate. If the handler is not provided the first successful evaluation will fulfill the expectation. If provided, the handler can override that behavior which leaves the caller responsible for fulfilling the expectation.</p>
 <p>So what we need to do to assert the changes in our views is write a test predicate and pass it to <code>expectationForPredicate</code>, together with the object the predicate has to be evaluated with, and an optional handler.</p>
@@ -13,25 +13,25 @@
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 <p>Let&#39;s take a <a href="https://github.com/mokacoding/UI-Test-View-Change">sample app</a> in which we have a button that once touched triggers an delayed update in a label. This is somehow similar to an &quot;Updated at...&quot; label that updates its text once the app receives the response to an update request to the server. A possible UI test for it would be:</p>
-<pre><code class=" hljs swift"><span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">testOtherButtonChangesFooter</span><span class="hljs-params">()</span></span> {
+<pre><code class=" hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">testOtherButtonChangesFooter</span><span class="hljs-params">()</span></span> {
   <span class="hljs-keyword">let</span> app = <span class="hljs-type">XCUIApplication</span>()
 
   <span class="hljs-comment">// Define the expectation on the final UI state</span>
   <span class="hljs-comment">//</span>
-  <span class="hljs-keyword">let</span> expectedText = <span class="hljs-string">"Oh! Did something happen?!"</span>
-  <span class="hljs-keyword">let</span> labelIdentifier = <span class="hljs-string">"footer label"</span>
-  <span class="hljs-keyword">let</span> testPredicate = <span class="hljs-type">NSPredicate</span>(format: <span class="hljs-string">"label = '<span class="hljs-subst">\(expectedText)</span>'"</span>)
+  <span class="hljs-keyword">let</span> expectedText = <span class="hljs-string">&quot;Oh! Did something happen?!&quot;</span>
+  <span class="hljs-keyword">let</span> labelIdentifier = <span class="hljs-string">&quot;footer label&quot;</span>
+  <span class="hljs-keyword">let</span> testPredicate = <span class="hljs-type">NSPredicate</span>(format: <span class="hljs-string">&quot;label = &#x27;\(expectedText)&#x27;&quot;</span>)
   <span class="hljs-keyword">let</span> object = app.staticTexts.elementMatchingType(.<span class="hljs-type">Any</span>, identifier: labelIdentifier)
 
-  <span class="hljs-keyword">self</span>.expectationForPredicate(testPredicate, evaluatedWithObject: object, handler: <span class="hljs-built_in">nil</span>)
+  <span class="hljs-keyword">self</span>.expectationForPredicate(testPredicate, evaluatedWithObject: object, handler: <span class="hljs-literal">nil</span>)
 
   <span class="hljs-comment">// Act on the UI to change the state</span>
   <span class="hljs-comment">//</span>
-  app.buttons[<span class="hljs-string">"Press me and I'll do something, eventually"</span>].tap()
+  app.buttons[<span class="hljs-string">&quot;Press me and I&#x27;ll do something, eventually&quot;</span>].tap()
 
   <span class="hljs-comment">// Wait and see...</span>
   <span class="hljs-comment">//</span>
-  <span class="hljs-keyword">self</span>.waitForExpectationsWithTimeout(<span class="hljs-number">10</span>, handler: <span class="hljs-built_in">nil</span>)
+  <span class="hljs-keyword">self</span>.waitForExpectationsWithTimeout(<span class="hljs-number">10</span>, handler: <span class="hljs-literal">nil</span>)
 }
 </code></pre>
 <p>That&#39;s it. I wouldn&#39;t go so far as saying <em>as simple as that</em>, because there is a bit of setup to do in order to run the assertion.</p>

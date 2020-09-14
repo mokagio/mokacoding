@@ -4,7 +4,7 @@ When I put my password in, it didn&#39;t work.</p>
 <p>There were no useful logs so I wondered if I used the wrong password.
 I had the password for that key in 1Password (after years of creating SSH keys with fancy passwords only to forget about them), so I was positive the it was correct, but there was a chance I was using the wrong key file.</p>
 <p>To verify my password, I used this command:</p>
-<pre><code class="">ssh-keygen -y -f /path/<span class="hljs-keyword">to</span>/ssh_key
+<pre><code class="">ssh-keygen -y -f <span class="hljs-regexp">/path/</span>to/ssh_key
 </code></pre><p>The <code>-y</code> option &quot;will read a private OpenSSH format file and print an OpenSSH public key to stdout&quot;.
 The <code>-f</code> option specifies the path to the private key.</p>
 <p>If the private key is password protected, <code>ssh-keygen</code> will ask for the password.</p>

@@ -6,15 +6,15 @@
 <p>We won&#39;t go in the details of Realm here, but you should really have a look at <a href="https://realm.io/docs/swift/latest/api/index.html">their docs</a>.</p>
 <p>Now, let&#39; imagine a very simple all, PizzaApp 🍕. With PizzaApp you can track your favourite pizzas offline, so even when there&#39;s no connection you can always browse them.</p>
 <p>This is how a pizza model looks like:</p>
-<pre><code class=" hljs swift"><span class="hljs-keyword">import</span> <span class="hljs-type">RealmSwift</span>
+<pre><code class=" hljs swift"><span class="hljs-keyword">import</span> RealmSwift
 
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Pizza</span>: <span class="hljs-title">Object</span> </span>{
-  public dynamic <span class="hljs-keyword">var</span> name = <span class="hljs-string">""</span>
-  public <span class="hljs-keyword">var</span> ingredients = <span class="hljs-type">List</span>&lt;<span class="hljs-type">Ingredient</span>&gt;()
+  <span class="hljs-keyword">public</span> <span class="hljs-keyword">dynamic</span> <span class="hljs-keyword">var</span> name = <span class="hljs-string">&quot;&quot;</span>
+  <span class="hljs-keyword">public</span> <span class="hljs-keyword">var</span> ingredients = <span class="hljs-type">List</span>&lt;<span class="hljs-type">Ingredient</span>&gt;()
 }
 </code></pre>
 <p>And this is how we can store a pizza in the database, or in other words adding it to the realm:</p>
-<pre><code class=" hljs swift"><span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">save</span><span class="hljs-params">(pizza: Pizza)</span></span> {
+<pre><code class=" hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">save</span><span class="hljs-params">(pizza: Pizza)</span></span> {
   <span class="hljs-keyword">let</span> realm = <span class="hljs-type">Realm</span>() <span class="hljs-comment">// &lt;- the default realm</span>
   realm.write {
     <span class="hljs-keyword">self</span>.realm.add(pizza)
@@ -24,17 +24,17 @@
 <h2 id="writing-tests">Writing tests</h2>
 <p>One simple way to start testing the <code>save</code> code is to assert that after it has been called the count of <code>Pizza</code> objects in the realm is increased by 1.</p>
 <pre><code class=" hljs swift"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PizzaControllerInMemorySpec</span>: <span class="hljs-title">QuickSpec</span> </span>{
-  <span class="hljs-keyword">override</span> <span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">spec</span><span class="hljs-params">()</span></span> {
-    describe(<span class="hljs-string">"PizzaController"</span>) {
+  <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">spec</span><span class="hljs-params">()</span></span> {
+    describe(<span class="hljs-string">&quot;PizzaController&quot;</span>) {
       beforeEach { <span class="hljs-comment">/* code to setup a test realm */</span> }
 
       afterEach { <span class="hljs-comment">/* code to tear down a test realm */</span> }
 
-      it(<span class="hljs-string">"adds the Pizza to the Realm"</span>) {
+      it(<span class="hljs-string">&quot;adds the Pizza to the Realm&quot;</span>) {
         expect(testRealm.objects(<span class="hljs-type">Pizza</span>).<span class="hljs-built_in">count</span>).to(<span class="hljs-built_in">equal</span>(<span class="hljs-number">0</span>))
 
         <span class="hljs-keyword">let</span> p = <span class="hljs-type">Pizza</span>()
-        p.name = <span class="hljs-string">"Margherita"</span>
+        p.name = <span class="hljs-string">&quot;Margherita&quot;</span>
         sut.addPizza(p)
 
         expect(testRealm.objects(<span class="hljs-type">Pizza</span>).<span class="hljs-built_in">count</span>).to(<span class="hljs-built_in">equal</span>(<span class="hljs-number">1</span>))
@@ -47,10 +47,10 @@
 <p>The first is to change the <code>Realm.defaultPath</code> to one used only for testing. The problem with this approach is that it assumes that we are always going to use the default Realm, while this may not be the case. We might for example spin up a temporary realm, persist changes on that, and only merge on the main realm if the user confirms the changes.</p>
 <p>The second approach solves this issue by suggesting to pass a realm instance to every method that needs to interact with it. Our <code>save</code> method would then have to be changed in <code>save(pizza: Pizza, onRealm realm: Realm)</code>. That would mean that the consumer of such API would always need to be aware of the realm. We can do better.</p>
 <p>A possible alternative is to have a realm manager/controller/service that can be initialized with a realm instance, and only works with it.</p>
-<pre><code class=" hljs swift"><span class="hljs-keyword">import</span> <span class="hljs-type">RealmSwift</span>
+<pre><code class=" hljs swift"><span class="hljs-keyword">import</span> RealmSwift
 
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PizzaController</span> </span>{
-  <span class="hljs-keyword">let</span> realm: <span class="hljs-type">Realm</span>!
+  <span class="hljs-keyword">let</span> realm: <span class="hljs-type">Realm!</span>
 
   <span class="hljs-keyword">init</span>(realm: <span class="hljs-type">Realm</span>) {
     <span class="hljs-keyword">self</span>.realm = realm
@@ -60,7 +60,7 @@
     <span class="hljs-keyword">self</span>.<span class="hljs-keyword">init</span>(realm: <span class="hljs-type">Realm</span>())
   }
 
-  <span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">addPizza</span><span class="hljs-params">(pizza: Pizza)</span></span> {
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">addPizza</span><span class="hljs-params">(pizza: Pizza)</span></span> {
     realm.write {
       <span class="hljs-keyword">self</span>.realm.add(pizza)
     }
@@ -70,19 +70,19 @@
 <p>With this we have the best of both worlds. The <em>normal</em> consumer doesn&#39;t need to know about Realm, and can use the <code>PizzaController()</code>. <em>Special</em> consumers, like the unit tests or contexts in which a secondary realm need to be put in place, can use <code>PizzaController(realm: Realm)</code>.</p>
 <p>When looking at the interface of <code>PizzaController()</code> we immediately see it depends on <code>Realm</code>, there are no hidden dependencies, no surprises. This is one of the simplest form of <a href="http://martinfowler.com/articles/injection.html">dependency injection</a>.</p>
 <p>Let&#39;s now look at how to use an <strong>in-memory realm</strong> to speed up the unit tests.</p>
-<pre><code class=" hljs swift"><span class="hljs-keyword">import</span> <span class="hljs-type">Quick</span>
-<span class="hljs-keyword">import</span> <span class="hljs-type">Nimble</span>
-<span class="hljs-keyword">import</span> <span class="hljs-type">RealmSwift</span>
+<pre><code class=" hljs swift"><span class="hljs-keyword">import</span> Quick
+<span class="hljs-keyword">import</span> Nimble
+<span class="hljs-keyword">import</span> RealmSwift
 <span class="hljs-keyword">import</span> testing_realm
 
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PizzaControllerInMemorySpec</span>: <span class="hljs-title">QuickSpec</span> </span>{
-  <span class="hljs-keyword">override</span> <span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">spec</span><span class="hljs-params">()</span></span> {
-    describe(<span class="hljs-string">"PizzaController"</span>) {
-      <span class="hljs-keyword">var</span> testRealm: <span class="hljs-type">Realm</span>!
-      <span class="hljs-keyword">var</span> sut: <span class="hljs-type">PizzaController</span>!
+  <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">spec</span><span class="hljs-params">()</span></span> {
+    describe(<span class="hljs-string">&quot;PizzaController&quot;</span>) {
+      <span class="hljs-keyword">var</span> testRealm: <span class="hljs-type">Realm!</span>
+      <span class="hljs-keyword">var</span> sut: <span class="hljs-type">PizzaController!</span>
 
       beforeEach{
-        testRealm = <span class="hljs-type">Realm</span>(inMemoryIdentifier: <span class="hljs-string">"pizza-controller-spec"</span>)
+        testRealm = <span class="hljs-type">Realm</span>(inMemoryIdentifier: <span class="hljs-string">&quot;pizza-controller-spec&quot;</span>)
         sut = <span class="hljs-type">PizzaController</span>(realm: testRealm)
       }
 
@@ -92,11 +92,11 @@
         }
       }
 
-      it(<span class="hljs-string">"adds the Pizza to the Realm"</span>) {
+      it(<span class="hljs-string">&quot;adds the Pizza to the Realm&quot;</span>) {
         expect(testRealm.objects(<span class="hljs-type">Pizza</span>).<span class="hljs-built_in">count</span>).to(<span class="hljs-built_in">equal</span>(<span class="hljs-number">0</span>))
 
         <span class="hljs-keyword">let</span> p = <span class="hljs-type">Pizza</span>()
-        p.name = <span class="hljs-string">"Margherita"</span>
+        p.name = <span class="hljs-string">&quot;Margherita&quot;</span>
         sut.addPizza(p)
 
         expect(testRealm.objects(<span class="hljs-type">Pizza</span>).<span class="hljs-built_in">count</span>).to(<span class="hljs-built_in">equal</span>(<span class="hljs-number">1</span>))

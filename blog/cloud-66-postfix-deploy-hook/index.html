@@ -5,26 +5,26 @@ is excellent and easy to follow, but glosses over how to write a deploy hook
 to automate the process.</p>
 <p>This is my take on a deploy hook to install SMPT through Postfix.</p>
 <h4 id="-deploy_hooks-yml-"><code>deploy_hooks.yml</code></h4>
-<pre><code class=" hljs yml">---
-<span class="hljs-string">production:</span>
-<span class="hljs-label">  first_thing:</span>
-    - <span class="hljs-string">source:</span> <span class="hljs-regexp">/.cloud66/</span>postfix_setup.sh
-<span class="hljs-label">      destination:</span> ~/postfix_setup.sh
-<span class="hljs-label">      target:</span> any
-<span class="hljs-label">      apply_during:</span> build_only
-<span class="hljs-label">      execute:</span> <span class="hljs-literal">true</span>
-<span class="hljs-label">      sudo:</span> <span class="hljs-literal">true</span>
+<pre><code class=" hljs yml"><span class="hljs-meta">---</span>
+<span class="hljs-attr">production:</span>
+  <span class="hljs-attr">first_thing:</span>
+    <span class="hljs-bullet">-</span> <span class="hljs-attr">source:</span> <span class="hljs-string">/.cloud66/postfix_setup.sh</span>
+      <span class="hljs-attr">destination:</span> <span class="hljs-string">~/postfix_setup.sh</span>
+      <span class="hljs-attr">target:</span> <span class="hljs-string">any</span>
+      <span class="hljs-attr">apply_during:</span> <span class="hljs-string">build_only</span>
+      <span class="hljs-attr">execute:</span> <span class="hljs-literal">true</span>
+      <span class="hljs-attr">sudo:</span> <span class="hljs-literal">true</span>
 </code></pre>
 <h4 id="-postfix_setup-sh-"><code>postfix_setup.sh</code></h4>
-<pre><code class=" hljs bash"><span class="hljs-shebang">#!/bin/bash
-</span>
-<span class="hljs-built_in">set</span> <span class="hljs-operator">-e</span>
+<pre><code class=" hljs bash"><span class="hljs-meta">#!/bin/bash</span>
+
+<span class="hljs-built_in">set</span> -e
 
 <span class="hljs-comment"># Install Postfix to send emails</span>
 yet | sudo apt-get install postfix
 
 <span class="hljs-comment"># Configure Postfix</span>
-sudo <span class="hljs-built_in">echo</span> <span class="hljs-string">"myhostname = yourdomain.com"</span> &gt;&gt; /etc/postfix/main.cf
+sudo <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;myhostname = yourdomain.com&quot;</span> &gt;&gt; /etc/postfix/main.cf
 
 <span class="hljs-comment"># Apply configurations</span>
 sudo /etc/init.d/postfix reload

@@ -17,11 +17,11 @@ is slow and error prone.</p>
 control on your tests.</p>
 <pre><code class=" hljs swift"><span class="hljs-class"><span class="hljs-keyword">protocol</span> <span class="hljs-title">CookieProvider</span> </span>{
 
-    <span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">cookieWithName</span><span class="hljs-params">(name: String)</span></span> -&gt; <span class="hljs-type">NSHTTPCookie</span>?
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">cookieWithName</span><span class="hljs-params">(name: String)</span></span> -&gt; <span class="hljs-type">NSHTTPCookie?</span>
 
-    <span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">setCookie</span><span class="hljs-params">(cookie: NSHTTPCookie)</span></span>
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">setCookie</span><span class="hljs-params">(cookie: NSHTTPCookie)</span></span>
 
-    <span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">deleteCookieWithName</span><span class="hljs-params">(name: String)</span></span>
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">deleteCookieWithName</span><span class="hljs-params">(name: String)</span></span>
 }
 </code></pre>
 <p>The components depending on the cookie storage will now expect an instance
@@ -43,18 +43,18 @@ if.</p>
 
     <span class="hljs-keyword">var</span> cookies: [<span class="hljs-type">NSHTTPCookie</span>]?
 
-    <span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">cookieWithName</span><span class="hljs-params">(name: String)</span></span> -&gt; <span class="hljs-type">NSHTTPCookie</span>? {
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">cookieWithName</span><span class="hljs-params">(name: String)</span></span> -&gt; <span class="hljs-type">NSHTTPCookie?</span> {
         <span class="hljs-keyword">return</span> cookies
             .<span class="hljs-built_in">filter</span> { $<span class="hljs-number">0</span>.name == name }
             .first
     }
 
-    <span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">setCookie</span><span class="hljs-params">(cookie: NSHTTPCookie)</span></span>
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">setCookie</span><span class="hljs-params">(cookie: NSHTTPCookie)</span></span>
         <span class="hljs-keyword">self</span>.cookies.append(cookie)
     }
 
-    <span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">deleteFooBarCoockie</span><span class="hljs-params">()</span></span> {
-        guard <span class="hljs-keyword">let</span> cookie = cookieWithName(name) <span class="hljs-keyword">else</span> {
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">deleteFooBarCoockie</span><span class="hljs-params">()</span></span> {
+        <span class="hljs-keyword">guard</span> <span class="hljs-keyword">let</span> cookie = cookieWithName(name) <span class="hljs-keyword">else</span> {
             <span class="hljs-keyword">return</span>
         }
 
@@ -76,7 +76,7 @@ conform to <code>CookieProvider</code>:</p>
 
 <span class="hljs-class"><span class="hljs-keyword">extension</span> <span class="hljs-title">NSHTTPCookieStorage</span>: <span class="hljs-title">CookieProvider</span> </span>{
 
-    <span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">cookieWithName</span><span class="hljs-params">(name: String)</span></span> -&gt; <span class="hljs-type">NSHTTPCookie</span>? {
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">cookieWithName</span><span class="hljs-params">(name: String)</span></span> -&gt; <span class="hljs-type">NSHTTPCookie?</span> {
         <span class="hljs-keyword">return</span> cookiesForURL(apiURL)?
             .<span class="hljs-built_in">filter</span> { $<span class="hljs-number">0</span>.name == name }
             .first
@@ -85,8 +85,8 @@ conform to <code>CookieProvider</code>:</p>
     <span class="hljs-comment">// A method called setCookie is already exposed by NSHTTPCookieStorage.</span>
     <span class="hljs-comment">// Less work :)</span>
 
-    <span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">deleteCookieWithName</span><span class="hljs-params">(name: String)</span></span> {
-        guard <span class="hljs-keyword">let</span> cookie = cookieWithName(name) <span class="hljs-keyword">else</span> {
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">deleteCookieWithName</span><span class="hljs-params">(name: String)</span></span> {
+        <span class="hljs-keyword">guard</span> <span class="hljs-keyword">let</span> cookie = cookieWithName(name) <span class="hljs-keyword">else</span> {
             <span class="hljs-keyword">return</span>
         }
 

@@ -92,7 +92,7 @@ why, please hit me up on Twitter <a href="https://twitter.com/mokagio">@mokagio<
 Xcode add a bridging header is to add a dummy Objective-C class and select
 &quot;Create Bridging Header&quot; in the prompt that will be presented.</p>
 <p>Once you have your bridging header, import the Firebase header in it like this:</p>
-<pre><code class=" hljs objc"><span class="hljs-preprocessor">#import <span class="hljs-title">"Firebase.h"</span></span>
+<pre><code class=" hljs objc"><span class="hljs-meta">#import <span class="hljs-meta-string">&quot;Firebase.h&quot;</span></span>
 </code></pre>
 <h3 id="7-import-the-module-map-file-swift-only-">7. Import the module map file (Swift only)</h3>
 <p>To use the Firebase SDK into a Swift project the header is not enough, we also
@@ -115,17 +115,17 @@ project&#39;s folder, and add it to the Xcode project.</p>
 <p>This is it. To verify your setup is complete and start using Firebase, import
 the framework and call the Firebase singleton initialization method.</p>
 <p>For example in the <code>AppDelegate</code>:</p>
-<pre><code class=" hljs swift"><span class="hljs-keyword">import</span> <span class="hljs-type">UIKit</span>
-<span class="hljs-keyword">import</span> <span class="hljs-type">Firebase</span>
+<pre><code class=" hljs swift"><span class="hljs-keyword">import</span> UIKit
+<span class="hljs-keyword">import</span> Firebase
 
-@<span class="hljs-type">UIApplicationMain</span>
+<span class="hljs-meta">@UIApplicationMain</span>
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AppDelegate</span>: <span class="hljs-title">UIResponder</span>, <span class="hljs-title">UIApplicationDelegate</span> </span>{
 
-    <span class="hljs-keyword">var</span> window: <span class="hljs-type">UIWindow</span>?
+    <span class="hljs-keyword">var</span> window: <span class="hljs-type">UIWindow?</span>
 
-    <span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">application</span><span class="hljs-params">(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?)</span></span> -&gt; <span class="hljs-type">Bool</span> {
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">application</span><span class="hljs-params">(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?)</span></span> -&gt; <span class="hljs-type">Bool</span> {
         <span class="hljs-type">FIRApp</span>.configure()
-        <span class="hljs-keyword">return</span> <span class="hljs-built_in">true</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>
     }
 }
 </code></pre>

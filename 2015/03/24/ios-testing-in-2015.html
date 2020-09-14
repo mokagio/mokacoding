@@ -13,11 +13,11 @@
 <p>While in the past two year unit testing for iOS and OS X has become better and better, the acceptance testing side of things hasn&#39;t made any improvements.</p>
 <p>To write UI automation test, Apple provides the <a href="https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/InstrumentsUserGuide/UsingtheAutomationInstrument/UsingtheAutomationInstrument.html">UIAutomation</a> framework. UIAutomation tests are written in Javascript, and allow us to drive the application UI and make assertion on its state. Despite how promising this all sounds, working with UIAutomation turns out to be quite tedious, and the Javascript APIs not as powerful as the unit testing <em>native</em> counter parts.</p>
 <p>Here&#39;s a snippet of UIAutomation test:</p>
-<pre><code class=" hljs javascript">UIATarget.localTarget().frontMostApp().navigationBar().buttons()[<span class="hljs-string">"Add"</span>].tap();
+<pre><code class=" hljs javascript">UIATarget.localTarget().frontMostApp().navigationBar().buttons()[<span class="hljs-string">&quot;Add&quot;</span>].tap();
 
-UIATarget.localTarget().frontMostApp().mainWindow().tableViews()[<span class="hljs-number">0</span>].cells()[<span class="hljs-number">0</span>].elements()[<span class="hljs-string">"Chocolate Cake"</span>];
+UIATarget.localTarget().frontMostApp().mainWindow().tableViews()[<span class="hljs-number">0</span>].cells()[<span class="hljs-number">0</span>].elements()[<span class="hljs-string">&quot;Chocolate Cake&quot;</span>];
 
-UIATarget.localTarget().frontMostApp().mainWindow().tableViews()[<span class="hljs-number">0</span>].scrollToElementWithPredicate(<span class="hljs-string">"name beginswith 'Turtle Pie'"</span>);
+UIATarget.localTarget().frontMostApp().mainWindow().tableViews()[<span class="hljs-number">0</span>].scrollToElementWithPredicate(<span class="hljs-string">&quot;name beginswith &#x27;Turtle Pie&#x27;&quot;</span>);
 </code></pre>
 <p>As you can see they managed to make the Javascript APIs even more verbose than the ones in Foundation. Add to that the fact that these tests need to be run from Instruments and you&#39;ll get the idea of how unpleasant working on this framework could be.</p>
 <p>The last piece of the puzzle is Apple&#39;s answer to the CI question: <a href="https://developer.apple.com/library/ios/documentation/IDEs/Conceptual/xcode_guide-continuous_integration/ConfigureBots.html#//apple_ref/doc/uid/TP40013292-CH9-SW1">Xcode Bots</a>. We can configure an Xcode Bot to get triggered and do work, for example running tests, for us, and host it on an Xcode Server.</p>
@@ -29,14 +29,14 @@ UIATarget.localTarget().frontMostApp().mainWindow().tableViews()[<span class="hl
 <p>The open source libraries for unit testing show a trend in the <em>style</em> of the tests, they&#39;re in fact all in an xSpec style, which is taken from the <a href="http://rspec.info/">RSpec</a> Ruby testing library, and gives more relevance to the testing the behaviour of a class, rather than enumerating its methods.</p>
 <h3 id="-kiwi-https-github-com-kiwi-bdd-kiwi-"><a href="https://github.com/kiwi-bdd/Kiwi">Kiwi</a></h3>
 <p><a href="https://github.com/kiwi-bdd/Kiwi">Kiwi</a> is a <em>drop-in</em> full stack replacement for XCTest, that provides an xSpec syntax. A Kiwi test, or better spec, looks like this:</p>
-<pre><code class=" hljs objc">describe(<span class="hljs-string">@"Team"</span>, ^{
-  context(<span class="hljs-string">@"when newly created"</span>, ^{
-    it(<span class="hljs-string">@"has a name"</span>, ^{
+<pre><code class=" hljs objc">describe(<span class="hljs-string">@&quot;Team&quot;</span>, ^{
+  context(<span class="hljs-string">@&quot;when newly created&quot;</span>, ^{
+    it(<span class="hljs-string">@&quot;has a name&quot;</span>, ^{
       <span class="hljs-keyword">id</span> team = [Team team];
-      [[team<span class="hljs-variable">.name</span> should] equal:<span class="hljs-string">@"Black Hawks"</span>];
+      [[team.name should] equal:<span class="hljs-string">@&quot;Black Hawks&quot;</span>];
     });
 
-    it(<span class="hljs-string">@"has 11 players"</span>, ^{
+    it(<span class="hljs-string">@&quot;has 11 players&quot;</span>, ^{
       <span class="hljs-keyword">id</span> team = [Team team];
       [[[team should] have:<span class="hljs-number">11</span>] players];
     });
@@ -51,12 +51,12 @@ UIATarget.localTarget().frontMostApp().mainWindow().tableViews()[<span class="hl
 <p>Here&#39;s a Specta spec:</p>
 <pre><code class=" hljs objc">SpecBegin(Thing)
 
-describe(<span class="hljs-string">@"Thing"</span>, ^{
-  it(<span class="hljs-string">@"should do stuff"</span>, ^{
+describe(<span class="hljs-string">@&quot;Thing&quot;</span>, ^{
+  it(<span class="hljs-string">@&quot;should do stuff&quot;</span>, ^{
     <span class="hljs-comment">// This is an example block. Place your assertions here.</span>
   });
 
-  it(<span class="hljs-string">@"should do some stuff asynchronously"</span>, ^{
+  it(<span class="hljs-string">@&quot;should do some stuff asynchronously&quot;</span>, ^{
     waitUntil(^(DoneCallback done) {
       <span class="hljs-comment">// Async example blocks need to invoke done() callback.</span>
       done();
@@ -76,17 +76,17 @@ describe(<span class="hljs-string">@"Thing"</span>, ^{
 </ul>
 <h3 id="-quick-https-github-com-quick-quick-"><a href="https://github.com/Quick/Quick">Quick</a></h3>
 <p><a href="https://github.com/Quick/Quick">Quick</a> is the new kid in the block, and it&#39;s a very cool kid indeed. Quick is mainly written in Swift and it&#39;s best suited to write test components written in the new language.</p>
-<pre><code class=" hljs swift">import Quick
+<pre><code class=" hljs swift"><span class="hljs-keyword">import</span> Quick
 
-class ThingSpec: QuickSpec {
-  override func spec() {
-    describe(&quot;a &#39;Thing&#39;&quot;) {
-      it(&quot;should do stuff) {
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ThingSpec</span>: <span class="hljs-title">QuickSpec</span> </span>{
+  <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">spec</span><span class="hljs-params">()</span></span> {
+    describe(<span class="hljs-string">&quot;a &#x27;Thing&#x27;&quot;</span>) {
+      it(<span class="hljs-string">&quot;should do stuff) {
         //
       }
     }
   }
-}
+}</span>
 </code></pre>
 <p>Thanks to Swift&#39;s syntax and closures Quick specs look far more readable that Kiwi&#39;s or Specta&#39;s.</p>
 <p>Quick comes together with <a href="https://github.com/Quick/Nimble">Nimble</a> it&#39;s matchers library, which allows us to write neat things like <code>expect(10) &gt; 2</code>.</p>
@@ -97,12 +97,12 @@ class ThingSpec: QuickSpec {
 <p><a href="https://github.com/kif-framework/KIF">KIF</a>, Keep It Functional, is a framework written in Objective-C that lets us write acceptance tests using XCTest and running them through Xcode in the same way we would do with unit tests.</p>
 <p>The KIF <code>tester</code> uses private APIs to gain knowledge of the view hierarchy, and lets us query and interact with it using the accessibility label value of the views.</p>
 <pre><code class=" hljs objc">- (<span class="hljs-keyword">void</span>)testSuccessfulLogin {
-  [tester enterText:<span class="hljs-string">@"user@example.com"</span> intoViewWithAccessibilityLabel:<span class="hljs-string">@"Login User Name"</span>];
-  [tester enterText:<span class="hljs-string">@"thisismypassword"</span> intoViewWithAccessibilityLabel:<span class="hljs-string">@"Login Password"</span>];
-  [tester tapViewWithAccessibilityLabel:<span class="hljs-string">@"Log In"</span>];
+  [tester enterText:<span class="hljs-string">@&quot;user@example.com&quot;</span> intoViewWithAccessibilityLabel:<span class="hljs-string">@&quot;Login User Name&quot;</span>];
+  [tester enterText:<span class="hljs-string">@&quot;thisismypassword&quot;</span> intoViewWithAccessibilityLabel:<span class="hljs-string">@&quot;Login Password&quot;</span>];
+  [tester tapViewWithAccessibilityLabel:<span class="hljs-string">@&quot;Log In&quot;</span>];
 
   <span class="hljs-comment">// Verify that the login succeeded</span>
-  [tester waitForTappableViewWithAccessibilityLabel:<span class="hljs-string">@"Welcome"</span>];
+  [tester waitForTappableViewWithAccessibilityLabel:<span class="hljs-string">@&quot;Welcome&quot;</span>];
 }
 </code></pre>
 <p><del>A big downside of KIF is the slow response time of the maintainers. This doesn&#39;t want to be a critique though, in the open source world everything is done for free, and since we all need to pay the bills, the amount of time that can be spent on such projects is limited. But when mixed with an foundation hard to work with, this results in unstable tools.</del></p>
@@ -110,26 +110,26 @@ class ThingSpec: QuickSpec {
 <h3 id="-subliminal-https-github-com-inkling-subliminal-"><a href="https://github.com/inkling/Subliminal">Subliminal</a></h3>
 <p><a href="https://github.com/inkling/Subliminal">Subliminal</a> is an Objective-C framework that, like KIF, integrates with XCTest. Unlike KIF though, Subliminal is written on top of UIAutomation itself, and aims to hide away it&#39;s complexity from the developers.</p>
 <pre><code class=" hljs objc">- (<span class="hljs-keyword">void</span>)testLogInSucceedsWithUsernameAndPassword {
-  SLTextField *usernameField = [SLTextField elementWithAccessibilityLabel:<span class="hljs-string">@"username field"</span>];
-  SLTextField *passwordField = [SLTextField elementWithAccessibilityLabel:<span class="hljs-string">@"password field"</span> isSecure:<span class="hljs-literal">YES</span>];
-  SLElement *submitButton = [SLElement elementWithAccessibilityLabel:<span class="hljs-string">@"Submit"</span>];
-  SLElement *loginSpinner = [SLElement elementWithAccessibilityLabel:<span class="hljs-string">@"Logging in..."</span>];
+  SLTextField *usernameField = [SLTextField elementWithAccessibilityLabel:<span class="hljs-string">@&quot;username field&quot;</span>];
+  SLTextField *passwordField = [SLTextField elementWithAccessibilityLabel:<span class="hljs-string">@&quot;password field&quot;</span> isSecure:<span class="hljs-literal">YES</span>];
+  SLElement *submitButton = [SLElement elementWithAccessibilityLabel:<span class="hljs-string">@&quot;Submit&quot;</span>];
+  SLElement *loginSpinner = [SLElement elementWithAccessibilityLabel:<span class="hljs-string">@&quot;Logging in...&quot;</span>];
 
-  <span class="hljs-built_in">NSString</span> *username = <span class="hljs-string">@"Jeff"</span>, *password = <span class="hljs-string">@"foo"</span>;
+  <span class="hljs-built_in">NSString</span> *username = <span class="hljs-string">@&quot;Jeff&quot;</span>, *password = <span class="hljs-string">@&quot;foo&quot;</span>;
   [usernameField setText:username];
   [passwordField setText:password];
 
   [submitButton tap];
 
   <span class="hljs-comment">// wait for the login spinner to disappear</span>
-  SLAssertTrueWithTimeout([loginSpinner isInvalidOrInvisible], <span class="hljs-number">3.0</span>, <span class="hljs-string">@"Log-in was not successful."</span>);
+  SLAssertTrueWithTimeout([loginSpinner isInvalidOrInvisible], <span class="hljs-number">3.0</span>, <span class="hljs-string">@&quot;Log-in was not successful.&quot;</span>);
 
-  <span class="hljs-built_in">NSString</span> *successMessage = [<span class="hljs-built_in">NSString</span> stringWithFormat:<span class="hljs-string">@"Hello, %@!"</span>, username];
+  <span class="hljs-built_in">NSString</span> *successMessage = [<span class="hljs-built_in">NSString</span> stringWithFormat:<span class="hljs-string">@&quot;Hello, %@!&quot;</span>, username];
   SLAssertTrue([[SLElement elementWithAccessibilityLabel:successMessage] isValid],
-  <span class="hljs-string">@"Log-in did not succeed."</span>);
+  <span class="hljs-string">@&quot;Log-in did not succeed.&quot;</span>);
 
   <span class="hljs-comment">// Check the internal state of the app.</span>
-  SLAssertTrue(SLAskAppYesNo(isUserLoggedIn), <span class="hljs-string">@"User is not logged in."</span>)
+  SLAssertTrue(SLAskAppYesNo(isUserLoggedIn), <span class="hljs-string">@&quot;User is not logged in.&quot;</span>)
 }
 </code></pre>
 <p>Subliminal states that it can enable testing In-App Purchase alerts, and even put the app to sleep. This all sounds great, but the fact that, at the time of writing, the last commit is from September 2014, and there are 13 active PR throws a bad signal on the status of the library 😕.</p>
@@ -141,24 +141,24 @@ class ThingSpec: QuickSpec {
 <p>A Cucumber/Calabash test looks like this</p>
 <pre><code class=" hljs ruby"><span class="hljs-comment"># rating_a_stand.feature</span>
 
-<span class="hljs-constant">Feature</span><span class="hljs-symbol">:</span> <span class="hljs-constant">Rating</span> a stand
-  <span class="hljs-constant">Scenario</span><span class="hljs-symbol">:</span> <span class="hljs-constant">Find</span> <span class="hljs-keyword">and</span> rate a stand from the list
-    <span class="hljs-constant">Given</span> <span class="hljs-constant">I</span> am on the foodstand list
-    <span class="hljs-constant">Then</span> <span class="hljs-constant">I</span> should see a <span class="hljs-string">"rating"</span> button
-    <span class="hljs-constant">And</span> <span class="hljs-constant">I</span> should <span class="hljs-keyword">not</span> see <span class="hljs-string">"Dixie Burger &amp; Gumbo Soup"</span>
+<span class="hljs-symbol">Feature:</span> Rating a stand
+  <span class="hljs-symbol">Scenario:</span> Find <span class="hljs-keyword">and</span> rate a stand from the list
+    Given I am on the foodstand list
+    Then I should see a <span class="hljs-string">&quot;rating&quot;</span> button
+    And I should <span class="hljs-keyword">not</span> see <span class="hljs-string">&quot;Dixie Burger &amp; Gumbo Soup&quot;</span>
 
 <span class="hljs-comment"># steps.rb</span>
 
-<span class="hljs-constant">Given</span>(<span class="hljs-regexp">/^I am on the foodstand list$/</span>) <span class="hljs-keyword">do</span>
-  wait_for_element_exists <span class="hljs-string">"view marked:'Foodstand'"</span>
+Given(<span class="hljs-regexp">/^I am on the foodstand list$/</span>) <span class="hljs-keyword">do</span>
+  wait_for_element_exists <span class="hljs-string">&quot;view marked:&#x27;Foodstand&#x27;&quot;</span>
 <span class="hljs-keyword">end</span>
 
-<span class="hljs-constant">Given</span>(<span class="hljs-regexp">/^I should see a "([^\"]*)" button$/</span>) <span class="hljs-keyword">do</span> |button_title|
-  wait_for_element_exists <span class="hljs-string">"button marked:'<span class="hljs-subst">#{button_title}</span>'"</span>
+Given(<span class="hljs-regexp">/^I should see a &quot;([^\&quot;]*)&quot; button$/</span>) <span class="hljs-keyword">do</span> <span class="hljs-params">|button_title|</span>
+  wait_for_element_exists <span class="hljs-string">&quot;button marked:&#x27;<span class="hljs-subst">#{button_title}</span>&#x27;&quot;</span>
 <span class="hljs-keyword">end</span>
 
-<span class="hljs-constant">Given</span>(<span class="hljs-regexp">/^I should not see "([^\"]*)"$/</span>) <span class="hljs-keyword">do</span> |view_label|
-  wait_for_element_does_not_exists <span class="hljs-string">"view marked:'<span class="hljs-subst">#{view_label}</span>'
+Given(<span class="hljs-regexp">/^I should not see &quot;([^\&quot;]*)&quot;$/</span>) <span class="hljs-keyword">do</span> <span class="hljs-params">|view_label|</span>
+  wait_for_element_does_not_exists <span class="hljs-string">&quot;view marked:&#x27;<span class="hljs-subst">#{view_label}</span>&#x27;
 end</span>
 </code></pre>
 <p>The upside of Calabash is very declarative tests, that the management will like <em>if they&#39;ll ever read them</em>, and the ability for a tester to port most of their know-how across the two platforms.</p>

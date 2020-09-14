@@ -17,7 +17,7 @@
     <span class="hljs-keyword">self</span>.view = view
   }
 
-  <span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">configure</span><span class="hljs-params">(withProductId id: Int)</span></span> { ... }
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">configure</span><span class="hljs-params">(withProductId id: Int)</span></span> { ... }
 }
 </code></pre>
 <p>How can we test that given a know product id the view will be configured with the expected name and price values?</p>
@@ -26,7 +26,7 @@
 <pre><code class=" hljs swift"><span class="hljs-comment">// When ProductViewConfigurator configures the view with a given product id</span>
 <span class="hljs-comment">// It sets the view name with the name of the fetched product</span>
 <span class="hljs-comment">// It sets the view price with the formatted price of the fetched product</span>
-<span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">testItConfiguresTheView</span><span class="hljs-params">()</span></span> {
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">testItConfiguresTheView</span><span class="hljs-params">()</span></span> {
   <span class="hljs-keyword">let</span> view = <span class="hljs-type">ProductView</span>()
   <span class="hljs-keyword">let</span> configurator = <span class="hljs-type">ProductViewConfigurator</span>(view: view)
 
@@ -35,8 +35,8 @@
   <span class="hljs-keyword">let</span> predicate = <span class="hljs-type">NSPredicate</span>(block: { any, <span class="hljs-number">_</span> <span class="hljs-keyword">in</span>
     <span class="hljs-comment">// Note that because the predicate receives an Any as input we need to</span>
     <span class="hljs-comment">// cast it.</span>
-    guard <span class="hljs-keyword">let</span> view = any <span class="hljs-keyword">as</span>? <span class="hljs-type">ProductView</span> <span class="hljs-keyword">else</span> { <span class="hljs-keyword">return</span> <span class="hljs-built_in">false</span> }
-    <span class="hljs-keyword">return</span> view.name.text == <span class="hljs-string">"Foo"</span> &amp;&amp; view.price.text == <span class="hljs-string">"$42"</span>
+    <span class="hljs-keyword">guard</span> <span class="hljs-keyword">let</span> view = any <span class="hljs-keyword">as</span>? <span class="hljs-type">ProductView</span> <span class="hljs-keyword">else</span> { <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span> }
+    <span class="hljs-keyword">return</span> view.name.text == <span class="hljs-string">&quot;Foo&quot;</span> &amp;&amp; view.price.text == <span class="hljs-string">&quot;$42&quot;</span>
   })
 
   <span class="hljs-comment">// Create an expectation using the predicate</span>

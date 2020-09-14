@@ -12,14 +12,14 @@
 <p>The first step is creating an <code>EXPMatchers</code> category named after the new matcher: <code>EXPMatchers+beAFruit</code>.</p>
 <p>We are now going to look at the code step by step, you can always check the example repo to see the entire <a href="https://github.com/mokacoding/expecta-plugin-example/blob/6f18f0ea17976e376fa55feea2006bb52b3671dd/expecta-plugins-exampleTests/EXPMatchers%2BbeAFruit.h">header</a> and <a href="https://github.com/mokacoding/expecta-plugin-example/blob/6f18f0ea17976e376fa55feea2006bb52b3671dd/expecta-plugins-exampleTests/EXPMatchers%2BbeAFruit.m">implementation</a>.</p>
 <p>In the <code>.h</code> we&#39;ll define the signature of our matcher using the <code>EXPMatcherInterface</code> macro, which expects the matcher name and a list of arguments.</p>
-<pre><code class=" hljs objc"><span class="hljs-preprocessor">#import <span class="hljs-title">"Expecta.h"</span></span>
+<pre><code class=" hljs objc"><span class="hljs-meta">#import <span class="hljs-meta-string">&quot;Expecta.h&quot;</span></span>
 
 EXPMatcherInterface(beAFruit, (<span class="hljs-keyword">void</span>))
 </code></pre>
 <p>Notice the <code>(void)</code> as the second argument to state that our matcher is not using any parameters.</p>
 <p>Than we are going to write the matcher&#39;s implementation, by providing code to run for the blocks making up the matcher.</p>
-<pre><code class=" hljs objc"><span class="hljs-preprocessor">#import <span class="hljs-title">"EXPMatchers+beAFruit.h"</span></span>
-<span class="hljs-preprocessor">#import <span class="hljs-title">"Fruit.h"</span></span>
+<pre><code class=" hljs objc"><span class="hljs-meta">#import <span class="hljs-meta-string">&quot;EXPMatchers+beAFruit.h&quot;</span></span>
+<span class="hljs-meta">#import <span class="hljs-meta-string">&quot;Fruit.h&quot;</span></span>
 
 EXPMatcherImplementationBegin(beAFruit, (<span class="hljs-keyword">void</span>)) {
 </code></pre>
@@ -33,24 +33,24 @@ EXPMatcherImplementationBegin(beAFruit, (<span class="hljs-keyword">void</span>)
 </code></pre>
 <p>Then there is <code>match</code>, which is where we can perform all the logic to determine whether our expectation is met.</p>
 <pre><code class=" hljs objc">  match(^<span class="hljs-built_in">BOOL</span> {
-    <span class="hljs-keyword">return</span> [actual isKindOfClass:[Fruit class]];
+    <span class="hljs-keyword">return</span> [actual isKindOfClass:[Fruit <span class="hljs-keyword">class</span>]];
   });
 </code></pre>
 <p>Finally there are two blocks that print the error message for the normal and negated (<code>.toNot</code>) failure scenarios.</p>
 <pre><code class=" hljs objc">  failureMessageForTo(^<span class="hljs-built_in">NSString</span> * {
     <span class="hljs-keyword">if</span> (actualIsNil) {
-      <span class="hljs-keyword">return</span> <span class="hljs-string">@"the actual value in nil/null"</span>;
+      <span class="hljs-keyword">return</span> <span class="hljs-string">@&quot;the actual value in nil/null&quot;</span>;
     }
 
-    <span class="hljs-keyword">return</span> [<span class="hljs-built_in">NSString</span> stringWithFormat:<span class="hljs-string">@"expected: kind of %@, got: an instance of %@"</span>, [Fruit class], [actual class]];
+    <span class="hljs-keyword">return</span> [<span class="hljs-built_in">NSString</span> stringWithFormat:<span class="hljs-string">@&quot;expected: kind of %@, got: an instance of %@&quot;</span>, [Fruit <span class="hljs-keyword">class</span>], [actual <span class="hljs-keyword">class</span>]];
   });
 
   failureMessageForNotTo(^<span class="hljs-built_in">NSString</span> * {
     <span class="hljs-keyword">if</span> (actualIsNil) {
-      <span class="hljs-keyword">return</span> <span class="hljs-string">@"the actual value in nil/null"</span>;
+      <span class="hljs-keyword">return</span> <span class="hljs-string">@&quot;the actual value in nil/null&quot;</span>;
     }
 
-    <span class="hljs-keyword">return</span> [<span class="hljs-built_in">NSString</span> stringWithFormat:<span class="hljs-string">@"expected: not kind of %@, got: an instance of %@"</span>, [Fruit class], [actual class]];
+    <span class="hljs-keyword">return</span> [<span class="hljs-built_in">NSString</span> stringWithFormat:<span class="hljs-string">@&quot;expected: not kind of %@, got: an instance of %@&quot;</span>, [Fruit <span class="hljs-keyword">class</span>], [actual <span class="hljs-keyword">class</span>]];
   });
 </code></pre>
 <p>The last thing left to do is do declare that the implementation is finished.</p>

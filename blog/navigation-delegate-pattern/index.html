@@ -13,7 +13,7 @@ I like to call this kind of delegates <code>NavigationDelegate</code>s<a href="#
 This can be done by using a <a href="https://www.mokacoding.com/blog/swift-test-doubles/#spy">spy</a>.</p>
 <h3 id="-navigationdelegate-in-action"><code>NavigationDelegate</code> in action</h3>
 <p>To test that a view controller triggers the expected navigation you can verify that it calls the appropriate method of its <code>NavigationDelegate</code>.</p>
-<pre><code class=" hljs swift"><span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">testCallsShowRedWhenRedButtonTouched</span><span class="hljs-params">()</span></span> {
+<pre><code class=" hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">testCallsShowRedWhenRedButtonTouched</span><span class="hljs-params">()</span></span> {
     <span class="hljs-keyword">let</span> viewController = loadViewController()
     <span class="hljs-keyword">let</span> navigationDelegateSpy = <span class="hljs-type">ViewControllerNavigationDelegateSpy</span>()
     viewController.navigationDelegate = navigationDelegateSpy
@@ -24,32 +24,32 @@ This can be done by using a <a href="https://www.mokacoding.com/blog/swift-test-
 }
 </code></pre>
 <pre><code class=" hljs swift"><span class="hljs-class"><span class="hljs-keyword">protocol</span> <span class="hljs-title">ViewControllerNavigationDelegate</span>: <span class="hljs-title">class</span> </span>{
-    <span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">showRedViewController</span><span class="hljs-params">()</span></span>
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">showRedViewController</span><span class="hljs-params">()</span></span>
 }
 
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ViewController</span>: <span class="hljs-title">UIViewController</span> </span>{
 
-    <span class="hljs-preprocessor">@IBOutlet</span> <span class="hljs-keyword">weak</span> <span class="hljs-keyword">var</span> redButton: <span class="hljs-type">UIButton</span>!
+    <span class="hljs-meta">@IBOutlet</span> <span class="hljs-keyword">weak</span> <span class="hljs-keyword">var</span> redButton: <span class="hljs-type">UIButton!</span>
 
-    <span class="hljs-keyword">weak</span> <span class="hljs-keyword">var</span> navigationDelegate: <span class="hljs-type">ViewControllerNavigationDelegate</span>?
+    <span class="hljs-keyword">weak</span> <span class="hljs-keyword">var</span> navigationDelegate: <span class="hljs-type">ViewControllerNavigationDelegate?</span>
 
-    <span class="hljs-keyword">override</span> <span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">viewDidLoad</span><span class="hljs-params">()</span></span> {
+    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">viewDidLoad</span><span class="hljs-params">()</span></span> {
         <span class="hljs-keyword">super</span>.viewDidLoad()
 
         redButton.addTarget(<span class="hljs-keyword">self</span>, action: #selector(redButtonTouched), <span class="hljs-keyword">for</span>: .primaryActionTriggered)
     }
 
-    <span class="hljs-preprocessor">@objc</span> <span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">redButtonTouched</span><span class="hljs-params">()</span></span> {
+    <span class="hljs-meta">@objc</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">redButtonTouched</span><span class="hljs-params">()</span></span> {
         navigationDelegate?.showRedViewController()
     }
 }
 </code></pre>
 <pre><code class=" hljs swift"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ViewControllerNavigationDelegateSpy</span>: <span class="hljs-title">ViewControllerNavigationDelegate</span> </span>{
 
-    private(<span class="hljs-keyword">set</span>) <span class="hljs-keyword">var</span> showRedCalled = <span class="hljs-built_in">false</span>
+    <span class="hljs-keyword">private</span>(<span class="hljs-keyword">set</span>) <span class="hljs-keyword">var</span> showRedCalled = <span class="hljs-literal">false</span>
 
-    <span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">showRedViewController</span><span class="hljs-params">()</span></span> {
-        showRedCalled = <span class="hljs-built_in">true</span>
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">showRedViewController</span><span class="hljs-params">()</span></span> {
+        showRedCalled = <span class="hljs-literal">true</span>
     }
 }
 </code></pre>
@@ -60,7 +60,7 @@ You also don&#39;t need to put the view controller inside a <code>UIWindow</code
 <p>The only downside is that you have to build a spy test double for the <code>NavigationDelegate</code>.
 Given how little code this involves, I think it&#39;s a pretty good tradeoff.</p>
 <p>If you want to test how the type conforming to the <code>NavigationDelegate</code> performs the navigation -a wise thing to do- you can do that in isolation.</p>
-<pre><code class=" hljs swift"><span class="hljs-func"><span class="hljs-keyword">func</span> <span class="hljs-title">testPushesRedViewController</span><span class="hljs-params">()</span></span> {
+<pre><code class=" hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">testPushesRedViewController</span><span class="hljs-params">()</span></span> {
     <span class="hljs-keyword">let</span> navigator = <span class="hljs-type">Navigator</span>(navigationController: <span class="hljs-type">UINavigationController</span>(rootViewController: <span class="hljs-type">UIViewController</span>()))
 
     navigator.showRedViewController()

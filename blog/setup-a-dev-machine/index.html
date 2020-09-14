@@ -5,36 +5,36 @@
 <h3 id="setup-os-x-for-development-the-checklist">Setup OS X for Development: the checklist</h3>
 <h4 id="-homebrew-http-brew-sh-"><a href="http://brew.sh/">Homebrew</a></h4>
 <p>Save time, and your sanity, use homebrew!</p>
-<pre><code class="">ruby <span class="hljs-operator">-e</span> <span class="hljs-string">"<span class="hljs-variable">$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)</span>"</span>
+<pre><code class="">ruby -e <span class="hljs-string">&quot;<span class="hljs-subst">$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)</span>&quot;</span>
 </code></pre><p>homebrew saves stuff in <code>/usr/local/bin</code>, so make sure it comes <strong>before</strong> the default <code>/bin</code> in the <code>$PATH</code>.</p>
-<pre><code class=""><span class="hljs-built_in">export</span> PATH=/usr/<span class="hljs-built_in">local</span>/bin/:<span class="hljs-variable">$PATH</span>
+<pre><code class="">export PATH=<span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/bin/</span>:<span class="hljs-variable">$PATH</span>
 </code></pre><h4 id="-zsh-http-www-zsh-org-"><a href="http://www.zsh.org/">zsh</a></h4>
-<pre><code class="">brew <span class="hljs-keyword">install</span> zsh
+<pre><code class=""><span class="hljs-keyword">brew </span><span class="hljs-keyword">install </span>zsh
 </code></pre><p>Zsh is cool, and with <a href="https://github.com/sorin-ionescu/prezto">prezto</a> we can make it super shiny. 
 <br/>
 <em>Note:</em> the following instructions are from the prezto README, <a href="https://github.com/sorin-ionescu/prezto#installation">check it out</a> just to be sure they are up to date.</p>
 <pre><code class="">zsh
-git <span class="hljs-built_in">clone</span> --recursive https://github.com/sorin-ionescu/prezto.git <span class="hljs-string">"<span class="hljs-variable">${ZDOTDIR:-$HOME}</span>/.zprezto"</span>
+git <span class="hljs-built_in">clone</span> --recursive https://github.com/sorin-ionescu/prezto.git <span class="hljs-string">&quot;<span class="hljs-variable">${ZDOTDIR:-<span class="hljs-variable">$HOME</span>}</span>/.zprezto&quot;</span>
 <span class="hljs-built_in">setopt</span> EXTENDED_GLOB
-<span class="hljs-keyword">for</span> rcfile <span class="hljs-keyword">in</span> <span class="hljs-string">"<span class="hljs-variable">${ZDOTDIR:-$HOME}</span>"</span>/.zprezto/runcoms/^README.md(.N); <span class="hljs-keyword">do</span>
-  ln <span class="hljs-operator">-s</span> <span class="hljs-string">"<span class="hljs-variable">$rcfile</span>"</span> <span class="hljs-string">"<span class="hljs-variable">${ZDOTDIR:-$HOME}</span>/.<span class="hljs-variable">${rcfile:t}</span>"</span>
+<span class="hljs-keyword">for</span> rcfile <span class="hljs-keyword">in</span> <span class="hljs-string">&quot;<span class="hljs-variable">${ZDOTDIR:-<span class="hljs-variable">$HOME</span>}</span>&quot;</span>/.zprezto/runcoms/^README.md(.N); <span class="hljs-keyword">do</span>
+  ln -s <span class="hljs-string">&quot;<span class="hljs-variable">$rcfile</span>&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">${ZDOTDIR:-<span class="hljs-variable">$HOME</span>}</span>/.<span class="hljs-variable">${rcfile:t}</span>&quot;</span>
 <span class="hljs-keyword">done</span>
 </code></pre><p>Finally, set zsh as the default shell</p>
-<pre><code class="">chsh <span class="hljs-operator">-s</span> /usr/<span class="hljs-built_in">local</span>/bin/zsh
+<pre><code class="">chsh -s <span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/bin/</span>zsh
 </code></pre><h4 id="-ruby-https-www-ruby-lang-org-en-of-course-via-rvm-https-rvm-io-"><a href="https://www.ruby-lang.org/en/">Ruby</a>, of course via <a href="https://rvm.io/">rvm</a></h4>
-<pre><code class="">\curl -L <span class="hljs-string">https:</span><span class="hljs-comment">//get.rvm.io | bash -s stable</span>
-rvm install <span class="hljs-number">2.0</span>.0
+<pre><code class="">\curl -L https:<span class="hljs-comment">//get.rvm.io | bash -s stable</span>
+rvm install <span class="hljs-number">2.0</span><span class="hljs-number">.0</span>
 </code></pre><h4 id="-python-http-www-python-org-a-proper-one"><a href="http://www.python.org/">Python</a>, a proper one</h4>
-<pre><code class="">brew <span class="hljs-keyword">install</span> python
+<pre><code class=""><span class="hljs-keyword">brew </span><span class="hljs-keyword">install </span>python
 </code></pre><h4 id="-node-js-http-nodejs-org-"><a href="http://nodejs.org/">Node.js</a></h4>
 <p>Just head to the <a href="http://nodejs.org/">home page</a> and hit the green &quot;Install&quot; button, it&#39;s the <a href="https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager#osx">reccomened way</a>! <em>Or use homebrew again:</em></p>
-<pre><code class="">brew <span class="hljs-keyword">install</span> node
+<pre><code class="">brew install <span class="hljs-keyword">node</span><span class="hljs-title"></span>
 </code></pre><h4 id="xcode-and-the-command-line-tools">Xcode and the Command Line Tools</h4>
 <p>Get it from <a href="https://developer.apple.com/xcode/">Apple&#39;s Developer page</a>, and then search for &quot;Command Line Tools&quot; in the &quot;Downloads&quot; tab of the &quot;Preferences&quot;.</p>
 <p>There&#39;s also an <a href="http://kennethreitz.org/xcode-gcc-and-homebrew/">open source way</a>, but I haven&#39;t tried it.</p>
 <h4 id="-java-http-www-java-com-en-"><a href="http://www.java.com/en/">Java</a></h4>
 <p>Apparently OS X doesn&#39;t come with Java ready for us, but at least installing it is easy, just try to use it in the terminal, and the installation wizard will start.</p>
-<pre><code class="">java
+<pre><code class=""><span class="hljs-attribute">java</span>
 </code></pre><h4 id="some-useful-extra-stuff">Some useful extra stuff</h4>
 <ul>
 <li><a href="http://www.google.com/chrome">Chrome</a></li>

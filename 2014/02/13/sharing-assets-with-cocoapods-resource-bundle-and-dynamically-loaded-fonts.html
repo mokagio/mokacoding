@@ -14,7 +14,7 @@
 <p>Then how do we make a bundle? Or in our case a Resource Bundle, so that we can add it in our <code>.podspec</code>? As you can imagine the Documentation is still not helpful...</p>
 <p>I spent a couple of hours messing around creating folders naming the <code>folder.bundle</code>, googling and <a href="http://stackoverflow.com/questions/8458953/ios-build-a-resource-bundle-via-xcode-target">stackoverflowing</a>, but with no luck integrating it with my pod. I also found a <a href="http://www.galloway.me.uk/tutorials/ios-library-with-resources/">tutorial</a> by Matt Galloway, but it looked like a complex hack, there had to be something simpler!</p>
 <p>Turns out it&#39;s <strong>dead simple</strong>! Just list the resources path you want in the bundle and the pod will generate it for you. Boom. No tricks, no hacks, just a line of code.</p>
-<pre><code class=" hljs ruby">spec.ios.resource_bundle = { <span class="hljs-string">'MapBox'</span> =&gt; <span class="hljs-string">'MapView/Map/Resources/*.png'</span> }
+<pre><code class=" hljs ruby">spec.ios.resource_bundle = { <span class="hljs-string">&#x27;MapBox&#x27;</span> =&gt; <span class="hljs-string">&#x27;MapView/Map/Resources/*.png&#x27;</span> }
 </code></pre>
 <h3 id="dynamically-load-the-fonts">Dynamically load the fonts</h3>
 <p>Now that the we have our Resource Bundle ready we only need to skip the annoying process of adding the fonts to the <code>Info.plist</code> and we&#39;re good to go.</p>
@@ -23,23 +23,23 @@
 <span class="hljs-built_in">CFErrorRef</span> error;
 <span class="hljs-built_in">CGDataProviderRef</span> provider = <span class="hljs-built_in">CGDataProviderCreateWithCFData</span>((<span class="hljs-built_in">CFDataRef</span>)inData);
 <span class="hljs-built_in">CGFontRef</span> font = <span class="hljs-built_in">CGFontCreateWithDataProvider</span>(provider);
-<span class="hljs-keyword">if</span> (! CTFontManagerRegisterGraphicsFont(font, &amp;error)) {
+<span class="hljs-keyword">if</span> (! <span class="hljs-built_in">CTFontManagerRegisterGraphicsFont</span>(font, &amp;error)) {
     <span class="hljs-built_in">CFStringRef</span> errorDescription = <span class="hljs-built_in">CFErrorCopyDescription</span>(error)
-    <span class="hljs-built_in">NSLog</span>(<span class="hljs-string">@"Failed to load font: %@"</span>, errorDescription);
+    <span class="hljs-built_in">NSLog</span>(<span class="hljs-string">@&quot;Failed to load font: %@&quot;</span>, errorDescription);
     <span class="hljs-built_in">CFRelease</span>(errorDescription);
 }
 <span class="hljs-built_in">CFRelease</span>(font);
 <span class="hljs-built_in">CFRelease</span>(provider);
 </code></pre>
 <p>The only downside of this approach is that we need to run that code at some point. I put it into a <code>FontsManager</code> class, with getters for the fonts that sort of lazy loads them. Like this:</p>
-<pre><code class=" hljs objc"><span class="hljs-keyword">static</span> <span class="hljs-built_in">NSString</span> * <span class="hljs-keyword">const</span> kBundle = <span class="hljs-string">@"ResourceBundle.bundle"</span>;
+<pre><code class=" hljs objc"><span class="hljs-keyword">static</span> <span class="hljs-built_in">NSString</span> * <span class="hljs-keyword">const</span> kBundle = <span class="hljs-string">@&quot;ResourceBundle.bundle&quot;</span>;
 
 + (<span class="hljs-built_in">UIFont</span> *)openSansLightFontOfSize:(<span class="hljs-built_in">CGFloat</span>)size
 {
-    <span class="hljs-built_in">NSString</span> *fontName = <span class="hljs-string">@"OpenSans-Light"</span>;
+    <span class="hljs-built_in">NSString</span> *fontName = <span class="hljs-string">@&quot;OpenSans-Light&quot;</span>;
     <span class="hljs-built_in">UIFont</span> *font = [<span class="hljs-built_in">UIFont</span> fontWithName:fontName size:size];
     <span class="hljs-keyword">if</span> (!font) {
-        [[<span class="hljs-keyword">self</span> class] dynamicallyLoadFontNamed:fontName];
+        [[<span class="hljs-keyword">self</span> <span class="hljs-keyword">class</span>] dynamicallyLoadFontNamed:fontName];
         font = [<span class="hljs-built_in">UIFont</span> fontWithName:fontName size:size];
 
         <span class="hljs-comment">// safe fallback</span>
@@ -51,16 +51,16 @@
 
 + (<span class="hljs-keyword">void</span>)dynamicallyLoadFontNamed:(<span class="hljs-built_in">NSString</span> *)name
 {
-    <span class="hljs-built_in">NSString</span> *resourceName = [<span class="hljs-built_in">NSString</span> stringWithFormat:<span class="hljs-string">@"%@/%@"</span>, kBundle, name];
-    <span class="hljs-built_in">NSURL</span> *url = [[<span class="hljs-built_in">NSBundle</span> mainBundle] URLForResource:resourceName withExtension:<span class="hljs-string">@"ttf"</span>];
+    <span class="hljs-built_in">NSString</span> *resourceName = [<span class="hljs-built_in">NSString</span> stringWithFormat:<span class="hljs-string">@&quot;%@/%@&quot;</span>, kBundle, name];
+    <span class="hljs-built_in">NSURL</span> *url = [[<span class="hljs-built_in">NSBundle</span> mainBundle] URLForResource:resourceName withExtension:<span class="hljs-string">@&quot;ttf&quot;</span>];
     <span class="hljs-built_in">NSData</span> *fontData = [<span class="hljs-built_in">NSData</span> dataWithContentsOfURL:url];
     <span class="hljs-keyword">if</span> (fontData) {
         <span class="hljs-built_in">CFErrorRef</span> error;
         <span class="hljs-built_in">CGDataProviderRef</span> provider = <span class="hljs-built_in">CGDataProviderCreateWithCFData</span>((<span class="hljs-built_in">CFDataRef</span>)fontData);
         <span class="hljs-built_in">CGFontRef</span> font = <span class="hljs-built_in">CGFontCreateWithDataProvider</span>(provider);
-        <span class="hljs-keyword">if</span> (! CTFontManagerRegisterGraphicsFont(font, &amp;error)) {
+        <span class="hljs-keyword">if</span> (! <span class="hljs-built_in">CTFontManagerRegisterGraphicsFont</span>(font, &amp;error)) {
             <span class="hljs-built_in">CFStringRef</span> errorDescription = <span class="hljs-built_in">CFErrorCopyDescription</span>(error);
-            <span class="hljs-built_in">NSLog</span>(<span class="hljs-string">@"Failed to load font: %@"</span>, errorDescription);
+            <span class="hljs-built_in">NSLog</span>(<span class="hljs-string">@&quot;Failed to load font: %@&quot;</span>, errorDescription);
             <span class="hljs-built_in">CFRelease</span>(errorDescription);
         }
         <span class="hljs-built_in">CFRelease</span>(font);

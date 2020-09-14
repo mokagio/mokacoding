@@ -6,11 +6,11 @@
 <p>The best way to configure your builds on Travis CI is through the <code>.travis.yml</code> file.</p>
 <p>In case you are not familiar with it, a <code>.yml</code> file is a file written in <a href="http://yaml.org/">YAML</a>, a very simple data serialization language, and <a href="http://yaml.org/spec/1.2/spec.html#id2759572">a JSON subset</a>.</p>
 <p>Here&#39;s the one of simplest <code>.travis.yml</code> you could write:</p>
-<pre><code class=" hljs yml"><span class="hljs-attribute">language</span>: <span class="hljs-string">objective-c</span>
-<span class="hljs-attribute">osx_image</span>: <span class="hljs-string">xcode7.1</span>
+<pre><code class=" hljs yml"><span class="hljs-attr">language:</span> <span class="hljs-string">objective-c</span>
+<span class="hljs-attr">osx_image:</span> <span class="hljs-string">xcode7.1</span>
 
-<span class="groovy"><span class="hljs-string">script:</span>
-  - .<span class="hljs-regexp">/bin/</span>tests</span>
+<span class="hljs-attr">script:</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-string">./bin/tests</span>
 </code></pre>
 <p>That&#39;s it. This configuration file will make sure that your build will run on a machine with Xcode 7.1, the run the executable script located at <code>bin/tests</code>.</p>
 <p>Using a script file where the test commands are rather than letting Travis CI guess how to run them itself has a number of advantages. First and foremost, it makes it so that you can run the same command the CI will use on your machine, which is important because you want to personally test your CI setup. On top of that it keeps the configuration file decoupled by the implementation details how the tests should run, and makes it more readable.</p>
@@ -18,29 +18,29 @@
 <p>Checkout <a href="https://www.mokacoding.com/blog/running-tests-from-the-terminal/">this post</a> for a closer look on how to write such a script.</p>
 <h2 id="other-configurations">Other configurations</h2>
 <p>The <a href="https://github.com/mokacoding/Bench/blob/master/.travis.yml"><code>.travis.yml</code></a> of <a href="https://github.com/mokacoding/Bench">Bench</a>, one of the example projects used to in posts like &quot;<a href="https://www.mokacoding.com/blog/xcode-7-ui-testing/">Xcode 7 UI testing, a first look</a>&quot; and &quot;<a href="https://www.mokacoding.com/blog/job-stories-acceptance-tests-with-kif-and-specta/">Job stories acceptance tests using KIF and Specta</a>&quot;, adds is similar to the one above, but with an extra section:</p>
-<pre><code class=" hljs yml"><span class="hljs-attribute">language</span>: <span class="hljs-string">objective-c</span>
-<span class="hljs-attribute">osx_image</span>: <span class="hljs-string">xcode7.1</span>
+<pre><code class=" hljs yml"><span class="hljs-attr">language:</span> <span class="hljs-string">objective-c</span>
+<span class="hljs-attr">osx_image:</span> <span class="hljs-string">xcode7.1</span>
 
-<span class="http"><span class="hljs-attribute">cache</span>: <span class="hljs-string">bundler</span>
+<span class="hljs-attr">cache:</span> <span class="hljs-string">bundler</span>
 
-<span class="groovy"><span class="hljs-string">script:</span>
-  - .<span class="hljs-regexp">/bin/</span>unit-tests</span></span>
+<span class="hljs-attr">script:</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-string">./bin/unit-tests</span>
 </code></pre>
 <p>Bench uses <a href="https://github.com/supermarin/xcpretty">xcpretty</a> to format the tests&#39; output. The tool is installed as a Ruby gem, using <a href="http://bundler.io/">Bundler</a>.</p>
 <p>Travis CI will automatically run <code>bundle install</code> on a project that uses Bundler, and the <code>cache: bundler</code> line in the configuration file tells it that it should in cache the dependencies installed that way, saving up some build time.</p>
 <p>In <a href="https://github.com/mokagio/Quick/blob/mokagio/test-xctool/.travis.yml">this <code>.travis.yml</code></a> from the <a href="https://github.com/Quick/Quic">Quick</a> project we do two extra things, update the git submodules, and make sure the <code>xctool</code> version <code>brew</code> is up to date.</p>
-<pre><code class=" hljs yml"><span class="hljs-attribute">osx_image</span>: <span class="hljs-string">xcode7</span>
-<span class="hljs-attribute">language</span>: <span class="hljs-string">objective-c</span>
+<pre><code class=" hljs yml"><span class="hljs-attr">osx_image:</span> <span class="hljs-string">xcode7</span>
+<span class="hljs-attr">language:</span> <span class="hljs-string">objective-c</span>
 
-<span class="haml">before_install:
-  -<span class="ruby"> git submodule update --init --recursive
-</span>  -<span class="ruby"> brew update || brew update
-</span>  -<span class="ruby"> brew outdated xctool || brew upgrade xctool
-</span>
-script:
-  -<span class="ruby"> rake <span class="hljs-symbol">test:</span>ios
-</span>  -<span class="ruby"> rake <span class="hljs-symbol">test:</span>osx
-</span>  -<span class="ruby"> rake <span class="hljs-symbol">test:</span><span class="hljs-symbol">xctool:</span>ios</span></span>
+<span class="hljs-attr">before_install:</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-string">git</span> <span class="hljs-string">submodule</span> <span class="hljs-string">update</span> <span class="hljs-string">--init</span> <span class="hljs-string">--recursive</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-string">brew</span> <span class="hljs-string">update</span> <span class="hljs-string">||</span> <span class="hljs-string">brew</span> <span class="hljs-string">update</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-string">brew</span> <span class="hljs-string">outdated</span> <span class="hljs-string">xctool</span> <span class="hljs-string">||</span> <span class="hljs-string">brew</span> <span class="hljs-string">upgrade</span> <span class="hljs-string">xctool</span>
+
+<span class="hljs-attr">script:</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-string">rake</span> <span class="hljs-string">test:ios</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-string">rake</span> <span class="hljs-string">test:osx</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-string">rake</span> <span class="hljs-string">test:xctool:ios</span>
 </code></pre>
 <h2 id="a-note-on-dependencies">A note on dependencies</h2>
 <p>You might have noticed that I have made no mention yet to <code>pod install</code> or <code>carthage bootstrap</code>. That is because I&#39;ve found that is way better to check in your projects dependencies under version control rather than having the CI downloading every time. Not only you will get a faster build, but also remove the network as a possible point of failure. For example GitHub being offline would not prevent the dependencies to being downloaded, resulting in the build failing.</p>

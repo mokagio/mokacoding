@@ -6,10 +6,10 @@
 </ul>
 <p>In such cases we can use Swift&#39;s <code>available</code> declaration attribute to tell the compiler that code using the marked object or function should not compile.</p>
 <pre><code class=" hljs swift"><span class="hljs-comment">// Swift 2.2</span>
-@available(&lt;platform&gt;, unavailable=&lt;version&gt;, message=&lt;message&gt;)
+<span class="hljs-meta">@available</span>(&lt;platform&gt;, unavailable=&lt;version&gt;, message=&lt;message&gt;)
 
 <span class="hljs-comment">// Swift 3</span>
-@available(&lt;platform&gt;, unavailable: &lt;version&gt;, message: &lt;message&gt;)
+<span class="hljs-meta">@available</span>(&lt;platform&gt;, unavailable: &lt;version&gt;, message: &lt;message&gt;)
 </code></pre>
 <p>For example, if you have to subclass <code>NSObject</code> into something that has a stored constant which needs to be passed at initialization, and don&#39;t want to allow consumers to call <code>init</code> because it doesn&#39;t make sense to set a default value for the constant, you can make <code>init</code> unavailable to its consumers:</p>
 <pre><code class=" hljs swift"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Dummy</span>: <span class="hljs-title">NSObject</span> </span>{
@@ -20,9 +20,9 @@
     <span class="hljs-keyword">self</span>.foo = foo
   }
 
-  @available(*, unavailable)
+  <span class="hljs-meta">@available</span>(*, unavailable)
   <span class="hljs-keyword">override</span> <span class="hljs-keyword">init</span>() {
-    fatalError()
+    <span class="hljs-built_in">fatalError</span>()
   }
 }
 </code></pre>
