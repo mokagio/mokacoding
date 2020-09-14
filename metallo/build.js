@@ -27,6 +27,7 @@ metalsmith(__dirname)
     "Makefile",
     "npm-shrinkwrap.json",
     "package.json",
+    "package-lock.json",
     "README.md",
     "TODO.md"
   ])
