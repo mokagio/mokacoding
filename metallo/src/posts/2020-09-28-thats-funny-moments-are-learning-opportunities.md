@@ -1,5 +1,5 @@
 ---
-title: "That's funny…" moments are learning opportunities
+title: "\"That's funny…\" moments are learning opportunities"
 tags:
   - Software Design
   - Quotes
