@@ -1,5 +1,6 @@
 ---
 title: "\"That's funny…\" moments are learning opportunities"
+description: "The most exciting phrase to hear in science, the one that heralds new discoveries, is not \"Eureka!\" but \"That's funny…\""
 tags:
   - Software Design
   - Quotes
