@@ -9,7 +9,7 @@ YDNIY, You Don't Need It Yet, is a principle to ship software on a schedule [pro
 Applying it consistently will benefit you beyond merely staying on track with a pre-committed schedule, though, it will help you learn and shape your software.
 
 The idea behind YDNIY is that if a feature, or part of it, is not required to make your product useful, you can delay implementing it and ship something valuable to the users.
-This is not limited to the first version of your product; you can keep improving the value you offer one strictly necessary change at a time, providing the users with a steady drip of improvements.
+This is not limited to the first version of your product: **keep refining the value you offer one strictly necessary change at a time, providing the users with a steady drip of improvements**.
 
 Itamar uses his [Python memory profiler library `fil`](https://pythonspeed.com/products/filmemoryprofiler/) as an example of how to apply YDNIY.
 The first public version was installable only via [`pip`](https://pypi.org/project/pip/), run only on Linux, and could profile only complete program runs.
@@ -42,9 +42,9 @@ Successful bootstrappers know a lot about applying YDNIY and moving in small ite
 When you quit your day job to start your own business, your income depends on how many customers you can get.
 The ability to ship something valuable (that people will pay for) fast (before your savings run out) is the difference between staying in the game and having to leave before you can make your play.
 
-Ben Orenstein, co-founder and CEO of [Tuple](https://tuple.app/), a pair programming app, has been sharing his bootstrapping journey since inception in [The Art Of Proudct](https://artofproductpodcast.com/) podcast.
-Like Itamar's `fip`, Tuple launched on only one platform.
-At the time of writing, it still doesn't offer Linux or Windows clients, only macOS.
+[Ben Orenstein](https://twitter.com/r00k), co-founder and CEO of [Tuple](https://tuple.app/), a pair programming app, has been sharing his bootstrapping journey since inception in [The Art Of Proudct](https://artofproductpodcast.com/) podcast.
+Like Itamar's `fip`, Tuple launched on only one platform: macOS.
+At the time of writing, it still doesn't offer Linux or Windows clients.
 This is clearly a limitation to the possible userbase for the app, but the company provides a smooth and reliable remote pair programming experience to enough developers on macOS to be profitable and growing.
 
 Several times in the show's history, Ben has bounced the idea of building clients for other platforms.
@@ -55,7 +55,8 @@ Had Ben and his team decided that it was necessary to ship the first version of 
 Remote pair programming involves real-time streaming of and interaction with the users' screen; making it work cross-platform is not a simple feat.
 Getting that right might have taken too much time, eating up the founders' savings, possibly ending up in that section of the startup cemetery reserved for those burnt their runway before their product ever saw the light of day.
 
-You Don't Need It Yet is an application of purposeful restraint in what we decide to build in the interest of delivering value to the users as soon as possible.
+**You Don't Need It Yet is a purposeful restraint of what you decide to build in the interest of delivering value to the users as soon as possible.**
+
 It goes against the perfectionist nature shared by most software developers.
 To practice it, you need to be comfortable with being uncomfortable about your product's completeness, because you'll need to ship something clearly unfinished.
 
