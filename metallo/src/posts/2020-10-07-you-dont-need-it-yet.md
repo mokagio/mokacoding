@@ -1,5 +1,6 @@
 ---
 title: You Don't Need It Yet
+description: YDNIY is a purposeful restraint of what you decide to build in the interest of delivering value to the users as soon as possible and consistently.
 tags:
 - Software Design
 og_image: https://mokacoding.s3.amazonaws.com/2020-10-07-mvp.jpg
@@ -53,7 +54,7 @@ The answer, for the moment, is still no.
 
 Had Ben and his team decided that it was necessary to ship the first version of Tuple with support across platforms, the company's trajectory would have been very different.
 Remote pair programming involves real-time streaming of and interaction with the users' screen; making it work cross-platform is not a simple feat.
-Getting that right might have taken too much time, eating up the founders' savings, possibly ending up in that section of the startup cemetery reserved for those burnt their runway before their product ever saw the light of day.
+Getting that right might have taken too much time, eating up the founders' savings and sending Tuple to that section of the startup cemetery reserved for those who burnt their runway before their product ever saw the light of day.
 
 **You Don't Need It Yet is a purposeful restraint of what you decide to build in the interest of delivering value to the users as soon as possible.**
 
