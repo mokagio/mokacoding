@@ -1,5 +1,5 @@
 ---
-title: "Book Review: Hyperfocus by Chris Bailey"
+title: "Hyperfocus by Chris Bailey"
 description: Hyperfocus will teach you how to concentrate effectively and let your mind wander to reach creative insights.
 tags:
 - Productivity
