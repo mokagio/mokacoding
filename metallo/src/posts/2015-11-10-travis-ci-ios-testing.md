@@ -10,7 +10,7 @@ tags:
 
 Whether you are using Swift or Objective-C, developing a little open source framework or the next App Store hit, having a solid CI setup is very important to guarantee a fast feedback loop, and a reliable development pipeline.
 
-Last week [we looked at CircleCI](https://www.mokacoding.com/blog/circle-ci-ios-testing/), and today we are going to see how to use [Travis CI](https://travis-ci.org/) to test iOS, and OS X applications. Oh! And watchOS and tvOS as well.
+Last week [we looked at CircleCI](https://mokacoding.com/blog/circle-ci-ios-testing/), and today we are going to see how to use [Travis CI](https://travis-ci.org/) to test iOS, and OS X applications. Oh! And watchOS and tvOS as well.
 
 **Note:** Before configuring Travis CI you'll need to make sure that the Xcode Scheme used to run the test is shared, so that it will be downloaded as part of the repo checkout so that the CI box will find it when attempting to run the tests.
 
@@ -36,11 +36,11 @@ Using a script file where the test commands are rather than letting Travis CI gu
 
 Note that the `language` key says `objective-c`, but that it enables both Swift and Objective-C builds.
 
-Checkout [this post](https://www.mokacoding.com/blog/running-tests-from-the-terminal/) for a closer look on how to write such a script.
+Checkout [this post](https://mokacoding.com/blog/running-tests-from-the-terminal/) for a closer look on how to write such a script.
 
 ## Other configurations
 
-The [`.travis.yml`](https://github.com/mokacoding/Bench/blob/master/.travis.yml) of [Bench](https://github.com/mokacoding/Bench), one of the example projects used to in posts like "[Xcode 7 UI testing, a first look](https://www.mokacoding.com/blog/xcode-7-ui-testing/)" and "[Job stories acceptance tests using KIF and Specta](https://www.mokacoding.com/blog/job-stories-acceptance-tests-with-kif-and-specta/)", adds is similar to the one above, but with an extra section:
+The [`.travis.yml`](https://github.com/mokacoding/Bench/blob/master/.travis.yml) of [Bench](https://github.com/mokacoding/Bench), one of the example projects used to in posts like "[Xcode 7 UI testing, a first look](https://mokacoding.com/blog/xcode-7-ui-testing/)" and "[Job stories acceptance tests using KIF and Specta](https://mokacoding.com/blog/job-stories-acceptance-tests-with-kif-and-specta/)", adds is similar to the one above, but with an extra section:
 
 ```yml
 language: objective-c

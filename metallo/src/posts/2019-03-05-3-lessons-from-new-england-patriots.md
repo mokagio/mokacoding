@@ -38,7 +38,7 @@ The New England Patriots **focus on improving every little detail** of their pla
 
 We can always be on the lookout for areas of improvement, even in the minutiae, like the Pats optimizing the delivery of the ball to the referee. Every second you shave from your workflow makes you faster, every technique you learn can make your software better. This is the [compound effect](), each improvement sits on top of the other, and makes you grow in an exponential way.
 
-You can get better at using your tools by learning keyboard shortcuts or exploring the menus to discover new functionalities. You can write scripts and workflows, or [create aliases for common shell commands](https://www.mokacoding.com/blog/terminal-aliases/).
+You can get better at using your tools by learning keyboard shortcuts or exploring the menus to discover new functionalities. You can write scripts and workflows, or [create aliases for common shell commands](https://mokacoding.com/blog/terminal-aliases/).
 
 You can also upgrade your tools to better ones, for example:
 

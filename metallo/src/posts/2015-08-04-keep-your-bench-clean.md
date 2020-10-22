@@ -34,7 +34,7 @@ Unused code slows you down. Keeping unused code does to your project the same th
 
 ## Make small atomic commits
 
-An atomic commit is a commit that does one single thing. We [already talked](https://www.mokacoding.com/blog/5-habits-that-will-make-you-a-better-software-developer/) about the value of small atomic commits. Small atomic commits tell the story of the codebase in a clear sequential way, they are easy to follow, and more importantly easy to revert.
+An atomic commit is a commit that does one single thing. We [already talked](https://mokacoding.com/blog/5-habits-that-will-make-you-a-better-software-developer/) about the value of small atomic commits. Small atomic commits tell the story of the codebase in a clear sequential way, they are easy to follow, and more importantly easy to revert.
 
 ## Never commit commented code
 

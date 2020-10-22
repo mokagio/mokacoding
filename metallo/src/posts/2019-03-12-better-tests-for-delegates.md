@@ -69,7 +69,7 @@ lass ResourceFetcherDelegateSpy: ResourceFetcherDelegate {
 }
 ```
 
-I talk more about this testing tactic [here](https://www.mokacoding.com/blog/testing-delegates-in-swift-with-xctest/).
+I talk more about this testing tactic [here](https://mokacoding.com/blog/testing-delegates-in-swift-with-xctest/).
 
 ## Behaviour vs. Implementation
 

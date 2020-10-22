@@ -7,7 +7,7 @@ tags:
 - Specta
 ---
 
-In this post we'll put together two of the tools seen in the past weeks, [KIF](https://www.mokacoding.com/blog/setting-up-kif-for-ios-acceptance-testing) and [Specta](https://www.mokacoding.com/blog/better-tests-with-specta), to write more effective acceptance tests, that map user stories.
+In this post we'll put together two of the tools seen in the past weeks, [KIF](https://mokacoding.com/blog/setting-up-kif-for-ios-acceptance-testing) and [Specta](https://mokacoding.com/blog/better-tests-with-specta), to write more effective acceptance tests, that map user stories.
 
 If you don't know what a job story is I'll suggest you to have a look at [these](https://medium.com/the-job-to-be-done/replacing-the-user-story-with-the-job-story-af7cdee10c27) two [posts](https://robots.thoughtbot.com/converting-to-jobs-stories). In short, a job story is an alternative approach to collecting requirements to the more famous _user story_, that focus on the value added by the feature or bugfix to be implemented. It is a good way to make sure only things that will actually benefit the user and help deliver a better experience will be developed.
 

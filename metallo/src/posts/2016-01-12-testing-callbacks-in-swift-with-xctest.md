@@ -105,7 +105,7 @@ I'd be happy to help.
 
 Stay tuned for the next article in which we'll see how to test asynchronous
 calls of delegate objects. If you don't want to miss out be sure to [subscribe
-to the newsletter](https://www.mokacoding.com#subscribe).
+to the newsletter](https://mokacoding.com#subscribe).
 
 _Leave the codebase better than you found it._
 

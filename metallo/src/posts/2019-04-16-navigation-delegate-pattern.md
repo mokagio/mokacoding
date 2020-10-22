@@ -26,7 +26,7 @@ View controllers should only trigger the navigation and then _delegate_ the act 
 I like to call this kind of delegates `NavigationDelegate`s[<sup id="pattern-origin">*</sup>](#fn1).
 
 With a `NavigationDelegate` in place, testing how a view controller does navigations is now a matter of testing how it interacts with its delegate.
-This can be done by using a [spy](https://www.mokacoding.com/blog/swift-test-doubles/#spy).
+This can be done by using a [spy](https://mokacoding.com/blog/swift-test-doubles/#spy).
 
 ### `NavigationDelegate` in action
 

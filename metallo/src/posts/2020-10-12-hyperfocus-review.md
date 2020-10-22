@@ -10,12 +10,12 @@ og_image: https://mokacoding.s3.amazonaws.com/2020-10-12-hyperfocus.jpg
 [_Hyperfocus_](https://geni.us/R8avh) by [Chris Bailey](https://alifeofproductivity.com/) is an easy read on the topics of productivity and creativity, a good entry-level book for any knowledge worker looking to use their brain to its full potential.
 
 The book, divided into two parts, covers first how to configure your environment and schedule to focus effectively, then how to foster creativity insights by taking productive breaks.
-It is a natural follow up to Chris' previous book [_The Productivity Project_](https://www.mokacoding.com/blog/the-productivity-project-notes/), diving deeper into the topic of how to use your most crucial productivity tool: attention.
+It is a natural follow up to Chris' previous book [_The Productivity Project_](https://mokacoding.com/blog/the-productivity-project-notes/), diving deeper into the topic of how to use your most crucial productivity tool: attention.
 
 ## Hyperfocus
 
 Hyperfocus, a term originating from [the ADHD literature](https://en.wikipedia.org/wiki/Hyperfocus), is the author's jargon for the process of managing your environment and schedule to minimize distraction and maximize the quality and duration of your attention.
-If you already read a few books on the topic, such as [_Deep Work_](https://geni.us/FITEF) or [_Indistractable_](https://www.mokacoding.com/blog/the-indistractable-developer/), the framework and its suggestions will sound familiar.
+If you already read a few books on the topic, such as [_Deep Work_](https://geni.us/FITEF) or [_Indistractable_](https://mokacoding.com/blog/the-indistractable-developer/), the framework and its suggestions will sound familiar.
 
 To practice hyperfocus:
 
@@ -95,4 +95,4 @@ If you are anything like me, this is something you need a constant reminder of.
 
 Get in touch on Twitter at [@mokagio](https://twitter.com/mokagio) or leave a comment below to discuss hyper- and scatterfocus or anything else productivity-related.
 
-If you'd like more book recommendations on the topic of productivity, check out my opinionated [_Top 10 Productivity Books_](https://www.mokacoding.com/blog/top-10-productivity-books/) list.
+If you'd like more book recommendations on the topic of productivity, check out my opinionated [_Top 10 Productivity Books_](https://mokacoding.com/blog/top-10-productivity-books/) list.

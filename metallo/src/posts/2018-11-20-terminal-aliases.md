@@ -6,7 +6,7 @@ tags:
   - Terminal
 ---
 
-One of the best things you could do to improve as a software developer is constantly [investing in your terminal setup and skills](https://www.mokacoding.com/blog/invest-in-your-terminal-to-become-a-better-developer/).
+One of the best things you could do to improve as a software developer is constantly [investing in your terminal setup and skills](https://mokacoding.com/blog/invest-in-your-terminal-to-become-a-better-developer/).
 
 You might be taken aback by the command line because there is a lot of typing to do. It can seem slower than using a GUI. It doesn't have to be that way.
 

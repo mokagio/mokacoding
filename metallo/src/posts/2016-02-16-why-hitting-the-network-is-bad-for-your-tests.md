@@ -65,7 +65,7 @@ or [Nocilla](https://github.com/luisobo/Nocilla) to hijack network requests
 made by your app and prevent them from hit the real server by providing a
 stubbed response.
 
-Head over to [the next post](https://www.mokacoding.com/blog/ohhttpstubs/) for a
+Head over to [the next post](https://mokacoding.com/blog/ohhttpstubs/) for a
 deeper look into OHHTTPStubs.
 
 ### Roll your own

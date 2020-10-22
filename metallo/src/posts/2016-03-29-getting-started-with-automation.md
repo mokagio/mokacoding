@@ -26,7 +26,7 @@ If you work with enterprise clients chances are that they'll require you to prod
 
 #### Running unit and acceptance test
 
-To generate test coverage reports you need to have run the tests first, and its always best to run them as a pre-step before every code coverage data generation. Running your tests via a script is [very simple](https://www.mokacoding.com/blog/running-tests-from-the-terminal/), and once you have it in place hooking up a CI system will be as easy as configuring it to run your script.
+To generate test coverage reports you need to have run the tests first, and its always best to run them as a pre-step before every code coverage data generation. Running your tests via a script is [very simple](https://mokacoding.com/blog/running-tests-from-the-terminal/), and once you have it in place hooking up a CI system will be as easy as configuring it to run your script.
 
 #### Building, archiving, and exporting your app for distribution
 
@@ -40,7 +40,7 @@ The nice thing about this is that it can be added as an extra step to the previo
 
 #### Environment Bootstrap
 
-Another example of processes that require multiple steps and for which the documentation might not be up to date is setting up the development environment after a fresh clone of the repository. You might be needing extra tool installable via [Homebrew](http://brew.sh), [Ruby gems](https://www.mokacoding.com/blog/ruby-for-ios-developers-bundler/), etc., fetching dependencies. It is easy to write a script that checks for every required tools, installing them when possible, and calls any other command with multiple parameters required to bootstrap the dev environment.
+Another example of processes that require multiple steps and for which the documentation might not be up to date is setting up the development environment after a fresh clone of the repository. You might be needing extra tool installable via [Homebrew](http://brew.sh), [Ruby gems](https://mokacoding.com/blog/ruby-for-ios-developers-bundler/), etc., fetching dependencies. It is easy to write a script that checks for every required tools, installing them when possible, and calls any other command with multiple parameters required to bootstrap the dev environment.
 
 ---
 

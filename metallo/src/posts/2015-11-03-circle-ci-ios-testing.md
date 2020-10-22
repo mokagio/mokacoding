@@ -36,11 +36,11 @@ That's it. This configuration file will make sure that your build will run on a 
 
 Using a script file where the test commands are rather than letting CircleCI guess how to run them itself has a number of advantages. First and foremost, it makes it so that you can run the same command the CI will use on your machine, which is important because you want to personally test your CI setup. On top of that it keeps the configuration file decoupled by the implementation details how the tests should run, and makes it more readable.
 
-Checkout [this post](https://www.mokacoding.com/blog/running-tests-from-the-terminal/) for a closer look on how to write such a script.
+Checkout [this post](https://mokacoding.com/blog/running-tests-from-the-terminal/) for a closer look on how to write such a script.
 
 ## Other configurations
 
-The [`circle.yml`](https://github.com/mokacoding/Bench/blob/master/circle.yml) of [Bench](https://github.com/mokacoding/Bench), one of the example projects used to in posts like "[Xcode 7 UI testing, a first look](https://www.mokacoding.com/blog/xcode-7-ui-testing/)" and "[Job stories acceptance tests using KIF and Specta](https://www.mokacoding.com/blog/job-stories-acceptance-tests-with-kif-and-specta/)", adds is similar to the one above, but with an extra section:
+The [`circle.yml`](https://github.com/mokacoding/Bench/blob/master/circle.yml) of [Bench](https://github.com/mokacoding/Bench), one of the example projects used to in posts like "[Xcode 7 UI testing, a first look](https://mokacoding.com/blog/xcode-7-ui-testing/)" and "[Job stories acceptance tests using KIF and Specta](https://mokacoding.com/blog/job-stories-acceptance-tests-with-kif-and-specta/)", adds is similar to the one above, but with an extra section:
 
 ```yml
 machine:

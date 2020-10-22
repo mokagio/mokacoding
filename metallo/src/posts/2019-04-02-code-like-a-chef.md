@@ -150,4 +150,4 @@ A messy bench is apparent to the naked eye, a messy codebase doesn't immediately
 It's harder to grasp the value of keeping code clean.
 Yet, over time, an untidy codebase will be as catastrophic for you as the messy benches were for Fiona and Georgia.
 
-_This article war originally written on [August 2015](https://www.mokacoding.com/blog/keep-your-bench-clean/), it's been edited and updated since then._
+_This article war originally written on [August 2015](https://mokacoding.com/blog/keep-your-bench-clean/), it's been edited and updated since then._

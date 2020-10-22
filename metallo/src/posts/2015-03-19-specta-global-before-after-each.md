@@ -12,7 +12,7 @@ tags:
 <blockquote class="twitter-tweet" data-cards="hidden" lang="en"><p><a href="https://twitter.com/mokagio">@mokagio</a> I feel slightly guilty for deprecating your post on Specta before/after calls already, <a href="https://t.co/peHjYJ959K">https://t.co/peHjYJ959K</a></p>&mdash; Ørta (@orta) <a href="https://twitter.com/orta/status/584558838642253824">April 5, 2015</a></blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-Have a look at the [updated version](https://www.mokacoding.com/blog/specta-global-before-after-each-updated/) to make sure you don't encounter any issue.
+Have a look at the [updated version](https://mokacoding.com/blog/specta-global-before-after-each-updated/) to make sure you don't encounter any issue.
 
 ---
 

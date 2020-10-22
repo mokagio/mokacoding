@@ -36,7 +36,7 @@ Now that we got the reading sorted, how about the writing? Sorry to break it to 
 
 The main reason is when working you seldom have the time to stretch outside of your comfort zone, and really try new things.
 
-If you want to master a design patter like [Clean Architecture](http://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) or a workflow like [Test Driven Development](https://www.mokacoding.com/blog/red-green-and-dont-forget-refactor) you need to [practice deliberately](http://calnewport.com/blog/2010/01/06/the-grandmaster-in-the-corner-office-what-the-study-of-chess-experts-teaches-us-about-building-a-remarkable-life/) at it.
+If you want to master a design patter like [Clean Architecture](http://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) or a workflow like [Test Driven Development](https://mokacoding.com/blog/red-green-and-dont-forget-refactor) you need to [practice deliberately](http://calnewport.com/blog/2010/01/06/the-grandmaster-in-the-corner-office-what-the-study-of-chess-experts-teaches-us-about-building-a-remarkable-life/) at it.
 
 Some techniques are:
 

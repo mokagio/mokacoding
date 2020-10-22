@@ -55,7 +55,7 @@ It's up to us to use only those features that are most useful and in line with o
 We need to remember that our iPhone is a tool and we are its master, and fight hard to avoid the relationship to reverse.
 
 [Here's an excellent article](https://medium.com/better-humans/how-to-set-up-your-iphone-for-productivity-focus-and-your-own-longevity-bb27a68cc3d8) on how to configure your iPhone to work for you, not against you.
-And if you want to dive deeper into the value of carefully choosing which features to adopt in the technological world, grab a copy of Cal Newport's [_Digital Minimalism_](https://geni.us/7HNOJAz), a book that made me realise [how my podcasts obsession was actually denying my mind the time to process all the information I was shoving into it](https://www.mokacoding.com/blog/podcast-addiction/).
+And if you want to dive deeper into the value of carefully choosing which features to adopt in the technological world, grab a copy of Cal Newport's [_Digital Minimalism_](https://geni.us/7HNOJAz), a book that made me realise [how my podcasts obsession was actually denying my mind the time to process all the information I was shoving into it](https://mokacoding.com/blog/podcast-addiction/).
 
 I've enabled Sleep Mode and Wind Down on my phone because I can use all the help I can get to sleep better, but I certainly won't be adding any widgets to my home screen.
 When I unlock my phone, I want it to be because I have a job to be done for one of my apps and I don't want anything to try and distract me from that.

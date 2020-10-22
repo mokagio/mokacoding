@@ -57,7 +57,7 @@ Usually, I'm right, but sometimes I'm not.
 Those are Asimov's "That's funny…" moments; the times where I get to adjust my model and refine my understanding, either of the new code I'm writing or of the way I should be interacting what already exists.
 
 Our ability to build an accurate mental representation of the software also depends on how readable the code is.
-This is why designing for local reasoning is important and why we should strive to [write code that is honest](http://www.mokacoding.com/blog/honesty-oriented-programming/).
+This is why designing for local reasoning is important and why we should strive to [write code that is honest](http://mokacoding.com/blog/honesty-oriented-programming/).
 Code with no hidden dependencies, doing only one thing, made up of small components, is easier to follow and reason about.
 There's less room for mistakes when building a mental representation of it.
 
@@ -95,7 +95,7 @@ Whether you are aware of it or not, you always build a mental representation of 
 Since the quality of our mental representation directly affects how well we can work within the codebase, it makes sense to invest in making sure it is accurate.
 
 As software writers, we can make our code easier to represent by taking into account readability, testability, how many things an unit of code does, and how many dependencies it has.
-Tip: [practicing TDD helps you with that](https://www.mokacoding.com/blog/if-youre-not-writing-tests-first-youre-missing-out/).
+Tip: [practicing TDD helps you with that](https://mokacoding.com/blog/if-youre-not-writing-tests-first-youre-missing-out/).
 
 As software readers, we can refine our mental representations by noticing when the behavior differs from our expectation and discover the reason why.
 

@@ -8,7 +8,7 @@ tags:
 - Testing
 ---
 
-After I shared [this little post about Quick beforeEach and afterEach](https://www.mokacoding.com/blog/quick-beforeeach-aftereach-behaviour/) with the team at [iflix](https://twitter.com/iflixdevs), Gerald popped a question in our chat:
+After I shared [this little post about Quick beforeEach and afterEach](https://mokacoding.com/blog/quick-beforeeach-aftereach-behaviour/) with the team at [iflix](https://twitter.com/iflixdevs), Gerald popped a question in our chat:
 
 ![Gerald's question: how does beforeSuite fits in the calls hierarchy?](https://s3.amazonaws.com/mokacoding/2017-05-11-beforesuite-aftersuite-question.jpg)
 

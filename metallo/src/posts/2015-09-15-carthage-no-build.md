@@ -9,7 +9,7 @@ tags:
 
 [Carthage](https://github.com/Carthage/Carthage) is an iOS and OS X dependency manager that aims to be simple to use and "out of your way". In this post we will look into a different way to integrate dependencies using Carthage than the standard one, an why you might want to use it.
 
-As usual there is a [sample project](https://github.com/mokacoding/Quick-Nimble-Carthage-Setup/tree/no-build), which is the same used when we looked at [How to add testing dependencies using Carthage](https://www.mokacoding.com/blog/setting-up-testing-libraries-with-carthage-xcode7), but on a different branch.
+As usual there is a [sample project](https://github.com/mokacoding/Quick-Nimble-Carthage-Setup/tree/no-build), which is the same used when we looked at [How to add testing dependencies using Carthage](https://mokacoding.com/blog/setting-up-testing-libraries-with-carthage-xcode7), but on a different branch.
 
 The standard way to use Carthage is by having a `Cartfile` listing the dependencies, and then running `carthage update` to download them in the `Cathage/Checkouts` folder, and build each of those into frameworks located in the `Carthage/Build` folder, and finally the developer has to manually integrate in the project.
 

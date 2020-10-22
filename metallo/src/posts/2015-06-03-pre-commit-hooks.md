@@ -7,7 +7,7 @@ tags:
 - Automation
 ---
 
-In the previous post we saw how iOS and Mac developers can [reduce the chances of merge conflicts on the project file using `xUnique`](https://www.mokacoding.com/blog/xunique/), a command line tool that makes the identifiers used in the `project.pbxproj` unique.
+In the previous post we saw how iOS and Mac developers can [reduce the chances of merge conflicts on the project file using `xUnique`](https://mokacoding.com/blog/xunique/), a command line tool that makes the identifiers used in the `project.pbxproj` unique.
 
 The main gotcha of this process is that _someone has to run the command_.
 

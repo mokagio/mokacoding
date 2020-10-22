@@ -44,7 +44,7 @@ If your cursor is in a test class, but outside a method, the context will be tha
 <source src="https://s3.amazonaws.com/mokacoding/2019-04-23-single-test-from-keyboard.gif" type="gif">
 </video>
 
-I [love keyboard shortcuts](https://xcodetips.com), and this is [my favorite testing shortcut](https://www.mokacoding.com/blog/xcode-testing-shortcuts/). I use it many many times every day.
+I [love keyboard shortcuts](https://xcodetips.com), and this is [my favorite testing shortcut](https://mokacoding.com/blog/xcode-testing-shortcuts/). I use it many many times every day.
 
 ## From the scheme
 

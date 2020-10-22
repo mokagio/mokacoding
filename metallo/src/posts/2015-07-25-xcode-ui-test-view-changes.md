@@ -9,7 +9,7 @@ tags:
 date: 2015-07-25
 ---
 
-With Xcode 7 Apple introduced a [new framework for UI testing](https://www.mokacoding.com/blog/xcode-7-ui-testing/). As with every new thing there is always room for improvement, and with Xcode 7 Beta 4, UI testing got a very useful improvement: the ability to wait asynchronously for view changes.
+With Xcode 7 Apple introduced a [new framework for UI testing](https://mokacoding.com/blog/xcode-7-ui-testing/). As with every new thing there is always room for improvement, and with Xcode 7 Beta 4, UI testing got a very useful improvement: the ability to wait asynchronously for view changes.
 
 <blockquote class="twitter-tweet" lang="en"><p lang="en" dir="ltr">Xcode 7 beta 4 adds async waiting for UI changes in UI testing with: &#10;&#10;-[XCTestCase expectationForPredicate:evaluatedWithObject:handler:]</p>&mdash; Joar Wingfors (@joar_at_work) <a href="https://twitter.com/joar_at_work/status/623716723787587585">July 22, 2015</a></blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>

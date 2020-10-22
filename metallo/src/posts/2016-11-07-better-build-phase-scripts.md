@@ -14,7 +14,7 @@ process using the "Run Script Phase" in the "Build Phases" section.
 
 This is a very handy feature as it allows us to do things like:
 
-- [Dynamically set the version and build number based on external parameters](https://www.mokacoding.com/blog/automatic-xcode-versioning-with-git/), e.g. commits count
+- [Dynamically set the version and build number based on external parameters](https://mokacoding.com/blog/automatic-xcode-versioning-with-git/), e.g. commits count
 - Load the settings bundle with options debug options to change the environment
 - Watermark the icon with the build number on debug builds
 

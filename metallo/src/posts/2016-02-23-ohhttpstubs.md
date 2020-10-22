@@ -7,7 +7,7 @@ tags:
 - iOS
 ---
 
-In the [previous post](https://www.mokacoding.com/blog/why-hitting-the-network-is-bad-for-your-tests/)
+In the [previous post](https://mokacoding.com/blog/why-hitting-the-network-is-bad-for-your-tests/)
 I tried to show the importance and the benefits of decoupling your unit tests
 from the network, and suggested ways to achieve that. In this new post of the
 Practical Testing in Swift series we'll look at a concrete implementation.

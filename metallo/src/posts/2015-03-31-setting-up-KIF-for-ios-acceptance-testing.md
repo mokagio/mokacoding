@@ -9,7 +9,7 @@ tags:
 
 Acceptance testing in iOS is a field that is gaining more interest, but with still a lot of work to do, and culture to be defined.
 
-[UIAutomation](https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/InstrumentsUserGuide/UsingtheAutomationInstrument/UsingtheAutomationInstrument.html), the framework provided by Apple, is not easy to use and this discourages many developers. Fortunately the open source community has come up with a number of other tools we can use to make sure our apps behave like intended. We've introduced some of those in last week's post ["The state of iOS testing in 2015"](https://www.mokacoding.com/blog/ios-testing-in-2015), and in this post we're gonna take a look at one of them, [KIF](https://github.com/kif-framework/KIF).
+[UIAutomation](https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/InstrumentsUserGuide/UsingtheAutomationInstrument/UsingtheAutomationInstrument.html), the framework provided by Apple, is not easy to use and this discourages many developers. Fortunately the open source community has come up with a number of other tools we can use to make sure our apps behave like intended. We've introduced some of those in last week's post ["The state of iOS testing in 2015"](https://mokacoding.com/blog/ios-testing-in-2015), and in this post we're gonna take a look at one of them, [KIF](https://github.com/kif-framework/KIF).
 
 ## Keep It Functional
 
@@ -19,7 +19,7 @@ Probably KIF's strongest point is the fact that it performs tests using a standa
 
 As you can read in the [README](https://github.com/kif-framework/KIF#kif-ios-integration-testing-framework), a KIF test runs on the main thread, and use a `KIFUITester` instance to simulate the user interaction by accessing the UI through the accessibility elements.
 
-While I personally don't think that having to know another language, be it Javascript for UIAutomation or Ruby for [Calabash](http://calaba.sh/) is a big issue, it's undeniable that having to run the tests outside of Xcode is annoying and doesn't suit well in a process of fast feedbacks, _unless we're talking of the [terminal](https://www.mokacoding.com/blog/running-tests-from-the-terminal/) 😜_) .
+While I personally don't think that having to know another language, be it Javascript for UIAutomation or Ruby for [Calabash](http://calaba.sh/) is a big issue, it's undeniable that having to run the tests outside of Xcode is annoying and doesn't suit well in a process of fast feedbacks, _unless we're talking of the [terminal](https://mokacoding.com/blog/running-tests-from-the-terminal/) 😜_) .
 
 One other thing to keep in mind when using KIF is that it works by leveraging **private APIs**, so you need to be careful not to include it in the App Store build.
 

@@ -9,7 +9,7 @@ tags:
 
 As your codebase grows so will your test suite. Production code is often refactored to stay simple to work with. The same care should be applied to the test code.
 
-Your unit test suite should be kept as tidy as your production code. We already saw [how to remove duplication from tests using test helpers](https://www.mokacoding.com/blog/how-to-remove-duplication-from-swift-tests-with-helper-functions/), functions extracting common functionalities in your test suite to avoid duplication.
+Your unit test suite should be kept as tidy as your production code. We already saw [how to remove duplication from tests using test helpers](https://mokacoding.com/blog/how-to-remove-duplication-from-swift-tests-with-helper-functions/), functions extracting common functionalities in your test suite to avoid duplication.
 
 Test helpers are an invaluable tool to make the tests suite easy to read and to expand without requiring extra work. I encourage you to use them.
 
@@ -17,7 +17,7 @@ Still, tests are a feedback on how our software is designed. Having to do a lot 
 
 ## Split decision logic from action logic
 
-Let's pick up the test for the `Logger` component of the [test helper example](https://www.mokacoding.com/blog/how-to-remove-duplication-from-swift-tests-with-helper-functions/).
+Let's pick up the test for the `Logger` component of the [test helper example](https://mokacoding.com/blog/how-to-remove-duplication-from-swift-tests-with-helper-functions/).
 
 ```swift
 func testLoggerLogsMessageWithPizza() {
@@ -152,7 +152,7 @@ As Manuel Chakravarty argues in his excellent talk [A Type is Worth a Thousand T
 
 ---
 
-Between this and [the previous post](https://www.mokacoding.com/blog/how-to-remove-duplication-from-swift-tests-with-helper-functions/) we saw three different approaches to avoid duplication in tests, ranging from the use of an helper function to encapsulate an expectation repeated multiple times, to the use of the type system to split the code taking decisions on the output from the code actioning it.
+Between this and [the previous post](https://mokacoding.com/blog/how-to-remove-duplication-from-swift-tests-with-helper-functions/) we saw three different approaches to avoid duplication in tests, ranging from the use of an helper function to encapsulate an expectation repeated multiple times, to the use of the type system to split the code taking decisions on the output from the code actioning it.
 
 Each is valuable, and each comes with different trade-offs. That's the beauty of software development, multiple solutions for the same problem, which one to pick is up to us.
 

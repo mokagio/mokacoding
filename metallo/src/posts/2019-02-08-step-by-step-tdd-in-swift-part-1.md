@@ -287,7 +287,7 @@ Our test is not yet testing the "if a pizza is named 'Margherita'" behaviour. To
 
 Before making the change to the `Pizza` `init` and its consumers let's make the change easy to make. In Kent Beck's words "make the change easy, warning this might be hard, then make the easy change".
 
-A way to make the change easier is to reduce number of places in the code where we init `Pizza` directly. We can do that using a [fixture extension](https://www.mokacoding.com/blog/streamlining-tests-setup-with-fixtures-in-swift/).
+A way to make the change easier is to reduce number of places in the code where we init `Pizza` directly. We can do that using a [fixture extension](https://mokacoding.com/blog/streamlining-tests-setup-with-fixtures-in-swift/).
 
 ```swift
 @testable import Giuseppes

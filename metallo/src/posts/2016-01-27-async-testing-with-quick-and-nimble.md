@@ -9,9 +9,9 @@ tags:
 
 In the previous two posts of the Practical Testing in Swift series we had a
 look at how to test asynchronous code using XCTest, both when dealing with
-[callbacks](https://www.mokacoding.com/blog/testing-callbacks-in-swift-with-xctest/)
+[callbacks](https://mokacoding.com/blog/testing-callbacks-in-swift-with-xctest/)
 and
-[delegates](https://www.mokacoding.com/blog/testing-delegates-in-swift-with-xctest/).
+[delegates](https://mokacoding.com/blog/testing-delegates-in-swift-with-xctest/).
 In this post we'll see how to do that using
 [Quick](https://github.com/Quick/Quick) and
 [Nimble](https://github.com/Quick/Nimble), a pair of Swift testing frameworks.
@@ -19,7 +19,7 @@ In this post we'll see how to do that using
 In case you are not familiar with them, let me introduce these two frameworks:
 Quick provides an [RSpec](http://rspec.info/) style syntax for Swift testing,
 so that we can write our tests in a more descriptive way; Nimble brings to the
-table a rich and powerful set of expectations and matchers. Read [this post](https://www.mokacoding.com/blog/testing-delegates-in-swift-with-xctest/)
+table a rich and powerful set of expectations and matchers. Read [this post](https://mokacoding.com/blog/testing-delegates-in-swift-with-xctest/)
 if you want to know more.
 
 ### Testing Callbacks with Quick and Nimble
@@ -47,7 +47,7 @@ received as its only parameter of its closure is not executed. For this reason
 the last line of the callback is `done()`, to notify the test runner that it
 can stop waiting.
 
-This setup is similar to the `XCTestExpectation` one that we [saw already](https://www.mokacoding.com/blog/testing-callbacks-in-swift-with-xctest/),
+This setup is similar to the `XCTestExpectation` one that we [saw already](https://mokacoding.com/blog/testing-callbacks-in-swift-with-xctest/),
 but in my opinion easier to reason about, and simpler to write.
 
 This approach can be used to test that a delegate method is called as a result
@@ -67,7 +67,7 @@ waitUntil(timeout: 2) { done in
 Testing this kind of behaviour reveals how neat the Nimble expectations are,
 and how better our test can feel by using this library.
 
-The example below uses the _spy delegate_ technique introduced in the [previous post](https://www.mokacoding.com/blog/testing-delegates-in-swift-with-xctest/),
+The example below uses the _spy delegate_ technique introduced in the [previous post](https://mokacoding.com/blog/testing-delegates-in-swift-with-xctest/),
 head over there to read more about it, or checkout the [example project](https://github.com/mokacoding/PracticalTesting)
 for this post to see the full code.
 
@@ -103,7 +103,7 @@ helped you with that. If you have any comments, questions, corrections or would
 like help with asynchronous code testing leave a comment below, or get in touch
 on Twitter [@mokagio](https://twitter.com/mokagio).
 
-Stay tuned for the [next article](https://www.mokacoding.com/blog/why-hitting-the-network-is-bad-for-your-tests/)
+Stay tuned for the [next article](https://mokacoding.com/blog/why-hitting-the-network-is-bad-for-your-tests/)
 in which well see how to decouple ourselves from the server when testing
 network related code.
 

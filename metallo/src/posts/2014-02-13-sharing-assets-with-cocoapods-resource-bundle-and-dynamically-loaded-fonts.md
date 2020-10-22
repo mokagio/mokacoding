@@ -21,7 +21,7 @@ The process is very simple:
 2. Add the resources to the pod resource bundle
 3. Dynamically load the fonts
 
-Creating a pod is super simple, I already [wrote about it](https://www.mokacoding.com/2013/01/21/cocoapods-how-to-create-your-own-pod.html), but it was a while ago, the best place to look for it is the [official CocoaPod documentation](http://guides.cocoapods.org/making/specs-and-specs-repo.html).
+Creating a pod is super simple, I already [wrote about it](https://mokacoding.com/2013/01/21/cocoapods-how-to-create-your-own-pod.html), but it was a while ago, the best place to look for it is the [official CocoaPod documentation](http://guides.cocoapods.org/making/specs-and-specs-repo.html).
 
 ### Add the assets to the pod resource bundle
 

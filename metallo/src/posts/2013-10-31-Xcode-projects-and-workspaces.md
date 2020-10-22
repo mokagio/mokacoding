@@ -8,7 +8,7 @@ keyword: Xcode project workspace
 slug: xcode-projects-and-workspaces
 ---
 
-_Note: this is post is the first answer to my [October's Questions](https://www.mokacoding.com/blog/october-questions). It should have arrived earlier but this month has been strange, because of several reasons I didn't had and didn't make enough time to write. But let's get started!_
+_Note: this is post is the first answer to my [October's Questions](https://mokacoding.com/blog/october-questions). It should have arrived earlier but this month has been strange, because of several reasons I didn't had and didn't make enough time to write. But let's get started!_
 
 I use Xcode every day (what an happy life), and it has now come the time to dig deeper into this pain in the butt of an IDE. Where to start if not from the _merge nightmare_, the `project.pbxproj`.
 

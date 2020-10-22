@@ -43,6 +43,6 @@ Take a leaf from the digital minimalist playbook. Reduce clutter to avoid paying
 
 ### Related Articles
 
-- [How To Sharpen Your Software Developer Tools](https://www.mokacoding.com/blog/tools-sharpening)
-- [How To Become Drastically Faster At Using The Terminal](https://www.mokacoding.com/blog/terminal-aliases)
-- [Keep Your Bench Clean](https://www.mokacoding.com/blog/keep-your-bench-clean/)
+- [How To Sharpen Your Software Developer Tools](https://mokacoding.com/blog/tools-sharpening)
+- [How To Become Drastically Faster At Using The Terminal](https://mokacoding.com/blog/terminal-aliases)
+- [Keep Your Bench Clean](https://mokacoding.com/blog/keep-your-bench-clean/)

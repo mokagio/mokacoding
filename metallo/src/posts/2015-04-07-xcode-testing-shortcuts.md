@@ -10,7 +10,7 @@ tags:
 
 The number one secret of productive developers is the mastery of their tools. From the text editor to the frameworks most unknown method, the more you know on a tool, the more way to use it effectively you'll find.
 
-Keyboard shortcuts are one of the easiest way to gain massive productivity improvements, with the least effort. I'll go as far as to say that to [you should learn a keyboard shortcut a day](https://www.mokacoding.com/blog/5-habits-that-will-make-you-a-better-software-developer/).
+Keyboard shortcuts are one of the easiest way to gain massive productivity improvements, with the least effort. I'll go as far as to say that to [you should learn a keyboard shortcut a day](https://mokacoding.com/blog/5-habits-that-will-make-you-a-better-software-developer/).
 
 So let's see how we can be more productive when running tests from Xcode by avoiding to the mouse, ever.
 
@@ -30,6 +30,6 @@ To remember this one think about the teenager saying Xcode _"Gee Xcode, I don't 
 
 There you go, these simple keyboard shortcut will save a lot of time over the course of the work week, and making them muscle memory will be a matter of days.
 
-An alternative way to run tests is from the terminal, if you're curious on how or why to do it check out [this post](https://www.mokacoding.com/blog/running-tests-from-the-terminal/).
+An alternative way to run tests is from the terminal, if you're curious on how or why to do it check out [this post](https://mokacoding.com/blog/running-tests-from-the-terminal/).
 
 _Happy coding, and leave the codebase better than you found it._

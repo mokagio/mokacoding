@@ -15,7 +15,7 @@ using [CocoaPods](https://cocoapods.org/) to integrate the library in your
 project.
 
 I love CocoaPods, but for a while now I've gone for a leaner approach using
-[Carthage](https://www.mokacoding.com/tag/Carthage/index.html).
+[Carthage](https://mokacoding.com/tag/Carthage/index.html).
 
 The two tools can coexist together peacefully, but since side projects are all
 about experimentation I've decided to go for a manual setup. This post contains

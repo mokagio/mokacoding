@@ -164,6 +164,6 @@ On the other hand, tests are a window on the ergonomics of your software. If som
 
 You should always be paying attention to how your tests feel to write and read. When they become painful or require extra work ask yourself whether the design can be improved.
 
-In [this post](https://www.mokacoding.com/blog/how-to-split-decision-and-action-logic-with-the-swift-type-system) we look at how to rewrite `Logger` in a way to make testing it -and as a direct effect using and maintaining it- easier.
+In [this post](https://mokacoding.com/blog/how-to-split-decision-and-action-logic-with-the-swift-type-system) we look at how to rewrite `Logger` in a way to make testing it -and as a direct effect using and maintaining it- easier.
 
 What do you think of test helpers? Is there anywhere in your test suite where you could use them? Or maybe you are already using them and want to share how they're working out for you. Leave a comment below or get in touch [on Twitter](https://twitter.com/mokagio), I'd love to hear from you.

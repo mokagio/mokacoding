@@ -28,7 +28,7 @@ Compare explaining to someone that to distribute the latest beta they need to
 execute `bundle exec fastlane test` because we decided to use
 [Fastlane](https://fastlane.tools/), which is distributed as a [Ruby
 gem](https://rubygems.org/), and its [better to use Ruby tools via
-Bundler](https://www.mokacoding.com/blog/ruby-for-ios-developers-bundler/), with
+Bundler](https://mokacoding.com/blog/ruby-for-ios-developers-bundler/), with
 saying to them "run `bin/distribute_beta`".
 
 Hiding these implementation and invocation details not only will simplify

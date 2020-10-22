@@ -81,7 +81,7 @@ func getMessage(weather: Weather, greetings: Messages = .default) -> String {
 ```
 
 The call site for `getMessage(weather:)` doesn't need to change, because we have extracted the existing messages in the `default` instance of `Messages`.
-In the tests, can now focus on the matching rather than the content of the messages by passing a [dummy instance](https://www.mokacoding.com/blog/swift-test-doubles/) of `Messages`.
+In the tests, can now focus on the matching rather than the content of the messages by passing a [dummy instance](https://mokacoding.com/blog/swift-test-doubles/) of `Messages`.
 
 ```swift
 func testWhenWeatherIsRainyUsesCopyForRainyState() {

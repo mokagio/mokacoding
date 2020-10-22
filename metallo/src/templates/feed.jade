@@ -6,8 +6,8 @@ rss(version="2.0", xmlns:atom="http://www.w3.org/2005/Atom")
     description.
       A blog about testing, iOS development, productivity, and blabber about software in general.
     link.
-      https://www.mokacoding.com
-    atom:link(href="https://www.mokacoding.com/feed.xml", rel="self", type="application/rss+xml")
+      https://mokacoding.com
+    atom:link(href="https://mokacoding.com/feed.xml", rel="self", type="application/rss+xml")
     language.
       en-US
     pubDate=(new Date).toUTCString()
@@ -17,7 +17,7 @@ rss(version="2.0", xmlns:atom="http://www.w3.org/2005/Atom")
         title=post.title
         description=post.description
         pubDate=post.date.toUTCString()
-        link="https://www.mokacoding.com/blog/" + post.slug
-        guid(isPermaLink="true")="https://www.mokacoding.com/blog/" + post.slug
+        link="https://mokacoding.com/blog/" + post.slug
+        guid(isPermaLink="true")="https://mokacoding.com/blog/" + post.slug
         for tag in post.tags
           category=tag

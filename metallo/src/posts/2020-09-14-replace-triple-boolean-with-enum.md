@@ -79,7 +79,7 @@ case .false: prepareSteak()
 If we don't want to make an assumption on the default value when the preference is missing, then defining an `enum` to model the scenario removes the ambiguity.
 By using a more specialized type than `Bool?` as the return value for `prefersVegetarian()`, we can make it clearer for the consumers of the code what to do when there is no stored preference.
 
-_By the way, did you know that [`Optional` is an `enum`, too](https://www.mokacoding.com/blog/what-is-an-optional-value-in-swift/)?_
+_By the way, did you know that [`Optional` is an `enum`, too](https://mokacoding.com/blog/what-is-an-optional-value-in-swift/)?_
 
 ---
 

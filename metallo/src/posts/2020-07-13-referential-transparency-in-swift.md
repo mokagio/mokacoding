@@ -65,7 +65,7 @@ Being able to simplify expressions might be interesting for mathematicians and  
 In practical terms, **code that is not referentially transparent is harder to reason about**.
 
 The function signature of referentially opaque code doesn't tell the whole story.
-It's not [honest](https://www.mokacoding.com/blog/honesty-oriented-programming).
+It's not [honest](https://mokacoding.com/blog/honesty-oriented-programming).
 You cannot trust that a function does only what it says by only looking at its input and output types, you need to drill into the implementation.
 
 In the real world, `roIncrement` could be a `loadData()` function to load the data for the UI which toggles a flag in the global state in its implementation.
@@ -74,7 +74,7 @@ The only way to know that flag had already been changed, is to ready the impleme
 This takes more effort and time.
 
 Languages like [Haskell](https://www.haskell.org/) and [Elm](https://elm-lang.org/) enforce referential transparency.
-In other languages, referential transparency can be achieved with techniques such as [making all the dependencies explicit](https://www.mokacoding.com/blog/explicit-dependencies/).
+In other languages, referential transparency can be achieved with techniques such as [making all the dependencies explicit](https://mokacoding.com/blog/explicit-dependencies/).
 
 When you go back to your IDE after reading this post and find yourself writing a new method, think about its dependencies and side effects.
 Can you make it referentially transparent?
