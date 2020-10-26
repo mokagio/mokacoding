@@ -32,7 +32,6 @@ We'll look at two of those in this post:
 <!-- Example: reading list app -->
 To compare these two approaches, let's imagine we're building a library reading list app.
 
-We have a tab view hosting two screens: one shows your reading list, the books you'd like to read, the other the list of all the titles in the library.
 We have a tab view hosting two screens: one shows you all the books in the library, another your to-read list.
 You can select a title from the library list to see its details and add it or remove it from your to-read list.
 
