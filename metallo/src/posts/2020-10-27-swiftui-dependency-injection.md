@@ -1,6 +1,6 @@
 ---
 title: How to do dependency injection in SwiftUI
-description: Let's look at two ways to inject dependencies in SwiftUI: using @EnvironmentObject or dependency inversion with MVVM
+description: Let's look at two ways to inject dependencies in SwiftUI: using @EnvironmentObject or dependency injection with MVVM
 ---
 
 Dependency injection is the practice of providing an object with the other objects it depends on rather than creating them internally.
