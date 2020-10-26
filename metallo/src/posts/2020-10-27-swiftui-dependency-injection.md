@@ -35,7 +35,7 @@ To compare these two approaches, let's imagine we're building a library reading 
 We have a tab view hosting two screens: one shows you all the books in the library, another your to-read list.
 You can select a title from the library list to see its details and add it or remove it from your to-read list.
 
-_image here_
+<!-- _image here_ -->
 
 The to-read list and book detail views both need access to the reading list storage; let's call it `ReadingListController`.
 
@@ -70,8 +70,7 @@ Every time the wrapped `ObservableObject` emits a change, the framework will inv
 `@EnvironmentObject` allows us to inject dependencies because it looks for its value in the SwiftUI environment.
 This means that a view deep in the hierarchy can access a dependency without its parent passing it through.
 
-_image without @EnvironmentObject_
-_image with @EnvironmentObject_
+<!-- _image without @EnvironmentObject_ | _image with @EnvironmentObject_ -->
 
 The way to add the dependency into the environment is to call the [`environmentObject(_:)`](https://developer.apple.com/documentation/swiftui/view/environmentobject(_:)) method on any ancestor of the view that needs to access it.
 I find this is best done at the top level: in the `App` implementation or in the `UIWindowSceneDelegate` if you are mix-and-matching SwiftUI with UIKit.
