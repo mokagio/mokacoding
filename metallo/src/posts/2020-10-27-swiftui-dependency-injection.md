@@ -3,7 +3,6 @@ title: How to do dependency injection in SwiftUI
 description: Let's look at two ways to inject dependencies in SwiftUI: using @EnvironmentObject or dependency inversion with MVVM
 ---
 
-Dependency injection is the practice of instantiating an object by passing its dependencies rather than creating them internally.
 Dependency injection is the practice of providing an object with the other objects it depends on rather than creating them internally.
 
 ```swift
@@ -27,8 +26,8 @@ This approach makes the design more flexible, keeps your code [honest](https://m
 In SwiftUI, there are different options for dependency injection.
 We'll look at two of those in this post:
 
-The `@EnvironmentObject` property wrapper
-Injection through an MVVM view model
+- The `@EnvironmentObject` property wrapper
+- Injection through an MVVM view model
 
 <!-- Example: reading list app -->
 To compare these two approaches, let's imagine we're building a library reading list app.
@@ -184,8 +183,8 @@ The next approach makes testing this conditional behavior easier and also remove
 
 If you use the MVVM pattern in SwiftUI, giving each view a view model containing all of the logic to present data and act on it, you can use it to inject dependencies by doing these two things:
 
-Move the logic to build the views to show from the view layer to the view model
-Centralize the logic to create view models in a single place
+- Move the logic to build the views to show from the view layer to the view model
+- Centralize the logic to create view models in a single place
 
 Here's the view models for `BookList` and `BookDetail`.
 
