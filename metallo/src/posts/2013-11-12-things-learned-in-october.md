@@ -1,5 +1,5 @@
 ---
-date: 2013-11-13
+date: 2013-11-12
 title: Some things I learned in October
 tags:
 - Life long learning
