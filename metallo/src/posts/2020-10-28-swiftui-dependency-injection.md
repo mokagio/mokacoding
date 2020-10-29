@@ -1,7 +1,7 @@
 ---
 title: Dependency Injection in SwiftUI
 description: "This post shows two ways of achieving dependency injection in SwiftUI: using @EnvironmentObject or a View Model Factory."
-og_image: https://mokacoding.s3.amazonaws.com/2020-10-23-swiftui-di-mvvm.png
+og_image: https://mokacoding.s3.amazonaws.com/2020-10-28-swiftui-di-mvvm.jpg
 ---
 
 There are different ways to do dependency injection in SwiftUI.
