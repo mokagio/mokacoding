@@ -71,7 +71,7 @@ Every time the wrapped `ObservableObject` emits a change, the framework will inv
 `@EnvironmentObject` allows us to inject dependencies because it looks for its value in the SwiftUI environment.
 This means that a view deep in the hierarchy can access a dependency without its parent passing it through.
 
-The way to add the dependency into the environment is to call the [`environmentObject(_:)`](https://developer.apple.com/documentation/swiftui/view/environmentobject(_:)) method on any ancestor of the view that needs to access it.
+The way to add the dependency into the environment is to call the [`environmentObject(_:)`](https://developer.apple.com/documentation/swiftui/view/environmentobject(_:%29) method on any ancestor of the view that needs to access it.
 I find this is best done at the top level: in the `App` implementation or in the `UIWindowSceneDelegate` if you are mix-and-matching SwiftUI with UIKit.
 
 Let's look at some code; you can get the source for this example [here](https://github.com/mokagio/ReadingList/tree/trunk/PureSwiftUIExample).
