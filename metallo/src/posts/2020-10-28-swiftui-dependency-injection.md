@@ -1,6 +1,7 @@
 ---
 title: How to do dependency injection in SwiftUI
 description: "This post shows two ways of achieving dependency injection in SwiftUI: using @EnvironmentObject or a View Model Factory."
+og_image: https://mokacoding.s3.amazonaws.com/2020-10-23-swiftui-di-mvvm.png
 ---
 
 There are different ways to do dependency injection in SwiftUI.
@@ -72,6 +73,8 @@ This means that a view deep in the hierarchy can access a dependency without its
 
 The way to add the dependency into the environment is to call the [`environmentObject(_:)`](https://developer.apple.com/documentation/swiftui/view/environmentobject(_:)) method on any ancestor of the view that needs to access it.
 I find this is best done at the top level: in the `App` implementation or in the `UIWindowSceneDelegate` if you are mix-and-matching SwiftUI with UIKit.
+
+Let's look at some code; you can get the source for this example [here](https://github.com/mokagio/ReadingList/tree/trunk/PureSwiftUIExample).
 
 ```swift
 import SwiftUI
@@ -216,6 +219,8 @@ struct BookDetail: View {
     }
 }
 ```
+
+You can find the code sample for this approach [here](https://github.com/mokagio/ReadingList/tree/trunk).
 
 Notice how `BookDetail` has no `if-else` conditional now.
 The view is [_humble_](https://martinfowler.com/eaaDev/uiArchs.html#HumbleView); it does what the view model tells it without any extra logic.
