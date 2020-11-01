@@ -52,7 +52,7 @@ You can select a title from the library list to see its details, then add it or 
 Every time the wrapped <code>ObservableObject</code> emits a change, the framework will invalidate the view, resulting in a redraw.</p>
 <p><code>@EnvironmentObject</code> allows us to inject dependencies because it looks for its value in the SwiftUI environment.
 This means that a view deep in the hierarchy can access a dependency without its parent passing it through.</p>
-<p>The way to add the dependency into the environment is to call the <a href="https://developer.apple.com/documentation/swiftui/view/environmentobject(_:"><code>environmentObject(_:)</code></a>) method on any ancestor of the view that needs to access it.
+<p>The way to add the dependency into the environment is to call the <a href="https://developer.apple.com/documentation/swiftui/view/environmentobject(_:%29"><code>environmentObject(_:)</code></a> method on any ancestor of the view that needs to access it.
 I find this is best done at the top level: in the <code>App</code> implementation or in the <code>UIWindowSceneDelegate</code> if you are mix-and-matching SwiftUI with UIKit.</p>
 <p>Let&#39;s look at some code; you can get the source for this example <a href="https://github.com/mokagio/ReadingList/tree/trunk/PureSwiftUIExample">here</a>.</p>
 <pre><code class=" hljs swift"><span class="hljs-keyword">import</span> SwiftUI
