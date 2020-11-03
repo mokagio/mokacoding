@@ -3,6 +3,7 @@ title: Referential Transparency in Swift
 description: An explanation of what referential transparency means with examples in Swift
 tags:
 - Swift
+date: 2020-07-13 00:00
 ---
 
 The [Wikipedia](https://en.wikipedia.org/wiki/Referential_transparency) definition for referential transparency is

@@ -3,6 +3,7 @@ title: Honesty-Oriented Programming
 description: If you focus on writing honest code, you'll end up with software that is easier to understand and work with.
 tags:
 - Software Design
+date: 2020-07-13 01:00
 ---
 
 If you focus on writing _honest_ code, regardless of the language and paradigm you work in, you'll end up with software that is easier to understand and work with.
