@@ -51,8 +51,8 @@ metalsmith(__dirname)
         var date = post.date;
         if (!date) {
           date = name.slice(0,10);
-          post.date = new Date(date);
         }
+        post.date = new Date(date);
 
         // set post slug based on file name
         var slug = name.slice(11, -3);
