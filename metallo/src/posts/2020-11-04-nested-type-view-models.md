@@ -1,6 +1,6 @@
 ---
 title: How to make the View to ViewModel relationship clear
-description: "How to use Swift's nested types to make it clear that a view model belongs to a view."
+description: "Using Swift's nested types helps making it clear that a view model belongs to a view."
 tags:
   - Swift
   - SwiftUI
