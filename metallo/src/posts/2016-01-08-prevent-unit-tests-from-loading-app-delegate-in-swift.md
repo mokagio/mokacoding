@@ -3,38 +3,35 @@ layout: post
 title: Prevent Unit Tests from Loading AppDelegate in Swift
 description: "How to prevent the unit test target from loading the AppDelegate and have faster tests execution."
 tags:
-- Espresso
 - Xcode
 - Swift
 - Testing
 ---
 
-_Credits to [Witold Skibniewski](http://mr-v.github.io/about/) and [Paul Boot](http://qualitycoding.org/app-delegate-for-tests/#comment-61735) who shared the Swift 2.0 implementation in [Jon Reid](http://qualitycoding.org/)'s post ["How to Easily Switch Your App Delegate for Testing"](http://qualitycoding.org/app-delegate-for-tests/), and to Jon for wirting the post that started the conversation._
+**Update 2020/11/12:** Checkout the [SwiftUI-compatible version](https://mokacoding.com/blog/prevent-swiftui-app-loading-in-unit-tests/)
 
-**Update 2018/09/19:** The code has been updated to work with Swift 4.2. You can find the previous implementations looking at the history of the [demo project](https://github.com/mokacoding/TestAppDelegateExample) on GitHub.
+**Update 2018/09/19:** Updated to work with Swift 4.2. You can find the previous implementations looking at the history of the [demo project](https://github.com/mokacoding/TestAppDelegateExample) on GitHub.
+
+_Credits to [Witold Skibniewski](http://mr-v.github.io/about/) and [Paul Boot](http://qualitycoding.org/app-delegate-for-tests/#comment-61735) who shared the Swift 2.0 implementation in [Jon Reid](http://qualitycoding.org/)'s post ["How to Easily Switch Your App Delegate for Testing"](http://qualitycoding.org/app-delegate-for-tests/), and to Jon for wirting the post that started the conversation._
 
 Here's how to have a dedicated `AppDelegate` for the unit test target in Swift:
 
 ```swift
-//
 // main.swift
-//
 import UIKit
 
 private func delegateClassName() -> String? {
   return NSClassFromString("XCTestCase") == nil ? NSStringFromClass(AppDelegate.self) : nil
 }
 
-_ = UIApplicationMain(
+UIApplicationMain(
   CommandLine.argc,
   CommandLine.unsafeArgv,
   nil,
   delegateClassName()
 )
 
-//
 // AppDelegate.swift
-//
 import UIKit
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
