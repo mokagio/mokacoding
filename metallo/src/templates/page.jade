@@ -21,16 +21,25 @@ html(lang="en")
       link(rel="canonical" href="https://mokacoding.com/blog/#{slug}/")
 
     // Open Graph meta tags
+    if !og_description
+      - og_description = description
+    - var og_url = baseUrl
+    if slug
+      - og_url = "https://mokacoding.com/blog/" + slug + "/"
+
     meta(property="og:title" content="#{og_title}")
-    meta(property="og:description" content="#{description}")
-    meta(property="og:url" content="#{baseUrl}")
+    meta(property="og:description" content="#{og_description}")
+    meta(property="og:url" content="#{og_url}")
     meta(property="og:type" content="article")
     meta(property="og:site_name" content="mokacoding")
     if (typeof(og_image) !== 'undefined')
       meta(property="og:image" content="#{og_image}")
 
     // Twitter meta tags
+    if !twitter_title
+      - twitter_title = og_title
     meta(property="twitter:card" content="summary")
+    meta(property="twitter:title" content="#{twitter_title}")
     meta(property="twitter:site" content="@mokacoding")
     meta(property="twitter:creator" content="@mokagio")
 
