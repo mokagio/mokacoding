@@ -8,15 +8,13 @@ tags:
 
 When you "Squash and merge" a pull request on GitHub, the merge commit title defaults to the PR title.
 
-_gif here_
-
 Using the pull request title, or any descriptive title with the PR id, makes a massive difference in how readable your Git history is.
 
-I wish GitHub had the same behavior for "Create merge commits,"  instead, it uses Git's default merge title "...".
+I wish GitHub had the same behavior for "Merge pull request" instead, it uses Git's default merge title "`Merge pull request #123 from username/branch-name`".
 
-Luckily, it takes about 5 seconds to copy the PR title into the merge commit field.
+Luckily, it takes just a few seconds to copy the PR title into the merge commit field.
 
-_gif here_
+![GIF showing how to copy-paste the pull request title into the merge commit title field](https://s3.amazonaws.com/mokacoding/2020-11-19-github-merge-title.gif)
 
 Is the effort worth it?
 You bet!
@@ -34,7 +32,7 @@ Imagine someone offered you a million dollars if you can guess what the latest c
 Would you rather the commit title was this:
 
 ```
-Merge.... (#123)
+Merge pull request #123 from add-author-label
 ```
 
 or this:
@@ -70,18 +68,22 @@ When applied to the log on the main branch of a repository, where all the PRs ge
 Compare the output when using a descriptive title to the PR merge commit vs. the default one:
 
 ```
-$ git log --first-parent ...
+$ git log --pretty=oneline --abbrev-commit --first-parent
 
-...default
+a2055b7 (HEAD -> trunk, origin/trunk) Merge pull request #4 from mokagio/feature-author-label
+64344e0 Merge pull request #3 from mokagio/improve-mobile-layout
+70ba8ac Merge pull request #2 from mokagio/feature-more-negative-space
+7d5c9da Merge pull request #1 from mokagio/feature-dark-mode-css-support
 ```
 
 ```
-$ git log --first-parent ...
+git log --pretty=oneline --abbrev-commit --first-parent
 
-...descriptive
+a2055b7 (HEAD -> trunk, origin/trunk) Add author label to post metadata component (#4)
+64344e0 Improve layout on mobile devices (#3)
+70ba8ac Use more negative space (#2)
+7d5c9da Support dark mode via CSS media query (#1)
 ```
-
-_You can find the full command I use to generate that log on the terminal [here](https://github.com/mokagio/dotfiles/blob/8884e2a75b5deef1d810032199c4736f2c9f986e/aliases#L54-L58)._
 
 The second log reads like a story.
 The first has little information to offer other than the fact that stuff got merge in this branch.
