@@ -4,6 +4,7 @@ description: "When merging a pull request on GitHub, it helps to replace the def
 tags:
 - GitHub
 - Git
+twitter_title: "Here's a better way to merge pull requests"
 og_description: "When merging on GitHub, you can improve the commit message in just a few seconds"
 ---
 
