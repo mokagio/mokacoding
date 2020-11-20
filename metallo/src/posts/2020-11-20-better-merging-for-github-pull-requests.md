@@ -1,14 +1,15 @@
 ---
-title: These 10 seconds when merging will make your GitHub pull request better
-description: When merging a pull request on GitHub, it helps to replace the default merge commit title with the PR title or an equally descriptive one. This will make your Git history more informative, and developers will understand the changes in the Git log faster.
+title: How to merge pull requests with a commit that improves your Git history
+description: "When merging a pull request on GitHub, it helps to replace the default merge commit title with the PR title or an equally descriptive one. This will make your Git history more informative, and developers will understand the changes in the Git log faster."
 tags:
 - GitHub
 - Git
+og_description: "When merging on GitHub, you can improve the commit message in just a few seconds"
 ---
 
 When you "Squash and merge" a pull request on GitHub, the merge commit title defaults to the PR title.
 
-Using the pull request title, or any descriptive title with the PR id, makes a massive difference in how readable your Git history is.
+**Using the pull request title, or any descriptive title with the PR id, makes a massive difference in how readable your Git history is.**
 
 I wish GitHub had the same behavior for "Merge pull request" instead, it uses Git's default merge title "`Merge pull request #123 from username/branch-name`".
 
@@ -18,8 +19,6 @@ Luckily, it takes just a few seconds to copy the PR title into the merge commit 
 
 Is the effort worth it?
 You bet!
-
-Having a clear Git history is something worth investing in.
 
 _Before we continue, an obvious solution to the problem would be to "Squash and merge" all PRs instead.
 Obvious, yes, but sometimes not desirable and other times not possible because of established team conventions.
@@ -42,9 +41,11 @@ Add author label to blogpost description view (#123)
 ```
 
 Obviously, no one will ever ask you to guess what a commit does only by reading its title – let alone offer you a million dollars.
-On top of that, the GitHub UI makes it easy to bring up extra information for a commit, as well as the PR it belongs to.
+Still, understanding what code does and working with it is something you are being paid for.
+The easier you can do that the more value you can bring to the table.
 
-Still, even though the extra information is only one click away, the second commit is more explicit than the first.
+It's true that the GitHub UI makes it easy to bring up extra information for a commit, as well as the PR it belongs to.
+Even though the extra information is only one click away, the second commit is more explicit than the first.
 There is less friction for the reader to understand what the commit does.
 
 ## Shorten the path to understanding
@@ -55,7 +56,7 @@ Clean code is easy to follow, making it easy to understand and, in turn, easy to
 Clean code is what every programmer opening an unfamiliar codebase hopes to find.
 The cleaner the code, the less time it will take to get up to speed and be productive.
 
-The productivity advantages of clarity apply to Git commits as well as code.
+**The productivity advantages of [clarity](https://mokacoding.com/blog/pipe-wrench/) apply to Git commits as well as code.**
 If you can shorten the path to understanding your Git history, every developer who will read it will benefit from it – including your future self.
 
 ## Turn your Git log into a readable story
@@ -98,7 +99,7 @@ Using a descriptive title when you merge your pull requests on GitHub is a proce
 It takes longer to merge a PR when you need to copy its tile or come up with a succinct one for the commit.
 Those extra seconds, a couple of minutes in the worse scenario, will pay off because every time a developer will look at the history, they'll benefit from its greater clarity.
 
-The asymmetry between the one time cost of the merge and the many times people will read the history makes the tradeoff all the more worth it.
+**The asymmetry between the one time cost of crafting the merge and the many times people will read the history makes the tradeoff all the more worth it**.
 
 So, next time you're about to click that merge button, spend a few extra seconds to add a descriptive title.
 Your team, the users of your open source software, your future self, they'll all thank you for it.
