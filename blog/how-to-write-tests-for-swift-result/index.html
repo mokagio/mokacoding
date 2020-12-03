@@ -53,7 +53,7 @@ If you can make the <code>Success</code> and <code>Failure</code> types of your 
 <p>Sometimes, you can&#39;t use a throwing function in your tests, so <code>get()</code> is out of the picture.
 This is the case for example when you are inside a non-throwing closure.</p>
 <p>In those cases, you can either use <code>guard case</code> or a plain <code>switch</code>.</p>
-<pre><code class=" hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">testResultSuccessExampleGuard</span><span class="hljs-params">()</span></span> <span class="hljs-keyword">throws</span> {
+<pre><code class=" hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">testResultSuccessExampleGuard</span><span class="hljs-params">()</span></span> {
     <span class="hljs-keyword">let</span> result = <span class="hljs-type">Result</span>&lt;<span class="hljs-type">Int</span>, <span class="hljs-type">Error</span>&gt;.success(<span class="hljs-number">42</span>)
 
     <span class="hljs-keyword">guard</span> <span class="hljs-keyword">case</span> .success(<span class="hljs-keyword">let</span> value) = result <span class="hljs-keyword">else</span> {
@@ -63,7 +63,7 @@ This is the case for example when you are inside a non-throwing closure.</p>
     <span class="hljs-type">XCTAssertEqual</span>(value, <span class="hljs-number">42</span>)
 }
 
-<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">testResultSuccessExampleSwitch</span><span class="hljs-params">()</span></span> <span class="hljs-keyword">throws</span> {
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">testResultSuccessExampleSwitch</span><span class="hljs-params">()</span></span> {
     <span class="hljs-keyword">let</span> result = <span class="hljs-type">Result</span>&lt;<span class="hljs-type">Int</span>, <span class="hljs-type">Error</span>&gt;.success(<span class="hljs-number">42</span>)
 
     <span class="hljs-keyword">switch</span> result {
