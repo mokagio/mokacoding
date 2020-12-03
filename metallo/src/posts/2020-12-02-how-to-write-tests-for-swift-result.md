@@ -88,7 +88,7 @@ This is the case for example when you are inside a non-throwing closure.
 In those cases, you can either use `guard case` or a plain `switch`.
 
 ```swift
-func testResultSuccessExampleGuard() throws {
+func testResultSuccessExampleGuard() {
     let result = Result<Int, Error>.success(42)
 
     guard case .success(let value) = result else {
@@ -98,7 +98,7 @@ func testResultSuccessExampleGuard() throws {
     XCTAssertEqual(value, 42)
 }
 
-func testResultSuccessExampleSwitch() throws {
+func testResultSuccessExampleSwitch() {
     let result = Result<Int, Error>.success(42)
 
     switch result {
