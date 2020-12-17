@@ -1,5 +1,15 @@
 ---
 title: 'How to be more effective at Test-Driven Development by asking "Do I need this yet?"'
+title: 'How to improve your Test-Driven Development workflow by asking "Do I need this yet?"'
+
+description: 'The "You Don't Need It Yet" technique to ship software on a schedule results in fast, real-world feeback. The same mindset can be applied with Test-Driven Development to move between the Red, Green, and Refactor stages faster.'
+
+og_description: ""
+og_image: ""
+
+tags:
+- Testing
+- TDD
 ---
 
 What do YDNIY and TDD have in common?
@@ -79,7 +89,7 @@ Another option could be to move on with the next test, which will initially fail
 The difference between TDD and testing after the fact is that writing tests first introduces a helpful pressure to build small components in small iterations.
 Applying YDNIY will make you get the most out of TDD.
 
-**By only writing what is strictly necessary right now while leaving the door open for future changes, you can focus on solving one small problem at a time.**
+**By only writing what is strictly necessary right now while leaving the door open for future changes, we can focus on solving one small problem at a time.**
 **This is a psychological relief that should not be underestimated and a way to assign our limited working memory space effectively.**
 
 The next time you'll write the code to make a failing test pass, ask yourself, "do I need it yet?"
