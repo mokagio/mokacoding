@@ -1,5 +1,11 @@
 p.post-meta
-  span.post-date= post.date.toDateString()
-    | &nbsp;
+  - // post.updated_at !== undefined doesn't work
+  if (typeof(post.updated_at) !== 'undefined')
+    span.post-date= "Last updated: " + post.updated_at.toDateString()
+      | &nbsp;
+  else
+    span.post-date= post.date.toDateString()
+      | &nbsp;
+
   for tag in post.tags
     a.post-tag(href=baseUrl + "tag/" + tag.replace(/ /g, '-') + "/index.html")= "-" + tag
