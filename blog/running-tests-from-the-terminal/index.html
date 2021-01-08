@@ -1,55 +1,79 @@
-<!DOCTYPE html><html lang="en"><head><title>Running Xcode tests from the terminal | mokacoding</title><meta name="description" content="In this post we take a look at how to run Xcode tests suites from the terminal with xcodbuild and xcpretty, and why you should do it"><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"><!-- Canonical URL--><link rel="canonical" href="https://mokacoding.com/blog/running-tests-from-the-terminal/"><!-- Open Graph meta tags--><meta property="og:title" content="Running Xcode tests from the terminal"><meta property="og:description" content="In this post we take a look at how to run Xcode tests suites from the terminal with xcodbuild and xcpretty, and why you should do it"><meta property="og:url" content="https://mokacoding.com/blog/running-tests-from-the-terminal/"><meta property="og:type" content="article"><meta property="og:site_name" content="mokacoding"><!-- Twitter meta tags--><meta property="twitter:card" content="summary"><meta property="twitter:title" content="Running Xcode tests from the terminal"><meta property="twitter:site" content="@mokacoding"><meta property="twitter:creator" content="@mokagio"><!-- Stylesheets--><link href="/css/griddy.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet"><link href="/css/font-awesome.min.css" rel="stylesheet"><link href="/css/zenburn.css" rel="stylesheet"><!-- FavIcon--><!-- Thanks to https://www.favicon-generator.org/ & https://html2jade.org/--><link rel="apple-touch-icon" sizes="57x57" href="https://s3.amazonaws.com/mokacoding/apple-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="https://s3.amazonaws.com/mokacoding/apple-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="https://s3.amazonaws.com/mokacoding/apple-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="https://s3.amazonaws.com/mokacoding/apple-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="https://s3.amazonaws.com/mokacoding/apple-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="https://s3.amazonaws.com/mokacoding/apple-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="https://s3.amazonaws.com/mokacoding/apple-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="https://s3.amazonaws.com/mokacoding/apple-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" href="https://s3.amazonaws.com/mokacoding/apple-icon-180x180.png"><link rel="icon" type="image/png" sizes="192x192" href="https://s3.amazonaws.com/mokacoding/android-icon-192x192.png"><link rel="icon" type="image/png" sizes="32x32" href="https://s3.amazonaws.com/mokacoding/favicon-32x32.png"><link rel="icon" type="image/png" sizes="96x96" href="https://s3.amazonaws.com/mokacoding/favicon-96x96.png"><link rel="icon" type="image/png" sizes="16x16" href="https://s3.amazonaws.com/mokacoding/favicon-16x16.png"><link rel="manifest" href="https://s3.amazonaws.com/mokacoding/manifest.json"><meta name="msapplication-TileColor" content="#ffffff"><meta name="msapplication-TileImage" content="https://s3.amazonaws.com/mokacoding/ms-icon-144x144.png"><meta name="theme-color" content="#ffffff"><!-- SumoMe--><script src="//load.sumome.com/" data-sumo-site-id="dd80959300db03e20c8bc3dd899f1424fd764d261e6c3c41923c96482a270dba" async="async"></script></head><body><!-- Use this to render an extra header in special occasions--><div class="special-header"><div class="page"><div class="row-12"><div class="col-12"><p><p><a href="https://goo.gl/forms/lCLlJd9hqCUYoTME2">What is your biggest struggle right now with building software?</a></p>
-</p></div></div></div></div><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">unit and acceptance testing, automation, productivity</div><div class="links"><a href="/archive.html">Archive</a><a href="/tags.html">Tags</a><a href="https://gio.codes">About</a><a href="#subscribe">Subscribe</a><a href="/feed.xml"><i class="fa fa-rss"></i></a></div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/running-tests-from-the-terminal">Running Xcode tests from the terminal</a></h2><p class="post-meta"><span class="post-date">Mon Mar 09 2015&nbsp;</span><a href="/tag/Testing/index.html" class="post-tag">-Testing</a></p><div class="post"><p>In this post we&#39;ll see how to run Xcode tests from the terminal, and why you might want to do it.</p>
-<p>If you&#39;ve installed the <a href="http://railsapps.github.io/xcode-command-line-tools.html">Command Line Tools</a> you&#39;ll see that from your terminal you can call <code>xcodebuild</code>.</p>
-<p>Reading through the output of <code>man xcodebuild</code>, available online <a href="https://developer.apple.com/library/mac/documentation/Darwin/Reference/ManPages/man1/xcodebuild.1.html">here</a>, we find that:</p>
-<blockquote>
-<p>xcodebuild builds one or more targets contained in an Xcode project, or builds a scheme contained in an Xcode workspace or Xcode project.</p>
-</blockquote>
-<p>So the first impression, as the name suggests by the way, is that <code>xcodebuild</code>&#39;s purpose is to build Xcode projects. Not really what we&#39;re looking for since we want to run tests. But if we keep reading <code>XCODEBUILD(1)</code> we&#39;ll find a section listing the possible build actions, and test is one of them.</p>
-<blockquote>
-<p>Test a scheme from the build root (SYMROOT).  This requires specifying a scheme and optionally a destination.</p>
-</blockquote>
-<p>After a bit more reading through <code>xcodebuild</code> man page and Apple&#39;s <a href="https://developer.apple.com/library/prerelease/ios/documentation/DeveloperTools/Conceptual/testing_with_xcode/A2-command_line_testing/A2-command_line_testing.html">Command-Line Testing resource</a> we can write the minimum viable command to run our tests:</p>
+<!DOCTYPE html><html lang="en"><head><title>How to run Xcode tests from the terminal | mokacoding</title><meta name="description" content="How to invoke xcodebuild to run the tests from the command line and how to format its output using xcbeautify or xcpretty"><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"><!-- Canonical URL--><link rel="canonical" href="https://mokacoding.com/blog/running-tests-from-the-terminal/"><!-- Open Graph meta tags--><meta property="og:title" content="How to run Xcode tests from the terminal"><meta property="og:description" content="How to invoke xcodebuild to run the tests from the command line and how to format its output using xcbeautify or xcpretty"><meta property="og:url" content="https://mokacoding.com/blog/running-tests-from-the-terminal/"><meta property="og:type" content="article"><meta property="og:site_name" content="mokacoding"><!-- Twitter meta tags--><meta property="twitter:card" content="summary"><meta property="twitter:title" content="How to run Xcode tests from the terminal"><meta property="twitter:site" content="@mokacoding"><meta property="twitter:creator" content="@mokagio"><!-- Stylesheets--><link href="/css/griddy.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet"><link href="/css/font-awesome.min.css" rel="stylesheet"><link href="/css/zenburn.css" rel="stylesheet"><!-- FavIcon--><!-- Thanks to https://www.favicon-generator.org/ & https://html2jade.org/--><link rel="apple-touch-icon" sizes="57x57" href="https://s3.amazonaws.com/mokacoding/apple-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="https://s3.amazonaws.com/mokacoding/apple-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="https://s3.amazonaws.com/mokacoding/apple-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="https://s3.amazonaws.com/mokacoding/apple-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="https://s3.amazonaws.com/mokacoding/apple-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="https://s3.amazonaws.com/mokacoding/apple-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="https://s3.amazonaws.com/mokacoding/apple-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="https://s3.amazonaws.com/mokacoding/apple-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" href="https://s3.amazonaws.com/mokacoding/apple-icon-180x180.png"><link rel="icon" type="image/png" sizes="192x192" href="https://s3.amazonaws.com/mokacoding/android-icon-192x192.png"><link rel="icon" type="image/png" sizes="32x32" href="https://s3.amazonaws.com/mokacoding/favicon-32x32.png"><link rel="icon" type="image/png" sizes="96x96" href="https://s3.amazonaws.com/mokacoding/favicon-96x96.png"><link rel="icon" type="image/png" sizes="16x16" href="https://s3.amazonaws.com/mokacoding/favicon-16x16.png"><link rel="manifest" href="https://s3.amazonaws.com/mokacoding/manifest.json"><meta name="msapplication-TileColor" content="#ffffff"><meta name="msapplication-TileImage" content="https://s3.amazonaws.com/mokacoding/ms-icon-144x144.png"><meta name="theme-color" content="#ffffff"><!-- SumoMe--><script src="//load.sumome.com/" data-sumo-site-id="dd80959300db03e20c8bc3dd899f1424fd764d261e6c3c41923c96482a270dba" async="async"></script></head><body><!-- Use this to render an extra header in special occasions--><div class="special-header"><div class="page"><div class="row-12"><div class="col-12"><p><p><a href="https://goo.gl/forms/lCLlJd9hqCUYoTME2">What is your biggest struggle right now with building software?</a></p>
+</p></div></div></div></div><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">unit and acceptance testing, automation, productivity</div><div class="links"><a href="/archive.html">Archive</a><a href="/tags.html">Tags</a><a href="https://gio.codes">About</a><a href="#subscribe">Subscribe</a><a href="/feed.xml"><i class="fa fa-rss"></i></a></div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/running-tests-from-the-terminal">How to run Xcode tests from the terminal</a></h2><p class="post-meta"><span class="post-date">Last updated: Fri Jan 08 2021&nbsp;</span><a href="/tag/Testing/index.html" class="post-tag">-Testing</a><a href="/tag/Xcode/index.html" class="post-tag">-Xcode</a><a href="/tag/Terminal/index.html" class="post-tag">-Terminal</a><a href="/tag/Automation/index.html" class="post-tag">-Automation</a></p><div class="post"><p>This post shows how to run Xcode unit tests and UI tests from your terminal and how to format the output for readability with <a href="https://github.com/thii/xcbeautify"><code>xcbeautify</code></a> and <a href="https://github.com/xcpretty/xcpretty"><code>xcpretty</code></a>.</p>
+<p>Running the tests from the command line is a necessary step for <a href="https://mokacoding.com/tag/CI/index.html">Continuous Integration</a> and can come in handy when working solo, too.
+For example, you might want to run a script to automate publishing a build to TestFlight and run the unit and UI test suites as a pre-check.</p>
+<h2 id="running-tests-with-xcodebuild-">Running tests with <code>xcodebuild</code></h2>
+<p>When you need to interact with an Xcode project from the terminal, <code>xcodebuild</code> is the first place to look in.
+This command-line tool allows you to perform different <em>actions</em> on an Xcode project or workspace, such as building, archiving, querying information, and of course, testing.</p>
+<p>The <code>test</code> action is what you use to run tests from a certain scheme in an Xcode project:</p>
 <pre><code class="">xcodebuild <span class="hljs-string">\</span>
-  -workspace MyAwesomeApp.xcworkspace <span class="hljs-string">\</span>
+  -project MyAwesomeApp.xcodeproj <span class="hljs-string">\</span>
   -scheme MyAwesomeApp <span class="hljs-string">\</span>
   -sdk iphonesimulator <span class="hljs-string">\</span>
-  -destination <span class="hljs-string">&#x27;platform=iOS Simulator,name=iPhone 6,OS=8.1&#x27;</span> <span class="hljs-string">\</span>
+  -destination <span class="hljs-string">&#x27;platform=iOS Simulator,name=iPhone 12,OS=14.3&#x27;</span> <span class="hljs-string">\</span>
   test
-</code></pre><p>Note that we&#39;re assuming that MyAwesomeApp uses CocoaPods, therefore we&#39;re using the <code>-workspace</code> option, which then requires to use <code>-scheme</code>.</p>
-<p>You can use <code>instruments -s devices</code> to see a list of know devices to use in the <code>-destination</code> option, <a href="http://mokagio.github.io/tech-journal/2015/03/12/xcode-list-available-devices.html">more here</a>.</p>
-<p>If you try to do this you&#39;ll see something like this:</p>
-<p><img src="https://s3.amazonaws.com/mokacoding/xcodebuild-vanilla.gif" alt="xcodebuild test output"></p>
-<p>Not a very pleasant output is it?</p>
-<p>This is where <a href="https://github.com/supermarin/xcpretty"><code>xcpretty</code></a> comes to the rescue. <code>xcpretty</code> is a tool designed to format <code>xcodebuild</code>&#39;s output, and make it human readable.</p>
-<p>Using <code>xcpretty</code> is very simple:</p>
+</code></pre><p>If your app uses a workspace, perhaps because of <a href="https://cocoapods.org/">CocoaPods</a>, you&#39;ll need to pass the <code>-workspace</code> option instead of <code>-project</code>: <code>-workspace MyAwesomeApp.xcworkspace</code>.</p>
+<p>You can <a href="http://mokagio.github.io/tech-journal/2015/03/12/xcode-list-available-devices.html">run <code>instruments -s devices</code> to see a list of know devices</a> to use as the <code>-destination</code> option.
+Checkout my <a href="https://mokacoding.com/blog/xcodebuild-destination-options/"><code>xcodebuild</code> destination cheatsheet</a> for more <code>-destination</code> tips &amp; tricks.</p>
+<p><code>xcodebuild</code> produces a <em>dense</em> output:</p>
+<!-- ![xcodebuild test output](https://s3.amazonaws.com/mokacoding/xcodebuild-vanilla.gif) -->
+<p>While it&#39;s great to have all of the build information at hand, most of it is irrelevant for the tests.
+And all of that text will make it impossible to scroll back in your terminal window and take up unnecessary space in your CI logs.</p>
+<p>Luckily, there are tools to format the raw <code>xcodebuild</code> input into something concise and informative.
+I have two to recommend: the Swift-based <code>xcbeautify</code> and the Ruby-based <code>xcpretty</code>.</p>
+<h2 id="running-tests-with-xcodebuild-and-xcbeautify-">Running tests with <code>xcodebuild</code> and <code>xcbeautify</code></h2>
+<p><code>xcbeautify</code> is a little Swift package that makes the <code>xcodebuild</code> output human-readable.</p>
+<p>There are multiple ways to <a href="https://github.com/thii/xcbeautify/tree/d2d1d466f72170c45554ad218e4421dd04706e4e#installation">install <code>xcbeautify</code></a>, the most straightforward being with <a href="https://brew.sh/">Homebrew</a>: <code>brew install xcbeautify</code>.</p>
+<p>Once installed, using <code>xcbeautify</code> is simply a matter of piping the <code>xcodebuild</code> output through it:</p>
 <pre><code class="">xcodebuild <span class="hljs-string">\</span>
   -workspace MyAwesomeApp.xcworkspace <span class="hljs-string">\</span>
   -scheme MyAwesomeApp <span class="hljs-string">\</span>
   -sdk iphonesimulator <span class="hljs-string">\</span>
-  -destination <span class="hljs-string">&#x27;platform=iOS Simulator,name=iPhone 6,OS=8.1&#x27;</span> <span class="hljs-string">\</span>
-  test | xcpretty
-</code></pre><p><img src="https://s3.amazonaws.com/mokacoding/xcodebuild-xcpretty.gif" alt="xcodebuild test with xcpretty output"></p>
-<p>If you&#39;re an <a href="http://rspec.info/">RSpec</a> fan like me, that you&#39;ll want <em>the green dots</em> in your tests output:</p>
+  -destination <span class="hljs-string">&#x27;platform=iOS Simulator,name=iPhone 12,OS=14.3&#x27;</span> <span class="hljs-string">\</span>
+  test <span class="hljs-string">\</span>
+  | xcbeautify
+</code></pre><!-- ![Screenshot with the xcbeautify output]() -->
+<p>You can use <code>xcbeautify</code> the Swift Package Manager and the <a href="https://bazel.build/">Bazel</a> build system output, too.</p>
+<p>If you are working on a project that doesn&#39;t rely on CocoaPods or <a href="https://fastlane.tools/">Fastlane</a>, then <code>xcbeautify</code> is an excellent and lightweight tool to use.</p>
+<p>If, on the other hand, you already have <a href="https://mokacoding.com/blog/ruby-for-ios-developers-bundler/">Ruby tooling</a> in your project setup, then it might be simpler to use <code>xcpretty</code>.
+Fastlane <a href="https://github.com/fastlane/fastlane/blob/e2ff4990a44f28fa7b25d745666007dc8e315577/fastlane.gemspec#L61">ships with <code>xcpretty</code></a> so you don&#39;t have to add an extra step in your CI to install it.</p>
+<p>Another scenario in which you might want to use <code>xcpretty</code> is if you want a different output format as it offers more formatters.</p>
+<h2 id="running-tests-with-xcodebuild-and-xcpretty-">Running tests with <code>xcodebuild</code> and <code>xcpretty</code></h2>
+<p>To install <code>xcpretty</code>, add it to your <code>Gemfile</code> then run <code>bundle install</code>:</p>
+<pre><code class=" hljs ruby"><span class="hljs-comment"># Gemfile</span>
+gem <span class="hljs-string">&quot;xcpretty&quot;</span>
+</code></pre>
+<p>You can also install it globally via <code>gem install xcpretty</code>, but <a href="https://mokacoding.com/blog/ruby-for-ios-developers-bundler/">using a <code>Gemfile</code> to manage your Ruby tools</a> makes it easier for a team and CI to always run on the same versions, avoiding &quot;it works on my machine&quot; issues.</p>
+<p>Once you&#39;re setup, you can format the <code>xcodebuild</code> output by piping it through <code>xcpretty</code>:</p>
 <pre><code class="">xcodebuild <span class="hljs-string">\</span>
   -workspace MyAwesomeApp.xcworkspace <span class="hljs-string">\</span>
   -scheme MyAwesomeApp <span class="hljs-string">\</span>
   -sdk iphonesimulator <span class="hljs-string">\</span>
-  -destination <span class="hljs-string">&#x27;platform=iOS Simulator,name=iPhone 6,OS=8.1&#x27;</span> <span class="hljs-string">\</span>
-  test | xcpretty --test --color
-</code></pre><p><img src="https://s3.amazonaws.com/mokacoding/xcodebuild-xcpretty-test.gif" alt="xcodebuild test with xcpretty RSpec style output"></p>
-<p>You might now ask <em>&quot;This is all interesting and colorful, but why should I use it?&quot;</em>. Here&#39;s some reasons why I like running tests from the terminal, and why you might like it too:</p>
-<h4 id="that-s-what-the-ci-is-doing">That&#39;s what the CI is doing</h4>
-<p>When running tests from CI you&#39;ll need to run tests from the terminal. It is very wise to test the behaviour of the CI scripts on your local machine. If something breaks in the pipeline you&#39;ll notice before pushing to master and breaking the build.</p>
-<h4 id="better-output">Better output</h4>
-<p>The visual feedback that the dots in the terminal give me is much more powerful that the view in Xcode.</p>
-<h4 id="do-you-really-trust-xcode-">Do you really trust Xcode?</h4>
-<p><blockquote class="twitter-tweet" data-cards="hidden" lang="en"><p>Here&#39;s one of the reasons I run tests from the terminal! <a href="http://t.co/38V7sUmLEY">pic.twitter.com/38V7sUmLEY</a></p>&mdash; Giovanni Lodi (@mokagio) <a href="https://twitter.com/mokagio/status/565703081237970944">February 12, 2015</a></blockquote></p>
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-<p>I&#39;m a big fan of the terminal and of doing things through CLIs, so for me having to move to it to run the test instead of hitting <code>⌘U</code> is not a big deal. Regardless of your workflow preferences though, there are cases when automation is needed, and that&#39;s when knowing how to run tests form the terminal will come handy.</p>
-<p>Note: another tool you might want to try is <a href="https://github.com/facebook/xctool">xctool</a>. I prefer the xcodebuild | xcpretty combo because it adds less overhead. If you&#39;re interested have a look at this <a href="http://nshipster.com/xctool/">NSHipster post</a>.</p>
-<p><em>Happy coding, and keep the codebase better than you found it</em>.</p>
+  -destination <span class="hljs-string">&#x27;platform=iOS Simulator,name=iPhone 12,OS=14.3&#x27;</span> <span class="hljs-string">\</span>
+  test <span class="hljs-string">\</span>
+  | bundle exec xcpretty
+</code></pre><!-- ![xcodebuild test with xcpretty output](https://s3.amazonaws.com/mokacoding/xcodebuild-xcpretty.gif) -->
+<p><em>If you set up <code>xcpretty</code> via <code>gem install</code>, you don&#39;t need to call it via <code>bundle exec</code>.</em></p>
+<p>For a more concise output, <code>xcpretty</code> can use the same formatting style as <a href="http://rspec.info/">RSpec</a>, which shows a dot for each test.
+Optionally, you can also color the dot green if the test passed or red otherwise.</p>
+<pre><code class="">xcodebuild <span class="hljs-string">\</span>
+  -workspace MyAwesomeApp.xcworkspace <span class="hljs-string">\</span>
+  -scheme MyAwesomeApp <span class="hljs-string">\</span>
+  -sdk iphonesimulator <span class="hljs-string">\</span>
+  -destination <span class="hljs-string">&#x27;platform=iOS Simulator,name=iPhone 12,OS=14.3&#x27;</span> <span class="hljs-string">\</span>
+  test <span class="hljs-string">\</span>
+  | bundle exec xcpretty --test --color
+</code></pre><!-- ![xcodebuild test with xcpretty RSpec style output](https://s3.amazonaws.com/mokacoding/xcodebuild-xcpretty-test.gif) -->
+<p>There are more formatters to choose from and other configuration options you can learn about <a href="https://github.com/xcpretty/xcpretty">in the project&#39;s <code>README</code></a>.</p>
+<hr>
+<p>Whether you decide to run your tests with vanilla <code>xcodebuild</code> or format their output with <code>xcbeautify</code> or <code>xcpretty</code>, I hope you found this tutorial useful.</p>
+<p>If you have any questions regarding testing from the command line, leave a comment below or get in touch on Twitter at <a href="https://twitter.com/mokagio">@mokagio</a>.</p>
+<hr>
+<h2 id="revision-history">Revision History</h2>
+<ul>
+<li><a href="https://web.archive.org/web/2015032304314.3/http://www.mokacoding.com/blog/running-tests-from-the-terminal/">2015/03/09</a>: First version</li>
+<li><a href="#">2021/01/08</a>: Updated to include <code>xcbeautify</code> and streamlined rationale for why you&#39;d want to run your tests from the terminal</li>
+</ul>
 </div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"><div><a href="/blog/specta-global-before-after-each"><<&nbsp;Specta global before and after each hooks</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/simpler-calabash-testing-with-rake">How to simplify Calabash acceptance testing with Rake&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin Sendfox Signup Form -->
 <div id="sendfox_embed_signup">
   <h4 class="form_title">Want more of these posts?</h4>
