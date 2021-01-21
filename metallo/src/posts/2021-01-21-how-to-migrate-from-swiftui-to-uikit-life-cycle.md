@@ -4,7 +4,7 @@ description: This free tutorial shows how to migrate an existing app with SwiftU
 tags:
 - SwiftUI
 - Xcode
-og_image: https://s3.amazonaws.com/mokacoding/2021-01-15-ogcover.jpg
+og_image: https://s3.amazonaws.com/mokacoding/2021-01-21-ogcover.jpg
 ---
 
 This brief tutorial shows how to convert a SwiftUI app from the SwiftUI to the UIKit App Delegate life cycle in Xcode.
