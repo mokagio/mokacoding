@@ -8,7 +8,7 @@ There are different ways to do dependency injection in SwiftUI.
 In this post, we'll look at two of them:
 
 - [Using the `@EnvironmentObject` property wrapper](#%40environmentobject)
-- [Using a View Model Factory](#view-models-%26-view-model-factory)
+- [Using a View Model Factory](#view-models-view-model-factory)
 
 ### Dependency Injection
 
