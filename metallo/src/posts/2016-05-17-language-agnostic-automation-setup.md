@@ -4,7 +4,7 @@ title: Language Agnostic Automation Setup
 description: "Every project can benefit from having a set of scripts to automate tasks such as running tests or distributing to testers. When setting up automation for your projects you can use a language agnostic setup. This will make it easier for new team members to get started, and allow you to change the setup without having to change the way the scripts are invoked."
 tags:
 - Automation
-- CI
+- Continuous Integration
 - Productivity
 ---
 

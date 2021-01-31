@@ -3,7 +3,7 @@ layout: post
 title: How to use Homebrew in CI
 description: A quick guide on how to safely use Homebrew in CI.
 tags:
-  - CI
+  - Continuous Integration
   - Homebrew
   - Espresso
 ---

@@ -3,7 +3,7 @@ layout: post
 title: "How to configure CircleCI for iOS testing"
 description: "A practical guide on how to configure CircleCI for to run iOS, and OS X, tests."
 tags:
-  - CI
+  - Continuous Integration
   - CircleCI
   - Xcode
 ---

@@ -3,7 +3,7 @@ layout: post
 title: "How to configure Travis CI for iOS testing"
 description: "A practical guide on how to configure Travis CI to run iOS, and OS X, tests."
 tags:
-  - CI
+  - Continuous Integration
   - Travis CI
   - Xcode
 ---
