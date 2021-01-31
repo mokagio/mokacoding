@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Lessons learned working on danger-switling selective linting"
+title: "Lessons learned working on danger-switlint selective linting"
 description: "A little post to share some things I learnt while working on a PR for danger-swiftlint to allow selective linting."
 tags:
 - Espresso
