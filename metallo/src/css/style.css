@@ -259,3 +259,14 @@ a.bordered-button {
 
   #sendfox_embed_signup button:hover {
     background-color: #16a085; }
+
+#homepage-posts ul {
+  list-style: none;
+  padding: 0; }
+
+  #homepage-posts ul a {
+    color: #303030;
+    text-decoration: underline; }
+
+  #homepage-posts ul a:visited {
+    color: #303030 }
