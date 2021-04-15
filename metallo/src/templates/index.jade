@@ -1,13 +1,52 @@
 extends page
 
 block contents
-  - var post = posts[0]
-  - var index = 1
-  while post.tags.indexOf("Espresso") != -1 && index < posts.length - 1
-    - post = posts[index]
-    - index += 1
+  //
+  // This is how to have the latest post in the homepage
+  //
+  //- var post = posts[0]
+  //- var index = 1
+  //while post.tags.indexOf("Espresso") != -1 && index < posts.length - 1
+  //  - post = posts[index]
+  //  - index += 1
 
-  include _post
-  //- we have a post per page, no point in using pagination, just rely on the prev and next properties given by collection
-  //- include _posts_list
-  //- include _pagination
+  //include _post
+  ////- we have a post per page, no point in using pagination, just rely on the prev and next properties given by collection
+  ////- include _posts_list
+  ////- include _pagination
+  #homepage-posts
+    :markdown
+      ## Hey there 👋
+
+      Hi I'm [Gio](https://gio.codes).
+      I'm a dad, and writer of software and words.
+      In this blog, I ramble about testing, automation, and productivity for software developers.
+
+      I'm pretty into TDD.
+      In fact, I wrote a whole book about it!
+      Check it out: [_Test-Driven Development in Swift with SwiftUI and Combine_](https://tddinswift.com/).
+
+      Here's some posts you'll find interesting:
+
+      ### Test-Driven Development
+
+      - [Why Test-Driven Development is valuable](https://mokacoding.com/blog/if-youre-not-writing-tests-first-youre-missing-out)
+      - [A step by step TDD in Swift introduction](https://mokacoding.com/blog/step-by-step-tdd-in-swift-part-1)
+      - [Dependency Injection in SwiftUI](https://mokacoding.com/blog/swiftui-dependency-injection/)
+
+      ### Xcode Productivity
+
+      - [`xcodebuild` destination cheatsheet](https://mokacoding.com/blog/xcodebuild-destination-options/)
+      - [A guide to improve your Xcode build phase scripts](https://mokacoding.com/blog/better-build-phase-scripts/)
+      - [How to run the tests from the terminal](https://mokacoding.com/blog/running-tests-from-the-terminal/)
+
+      ### General Productivity
+
+      - [10 productivity books for software developers that are not about coding](https://mokacoding.com/blog/top-10-productivity-books)
+      - [Where to start to become more productive](https://mokacoding.com/blog/where-to-start-to-become-more-productive)
+      - [Apps and tools I use](https://mokacoding.com/blog/apps-and-tools-i-use/)
+
+      ### Other Goodies
+
+      - [How to properly track symlinks in Git](https://mokacoding.com/blog/symliks-in-git/)
+      - [Functional Programing in Swift: Functor, Applicative, and Monad in pictures](https://mokacoding.com/blog/functor-applicative-monads-in-pictures/)
