@@ -1,4 +1,15 @@
-When I first adopted Slack, it was a refreshing change of pace from bloated email threads where information would inevitably get lost. Over the years, though, I've come to dread instant messagging at work as the biggest source of frustration and distraction. Is there an alternative to working in a constantly-connected synchronous way?
+---
+title: A World Without Slack
+tags:
+- books
+- productivity
+- processes
+---
+
+When I first adopted Slack, it was a refreshing change of pace from bloated email threads where information would inevitably get lost.
+Nowadays, I dread instant messaging; it's a major source of interruptions and distractions.
+That's not directly Slack's fault, rather a byproduct of the frictionless communication it enables.
+Is this how work looks like in the 21st century, or is there a way to do better?
 
 [_A World Without Email_](https://geni.us/FylTA1) by Cal Newport, the author ofone of [the must-read books](https://mokacoding.com/blog/top-10-productivity-books/) for knowledge workers, _[Deep Work](https://geni.us/FITEF)_, explores this topic and offers a path forward to minimize unscheduled unstructured communications and maximize focus and productivity.
 
@@ -42,7 +53,7 @@ In the knowledge sector, the biggest capital is the brains of the employees that
 
 > The productivity of the knowledge sector can be significantly increased if we identify workflows that better optimize the human brain’s ability to sustainably add value to information.
 
-The legendary business thinker Peter Drucker said[<sup id="fn2-back">2</sup>](#fn2) that knowledge work is at the state factory work was at the start of the 20th century. We’re just scratching the surface of what our brains can achieve together. 
+The legendary business thinker Peter Drucker said[<sup id="fn2-back">2</sup>](#fn2) that knowledge work is at the state factory work was at the start of the 20th century. We’re just scratching the surface of what our brains can achieve together.
 
 And yet, most of us accept the frustrating background chatter of IM as the status quo, a necessary evil of success in the modern age.
 
@@ -115,12 +126,12 @@ I wholeheartedly recommend the book, this post is but a poor summary and touches
 
 What workflows are you deploying right now? What are your techniques to minimize context-switching in favor of focused work? I'd love to hear from you! Leave a comment below or get in touch on Twitter at [@mokagio](https://twitter.com/mokagio).
 
-_P.S. At Automattic, we are taking the ideas from the book very seriously and are constantly experimenting and refining our workflows. If that sounds interestin, checkout our [remote jobs page](https://automattic.com/work-with-us/) or get in touch with me._
+_P.S. This is an edited version of a post I originally shared in one of Automattic's internal P2s. We are constantly experimenting and refining our workflows and take ideas such as those from the book very seriously. If that sounds interesting, checkout our [remote jobs page](https://automattic.com/work-with-us/) or get in touch with me._
 
 ### Footnotes
 
-1 - Ford's experiments to better allocate his capital culmintated into the assembly line. For an in-depth look at the story, see [_The Perfectionists: How Precision Engineers Created the Modern World_](https://geni.us/XO9cbnT), one of the book's sources. [↩️](#fn1-back)
+<span id="fn1">1</span> - Ford's experiments to better allocate his capital culmintated into the assembly line. For an in-depth look at the story, see [_The Perfectionists: How Precision Engineers Created the Modern World_](https://geni.us/XO9cbnT), one of the book's sources. [↩️](#fn1-back)
 
-2 – Peter F. Drucker, [“Knowledge-Worker Productivity: The Biggest Challenge,” California Management Review 41, no. 2 (Winter 1999)](https://href.li/?https://cmr.berkeley.edu/search/articleDetail.aspx?article=4872). Following the link ends up in a paywall – _with a bit of patience on Google, the original can still be found_. [↩️](#fn2-back)
+<span id="fn2">2</span> – Peter F. Drucker, [“Knowledge-Worker Productivity: The Biggest Challenge,” California Management Review 41, no. 2 (Winter 1999)](https://href.li/?https://cmr.berkeley.edu/search/articleDetail.aspx?article=4872). Following the link ends up in a paywall – _with a bit of patience on Google, the original can still be found_. [↩️](#fn2-back)
 
-3 – Mine is a gross simplification (and possibly misrepresentation) of Shannon’s work. If you’re curious on the topic, you’ll enjoy _[Mind at Play: How Claude Shannon Invented the Information Age](https://geni.us/FqRN7P)_, another of the book's sources. [↩️](#fn3-back)
+<span id="fn3">3</span> – Mine is a gross simplification (with possible misrepresentations) of Shannon’s work. If you’re curious on the topic, you’ll enjoy _[Mind at Play: How Claude Shannon Invented the Information Age](https://geni.us/FqRN7P)_, another of the book's sources. [↩️](#fn3-back)
