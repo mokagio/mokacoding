@@ -1,17 +1,19 @@
 ---
 title: A World Without Slack
+description: How to establish a workflow that minimizes unscheduled unstructured communications and maximizes focus and productivity.
 tags:
 - books
 - productivity
 - processes
+og_image: https://s3.amazonaws.com/mokacoding/2021-04-18-og_image.jpg
 ---
 
 When I first adopted Slack, it was a refreshing change of pace from bloated email threads where information would inevitably get lost.
 Nowadays, I dread instant messaging; it's a major source of interruptions and distractions.
-That's not directly Slack's fault, rather a byproduct of the frictionless communication it enables.
+That's not directly Slack's fault, but rather a byproduct of the frictionless communication it enables.
 Is this how work looks like in the 21st century, or is there a way to do better?
 
-[_A World Without Email_](https://geni.us/FylTA1) by Cal Newport, the author ofone of [the must-read books](https://mokacoding.com/blog/top-10-productivity-books/) for knowledge workers, _[Deep Work](https://geni.us/FITEF)_, explores this topic and offers a path forward to minimize unscheduled unstructured communications and maximize focus and productivity.
+[_A World Without Email_](https://geni.us/FylTA1) by Cal Newport, the author of one of [the must-read books](https://mokacoding.com/blog/top-10-productivity-books/) for knowledge workers, _[Deep Work](https://geni.us/FITEF)_, offers a path forward to minimize unscheduled unstructured communications and maximize focus and productivity.
 
 In this post, I want to share some ideas from the book and some food for thought for how they may apply to the world of software development.
 
