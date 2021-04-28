@@ -34,6 +34,8 @@ html(lang="en")
     meta(property="og:site_name" content="mokacoding")
     if (typeof(og_image) !== 'undefined')
       meta(property="og:image" content="#{og_image}")
+    else
+      meta(property="og:image" content="https://s3.amazonaws.com/mokacoding/mokacoding_og_image.jpg")
 
     // Twitter meta tags
     if !twitter_title
