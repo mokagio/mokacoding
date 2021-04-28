@@ -1,5 +1,8 @@
 ---
 title: How to manage complex inputs in your Swift tests with Scenario Builders
+description: "When writing unit tests in Swift for complex objects, you may need to write a lot of setup boilerplate code in the arrange phase. Scenario Builders are a pattern that extracts and encapsulated all that logic in a single component with an English-like API. This tutorial shows how to build a Scenario Builder in Swift and looks at its pros and cons."
+og_description: "Scenario Builders extract and encapsulate complex setup logic behind an English-like API in your Swift unit tests."
+twitter_title: Scenario Builders in Swift
 tags:
 - Testing
 - Swift
@@ -8,7 +11,7 @@ date: 2021-04-06 06:21
 
 How do you set up the input state for a system under test that depends on a complicated network of objects?
 
-If you manually instantiate and connect all of the components involved, your test's arrange phase will become long and hard to read.
+If you manually instantiate and connect all of the components involved, your unit test's arrange phase will become long and hard to read.
 
 Using [fixtures](https://mokacoding.com/blog/streamlining-tests-setup-with-fixtures-in-swift/) can help removing boilerplate and highlighting only the properties that affect the behavior under test, but you're still required to manually connect the various objects.
 
@@ -25,7 +28,7 @@ the patient needs to be registered with the doctor issuing the script,
 they both need to be part of the system,
 and the patient needs to be over the minimum age for the drug.
 
-A traditional test would require a setup along these lines:
+A traditional unit test would require a setup along these lines:
 
 ```swift
 let medicalBackend = MedicalBackend(
@@ -56,7 +59,7 @@ medicalBackend.onboard(patient: patient)
 medicalBackend.register(patient: patient, with: doctor)
 ```
 
-The key information affecting the system under test outcome, that is whether the patient is under age for the medicine, is lost in the noise made by the rest of the necessary input parameters.
+The key information affecting the system under test outcome, that is, whether the patient is under age for the medicine, is lost in the noise made by the rest of the necessary input parameters.
 
 As already mentioned, [fixtures](https://mokacoding.com/blog/streamlining-tests-setup-with-fixtures-in-swift/) can help, but we're still left with extra work in the arrange phase:
 
@@ -123,10 +126,13 @@ Thanks to the Scenario Builder, the test we wrote before can become much simpler
 let (medicalBackend, doctor, patient) = ScenarioBuilder().withPatientAge(10).build()
 ```
 
+Notice the signal to noise ratio of this syntax compared to the initial example.
+All the irrelevant information is hidden away inside `ScenarioBuilder`.
+
 To appreciate the value of this approach, imagine how much setup work this would spare you if you had to write five, ten, thirty more tests that required a consistent starting state for the medical system.
 
-The main difference between this approach and extracting the logic in a dedicated function is its composability.
-Once you went through the effort of setting up the Scenario Builder, adding additional variations to the scenario is relatively cheap.
+A key difference between this approach and extracting the logic in a dedicated function is composability.
+Once you've gone through the effort of setting up the Scenario Builder, adding additional variations to the scenario is relatively cheap.
 
 ```swift
 ScenarioBuilder()
