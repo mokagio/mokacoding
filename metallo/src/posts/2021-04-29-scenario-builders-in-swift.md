@@ -6,7 +6,7 @@ twitter_title: Scenario Builders in Swift
 tags:
 - Testing
 - Swift
-date: 2021-04-06 06:21
+date: 2021-04-29 06:21
 ---
 
 How do you set up the input state for a system under test that depends on a complicated network of objects?
@@ -58,6 +58,8 @@ let patient = Patient(
 medicalBackend.onboard(patient: patient)
 medicalBackend.register(patient: patient, with: doctor)
 ```
+
+_The code in this tutorial is available [on GitHub](https://github.com/mokagio/swift-scenario-builder-example). Check it out if you want to follow along from Xcode._
 
 The key information affecting the system under test outcome, that is, whether the patient is under age for the medicine, is lost in the noise made by the rest of the necessary input parameters.
 
