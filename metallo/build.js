@@ -174,31 +174,39 @@ function filterImages(filename, properties, index) {
 }
 
 function tagList(files, metalsmith, done) {
-  var tags = {};
+  var rawTags = {};
 
   for (var post in metalsmith.data.posts) {
       for (var t in metalsmith.data.posts[post].tags) {
           tag = metalsmith.data.posts[post].tags[t];
           tag = tag.replace(/ /g, "-");
-          if (! tags[tag]) {
-              tags[tag] = [];
+          tag = tag.toLowerCase();
+          if (! rawTags[tag]) {
+              rawTags[tag] = [];
           }
 
-          tags[tag].push(metalsmith.data.posts[post]);
+          rawTags[tag].push(metalsmith.data.posts[post]);
       }
   }
 
-  metalsmith.metadata().tags = tags;
+  var tags = []
 
-  for (var tag in tags) {
-    path = 'tag/' + tag + '/index.html';
+  for (var tag in rawTags) {
+    tags.push({ name: tag, posts: rawTags[tag] })
+  }
+
+  const sortedTags = tags.sort((a, b) => a.posts.length < b.posts.length ? 1 : -1);
+  metalsmith.metadata().tags = sortedTags//.map((t) => t.name);
+
+  for (var tag of sortedTags) {
+    path = 'tag/' + tag.name + '/index.html';
     files[path] = {
       template: 'tag-index.jade',
       mode: '0644',
       contents: '',
-      title: "Posts tagged '" + tag + "'",
-      posts: tags[tag],
-      tag: tag,
+      title: "Posts tagged '" + tag.name + "'",
+      posts: tag.posts,
+      tag: tag.name,
       path: path,
     };
   }

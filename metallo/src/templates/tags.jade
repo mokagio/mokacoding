@@ -4,6 +4,7 @@ block contents
   h1
     a(href=baseUrl + path)= "Tags"
 
-  for tag in Object.keys(tags)
+  for tag in tags
     h3
-      a(href=baseUrl + "tag/" + tag.replace(/ /g, '-') + "/index.html")= tag
+      a(href=baseUrl + "tag/" + tag.name.replace(/ /g, '-') + "/index.html")
+        | #{tag.name} #[em(style="font-size: smaller") – #{tag.posts.length} posts]
