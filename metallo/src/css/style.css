@@ -1,4 +1,13 @@
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:300italic,400,600);
+/* Originally, I had this import
+ *
+ * @import url(https://fonts.googleapis.com/css?family=Open+Sans:300italic,400,600);
+ *
+ * Looking at the network console, I could see it went off and loaded the
+ * following one as well, even though I never explictily asked for it. Since it
+ * contains all the values from the original one, it seems safe to use this
+ * instead.
+ */
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:200italic,300italic,400italic,500italic,600italic,700italic,800italic,900italic,200,300,400,500,600,700,800);
 body {
   font-family: "Open Sans", sans-serif;
   color: #303030; }
