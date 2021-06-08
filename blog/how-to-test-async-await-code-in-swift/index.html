@@ -1,0 +1,120 @@
+<!DOCTYPE html><html lang="en"><head><title>How to test Swift async/await code with XCTest | mokacoding</title><meta name="description" content="Swift 5.5 and Xcode 13 introduce the async/await pattern for concurrent code. This tutorial post shows how to write unit tests for asynchronous code in Swift using the XCTest framework."><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"><!-- Canonical URL--><link rel="canonical" href="https://mokacoding.com/blog/how-to-test-async-await-code-in-swift/"><!-- Open Graph meta tags--><meta property="og:title" content="How to test Swift async/await code with XCTest"><meta property="og:description" content="Testing async/await code is straightforward. Let me show you how."><meta property="og:url" content="https://mokacoding.com/blog/how-to-test-async-await-code-in-swift/"><meta property="og:type" content="article"><meta property="og:site_name" content="mokacoding"><meta property="og:image" content="https://s3.amazonaws.com/mokacoding/2021-06-07-async-await-test.jpg"><!-- Twitter meta tags--><meta property="twitter:card" content="summary"><meta property="twitter:title" content="How to test Swift async/await"><meta property="twitter:site" content="@mokacoding"><meta property="twitter:creator" content="@mokagio"><!-- Stylesheets--><link href="/css/griddy.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet"><link href="/css/font-awesome.min.css" rel="stylesheet"><link href="/css/zenburn.css" rel="stylesheet"><!-- FavIcon--><!-- Thanks to https://www.favicon-generator.org/ & https://html2jade.org/--><link rel="apple-touch-icon" sizes="57x57" href="https://s3.amazonaws.com/mokacoding/apple-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="https://s3.amazonaws.com/mokacoding/apple-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="https://s3.amazonaws.com/mokacoding/apple-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="https://s3.amazonaws.com/mokacoding/apple-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="https://s3.amazonaws.com/mokacoding/apple-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="https://s3.amazonaws.com/mokacoding/apple-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="https://s3.amazonaws.com/mokacoding/apple-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="https://s3.amazonaws.com/mokacoding/apple-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" href="https://s3.amazonaws.com/mokacoding/apple-icon-180x180.png"><link rel="icon" type="image/png" sizes="192x192" href="https://s3.amazonaws.com/mokacoding/android-icon-192x192.png"><link rel="icon" type="image/png" sizes="32x32" href="https://s3.amazonaws.com/mokacoding/favicon-32x32.png"><link rel="icon" type="image/png" sizes="96x96" href="https://s3.amazonaws.com/mokacoding/favicon-96x96.png"><link rel="icon" type="image/png" sizes="16x16" href="https://s3.amazonaws.com/mokacoding/favicon-16x16.png"><link rel="manifest" href="https://s3.amazonaws.com/mokacoding/manifest.json"><meta name="msapplication-TileColor" content="#ffffff"><meta name="msapplication-TileImage" content="https://s3.amazonaws.com/mokacoding/ms-icon-144x144.png"><meta name="theme-color" content="#ffffff"><!-- SumoMe--><script src="//load.sumome.com/" data-sumo-site-id="dd80959300db03e20c8bc3dd899f1424fd764d261e6c3c41923c96482a270dba" async="async"></script></head><body><!-- Use this to render an extra header in special occasions--><div class="special-header"><div class="page"><div class="row-12"><div class="col-12"><p><!-- - Saving this for later and to avoid a `git revert`:markdown
+  [What is your biggest struggle right now with building software?](https://goo.gl/forms/lCLlJd9hqCUYoTME2)--><p><a href="https://tddinswift.com?utm_source=mokacoding-site&amp;utm_campaign=coming-soon&amp;utm_medium=sticky-header">Coming Soon: <strong>Test-Driven Development in Swift with SwiftUI and Combine</strong></a></p>
+</p></div></div></div></div><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">unit and acceptance testing, automation, productivity</div><div class="links"><a href="/archive.html">Archive</a><a href="/tags.html">Tags</a><a href="https://gio.codes">About</a><a href="#subscribe">Subscribe</a><a href="/feed.xml"><i class="fa fa-rss"></i></a></div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/how-to-test-async-await-code-in-swift">How to test Swift async/await code with XCTest</a></h2><p class="post-meta"><span class="post-date">Mon Jun 07 2021&nbsp;</span><a href="/tag/Xcode/index.html" class="post-tag">-Xcode</a><a href="/tag/XCTest/index.html" class="post-tag">-XCTest</a><a href="/tag/Testing/index.html" class="post-tag">-Testing</a><a href="/tag/Swift/index.html" class="post-tag">-Swift</a></p><div class="post"><p>⚠️ – <em>This post refers to beta software.</em>
+<em>I&#39;ll try to keep it up to date, but it&#39;s possible some of the code samples won&#39;t work out of the box.</em>
+<em>All the code is available on <a href="https://github.com/mokagio/xcode-13-experiments/">GitHub</a>.</em>
+<em>Latest update:  Xcode 13.0 beta 1 (13A5154h)</em></p>
+<p>Concurrency was one of the biggest and most welcome additions to Swift officially announced at WWDC 2021.
+Swift now supports the async/await pattern, first introduced <a href="https://en.wikipedia.org/wiki/Async/await#History">in F# in the late 2000s</a> and then adopted in other languages including <a href="https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Async_await">JavaScript</a>, <a href="https://www.typescriptlang.org/play#example/async-await">TypeScript</a>, and <a href="https://rust-lang.github.io/async-book/01_getting_started/04_async_await_primer.html">Rust</a>.</p>
+<p>This is a huge improvement for developers and it will help describe the code in a way that is easier to reason about and safer to update.</p>
+<p>Let&#39;s look at how to write unit tests for code using <code>async await</code> in Xcode 13 with <a href="https://mokacoding.com/tag/xctest/">XCTest</a>.</p>
+<h2 id="how-to-unit-test-async-await-code">How to unit test async/await code</h2>
+<p>I&#39;m a sucker for culinary examples, my book <a href="https://tddinswift.com"><em>Test-Driven Development in Swift</em></a> uses a restaurant menu ordering app to teach TDD, and I was delighted to see Apple introduce async/await in the <a href="https://developer.apple.com/documentation/xcode-release-notes/xcode-13-beta-release-notes">Xcode 13.0 beta 1 release notes</a> using asynchronous functions to prepare dinner.
+Let&#39;s stick with Apple&#39;s examples and write a test for the asynchronous <code>chopVegetables</code> method to ensure the vegetables are properly chopped by checking that the returning array has more than one element.</p>
+<p>Because async/await is a feature at the Swift language level, to test an <code>async</code> function we can use the same approach we&#39;d use to consume that code in production: call it with <code>await</code>.</p>
+<pre><code class=" hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">chopVegetables</span><span class="hljs-params">()</span></span> async <span class="hljs-keyword">throws</span> -&gt; [<span class="hljs-type">Vegetable</span>]
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">testChoppingVegetablesReturnsManyVegetables</span><span class="hljs-params">()</span></span> async <span class="hljs-keyword">throws</span> {
+    <span class="hljs-keyword">let</span> vegetables = <span class="hljs-keyword">try</span> await chopVegetables()
+    <span class="hljs-type">XCTAssertGreaterThan</span>(vegetables.<span class="hljs-built_in">count</span>, <span class="hljs-number">1</span>)
+}
+</code></pre>
+<p>That&#39;s it.</p>
+<p>To appreciate how neater this is than the approach we used before the introduction of <code>async await</code>, let me show you the same test but for a <code>chopVegetables</code> version using callbacks and <code>Result</code>.</p>
+<pre><code class=" hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">chopVegetables</span><span class="hljs-params">(completion: @escaping <span class="hljs-params">(Result&lt;[Vegetable], CookingError&gt;)</span></span></span> -&gt; <span class="hljs-type">Void</span>) { ... }
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">testChoppingVegetablesReturnsManyVegetables</span><span class="hljs-params">()</span></span> {
+    <span class="hljs-keyword">let</span> expectation = <span class="hljs-type">XCTestExpectation</span>(description: <span class="hljs-string">&quot;Chops the vegetables&quot;</span>)
+
+    chopVegetables { result <span class="hljs-keyword">in</span>
+        <span class="hljs-keyword">guard</span> <span class="hljs-keyword">case</span> .success(<span class="hljs-keyword">let</span> vegetables) = result <span class="hljs-keyword">else</span> { <span class="hljs-keyword">return</span> }
+        <span class="hljs-type">XCTAssertGreaterThan</span>(vegetables.<span class="hljs-built_in">count</span>, <span class="hljs-number">1</span>)
+        expectation.fulfill()
+    }
+
+    wait(<span class="hljs-keyword">for</span>: [expectation], timeout: <span class="hljs-number">1</span>)
+}
+</code></pre>
+<p>The contrast is striking.
+asycn/await is certainly a welcome change on the testing side of the codebase, too!</p>
+<h2 id="how-do-async-await-tests-fail-">How do async/await tests fail?</h2>
+<p>If the code we&#39;re <code>await</code>ing throws, the test will fail like any other test that throws.</p>
+<p><img src="https://s3.amazonaws.com/mokacoding/2021-06-07-async-await-failure.jpg" alt="screenshot of test failure"></p>
+<p>If you want to have more refined error handling, you can wrap the <code>try await</code> call in a <code>do catch</code>.</p>
+<pre><code class=" hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">testChoppingVegetablesReturnsManyVegetables</span><span class="hljs-params">()</span></span> async {
+    <span class="hljs-keyword">do</span> {
+        <span class="hljs-keyword">let</span> vegetables = <span class="hljs-keyword">try</span> await chopVegetables(using: <span class="hljs-type">Knife</span>(sharpness: .low))
+        <span class="hljs-type">XCTAssertGreaterThan</span>(vegetables.<span class="hljs-built_in">count</span>, <span class="hljs-number">1</span>)
+    } <span class="hljs-keyword">catch</span> {
+        <span class="hljs-type">XCTFail</span>(<span class="hljs-string">&quot;Expected chopped vegetables, but failed \(error).&quot;</span>)
+    }
+}
+</code></pre>
+<p>Using <code>do catch</code>, you can generate more informative failures messages, which will help you triage and fix failed tests in the future.</p>
+<h2 id="how-to-test-the-failure-path-in-async-await-code">How to test the failure path in async/await code</h2>
+<p>You can use the <code>do catch</code> approach to verify how async/await code fails.</p>
+<p>Let&#39;s extend the Apple examples by adding a <code>Knife</code> parameter to the chopping function and expecting an error to be thrown if the knife is blunt.</p>
+<pre><code class=" hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">testChoppingVegetablesThrowsWhenKnifeBlunt</span><span class="hljs-params">()</span></span> {
+    <span class="hljs-keyword">do</span> {
+        <span class="hljs-number">_</span> = <span class="hljs-keyword">try</span> await chopVegetables(using: <span class="hljs-type">Knife</span>(sharpness: .low))
+    } <span class="hljs-keyword">catch</span> {
+        <span class="hljs-type">XCTAssertEqual</span>(error <span class="hljs-keyword">as</span>? <span class="hljs-type">CookingError</span>, .knifeTooBlunt)
+    }
+}
+</code></pre>
+<p>Unfortunately the <code>XCTAssertThorwsError</code> and the other assertion APIs don&#39;t support concurrency yet, so <code>do catch</code> is the only option to test the error path of <code>async</code> code.</p>
+<p><img src="https://s3.amazonaws.com/mokacoding/2021-06-07-xctassertthrowserror.jpg" alt="screenshot of unsupported concurrency error"></p>
+<hr>
+<p>The introduction of async/await in Swift is a fantastic improvement and the teams behind XCTest and Xcode 13 have done a great job enabling developers to write tests for this new breed of asynchronous code out of the box.
+Not only it doesn&#39;t require learning new APIs, but also greatly improves conciseness and understandability in the test code.</p>
+<p>What do you think of asycn/await?
+Have you got any tips for testing asynchronous code?
+Leave a comment below or reach out on Twitter at <a href="https://twitter.com/mokagio">@mokagio</a>.</p>
+</div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"></div><div class="col-6"><div style="text-align: right"><a href="/blog/better-swift-date-compare-tests">How to write better tests for Swift date comparisons&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin Sendfox Signup Form -->
+<div id="sendfox_embed_signup">
+  <h4 class="form_title">Want more of these posts?</h4>
+  <p class="form_caption">Subscribe to receive new posts in your inbox.</p>
+  <form method="post" action="https://sendfox.com/form/3ee4z3/10r4wg" class="sendfox-form" id="10r4wg" data-async="true" data-recaptcha="true">
+    <p><input type="email" placeholder="Email" name="email" class="email" required /></p>
+    <!-- no botz please -->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="a_password" tabindex="-1" value="" autocomplete="off" /></div>
+    <div class="clear"><button type="submit">Sign me up</button></div>
+  </form>
+  <script src="https://sendfox.com/js/form.js"></script>
+</div>
+<!-- End Sendfox Signup Form -->
+</div><div class="bottom-box"><div id="disqus_thread"></div><script>var disqus_shortname = "mokacoding";
+// Neet do add the / at the end to maintain compatibility with previous version
+// of the blog that didn't define disqus_url, letting Disqus set it automatically
+// using window.location.href
+var disqus_url = "https://mokacoding.com/blog/how-to-test-async-await-code-in-swift/";
+
+(function() {
+  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><noscript>Please enable JavaScript to view the<a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></div></div></div><div class="row-12 footer"><div class="col-12"><h3><a href="/">mokacoding</a></h3></div><div id="copy" class="col-9"><p>Hi I&#39;m <a href="https://gio.codes">Gio</a> I write here semi-regularly on software testing and TDD, productivity, and iOS development.</p>
+<p><a href="mailto:gio+blog@mokacoding.com">Get in touch</a> if you&#39;re interested in working together.</p>
+</div><div id="links" class="col-3"><p><i class="fa fa-twitter"></i>&nbsp;<a href="https://twitter.com/mokagio">@mokagio</a></p><p><i class="fa fa-github"></i>&nbsp;<a href="https://github.com/mokagio">mokagio</a></p></div></div></div></body><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-43554041-1', 'auto');
+ga('send', 'pageview');
+</script><script>var toggle = function(elm){
+  var y = elm.style && elm.style.display ? elm.style.display : 'block';
+  if (y == 'block'){
+    elm.style.opacity='0';
+    setTimeout( function(){ elm.style.display = 'none'; }, 300 );
+  }
+  else {
+    elm.style.display='block';
+    setTimeout( function(){ elm.style.opacity = '1'; }, 10 );
+  }
+}
+
+document.getElementById('close').onclick = function(){
+  toggle(document.getElementById('sticky-header'));
+  toggle(document.getElementById('sticky-header-padding-hack'));
+}</script></html>
