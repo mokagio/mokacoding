@@ -57,6 +57,7 @@ asycn/await is certainly a welcome change on the testing side of the codebase, t
 <pre><code class=" hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">testChoppingVegetablesThrowsWhenKnifeBlunt</span><span class="hljs-params">()</span></span> {
     <span class="hljs-keyword">do</span> {
         <span class="hljs-number">_</span> = <span class="hljs-keyword">try</span> await chopVegetables(using: <span class="hljs-type">Knife</span>(sharpness: .low))
+        <span class="hljs-type">XCTFail</span>(<span class="hljs-string">&quot;Expected to throw while awaiting, but succeeded&quot;</span>)
     } <span class="hljs-keyword">catch</span> {
         <span class="hljs-type">XCTAssertEqual</span>(error <span class="hljs-keyword">as</span>? <span class="hljs-type">CookingError</span>, .knifeTooBlunt)
     }
