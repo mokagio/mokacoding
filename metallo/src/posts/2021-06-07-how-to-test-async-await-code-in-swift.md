@@ -94,6 +94,7 @@ Let's extend the Apple examples by adding a `Knife` parameter to the chopping fu
 func testChoppingVegetablesThrowsWhenKnifeBlunt() {
     do {
         _ = try await chopVegetables(using: Knife(sharpness: .low))
+        XCTFail("Expected to throw while awaiting, but succeeded")
     } catch {
         XCTAssertEqual(error as? CookingError, .knifeTooBlunt)
     }
