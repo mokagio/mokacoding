@@ -1,0 +1,106 @@
+<!DOCTYPE html><html lang="en"><head><title>WWDC21: What's New in Testing | mokacoding</title><meta name="description" content="A roundup of the testing-related new features announced at WWDC 2021. Including Xcode Cloud, how to test code using async/await, the new XCTExpectFailure and addTearDownBlock APIs, and the new Test Repetition configuration in Test Plans."><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"><!-- Canonical URL--><link rel="canonical" href="https://mokacoding.com/blog/wwdc21-whats-new-in-testing/"><!-- Open Graph meta tags--><meta property="og:title" content="WWDC21: What's New in Testing"><meta property="og:description" content="Roundup of testing related new features announced at WWDC21"><meta property="og:url" content="https://mokacoding.com/blog/wwdc21-whats-new-in-testing/"><meta property="og:type" content="article"><meta property="og:site_name" content="mokacoding"><meta property="og:image" content="https://s3.amazonaws.com/mokacoding/mokacoding_og_image.jpg"><!-- Twitter meta tags--><meta property="twitter:card" content="summary"><meta property="twitter:title" content="WWDC21: What's New in Testing"><meta property="twitter:site" content="@mokacoding"><meta property="twitter:creator" content="@mokagio"><!-- Stylesheets--><link href="/css/griddy.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet"><link href="/css/font-awesome.min.css" rel="stylesheet"><link href="/css/zenburn.css" rel="stylesheet"><!-- FavIcon--><!-- Thanks to https://www.favicon-generator.org/ & https://html2jade.org/--><link rel="apple-touch-icon" sizes="57x57" href="https://s3.amazonaws.com/mokacoding/apple-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="https://s3.amazonaws.com/mokacoding/apple-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="https://s3.amazonaws.com/mokacoding/apple-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="https://s3.amazonaws.com/mokacoding/apple-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="https://s3.amazonaws.com/mokacoding/apple-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="https://s3.amazonaws.com/mokacoding/apple-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="https://s3.amazonaws.com/mokacoding/apple-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="https://s3.amazonaws.com/mokacoding/apple-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" href="https://s3.amazonaws.com/mokacoding/apple-icon-180x180.png"><link rel="icon" type="image/png" sizes="192x192" href="https://s3.amazonaws.com/mokacoding/android-icon-192x192.png"><link rel="icon" type="image/png" sizes="32x32" href="https://s3.amazonaws.com/mokacoding/favicon-32x32.png"><link rel="icon" type="image/png" sizes="96x96" href="https://s3.amazonaws.com/mokacoding/favicon-96x96.png"><link rel="icon" type="image/png" sizes="16x16" href="https://s3.amazonaws.com/mokacoding/favicon-16x16.png"><link rel="manifest" href="https://s3.amazonaws.com/mokacoding/manifest.json"><meta name="msapplication-TileColor" content="#ffffff"><meta name="msapplication-TileImage" content="https://s3.amazonaws.com/mokacoding/ms-icon-144x144.png"><meta name="theme-color" content="#ffffff"><!-- SumoMe--><script src="//load.sumome.com/" data-sumo-site-id="dd80959300db03e20c8bc3dd899f1424fd764d261e6c3c41923c96482a270dba" async="async"></script></head><body><!-- Use this to render an extra header in special occasions--><div class="special-header"><div class="page"><div class="row-12"><div class="col-12"><p><!-- - Saving this for later and to avoid a `git revert`:markdown
+  [What is your biggest struggle right now with building software?](https://goo.gl/forms/lCLlJd9hqCUYoTME2)--><p><a href="https://tddinswift.com?utm_source=mokacoding-site&amp;utm_campaign=coming-soon&amp;utm_medium=sticky-header">Coming Soon: <strong>Test-Driven Development in Swift with SwiftUI and Combine</strong></a></p>
+</p></div></div></div></div><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">unit and acceptance testing, automation, productivity</div><div class="links"><a href="/archive.html">Archive</a><a href="/tags.html">Tags</a><a href="https://gio.codes">About</a><a href="#subscribe">Subscribe</a><a href="/feed.xml"><i class="fa fa-rss"></i></a></div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/wwdc21-whats-new-in-testing">WWDC21: What's New in Testing</a></h2><p class="post-meta"><span class="post-date">Thu Jun 17 2021&nbsp;</span><a href="/tag/Testing/index.html" class="post-tag">-Testing</a><a href="/tag/XCTest/index.html" class="post-tag">-XCTest</a><a href="/tag/Swift/index.html" class="post-tag">-Swift</a><a href="/tag/Talks/index.html" class="post-tag">-Talks</a></p><div class="post"><p>As a testing enthusiast, I&#39;m always waiting for a &quot;What&#39;s New in Testing&quot; session at WWDC, like the ones from <a href="https://developer.apple.com/videos/play/wwdc2017/409/">2017</a> and <a href="https://developer.apple.com/videos/play/wwdc2018/403/">2018</a>.
+This year I was even keener to learn what was new because of the upcoming launch of my book <a href="https://tddinswift.com">Test-Driven Development in Swift</a> on July 11th.</p>
+<p>Since there was no &quot;What&#39;s New in Testing&quot; talk at WWDC21, I thought I&#39;d make one for the WWDC themed <a href="https://melbournecocoaheads.com/">Melbourne Cocoaheads Meetup</a> last week.
+You can see the live stream recording <a href="https://youtu.be/BIL3GvBFatE?t=2807">here</a>.
+I recorded an in-case-of-emergency version beforehand, which I embedded below alongside the slides because it has better video quality.
+In the same meetup, <a href="https://twitter.com/jarrodrobins">Jarrod Robins</a> gave a hilarious <a href="https://youtu.be/BIL3GvBFatE?t=742">iOS and macOS new features talk</a> which I recommend too.</p>
+<h2 id="video">Video</h2>
+<!-- YouTube embed code -->
+<!-- Thanks https://jameshfisher.com/2017/08/30/how-do-i-make-a-full-width-iframe/ for the aspect-ratio with YouTube iframe code -->
+<div>
+  <div style="position:relative;padding-top:56.25%;">
+   <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;" src="https://www.youtube-nocookie.com/embed/k3PWUbHbx-4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>
+</div>
+
+<h2 id="slides">Slides</h2>
+<!-- SpeakerDeck embed code -->
+<script async class="speakerdeck-embed" data-id="b9be478e46f2450098b0a7422807f51a" data-ratio="1.77777777777778" src="//speakerdeck.com/assets/embed.js"></script>
+
+<h2 id="what-s-new-in-testing">What&#39;s New in Testing</h2>
+<p>The biggest testing news was Apple&#39;s new <strong><a href="https://developer.apple.com/documentation/xcode/xcode-cloud">Xcode Cloud</a></strong> service, a Continuous Integration service fully integrated with Xcode and App Store Connect.</p>
+<p>Managing CI for Swift apps has historically been tricky because of the hardware constraint that builds need to run on a Mac.
+There are existing products like <a href="https://www.bitrise.io/">Bitrise</a> and <a href="https://docs.travis-ci.com/user/reference/osx/">TravisCI</a> offer managed solutions, but who better than Apple to provide a managed environment on Apple hardware?</p>
+<p>As of this writing, Xcode Cloud is in beta, and I haven&#39;t gotten an invite yet, so it&#39;s hard to give a concrete opinion.
+From what we can understand from Apple&#39;s demos at WWDC, I think this will be <strong> a solid solution for indie developers and small teams that don&#39;t have the time or know-how to manage their CI infrastructure</strong>.</p>
+<p>Another huge announcement, albeit not really a piece of news since Swift development happens <a href="https://swift.org/community/">in the open</a>, was the introduction of the <strong>async/await pattern</strong> for asynchronous operations and concurrency.
+Not only async/await makes writing async code straightforward but also testing it.
+Check out <a href="https://mokacoding.com/blog/how-to-test-async-await-code-in-swift/">this post</a> for more details.</p>
+<p>XCTest got two new shiny APIs for us to play with.
+<strong><code>XCTExpectFailure</code></strong> allows you to expect tests to fail.
+I encourage you to use this API only in extreme cases, like during an extensive rewrite that breaks some code areas.
+Do not use it to avoid dealing with tests that are broken or flaky.
+<code>XCTExpectFailure</code> is already available in Xcode 12.5; you don&#39;t need to wait for Xcode 13 to use it.
+You can find the WWDC session <a href="https://developer.apple.com/videos/play/wwdc2021/10207/">here</a> and the docs <a href="https://developer.apple.com/documentation/xctest/3726077-xctexpectfailure">here</a>.</p>
+<p>Another new handy method is <strong><a href="https://developer.apple.com/documentation/xctest/xctestcase/3815521-addteardownblock"><code>addTearDownBlock</code></a></strong> with which you can push code to execute after a test finishes into a LIFO stack.</p>
+<p>A new testing feature coming with Xcode 13 is the addition of a <strong>Test Repetition</strong> configuration to Test Plans.
+There are four test repetition modes:</p>
+<ul>
+<li><em>None</em>. Do not repeat the tests</li>
+<li><em>Until Failure</em>. Runs the tests until one fails, up to three times. Useful to discover flaky tests.</li>
+<li><em>Retry on Failure</em>. Will retry the tests that failed up to three times. Helpful to work around flaky tests that you haven&#39;t had the time to fix yet.</li>
+<li><em>Up Until Maximum Repetition</em>. Will run the tests three times (the number doesn&#39;t seem configurable yet) and report the success ratio. Useful to gauge the stability of your test suite.</li>
+</ul>
+<p>One feature unrelated to testing that I&#39;m super excited about is <strong>Vim key bindings</strong> in Xcode.
+Fun fact, I&#39;m told that Vim keybinding support was requested with Radar 3716281 in July 2004, although I couldn&#39;t find a link to that radar.</p>
+<p>I&#39;ve been a Vim user for a long time, and I&#39;m writing this post with Vim.
+Once you get over the initial learning curve, Vim&#39;s <em>modal editing</em> will make you super efficient at manipulating text.
+It&#39;s great to see this powerful text editing capability being added to Xcode.</p>
+<p>I&#39;m so excited about Vim key bindings that I&#39;m considering putting together <a href="https://mokacoding.com/xcode-heart-vim">a course</a> about it.
+Head over <a href="https://mokacoding.com/xcode-heart-vim">here</a> to learn more and register your interest.</p>
+<hr>
+<p>WWDC had lots of exciting testing news, and more little nuggets can be found in the <a href="https://developer.apple.com/documentation/xcode-release-notes/xcode-13-beta-release-notes">Xcode 13 release notes</a> —even though testing is at the very bottom.
+What was your favorite news?
+I&#39;d love to hear from you!
+Leave a comment below or get in touch on Twitter at <a href="https://twitter.com/mokagio">@mokagio</a>.</p>
+<p>And, of course, don&#39;t forget to check out <a href="https://tddinswift.com">Test-Driven Development in Swift</a> if you want to learn more about testing Swift applications.</p>
+</div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"></div><div class="col-6"><div style="text-align: right"><a href="/blog/how-to-test-async-await-code-in-swift">How to test Swift async/await code with XCTest&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin Sendfox Signup Form -->
+<div id="sendfox_embed_signup">
+  <h4 class="form_title">Want more of these posts?</h4>
+  <p class="form_caption">Subscribe to receive new posts in your inbox.</p>
+  <form method="post" action="https://sendfox.com/form/3ee4z3/10r4wg" class="sendfox-form" id="10r4wg" data-async="true" data-recaptcha="true">
+    <p><input type="email" placeholder="Email" name="email" class="email" required /></p>
+    <!-- no botz please -->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="a_password" tabindex="-1" value="" autocomplete="off" /></div>
+    <div class="clear"><button type="submit">Sign me up</button></div>
+  </form>
+  <script src="https://sendfox.com/js/form.js"></script>
+</div>
+<!-- End Sendfox Signup Form -->
+</div><div class="bottom-box"><div id="disqus_thread"></div><script>var disqus_shortname = "mokacoding";
+// Neet do add the / at the end to maintain compatibility with previous version
+// of the blog that didn't define disqus_url, letting Disqus set it automatically
+// using window.location.href
+var disqus_url = "https://mokacoding.com/blog/wwdc21-whats-new-in-testing/";
+
+(function() {
+  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><noscript>Please enable JavaScript to view the<a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></div></div></div><div class="row-12 footer"><div class="col-12"><h3><a href="/">mokacoding</a></h3></div><div id="copy" class="col-9"><p>Hi I&#39;m <a href="https://gio.codes">Gio</a> I write here semi-regularly on software testing and TDD, productivity, and iOS development.</p>
+<p><a href="mailto:gio+blog@mokacoding.com">Get in touch</a> if you&#39;re interested in working together.</p>
+</div><div id="links" class="col-3"><p><i class="fa fa-twitter"></i>&nbsp;<a href="https://twitter.com/mokagio">@mokagio</a></p><p><i class="fa fa-github"></i>&nbsp;<a href="https://github.com/mokagio">mokagio</a></p></div></div></div></body><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-43554041-1', 'auto');
+ga('send', 'pageview');
+</script><script>var toggle = function(elm){
+  var y = elm.style && elm.style.display ? elm.style.display : 'block';
+  if (y == 'block'){
+    elm.style.opacity='0';
+    setTimeout( function(){ elm.style.display = 'none'; }, 300 );
+  }
+  else {
+    elm.style.display='block';
+    setTimeout( function(){ elm.style.opacity = '1'; }, 10 );
+  }
+}
+
+document.getElementById('close').onclick = function(){
+  toggle(document.getElementById('sticky-header'));
+  toggle(document.getElementById('sticky-header-padding-hack'));
+}</script></html>
