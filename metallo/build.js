@@ -29,7 +29,15 @@ metalsmith(__dirname)
     "package.json",
     "package-lock.json",
     "README.md",
-    "TODO.md"
+    "TODO.md",
+    // Keeping this while I work on a better page structure, or for long enough
+    // for the source where that link was published to become old and not
+    // visited anymore. The source, sources actually, are:
+    //
+    // - https://speakerdeck.com/mokagio/wwdc-2021-whats-new-in-testing
+    // - https://mokacoding.com/blog/wwdc21-whats-new-in-testing/
+    // - https://www.youtube.com/watch?v=BIL3GvBFatE&t=2807s&ab_channel=MelbourneCocoaHeads
+    "xcode-heart-vim",
   ])
 
   .use(ignore("templates/*"))
