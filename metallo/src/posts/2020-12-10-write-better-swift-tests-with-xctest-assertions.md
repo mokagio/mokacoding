@@ -106,4 +106,4 @@ Extracting common groups of assertions into a custom one or providing a dedicate
 I hope you found this post useful.
 If you want to share your custom assertions, leave a comment below, or get in touch on Twitter at [@mokagio](https://twitter.com/mokagio).
 
-If you found this post useful and want to learn more about unit testing in Swift, check out my book [_TDD in Swift, with SwiftUI and Combine_](https://bit.ly/tdd-in-swift).
+If you found this post useful and want to learn more about unit testing in Swift, check out my book [_TDD in Swift, with SwiftUI and Combine_](https://tddinswift.com).

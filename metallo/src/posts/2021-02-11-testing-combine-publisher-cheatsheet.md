@@ -186,7 +186,7 @@ wait(for: [expectation], timeout: 0.5)
 
 ---
 
-For more insights on how to write tests for code using Combine, checkout my upcoming book [Test-Driven Development in Swift with SwiftUI and Combine](https://bit.ly/tdd-in-swift).
+You'll find more insights on how to write tests for code using Combine in my book [_Test-Driven Development in Swift with SwiftUI and Combine_](https://tddinswift.com).
 
 What are the most common `Publisher` behavior you test?
 I'd love to hear from you!

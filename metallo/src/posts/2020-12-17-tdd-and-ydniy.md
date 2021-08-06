@@ -36,7 +36,7 @@ Building software driven by tests requires continually asking yourself, "do I ne
 The focus is on getting the test you just wrote to pass as soon as possible.
 Doing that establishes a green baseline from which you can safely perform small refactors to refine the implementation.
 
-My upcoming book [_TDD in Swift with SwiftUI and Combine_](https://bit.ly/tdd-in-swift) introduces Test-Driven Development concepts by building a "real-world" menu ordering app for an Italian restaurant.
+In my book [_Test-Driven Development in Swift_ (with SwiftUI and Combine)](https://tddinswift.com) introduces TDD concepts by building a "real-world" menu ordering app for an Italian restaurant.
 
 The journey starts with a simplification exercise: what do we need to build _something_ valuable for the users?
 What's our [Earliest Testable version](https://blog.crisp.se/2016/01/25/henrikkniberg/making-sense-of-mvp)?
@@ -94,7 +94,9 @@ What are the techniques you use to get fast feedback when writing tests?
 I'd love to hear from you!
 Leave a comment below or get in touch on Twitter at [@mokagio](https://twitter.com/mokagio).
 
-Oh, and if you'd like to hear more about the upcoming _TDD in Swift with SwiftUI and Combine_ book [don't forget to subscribe](https://bit.ly/tdd-in-swift#subscribe).
+_Enjoyed this post?_
+_Want to know more about how to apply TDD to move iteratively?_
+_You might like my book_ [Test-Driven Development in Swift with SwiftUI and Combine](https://tddinswift.com).
 
 ## Footnotes
 

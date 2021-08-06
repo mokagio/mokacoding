@@ -66,4 +66,4 @@ Boring iterations. Interesting steps.
 
 _Enjoyed this post?_
 _Want to know more about how to apply TDD to move iteratively?_
-_You might like my upcoming book_ [Test-Driven Development in Swift with SwiftUI and Combine](https://bit.ly/tdd-in-swift).
+_You might like my book_ [Test-Driven Development in Swift with SwiftUI and Combine](https://tddinswift.com).
