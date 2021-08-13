@@ -167,16 +167,21 @@ function filterImages(filename, properties, index) {
 function tagList(files, metalsmith, done) {
   var rawTags = {};
 
-  for (var post in metalsmith.data.posts) {
-      for (var t in metalsmith.data.posts[post].tags) {
-          tag = metalsmith.data.posts[post].tags[t];
+  for (var post in metalsmith.metadata().posts) {
+    if (post == 'metadata') {
+      // Not sure why, but in the array of posts there's also a `metadata`
+      // "thing" which, when accessed, returns `undefined`. Let's just skip it.
+      continue
+    }
+      for (var t in metalsmith.metadata().posts[post].tags) {
+          tag = metalsmith.metadata().posts[post].tags[t];
           tag = tag.replace(/ /g, "-");
           tag = tag.toLowerCase();
           if (! rawTags[tag]) {
               rawTags[tag] = [];
           }
 
-          rawTags[tag].push(metalsmith.data.posts[post]);
+          rawTags[tag].push(metalsmith.metadata().posts[post]);
       }
   }
 
