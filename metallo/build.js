@@ -1,5 +1,11 @@
 // A lot of this is taken form https://github.com/lsjroberts/gelatin-design/blob/master/build.js
 
+let inDevMode = process.argv.slice(2)[0] == "--dev"
+
+if (inDevMode) {
+  console.log("⚠️⚠️⚠️ Running in development mode. Will only render posts for the current year. ⚠️⚠️⚠️")
+}
+
 var metalsmith  = require("metalsmith")
     , markdown  = require("metalsmith-markdown")
     , highlight = require("highlight.js")
@@ -26,15 +32,15 @@ metalsmith(__dirname)
   .use(ignore("templates/*"))
   .use(ignore("assets/*"))
 
-  .use(function(files, metalsmith, done) {
+  .use(function(_, metalsmith, done) {
     metalsmith.metadata().baseUrl = baseUrl;
     done();
   })
 
   // automatically set some values for the posts
   // lazy devolepers => smart developers
-  .use(branch("posts/*.md")
-    .use(function (files, metalsmith, done) {
+  .use(branch('posts/*.md')
+    .use(function (files, _, done) {
       for (var key in files) {
         var post = files[key];
         var name = key.split("/").pop();
@@ -96,13 +102,13 @@ metalsmith(__dirname)
     .use(permalinks({
         pattern: 'blog/:slug'
     }))
-    .use(function (files, metalsmith, done) {
+    .use(function (files, _, done) {
       for (var file in files) {
         files[file].template = 'post.jade';
       }
       done();
     })
-    .use(function (files, metalsmith, done) {
+    .use(function (files, _, done) {
       for (var key in files) {
         post = files[key];
 
@@ -142,11 +148,13 @@ metalsmith(__dirname)
     }))
   )
 
-  .use(function (files, metalsmith, done) {
+  .use(function (files, _, done) {
     files['feed.xml'] = files['feed.html'];
     delete files['feed.html'];
     done();
   })
+
+  .ignore(shouldIgnoreContentForFasterBuild)
 
   .build(function(err) {
     if (err) {
@@ -157,7 +165,7 @@ metalsmith(__dirname)
   }
 );
 
-function filterImages(filename, properties, index) {
+function filterImages(filename, _, _) {
   var extension = filename.split('.').pop().toLowerCase();
   var imageExtensions = [ "jpg", "jpeg", "png" ];
   var notAnImage = imageExtensions.indexOf(extension) == -1;
@@ -208,4 +216,20 @@ function tagList(files, metalsmith, done) {
   }
 
   done();
+}
+
+function shouldIgnoreContentForFasterBuild(fullPath, _) {
+  // Only ignore in dev mode
+  if (inDevMode == false) { return false }
+
+  // The input path is absolute, let's make it relative for easier comparison.
+  let fileName = fullPath.replace(__dirname + '/src/', '')
+
+  // Only consider ignoring posts
+  let postsDir = 'posts/'
+  if (fileName.startsWith('posts/') == false) { return false }
+
+  // Ignore all the posts not from the current year.
+  // This presents a bottleneck on the first post of the year, but oh well...
+  return fileName.startsWith(postsDir + new Date().getFullYear()) == false
 }
