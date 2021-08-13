@@ -17,28 +17,11 @@ baseUrl = "/";
 
 metalsmith(__dirname)
   .source("src")
-  .destination("..")
-  .clean(true).except([
-    ".git",
-    "CNAME",
-    "metallo",
-    "node_modules",
-    ".gitignore",
-    "Makefile",
-    "npm-shrinkwrap.json",
-    "package.json",
-    "package-lock.json",
-    "README.md",
-    "TODO.md",
-    // Keeping this while I work on a better page structure, or for long enough
-    // for the source where that link was published to become old and not
-    // visited anymore. The source, sources actually, are:
-    //
-    // - https://speakerdeck.com/mokagio/wwdc-2021-whats-new-in-testing
-    // - https://mokacoding.com/blog/wwdc21-whats-new-in-testing/
-    // - https://www.youtube.com/watch?v=BIL3GvBFatE&t=2807s&ab_channel=MelbourneCocoaHeads
-    "xcode-heart-vim",
-  ])
+  // GitHub Pages suports building from a folder other than root, so put all
+  // the html output in a 'dist' (distribution) folder. This would be good if
+  // we were to deploy somewhere else, like S3, too.
+  .destination("../dist")
+  .clean(true)
 
   .use(ignore("templates/*"))
   .use(ignore("assets/*"))
