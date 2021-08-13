@@ -4,6 +4,9 @@ serve:
 build:
 	node ./metallo/build.js
 
+dev_build:
+	node ./metallo/build.js --dev
+
 watch:
 	node ./metallo/build.js
 	node ./metallo/watch.js
