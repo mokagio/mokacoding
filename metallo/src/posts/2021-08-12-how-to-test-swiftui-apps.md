@@ -22,6 +22,8 @@ The answer is simpler and doesn't require any extra tool, only good software des
 
 Let me show you how to write unit tests for the actual logic behind a SwiftUI app by decoupling layout declaration from content generation.
 
+_Hey! I'm trying something new: I made a video tutorial version of this post, check it out [here](https://www.youtube.com/watch?v=6uhPkYyI7DY&ab_channel=TDD%26Pizza)_ 📺
+
 The template Xcode uses to generate a SwiftUI app for us includes a `View` printing the classic ["Hello, world!" message](https://en.wikipedia.org/wiki/%22Hello,_World!%22_program).
 
 
