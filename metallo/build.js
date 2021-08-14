@@ -2,8 +2,16 @@
 
 let inDevMode = process.argv.slice(2)[0] == "--dev"
 
+var postsToRenderInDevMode = []
+
 if (inDevMode) {
-  console.log("⚠️⚠️⚠️ Running in development mode. Will only render posts for the current year. ⚠️⚠️⚠️")
+  let numberOfPostsToRender = 10
+  console.log(`⚠️⚠️⚠️ Running in development mode. Will only render last ${numberOfPostsToRender} posts. ⚠️⚠️⚠️`)
+
+  let fs = require('fs')
+  let allPosts = fs.readdirSync(__dirname + '/src/posts/');
+  let allPostsCount = allPosts.length
+  postsToRenderInDevMode = allPosts.slice(allPostsCount - numberOfPostsToRender, allPostsCount)
 }
 
 var metalsmith  = require("metalsmith")
@@ -218,6 +226,7 @@ function tagList(files, metalsmith, done) {
   done();
 }
 
+let path = require('path')
 function shouldIgnoreContentForFasterBuild(fullPath, _) {
   // Only ignore in dev mode
   if (inDevMode == false) { return false }
@@ -229,7 +238,5 @@ function shouldIgnoreContentForFasterBuild(fullPath, _) {
   let postsDir = 'posts/'
   if (fileName.startsWith('posts/') == false) { return false }
 
-  // Ignore all the posts not from the current year.
-  // This presents a bottleneck on the first post of the year, but oh well...
-  return fileName.startsWith(postsDir + new Date().getFullYear()) == false
+  return postsToRenderInDevMode.includes(path.basename(fullPath)) == false
 }
