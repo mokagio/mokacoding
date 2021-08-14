@@ -32,9 +32,11 @@ baseUrl = "/";
 metalsmith(__dirname)
   .source("src")
   // GitHub Pages suports building from a folder other than root, so put all
-  // the html output in a 'dist' (distribution) folder. This would be good if
-  // we were to deploy somewhere else, like S3, too.
-  .destination("../dist")
+  // the HTML output in a distribution folder. This would be good if we were to
+  // deploy somewhere else, like S3, too.
+  //
+  // We must use "docs" because that's the only folder name GitHub supports...
+  .destination("../docs")
   .clean(true)
 
   .use(ignore("templates/*"))
