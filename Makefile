@@ -1,5 +1,5 @@
 serve:
-	cd ./dist && ../node_modules/http-server/bin/http-server -p 8000
+	cd ./docs && ../node_modules/http-server/bin/http-server -p 8000
 
 build:
 	node ./metallo/build.js
