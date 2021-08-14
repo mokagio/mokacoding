@@ -1,0 +1,108 @@
+<!DOCTYPE html><html lang="en"><head><title>How to merge pull requests with a commit that improves your Git history | mokacoding</title><meta name="description" content="When merging a pull request on GitHub, it helps to replace the default merge commit title with the PR title or an equally descriptive one. This will make your Git history more informative, and developers will understand the changes in the Git log faster."><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"><!-- Canonical URL--><link rel="canonical" href="https://mokacoding.com/blog/better-merging-for-github-pull-requests/"><!-- Open Graph meta tags--><meta property="og:title" content="How to merge pull requests with a commit that improves your Git history"><meta property="og:description" content="When merging on GitHub, you can improve the commit message in just a few seconds"><meta property="og:url" content="https://mokacoding.com/blog/better-merging-for-github-pull-requests/"><meta property="og:type" content="article"><meta property="og:site_name" content="mokacoding"><meta property="og:image" content="https://s3.amazonaws.com/mokacoding/mokacoding_og_image.jpg"><!-- Twitter meta tags--><meta property="twitter:card" content="summary"><meta property="twitter:title" content="Here's a better way to merge pull requests"><meta property="twitter:site" content="@mokacoding"><meta property="twitter:creator" content="@mokagio"><!-- Stylesheets--><link href="/css/griddy.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet"><link href="/css/font-awesome.min.css" rel="stylesheet"><link href="/css/zenburn.css" rel="stylesheet"><!-- FavIcon--><!-- Thanks to https://www.favicon-generator.org/ & https://html2jade.org/--><link rel="apple-touch-icon" sizes="57x57" href="https://s3.amazonaws.com/mokacoding/apple-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="https://s3.amazonaws.com/mokacoding/apple-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="https://s3.amazonaws.com/mokacoding/apple-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="https://s3.amazonaws.com/mokacoding/apple-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="https://s3.amazonaws.com/mokacoding/apple-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="https://s3.amazonaws.com/mokacoding/apple-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="https://s3.amazonaws.com/mokacoding/apple-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="https://s3.amazonaws.com/mokacoding/apple-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" href="https://s3.amazonaws.com/mokacoding/apple-icon-180x180.png"><link rel="icon" type="image/png" sizes="192x192" href="https://s3.amazonaws.com/mokacoding/android-icon-192x192.png"><link rel="icon" type="image/png" sizes="32x32" href="https://s3.amazonaws.com/mokacoding/favicon-32x32.png"><link rel="icon" type="image/png" sizes="96x96" href="https://s3.amazonaws.com/mokacoding/favicon-96x96.png"><link rel="icon" type="image/png" sizes="16x16" href="https://s3.amazonaws.com/mokacoding/favicon-16x16.png"><link rel="manifest" href="https://s3.amazonaws.com/mokacoding/manifest.json"><meta name="msapplication-TileColor" content="#ffffff"><meta name="msapplication-TileImage" content="https://s3.amazonaws.com/mokacoding/ms-icon-144x144.png"><meta name="theme-color" content="#ffffff"><!-- SumoMe--><script src="//load.sumome.com/" data-sumo-site-id="dd80959300db03e20c8bc3dd899f1424fd764d261e6c3c41923c96482a270dba" async="async"></script></head><body><!-- Use this to render an extra header in special occasions--><div class="special-header"><div class="page"><div class="row-12"><div class="col-12"><p><!-- - Saving this for later and to avoid a `git revert`:markdown
+  [What is your biggest struggle right now with building software?](https://goo.gl/forms/lCLlJd9hqCUYoTME2)--><p><a href="https://tddinswift.com?utm_source=mokacoding-site&amp;utm_campaign=coming-soon&amp;utm_medium=sticky-header">Avilable Now: <strong>Test-Driven Development in Swift with SwiftUI and Combine</strong></a></p>
+</p></div></div></div></div><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">unit and acceptance testing, automation, productivity</div><div class="links"><a href="/archive.html">Archive</a><a href="/tags.html">Tags</a><a href="https://gio.codes">About</a><a href="#subscribe">Subscribe</a><a href="/feed.xml"><i class="fa fa-rss"></i></a></div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/better-merging-for-github-pull-requests">How to merge pull requests with a commit that improves your Git history</a></h2><p class="post-meta"><span class="post-date">Fri Nov 20 2020&nbsp;</span><a href="/tag/GitHub/index.html" class="post-tag">-GitHub</a><a href="/tag/Git/index.html" class="post-tag">-Git</a></p><div class="post"><p>When you &quot;Squash and merge&quot; a pull request on GitHub, the merge commit title defaults to the PR title.</p>
+<p><strong>Using the pull request title, or any descriptive title with the PR id, makes a massive difference in how readable your Git history is.</strong></p>
+<p>I wish GitHub had the same behavior for &quot;Merge pull request&quot; instead, it uses Git&#39;s default merge title &quot;<code>Merge pull request #123 from username/branch-name</code>&quot;.</p>
+<p>Luckily, it takes just a few seconds to copy the PR title into the merge commit field.</p>
+<p><img src="https://s3.amazonaws.com/mokacoding/2020-11-19-github-merge-title.gif" alt="GIF showing how to copy-paste the pull request title into the merge commit title field"></p>
+<p>Is the effort worth it?
+You bet!</p>
+<p><em>Before we continue, an obvious solution to the problem would be to &quot;Squash and merge&quot; all PRs instead.
+Obvious, yes, but sometimes not desirable and other times not possible because of established team conventions.
+This post doesn&#39;t want to be an argument for merging vs. squashing.
+The idea of keeping a clear and informative Git history is valid regardless of how we get our changes into it.</em></p>
+<h2 id="why-does-the-merge-commit-title-matter">Why does the merge commit title matter?</h2>
+<p>Imagine someone offered you a million dollars if you can guess what the latest commit on a repository does by only reading its title.
+Would you rather the commit title was this:</p>
+<pre><code><span class="hljs-meta">Merge</span> pull request #123 <span class="hljs-meta">from</span> <span class="hljs-meta">add</span>-author-<span class="hljs-meta">label</span></code></pre><p>or this:</p>
+<pre><code>Add author <span class="hljs-keyword">label</span> <span class="hljs-keyword">to</span> blogpost description view (<span class="hljs-string">#123</span>)</code></pre><p>Obviously, no one will ever ask you to guess what a commit does only by reading its title – let alone offer you a million dollars.
+Still, understanding what code does and working with it is something you are being paid for.
+The easier you can do that the more value you can bring to the table.</p>
+<p>It&#39;s true that the GitHub UI makes it easy to bring up extra information for a commit, as well as the PR it belongs to.
+Even though the extra information is only one click away, the second commit is more explicit than the first.
+There is less friction for the reader to understand what the commit does.</p>
+<h2 id="shorten-the-path-to-understanding">Shorten the path to understanding</h2>
+<p>Software developers appreciate the value of clean, readable code.
+Clean code is easy to follow, making it easy to understand and, in turn, easy to work with.</p>
+<p>Clean code is what every programmer opening an unfamiliar codebase hopes to find.
+The cleaner the code, the less time it will take to get up to speed and be productive.</p>
+<p><strong>The productivity advantages of <a href="https://mokacoding.com/blog/pipe-wrench/">clarity</a> apply to Git commits as well as code.</strong>
+If you can shorten the path to understanding your Git history, every developer who will read it will benefit from it – including your future self.</p>
+<h2 id="turn-your-git-log-into-a-readable-story">Turn your Git log into a readable story</h2>
+<p>Consistently using descriptive titles for your merge commits will turn your Git log messages into a human-readable history of the changes that made it into the codebase.</p>
+<p>The <code>git log</code> command has an option called <code>--first-parents</code> to follow only the first parent commit upon seeing a merge commit.
+When applied to the log on the main branch of a repository, where all the PRs get merged, the result is a list of merge commits only.</p>
+<p>Compare the output when using a descriptive title to the PR merge commit vs. the default one:</p>
+<pre><code>$ git log <span class="hljs-comment">--pretty=oneline --abbrev-commit --first-parent</span>
+
+a2055b7 (HEAD <span class="hljs-operator">-</span><span class="hljs-operator">&gt;</span> trunk, origin<span class="hljs-operator">/</span>trunk) <span class="hljs-keyword">Merge</span> pull request #<span class="hljs-number">4</span> <span class="hljs-keyword">from</span> mokagio<span class="hljs-operator">/</span>feature<span class="hljs-operator">-</span>author<span class="hljs-operator">-</span>label
+<span class="hljs-number">64344e0</span> <span class="hljs-keyword">Merge</span> pull request #<span class="hljs-number">3</span> <span class="hljs-keyword">from</span> mokagio<span class="hljs-operator">/</span>improve<span class="hljs-operator">-</span>mobile<span class="hljs-operator">-</span>layout
+<span class="hljs-number">70</span>ba8ac <span class="hljs-keyword">Merge</span> pull request #<span class="hljs-number">2</span> <span class="hljs-keyword">from</span> mokagio<span class="hljs-operator">/</span>feature<span class="hljs-operator">-</span>more<span class="hljs-operator">-</span>negative<span class="hljs-operator">-</span>space
+<span class="hljs-number">7</span>d5c9da <span class="hljs-keyword">Merge</span> pull request #<span class="hljs-number">1</span> <span class="hljs-keyword">from</span> mokagio<span class="hljs-operator">/</span>feature<span class="hljs-operator">-</span>dark<span class="hljs-operator">-</span>mode<span class="hljs-operator">-</span>css<span class="hljs-operator">-</span>support</code></pre><pre><code>git <span class="hljs-built_in">log</span> <span class="hljs-comment">--pretty=oneline --abbrev-commit --first-parent</span>
+
+a2055b7 (HEAD -&gt; trunk, origin/trunk) Add author label <span class="hljs-built_in">to</span> <span class="hljs-built_in">post</span> metadata component (<span class="hljs-comment">#4)</span>
+<span class="hljs-number">64344e0</span> Improve layout <span class="hljs-keyword">on</span> <span class="hljs-title">mobile</span> <span class="hljs-title">devices</span> (#<span class="hljs-title">3</span>)
+<span class="hljs-number">70</span>ba8ac Use more negative <span class="hljs-literal">space</span> (<span class="hljs-comment">#2)</span>
+<span class="hljs-number">7</span>d5c9da Support dark mode via CSS media query (<span class="hljs-comment">#1)</span></code></pre><p>The second log reads like a story.
+The first has little information to offer other than the fact that stuff got merge in this branch.</p>
+<p>When you pull the latest changes from your main branch, you can run this filtered <code>git log</code> to get an idea of the recent changes.
+<em>Tip</em>: define <a href="https://mokacoding.com/blog/terminal-aliases/">an alias for it</a> to make it easier to call it; mine is <code>glgf</code>.</p>
+<hr>
+<p>Using a descriptive title when you merge your pull requests on GitHub is a process that adds friction in the short run to remove friction in the long run.</p>
+<p>It takes longer to merge a PR when you need to copy its tile or come up with a succinct one for the commit.
+Those extra seconds, a couple of minutes in the worse scenario, will pay off because every time a developer will look at the history, they&#39;ll benefit from its greater clarity.</p>
+<p><strong>The asymmetry between the one time cost of crafting the merge and the many times people will read the history makes the tradeoff all the more worth it</strong>.</p>
+<p>So, next time you&#39;re about to click that merge button, spend a few extra seconds to add a descriptive title.
+Your team, the users of your open source software, your future self, they&#39;ll all thank you for it.</p>
+<p>What do you think of this approach?
+What are your best practices for effective GitHub pull requests and tidy Git history?
+I&#39;d love to hear from you!
+Leave a comment below or get in touch on Twitter at <a href="https://twitter.com/mokagio">@mokagio</a>.</p>
+</div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"><div><a href="/blog/when-experiments-go-wrong"><<&nbsp;When experiments go wrong</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/prevent-swiftui-app-loading-in-unit-tests">How to bypass the SwiftUI App when running unit tests&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin Sendfox Signup Form -->
+<div id="sendfox_embed_signup">
+  <h4 class="form_title">Want more of these posts?</h4>
+  <p class="form_caption">Subscribe to receive new posts in your inbox.</p>
+  <form method="post" action="https://sendfox.com/form/3ee4z3/10r4wg" class="sendfox-form" id="10r4wg" data-async="true" data-recaptcha="true">
+    <p><input type="email" placeholder="Email" name="email" class="email" required /></p>
+    <!-- no botz please -->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="a_password" tabindex="-1" value="" autocomplete="off" /></div>
+    <div class="clear"><button type="submit">Sign me up</button></div>
+  </form>
+  <script src="https://sendfox.com/js/form.js"></script>
+</div>
+<!-- End Sendfox Signup Form -->
+</div><div class="bottom-box"><div id="disqus_thread"></div><script>var disqus_shortname = "mokacoding";
+// Neet do add the / at the end to maintain compatibility with previous version
+// of the blog that didn't define disqus_url, letting Disqus set it automatically
+// using window.location.href
+var disqus_url = "https://mokacoding.com/blog/better-merging-for-github-pull-requests/";
+
+(function() {
+  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><noscript>Please enable JavaScript to view the<a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></div></div></div><div class="row-12 footer"><div class="col-12"><h3><a href="/">mokacoding</a></h3></div><div id="copy" class="col-9"><p>Hi I&#39;m <a href="https://gio.codes">Gio</a> I write here semi-regularly on software testing and TDD, productivity, and iOS development.</p>
+<p><a href="mailto:gio+blog@mokacoding.com">Get in touch</a> if you&#39;re interested in working together.</p>
+</div><div id="links" class="col-3"><p><i class="fa fa-twitter"></i>&nbsp;<a href="https://twitter.com/mokagio">@mokagio</a></p><p><i class="fa fa-github"></i>&nbsp;<a href="https://github.com/mokagio">mokagio</a></p></div></div></div></body><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-43554041-1', 'auto');
+ga('send', 'pageview');
+</script><script>var toggle = function(elm){
+  var y = elm.style && elm.style.display ? elm.style.display : 'block';
+  if (y == 'block'){
+    elm.style.opacity='0';
+    setTimeout( function(){ elm.style.display = 'none'; }, 300 );
+  }
+  else {
+    elm.style.display='block';
+    setTimeout( function(){ elm.style.opacity = '1'; }, 10 );
+  }
+}
+
+document.getElementById('close').onclick = function(){
+  toggle(document.getElementById('sticky-header'));
+  toggle(document.getElementById('sticky-header-padding-hack'));
+}</script></html>

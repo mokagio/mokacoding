@@ -1,0 +1,122 @@
+<!DOCTYPE html><html lang="en"><head><title>CocoaPods! | mokacoding</title><meta name="description" content="A brief introduction to CocoaPods, the Objective-C dependencies manager."><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"><!-- Canonical URL--><link rel="canonical" href="https://mokacoding.com/blog/cocoapods/"><!-- Open Graph meta tags--><meta property="og:title" content="CocoaPods!"><meta property="og:description" content="A brief introduction to CocoaPods, the Objective-C dependencies manager."><meta property="og:url" content="https://mokacoding.com/blog/cocoapods/"><meta property="og:type" content="article"><meta property="og:site_name" content="mokacoding"><meta property="og:image" content="https://s3.amazonaws.com/mokacoding/mokacoding_og_image.jpg"><!-- Twitter meta tags--><meta property="twitter:card" content="summary"><meta property="twitter:title" content="CocoaPods!"><meta property="twitter:site" content="@mokacoding"><meta property="twitter:creator" content="@mokagio"><!-- Stylesheets--><link href="/css/griddy.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet"><link href="/css/font-awesome.min.css" rel="stylesheet"><link href="/css/zenburn.css" rel="stylesheet"><!-- FavIcon--><!-- Thanks to https://www.favicon-generator.org/ & https://html2jade.org/--><link rel="apple-touch-icon" sizes="57x57" href="https://s3.amazonaws.com/mokacoding/apple-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="https://s3.amazonaws.com/mokacoding/apple-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="https://s3.amazonaws.com/mokacoding/apple-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="https://s3.amazonaws.com/mokacoding/apple-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="https://s3.amazonaws.com/mokacoding/apple-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="https://s3.amazonaws.com/mokacoding/apple-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="https://s3.amazonaws.com/mokacoding/apple-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="https://s3.amazonaws.com/mokacoding/apple-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" href="https://s3.amazonaws.com/mokacoding/apple-icon-180x180.png"><link rel="icon" type="image/png" sizes="192x192" href="https://s3.amazonaws.com/mokacoding/android-icon-192x192.png"><link rel="icon" type="image/png" sizes="32x32" href="https://s3.amazonaws.com/mokacoding/favicon-32x32.png"><link rel="icon" type="image/png" sizes="96x96" href="https://s3.amazonaws.com/mokacoding/favicon-96x96.png"><link rel="icon" type="image/png" sizes="16x16" href="https://s3.amazonaws.com/mokacoding/favicon-16x16.png"><link rel="manifest" href="https://s3.amazonaws.com/mokacoding/manifest.json"><meta name="msapplication-TileColor" content="#ffffff"><meta name="msapplication-TileImage" content="https://s3.amazonaws.com/mokacoding/ms-icon-144x144.png"><meta name="theme-color" content="#ffffff"><!-- SumoMe--><script src="//load.sumome.com/" data-sumo-site-id="dd80959300db03e20c8bc3dd899f1424fd764d261e6c3c41923c96482a270dba" async="async"></script></head><body><!-- Use this to render an extra header in special occasions--><div class="special-header"><div class="page"><div class="row-12"><div class="col-12"><p><!-- - Saving this for later and to avoid a `git revert`:markdown
+  [What is your biggest struggle right now with building software?](https://goo.gl/forms/lCLlJd9hqCUYoTME2)--><p><a href="https://tddinswift.com?utm_source=mokacoding-site&amp;utm_campaign=coming-soon&amp;utm_medium=sticky-header">Avilable Now: <strong>Test-Driven Development in Swift with SwiftUI and Combine</strong></a></p>
+</p></div></div></div></div><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">unit and acceptance testing, automation, productivity</div><div class="links"><a href="/archive.html">Archive</a><a href="/tags.html">Tags</a><a href="https://gio.codes">About</a><a href="#subscribe">Subscribe</a><a href="/feed.xml"><i class="fa fa-rss"></i></a></div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/cocoapods">CocoaPods!</a></h2><p class="post-meta"><span class="post-date">Sat Jan 05 2013&nbsp;</span><a href="/tag/CocoaPods/index.html" class="post-tag">-CocoaPods</a><a href="/tag/iOS/index.html" class="post-tag">-iOS</a></p><div class="post"><h2 id="what-is-cocoapods">What is CocoaPods?</h2>
+<blockquote>
+<p>CocoaPods: The best way to manage library dependencies in Objective-C projects.</p></p>
+</blockquote>
+<p>If you&#39;re familiar with Ruby on Rails, it&#39;s the same thing as <a href="http://gembundler.com/">Bundler</a>, or it&#39;s lame copy attempt for Symfony 2, <a href="http://getcomposer.org/">Composer</a>.</p>
+<p>If you&#39;re not, and you haven&#39;t sorted it out from the quote above, CocoaPods is a tool that&#39;s let us manage our libraries and their dependencies in our Objective-C projects. This means:</p>
+<ol>
+<li>No more wasted time downloading all the libraries the one we want to use depends on.</li>
+<li>Smart and safe version management, specially when we&#39;re working on a project with other people, which is 90% of the time.</li>
+</ol>
+<p>To <em>&quot;get my hands dirty&quot;</em> with CocoaPods I made this little project called <a href="https://github.com/mokagio/justninegags">JustNineGags</a>, feel free to check it out on GitHub.</p>
+<h2 id="why-should-i-use-it">Why should I use it?</h2>
+<p>Because it's awesome! It makes development faster and easier, and also safer! It easier to work in teams and keep the libraries versions even. Should I go on? Ok! Just think about this: you won't download and move in your project a library anymore, <code>pod</code> will do it all for you!</p>
+
+<h2 id="installing-cocoapods">Installing CocoaPods</h2>
+<p>Installing CocoaPods is as simple as installing all the other Ruby Gems, I shouldn't even writing this, as what's written in the <a href="http://cocoapods.org/#install">install section</a> is more than enough, anyway:</p>
+
+<pre><code>gem <span class="hljs-keyword">install</span> cocoapods</code></pre><p>Once the installation is completed run:</p>
+
+<pre><code>pod setup</code></pre><p>This will, guess what, setup everything CocoaPods needs on your system. You should see an output like this:</p>
+
+<pre><code>Setting <span class="hljs-keyword">up</span> CocoaPods master repo
+Cloning spec repo <span class="hljs-string">&#x27;master&#x27;</span> from <span class="hljs-string">&#x27;&lt;a href=&#x27;</span>http<span class="hljs-variable">s:</span>//github.<span class="hljs-keyword">com</span>/CocoaPods/Specs.git<span class="hljs-string">&#x27;&gt;https://github.com/CocoaPods/Specs.git&lt;/a&gt;&#x27;</span> (branch <span class="hljs-string">&#x27;master&#x27;</span>)
+Setup completed (<span class="hljs-keyword">read</span>-<span class="hljs-keyword">only</span> access)</code></pre><p>Done! :)</p>
+
+<p><em>You should avoid using <code>sudo</code> otherwise everything else you'll do with <code>pod</code> will need to use <code>sudo</code> as well. And this mean that the folders and file that are gonna be created will be owend by <code>root</code> instead that by you.</em></p>
+
+<h2>Using CocoaPods</h2>
+
+<p>Again, everything written on the <a href="http://cocoapods.org/#get_started">website</a> is pretty straightforward.</p>
+
+<p>Go in the root folder of your Objective-C project and create a file named <code>Podfile</code>, with whatever editor you like. We'll use this file to list all the libraries, <em>pods</em>, we need in the project. The JustNineGags <code>Podfile</code> content is:</p>
+
+<pre><code class="hljs ruby">platform <span class="hljs-symbol">:ios</span>
+pod <span class="hljs-string">&#x27;MBProgressHUD&#x27;</span>, <span class="hljs-string">&#x27;~&gt; 0.5&#x27;</span>
+pod <span class="hljs-string">&#x27;Reachability&#x27;</span>,  <span class="hljs-string">&#x27;~&gt; 3.1.0&#x27;</span></code></pre>
+<h3>Adding a Pod</h3>
+
+<p>As you can see adding a Pod is really easy, just go on <a href="http://cocoapods.org">CocoaPods website</a>, look for the it, and then add it to the <code>Podfile</code> using it's name and the version you need.</p>
+
+<h3>Installing the Pods</h3>
+
+<p>Right now we've told CocoaPods the Pods we need but they aren't yet in out project. So let's run</p>
+
+<pre><code>pod <span class="hljs-keyword">install</span></code></pre><p>This will download all the libraries we've asked for, and all their dependencies. Sweet!</p>
+
+<p>The first time we run <code>pod install</code> something else will happen, a <code>Pods/</code> folder, a <code>Podfile.lock</code>, and a <code>YourProjectName.xcworkspace</code> will be created.</p>
+
+<p><strong>Important!</strong> From now on remember to open your project through the <code>YourProjectName.xcworkspace</code> file, otherwise the pods won't be loaded by Xcode.</p>
+
+<p>That's all folks! :)</p>
+
+<h3>What should we track?</h3>
+
+<p>Using CocoaPods adds some files and folders to our project, which of those should we track in our repo, and which should be left aside, adding them to the <code>.gitignore</code>? That of course assuming you're using git, and you definitely should. Let's have a look at the new stuff:</p>
+
+<ul>
+<li><code>Podfile</code>, we definitely <b>need</b> this one, as all the pods we need are listed in it.</li>
+<li><code>Podfile.lock</code>, as for all the other library management systems, we <b>need</b> this one too, because it's used to assure all the developers are using the same versions of the pods and their dependencies.</li>
+<li><code>Pods/</code>, we <b>don't need</b> to track this folder, it's created by <code>pod install</code>, and all it's content is downloaded for us from other repos.</li>
+<li><code>YourProjectName.xcworkspace</code>, we <b>don't need</b> this one either, because it's generated by <code>pod install</code> too.</li>
+</ul>
+
+<h2>What's coming next?</h2>
+
+<p>How to setup our own pods. I'll probably write a little and simple Category to add other colors to the <code>UIColor</code> factories, stay tuned!</p>
+
+<hr />
+
+<h2>Update 2013-01-06</h2>
+
+<p>To implement HTTP requests in <a href="https://github.com/mokagio/justninegags">JustNineGags</a> I used <code><a href="https://github.com/nfarina/webrequest">SMWebRequest</a></code> because I'm too lazy to write everything by myself. <code>SMWebRequest</code> wasn't a Pod yet so I opened an <a href="https://github.com/nfarina/webrequest/issues/7">issue</a> asking good guy <a href="https://twitter.com/nfarina">nfarina</a> to add it. In less than 12 hours the Pod was added! :D</p>
+</div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"><div><a href="/blog/cocoapods-how-to-create-your-own-pod"><<&nbsp;CocoaPods - How to create your own Pod</a></div></div><div class="col-6"></div></div><div id="subscribe" class="bottom-box"><!-- Begin Sendfox Signup Form -->
+<div id="sendfox_embed_signup">
+  <h4 class="form_title">Want more of these posts?</h4>
+  <p class="form_caption">Subscribe to receive new posts in your inbox.</p>
+  <form method="post" action="https://sendfox.com/form/3ee4z3/10r4wg" class="sendfox-form" id="10r4wg" data-async="true" data-recaptcha="true">
+    <p><input type="email" placeholder="Email" name="email" class="email" required /></p>
+    <!-- no botz please -->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="a_password" tabindex="-1" value="" autocomplete="off" /></div>
+    <div class="clear"><button type="submit">Sign me up</button></div>
+  </form>
+  <script src="https://sendfox.com/js/form.js"></script>
+</div>
+<!-- End Sendfox Signup Form -->
+</div><div class="bottom-box"><div id="disqus_thread"></div><script>var disqus_shortname = "mokacoding";
+// Neet do add the / at the end to maintain compatibility with previous version
+// of the blog that didn't define disqus_url, letting Disqus set it automatically
+// using window.location.href
+var disqus_url = "https://mokacoding.com/blog/cocoapods/";
+
+(function() {
+  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><noscript>Please enable JavaScript to view the<a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></div></div></div><div class="row-12 footer"><div class="col-12"><h3><a href="/">mokacoding</a></h3></div><div id="copy" class="col-9"><p>Hi I&#39;m <a href="https://gio.codes">Gio</a> I write here semi-regularly on software testing and TDD, productivity, and iOS development.</p>
+<p><a href="mailto:gio+blog@mokacoding.com">Get in touch</a> if you&#39;re interested in working together.</p>
+</div><div id="links" class="col-3"><p><i class="fa fa-twitter"></i>&nbsp;<a href="https://twitter.com/mokagio">@mokagio</a></p><p><i class="fa fa-github"></i>&nbsp;<a href="https://github.com/mokagio">mokagio</a></p></div></div></div></body><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-43554041-1', 'auto');
+ga('send', 'pageview');
+</script><script>var toggle = function(elm){
+  var y = elm.style && elm.style.display ? elm.style.display : 'block';
+  if (y == 'block'){
+    elm.style.opacity='0';
+    setTimeout( function(){ elm.style.display = 'none'; }, 300 );
+  }
+  else {
+    elm.style.display='block';
+    setTimeout( function(){ elm.style.opacity = '1'; }, 10 );
+  }
+}
+
+document.getElementById('close').onclick = function(){
+  toggle(document.getElementById('sticky-header'));
+  toggle(document.getElementById('sticky-header-padding-hack'));
+}</script></html>

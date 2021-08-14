@@ -1,0 +1,89 @@
+<!DOCTYPE html><html lang="en"><head><title>Setting up Calabash for iOS projects with Cocoapods and Build Configurations | mokacoding</title><meta name="description" content="A simple guide that shows the simplest way to install Calabash on an iOS project, by using Build Configurations and CocoaPods."><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"><!-- Canonical URL--><link rel="canonical" href="https://mokacoding.com/blog/calabash-ios-with-cocoapods-and-build-configurations/"><!-- Open Graph meta tags--><meta property="og:title" content="Setting up Calabash for iOS projects with Cocoapods and Build Configurations"><meta property="og:description" content="A simple guide that shows the simplest way to install Calabash on an iOS project, by using Build Configurations and CocoaPods."><meta property="og:url" content="https://mokacoding.com/blog/calabash-ios-with-cocoapods-and-build-configurations/"><meta property="og:type" content="article"><meta property="og:site_name" content="mokacoding"><meta property="og:image" content="https://s3.amazonaws.com/mokacoding/mokacoding_og_image.jpg"><!-- Twitter meta tags--><meta property="twitter:card" content="summary"><meta property="twitter:title" content="Setting up Calabash for iOS projects with Cocoapods and Build Configurations"><meta property="twitter:site" content="@mokacoding"><meta property="twitter:creator" content="@mokagio"><!-- Stylesheets--><link href="/css/griddy.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet"><link href="/css/font-awesome.min.css" rel="stylesheet"><link href="/css/zenburn.css" rel="stylesheet"><!-- FavIcon--><!-- Thanks to https://www.favicon-generator.org/ & https://html2jade.org/--><link rel="apple-touch-icon" sizes="57x57" href="https://s3.amazonaws.com/mokacoding/apple-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="https://s3.amazonaws.com/mokacoding/apple-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="https://s3.amazonaws.com/mokacoding/apple-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="https://s3.amazonaws.com/mokacoding/apple-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="https://s3.amazonaws.com/mokacoding/apple-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="https://s3.amazonaws.com/mokacoding/apple-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="https://s3.amazonaws.com/mokacoding/apple-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="https://s3.amazonaws.com/mokacoding/apple-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" href="https://s3.amazonaws.com/mokacoding/apple-icon-180x180.png"><link rel="icon" type="image/png" sizes="192x192" href="https://s3.amazonaws.com/mokacoding/android-icon-192x192.png"><link rel="icon" type="image/png" sizes="32x32" href="https://s3.amazonaws.com/mokacoding/favicon-32x32.png"><link rel="icon" type="image/png" sizes="96x96" href="https://s3.amazonaws.com/mokacoding/favicon-96x96.png"><link rel="icon" type="image/png" sizes="16x16" href="https://s3.amazonaws.com/mokacoding/favicon-16x16.png"><link rel="manifest" href="https://s3.amazonaws.com/mokacoding/manifest.json"><meta name="msapplication-TileColor" content="#ffffff"><meta name="msapplication-TileImage" content="https://s3.amazonaws.com/mokacoding/ms-icon-144x144.png"><meta name="theme-color" content="#ffffff"><!-- SumoMe--><script src="//load.sumome.com/" data-sumo-site-id="dd80959300db03e20c8bc3dd899f1424fd764d261e6c3c41923c96482a270dba" async="async"></script></head><body><!-- Use this to render an extra header in special occasions--><div class="special-header"><div class="page"><div class="row-12"><div class="col-12"><p><!-- - Saving this for later and to avoid a `git revert`:markdown
+  [What is your biggest struggle right now with building software?](https://goo.gl/forms/lCLlJd9hqCUYoTME2)--><p><a href="https://tddinswift.com?utm_source=mokacoding-site&amp;utm_campaign=coming-soon&amp;utm_medium=sticky-header">Avilable Now: <strong>Test-Driven Development in Swift with SwiftUI and Combine</strong></a></p>
+</p></div></div></div></div><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">unit and acceptance testing, automation, productivity</div><div class="links"><a href="/archive.html">Archive</a><a href="/tags.html">Tags</a><a href="https://gio.codes">About</a><a href="#subscribe">Subscribe</a><a href="/feed.xml"><i class="fa fa-rss"></i></a></div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/calabash-ios-with-cocoapods-and-build-configurations">Setting up Calabash for iOS projects with Cocoapods and Build Configurations</a></h2><p class="post-meta"><span class="post-date">Sun Jan 25 2015&nbsp;</span><a href="/tag/Acceptance-Testing/index.html" class="post-tag">-Acceptance Testing</a><a href="/tag/Calabash/index.html" class="post-tag">-Calabash</a></p><div class="post"><p><a href="http://calaba.sh/">Calabash</a> is a nice automation testing framework. It differs form from other solutions like <a href="https://github.com/kif-framework/KIF">KIF</a> because the tests are written and run using <a href="http://cukes.info/">Cucumber</a>, a BDD framework from the Rails world which main selling point are human readable &quot;features&quot;, written in a Ruby DSL.</p>
+<p>At the time of writing, the suggest <a href="https://github.com/calabash/calabash-ios#installation">installation method</a> is to either use the experimental <code>calabash-ios setup</code> command, or to create a new Target and add the calabash binary to it the old &quot;drag-n-drop&quot; way. </p>
+<p>In my opinion setting it up this way has at least two downsides:</p>
+<ol>
+<li>Having a second target means that when adding a new file the developers need to add it to both targets, <strong>every time</strong>. This is quite error prone...</li>
+<li>There is no automated way to track new versions of the binary.</li>
+</ol>
+<h2 id="build-configuration--cocoapods-based-setup">Build Configuration + CocoaPods based setup</h2>
+<p>The solution I propose removes both the upgrade automation problem, and the annoyance of having to add files to multiple targets.</p>
+<p>By using CocoaPods we can automate the version updates, and by using a custom Build Configuration we can use the main Target, and new files will always be there.</p>
+<p>The setup process is quite straightforward, and you can follow it on <a href="https://github.com/mokagio/setup-calabash-ios">this example repo</a> while reading along.</p>
+<h3 id="1-get-calabash">1. Get Calabash</h3>
+<p>Calabash is distributed via <a href="https://rubygems.org/">RubyGems</a>, so getting it is as easy as running:</p>
+<pre><code>gem <span class="hljs-keyword">install</span> calabash-cucumber</code></pre><p>To verify that the installation has been successful type <code>calabash-ios</code>, you should see a print of all the possible commands.</p>
+<h3 id="2-create-a-new-build-configuration">2. Create a new Build Configuration</h3>
+<p>Adding a new Build Configuration to an Xcode project is done by going to the Project &gt; Info tab, mind Project not Target, going to the Configurations section and pressing the plus button. Adding a new Configuration is actually nothing more than duplicating an existing one. </p>
+<img src="https://s3.amazonaws.com/mokacoding/2015-01-25-setup-calabash-ios-add-build-configuration.jpg" alt="Setup Calabash for iOS with CocoaPods and Build Configurations - Add new Build Configuration"/>
+
+<h3 id="3-add-calabash-through-cocoapods">3. Add Calabash through CocoaPods</h3>
+<p>Calabash works by connecting to the app in the Simulator or device via HTTP. To make this happen we need to add a binary to our app, which will start the server that we&#39;ll connect to.</p>
+<p>The Calabash CocoaPods takes care of all the setup operations for us, but we don&#39;t want the Calabash binary to be in the ipa we&#39;ll submit to the store.</p>
+<p><a href="http://blog.cocoapods.org/CocoaPods-0.34/">Since version 0.34</a> CocoaPods allows us to install pods with a configuration granularity, which is awesome. This is why we added a dedicated configuration, to leverage on this feature and avoid Calabash leaking into production.</p>
+<pre><code class="hljs ruby">target <span class="hljs-string">&#x27;MyAwesomeApp&#x27;</span> <span class="hljs-keyword">do</span>
+  pod <span class="hljs-string">&#x27;Calabash&#x27;</span>, <span class="hljs-symbol">:configurations</span> =&gt; [<span class="hljs-string">&#x27;Calabash&#x27;</span>]
+<span class="hljs-keyword">end</span></code></pre>
+<p>Now simply <code>pod install</code> and Calabash will be integrated in your project.</p>
+<h3 id="4-create-a-calabash-scheme">4. Create a Calabash scheme</h3>
+<p>The final piece of the puzzle is to have a way to run our app in the Calabash configuration, so that the local server will be started and the calabash cli will be able to contact the app to run the automation tests.</p>
+<p>To do this just create a new Scheme, and set the Run &gt; Build Configuration option to Calabash.</p>
+<img src="https://s3.amazonaws.com/mokacoding/2015-01-25-setup-calabash-ios-edit-scheme.jpg" alt="Setup Calabash for iOS with CocoaPods and Build Configurations - Edit Scheme"/>
+
+<p>Now select the new Scheme and Run. If everything has been successful you&#39;ll see an output similar to this:</p>
+<pre><code><span class="hljs-attribute">2015</span>-<span class="hljs-number">01</span>-<span class="hljs-number">25</span> <span class="hljs-number">21</span>:<span class="hljs-number">20</span>:<span class="hljs-number">35</span>.<span class="hljs-number">693</span> CalabashSetup[<span class="hljs-number">33579</span>:<span class="hljs-number">257892</span>] Creating the server: &lt;LPHTTPServer: <span class="hljs-number">0</span>x<span class="hljs-number">7</span>fa<span class="hljs-number">4</span>fbc<span class="hljs-number">07940</span>&gt;
+<span class="hljs-attribute">2015</span>-<span class="hljs-number">01</span>-<span class="hljs-number">25</span> <span class="hljs-number">21</span>:<span class="hljs-number">20</span>:<span class="hljs-number">35</span>.<span class="hljs-number">693</span> CalabashSetup[<span class="hljs-number">33579</span>:<span class="hljs-number">257892</span>] Calabash iOS server version: CALABASH VERSION: <span class="hljs-number">0</span>.<span class="hljs-number">12</span>.<span class="hljs-number">0</span>
+<span class="hljs-attribute">2015</span>-<span class="hljs-number">01</span>-<span class="hljs-number">25</span> <span class="hljs-number">21</span>:<span class="hljs-number">20</span>:<span class="hljs-number">35</span>.<span class="hljs-number">694</span> CalabashSetup[<span class="hljs-number">33579</span>:<span class="hljs-number">257892</span>] simroot: /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk
+<span class="hljs-attribute">2015</span>-<span class="hljs-number">01</span>-<span class="hljs-number">25</span> <span class="hljs-number">21</span>:<span class="hljs-number">20</span>:<span class="hljs-number">35</span>.<span class="hljs-number">697</span> CalabashSetup[<span class="hljs-number">33579</span>:<span class="hljs-number">257892</span>] Started LPHTTP server <span class="hljs-literal">on</span> port <span class="hljs-number">37265</span>
+<span class="hljs-attribute">2015</span>-<span class="hljs-number">01</span>-<span class="hljs-number">25</span> <span class="hljs-number">21</span>:<span class="hljs-number">20</span>:<span class="hljs-number">35</span>.<span class="hljs-number">876</span> CalabashSetup[<span class="hljs-number">33579</span>:<span class="hljs-number">257972</span>] Bonjour Service Published: domain(local.) type(_http._tcp.) name(Calabash Server)</code></pre><p><strong>Congratulations!</strong> You&#39;re Calabash setup with CocoaPods and Build Configurations is completed!</p>
+<p>If you had any problems during the setup tweet me for help <a href="https://twitter.com/mokagio">@mokagio</a>, or check the <a href="https://github.com/mokagio/setup-calabash-ios">example repo</a>.</p>
+<p><em>Happy acceptance testing with Calabash</em></p>
+</div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"><div><a href="/blog/gitiquette"><<&nbsp;Git-iquette</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/5-habits-that-will-make-you-a-better-software-developer">5 habits that will make you a better software developer&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin Sendfox Signup Form -->
+<div id="sendfox_embed_signup">
+  <h4 class="form_title">Want more of these posts?</h4>
+  <p class="form_caption">Subscribe to receive new posts in your inbox.</p>
+  <form method="post" action="https://sendfox.com/form/3ee4z3/10r4wg" class="sendfox-form" id="10r4wg" data-async="true" data-recaptcha="true">
+    <p><input type="email" placeholder="Email" name="email" class="email" required /></p>
+    <!-- no botz please -->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="a_password" tabindex="-1" value="" autocomplete="off" /></div>
+    <div class="clear"><button type="submit">Sign me up</button></div>
+  </form>
+  <script src="https://sendfox.com/js/form.js"></script>
+</div>
+<!-- End Sendfox Signup Form -->
+</div><div class="bottom-box"><div id="disqus_thread"></div><script>var disqus_shortname = "mokacoding";
+// Neet do add the / at the end to maintain compatibility with previous version
+// of the blog that didn't define disqus_url, letting Disqus set it automatically
+// using window.location.href
+var disqus_url = "https://mokacoding.com/blog/calabash-ios-with-cocoapods-and-build-configurations/";
+
+(function() {
+  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><noscript>Please enable JavaScript to view the<a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></div></div></div><div class="row-12 footer"><div class="col-12"><h3><a href="/">mokacoding</a></h3></div><div id="copy" class="col-9"><p>Hi I&#39;m <a href="https://gio.codes">Gio</a> I write here semi-regularly on software testing and TDD, productivity, and iOS development.</p>
+<p><a href="mailto:gio+blog@mokacoding.com">Get in touch</a> if you&#39;re interested in working together.</p>
+</div><div id="links" class="col-3"><p><i class="fa fa-twitter"></i>&nbsp;<a href="https://twitter.com/mokagio">@mokagio</a></p><p><i class="fa fa-github"></i>&nbsp;<a href="https://github.com/mokagio">mokagio</a></p></div></div></div></body><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-43554041-1', 'auto');
+ga('send', 'pageview');
+</script><script>var toggle = function(elm){
+  var y = elm.style && elm.style.display ? elm.style.display : 'block';
+  if (y == 'block'){
+    elm.style.opacity='0';
+    setTimeout( function(){ elm.style.display = 'none'; }, 300 );
+  }
+  else {
+    elm.style.display='block';
+    setTimeout( function(){ elm.style.opacity = '1'; }, 10 );
+  }
+}
+
+document.getElementById('close').onclick = function(){
+  toggle(document.getElementById('sticky-header'));
+  toggle(document.getElementById('sticky-header-padding-hack'));
+}</script></html>

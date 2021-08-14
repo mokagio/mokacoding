@@ -1,0 +1,179 @@
+<!DOCTYPE html><html lang="en"><head><title>Testing Delegates in Swift with XCTest | mokacoding</title><meta name="description" content="In this second post of the Practical Testing in Swift we a look at strategies to test how objects call their delegate methods or set property on them."><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"><!-- Canonical URL--><link rel="canonical" href="https://mokacoding.com/blog/testing-delegates-in-swift-with-xctest/"><!-- Open Graph meta tags--><meta property="og:title" content="Testing Delegates in Swift with XCTest"><meta property="og:description" content="In this second post of the Practical Testing in Swift we a look at strategies to test how objects call their delegate methods or set property on them."><meta property="og:url" content="https://mokacoding.com/blog/testing-delegates-in-swift-with-xctest/"><meta property="og:type" content="article"><meta property="og:site_name" content="mokacoding"><meta property="og:image" content="https://s3.amazonaws.com/mokacoding/mokacoding_og_image.jpg"><!-- Twitter meta tags--><meta property="twitter:card" content="summary"><meta property="twitter:title" content="Testing Delegates in Swift with XCTest"><meta property="twitter:site" content="@mokacoding"><meta property="twitter:creator" content="@mokagio"><!-- Stylesheets--><link href="/css/griddy.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet"><link href="/css/font-awesome.min.css" rel="stylesheet"><link href="/css/zenburn.css" rel="stylesheet"><!-- FavIcon--><!-- Thanks to https://www.favicon-generator.org/ & https://html2jade.org/--><link rel="apple-touch-icon" sizes="57x57" href="https://s3.amazonaws.com/mokacoding/apple-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="https://s3.amazonaws.com/mokacoding/apple-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="https://s3.amazonaws.com/mokacoding/apple-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="https://s3.amazonaws.com/mokacoding/apple-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="https://s3.amazonaws.com/mokacoding/apple-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="https://s3.amazonaws.com/mokacoding/apple-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="https://s3.amazonaws.com/mokacoding/apple-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="https://s3.amazonaws.com/mokacoding/apple-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" href="https://s3.amazonaws.com/mokacoding/apple-icon-180x180.png"><link rel="icon" type="image/png" sizes="192x192" href="https://s3.amazonaws.com/mokacoding/android-icon-192x192.png"><link rel="icon" type="image/png" sizes="32x32" href="https://s3.amazonaws.com/mokacoding/favicon-32x32.png"><link rel="icon" type="image/png" sizes="96x96" href="https://s3.amazonaws.com/mokacoding/favicon-96x96.png"><link rel="icon" type="image/png" sizes="16x16" href="https://s3.amazonaws.com/mokacoding/favicon-16x16.png"><link rel="manifest" href="https://s3.amazonaws.com/mokacoding/manifest.json"><meta name="msapplication-TileColor" content="#ffffff"><meta name="msapplication-TileImage" content="https://s3.amazonaws.com/mokacoding/ms-icon-144x144.png"><meta name="theme-color" content="#ffffff"><!-- SumoMe--><script src="//load.sumome.com/" data-sumo-site-id="dd80959300db03e20c8bc3dd899f1424fd764d261e6c3c41923c96482a270dba" async="async"></script></head><body><!-- Use this to render an extra header in special occasions--><div class="special-header"><div class="page"><div class="row-12"><div class="col-12"><p><!-- - Saving this for later and to avoid a `git revert`:markdown
+  [What is your biggest struggle right now with building software?](https://goo.gl/forms/lCLlJd9hqCUYoTME2)--><p><a href="https://tddinswift.com?utm_source=mokacoding-site&amp;utm_campaign=coming-soon&amp;utm_medium=sticky-header">Avilable Now: <strong>Test-Driven Development in Swift with SwiftUI and Combine</strong></a></p>
+</p></div></div></div></div><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">unit and acceptance testing, automation, productivity</div><div class="links"><a href="/archive.html">Archive</a><a href="/tags.html">Tags</a><a href="https://gio.codes">About</a><a href="#subscribe">Subscribe</a><a href="/feed.xml"><i class="fa fa-rss"></i></a></div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/testing-delegates-in-swift-with-xctest">Testing Delegates in Swift with XCTest</a></h2><p class="post-meta"><span class="post-date">Tue Jan 19 2016&nbsp;</span><a href="/tag/Swift/index.html" class="post-tag">-Swift</a><a href="/tag/Testing/index.html" class="post-tag">-Testing</a><a href="/tag/XCTest/index.html" class="post-tag">-XCTest</a></p><div class="post"><p>In the <a href="https://mokacoding.com/blog/testing-callbacks-in-swift-with-xctest/">previous post</a>
+of the <strong>Practical Testing in Swift</strong> series we saw how to test asynchronous
+code that calls a callback using XCTest.</p>
+<p>Calling callbacks is not the only pattern available to perform asynchronous
+operations, <a href="https://en.wikipedia.org/wiki/Delegation_pattern">delegation</a> is
+an option as well. In fact, Cocoa and Cocoa Touch use the delegate pattern <strong>a
+lot</strong>.</p>
+<p>Let&#39;s see how to write unit tests for types using delegates.</p>
+<h3 id="testing-delegate-method-call">Testing Delegate Method Call</h3>
+<p>Probably the most interesting, and useful, kind of delegate tests are the ones
+that verify that an object calls its delegate as a result of an asynchronous
+operation.</p>
+<p>The object and its delegate protocol usually look something like this:</p>
+<pre><code class="hljs swift"><span class="hljs-class"><span class="hljs-keyword">protocol</span> <span class="hljs-title">Delegate</span>: <span class="hljs-title">class</span> </span>{
+
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">somethingWithDelegate</span>(<span class="hljs-params">something</span>: <span class="hljs-type">SomethingWithDelegate</span>, <span class="hljs-params">didAsyncStuffWithResult</span> <span class="hljs-params">result</span>: <span class="hljs-type">Bool</span>)</span>
+}
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SomethingWithDelegate</span> </span>{
+  <span class="hljs-keyword">weak</span> <span class="hljs-keyword">var</span> delegate: <span class="hljs-type">Delegate</span>?
+
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">doAsyncStuff</span>()</span> {
+        <span class="hljs-comment">// does async operation, and when operation is completed...</span>
+        <span class="hljs-keyword">self</span>.delegate<span class="hljs-operator">?</span>.somethingWithDelegate(<span class="hljs-keyword">self</span>, didAsyncStuffWithResult: <span class="hljs-literal">true</span>)
+  }
+}</code></pre>
+<p>To test this behaviour we will need to combine the <code>XCTestExpectation</code> API we
+saw <a href="https://mokacoding.com/blog/testing-callbacks-in-swift-with-xctest/">in the previous post</a> with a test pattern called <strong>Spy</strong>.</p>
+<p>This pattern is defined as:</p>
+<blockquote>
+<p>Use a Test Double to capture the indirect output calls made to another component by the system
+under test (SUT) for later verification by the test. <a href="http://xunitpatterns.com/Test%20Spy.html">Source</a></p>
+</blockquote>
+<p>In our case we will apply the pattern by defining and instantiating an object
+conforming to <code>Delegate</code> for the sole purpose of our test. When implementing
+the delegate the spy will have a flag we can inspect to verify whether the
+object that was suppose to call its delegate actually did so.</p>
+<p>Note that this kind of usage is not 100% in line with the definition, as we are
+not really making a double of an existing class. I still feel that the Spy name
+is still appropriate though, because of the capturing behaviour.</p>
+<p>The implementation is pretty straightforward:</p>
+<pre><code class="hljs swift"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SpyDelegate</span>: <span class="hljs-title">Delegate</span> </span>{
+
+  <span class="hljs-comment">// Setting .None is unnecessary, but helps with clarity imho</span>
+  <span class="hljs-keyword">var</span> somethingWithDelegateAsyncResult: <span class="hljs-type">Bool</span>? <span class="hljs-operator">=</span> .<span class="hljs-type">None</span>
+
+  <span class="hljs-comment">// Async test code needs to fulfill the XCTestExpecation used for the test</span>
+    <span class="hljs-comment">// when all the async operations have been completed. For this reason we need</span>
+    <span class="hljs-comment">// to store a reference to the expectation</span>
+  <span class="hljs-keyword">var</span> asyncExpectation: <span class="hljs-type">XCTestExpectation</span>?
+
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">somethingWithDelegate</span>(<span class="hljs-params">something</span>: <span class="hljs-type">SomethingWithDelegate</span>, <span class="hljs-params">didAsyncStuffWithResult</span> <span class="hljs-params">result</span>: <span class="hljs-type">Bool</span>)</span> {
+    <span class="hljs-keyword">guard</span> <span class="hljs-keyword">let</span> expectation <span class="hljs-operator">=</span> asyncExpectation <span class="hljs-keyword">else</span> {
+      <span class="hljs-type">XCTFail</span>(<span class="hljs-string">&quot;SpyDelegate was not setup correctly. Missing XCTExpectation reference&quot;</span>)
+      <span class="hljs-keyword">return</span>
+    }
+
+    somethingWithDelegateAsyncResult <span class="hljs-operator">=</span> result
+    expectation.fulfill()
+  }
+}</code></pre>
+<p>The actual test will simply need to instantiate and configure a <code>SpyDelegate</code>
+and exercise the method under test <a href="https://mokacoding.com/blog/testing-callbacks-in-swift-with-xctest/">in an asynchronous way</a>.</p>
+<pre><code class="hljs swift"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DelegateTestExample</span>: <span class="hljs-title">XCTestCase</span> </span>{
+
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">testDelegateMethodIsCalledAsync</span>()</span> {
+    <span class="hljs-keyword">let</span> something <span class="hljs-operator">=</span> <span class="hljs-type">SomethingWithDelegate</span>()
+    <span class="hljs-keyword">let</span> spyDelegate <span class="hljs-operator">=</span> <span class="hljs-type">SpyDelegate</span>()
+    something.delegate <span class="hljs-operator">=</span> spyDelegate
+
+    <span class="hljs-keyword">let</span> expectation <span class="hljs-operator">=</span> expectationWithDescription(<span class="hljs-string">&quot;SomethingWithDelegate calls the delegate as the result of an async method completion&quot;</span>)
+    spyDelegate.asyncExpectation <span class="hljs-operator">=</span> expectation
+
+    something.doAsyncStuff()
+
+    waitForExpectationsWithTimeout(<span class="hljs-number">1</span>) { error <span class="hljs-keyword">in</span>
+      <span class="hljs-keyword">if</span> <span class="hljs-keyword">let</span> error <span class="hljs-operator">=</span> error {
+        <span class="hljs-type">XCTFail</span>(<span class="hljs-string">&quot;waitForExpectationsWithTimeout errored: <span class="hljs-subst">\(error)</span>&quot;</span>)
+      }
+
+      <span class="hljs-keyword">guard</span> <span class="hljs-keyword">let</span> result <span class="hljs-operator">=</span> spyDelegate.somethingWithDelegateAsyncResult <span class="hljs-keyword">else</span> {
+        <span class="hljs-type">XCTFail</span>(<span class="hljs-string">&quot;Expected delegate to be called&quot;</span>)
+        <span class="hljs-keyword">return</span>
+      }
+
+      <span class="hljs-type">XCTAssertTrue</span>(result)
+    }
+  }
+}</code></pre>
+<p>That&#39;s it. The amount of setup code that we need for this test is higher than
+for testing async code executing a callback, but they are conceptually identical.</p>
+<h3 id="other-delegate-tests">Other Delegate Tests</h3>
+<p>The same approach can be used to test that a class with a delegate properly sets
+the value of a property or calls a synchronous method on it.</p>
+<pre><code class="hljs swift"><span class="hljs-class"><span class="hljs-keyword">protocol</span> <span class="hljs-title">Delegate</span>: <span class="hljs-title">class</span> </span>{
+    <span class="hljs-keyword">var</span> property: <span class="hljs-type">Int</span>? { <span class="hljs-keyword">get</span> <span class="hljs-keyword">set</span> }
+}
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DelegateTestExample</span>: <span class="hljs-title">XCTestCase</span> </span>{
+
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">testDelegatePropertySet</span>()</span> {
+        <span class="hljs-keyword">let</span> something <span class="hljs-operator">=</span> <span class="hljs-type">SomethingWithDelegate</span>()
+        <span class="hljs-keyword">let</span> spyDelegate <span class="hljs-operator">=</span> <span class="hljs-type">SpyDelegate</span>()
+        something.delegate <span class="hljs-operator">=</span> spyDelegate
+
+        something.methodResultingInDelegatePropertySet()
+
+        <span class="hljs-keyword">guard</span> <span class="hljs-keyword">let</span> propertyValue <span class="hljs-operator">=</span> spyDelegate.property <span class="hljs-keyword">else</span> {
+            <span class="hljs-type">XCTFail</span>(<span class="hljs-string">&quot;Expected delegate to be called&quot;</span>)
+            <span class="hljs-keyword">return</span>
+        }
+
+        <span class="hljs-type">XCTAssertEqual</span>(propertyValue, <span class="hljs-number">42</span>)
+    }
+}</code></pre>
+<p>I&#39;ll let writing a test for a synchronous method call up to you.</p>
+<hr>
+<p>With Swift and functional programming becoming more popular our applications
+and libraries tend to rely on callbacks rather than delegation more and more.
+Nevertheless this pattern is very useful and battle tested, and is important to
+know how to write unit tests for code using it.</p>
+<p>Get in touch with me on Twitter <a href="http://twitter.com/mokagio">@mokagio</a> or leave
+a comment below if you have questions, need help setting up your delegate
+tests, or have experience to share.</p>
+<p>Stay tuned for the next article in the series in which we will see how to use
+<a href="https://github.com/Quick/Quick">Quick</a> and
+<a href="https://github.com/Quick/Nimble">Nimble</a> to write asynchronous tests.
+<a href="/#subscribe">Subscribe to the mailing list</a> to avoid missing out and receive
+links to interesting articles on testing, automation, and productivity.</p>
+</div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"><div><a href="/blog/async-testing-with-quick-and-nimble"><<&nbsp;Async Testing with Quick and Nimble</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/testing-callbacks-in-swift-with-xctest">Testing callbacks in Swift with XCTest&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin Sendfox Signup Form -->
+<div id="sendfox_embed_signup">
+  <h4 class="form_title">Want more of these posts?</h4>
+  <p class="form_caption">Subscribe to receive new posts in your inbox.</p>
+  <form method="post" action="https://sendfox.com/form/3ee4z3/10r4wg" class="sendfox-form" id="10r4wg" data-async="true" data-recaptcha="true">
+    <p><input type="email" placeholder="Email" name="email" class="email" required /></p>
+    <!-- no botz please -->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="a_password" tabindex="-1" value="" autocomplete="off" /></div>
+    <div class="clear"><button type="submit">Sign me up</button></div>
+  </form>
+  <script src="https://sendfox.com/js/form.js"></script>
+</div>
+<!-- End Sendfox Signup Form -->
+</div><div class="bottom-box"><div id="disqus_thread"></div><script>var disqus_shortname = "mokacoding";
+// Neet do add the / at the end to maintain compatibility with previous version
+// of the blog that didn't define disqus_url, letting Disqus set it automatically
+// using window.location.href
+var disqus_url = "https://mokacoding.com/blog/testing-delegates-in-swift-with-xctest/";
+
+(function() {
+  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><noscript>Please enable JavaScript to view the<a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></div></div></div><div class="row-12 footer"><div class="col-12"><h3><a href="/">mokacoding</a></h3></div><div id="copy" class="col-9"><p>Hi I&#39;m <a href="https://gio.codes">Gio</a> I write here semi-regularly on software testing and TDD, productivity, and iOS development.</p>
+<p><a href="mailto:gio+blog@mokacoding.com">Get in touch</a> if you&#39;re interested in working together.</p>
+</div><div id="links" class="col-3"><p><i class="fa fa-twitter"></i>&nbsp;<a href="https://twitter.com/mokagio">@mokagio</a></p><p><i class="fa fa-github"></i>&nbsp;<a href="https://github.com/mokagio">mokagio</a></p></div></div></div></body><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-43554041-1', 'auto');
+ga('send', 'pageview');
+</script><script>var toggle = function(elm){
+  var y = elm.style && elm.style.display ? elm.style.display : 'block';
+  if (y == 'block'){
+    elm.style.opacity='0';
+    setTimeout( function(){ elm.style.display = 'none'; }, 300 );
+  }
+  else {
+    elm.style.display='block';
+    setTimeout( function(){ elm.style.opacity = '1'; }, 10 );
+  }
+}
+
+document.getElementById('close').onclick = function(){
+  toggle(document.getElementById('sticky-header'));
+  toggle(document.getElementById('sticky-header-padding-hack'));
+}</script></html>

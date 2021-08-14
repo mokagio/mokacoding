@@ -1,0 +1,74 @@
+<!DOCTYPE html><html lang="en"><head><title>In-App Purchase Debugging Lessons | mokacoding</title><meta name="description" content="A couple of tips learnt the hard way on how to develop and debug In App Purchase support in an iOS app."><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"><!-- Canonical URL--><link rel="canonical" href="https://mokacoding.com/blog/in-app-purchase-debugging-lessons/"><!-- Open Graph meta tags--><meta property="og:title" content="In-App Purchase Debugging Lessons"><meta property="og:description" content="A couple of tips learnt the hard way on how to develop and debug In App Purchase support in an iOS app."><meta property="og:url" content="https://mokacoding.com/blog/in-app-purchase-debugging-lessons/"><meta property="og:type" content="article"><meta property="og:site_name" content="mokacoding"><meta property="og:image" content="https://s3.amazonaws.com/mokacoding/mokacoding_og_image.jpg"><!-- Twitter meta tags--><meta property="twitter:card" content="summary"><meta property="twitter:title" content="In-App Purchase Debugging Lessons"><meta property="twitter:site" content="@mokacoding"><meta property="twitter:creator" content="@mokagio"><!-- Stylesheets--><link href="/css/griddy.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet"><link href="/css/font-awesome.min.css" rel="stylesheet"><link href="/css/zenburn.css" rel="stylesheet"><!-- FavIcon--><!-- Thanks to https://www.favicon-generator.org/ & https://html2jade.org/--><link rel="apple-touch-icon" sizes="57x57" href="https://s3.amazonaws.com/mokacoding/apple-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="https://s3.amazonaws.com/mokacoding/apple-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="https://s3.amazonaws.com/mokacoding/apple-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="https://s3.amazonaws.com/mokacoding/apple-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="https://s3.amazonaws.com/mokacoding/apple-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="https://s3.amazonaws.com/mokacoding/apple-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="https://s3.amazonaws.com/mokacoding/apple-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="https://s3.amazonaws.com/mokacoding/apple-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" href="https://s3.amazonaws.com/mokacoding/apple-icon-180x180.png"><link rel="icon" type="image/png" sizes="192x192" href="https://s3.amazonaws.com/mokacoding/android-icon-192x192.png"><link rel="icon" type="image/png" sizes="32x32" href="https://s3.amazonaws.com/mokacoding/favicon-32x32.png"><link rel="icon" type="image/png" sizes="96x96" href="https://s3.amazonaws.com/mokacoding/favicon-96x96.png"><link rel="icon" type="image/png" sizes="16x16" href="https://s3.amazonaws.com/mokacoding/favicon-16x16.png"><link rel="manifest" href="https://s3.amazonaws.com/mokacoding/manifest.json"><meta name="msapplication-TileColor" content="#ffffff"><meta name="msapplication-TileImage" content="https://s3.amazonaws.com/mokacoding/ms-icon-144x144.png"><meta name="theme-color" content="#ffffff"><!-- SumoMe--><script src="//load.sumome.com/" data-sumo-site-id="dd80959300db03e20c8bc3dd899f1424fd764d261e6c3c41923c96482a270dba" async="async"></script></head><body><!-- Use this to render an extra header in special occasions--><div class="special-header"><div class="page"><div class="row-12"><div class="col-12"><p><!-- - Saving this for later and to avoid a `git revert`:markdown
+  [What is your biggest struggle right now with building software?](https://goo.gl/forms/lCLlJd9hqCUYoTME2)--><p><a href="https://tddinswift.com?utm_source=mokacoding-site&amp;utm_campaign=coming-soon&amp;utm_medium=sticky-header">Avilable Now: <strong>Test-Driven Development in Swift with SwiftUI and Combine</strong></a></p>
+</p></div></div></div></div><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">unit and acceptance testing, automation, productivity</div><div class="links"><a href="/archive.html">Archive</a><a href="/tags.html">Tags</a><a href="https://gio.codes">About</a><a href="#subscribe">Subscribe</a><a href="/feed.xml"><i class="fa fa-rss"></i></a></div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/in-app-purchase-debugging-lessons">In-App Purchase Debugging Lessons</a></h2><p class="post-meta"><span class="post-date">Tue Aug 26 2014&nbsp;</span><a href="/tag/iOS/index.html" class="post-tag">-iOS</a></p><div class="post"><p>Here&#39;s a couple of lessons regarding developing In-App Purchase that I learnt the hard way while working of <a href="https://itunes.apple.com/au/app/fineants-savings-tracker/id888444078?mt=8">Fineants</a>. I&#39;ll leave them here as a self memo for the next time.</p>
+<h3 id="never-ever-quit-the-app-while-the-purchase-is-in-progress">Never ever quit the app while the purchase is in progress</h3>
+<p>Let me say it again: <strong>never ever quit your app while a purchase is in progress</strong>.</p>
+<p>If you do, you&#39;ll see this alert popping up every time, regardless of what you do:</p>
+<img src="http://mokacoding.s3.amazonaws.com/2014-08-26-iap-already-purchased-hasnt-been-downloaded.png" alt="Item has already been purchased but it hasn't been downloaded error screenshot"/>
+
+<p>Picking from the <a href="https://developer.apple.com/library/ios/technotes/tn2259/_index.html#//apple_ref/doc/uid/DTS40009578-CH1-FREQUENTLY_ASKED_QUESTIONS">In-App Purchase FAQ</a>: <em>&quot;You are getting the &quot;You&#39;ve already purchased this In-App Purchase but it hasn&#39;t been downloaded.&quot; error message because you did not call <code>SKPaymentQueue</code>&#39;s <code>finishTransaction:</code> method in your application. &quot;</em></p>
+<p>Looking through the <a href="https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/StoreKitGuide/Chapters/DeliverProduct.html">In-App Purchase Programming Guide</a> we discover that not finishing a transaction is a problem, because:</p>
+<blockquote>
+<p>[...] even during testing, failing to finish the transaction can cause problems: unfinished transactions remain in the queue indefinitely, which could interfere with later testing.</p>
+</blockquote>
+<p>Which brings us back to the start: you&#39;ll keep getting the for and <em>indefinite</em> amount of time. This means you&#39;ll have to setup a new test account, or go home and try again tomorrow!</p>
+<h3 id="log-a-lot">Log a lot</h3>
+<p>To be sure that the IAP process is behaving as expected add some serious logging in the code that handles it.</p>
+<p>For sure, to debug it while implementing it breakpoints are very effective. But once you are sure that it&#39;s working and, say you&#39;re doing some QA to make sure you didn&#39;t break anything before realising an update, having logs in the console tracking how the process went is priceless.</p>
+<p>Even more important is <strong>logging the reason a transaction has failed</strong>. </p>
+<p><a href="https://developer.apple.com/library/ios/documentation/StoreKit/Reference/SKPaymentTransaction_Class/Reference/Reference.html"><code>SKPaymentTransaction</code></a> has an <a href="https://developer.apple.com/library/ios/documentation/StoreKit/Reference/SKPaymentTransaction_Class/Reference/Reference.html#//apple_ref/occ/instp/SKPaymentTransaction/error"><code>error</code></a> property which is <em>&quot;an object describing the error that occurred while processing the transaction&quot;</em>.</p>
+<h3 id="test-with-a-good-connection">Test with a good connection</h3>
+<img src="http://mokacoding.s3.amazonaws.com/2014-08-26-iap-cannot-connect-store.png" alt="Cannot connect to iTunes Store error screenshot"/>
+
+<p>Thanks to the <code>error</code> property above I once found out that the failure I&#39;d been experiencing for the past 10 minutes were due to the fact that the app wasn&#39;t able to connect to the iTunes Store because of the crappy Wi-Fi I was using.</p>
+<hr>
+<p>iOS 8 brought the possibility of testing IAP on the Simulator. I hope Apple will soon improve the IAP test accounts, giving developers the possibility to reset and remove transactions.</p>
+<p><em>Enjoy earning money withs In App Purchase</em></p>
+</div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"><div><a href="/blog/why-i-dont-work-on-friday"><<&nbsp;Why I don't work on Fridays</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/why-i-shouldnt-have-stopped-blogging-with-jekyll">Why I (shouldn't have) stopped blogging with Jekyll&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin Sendfox Signup Form -->
+<div id="sendfox_embed_signup">
+  <h4 class="form_title">Want more of these posts?</h4>
+  <p class="form_caption">Subscribe to receive new posts in your inbox.</p>
+  <form method="post" action="https://sendfox.com/form/3ee4z3/10r4wg" class="sendfox-form" id="10r4wg" data-async="true" data-recaptcha="true">
+    <p><input type="email" placeholder="Email" name="email" class="email" required /></p>
+    <!-- no botz please -->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="a_password" tabindex="-1" value="" autocomplete="off" /></div>
+    <div class="clear"><button type="submit">Sign me up</button></div>
+  </form>
+  <script src="https://sendfox.com/js/form.js"></script>
+</div>
+<!-- End Sendfox Signup Form -->
+</div><div class="bottom-box"><div id="disqus_thread"></div><script>var disqus_shortname = "mokacoding";
+// Neet do add the / at the end to maintain compatibility with previous version
+// of the blog that didn't define disqus_url, letting Disqus set it automatically
+// using window.location.href
+var disqus_url = "https://mokacoding.com/blog/in-app-purchase-debugging-lessons/";
+
+(function() {
+  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><noscript>Please enable JavaScript to view the<a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></div></div></div><div class="row-12 footer"><div class="col-12"><h3><a href="/">mokacoding</a></h3></div><div id="copy" class="col-9"><p>Hi I&#39;m <a href="https://gio.codes">Gio</a> I write here semi-regularly on software testing and TDD, productivity, and iOS development.</p>
+<p><a href="mailto:gio+blog@mokacoding.com">Get in touch</a> if you&#39;re interested in working together.</p>
+</div><div id="links" class="col-3"><p><i class="fa fa-twitter"></i>&nbsp;<a href="https://twitter.com/mokagio">@mokagio</a></p><p><i class="fa fa-github"></i>&nbsp;<a href="https://github.com/mokagio">mokagio</a></p></div></div></div></body><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-43554041-1', 'auto');
+ga('send', 'pageview');
+</script><script>var toggle = function(elm){
+  var y = elm.style && elm.style.display ? elm.style.display : 'block';
+  if (y == 'block'){
+    elm.style.opacity='0';
+    setTimeout( function(){ elm.style.display = 'none'; }, 300 );
+  }
+  else {
+    elm.style.display='block';
+    setTimeout( function(){ elm.style.opacity = '1'; }, 10 );
+  }
+}
+
+document.getElementById('close').onclick = function(){
+  toggle(document.getElementById('sticky-header'));
+  toggle(document.getElementById('sticky-header-padding-hack'));
+}</script></html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html><html lang="en"><head><title>Bringing font icons in iOS with MTFontIcon | mokacoding</title><meta name="description" content="Introducing MTFontIcon, a CocoaPod library for iOS to improve application development efficiency by using font icons."><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"><!-- Canonical URL--><link rel="canonical" href="https://mokacoding.com/blog/mtfonticon/"><!-- Open Graph meta tags--><meta property="og:title" content="Bringing font icons in iOS with MTFontIcon"><meta property="og:description" content="Introducing MTFontIcon, a CocoaPod library for iOS to improve application development efficiency by using font icons."><meta property="og:url" content="https://mokacoding.com/blog/mtfonticon/"><meta property="og:type" content="article"><meta property="og:site_name" content="mokacoding"><meta property="og:image" content="https://s3.amazonaws.com/mokacoding/mokacoding_og_image.jpg"><!-- Twitter meta tags--><meta property="twitter:card" content="summary"><meta property="twitter:title" content="Bringing font icons in iOS with MTFontIcon"><meta property="twitter:site" content="@mokacoding"><meta property="twitter:creator" content="@mokagio"><!-- Stylesheets--><link href="/css/griddy.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet"><link href="/css/font-awesome.min.css" rel="stylesheet"><link href="/css/zenburn.css" rel="stylesheet"><!-- FavIcon--><!-- Thanks to https://www.favicon-generator.org/ & https://html2jade.org/--><link rel="apple-touch-icon" sizes="57x57" href="https://s3.amazonaws.com/mokacoding/apple-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="https://s3.amazonaws.com/mokacoding/apple-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="https://s3.amazonaws.com/mokacoding/apple-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="https://s3.amazonaws.com/mokacoding/apple-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="https://s3.amazonaws.com/mokacoding/apple-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="https://s3.amazonaws.com/mokacoding/apple-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="https://s3.amazonaws.com/mokacoding/apple-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="https://s3.amazonaws.com/mokacoding/apple-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" href="https://s3.amazonaws.com/mokacoding/apple-icon-180x180.png"><link rel="icon" type="image/png" sizes="192x192" href="https://s3.amazonaws.com/mokacoding/android-icon-192x192.png"><link rel="icon" type="image/png" sizes="32x32" href="https://s3.amazonaws.com/mokacoding/favicon-32x32.png"><link rel="icon" type="image/png" sizes="96x96" href="https://s3.amazonaws.com/mokacoding/favicon-96x96.png"><link rel="icon" type="image/png" sizes="16x16" href="https://s3.amazonaws.com/mokacoding/favicon-16x16.png"><link rel="manifest" href="https://s3.amazonaws.com/mokacoding/manifest.json"><meta name="msapplication-TileColor" content="#ffffff"><meta name="msapplication-TileImage" content="https://s3.amazonaws.com/mokacoding/ms-icon-144x144.png"><meta name="theme-color" content="#ffffff"><!-- SumoMe--><script src="//load.sumome.com/" data-sumo-site-id="dd80959300db03e20c8bc3dd899f1424fd764d261e6c3c41923c96482a270dba" async="async"></script></head><body><!-- Use this to render an extra header in special occasions--><div class="special-header"><div class="page"><div class="row-12"><div class="col-12"><p><!-- - Saving this for later and to avoid a `git revert`:markdown
+  [What is your biggest struggle right now with building software?](https://goo.gl/forms/lCLlJd9hqCUYoTME2)--><p><a href="https://tddinswift.com?utm_source=mokacoding-site&amp;utm_campaign=coming-soon&amp;utm_medium=sticky-header">Avilable Now: <strong>Test-Driven Development in Swift with SwiftUI and Combine</strong></a></p>
+</p></div></div></div></div><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">unit and acceptance testing, automation, productivity</div><div class="links"><a href="/archive.html">Archive</a><a href="/tags.html">Tags</a><a href="https://gio.codes">About</a><a href="#subscribe">Subscribe</a><a href="/feed.xml"><i class="fa fa-rss"></i></a></div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/mtfonticon">Bringing font icons in iOS with MTFontIcon</a></h2><p class="post-meta"><span class="post-date">Tue Sep 17 2013&nbsp;</span><a href="/tag/iOS/index.html" class="post-tag">-iOS</a><a href="/tag/Objective-C/index.html" class="post-tag">-Objective-C</a><a href="/tag/Ruby/index.html" class="post-tag">-Ruby</a><a href="/tag/Layout/index.html" class="post-tag">-Layout</a><a href="/tag/CSS/index.html" class="post-tag">-CSS</a><a href="/tag/Open-Source/index.html" class="post-tag">-Open Source</a></p><div class="post"><p>Let me introduce you one of my latests projects, on which I worked almost a month ago, but I&#39;m both lazy and hyperactive when it comes to projects, so the blog post arrives only now...</p>
+<p>###MTFontIcon</p>
+<p><strong>MTFontIcons</strong>, available as a <a href="cocoapods.org/?q=mtfonticon">CocoaPod</a> and on <a href="https://github.com/mokagio/MTFontIcon">GitHub</a>, is a library that let&#39;s us use font-based icons in iOS application, speeding up the development and helping those poor developers that don&#39;t even know how to select the pen tool in Adobe Illustrator.</p>
+<p>###The problem</p>
+<p>Few people in our world are both great developers and skilled artist, my friend and ex-colleague <a href="https://twitter.com/Liquidimage_">Tancredi</a> is one of those. For the rest of us mere mortals finding building a well crafted app is already a big task, and we don&#39;t have time to go through the <a href="http://net.tutsplus.com/">Nettus+</a> Illustrator and Photoshop tutorials to learn how to make a nice icon set for our apps. We only speak code.</p>
+<p>It would be really nice to have a way to iterate on the attributes of our icons and images quickly and without losing quality. Changing the color from #f0f0f0 to #f0dff1, making it 2pts wider, increasing the alpha of the shadow, without opening Illustrator, or worst waiting for the designer to put the assets on Dropobox. It would be nice to code all those things.</p>
+<p>###The solution</p>
+<p>The fact is our cousins from the web world already faced this problem, and solved in a really nice way! They&#39;ve been using <a href="http://css-tricks.com/examples/IconFont/">Icon Fonts</a> for a while, and they&#39;re really happy about them.
+This technique is so powerful and popular that even the famous framework <a href="http://getbootstrap.com/">Bootstrap</a> made by the guys at Twitter is using it. And there are plenty of resources only to get ready made stets of icons, or roll out our own font uploading the SVGs.</p>
+<p>###How does it work?</p>
+<p>Then why not using the same smartness in Objective-C? The MTFontIcon idea was born from the above mentioned rebel genious of Tancredi, while working on a prototype for a new concept at <a href="http://www.memrise.com">Memrise</a>. Unfortunately the idea protoyped wasn&#39;t that good, unlike the tech behind it.</p>
+<p>The usage is simple:</p>
+<ol>
+<li>Create a font with all your icons, using web tools like <a href="http://icomoon.io/app/">IcoMoon</a>.</li>
+<li>Import the font in your app, and don&#39;t forget to updated the <code>Info.plist</code>.</li>
+<li>Define the matchings between the names you want to use for your icons and the unicode character they have in the font.</li>
+<li>Get an instance of <code>MTFontIconFactory</code> and use it to get as many <code>MTFontIconView</code>s as you want :)</li>
+</ol>
+<p>Two minutes setup, two lines of code usage, twice as fast app UI development and polishing!</p>
+<p>###Current problems and roadmap</p>
+<p>Despite the <code>1.0.0</code> tag, MTFontIcon has still a long way to go before considering itself a mature and really useful project. Here&#39;s a list of things we could improve:</p>
+<ul>
+<li>Issues with ascendant and descendants, if you ever tried to use a custom font on iOS you know what I&#39;m talking about. Otherwise read <a href="http://stackoverflow.com/questions/7535498/uibutton-custom-font-vertical-alignment">this</a> and <a href="">this</a>.</li>
+<li>The library is coupled with <a href="http://icomoon.io/app/">IcoMoon</a>, at the moment you&#39;re better use that service, because all the font tunings (see above), are made on their font. Or you can fork the library and help me out.</li>
+<li>Using CoreText would be cleaner and more performant.</li>
+<li>Why not having a ruby script or gem to automate all the boring part of the process?</li>
+</ul>
+<hr/>
+
+<p>That&#39;s all folks. Working on MTFontIcon has been fun and stimulating. The library, and its authors, have still a long way to go, but I hope whoever will read the code will see the intention of making a top quality, well crafted, 2013 styled, piece of code.</p>
+<p>If you&#39;re intereseted in font icons or in using MTFontIcon check out these resources: <a href="http://fortawesome.github.io/Font-Awesome/">Font Awesome</a>, 361 (as of version 3.2.1) awesome icons for you, <a href="http://weloveiconfonts.com/">We Love Icon Fonts</a>, a free and open source icon fonts hosting service, <a href="http://fontello.com/">Fontello</a>, an alternative to IcoMoon.</p>
+</div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"><div><a href="/blog/setup-a-dev-machine"><<&nbsp;Setting a Mac for Development</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/xcode5-crash-on-submission">A workaround to Xcode 5 GM crash on app submission&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin Sendfox Signup Form -->
+<div id="sendfox_embed_signup">
+  <h4 class="form_title">Want more of these posts?</h4>
+  <p class="form_caption">Subscribe to receive new posts in your inbox.</p>
+  <form method="post" action="https://sendfox.com/form/3ee4z3/10r4wg" class="sendfox-form" id="10r4wg" data-async="true" data-recaptcha="true">
+    <p><input type="email" placeholder="Email" name="email" class="email" required /></p>
+    <!-- no botz please -->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="a_password" tabindex="-1" value="" autocomplete="off" /></div>
+    <div class="clear"><button type="submit">Sign me up</button></div>
+  </form>
+  <script src="https://sendfox.com/js/form.js"></script>
+</div>
+<!-- End Sendfox Signup Form -->
+</div><div class="bottom-box"><div id="disqus_thread"></div><script>var disqus_shortname = "mokacoding";
+// Neet do add the / at the end to maintain compatibility with previous version
+// of the blog that didn't define disqus_url, letting Disqus set it automatically
+// using window.location.href
+var disqus_url = "https://mokacoding.com/blog/mtfonticon/";
+
+(function() {
+  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><noscript>Please enable JavaScript to view the<a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></div></div></div><div class="row-12 footer"><div class="col-12"><h3><a href="/">mokacoding</a></h3></div><div id="copy" class="col-9"><p>Hi I&#39;m <a href="https://gio.codes">Gio</a> I write here semi-regularly on software testing and TDD, productivity, and iOS development.</p>
+<p><a href="mailto:gio+blog@mokacoding.com">Get in touch</a> if you&#39;re interested in working together.</p>
+</div><div id="links" class="col-3"><p><i class="fa fa-twitter"></i>&nbsp;<a href="https://twitter.com/mokagio">@mokagio</a></p><p><i class="fa fa-github"></i>&nbsp;<a href="https://github.com/mokagio">mokagio</a></p></div></div></div></body><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-43554041-1', 'auto');
+ga('send', 'pageview');
+</script><script>var toggle = function(elm){
+  var y = elm.style && elm.style.display ? elm.style.display : 'block';
+  if (y == 'block'){
+    elm.style.opacity='0';
+    setTimeout( function(){ elm.style.display = 'none'; }, 300 );
+  }
+  else {
+    elm.style.display='block';
+    setTimeout( function(){ elm.style.opacity = '1'; }, 10 );
+  }
+}
+
+document.getElementById('close').onclick = function(){
+  toggle(document.getElementById('sticky-header'));
+  toggle(document.getElementById('sticky-header-padding-hack'));
+}</script></html>

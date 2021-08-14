@@ -1,0 +1,80 @@
+<!DOCTYPE html><html lang="en"><head><title>How to write code faster using snippets | mokacoding</title><meta name="description" content="Leveraging &quot;snippets&quot; is a way to get faster at writing code and free mental resources for problem solving. Most IDEs and text editor offer this feature, where you can write code scaffolding with a keyboard shortcut."><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"><!-- Canonical URL--><link rel="canonical" href="https://mokacoding.com/blog/how-to-write-code-faster-using-snippets/"><!-- Open Graph meta tags--><meta property="og:title" content="How to write code faster using snippets"><meta property="og:description" content="Leveraging &quot;snippets&quot; is a way to get faster at writing code and free mental resources for problem solving. Most IDEs and text editor offer this feature, where you can write code scaffolding with a keyboard shortcut."><meta property="og:url" content="https://mokacoding.com/blog/how-to-write-code-faster-using-snippets/"><meta property="og:type" content="article"><meta property="og:site_name" content="mokacoding"><meta property="og:image" content="https://s3.amazonaws.com/mokacoding/2018-10-16-xcode-10-snippets-og-image.png"><!-- Twitter meta tags--><meta property="twitter:card" content="summary"><meta property="twitter:title" content="How to write code faster using snippets"><meta property="twitter:site" content="@mokacoding"><meta property="twitter:creator" content="@mokagio"><!-- Stylesheets--><link href="/css/griddy.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet"><link href="/css/font-awesome.min.css" rel="stylesheet"><link href="/css/zenburn.css" rel="stylesheet"><!-- FavIcon--><!-- Thanks to https://www.favicon-generator.org/ & https://html2jade.org/--><link rel="apple-touch-icon" sizes="57x57" href="https://s3.amazonaws.com/mokacoding/apple-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="https://s3.amazonaws.com/mokacoding/apple-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="https://s3.amazonaws.com/mokacoding/apple-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="https://s3.amazonaws.com/mokacoding/apple-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="https://s3.amazonaws.com/mokacoding/apple-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="https://s3.amazonaws.com/mokacoding/apple-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="https://s3.amazonaws.com/mokacoding/apple-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="https://s3.amazonaws.com/mokacoding/apple-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" href="https://s3.amazonaws.com/mokacoding/apple-icon-180x180.png"><link rel="icon" type="image/png" sizes="192x192" href="https://s3.amazonaws.com/mokacoding/android-icon-192x192.png"><link rel="icon" type="image/png" sizes="32x32" href="https://s3.amazonaws.com/mokacoding/favicon-32x32.png"><link rel="icon" type="image/png" sizes="96x96" href="https://s3.amazonaws.com/mokacoding/favicon-96x96.png"><link rel="icon" type="image/png" sizes="16x16" href="https://s3.amazonaws.com/mokacoding/favicon-16x16.png"><link rel="manifest" href="https://s3.amazonaws.com/mokacoding/manifest.json"><meta name="msapplication-TileColor" content="#ffffff"><meta name="msapplication-TileImage" content="https://s3.amazonaws.com/mokacoding/ms-icon-144x144.png"><meta name="theme-color" content="#ffffff"><!-- SumoMe--><script src="//load.sumome.com/" data-sumo-site-id="dd80959300db03e20c8bc3dd899f1424fd764d261e6c3c41923c96482a270dba" async="async"></script></head><body><!-- Use this to render an extra header in special occasions--><div class="special-header"><div class="page"><div class="row-12"><div class="col-12"><p><!-- - Saving this for later and to avoid a `git revert`:markdown
+  [What is your biggest struggle right now with building software?](https://goo.gl/forms/lCLlJd9hqCUYoTME2)--><p><a href="https://tddinswift.com?utm_source=mokacoding-site&amp;utm_campaign=coming-soon&amp;utm_medium=sticky-header">Avilable Now: <strong>Test-Driven Development in Swift with SwiftUI and Combine</strong></a></p>
+</p></div></div></div></div><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">unit and acceptance testing, automation, productivity</div><div class="links"><a href="/archive.html">Archive</a><a href="/tags.html">Tags</a><a href="https://gio.codes">About</a><a href="#subscribe">Subscribe</a><a href="/feed.xml"><i class="fa fa-rss"></i></a></div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/how-to-write-code-faster-using-snippets">How to write code faster using snippets</a></h2><p class="post-meta"><span class="post-date">Tue Oct 16 2018&nbsp;</span><a href="/tag/Productivity/index.html" class="post-tag">-Productivity</a><a href="/tag/Xcode/index.html" class="post-tag">-Xcode</a><a href="/tag/Automation/index.html" class="post-tag">-Automation</a></p><div class="post"><p>Earlier this year I was humbled by the change of writing guest post 2 challenges in <a href="https://twitter.com/r00k">Ben Orenstein</a>&#39;s <a href="https://www.codequalitychallenge.com/">Code Quality Challenge</a>. One lesson was on the value of using <strong>snippets</strong>.</p>
+<p>As software developers we are paid to solve problems, writing code is the mean to which we do it. If we can spend less time in the act of <em>writing</em> and more in the act of <em>solving</em> we&#39;ll deliver more value to our users, clients, or employer.</p>
+<p>Snippets are a way to have your text editor or IDE do the typing for you. Using a predefined key phrase you can print the scaffold for functions or entire classes, then fill it up with your content.</p>
+<p>Here&#39;s how snippets work in Xcode:</p>
+<p><img src="https://s3.amazonaws.com/mokacoding/2018-10-16-xcode-10-snippets.gif" alt="Animated GIF showing snippets in action in Xcode 10.0"></p>
+<p>And here&#39;s how the <a href="https://github.com/sirver/UltiSnips">UtilSnip Vim plugin</a> provides snippets:</p>
+<p><img src="https://camo.githubusercontent.com/296aecf30e1607233814196db6bd3f5f47e70c73/68747470733a2f2f7261772e6769746875622e636f6d2f5369725665722f756c7469736e6970732f6d61737465722f646f632f64656d6f2e676966" alt="Example of how the UtilSnip plugin provides snippets for Vim"></p>
+<p>Like <a href="https://mokacoding.com/blog/invest-in-your-terminal-to-become-a-better-developer/">investing in your terminal setup</a> configuring things such as aliases and scripts, having a wide array of snippets at your disposals is a great way to improve your productivity as a software developer.</p>
+<p>A single snippet might not save you much typing, but as you add more and more their contribution becomes relevant. All these micro optimization <strong>compound over time</strong>.</p>
+<p>Snippets, aliases, automation, touch typing, these are all productivity tactics aimed at <strong>removing friction</strong> between your mind thinking something and materializing it.</p>
+<p>Once you become aware of the value of snippets you&#39;ll start seeing many occasions to create them.</p>
+<ul>
+<li>Language constructs like <code>if ... else ...</code> or <code>guard let ... else ...</code></li>
+<li>Mundane setup code specific to a framework or library</li>
+<li>Test scaffolds</li>
+</ul>
+<p>Today when writing code keep an eye out for things you find yourself writing over and over again. Try make a snippet for them and see the difference.</p>
+<p>This <a href="https://nshipster.com/xcode-snippets/">article from NSHipster</a> shows how to use snippets in Xcode. If alongside Xcode you also use a text editor here&#39;s how to configure snippets in:</p>
+<ul>
+<li><a href="https://flight-manual.atom.io/using-atom/sections/snippets/">Atom</a></li>
+<li><a href="http://docs.sublimetext.info/en/latest/extensibility/snippets.html">Sublime Text</a></li>
+<li><a href="https://github.com/sirver/UltiSnips">Vim (via UtilSnip)</a></li>
+<li><a href="https://code.visualstudio.com/docs/editor/userdefinedsnippets">VSCode</a></li>
+</ul>
+<p>If your development environment doesn&#39;t support snippets you can use a third party tool. On macOS I&#39;d recommend <a href="https://www.alfredapp.com/">Alfred</a> or <a href="https://kapeli.com/dash">Dash</a>.</p>
+<p>Online you can find snippets library, like <a href="https://github.com/burczyk/XcodeSwiftSnippets">this one for Swift</a>. They are great to take inspiration from, but I would recommend you configure your own snippets one at a time.</p>
+<p>By working on setting up your own development environment you&#39;ll master it faster and really customize it to your very own needs, something copying someone else&#39;s configuration will never do.</p>
+<p>Try spending a few days configuring and using your snippets and you&#39;ll see what a difference they make by removing the tedious task of writing scaffolding code.</p>
+<p>If this post helped you getting started with snippets I&#39;d love to hear about your experience. Or maybe you already use snippets? Then, what are your favourites? What do you use to store them?</p>
+<p>Get in touch on Twitter at <a href="https://twitter.com/mokagio">@mokagio</a> or leave a comment below.</p>
+</div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"><div><a href="/blog/where-to-start-to-become-more-productive"><<&nbsp;Where to start to become more productive</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/streamlining-tests-setup-with-fixtures-in-swift">Streamlining tests setup with fixtures in Swift&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin Sendfox Signup Form -->
+<div id="sendfox_embed_signup">
+  <h4 class="form_title">Want more of these posts?</h4>
+  <p class="form_caption">Subscribe to receive new posts in your inbox.</p>
+  <form method="post" action="https://sendfox.com/form/3ee4z3/10r4wg" class="sendfox-form" id="10r4wg" data-async="true" data-recaptcha="true">
+    <p><input type="email" placeholder="Email" name="email" class="email" required /></p>
+    <!-- no botz please -->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="a_password" tabindex="-1" value="" autocomplete="off" /></div>
+    <div class="clear"><button type="submit">Sign me up</button></div>
+  </form>
+  <script src="https://sendfox.com/js/form.js"></script>
+</div>
+<!-- End Sendfox Signup Form -->
+</div><div class="bottom-box"><div id="disqus_thread"></div><script>var disqus_shortname = "mokacoding";
+// Neet do add the / at the end to maintain compatibility with previous version
+// of the blog that didn't define disqus_url, letting Disqus set it automatically
+// using window.location.href
+var disqus_url = "https://mokacoding.com/blog/how-to-write-code-faster-using-snippets/";
+
+(function() {
+  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><noscript>Please enable JavaScript to view the<a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></div></div></div><div class="row-12 footer"><div class="col-12"><h3><a href="/">mokacoding</a></h3></div><div id="copy" class="col-9"><p>Hi I&#39;m <a href="https://gio.codes">Gio</a> I write here semi-regularly on software testing and TDD, productivity, and iOS development.</p>
+<p><a href="mailto:gio+blog@mokacoding.com">Get in touch</a> if you&#39;re interested in working together.</p>
+</div><div id="links" class="col-3"><p><i class="fa fa-twitter"></i>&nbsp;<a href="https://twitter.com/mokagio">@mokagio</a></p><p><i class="fa fa-github"></i>&nbsp;<a href="https://github.com/mokagio">mokagio</a></p></div></div></div></body><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-43554041-1', 'auto');
+ga('send', 'pageview');
+</script><script>var toggle = function(elm){
+  var y = elm.style && elm.style.display ? elm.style.display : 'block';
+  if (y == 'block'){
+    elm.style.opacity='0';
+    setTimeout( function(){ elm.style.display = 'none'; }, 300 );
+  }
+  else {
+    elm.style.display='block';
+    setTimeout( function(){ elm.style.opacity = '1'; }, 10 );
+  }
+}
+
+document.getElementById('close').onclick = function(){
+  toggle(document.getElementById('sticky-header'));
+  toggle(document.getElementById('sticky-header-padding-hack'));
+}</script></html>

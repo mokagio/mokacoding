@@ -1,0 +1,72 @@
+<!DOCTYPE html><html lang="en"><head><title>Injecting environment variables from a file with xargs | mokacoding</title><meta name="description" content="How to provide environment variables stored in a .env file as an input for a command execution without having to export then, with a deep look at the shell commands used."><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"><!-- Canonical URL--><link rel="canonical" href="https://mokacoding.com/blog/env-xargs/"><!-- Open Graph meta tags--><meta property="og:title" content="Injecting environment variables from a file with xargs"><meta property="og:description" content="How to provide environment variables stored in a .env file as an input for a command execution without having to export then, with a deep look at the shell commands used."><meta property="og:url" content="https://mokacoding.com/blog/env-xargs/"><meta property="og:type" content="article"><meta property="og:site_name" content="mokacoding"><meta property="og:image" content="https://s3.amazonaws.com/mokacoding/mokacoding_og_image.jpg"><!-- Twitter meta tags--><meta property="twitter:card" content="summary"><meta property="twitter:title" content="Injecting environment variables from a file with xargs"><meta property="twitter:site" content="@mokacoding"><meta property="twitter:creator" content="@mokagio"><!-- Stylesheets--><link href="/css/griddy.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet"><link href="/css/font-awesome.min.css" rel="stylesheet"><link href="/css/zenburn.css" rel="stylesheet"><!-- FavIcon--><!-- Thanks to https://www.favicon-generator.org/ & https://html2jade.org/--><link rel="apple-touch-icon" sizes="57x57" href="https://s3.amazonaws.com/mokacoding/apple-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="https://s3.amazonaws.com/mokacoding/apple-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="https://s3.amazonaws.com/mokacoding/apple-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="https://s3.amazonaws.com/mokacoding/apple-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="https://s3.amazonaws.com/mokacoding/apple-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="https://s3.amazonaws.com/mokacoding/apple-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="https://s3.amazonaws.com/mokacoding/apple-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="https://s3.amazonaws.com/mokacoding/apple-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" href="https://s3.amazonaws.com/mokacoding/apple-icon-180x180.png"><link rel="icon" type="image/png" sizes="192x192" href="https://s3.amazonaws.com/mokacoding/android-icon-192x192.png"><link rel="icon" type="image/png" sizes="32x32" href="https://s3.amazonaws.com/mokacoding/favicon-32x32.png"><link rel="icon" type="image/png" sizes="96x96" href="https://s3.amazonaws.com/mokacoding/favicon-96x96.png"><link rel="icon" type="image/png" sizes="16x16" href="https://s3.amazonaws.com/mokacoding/favicon-16x16.png"><link rel="manifest" href="https://s3.amazonaws.com/mokacoding/manifest.json"><meta name="msapplication-TileColor" content="#ffffff"><meta name="msapplication-TileImage" content="https://s3.amazonaws.com/mokacoding/ms-icon-144x144.png"><meta name="theme-color" content="#ffffff"><!-- SumoMe--><script src="//load.sumome.com/" data-sumo-site-id="dd80959300db03e20c8bc3dd899f1424fd764d261e6c3c41923c96482a270dba" async="async"></script></head><body><!-- Use this to render an extra header in special occasions--><div class="special-header"><div class="page"><div class="row-12"><div class="col-12"><p><!-- - Saving this for later and to avoid a `git revert`:markdown
+  [What is your biggest struggle right now with building software?](https://goo.gl/forms/lCLlJd9hqCUYoTME2)--><p><a href="https://tddinswift.com?utm_source=mokacoding-site&amp;utm_campaign=coming-soon&amp;utm_medium=sticky-header">Avilable Now: <strong>Test-Driven Development in Swift with SwiftUI and Combine</strong></a></p>
+</p></div></div></div></div><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">unit and acceptance testing, automation, productivity</div><div class="links"><a href="/archive.html">Archive</a><a href="/tags.html">Tags</a><a href="https://gio.codes">About</a><a href="#subscribe">Subscribe</a><a href="/feed.xml"><i class="fa fa-rss"></i></a></div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/env-xargs">Injecting environment variables from a file with xargs</a></h2><p class="post-meta"><span class="post-date">Fri Nov 13 2015&nbsp;</span><a href="/tag/Espresso/index.html" class="post-tag">-Espresso</a><a href="/tag/Shell/index.html" class="post-tag">-Shell</a><a href="/tag/Tooling/index.html" class="post-tag">-Tooling</a></p><div class="post"><h2 id="tldr">TL;DR</h2>
+<p>You can use</p>
+<pre><code class="hljs bash">env $(cat .env | grep -v <span class="hljs-string">&quot;#&quot;</span> | xargs) your_command_expecting_env_vars</code></pre>
+<p>to run <code>your_command_expecting_env_vars</code> providing it the content of <code>.env</code> like you would do when running <code>FOO=1 BAR=2 your_command_expecting_env_vars</code>.</p>
+<h2 id="tswr">TS;WR</h2>
+<p>Many command lines tool can read, or even expect, values set in environment variables.</p>
+<p>It is a common practice to place environment variables contextual to a project in a <code>.env</code> file in the project root, and there are tools like <a href="https://github.com/bkeepers/dotenv"><code>dotenv</code></a> that allow you to load those variables into your application.</p>
+<p>Sometimes thought you just need to set a handful of values and cannot be bothered typing <code>FOO=1 BAR=2 BAZ=3 bundle exec foobarbaz</code>. Or maybe your cli tool expects a token that you don&#39;t want to store in the repo, but at the same time cannot type every time.</p>
+<p>In such cases it might be useful to place those environment variables in a <code>.env</code> file, but how to load them?</p>
+<p>This is one possible way:</p>
+<pre><code>env <span class="hljs-constructor">$(<span class="hljs-params">cat</span> .<span class="hljs-params">env</span> | <span class="hljs-params">grep</span> -<span class="hljs-params">v</span> <span class="hljs-string">&quot;#&quot;</span> | <span class="hljs-params">xargs</span>)</span> your_command_expecting_env_var</code></pre><p>Let&#39;s disassemble this long command, shall we?</p>
+<p><code>$(...)</code> will be evaluate it&#39;s content before the command is interpreted and run, and replaced with the result, so that what actually is run will be <code>env result your_command_expecting_env_var</code>.</p>
+<p><code>cat .env</code> will put the content of the <code>.env</code> file into the standard output. This would normally be the screen, but in this case there is a pipe operator.</p>
+<p><code>grep -v &quot;#&quot;</code> is an inverted match grep. By default <code>grep</code> selects lines containing the given pattern, the string <code>#</code> in our case, from its standard input. With the <code>-v</code>, or <code>--invert-match</code> it will select the lines not matching the given string.</p>
+<p>So <code>cat .env | grep -v &quot;#&quot;</code> results in the content of <code>.env</code> apart from comment lines sent to the standard output, where <code>xargs</code> is there to wait for it. <code>xargs</code> builds an argument list out of its standard input.</p>
+<p>This argument list is fed to <code>env</code>. The synopsis of this command is:</p>
+<pre><code class="hljs bash">env [-i] [name=value ...] [utility [argument ...]]</code></pre>
+<p>What <code>env</code> does is executing <code>utility</code> after modifying the environment as specified by the <code>name=value ...</code> list. And that is exactly the end result that we are looking for 😎</p>
+<p>A nice thing to notice is that <code>env</code> doesn&#39;t export the <code>name=value</code> inputs, so that the environment is not polluted.</p>
+<p>Hope you found this article useful, <a href="http://stackoverflow.com/questions/19331497/set-environment-variables-from-file/#answer-20909045">this</a> is the SO answer that inspired and helped me with this approach.</p>
+<p>If you need help get in touch with me on Twitter <a href="https://twitter.com/mokagio">@mokagio</a>, or leave a comment below. And don&#39;t forget to hit the share button 😉.</p>
+<p><em>Happy coding, and leave the codebase better than you found it.</em></p>
+</div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"><div><a href="/blog/install-xcode-plugin-with-fastlane"><<&nbsp;Installing Xcode plugins from the terminal with Fastlane</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/travis-ci-ios-testing">How to configure Travis CI for iOS testing&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin Sendfox Signup Form -->
+<div id="sendfox_embed_signup">
+  <h4 class="form_title">Want more of these posts?</h4>
+  <p class="form_caption">Subscribe to receive new posts in your inbox.</p>
+  <form method="post" action="https://sendfox.com/form/3ee4z3/10r4wg" class="sendfox-form" id="10r4wg" data-async="true" data-recaptcha="true">
+    <p><input type="email" placeholder="Email" name="email" class="email" required /></p>
+    <!-- no botz please -->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="a_password" tabindex="-1" value="" autocomplete="off" /></div>
+    <div class="clear"><button type="submit">Sign me up</button></div>
+  </form>
+  <script src="https://sendfox.com/js/form.js"></script>
+</div>
+<!-- End Sendfox Signup Form -->
+</div><div class="bottom-box"><div id="disqus_thread"></div><script>var disqus_shortname = "mokacoding";
+// Neet do add the / at the end to maintain compatibility with previous version
+// of the blog that didn't define disqus_url, letting Disqus set it automatically
+// using window.location.href
+var disqus_url = "https://mokacoding.com/blog/env-xargs/";
+
+(function() {
+  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><noscript>Please enable JavaScript to view the<a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></div></div></div><div class="row-12 footer"><div class="col-12"><h3><a href="/">mokacoding</a></h3></div><div id="copy" class="col-9"><p>Hi I&#39;m <a href="https://gio.codes">Gio</a> I write here semi-regularly on software testing and TDD, productivity, and iOS development.</p>
+<p><a href="mailto:gio+blog@mokacoding.com">Get in touch</a> if you&#39;re interested in working together.</p>
+</div><div id="links" class="col-3"><p><i class="fa fa-twitter"></i>&nbsp;<a href="https://twitter.com/mokagio">@mokagio</a></p><p><i class="fa fa-github"></i>&nbsp;<a href="https://github.com/mokagio">mokagio</a></p></div></div></div></body><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-43554041-1', 'auto');
+ga('send', 'pageview');
+</script><script>var toggle = function(elm){
+  var y = elm.style && elm.style.display ? elm.style.display : 'block';
+  if (y == 'block'){
+    elm.style.opacity='0';
+    setTimeout( function(){ elm.style.display = 'none'; }, 300 );
+  }
+  else {
+    elm.style.display='block';
+    setTimeout( function(){ elm.style.opacity = '1'; }, 10 );
+  }
+}
+
+document.getElementById('close').onclick = function(){
+  toggle(document.getElementById('sticky-header'));
+  toggle(document.getElementById('sticky-header-padding-hack'));
+}</script></html>

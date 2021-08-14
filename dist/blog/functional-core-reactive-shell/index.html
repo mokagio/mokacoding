@@ -1,0 +1,307 @@
+<!DOCTYPE html><html lang="en"><head><title>Functional Core Reactive Shell | mokacoding</title><meta name="description" content="This is a blogpost version of the content of my talk &quot;Functional Core, Reactive Shell&quot;"><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"><!-- Canonical URL--><link rel="canonical" href="https://mokacoding.com/blog/functional-core-reactive-shell/"><!-- Open Graph meta tags--><meta property="og:title" content="Functional Core Reactive Shell"><meta property="og:description" content="This is a blogpost version of the content of my talk &quot;Functional Core, Reactive Shell&quot;"><meta property="og:url" content="https://mokacoding.com/blog/functional-core-reactive-shell/"><meta property="og:type" content="article"><meta property="og:site_name" content="mokacoding"><meta property="og:image" content="https://s3.amazonaws.com/mokacoding/mokacoding_og_image.jpg"><!-- Twitter meta tags--><meta property="twitter:card" content="summary"><meta property="twitter:title" content="Functional Core Reactive Shell"><meta property="twitter:site" content="@mokacoding"><meta property="twitter:creator" content="@mokagio"><!-- Stylesheets--><link href="/css/griddy.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet"><link href="/css/font-awesome.min.css" rel="stylesheet"><link href="/css/zenburn.css" rel="stylesheet"><!-- FavIcon--><!-- Thanks to https://www.favicon-generator.org/ & https://html2jade.org/--><link rel="apple-touch-icon" sizes="57x57" href="https://s3.amazonaws.com/mokacoding/apple-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="https://s3.amazonaws.com/mokacoding/apple-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="https://s3.amazonaws.com/mokacoding/apple-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="https://s3.amazonaws.com/mokacoding/apple-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="https://s3.amazonaws.com/mokacoding/apple-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="https://s3.amazonaws.com/mokacoding/apple-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="https://s3.amazonaws.com/mokacoding/apple-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="https://s3.amazonaws.com/mokacoding/apple-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" href="https://s3.amazonaws.com/mokacoding/apple-icon-180x180.png"><link rel="icon" type="image/png" sizes="192x192" href="https://s3.amazonaws.com/mokacoding/android-icon-192x192.png"><link rel="icon" type="image/png" sizes="32x32" href="https://s3.amazonaws.com/mokacoding/favicon-32x32.png"><link rel="icon" type="image/png" sizes="96x96" href="https://s3.amazonaws.com/mokacoding/favicon-96x96.png"><link rel="icon" type="image/png" sizes="16x16" href="https://s3.amazonaws.com/mokacoding/favicon-16x16.png"><link rel="manifest" href="https://s3.amazonaws.com/mokacoding/manifest.json"><meta name="msapplication-TileColor" content="#ffffff"><meta name="msapplication-TileImage" content="https://s3.amazonaws.com/mokacoding/ms-icon-144x144.png"><meta name="theme-color" content="#ffffff"><!-- SumoMe--><script src="//load.sumome.com/" data-sumo-site-id="dd80959300db03e20c8bc3dd899f1424fd764d261e6c3c41923c96482a270dba" async="async"></script></head><body><!-- Use this to render an extra header in special occasions--><div class="special-header"><div class="page"><div class="row-12"><div class="col-12"><p><!-- - Saving this for later and to avoid a `git revert`:markdown
+  [What is your biggest struggle right now with building software?](https://goo.gl/forms/lCLlJd9hqCUYoTME2)--><p><a href="https://tddinswift.com?utm_source=mokacoding-site&amp;utm_campaign=coming-soon&amp;utm_medium=sticky-header">Avilable Now: <strong>Test-Driven Development in Swift with SwiftUI and Combine</strong></a></p>
+</p></div></div></div></div><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">unit and acceptance testing, automation, productivity</div><div class="links"><a href="/archive.html">Archive</a><a href="/tags.html">Tags</a><a href="https://gio.codes">About</a><a href="#subscribe">Subscribe</a><a href="/feed.xml"><i class="fa fa-rss"></i></a></div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/functional-core-reactive-shell">Functional Core Reactive Shell</a></h2><p class="post-meta"><span class="post-date">Wed Jun 01 2016&nbsp;</span><a href="/tag/Functional-Programming/index.html" class="post-tag">-Functional Programming</a><a href="/tag/Functional-Reactive-Programming/index.html" class="post-tag">-Functional Reactive Programming</a><a href="/tag/Talks/index.html" class="post-tag">-Talks</a><a href="/tag/Swift/index.html" class="post-tag">-Swift</a><a href="/tag/Software-Design/index.html" class="post-tag">-Software Design</a></p><div class="post"><p>During the past couple of months I gave a talk named &quot;Functional Core, Reactive
+Shell&quot; (or something similar) at a number of (3) events. I think is my best
+talk so far, and I&#39;d like to share a summary of its contents and ideas here.</p>
+<p>The purpose of the talk is to introduce a somehow different way to look at
+software architecture and how manage its complexity.</p>
+<p>You can see the video from one of the talks
+<a href="https://youtu.be/nYxy7Y7Gji4?t=28m35s">here</a>. And these are the slides:</p>
+<iframe src="//www.slideshare.net/slideshow/embed_code/key/y1q0g6Yvw5IyAC" width="595" height="485" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="//www.slideshare.net/GiovanniLodi2/functional-core-reactive-shell" title="Functional Core, Reactive Shell" target="_blank">Functional Core, Reactive Shell</a> </strong> from <strong><a href="//www.slideshare.net/GiovanniLodi2" target="_blank">Giovanni Lodi</a></strong> </div>
+
+<h3 id="spaghetti-lasagna-and-pizza">Spaghetti, Lasagna and Pizza</h3>
+<p>We&#39;re all too familiar with so called spaghetti code, source code so entangled
+and messy to remind of a bowl of spaghetti, minus the deliciousness.</p>
+<p>The opposite of spaghetti code is lasagna code, software that follows the
+<a href="https://en.wikipedia.org/wiki/Single_responsibility_principle">single responsibility
+principle</a> and
+composed of multiple layers of abstraction, each segregating parts of the code
+from the other making the system easier to reason about despite its size.</p>
+<p>Another famous, and yummy, Italian food that can be used to describe software
+architecture is... Pizza. To understand the details of pizza code we need to
+look back at the lasagna for a moment.</p>
+<h3 id="from-the-tests-point-of-view">From the tests&#39; point of view</h3>
+<p>From the developer point of view lasagna code is great, every component has
+clear dependencies, and operates on a specific layer of abstraction. At the top
+we work with domain objects, at the bottom with database drivers and network
+clients.</p>
+<p>But when writing tests for these component we bump in two issues. The first is
+that objects from a certain layer depend on objects from the layer below, which
+depend on objects from the layer below them, and so on. The higher the lasagna
+the taller is the dependency tree that we need to build to initialize our
+system under test.</p>
+<p>The second issue is that the behaviour of some components depends on what the
+objects it depends upon do. For example a persistence service which only deals
+with domain objects in its public interface, internally relies on a database
+controller for a certain vendor to persist that data to disk. To test that the
+persistence service behaves as expected we need to test how it commands the
+database.</p>
+<h3 id="test-doubles">Test Doubles</h3>
+<p>Pasta lovers and test enthusiast have found a neat solution for these <em>limitation</em>
+of lasagna software, using test doubles.</p>
+<p>Test doubles is the name of a group of testing patter based on the idea of making
+a special copy, a double, of an object for the purpose of facilitating testing.</p>
+<p>We can use a <em>stub</em>, a test double allowing us to control the indirect inputs
+provided to the system under test, to replace dependencies trees that would
+otherwise be expensive to setup with a single copy of the top level dependency.
+The methods of this stub when called won&#39;t perform any logic but simply return
+values that we have configured at the start.</p>
+<p>Alongside making the tests easier to setup, another advantage of using stub is
+that now we can easily control the inputs provided to our system, and so we
+can easily test any kind of scenario.</p>
+<p>We can use a <em>mock</em>, at test double allowing us to control the indirect outputs
+produced by the system under test, to verify that top level objects depending
+on other at lower level consume them as intended.</p>
+<p>Going back to our persistence service example, we could initialize it with a
+mock database, which doesn&#39;t really persist data to disk, but simply records
+the method calls it receives. Now testing the behaviour of the persistence
+service is just a matter of verifying it calls the expected methods, with the
+expected arguments.</p>
+<h3 id="the-issue-with-mocks">The issue with Mocks</h3>
+<p>Mocks sound very promising on paper, but they have an issue which you&#39;ll soon
+come familiar with when using them. Mocks are liars. Mocks are not production
+code, they make you test your system with components that are not going to be
+used for real.</p>
+<p>There are too many stories of software projects with test suites relying
+heavily on mocking going wrong despite all the tests being green.</p>
+<p>I myself am guilty of shipping a build to testers crashing due to a networking
+issue that my tests didn&#39;t scam because they were relying on a mock.</p>
+<p>&quot;Well, didn&#39;t you test the real version of the mocked dependency?&quot; you could
+ask.  I had. &quot;Clearly not well enough.&quot;. Correct, but that misses the point.</p>
+<p>The point is that mocks make us test the wrong things. A test should assert
+behaviours in the form of outputs for a given input, not by verifying if a
+certain method is called or not. Mocks focus on implementation, while the
+results are what we actually care about.</p>
+<p>Isn&#39;t one of the points of tests to enable us to change the implementation of
+our components without changing the system&#39;s behaviour?</p>
+<p>If you were to test a method with this signature:</p>
+<pre><code class="hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">sum</span>(<span class="hljs-params">a</span>: <span class="hljs-type">Int</span>, <span class="hljs-params">b</span>: <span class="hljs-type">Int</span>)</span> -&gt; <span class="hljs-type">Int</span></code></pre>
+<p>Would you assert that <code>+</code> is called, or that given 1 and 2 the result is 3?</p>
+<p>Smarter people than me have tackled the issue of mocking, one of those is <a href="https://twitter.com/kenscambler">Ken
+Scambler</a> in his post &quot;<a href="http://techblog.realestate.com.au/to-kill-a-mockingtest/">To Kill a
+Mockingtest</a>&quot;. I
+highly recommend you read it for a deeper and more practical look at the issue,
+and how to solve it.</p>
+<h3 id="the-root-of-the-problem">The root of the problem</h3>
+<p>Mocks are not evil, yes they are pathological liar, but at the end of the day
+they are just a tool, and quite a smart one actually.</p>
+<p>The root of the problem is with the lasagna architecture itself. Layers upon
+layers of objects interacting with and depending upon each other make it so
+that a change in one layer could ripple to the others.</p>
+<h3 id="from-objects-to-values">From Objects to Values</h3>
+<p>As I said, smarter people than me have thought about these issues, this is the
+beauty of software development, and science, we <a href="https://en.wikipedia.org/wiki/Standing_on_the_shoulders_of_giants">stand on the shoulders of
+giants</a>.</p>
+<p>In his talk &quot;<a href="https://www.destroyallsoftware.com/talks/boundaries">Boundaries</a>&quot;
+<a href="https://twitter.com/garybernhardt?lang=en">Gary Bernhardt</a> proposes to shift
+the focus of our software design from the objects and how they interact, to the
+values they exchange.</p>
+<p>By shifting towards values we can leverage concept from the functional
+programming world, in particular immutability and pure functions.</p>
+<p>Immutable values cannot be changed. This makes it easy to pass them around without
+having to worry that some other component will change them, invalidating our
+assumptions.</p>
+<p>Pure functions do not have side effects, which means that they don&#39;t produce
+mutations, nor they interact with the outside world, no networks calls nor
+file-system operations.</p>
+<p>Testing pure functions is incredibly straightforward: provide inputs and assert
+that the outputs are what you expect. No need to setup stubs or mocks.</p>
+<p>If we write our software by focusing on the data it deals with then we can have
+pipelines of pure functions that get values in and give values out.</p>
+<p>But what about I/O?! As we said, a pure function does not have side effects,
+and as such cannot perform I/O. So how do we actually show stuff to the users
+or gather their inputs?</p>
+<h3 id="decision-and-actions">Decision and Actions</h3>
+<p>A software designed &quot;value first&quot; can manage side effects by... making them
+values as well!</p>
+<p>The idea is to split the code that takes decision, what side effect to perform,
+from the code taking action, what actually performs the effect.</p>
+<p>For example when storing some data in the database we could have a
+<code>DatabaseAction</code> value:</p>
+<pre><code class="hljs swift"><span class="hljs-class"><span class="hljs-keyword">enum</span> <span class="hljs-title">DatabaseActionMode</span> </span>{
+  <span class="hljs-keyword">case</span> <span class="hljs-type">Delete</span>
+  <span class="hljs-keyword">case</span> <span class="hljs-type">Insert</span>
+  <span class="hljs-keyword">case</span> <span class="hljs-type">Update</span>
+}
+
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">DatabaseAction</span> </span>{
+  <span class="hljs-keyword">let</span> objects: [<span class="hljs-type">Persistable</span>]
+  <span class="hljs-keyword">let</span> mode: <span class="hljs-type">DatabaseActionMode</span>
+}</code></pre>
+<p>Testing code that interacts with the database would then become a matter of
+testing the logic, pure functions, producing <code>DatabaseAction</code> values.</p>
+<p>The action can then be performed by something like this:</p>
+<pre><code class="hljs swift"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DatabaseService</span> </span>{
+
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">performAction</span>(<span class="hljs-params">action</span>: <span class="hljs-type">DatabaseAction</span>)</span> {
+    <span class="hljs-keyword">switch</span> action.mode {
+    <span class="hljs-keyword">case</span> .<span class="hljs-type">Delete</span>: <span class="hljs-comment">// ...</span>
+    <span class="hljs-keyword">case</span> .<span class="hljs-type">Insert</span>: <span class="hljs-comment">// ...</span>
+    <span class="hljs-keyword">case</span> .<span class="hljs-type">Update</span>: <span class="hljs-comment">// ...</span>
+    }
+  }
+}</code></pre>
+<p>Testing <code>DatabaseService</code> would be easy as well, just create a simple
+<code>DatabaseAction</code> and verify that the <code>objects</code> it carries are modified in
+database according to the value of its <code>mode</code> property.</p>
+<h3 id="functional-core-imperative-shell">Functional Core, Imperative Shell</h3>
+<p>Our software now boils down to a pipeline of purely functional values
+transformations that eventually produces side effects which are sent to objects
+that know how
+to perform them.</p>
+<p>This is what Gary Bernhardt calls &quot;Functional Core, Imperative Shell&quot;.</p>
+<p>The functional core is made by the values and the purely functional logic, the
+imperative shell is the straightforward glue that takes value from one
+function, passes them to the next, and eventually provides a side effect value
+to its performer.</p>
+<p>And that&#39;s the pizza! Values and functions are our toppings, the imperative
+glue code is the crust.</p>
+<h3 id="functional-core-reactive-shell">Functional Core, Reactive Shell</h3>
+<p>Gary Bernhardt talk is dated 2012, and he was working in Ruby. Some years have
+passed and some paradigms have become mainstream, so I&#39;d like to introduce my
+spin on the concept, with the background of an iOS developer working in Swift.</p>
+<p>The Functional Reactive Programming flavour introduced by
+<a href="https://github.com/Reactive-Extensions/RxJS">RxJS</a> and implemented in Swift by
+frameworks such as <a href="https://github.com/ReactiveX/RxSwift">RxSwift</a> and
+<a href="https://github.com/ReactiveCocoa/ReactiveCocoa">ReactiveCocoa</a> marries very
+well with the concept of looking to software as a pipeline of values
+transformation.</p>
+<p>By leveraging FRP we can replace most of the imperative glue code with the
+scaffold provided by signal transformations. We can go from &quot;Functional Core,
+Imperative Shell&quot;, to &quot;Functional Core, Reactive Shell&quot;.</p>
+<p>Input sources, like a button the user touches, a read from the file-system, a
+network request, etc.  can all be treated as signal producers. We can transform
+the input signals by using the FRP scaffolding tools like <code>map</code>, <code>flatMap</code>,
+<code>zip</code>, etc. operators apply our pure transformations, for example going from a
+JSON dictionary to a view update action with embedded view model. An finally we
+can observe those signals, and perform the side effects they produce.</p>
+<p>This approach reduces the amount of actual business logic we need to write, boiling
+it down to a number of functions that we can test with confidence.</p>
+<p>And speaking of testing we can test the behaviour of the whole reactive shell
+quite easily too, just provide our own source of input signals to the shell,
+and subscribe to them to assert the side effect values are configured as
+expected.</p>
+<h3 id="is-this-pizza-actually-edible">Is this pizza actually edible?</h3>
+<p>While there&#39;s little doubt that real Italian food, and Pizza in particular, is
+delicious, you might be wondering if the &quot;Functional Core, Reactive Shell&quot; is
+actually a good idea.</p>
+<p>I&#39;ll be honest. There are some downsides. First of all the FRP style and its
+tools come with a bit of a learning curve, and not all developers are familiar
+with them.</p>
+<p>Even if you and your team are prolific with this style, to be effective all
+your code needs to buy into this style. This could be a problem later on if you
+want to change architecture, or if the original team is replaced by one less
+familiar with FRP.</p>
+<p>Finally, another considerable disadvantage is that the reactive shell code, the
+crust of the pizza, will look long and odd. Like this:</p>
+<pre><code class="hljs swift"><span class="hljs-type">SignalProducer</span>(values: [
+    <span class="hljs-comment">//</span>
+    <span class="hljs-comment">// Input sources</span>
+    <span class="hljs-comment">//</span>
+    databaseService.allStuff()
+        .map { <span class="hljs-variable">$0</span>.map { <span class="hljs-type">Stuff</span>(realmObject: <span class="hljs-variable">$0</span>) } },
+
+    networkService.performRequest(toEndpoint: .<span class="hljs-type">GetStuff</span>)
+        .flatMap(.<span class="hljs-type">Latest</span>) { <span class="hljs-type">JSON</span> <span class="hljs-keyword">in</span>
+            <span class="hljs-keyword">return</span> <span class="hljs-type">Stuff</span>.stuffProducer(withJSON: <span class="hljs-type">JSON</span>)
+    }
+    ])
+    .flatten(.<span class="hljs-type">Merge</span>)
+    <span class="hljs-comment">//</span>
+    <span class="hljs-comment">// Data transformations</span>
+    <span class="hljs-comment">//</span>
+    .map { stuffArray <span class="hljs-keyword">in</span> stuffArray.map { <span class="hljs-type">CellViewModel</span>(stuff: <span class="hljs-variable">$0</span>) } }
+    .map { viewModels <span class="hljs-keyword">in</span> <span class="hljs-type">Effect</span>.<span class="hljs-type">UpdateView</span>(viewModels: viewModels) }
+    <span class="hljs-comment">//</span>
+    <span class="hljs-comment">// Collect and perform side effects</span>
+    <span class="hljs-comment">//</span>
+    .observeOn(<span class="hljs-type">UIScheduler</span>())
+    .on(
+        failed: { [<span class="hljs-keyword">weak</span> <span class="hljs-keyword">self</span>] error <span class="hljs-keyword">in</span>
+            <span class="hljs-keyword">self</span><span class="hljs-operator">?</span>.performEffect(<span class="hljs-type">Effect</span>.<span class="hljs-type">PresentAlert</span>(error: error))
+        },
+        next: { [<span class="hljs-keyword">weak</span> <span class="hljs-keyword">self</span>] effect <span class="hljs-keyword">in</span>
+            <span class="hljs-keyword">self</span><span class="hljs-operator">?</span>.performEffect(effect)
+        }
+    )
+    .start()</code></pre>
+<p>You can see more code
+<a href="https://github.com/mokacoding/functional-core-reactive-shell-demo">here</a>.</p>
+<p>My personal opinion is that these issues are balanced up by what you get out of
+this approach. The awkward and hard to read &quot;reactive shell&quot; is balanced up by
+very small and easy to understand <em>toppings</em>, and that&#39;s actually where the
+majority of your business logic will be.</p>
+<p>On top of that the shell is the tells you the story of the whole system, no
+need to jump up and down abstraction layers and managers classes that call
+controllers that call other managers.</p>
+<p>Furthermore, this approach simplifies making changes to the system. It easy to
+add or remove steps to the pipeline, and since each transformation is pure and
+isolated from the others changing them is even easier.</p>
+<p>Finally, I see the fact that these techniques are not mainstream, and not
+straightforward to pick up as a non-issue. I&#39;ve been very lucky to work with
+many software developers that embrace learning and realise that any new
+pattern, paradigm, or technology they learn enriches them.</p>
+<h3 id="wrapping-it-up">Wrapping it up</h3>
+<p>I am not here to tell you that &quot;Functional Core, Imperative/Reactive Shell&quot; is
+the silver bullet of software architecture. Each project is different, and each
+team working on it is different as well.</p>
+<p>I personally find this approach very interesting, and have been working in a
+&quot;Functional Core, Reactive Shell&quot; way on some side projects. Working with it is
+fun and rewarding, and I find it easy to pick the code up even after weeks and
+find my way around it straightaway.</p>
+<p>To be honest I haven&#39;t had the chance to use it on a &quot;real world&quot; app, and due
+to that I probably have yet to bump into issues that could arise at scale, or
+with a larger team working on it.</p>
+<p>I hope you&#39;ll give this approach a shot, even if sandboxed to a new small
+feature. If you do, please get in touch with me on Twitter
+<a href="https://twitter.com/mokagio">@mokagio</a> or leave a comment below. I&#39;d love to
+know if you find it useful, or if you think this is a silly idea.</p>
+<p><em>Leave the codebase better than you found it.</em></p>
+</div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"><div><a href="/blog/swift-unavailable-how-to"><<&nbsp;How to make Swift methods unavailable</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/language-agnostic-automation-setup">Language Agnostic Automation Setup&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin Sendfox Signup Form -->
+<div id="sendfox_embed_signup">
+  <h4 class="form_title">Want more of these posts?</h4>
+  <p class="form_caption">Subscribe to receive new posts in your inbox.</p>
+  <form method="post" action="https://sendfox.com/form/3ee4z3/10r4wg" class="sendfox-form" id="10r4wg" data-async="true" data-recaptcha="true">
+    <p><input type="email" placeholder="Email" name="email" class="email" required /></p>
+    <!-- no botz please -->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="a_password" tabindex="-1" value="" autocomplete="off" /></div>
+    <div class="clear"><button type="submit">Sign me up</button></div>
+  </form>
+  <script src="https://sendfox.com/js/form.js"></script>
+</div>
+<!-- End Sendfox Signup Form -->
+</div><div class="bottom-box"><div id="disqus_thread"></div><script>var disqus_shortname = "mokacoding";
+// Neet do add the / at the end to maintain compatibility with previous version
+// of the blog that didn't define disqus_url, letting Disqus set it automatically
+// using window.location.href
+var disqus_url = "https://mokacoding.com/blog/functional-core-reactive-shell/";
+
+(function() {
+  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><noscript>Please enable JavaScript to view the<a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></div></div></div><div class="row-12 footer"><div class="col-12"><h3><a href="/">mokacoding</a></h3></div><div id="copy" class="col-9"><p>Hi I&#39;m <a href="https://gio.codes">Gio</a> I write here semi-regularly on software testing and TDD, productivity, and iOS development.</p>
+<p><a href="mailto:gio+blog@mokacoding.com">Get in touch</a> if you&#39;re interested in working together.</p>
+</div><div id="links" class="col-3"><p><i class="fa fa-twitter"></i>&nbsp;<a href="https://twitter.com/mokagio">@mokagio</a></p><p><i class="fa fa-github"></i>&nbsp;<a href="https://github.com/mokagio">mokagio</a></p></div></div></div></body><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-43554041-1', 'auto');
+ga('send', 'pageview');
+</script><script>var toggle = function(elm){
+  var y = elm.style && elm.style.display ? elm.style.display : 'block';
+  if (y == 'block'){
+    elm.style.opacity='0';
+    setTimeout( function(){ elm.style.display = 'none'; }, 300 );
+  }
+  else {
+    elm.style.display='block';
+    setTimeout( function(){ elm.style.opacity = '1'; }, 10 );
+  }
+}
+
+document.getElementById('close').onclick = function(){
+  toggle(document.getElementById('sticky-header'));
+  toggle(document.getElementById('sticky-header-padding-hack'));
+}</script></html>

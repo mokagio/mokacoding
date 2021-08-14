@@ -1,0 +1,95 @@
+<!DOCTYPE html><html lang="en"><head><title>A workaround to Xcode 5 GM crash on app submission | mokacoding</title><meta name="description" content="A workaround for the unusual crash of Xcode 5 GM during the App Store submission process."><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"><!-- Canonical URL--><link rel="canonical" href="https://mokacoding.com/blog/xcode5-crash-on-submission/"><!-- Open Graph meta tags--><meta property="og:title" content="A workaround to Xcode 5 GM crash on app submission"><meta property="og:description" content="A workaround for the unusual crash of Xcode 5 GM during the App Store submission process."><meta property="og:url" content="https://mokacoding.com/blog/xcode5-crash-on-submission/"><meta property="og:type" content="article"><meta property="og:site_name" content="mokacoding"><meta property="og:image" content="https://s3.amazonaws.com/mokacoding/mokacoding_og_image.jpg"><!-- Twitter meta tags--><meta property="twitter:card" content="summary"><meta property="twitter:title" content="A workaround to Xcode 5 GM crash on app submission"><meta property="twitter:site" content="@mokacoding"><meta property="twitter:creator" content="@mokagio"><!-- Stylesheets--><link href="/css/griddy.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet"><link href="/css/font-awesome.min.css" rel="stylesheet"><link href="/css/zenburn.css" rel="stylesheet"><!-- FavIcon--><!-- Thanks to https://www.favicon-generator.org/ & https://html2jade.org/--><link rel="apple-touch-icon" sizes="57x57" href="https://s3.amazonaws.com/mokacoding/apple-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="https://s3.amazonaws.com/mokacoding/apple-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="https://s3.amazonaws.com/mokacoding/apple-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="https://s3.amazonaws.com/mokacoding/apple-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="https://s3.amazonaws.com/mokacoding/apple-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="https://s3.amazonaws.com/mokacoding/apple-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="https://s3.amazonaws.com/mokacoding/apple-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="https://s3.amazonaws.com/mokacoding/apple-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" href="https://s3.amazonaws.com/mokacoding/apple-icon-180x180.png"><link rel="icon" type="image/png" sizes="192x192" href="https://s3.amazonaws.com/mokacoding/android-icon-192x192.png"><link rel="icon" type="image/png" sizes="32x32" href="https://s3.amazonaws.com/mokacoding/favicon-32x32.png"><link rel="icon" type="image/png" sizes="96x96" href="https://s3.amazonaws.com/mokacoding/favicon-96x96.png"><link rel="icon" type="image/png" sizes="16x16" href="https://s3.amazonaws.com/mokacoding/favicon-16x16.png"><link rel="manifest" href="https://s3.amazonaws.com/mokacoding/manifest.json"><meta name="msapplication-TileColor" content="#ffffff"><meta name="msapplication-TileImage" content="https://s3.amazonaws.com/mokacoding/ms-icon-144x144.png"><meta name="theme-color" content="#ffffff"><!-- SumoMe--><script src="//load.sumome.com/" data-sumo-site-id="dd80959300db03e20c8bc3dd899f1424fd764d261e6c3c41923c96482a270dba" async="async"></script></head><body><!-- Use this to render an extra header in special occasions--><div class="special-header"><div class="page"><div class="row-12"><div class="col-12"><p><!-- - Saving this for later and to avoid a `git revert`:markdown
+  [What is your biggest struggle right now with building software?](https://goo.gl/forms/lCLlJd9hqCUYoTME2)--><p><a href="https://tddinswift.com?utm_source=mokacoding-site&amp;utm_campaign=coming-soon&amp;utm_medium=sticky-header">Avilable Now: <strong>Test-Driven Development in Swift with SwiftUI and Combine</strong></a></p>
+</p></div></div></div></div><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">unit and acceptance testing, automation, productivity</div><div class="links"><a href="/archive.html">Archive</a><a href="/tags.html">Tags</a><a href="https://gio.codes">About</a><a href="#subscribe">Subscribe</a><a href="/feed.xml"><i class="fa fa-rss"></i></a></div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/xcode5-crash-on-submission">A workaround to Xcode 5 GM crash on app submission</a></h2><p class="post-meta"><span class="post-date">Mon Sep 16 2013&nbsp;</span><a href="/tag/Xcode/index.html" class="post-tag">-Xcode</a></p><div class="post"><p>I just finished writing this post, and I realized is just about me complaining trying to sound funny. So here&#39;s, frontloaded, the important stuff.</p>
+<p>Apparently Xcode 5 GM crashed on some of us during the App Store submission process. Before even starting it. How annoying.</p>
+<p>The workaround I found relies on bypassing Xcode for the submission process.</p>
+<p>####Step 1</p>
+<p>Make sure all the provisioning profiles and code signing are set properly</p>
+<p>####Step 2</p>
+<p>Open your Terminal and generate the <code>.ipa</code> yourself, with the help of <a href="https://github.com/nomad/shenzhen">shenzhen</a>.</p>
+<pre><code>cd my<span class="hljs-regexp">/ready/</span>to<span class="hljs-regexp">/be/</span>submitter<span class="hljs-regexp">/ios/</span><span class="hljs-keyword">project</span>
+ipa build -c Release</code></pre><p>####Step 3</p>
+<p>Upload the app through Application Loader.</p>
+<p>####Step 4</p>
+<p>Find a tv series to start watching while waiting for your app to be reviewed.</p>
+<p>That&#39;s all. It took me an embarrassing long while to figure this out, I hope to be helping some fellow developer with this post.</p>
+<p>Below the full thing.</p>
+<hr/>
+
+<p>Every now and then in the lifecycle of an iOS project it comes the day when you have to submit an update, or even worst touch the provisioning profiles. When that day comes, it&#39;s better if it&#39;s a Monday, because you don&#39;t want to ruin yourself the weekend. And it&#39;s also better if you have chamomile in your cup instead of coffee.</p>
+<p>###Submit your iOS7 apps today</p>
+<p><img src="http://mokacoding.s3.amazonaws.com/2013-09-16-submit-today.jpg" alt="Submit today"></p>
+<p>On the 10th of September Apple sent an email to their developers, &quot;Submit your iOS7 apps today&quot; they said. Up to that point we couldn&#39;t submit apps made with the iOS7 SDK, as written somewhere in the Xcode 5 Developer Preview release notes. But that day the iOS7 GM and Xcode 5 GM where released, and the run to submit started.</p>
+<p><img src="http://mokacoding.s3.amazonaws.com/2013-09-16-use-xcode5.jpg" alt="Use Xcode 5 GM"></p>
+<p>In their beautiful styled <a href="https://developer.apple.com/ios7/">iOS7 developer page</a> they explained everything. If you follow the link to the <a href="https://developer.apple.com/library/prerelease/ios/documentation/IDEs/Conceptual/AppDistributionGuide/Introduction/Introduction.html">App Distribution Guide</a> in the bottom of the page you will have a funny surprise. The link goes to the previous version documentation, and our Apple engineers forgot to add a link to the new version.</p>
+<p><img src="http://mokacoding.s3.amazonaws.com/2013-09-16-missing-link.jpg" alt="Missing link"></p>
+<p>I&#39;m sure everything is gonna be fine, Xcode is such a reliable IDE, and the Apple guys are known for the quality of the products they give to their developers. Let&#39;s go!</p>
+<p>###The tragic message</p>
+<p>When clicking on &quot;Validate&quot; or &quot;Distribute&quot; from the organizer, no matter how may times I refreshed my Accounts in the Preferences menu this is what I got</p>
+<p><img src="http://mokacoding.s3.amazonaws.com/2013-09-16-the-terrible-dialog.jpg" alt="The terrible dialog"></p>
+<p>And guess what? Both those buttons resulted in Xcode crashing, right there, with no explanation, no progress bar, nothing, Boom!</p>
+<p>Out of curiosity I opened the crash log that got generated and…</p>
+<pre><code>Crashed Thread:  <span class="hljs-number">0</span>  Dispatch queue: com.apple.main-thread
+
+<span class="hljs-keyword">Exception</span> <span class="hljs-keyword">Type</span>:  EXC_BAD_ACCESS (SIGSEGV)
+<span class="hljs-keyword">Exception</span> Codes: EXC_I386_GPFLT</code></pre><p>Whenever I get an <code>EXC_BAD_ACCESS (SIGSEGV)</code> I feel like punching myself in the face, it&#39;s a memory issue, and I must have been really dumb to produce something like that in the ARC era.</p>
+<p>But let&#39;s not waste time complaining about those things, risking to be kicked out of the dev program, and look for a solution.</p>
+<p>###The workaround</p>
+<p>What&#39;s the place where all the developers go when in trouble? No it&#39;s not church, it&#39;s <a href="stackoverflow.com">StackOverflow</a>! There I found <a href="http://stackoverflow.com/questions/18748779/xcode5-gm-crashes-no-identities-are-available-for-signing-then-crash/">someone with the same problem</a>, suggesting to use Application Loader to upload the app.</p>
+<p>I never used it before, but I was faced with a problem straightaway. Application Loader need an <code>.ipa</code>, which we can generate only through the Organizer in Xcode.</p>
+<p><em>&quot;which we can generate only through the Organizer in Xcode.&quot;</em>. Are you sure about it? </p>
+<p>Actually <code>xcodebuild</code>, Xcode CLI, let us build ipas, in a very complex way. <code>xctool</code> buy the Facebook iOS team makes the task easier, but it the usual suspect, good guy <a href="https://github.com/mattt">Mattt</a> that has the real solution for that. With his gem <a href="https://github.com/nomad/shenzhen">shenzhen</a> we can build an ipa from command line without spending too much time specifing options or reading through the <code>--help</code> guide.</p>
+<pre><code><span class="hljs-attribute">ipa build -c Release</span></code></pre><p>That&#39;s all we need to generate our <code>.ipa</code>.</p>
+<p>Once we have our package we can send it to the Apples servers through Application Loader, bypassing Organizer and the frustrating crash. Smart!</p>
+<br/>
+That's all folks. I'm a bit disappointed by the fact that such an issue is leaked on a GM, when we, some of us at least, spend so much time unit testing our apps, being patient with the QA guys, and taking all the possible measures to make sure everything works as expected. But nobody's perfect, and every now and then hacking stuff is fun, so no big deal.
+
+<p>Happy coding!</p>
+</div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"><div><a href="/blog/mtfonticon"><<&nbsp;Bringing font icons in iOS with MTFontIcon</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/things-learned-in-august">Some things I learned in August&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin Sendfox Signup Form -->
+<div id="sendfox_embed_signup">
+  <h4 class="form_title">Want more of these posts?</h4>
+  <p class="form_caption">Subscribe to receive new posts in your inbox.</p>
+  <form method="post" action="https://sendfox.com/form/3ee4z3/10r4wg" class="sendfox-form" id="10r4wg" data-async="true" data-recaptcha="true">
+    <p><input type="email" placeholder="Email" name="email" class="email" required /></p>
+    <!-- no botz please -->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="a_password" tabindex="-1" value="" autocomplete="off" /></div>
+    <div class="clear"><button type="submit">Sign me up</button></div>
+  </form>
+  <script src="https://sendfox.com/js/form.js"></script>
+</div>
+<!-- End Sendfox Signup Form -->
+</div><div class="bottom-box"><div id="disqus_thread"></div><script>var disqus_shortname = "mokacoding";
+// Neet do add the / at the end to maintain compatibility with previous version
+// of the blog that didn't define disqus_url, letting Disqus set it automatically
+// using window.location.href
+var disqus_url = "https://mokacoding.com/blog/xcode5-crash-on-submission/";
+
+(function() {
+  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><noscript>Please enable JavaScript to view the<a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></div></div></div><div class="row-12 footer"><div class="col-12"><h3><a href="/">mokacoding</a></h3></div><div id="copy" class="col-9"><p>Hi I&#39;m <a href="https://gio.codes">Gio</a> I write here semi-regularly on software testing and TDD, productivity, and iOS development.</p>
+<p><a href="mailto:gio+blog@mokacoding.com">Get in touch</a> if you&#39;re interested in working together.</p>
+</div><div id="links" class="col-3"><p><i class="fa fa-twitter"></i>&nbsp;<a href="https://twitter.com/mokagio">@mokagio</a></p><p><i class="fa fa-github"></i>&nbsp;<a href="https://github.com/mokagio">mokagio</a></p></div></div></div></body><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-43554041-1', 'auto');
+ga('send', 'pageview');
+</script><script>var toggle = function(elm){
+  var y = elm.style && elm.style.display ? elm.style.display : 'block';
+  if (y == 'block'){
+    elm.style.opacity='0';
+    setTimeout( function(){ elm.style.display = 'none'; }, 300 );
+  }
+  else {
+    elm.style.display='block';
+    setTimeout( function(){ elm.style.opacity = '1'; }, 10 );
+  }
+}
+
+document.getElementById('close').onclick = function(){
+  toggle(document.getElementById('sticky-header'));
+  toggle(document.getElementById('sticky-header-padding-hack'));
+}</script></html>

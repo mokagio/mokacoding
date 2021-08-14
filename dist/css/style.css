@@ -1,0 +1,281 @@
+/* Originally, I had this import
+ *
+ * @import url(https://fonts.googleapis.com/css?family=Open+Sans:300italic,400,600);
+ *
+ * Looking at the network console, I could see it went off and loaded the
+ * following one as well, even though I never explictily asked for it. Since it
+ * contains all the values from the original one, it seems safe to use this
+ * instead.
+ */
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:200italic,300italic,400italic,500italic,600italic,700italic,800italic,900italic,200,300,400,500,600,700,800);
+body {
+  font-family: "Open Sans", sans-serif;
+  color: #303030; }
+
+a {
+  text-decoration: none;
+  color: #27ae60; }
+  a:hover {
+    color: #16a085; }
+
+h3 {
+  font-size: 1.3em; }
+
+.page {
+  max-width: 700px;
+  padding: 0 8px;
+  margin: auto; }
+
+.header {
+  text-align: center;
+  margin-bottom: 72px;
+  border-bottom: 1px solid #ecf0f1; }
+  .header h1.brand {
+    font-size: 40px;
+    margin-bottom: 2px; }
+  .header .punchline {
+    color: #838383;
+    font-style: italic; }
+  .header .links {
+    text-align: left;
+    padding: 4px 0;
+    font-size: 1.05em;
+    margin-top:18px; }
+    .header .links a {
+      display: inline-block;
+      color: #a9a9a9;
+      margin-right: 12px; }
+      .header .links a:hover {
+        color: #16a985; }
+
+.footer {
+  color: #838383;
+  border-top: 1px solid #ecf0f1;
+  padding-top: 44px;
+  margin-bottom: 26px; }
+  .footer p {
+    margin: 0 0 16px 0; }
+  .footer h3 {
+    margin-top: 0; }
+  .footer #copy {
+    text-align: justify; }
+  .footer #links {
+    text-align: right; }
+
+.post-container {
+  text-align: justify; }
+  .post-container h2, .post-container h3 {
+    text-align: left; }
+  .post-container h2 code, .post-container h3 code {
+    font-size: 1.4em;
+  }
+  .post-container h2.post-title {
+    margin-bottom: 5px; }
+  .post-container h2:not(.post-title) {
+    padding: 1.666em 0 0; }
+  .post-container h3 {
+    padding: 1.444em 0 0; }
+  .post-container p.post-meta {
+    margin-top: 0;
+    margin-bottom: 42px;
+    font-size: 0.8em; }
+    .post-container p.post-meta span.post-date {
+      color: #838383; }
+    .post-container p.post-meta a.post-tag {
+      display: inline-block;
+      margin-left: 6px; }
+  .post-container p {
+    margin: 1.5em 0;
+    line-height: 1.5em; }
+    .post-container p code {
+      background-color: rgba(150, 160, 150, 0.2);
+      padding: 1px 4px 2px;
+      border-radius: 3px;
+      font-size: 1.1em; }
+  .post-container img {
+    max-width: 90%;
+    display: block;
+    margin: auto; }
+  .post-container video {
+    max-width: 90%;
+    display: block;
+    margin: auto; }
+  .post-container blockquote {
+    margin: 0;
+    padding: 0 26px 0;
+    border-left: 1px solid;
+    color: #838383; }
+    .post-container blockquote p {
+      margin: 0.8em 0;
+      font-style: italic; }
+  .post-container hr {
+    margin: 24px 0;
+    border-top: 1px solid #dddddd;
+    border-right: none;
+    border-left: none;
+    border-bottom: none; }
+  .post-container pre code {
+    display: block;
+    overflow-x: scroll;
+    padding: 16px 10px; }
+  .post-container .highlight {
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    margin: 24px 0; }
+
+.primary-color {
+  color: #27ae60; }
+
+.post-container.tag {
+  margin-bottom: 52px; }
+  .post-container.tag .post-meta {
+    margin-bottom: 20px; }
+  .post-container.tag .post-description {
+    margin-top: 20px; }
+
+.bottom-box {
+  border-top: 1px solid #ecf0f1;
+  padding-top: 26px;
+  margin-bottom: 26px; }
+  .bottom-box p {
+    margin: 0; }
+  .bottom-box.no-border {
+    border-top: none; }
+
+/* See http://nicolasgallagher.com/micro-clearfix-hack/ */
+.clearfixed:before,
+.clearfixed:after {
+  content: " ";
+  display: table;
+}
+.clearfixed:after {
+  clear: both;
+}
+
+/* Share buttons */
+#share-buttons iframe {
+  margin-right: 10px;
+}
+
+iframe[src*="reddit"] {
+  margin-bottom: -2px;
+}
+
+/* Top of the page message */
+.sticky-header {
+	position: fixed;
+  z-index: 1000;
+}
+
+.special-header {
+	width: 100%;
+  max-width: 100%;
+	margin: -8px 0 0 -8px;
+	padding: 6px;
+	background-color: #27ae60;
+	color: white;
+	text-align: center;
+  font-size: large;
+}
+
+.special-header .page .row-12:only-child {
+  margin-bottom: 0;
+}
+
+.special-header a {
+  color: white;
+  text-decoration: underline;
+}
+
+a.bordered-button {
+  display: inline-block;
+  border: 1px solid white;
+  border-radius: 4px;
+  padding: 8px 12px;
+}
+
+.special-header .close-button {
+  float: right;
+  top: 0;
+  right: 0;
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+}
+
+#related-posts {
+  margin-bottom: 2.5em; }
+
+  #related-posts li {
+    font-size: 1.2em; }
+
+    #related-posts li a {
+      color: #303030;
+      text-decoration: underline;
+      text-underline-position: under; }
+
+/* Sendfox */
+#sendfox_embed_signup{
+  background:#fff;
+  clear:left;
+  color: #838383;
+  font-size: 14px; }
+
+#sendfox_embed_signup .form_title {
+  margin-bottom: .25rem;
+  color: #303030; }
+
+#sendfox_embed_signup p {
+  margin-top: 0;
+  margin-bottom: .25rem;
+  font-style: italic; }
+
+#sendfox_embed_signup form {
+  padding: 0; }
+
+
+#sendfox_embed_signup input.email {
+    display: block;
+    padding: 8px 0;
+    margin: 0 4% 10px 0;
+    text-indent: 5px;
+    width: 58%;
+    min-width: 130px;
+    border: 1px solid #999;
+    -webkit-appearance: none; }
+
+#sendfox_embed_signup button {
+  background-color: #27ae60;
+  display: block;
+  width: 35%;
+  margin: 0 0 10px 0;
+  min-width: 90px;
+  clear: both;
+  border: 0 none;
+  border-radius: 4px;
+  color: #FFFFFF;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: bold;
+  height: 32px;
+  line-height: 32px;
+  padding: 0;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: top;
+  white-space: nowrap; }
+
+  #sendfox_embed_signup button:hover {
+    background-color: #16a085; }
+
+#homepage-posts ul {
+  list-style: none;
+  padding: 0; }
+
+  #homepage-posts ul a {
+    color: #303030;
+    text-decoration: underline; }
+
+  #homepage-posts ul a:visited {
+    color: #303030 }

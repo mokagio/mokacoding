@@ -1,0 +1,70 @@
+.row-12 {
+  margin-bottom: 20px;
+  margin-left: -10px;
+  margin-right: -10px;
+  zoom: 1;
+@media screen and (max-width: 400px) {
+}
+}
+.row-12:before,
+.row-12:after {
+  content: '';
+  display: table;
+}
+.row-12:after {
+  clear: both;
+}
+.row-12 .col-1 {
+  width: 8.333333333333334%;
+}
+.row-12 .col-2 {
+  width: 16.666666666666668%;
+}
+.row-12 .col-3 {
+  width: 25%;
+}
+.row-12 .col-4 {
+  width: 33.333333333333336%;
+}
+.row-12 .col-5 {
+  width: 41.666666666666664%;
+}
+.row-12 .col-6 {
+  width: 50%;
+}
+.row-12 .col-7 {
+  width: 58.333333333333336%;
+}
+.row-12 .col-8 {
+  width: 66.66666666666667%;
+}
+.row-12 .col-9 {
+  width: 75%;
+}
+.row-12 .col-10 {
+  width: 83.33333333333333%;
+}
+.row-12 .col-11 {
+  width: 91.66666666666667%;
+}
+.row-12 .col-12 {
+  width: 100%;
+}
+.row-12 .col-1, .row-12 .col-2, .row-12 .col-3, .row-12 .col-4, .row-12 .col-5, .row-12 .col-6, .row-12 .col-7, .row-12 .col-8, .row-12 .col-9, .row-12 .col-10, .row-12 .col-11 {
+  float: left;
+  /* tweak on original version, so that cols always start from 0 left */
+  padding: 0 20px 0 0;
+  box-sizing: border-box;
+  min-height: 1px;
+}
+@media screen and (max-width: 400px) {
+.row-12 {
+  margin: 0;
+}
+.row-12 .col-1, .row-12 .col-2, .row-12 .col-3, .row-12 .col-4, .row-12 .col-5, .row-12 .col-6, .row-12 .col-7, .row-12 .col-8, .row-12 .col-9, .row-12 .col-10, .row-12 .col-11 {
+  float: none;
+  width: auto;
+  display: block;
+  margin-bottom: 20px;
+}
+}

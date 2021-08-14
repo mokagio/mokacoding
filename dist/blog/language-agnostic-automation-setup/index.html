@@ -1,0 +1,128 @@
+<!DOCTYPE html><html lang="en"><head><title>Language Agnostic Automation Setup | mokacoding</title><meta name="description" content="Every project can benefit from having a set of scripts to automate tasks such as running tests or distributing to testers. When setting up automation for your projects you can use a language agnostic setup. This will make it easier for new team members to get started, and allow you to change the setup without having to change the way the scripts are invoked."><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"><!-- Canonical URL--><link rel="canonical" href="https://mokacoding.com/blog/language-agnostic-automation-setup/"><!-- Open Graph meta tags--><meta property="og:title" content="Language Agnostic Automation Setup"><meta property="og:description" content="Every project can benefit from having a set of scripts to automate tasks such as running tests or distributing to testers. When setting up automation for your projects you can use a language agnostic setup. This will make it easier for new team members to get started, and allow you to change the setup without having to change the way the scripts are invoked."><meta property="og:url" content="https://mokacoding.com/blog/language-agnostic-automation-setup/"><meta property="og:type" content="article"><meta property="og:site_name" content="mokacoding"><meta property="og:image" content="https://s3.amazonaws.com/mokacoding/mokacoding_og_image.jpg"><!-- Twitter meta tags--><meta property="twitter:card" content="summary"><meta property="twitter:title" content="Language Agnostic Automation Setup"><meta property="twitter:site" content="@mokacoding"><meta property="twitter:creator" content="@mokagio"><!-- Stylesheets--><link href="/css/griddy.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet"><link href="/css/font-awesome.min.css" rel="stylesheet"><link href="/css/zenburn.css" rel="stylesheet"><!-- FavIcon--><!-- Thanks to https://www.favicon-generator.org/ & https://html2jade.org/--><link rel="apple-touch-icon" sizes="57x57" href="https://s3.amazonaws.com/mokacoding/apple-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="https://s3.amazonaws.com/mokacoding/apple-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="https://s3.amazonaws.com/mokacoding/apple-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="https://s3.amazonaws.com/mokacoding/apple-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="https://s3.amazonaws.com/mokacoding/apple-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="https://s3.amazonaws.com/mokacoding/apple-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="https://s3.amazonaws.com/mokacoding/apple-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="https://s3.amazonaws.com/mokacoding/apple-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" href="https://s3.amazonaws.com/mokacoding/apple-icon-180x180.png"><link rel="icon" type="image/png" sizes="192x192" href="https://s3.amazonaws.com/mokacoding/android-icon-192x192.png"><link rel="icon" type="image/png" sizes="32x32" href="https://s3.amazonaws.com/mokacoding/favicon-32x32.png"><link rel="icon" type="image/png" sizes="96x96" href="https://s3.amazonaws.com/mokacoding/favicon-96x96.png"><link rel="icon" type="image/png" sizes="16x16" href="https://s3.amazonaws.com/mokacoding/favicon-16x16.png"><link rel="manifest" href="https://s3.amazonaws.com/mokacoding/manifest.json"><meta name="msapplication-TileColor" content="#ffffff"><meta name="msapplication-TileImage" content="https://s3.amazonaws.com/mokacoding/ms-icon-144x144.png"><meta name="theme-color" content="#ffffff"><!-- SumoMe--><script src="//load.sumome.com/" data-sumo-site-id="dd80959300db03e20c8bc3dd899f1424fd764d261e6c3c41923c96482a270dba" async="async"></script></head><body><!-- Use this to render an extra header in special occasions--><div class="special-header"><div class="page"><div class="row-12"><div class="col-12"><p><!-- - Saving this for later and to avoid a `git revert`:markdown
+  [What is your biggest struggle right now with building software?](https://goo.gl/forms/lCLlJd9hqCUYoTME2)--><p><a href="https://tddinswift.com?utm_source=mokacoding-site&amp;utm_campaign=coming-soon&amp;utm_medium=sticky-header">Avilable Now: <strong>Test-Driven Development in Swift with SwiftUI and Combine</strong></a></p>
+</p></div></div></div></div><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">unit and acceptance testing, automation, productivity</div><div class="links"><a href="/archive.html">Archive</a><a href="/tags.html">Tags</a><a href="https://gio.codes">About</a><a href="#subscribe">Subscribe</a><a href="/feed.xml"><i class="fa fa-rss"></i></a></div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/language-agnostic-automation-setup">Language Agnostic Automation Setup</a></h2><p class="post-meta"><span class="post-date">Tue May 17 2016&nbsp;</span><a href="/tag/Automation/index.html" class="post-tag">-Automation</a><a href="/tag/Continuous-Integration/index.html" class="post-tag">-Continuous Integration</a><a href="/tag/Productivity/index.html" class="post-tag">-Productivity</a></p><div class="post"><p>A while ago a read a blog post by <a href="https://byparker.com/">Parker Moore</a> titled
+&quot;<a href="https://byparker.com/blog/2015/language-agnostic-interfaces-for-software-development/">Language-Agnostic Interfaces for Software
+Development</a>&quot;.</p>
+<blockquote>
+<p>Don’t let the title fool you, the concept here is simple: provide simple
+scripts in your repositories so – no matter the language or tools used – a
+newcomer to the code base can get started quickly and easily.</p>
+</blockquote>
+<p>I found the idea interesting at the time, but only recently I came to
+appreciate it fully, and apply it on my personal and client projects.</p>
+<p>The benefits of this approach are clearer when used on projects developed by a
+team rather than an individual. Co-workers don&#39;t need to know about the setup
+implementation details to use it, they just need to run a command from the
+terminal.</p>
+<p>Compare explaining to someone that to distribute the latest beta they need to
+execute <code>bundle exec fastlane test</code> because we decided to use
+<a href="https://fastlane.tools/">Fastlane</a>, which is distributed as a <a href="https://rubygems.org/">Ruby
+gem</a>, and its <a href="https://mokacoding.com/blog/ruby-for-ios-developers-bundler/">better to use Ruby tools via
+Bundler</a>, with
+saying to them &quot;run <code>bin/distribute_beta</code>&quot;.</p>
+<p>Hiding these implementation and invocation details not only will simplify
+usage, but also make sure they do it properly. It&#39;s easy to forget to call Ruby
+tools via <code>bundle exec</code>, or miss some option when calling <code>carthage update</code>.</p>
+<p>Another bonus of using a language agnostic setup is that if you change the
+implementation of the automation scripts their interface will stay the same.
+You&#39;ll be able to migrate from one tool to another, for example from barebones
+<code>xcodebuild</code> invocations to a more advanced <code>Fastfile</code>, without your teammates
+noticing.</p>
+<p>Of all the teammates one in particular will be thankful for a language agnostic
+setup, the CI. If the way to run the test and any other automated action
+doesn&#39;t change, then neither will the CI setup.</p>
+<h2 id="how-does-it-look-like">How does it look like</h2>
+<p>Enough talking, let&#39;s look at some code. You can find a sample project
+configure with language agnostic automation scripts <a href="https://github.com/mokacoding/agnostic-automation-setup">on
+GitHub</a>.</p>
+<p>The project has a <code>bin</code> folder in its root, with a number of executable scripts
+inside. <a href="https://byparker.com/blog/2015/language-agnostic-interfaces-for-software-development/">Parker&#39;s original
+post</a>
+has a <code>scripts</code> folder instead, I prefer to use <code>bin</code>, you should use what
+makes most sense for you.</p>
+<p>Usually you would have scripts like:</p>
+<ul>
+<li><code>bin/bootstrap</code></li>
+<li><code>bin/test</code></li>
+<li><code>bin/distribute_beta</code></li>
+</ul>
+<p>The name of each script is self explanatory, and that&#39;s all someone needs to
+know to get started.</p>
+<p>To prove my argument that having this kind of setup will save you time managing
+your CI I changed the implementation of the test script a couple of times,
+every time keeping the build green and with no change to the CI configuration.
+See it for yourself by looking at <a href="https://github.com/mokacoding/agnostic-automation-setup/commits/master">the
+commits</a>
+and <a href="https://travis-ci.org/mokacoding/agnostic-automation-setup/builds">the
+builds</a>.</p>
+<hr>
+<p>I hope with this post and the example repo to have made you curious about the
+language agnostic automation setup and showed you how to get started.</p>
+<p>Every project has its own story and automation requirements, there is no
+one-size-fits-all, you will have to find out what works best for you and your
+team.</p>
+<p>I&#39;d love to hear feedback on the idea, and if you&#39;re using it, how it&#39;s working
+out for you. Hit me up on Twitter <a href="https://twitter.com/mokagio">@mokagio</a> or
+leave a comment below.</p>
+<p><em>Leave the codebase better than you found it.</em></p>
+<h3 id="ps-a-note-on-having-to-explain-things-to-co-workers">PS: A note on &quot;having to explain things&quot; to co-workers</h3>
+<blockquote>
+<p>&quot;Give a man a fish and you feed him for a day. Teach a man to fish and you feed him for a lifetime.&quot;
+Chinese proverb</p>
+</blockquote>
+<p>I am a firm believer that understanding the internal of a system is the best
+way to use it properly and be productive with it. When I&#39;m suggesting to use a
+language agnostic setup I&#39;m not advocating for not having to explain how
+automation works to them, I&#39;m just arguing that <strong>to get someone started</strong> one
+single command is better that a combination of commands. It is then up to you
+to find the time to explain the implementation details, either in person, with
+documentation, or why not with a blog post like this one. There&#39;s nothing
+better than learning something and sharing it with others.</p>
+</div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"><div><a href="/blog/functional-core-reactive-shell"><<&nbsp;Functional Core Reactive Shell</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/nsdateformatter-json-date">NSDateFormatter format for JSON dates&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin Sendfox Signup Form -->
+<div id="sendfox_embed_signup">
+  <h4 class="form_title">Want more of these posts?</h4>
+  <p class="form_caption">Subscribe to receive new posts in your inbox.</p>
+  <form method="post" action="https://sendfox.com/form/3ee4z3/10r4wg" class="sendfox-form" id="10r4wg" data-async="true" data-recaptcha="true">
+    <p><input type="email" placeholder="Email" name="email" class="email" required /></p>
+    <!-- no botz please -->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="a_password" tabindex="-1" value="" autocomplete="off" /></div>
+    <div class="clear"><button type="submit">Sign me up</button></div>
+  </form>
+  <script src="https://sendfox.com/js/form.js"></script>
+</div>
+<!-- End Sendfox Signup Form -->
+</div><div class="bottom-box"><div id="disqus_thread"></div><script>var disqus_shortname = "mokacoding";
+// Neet do add the / at the end to maintain compatibility with previous version
+// of the blog that didn't define disqus_url, letting Disqus set it automatically
+// using window.location.href
+var disqus_url = "https://mokacoding.com/blog/language-agnostic-automation-setup/";
+
+(function() {
+  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><noscript>Please enable JavaScript to view the<a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></div></div></div><div class="row-12 footer"><div class="col-12"><h3><a href="/">mokacoding</a></h3></div><div id="copy" class="col-9"><p>Hi I&#39;m <a href="https://gio.codes">Gio</a> I write here semi-regularly on software testing and TDD, productivity, and iOS development.</p>
+<p><a href="mailto:gio+blog@mokacoding.com">Get in touch</a> if you&#39;re interested in working together.</p>
+</div><div id="links" class="col-3"><p><i class="fa fa-twitter"></i>&nbsp;<a href="https://twitter.com/mokagio">@mokagio</a></p><p><i class="fa fa-github"></i>&nbsp;<a href="https://github.com/mokagio">mokagio</a></p></div></div></div></body><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-43554041-1', 'auto');
+ga('send', 'pageview');
+</script><script>var toggle = function(elm){
+  var y = elm.style && elm.style.display ? elm.style.display : 'block';
+  if (y == 'block'){
+    elm.style.opacity='0';
+    setTimeout( function(){ elm.style.display = 'none'; }, 300 );
+  }
+  else {
+    elm.style.display='block';
+    setTimeout( function(){ elm.style.opacity = '1'; }, 10 );
+  }
+}
+
+document.getElementById('close').onclick = function(){
+  toggle(document.getElementById('sticky-header'));
+  toggle(document.getElementById('sticky-header-padding-hack'));
+}</script></html>

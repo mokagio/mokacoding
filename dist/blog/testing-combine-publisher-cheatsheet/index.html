@@ -1,0 +1,202 @@
+<!DOCTYPE html><html lang="en"><head><title>Unit Testing Combine Publisher Cheatsheet | mokacoding</title><meta name="description" content="Snippets to test the behavior of Combine Publishers in XCTest ready to copy and paste into Xcode"><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"><!-- Canonical URL--><link rel="canonical" href="https://mokacoding.com/blog/testing-combine-publisher-cheatsheet/"><!-- Open Graph meta tags--><meta property="og:title" content="Unit Testing Combine Publisher Cheatsheet"><meta property="og:description" content="Snippets to test the behavior of Combine Publishers in XCTest ready to copy and paste into Xcode"><meta property="og:url" content="https://mokacoding.com/blog/testing-combine-publisher-cheatsheet/"><meta property="og:type" content="article"><meta property="og:site_name" content="mokacoding"><meta property="og:image" content="https://s3.amazonaws.com/mokacoding/2021-02-11-ogcover.jpg"><!-- Twitter meta tags--><meta property="twitter:card" content="summary"><meta property="twitter:title" content="Unit Testing Combine Publisher Cheatsheet"><meta property="twitter:site" content="@mokacoding"><meta property="twitter:creator" content="@mokagio"><!-- Stylesheets--><link href="/css/griddy.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet"><link href="/css/font-awesome.min.css" rel="stylesheet"><link href="/css/zenburn.css" rel="stylesheet"><!-- FavIcon--><!-- Thanks to https://www.favicon-generator.org/ & https://html2jade.org/--><link rel="apple-touch-icon" sizes="57x57" href="https://s3.amazonaws.com/mokacoding/apple-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="https://s3.amazonaws.com/mokacoding/apple-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="https://s3.amazonaws.com/mokacoding/apple-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="https://s3.amazonaws.com/mokacoding/apple-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="https://s3.amazonaws.com/mokacoding/apple-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="https://s3.amazonaws.com/mokacoding/apple-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="https://s3.amazonaws.com/mokacoding/apple-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="https://s3.amazonaws.com/mokacoding/apple-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" href="https://s3.amazonaws.com/mokacoding/apple-icon-180x180.png"><link rel="icon" type="image/png" sizes="192x192" href="https://s3.amazonaws.com/mokacoding/android-icon-192x192.png"><link rel="icon" type="image/png" sizes="32x32" href="https://s3.amazonaws.com/mokacoding/favicon-32x32.png"><link rel="icon" type="image/png" sizes="96x96" href="https://s3.amazonaws.com/mokacoding/favicon-96x96.png"><link rel="icon" type="image/png" sizes="16x16" href="https://s3.amazonaws.com/mokacoding/favicon-16x16.png"><link rel="manifest" href="https://s3.amazonaws.com/mokacoding/manifest.json"><meta name="msapplication-TileColor" content="#ffffff"><meta name="msapplication-TileImage" content="https://s3.amazonaws.com/mokacoding/ms-icon-144x144.png"><meta name="theme-color" content="#ffffff"><!-- SumoMe--><script src="//load.sumome.com/" data-sumo-site-id="dd80959300db03e20c8bc3dd899f1424fd764d261e6c3c41923c96482a270dba" async="async"></script></head><body><!-- Use this to render an extra header in special occasions--><div class="special-header"><div class="page"><div class="row-12"><div class="col-12"><p><!-- - Saving this for later and to avoid a `git revert`:markdown
+  [What is your biggest struggle right now with building software?](https://goo.gl/forms/lCLlJd9hqCUYoTME2)--><p><a href="https://tddinswift.com?utm_source=mokacoding-site&amp;utm_campaign=coming-soon&amp;utm_medium=sticky-header">Avilable Now: <strong>Test-Driven Development in Swift with SwiftUI and Combine</strong></a></p>
+</p></div></div></div></div><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">unit and acceptance testing, automation, productivity</div><div class="links"><a href="/archive.html">Archive</a><a href="/tags.html">Tags</a><a href="https://gio.codes">About</a><a href="#subscribe">Subscribe</a><a href="/feed.xml"><i class="fa fa-rss"></i></a></div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/testing-combine-publisher-cheatsheet">Unit Testing Combine Publisher Cheatsheet</a></h2><p class="post-meta"><span class="post-date">Thu Feb 11 2021&nbsp;</span><a href="/tag/Testing/index.html" class="post-tag">-Testing</a><a href="/tag/Combine/index.html" class="post-tag">-Combine</a><a href="/tag/Xcode/index.html" class="post-tag">-Xcode</a><a href="/tag/XCTest/index.html" class="post-tag">-XCTest</a></p><div class="post"><p>Here&#39;s an easy to copy and paste reference on how to write common test assertions for Swift Combine <code>Publisher</code>s in XCTest in Xcode.</p>
+<ul>
+<li><a href="#how-to-test-publisher-publishes-one-value-then-finishes">How to test <code>Publisher</code> publishes one value then finishes</a></li>
+<li><a href="#how-to-test-publisher-publishes-one-value-then-a-failure">How to test <code>Publisher</code> publishes one value then a failure</a></li>
+<li><a href="#how-to-test-publisher-publishes-many-values-then-finishes">How to test <code>Publisher</code> publishes many values then finishes</a></li>
+<li><a href="#how-to-test-publisher-publishes-many-values-then-a-failure">How to test <code>Publisher</code> publishes many values then a failure</a></li>
+<li><a href="#how-to-test-publisher-publishes-no-values-then-finishes">How to test <code>Publisher</code> publishes no values then finishes</a></li>
+<li><a href="#how-to-test-publisher-publishes-no-values-then-a-failure">How to test <code>Publisher</code> publishes no values then a failure</a></li>
+</ul>
+<p>You can see these snippets in action and experiment with the syntax by checking out the <a href="https://github.com/mokagio/TestingCombineExamples">example project</a>.</p>
+<p>While researching this post, I found that there is too much boilerplate required to test a <code>Publisher</code>, resulting in code that is harder to read.
+I started building a Swift Package to try addressing this problem: <strong><a href="https://github.com/mokagio/CombineTestHelpers">CombineTestHelpers</a></strong> provides handy one liners for each scenario in this cheat sheet and more.</p>
+<p>In the snippets below you&#39;ll see some code in the form <code>&lt;# ... #&gt;</code>.
+That&#39;s the source code placeholder Xcode notation and makes it easier to adapt the code to your needs.
+Xcode will let you jump to those placeholders with <code>Tab</code>.</p>
+<p>All the examples in this cheat sheet follow the same pattern:
+to test a Combine <code>Publisher</code>, define an <code>XCTestExpectation</code> and make the test subscribe to the publisher with <code>sink(receiveCompletion:, receiveValue)</code>.
+Fulfill the expectation in either the value or completion closure, depending on the kind of behavior you want to verify.
+If necessary, you can run one or more <code>XCTestAssert-</code> assertions on the value and completion you receive.</p>
+<h2 id="how-to-test-publisher-publishes-one-value-then-finishes">How to test <code>Publisher</code> publishes one value then finishes</h2>
+<!-- If you want to ensure your `Publisher` publishes only one value, fulfill the expectation in its `receiveCompletion` closure. -->
+
+<pre><code class="hljs swift"><span class="hljs-keyword">let</span> expectation <span class="hljs-operator">=</span> <span class="hljs-type">XCTestExpectation</span>(description: <span class="hljs-string">&quot;Publishes one value then finishes&quot;</span>)
+
+<span class="hljs-keyword">var</span> values: [<span class="hljs-operator">&lt;</span># <span class="hljs-type">Publisher</span> <span class="hljs-type">Output</span> type #<span class="hljs-operator">&gt;</span>] <span class="hljs-operator">=</span> []
+
+publisher
+    .sink(
+        receiveCompletion: { completion <span class="hljs-keyword">in</span>
+            <span class="hljs-keyword">guard</span> <span class="hljs-keyword">case</span> .finished <span class="hljs-operator">=</span> completion <span class="hljs-keyword">else</span> { <span class="hljs-keyword">return</span> }
+            expectation.fulfill()
+        },
+        receiveValue: { value <span class="hljs-keyword">in</span>
+            <span class="hljs-keyword">guard</span> values.isEmpty <span class="hljs-keyword">else</span> {
+                <span class="hljs-keyword">return</span> <span class="hljs-type">XCTFail</span>(<span class="hljs-string">&quot;Expected to receive only one value, got another: (<span class="hljs-subst">\(value)</span>)&quot;</span>)
+            }
+            <span class="hljs-type">XCTAssertEqual</span>(value, <span class="hljs-operator">&lt;</span># expected value #<span class="hljs-operator">&gt;</span>)
+            values.append(value)
+        }
+    )
+    .store(in: <span class="hljs-operator">&amp;</span>cancellables)
+
+wait(for: [expectation], timeout: <span class="hljs-number">0.5</span>)</code></pre>
+<h3 id="how-to-test-publisher-publishes-one-value-then-a-failure">How to test <code>Publisher</code> publishes one value then a failure</h3>
+<!-- In the previous example, we expected the stream to successfully complete. -->
+<!-- If instead you're working with a publisher that sends one value then fails, you'll need to fulfill the expectation in the `receiveCompletion` closure but only if the value is a `.failure`. -->
+<!-- Optionally, you may also assert the received error. -->
+
+<pre><code class="hljs swift"><span class="hljs-keyword">let</span> expectation <span class="hljs-operator">=</span> <span class="hljs-type">XCTestExpectation</span>(description: <span class="hljs-string">&quot;Publishes one value then fails&quot;</span>)
+
+<span class="hljs-keyword">var</span> values: [<span class="hljs-operator">&lt;</span># <span class="hljs-type">Publisher</span> <span class="hljs-type">Output</span> type #<span class="hljs-operator">&gt;</span>] <span class="hljs-operator">=</span> []
+
+publisher
+    .sink(
+        receiveCompletion: { completion <span class="hljs-keyword">in</span>
+            <span class="hljs-keyword">guard</span> <span class="hljs-keyword">case</span> .failure(<span class="hljs-keyword">let</span> error) <span class="hljs-operator">=</span> completion <span class="hljs-keyword">else</span> { <span class="hljs-keyword">return</span> }
+            <span class="hljs-type">XCTAssertEqual</span>(error, <span class="hljs-operator">&lt;</span># expected error #<span class="hljs-operator">&gt;</span>)
+            expectation.fulfill()
+        },
+        receiveValue: { value <span class="hljs-keyword">in</span>
+            <span class="hljs-keyword">guard</span> values.isEmpty <span class="hljs-keyword">else</span> {
+                <span class="hljs-keyword">return</span> <span class="hljs-type">XCTFail</span>(<span class="hljs-string">&quot;Expected to receive only one value, got another (<span class="hljs-subst">\(value)</span>)&quot;</span>)
+            }
+            <span class="hljs-type">XCTAssertEqual</span>(value, <span class="hljs-operator">&lt;</span># expected value #<span class="hljs-operator">&gt;</span>)
+            values.append(value)
+        }
+    )
+    .store(in: <span class="hljs-operator">&amp;</span>cancellables)
+
+wait(for: [expectation], timeout: <span class="hljs-number">0.5</span>)</code></pre>
+<h3 id="how-to-test-publisher-publishes-many-values-then-finishes">How to test <code>Publisher</code> publishes many values then finishes</h3>
+<pre><code class="hljs swift"><span class="hljs-keyword">let</span> expectation <span class="hljs-operator">=</span> <span class="hljs-type">XCTestExpectation</span>(description: <span class="hljs-string">&quot;Publishes values then finishes&quot;</span>)
+
+<span class="hljs-keyword">var</span> values: [<span class="hljs-operator">&lt;</span># <span class="hljs-type">Publisher</span> <span class="hljs-type">Output</span> type #<span class="hljs-operator">&gt;</span>] <span class="hljs-operator">=</span> []
+
+publisher
+    .sink(
+        receiveCompletion: { completion <span class="hljs-keyword">in</span>
+            <span class="hljs-keyword">guard</span> <span class="hljs-keyword">case</span> .finished <span class="hljs-operator">=</span> completion <span class="hljs-keyword">else</span> { <span class="hljs-keyword">return</span> }
+            expectation.fulfill()
+        },
+        receiveValue: {
+            values.append(<span class="hljs-variable">$0</span>)
+        }
+    )
+    .store(in: <span class="hljs-operator">&amp;</span>cancellables)
+
+wait(for: [expectation], timeout: <span class="hljs-number">0.5</span>)
+
+<span class="hljs-type">XCTAssertEqual</span>(values, <span class="hljs-operator">&lt;</span># expected values #<span class="hljs-operator">&gt;</span>)</code></pre>
+<h3 id="how-to-test-publisher-publishes-many-values-then-a-failure">How to test <code>Publisher</code> publishes many values then a failure</h3>
+<pre><code class="hljs swift"><span class="hljs-keyword">let</span> expectation <span class="hljs-operator">=</span> <span class="hljs-type">XCTestExpectation</span>(description: <span class="hljs-string">&quot;Publishes many values then a failure&quot;</span>)
+
+<span class="hljs-keyword">var</span> values: [<span class="hljs-operator">&lt;</span># <span class="hljs-type">Publisher</span> <span class="hljs-type">Output</span> type #<span class="hljs-operator">&gt;</span>] <span class="hljs-operator">=</span> []
+
+publisher
+    .sink(
+        receiveCompletion: { completion <span class="hljs-keyword">in</span>
+            <span class="hljs-keyword">guard</span> <span class="hljs-keyword">case</span> .failure(<span class="hljs-keyword">let</span> error) <span class="hljs-operator">=</span> completion <span class="hljs-keyword">else</span> { <span class="hljs-keyword">return</span> }
+            <span class="hljs-type">XCTAssertEqual</span>(error, <span class="hljs-operator">&lt;</span># expected error #<span class="hljs-operator">&gt;</span>)
+            expectation.fulfill()
+        },
+        receiveValue: {
+            values.append(<span class="hljs-variable">$0</span>)
+        }
+    )
+    .store(in: <span class="hljs-operator">&amp;</span>cancellables)
+
+wait(for: [expectation], timeout: <span class="hljs-number">0.5</span>)
+
+<span class="hljs-type">XCTAssertEqual</span>(values, <span class="hljs-operator">&lt;</span># expected values #<span class="hljs-operator">&gt;</span>)</code></pre>
+<h3 id="how-to-test-publisher-publishes-no-values-then-finishes">How to test <code>Publisher</code> publishes no values then finishes</h3>
+<pre><code class="hljs swift"><span class="hljs-keyword">let</span> expectation <span class="hljs-operator">=</span> <span class="hljs-type">XCTestExpectation</span>(description: <span class="hljs-string">&quot;Finishes without publishing values&quot;</span>)
+
+publisher
+    .sink(
+        receiveCompletion: { completion <span class="hljs-keyword">in</span>
+            <span class="hljs-keyword">guard</span> <span class="hljs-keyword">case</span> .finished <span class="hljs-operator">=</span> completion <span class="hljs-keyword">else</span> { <span class="hljs-keyword">return</span> }
+            expectation.fulfill()
+        },
+        receiveValue: {
+            <span class="hljs-type">XCTFail</span>(<span class="hljs-string">&quot;Expected to finish without receiving any value, got <span class="hljs-subst">\(<span class="hljs-variable">$0</span>)</span>&quot;</span>)
+        }
+    )
+    .store(in: <span class="hljs-operator">&amp;</span>cancellables)
+
+wait(for: [expectation], timeout: <span class="hljs-number">0.5</span>)</code></pre>
+<h3 id="how-to-test-publisher-publishes-no-values-then-a-failure">How to test <code>Publisher</code> publishes no values then a failure</h3>
+<!-- To test that a `Publisher` sends a failure and no value at all, it's not enough to fulfill the expectation if the `receiveCompletion` value is a `.failure`, we also need to ensure the test fails if `receiveValue` is called. -->
+
+<pre><code class="hljs swift"><span class="hljs-keyword">let</span> expectation <span class="hljs-operator">=</span> <span class="hljs-type">XCTestExpectation</span>(description: <span class="hljs-string">&quot;Fails without publishing values&quot;</span>)
+
+publisher
+    .sink(
+        receiveCompletion: { completion <span class="hljs-keyword">in</span>
+            <span class="hljs-keyword">guard</span> <span class="hljs-keyword">case</span> .failure(<span class="hljs-keyword">let</span> error) <span class="hljs-operator">=</span> completion <span class="hljs-keyword">else</span> { <span class="hljs-keyword">return</span> }
+            <span class="hljs-type">XCTAssertEqual</span>(error, <span class="hljs-operator">&lt;</span># expected error #<span class="hljs-operator">&gt;</span>)
+            expectation.fulfill()
+        },
+        receiveValue: {
+            <span class="hljs-type">XCTFail</span>(<span class="hljs-string">&quot;Expected to fail without receiving any value, got <span class="hljs-subst">\(<span class="hljs-variable">$0</span>)</span>&quot;</span>)
+        }
+    )
+    .store(in: <span class="hljs-operator">&amp;</span>cancellables)
+
+wait(for: [expectation], timeout: <span class="hljs-number">0.5</span>)</code></pre>
+<hr>
+<p>You&#39;ll find more insights on how to write tests for code using Combine in my book <a href="https://tddinswift.com"><em>Test-Driven Development in Swift with SwiftUI and Combine</em></a>.</p>
+<p>What are the most common <code>Publisher</code> behavior you test?
+I&#39;d love to hear from you!
+Leave a comment below or get in touch on Twitter at <a href="https://twitter.com/mokagio">@mokagio</a>.</p>
+<p><i><span>OpenGraph <a href="https://unsplash.com/photos/QqN25A3iF9w">Image</a> by <a href="https://unsplash.com/@sharonp?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Sharon Pittaway</a> on <a href="https://unsplash.com/s/photos/marbles?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span></i></p>
+</div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"><div><a href="/blog/how-waiting-in-line-can-improve-your-focus"><<&nbsp;How waiting in line can improve your focus</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/boring-iterations-interesting-steps">Boring Iterations. Interesting Steps.&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin Sendfox Signup Form -->
+<div id="sendfox_embed_signup">
+  <h4 class="form_title">Want more of these posts?</h4>
+  <p class="form_caption">Subscribe to receive new posts in your inbox.</p>
+  <form method="post" action="https://sendfox.com/form/3ee4z3/10r4wg" class="sendfox-form" id="10r4wg" data-async="true" data-recaptcha="true">
+    <p><input type="email" placeholder="Email" name="email" class="email" required /></p>
+    <!-- no botz please -->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="a_password" tabindex="-1" value="" autocomplete="off" /></div>
+    <div class="clear"><button type="submit">Sign me up</button></div>
+  </form>
+  <script src="https://sendfox.com/js/form.js"></script>
+</div>
+<!-- End Sendfox Signup Form -->
+</div><div class="bottom-box"><div id="disqus_thread"></div><script>var disqus_shortname = "mokacoding";
+// Neet do add the / at the end to maintain compatibility with previous version
+// of the blog that didn't define disqus_url, letting Disqus set it automatically
+// using window.location.href
+var disqus_url = "https://mokacoding.com/blog/testing-combine-publisher-cheatsheet/";
+
+(function() {
+  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><noscript>Please enable JavaScript to view the<a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></div></div></div><div class="row-12 footer"><div class="col-12"><h3><a href="/">mokacoding</a></h3></div><div id="copy" class="col-9"><p>Hi I&#39;m <a href="https://gio.codes">Gio</a> I write here semi-regularly on software testing and TDD, productivity, and iOS development.</p>
+<p><a href="mailto:gio+blog@mokacoding.com">Get in touch</a> if you&#39;re interested in working together.</p>
+</div><div id="links" class="col-3"><p><i class="fa fa-twitter"></i>&nbsp;<a href="https://twitter.com/mokagio">@mokagio</a></p><p><i class="fa fa-github"></i>&nbsp;<a href="https://github.com/mokagio">mokagio</a></p></div></div></div></body><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-43554041-1', 'auto');
+ga('send', 'pageview');
+</script><script>var toggle = function(elm){
+  var y = elm.style && elm.style.display ? elm.style.display : 'block';
+  if (y == 'block'){
+    elm.style.opacity='0';
+    setTimeout( function(){ elm.style.display = 'none'; }, 300 );
+  }
+  else {
+    elm.style.display='block';
+    setTimeout( function(){ elm.style.opacity = '1'; }, 10 );
+  }
+}
+
+document.getElementById('close').onclick = function(){
+  toggle(document.getElementById('sticky-header'));
+  toggle(document.getElementById('sticky-header-padding-hack'));
+}</script></html>

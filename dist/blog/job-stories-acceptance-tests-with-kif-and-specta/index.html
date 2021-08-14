@@ -1,0 +1,115 @@
+<!DOCTYPE html><html lang="en"><head><title>Job stories acceptance tests using KIF and Specta | mokacoding</title><meta name="description" content="When writing tests it's very important do be declarative, aiming to have tests that explain how a class is supposed to behave as good as its documentation would do. When talking about acceptance tests we can achieve this kind of clarity by having a 1:1 relationship between the tests and the acceptance criteria for the application. A very effective way to express acceptance criteria is through _job stories_. In this post we'll see how to write acceptance tests that map job stories for our iOS apps, using KIF and Specta."><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"><!-- Canonical URL--><link rel="canonical" href="https://mokacoding.com/blog/job-stories-acceptance-tests-with-KIF-and-specta/"><!-- Open Graph meta tags--><meta property="og:title" content="Job stories acceptance tests using KIF and Specta"><meta property="og:description" content="When writing tests it's very important do be declarative, aiming to have tests that explain how a class is supposed to behave as good as its documentation would do. When talking about acceptance tests we can achieve this kind of clarity by having a 1:1 relationship between the tests and the acceptance criteria for the application. A very effective way to express acceptance criteria is through _job stories_. In this post we'll see how to write acceptance tests that map job stories for our iOS apps, using KIF and Specta."><meta property="og:url" content="https://mokacoding.com/blog/job-stories-acceptance-tests-with-KIF-and-specta/"><meta property="og:type" content="article"><meta property="og:site_name" content="mokacoding"><meta property="og:image" content="https://s3.amazonaws.com/mokacoding/mokacoding_og_image.jpg"><!-- Twitter meta tags--><meta property="twitter:card" content="summary"><meta property="twitter:title" content="Job stories acceptance tests using KIF and Specta"><meta property="twitter:site" content="@mokacoding"><meta property="twitter:creator" content="@mokagio"><!-- Stylesheets--><link href="/css/griddy.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet"><link href="/css/font-awesome.min.css" rel="stylesheet"><link href="/css/zenburn.css" rel="stylesheet"><!-- FavIcon--><!-- Thanks to https://www.favicon-generator.org/ & https://html2jade.org/--><link rel="apple-touch-icon" sizes="57x57" href="https://s3.amazonaws.com/mokacoding/apple-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="https://s3.amazonaws.com/mokacoding/apple-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="https://s3.amazonaws.com/mokacoding/apple-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="https://s3.amazonaws.com/mokacoding/apple-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="https://s3.amazonaws.com/mokacoding/apple-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="https://s3.amazonaws.com/mokacoding/apple-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="https://s3.amazonaws.com/mokacoding/apple-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="https://s3.amazonaws.com/mokacoding/apple-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" href="https://s3.amazonaws.com/mokacoding/apple-icon-180x180.png"><link rel="icon" type="image/png" sizes="192x192" href="https://s3.amazonaws.com/mokacoding/android-icon-192x192.png"><link rel="icon" type="image/png" sizes="32x32" href="https://s3.amazonaws.com/mokacoding/favicon-32x32.png"><link rel="icon" type="image/png" sizes="96x96" href="https://s3.amazonaws.com/mokacoding/favicon-96x96.png"><link rel="icon" type="image/png" sizes="16x16" href="https://s3.amazonaws.com/mokacoding/favicon-16x16.png"><link rel="manifest" href="https://s3.amazonaws.com/mokacoding/manifest.json"><meta name="msapplication-TileColor" content="#ffffff"><meta name="msapplication-TileImage" content="https://s3.amazonaws.com/mokacoding/ms-icon-144x144.png"><meta name="theme-color" content="#ffffff"><!-- SumoMe--><script src="//load.sumome.com/" data-sumo-site-id="dd80959300db03e20c8bc3dd899f1424fd764d261e6c3c41923c96482a270dba" async="async"></script></head><body><!-- Use this to render an extra header in special occasions--><div class="special-header"><div class="page"><div class="row-12"><div class="col-12"><p><!-- - Saving this for later and to avoid a `git revert`:markdown
+  [What is your biggest struggle right now with building software?](https://goo.gl/forms/lCLlJd9hqCUYoTME2)--><p><a href="https://tddinswift.com?utm_source=mokacoding-site&amp;utm_campaign=coming-soon&amp;utm_medium=sticky-header">Avilable Now: <strong>Test-Driven Development in Swift with SwiftUI and Combine</strong></a></p>
+</p></div></div></div></div><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">unit and acceptance testing, automation, productivity</div><div class="links"><a href="/archive.html">Archive</a><a href="/tags.html">Tags</a><a href="https://gio.codes">About</a><a href="#subscribe">Subscribe</a><a href="/feed.xml"><i class="fa fa-rss"></i></a></div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/job-stories-acceptance-tests-with-kif-and-specta">Job stories acceptance tests using KIF and Specta</a></h2><p class="post-meta"><span class="post-date">Tue Apr 21 2015&nbsp;</span><a href="/tag/Acceptance-Testing/index.html" class="post-tag">-Acceptance Testing</a><a href="/tag/KIF/index.html" class="post-tag">-KIF</a><a href="/tag/Specta/index.html" class="post-tag">-Specta</a></p><div class="post"><p>In this post we&#39;ll put together two of the tools seen in the past weeks, <a href="https://mokacoding.com/blog/setting-up-kif-for-ios-acceptance-testing">KIF</a> and <a href="https://mokacoding.com/blog/better-tests-with-specta">Specta</a>, to write more effective acceptance tests, that map user stories.</p>
+<p>If you don&#39;t know what a job story is I&#39;ll suggest you to have a look at <a href="https://medium.com/the-job-to-be-done/replacing-the-user-story-with-the-job-story-af7cdee10c27">these</a> two <a href="https://robots.thoughtbot.com/converting-to-jobs-stories">posts</a>. In short, a job story is an alternative approach to collecting requirements to the more famous <em>user story</em>, that focus on the value added by the feature or bugfix to be implemented. It is a good way to make sure only things that will actually benefit the user and help deliver a better experience will be developed.</p>
+<p>Let&#39;s take a look at our example app, <a href="https://github.com/mokacoding/Bench">Bench</a>. One (<em>of the two</em>) its feature is displaying the list of the elements from the <a href="http://en.wikipedia.org/wiki/Periodic_table">periodic table</a>. The job story for this feature could have looked something like:</p>
+<blockquote>
+<p>When I tap the &quot;show elements&quot; button
+I see a list of elements
+So that I can expand my knowledge</p>
+</blockquote>
+<p>The test we wrote was this:</p>
+<pre><code class="hljs objc"><span class="hljs-comment">/**
+ *  When I tap the &quot;show elements&quot; button, I see a listt of elements, so I can expand my knowledge
+ */</span>
+- (<span class="hljs-keyword">void</span>)testShowElements {
+  [tester tapViewWithAccessibilityLabel:<span class="hljs-string">@&quot;show elements&quot;</span>];
+
+  [tester waitForViewWithAccessibilityLabel:<span class="hljs-string">@&quot;Elements&quot;</span>];
+  [tester waitForViewWithAccessibilityLabel:<span class="hljs-string">@&quot;[H] Hydrogen (1)&quot;</span> ];
+  [tester waitForViewWithAccessibilityLabel:<span class="hljs-string">@&quot;[Uuo] Ununoctium (118)&quot;</span>];
+  <span class="hljs-comment">// Code to restore the app to the default state</span>
+}</code></pre>
+<p>The only way we have to tie the test to the story is by using a comment. The terminal output for it will be:</p>
+<pre><code><span class="hljs-keyword">Test </span>Case &#x27;-[MainScreenTest testShowElements]&#x27; started.
+<span class="hljs-keyword">Test </span>Case &#x27;-[MainScreenTest testShowElements]&#x27; passed (1.720 seconds).</code></pre><p>This output does not give use any information on the story.</p>
+<p>Let&#39;s now see what we could do using Specta has the harness for the test. The simplest implementation we could write is be something like this:</p>
+<pre><code class="hljs objc">describe(<span class="hljs-string">@&quot;When I tap the &#x27;show elements&#x27; button, I see a list of elements, so I can expand my knowledge&quot;</span>, ^{
+  it(<span class="hljs-string">@&quot;should do what&#x27;s expected&quot;</span>, ^{
+    [tester tapViewWithAccessibilityLabel:<span class="hljs-string">@&quot;show elements&quot;</span>];
+
+    [tester waitForViewWithAccessibilityLabel:<span class="hljs-string">@&quot;Elements&quot;</span>];
+    [tester waitForViewWithAccessibilityLabel:<span class="hljs-string">@&quot;[H] Hydrogen (1)&quot;</span> ];
+    [tester waitForViewWithAccessibilityLabel:<span class="hljs-string">@&quot;[Uuo] Ununoctium (118)&quot;</span>];
+    <span class="hljs-comment">// Code to restore the app to the default state</span>
+  });
+});</code></pre>
+<p>Which outputs:</p>
+<pre><code><span class="hljs-keyword">Test </span>Case &#x27;-[MainScreenSpec test_When_I_tap_the_show_elements_button_I_see_a_list_of_elements_so_that_I_can_expand_my_knowledge__should_do_whats_expected]&#x27; started.
+<span class="hljs-keyword">Test </span>Case &#x27;-[MainScreenSpec test_When_I_tap_the_show_elements_button_I_see_a_list_of_elements_so_that_I_can_expand_my_knowledge__should_do_whats_expected]&#x27; passed (1.703 seconds).</code></pre><p>Now, I&#39;m not gonna say that this console output <em>reads better</em> than the previous one, but you can&#39;t deny that, once you digest the <a href="http://en.wikipedia.org/wiki/Snake_case">snake casing</a>, the story is expressed there.</p>
+<p>However, there are some issues, that <code>@&quot;should do what&#39;s expected&quot;</code> is a bit out of place, and doesn&#39;t really add any value. Also, the test body is as long as its XCTest counterpart.</p>
+<p>When can leverage on the xSpec syntax that Specta provides use to write a test case that flows in a nicer way.</p>
+<pre><code class="hljs objc">describe(<span class="hljs-string">@&quot;Main screen&quot;</span>, ^{
+  context(<span class="hljs-string">@&quot;when I tap the &#x27;show elements&#x27; button&quot;</span>, ^{
+    before(^{
+      [tester tapViewWithAccessibilityLabel:<span class="hljs-string">@&quot;show elements&quot;</span>];
+    });
+
+    it(<span class="hljs-string">@&quot;I see a list of elements, so I can expand my knowledge&quot;</span>, ^{
+      [tester waitForViewWithAccessibilityLabel:<span class="hljs-string">@&quot;Elements&quot;</span>];
+      [tester waitForViewWithAccessibilityLabel:<span class="hljs-string">@&quot;[H] Hydrogen (1)&quot;</span> ];
+      [tester waitForViewWithAccessibilityLabel:<span class="hljs-string">@&quot;[Uuo] Ununoctium (118)&quot;</span>];
+    });
+
+    after(^{
+      <span class="hljs-comment">// Code to restore the app to the default state</span>
+    });
+  });
+});</code></pre>
+<p>The code of this test really <em>reads better</em>, what I especially like is how this syntax allows us to separate the operations that we need to perform to reach the screen or feature under test from the assertion itself. The same stands true for the code to restore the app into the default state, from which the next test, whatever it will be, can reliably start.</p>
+<p>Notice how we removed the useless <code>@&quot;should do what&#39;s exepceted&quot;</code> and how more horizontally compact the code is, no need to move your eyes left and right to read it, or to horizontally scroll.</p>
+<p>The console output is still long and with all the <code>_</code>, but at least it only carries useful information:</p>
+<pre><code><span class="hljs-keyword">Test </span>Case &#x27;-[MainScreenSpec test_Main_screen__when_I_tap_the_show_elements_button__I_see_a_list_of_elements_so_I_can_expand_my_knowledge]&#x27; started.
+<span class="hljs-keyword">Test </span>Case &#x27;-[MainScreenSpec test_Main_screen__when_I_tap_the_show_elements_button__I_see_a_list_of_elements_so_I_can_expand_my_knowledge]&#x27; passed (1.724 seconds).</code></pre><p>You can have a look at <a href="https://github.com/mokacoding/Bench/blob/KIF%2BSpecta/BenchKIF/MainScreenSpec.m">the other tests</a> on Bench to have a better idea of how this kind of tests look.</p>
+<hr>
+<p>Acceptance testing on iOS is an field which is still evolving and taking a proper form, both the tools and the process are not yet mature and up to the task. This approach to writing acceptance tests using a job story style, with KIF and Specta as tools of choice, is only one of the possible ones, and it&#39;s not said that it&#39;s the best one. Although without experimenting and trying new approaches we risk to stagnate, and progress comes from experimentation. I&#39;ve been using this approach in a handful of projects and have been quite happy with the results.</p>
+<p>I&#39;d like to hear your opinion on this, or on any other styles you might be using to write your acceptance test cases. You can tweet <a href="http://twiter.com/mokacoding">@mokacoding</a>, or use the comments below. And don&#39;t forget to <a href="#subscribe">subscribe</a> to our newsletter.</p>
+<p><em>Happy coding, and leave the codebase better than you found it.</em></p>
+</div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"><div><a href="/blog/specta-global-before-after-each-updated"><<&nbsp;Specta global before and after each hooks (Updated)</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/better-tests-with-specta">Better tests with Specta&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin Sendfox Signup Form -->
+<div id="sendfox_embed_signup">
+  <h4 class="form_title">Want more of these posts?</h4>
+  <p class="form_caption">Subscribe to receive new posts in your inbox.</p>
+  <form method="post" action="https://sendfox.com/form/3ee4z3/10r4wg" class="sendfox-form" id="10r4wg" data-async="true" data-recaptcha="true">
+    <p><input type="email" placeholder="Email" name="email" class="email" required /></p>
+    <!-- no botz please -->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="a_password" tabindex="-1" value="" autocomplete="off" /></div>
+    <div class="clear"><button type="submit">Sign me up</button></div>
+  </form>
+  <script src="https://sendfox.com/js/form.js"></script>
+</div>
+<!-- End Sendfox Signup Form -->
+</div><div class="bottom-box"><div id="disqus_thread"></div><script>var disqus_shortname = "mokacoding";
+// Neet do add the / at the end to maintain compatibility with previous version
+// of the blog that didn't define disqus_url, letting Disqus set it automatically
+// using window.location.href
+var disqus_url = "https://mokacoding.com/blog/job-stories-acceptance-tests-with-kif-and-specta/";
+
+(function() {
+  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><noscript>Please enable JavaScript to view the<a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></div></div></div><div class="row-12 footer"><div class="col-12"><h3><a href="/">mokacoding</a></h3></div><div id="copy" class="col-9"><p>Hi I&#39;m <a href="https://gio.codes">Gio</a> I write here semi-regularly on software testing and TDD, productivity, and iOS development.</p>
+<p><a href="mailto:gio+blog@mokacoding.com">Get in touch</a> if you&#39;re interested in working together.</p>
+</div><div id="links" class="col-3"><p><i class="fa fa-twitter"></i>&nbsp;<a href="https://twitter.com/mokagio">@mokagio</a></p><p><i class="fa fa-github"></i>&nbsp;<a href="https://github.com/mokagio">mokagio</a></p></div></div></div></body><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-43554041-1', 'auto');
+ga('send', 'pageview');
+</script><script>var toggle = function(elm){
+  var y = elm.style && elm.style.display ? elm.style.display : 'block';
+  if (y == 'block'){
+    elm.style.opacity='0';
+    setTimeout( function(){ elm.style.display = 'none'; }, 300 );
+  }
+  else {
+    elm.style.display='block';
+    setTimeout( function(){ elm.style.opacity = '1'; }, 10 );
+  }
+}
+
+document.getElementById('close').onclick = function(){
+  toggle(document.getElementById('sticky-header'));
+  toggle(document.getElementById('sticky-header-padding-hack'));
+}</script></html>

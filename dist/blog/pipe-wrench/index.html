@@ -1,0 +1,112 @@
+<!DOCTYPE html><html lang="en"><head><title>What can a pipe wrench teach us about software engineering? | mokacoding</title><meta name="description" content="With his famous pipe wrench lecture, Vannevar Bush taught young MIT engineers the value of precision. The same teaching holds true for software developers."><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"><!-- Canonical URL--><link rel="canonical" href="https://mokacoding.com/blog/pipe-wrench/"><!-- Open Graph meta tags--><meta property="og:title" content="What can a pipe wrench teach us about software engineering?"><meta property="og:description" content="With his famous pipe wrench lecture, Vannevar Bush taught young MIT engineers the value of precision. The same teaching holds true for software developers."><meta property="og:url" content="https://mokacoding.com/blog/pipe-wrench/"><meta property="og:type" content="article"><meta property="og:site_name" content="mokacoding"><meta property="og:image" content="https://mokacoding.s3.amazonaws.com/2020-10-21-pipe-wrench.jpg"><!-- Twitter meta tags--><meta property="twitter:card" content="summary"><meta property="twitter:title" content="What can a pipe wrench teach us about software engineering?"><meta property="twitter:site" content="@mokacoding"><meta property="twitter:creator" content="@mokagio"><!-- Stylesheets--><link href="/css/griddy.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet"><link href="/css/font-awesome.min.css" rel="stylesheet"><link href="/css/zenburn.css" rel="stylesheet"><!-- FavIcon--><!-- Thanks to https://www.favicon-generator.org/ & https://html2jade.org/--><link rel="apple-touch-icon" sizes="57x57" href="https://s3.amazonaws.com/mokacoding/apple-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="https://s3.amazonaws.com/mokacoding/apple-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="https://s3.amazonaws.com/mokacoding/apple-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="https://s3.amazonaws.com/mokacoding/apple-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="https://s3.amazonaws.com/mokacoding/apple-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="https://s3.amazonaws.com/mokacoding/apple-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="https://s3.amazonaws.com/mokacoding/apple-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="https://s3.amazonaws.com/mokacoding/apple-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" href="https://s3.amazonaws.com/mokacoding/apple-icon-180x180.png"><link rel="icon" type="image/png" sizes="192x192" href="https://s3.amazonaws.com/mokacoding/android-icon-192x192.png"><link rel="icon" type="image/png" sizes="32x32" href="https://s3.amazonaws.com/mokacoding/favicon-32x32.png"><link rel="icon" type="image/png" sizes="96x96" href="https://s3.amazonaws.com/mokacoding/favicon-96x96.png"><link rel="icon" type="image/png" sizes="16x16" href="https://s3.amazonaws.com/mokacoding/favicon-16x16.png"><link rel="manifest" href="https://s3.amazonaws.com/mokacoding/manifest.json"><meta name="msapplication-TileColor" content="#ffffff"><meta name="msapplication-TileImage" content="https://s3.amazonaws.com/mokacoding/ms-icon-144x144.png"><meta name="theme-color" content="#ffffff"><!-- SumoMe--><script src="//load.sumome.com/" data-sumo-site-id="dd80959300db03e20c8bc3dd899f1424fd764d261e6c3c41923c96482a270dba" async="async"></script></head><body><!-- Use this to render an extra header in special occasions--><div class="special-header"><div class="page"><div class="row-12"><div class="col-12"><p><!-- - Saving this for later and to avoid a `git revert`:markdown
+  [What is your biggest struggle right now with building software?](https://goo.gl/forms/lCLlJd9hqCUYoTME2)--><p><a href="https://tddinswift.com?utm_source=mokacoding-site&amp;utm_campaign=coming-soon&amp;utm_medium=sticky-header">Avilable Now: <strong>Test-Driven Development in Swift with SwiftUI and Combine</strong></a></p>
+</p></div></div></div></div><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">unit and acceptance testing, automation, productivity</div><div class="links"><a href="/archive.html">Archive</a><a href="/tags.html">Tags</a><a href="https://gio.codes">About</a><a href="#subscribe">Subscribe</a><a href="/feed.xml"><i class="fa fa-rss"></i></a></div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/pipe-wrench">What can a pipe wrench teach us about software engineering?</a></h2><p class="post-meta"><span class="post-date">Wed Oct 21 2020&nbsp;</span><a href="/tag/Books/index.html" class="post-tag">-Books</a><a href="/tag/Software-Design/index.html" class="post-tag">-Software Design</a><a href="/tag/Swift/index.html" class="post-tag">-Swift</a></p><div class="post"><p>What can a pipe wrench teach us about software engineering?
+A lot, according to <a href="https://en.wikipedia.org/wiki/Vannevar_Bush">Vannevar Bush</a>.</p>
+<p>An electrical engineer and professor at MIT, Bush was &quot;one of the most politically powerful inventors in America since Benjamin Franklin,&quot; as his biographer <a href="https://geni.us/liVH8">G. Pascal Zachary puts it</a>.
+During WWII, he personified the United State&#39;s military research, organized the Manhattan Project, and played a crucial role in the Allied victory.
+He was also a mentor to <a href="https://en.wikipedia.org/wiki/Claude_Shannon">Claude Shannon</a>, the father of the information age.</p>
+<p>One anecdote of Bush&#39;s career as an instructor at MIT particularly inspired me: his pipe wrench lecture.</p>
+<p>Bush would greet an auditorium filled with aspiring engineers, hold up a pipe wrench, and challenge them: &quot;Describe this&quot;.</p>
+<img src="https://mokacoding.s3.amazonaws.com/2020-10-21-pipe-wrench.jpg" style="margin: 0 auto; display: block" width=70% alt="image of a pipe wrench"/>
+
+<p style="text-align: center; opacity: .6; font-size: .85rem"><i>Not the actual pipe wrench showed by Bush, I found this one on Amazon.</i></p>
+
+<p>One by one, they would try, and each time Bush would dissect the description, pointing out where it was vague.</p>
+<p>Finally, he would write in precise English a patent application for the wrench:</p>
+<blockquote>
+<p>By turning the nut to the right or left the movable jaw may be moved either toward or away from the fixed jaw, as may be desirable.
+The inner face of the movable jaw is formed at a right angle to its shank, and is also provided with a series of teeth, which pitch or rake on its fellow jaw...</p>
+</blockquote>
+<p>With this exercise, Bush drilled into the class the value of precision.</p>
+<h2 id="precision">Precision</h2>
+<p>&quot;Given the pipe wrench, produce the words for that wrench and no other; given the words, produce the wrench.
+That, Bush taught his students, was the beginning of engineering&quot;, write Soni and Goodman in <a href="https://geni.us/FqRN7P"><em>A Mind at Play</em></a>.</p>
+<p>Bush MIT students were electrical engineers, but precision is something software engineers should learn, too.</p>
+<p>Precision is fundamental when representing building a model for the domain of the software in code.</p>
+<p>One way in which a domain representation can be vague is when it allows inconsistent state to occur.
+If you work in a language with a strong type system, like Swift, you can use precise types to make your domain modeling clearer and make undesirable state unrepresentable.</p>
+<p>For example, when modeling an operation that can either succeed with some data or fail with an error, you could use a type like this:</p>
+<pre><code class="hljs swift"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Operation</span> </span>{
+  <span class="hljs-keyword">let</span> success: <span class="hljs-type">Bool</span>
+  <span class="hljs-keyword">let</span> data: <span class="hljs-type">Data</span>?
+  <span class="hljs-keyword">let</span> error: <span class="hljs-type">Error</span>?
+}</code></pre>
+<p>This type does the job but leaves room for errors: nothing stops you from creating an instance with <code>success</code> true but <code>data</code> nil or one with values in both <code>data</code> and <code>error</code>.</p>
+<pre><code class="hljs swift"><span class="hljs-keyword">let</span> inconsistentOperation <span class="hljs-operator">=</span> <span class="hljs-type">Operation</span>(success: <span class="hljs-literal">false</span>, data: someData, error: .none)</code></pre>
+<p>Using the <a href="https://developer.apple.com/documentation/swift/result"><code>Result</code> <code>enum</code></a>, you can remove this ambiguity <em>at compile time</em>, making it impossible for both data and error to be set simultaneously.</p>
+<pre><code class="hljs swift"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Operation</span> </span>{
+  <span class="hljs-keyword">let</span> result: <span class="hljs-type">Result</span>&lt;<span class="hljs-type">Data</span>, <span class="hljs-type">Error</span>&gt;
+}</code></pre>
+<p>Another useful <code>enum</code>, borrowed from the <a href="https://elm-lang.org/">Elm programming language</a>, is <a href="https://github.com/mokagio/RemoteData"><code>RemoteData</code></a>: a way to encapsulate the state of a network operation.</p>
+<pre><code class="hljs swift"><span class="hljs-class"><span class="hljs-keyword">enum</span> <span class="hljs-title">RemoteData</span>&lt;<span class="hljs-title">T</span>&gt; </span>{
+  <span class="hljs-keyword">case</span> notAsked
+  <span class="hljs-keyword">case</span> loading
+  <span class="hljs-keyword">case</span> loaded(<span class="hljs-type">T</span>)
+  <span class="hljs-keyword">case</span> failed(<span class="hljs-type">Error</span>)
+}</code></pre>
+<p><code>enum</code>s are not the only way tool to make your domain modeling more precise.
+<a href="https://github.com/pointfreeco/swift-nonempty"><code>NonEmpty</code></a> uses <a href="https://docs.swift.org/swift-book/LanguageGuide/Generics.html#ID186">type constrained generics</a> to represent <code>Collection</code>s that are not empty.</p>
+<pre><code class="hljs swift"><span class="hljs-comment">// A non-empty array of integers</span>
+<span class="hljs-keyword">let</span> xs <span class="hljs-operator">=</span> <span class="hljs-type">NonEmpty</span>&lt;[<span class="hljs-type">Int</span>]&gt;(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>)
+xs.first <span class="hljs-operator">+</span> <span class="hljs-number">1</span> <span class="hljs-comment">// `first` is non-optional since it&#x27;s guaranteed to be present</span></code></pre>
+<p>Using <code>NonEmpty</code> adds clarity to the values you define, possibly avoiding runtime crashes by making it impossible to access via subscript an empty array.</p>
+<p>If you had to represent &quot;a collection of unique positive integers where order matters and with at least one element,&quot; you could use <code>[Int]</code>, or you could combine <code>NonEmpty</code>, <a href="https://github.com/Weebly/OrderedSet"><code>OrderedSet</code></a>, and <a href="https://developer.apple.com/documentation/swift/uint"><code>UInt</code></a> in <code>NonEmpty&lt;OrderedSet&lt;UInt&gt;&gt;</code>.</p>
+<p>Using <code>[Int]</code> might be simpler but leaves the door open for all sorts of inconsistent instances, like an empty array, an array with negative values, or one with more than one occurrences of the same value.
+<code>NonEmpty&lt;OrderedSet&lt;UInt&gt;&gt;</code> requires more work but using it will make the compiler help you avoid inconsistent state.</p>
+<hr>
+<p>We like to call ourselves software <em>engineers</em>, but sometimes forget that engineering is an applied science.
+It is rigorous and methodical.
+When building a bridge, an integrated circuit, or a motor, precision matters.
+If the parts don&#39;t fit, if the power supply is not adequate, if there isn&#39;t enough material, things won&#39;t work.</p>
+<p>With software, we&#39;re blessed with having a more malleable medium than our colleagues working in the physical realm.
+That shouldn&#39;t be an excuse to forget the value of precision.</p>
+<p>What are your favorite ways to use the type-system to implement a precise domain model?</p>
+<p>Leave a comment below or get in touch on Twitter at <a href="https://twitter.com/mokagio">@mokagio</a>.</p>
+</div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"><div><a href="/blog/swiftui-dependency-injection"><<&nbsp;Dependency Injection in SwiftUI</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/hyperfocus-review">Hyperfocus by Chris Bailey&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin Sendfox Signup Form -->
+<div id="sendfox_embed_signup">
+  <h4 class="form_title">Want more of these posts?</h4>
+  <p class="form_caption">Subscribe to receive new posts in your inbox.</p>
+  <form method="post" action="https://sendfox.com/form/3ee4z3/10r4wg" class="sendfox-form" id="10r4wg" data-async="true" data-recaptcha="true">
+    <p><input type="email" placeholder="Email" name="email" class="email" required /></p>
+    <!-- no botz please -->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="a_password" tabindex="-1" value="" autocomplete="off" /></div>
+    <div class="clear"><button type="submit">Sign me up</button></div>
+  </form>
+  <script src="https://sendfox.com/js/form.js"></script>
+</div>
+<!-- End Sendfox Signup Form -->
+</div><div class="bottom-box"><div id="disqus_thread"></div><script>var disqus_shortname = "mokacoding";
+// Neet do add the / at the end to maintain compatibility with previous version
+// of the blog that didn't define disqus_url, letting Disqus set it automatically
+// using window.location.href
+var disqus_url = "https://mokacoding.com/blog/pipe-wrench/";
+
+(function() {
+  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><noscript>Please enable JavaScript to view the<a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></div></div></div><div class="row-12 footer"><div class="col-12"><h3><a href="/">mokacoding</a></h3></div><div id="copy" class="col-9"><p>Hi I&#39;m <a href="https://gio.codes">Gio</a> I write here semi-regularly on software testing and TDD, productivity, and iOS development.</p>
+<p><a href="mailto:gio+blog@mokacoding.com">Get in touch</a> if you&#39;re interested in working together.</p>
+</div><div id="links" class="col-3"><p><i class="fa fa-twitter"></i>&nbsp;<a href="https://twitter.com/mokagio">@mokagio</a></p><p><i class="fa fa-github"></i>&nbsp;<a href="https://github.com/mokagio">mokagio</a></p></div></div></div></body><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-43554041-1', 'auto');
+ga('send', 'pageview');
+</script><script>var toggle = function(elm){
+  var y = elm.style && elm.style.display ? elm.style.display : 'block';
+  if (y == 'block'){
+    elm.style.opacity='0';
+    setTimeout( function(){ elm.style.display = 'none'; }, 300 );
+  }
+  else {
+    elm.style.display='block';
+    setTimeout( function(){ elm.style.opacity = '1'; }, 10 );
+  }
+}
+
+document.getElementById('close').onclick = function(){
+  toggle(document.getElementById('sticky-header'));
+  toggle(document.getElementById('sticky-header-padding-hack'));
+}</script></html>

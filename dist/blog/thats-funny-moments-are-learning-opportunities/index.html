@@ -1,0 +1,123 @@
+<!DOCTYPE html><html lang="en"><head><title>&quot;That's funny…&quot; moments are learning opportunities | mokacoding</title><meta name="description" content="The most exciting phrase to hear in science, and software development, the one that heralds new discoveries, is not &quot;Eureka!&quot; but &quot;That's funny…&quot;"><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"><!-- Canonical URL--><link rel="canonical" href="https://mokacoding.com/blog/thats-funny-moments-are-learning-opportunities/"><!-- Open Graph meta tags--><meta property="og:title" content="&quot;That's funny…&quot; moments are learning opportunities"><meta property="og:description" content="The most exciting phrase to hear in science, and software development, the one that heralds new discoveries, is not &quot;Eureka!&quot; but &quot;That's funny…&quot;"><meta property="og:url" content="https://mokacoding.com/blog/thats-funny-moments-are-learning-opportunities/"><meta property="og:type" content="article"><meta property="og:site_name" content="mokacoding"><meta property="og:image" content="https://mokacoding.s3.amazonaws.com/og-image-light-bulbs.jpg"><!-- Twitter meta tags--><meta property="twitter:card" content="summary"><meta property="twitter:title" content="&quot;That's funny…&quot; moments are learning opportunities"><meta property="twitter:site" content="@mokacoding"><meta property="twitter:creator" content="@mokagio"><!-- Stylesheets--><link href="/css/griddy.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet"><link href="/css/font-awesome.min.css" rel="stylesheet"><link href="/css/zenburn.css" rel="stylesheet"><!-- FavIcon--><!-- Thanks to https://www.favicon-generator.org/ & https://html2jade.org/--><link rel="apple-touch-icon" sizes="57x57" href="https://s3.amazonaws.com/mokacoding/apple-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="https://s3.amazonaws.com/mokacoding/apple-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="https://s3.amazonaws.com/mokacoding/apple-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="https://s3.amazonaws.com/mokacoding/apple-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="https://s3.amazonaws.com/mokacoding/apple-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="https://s3.amazonaws.com/mokacoding/apple-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="https://s3.amazonaws.com/mokacoding/apple-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="https://s3.amazonaws.com/mokacoding/apple-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" href="https://s3.amazonaws.com/mokacoding/apple-icon-180x180.png"><link rel="icon" type="image/png" sizes="192x192" href="https://s3.amazonaws.com/mokacoding/android-icon-192x192.png"><link rel="icon" type="image/png" sizes="32x32" href="https://s3.amazonaws.com/mokacoding/favicon-32x32.png"><link rel="icon" type="image/png" sizes="96x96" href="https://s3.amazonaws.com/mokacoding/favicon-96x96.png"><link rel="icon" type="image/png" sizes="16x16" href="https://s3.amazonaws.com/mokacoding/favicon-16x16.png"><link rel="manifest" href="https://s3.amazonaws.com/mokacoding/manifest.json"><meta name="msapplication-TileColor" content="#ffffff"><meta name="msapplication-TileImage" content="https://s3.amazonaws.com/mokacoding/ms-icon-144x144.png"><meta name="theme-color" content="#ffffff"><!-- SumoMe--><script src="//load.sumome.com/" data-sumo-site-id="dd80959300db03e20c8bc3dd899f1424fd764d261e6c3c41923c96482a270dba" async="async"></script></head><body><!-- Use this to render an extra header in special occasions--><div class="special-header"><div class="page"><div class="row-12"><div class="col-12"><p><!-- - Saving this for later and to avoid a `git revert`:markdown
+  [What is your biggest struggle right now with building software?](https://goo.gl/forms/lCLlJd9hqCUYoTME2)--><p><a href="https://tddinswift.com?utm_source=mokacoding-site&amp;utm_campaign=coming-soon&amp;utm_medium=sticky-header">Avilable Now: <strong>Test-Driven Development in Swift with SwiftUI and Combine</strong></a></p>
+</p></div></div></div></div><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">unit and acceptance testing, automation, productivity</div><div class="links"><a href="/archive.html">Archive</a><a href="/tags.html">Tags</a><a href="https://gio.codes">About</a><a href="#subscribe">Subscribe</a><a href="/feed.xml"><i class="fa fa-rss"></i></a></div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/thats-funny-moments-are-learning-opportunities">&quot;That's funny…&quot; moments are learning opportunities</a></h2><p class="post-meta"><span class="post-date">Mon Sep 28 2020&nbsp;</span><a href="/tag/Software-Design/index.html" class="post-tag">-Software Design</a><a href="/tag/Quotes/index.html" class="post-tag">-Quotes</a></p><div class="post"><p>The other day, I came across this quote <a href="https://quoteinvestigator.com/2015/03/02/eureka-funny/">often attributed to Isaac Asimov</a>:</p>
+<blockquote>
+<p>The most exciting phrase to hear in science, the one that heralds new discoveries, is not &quot;Eureka!&quot; (I found it!) but &quot;That&#39;s funny…&quot;</p>
+</blockquote>
+<p>That&#39;s as true for science as it is for software development.</p>
+<p>When our software does something that makes us exclaim: &quot;That&#39;s funny...&quot;, that&#39;s when learning happens.
+The <em>funny</em>, unexpected behavior is a sign that our understanding of the software doesn&#39;t match reality.
+When that happens, there&#39;s often a bug.</p>
+<p>We tend to think of bugs as the software being wrong.
+A different way to look at them, though, is as an asymmetry between the desired behavior and the authors&#39; understanding of what the code they wrote would end up doing.</p>
+<p>For example, you might expect that calling a view method named <code>display(_: Bool)</code> passing <code>true</code> will result in the view being displayed.
+But, if the method implementation is as follows, the view will be hidden instead.</p>
+<pre><code class="hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">display</span>(<span class="hljs-keyword">_</span> <span class="hljs-params">shouldHide</span>: <span class="hljs-type">Bool</span>)</span> {
+  shouldHide <span class="hljs-operator">?</span> hide() : show()
+}</code></pre>
+<p>The difference between the mental representation<sup id="mental-representation-fn-back"><a href="#mental-representation-fn">1</a></sup> of what the code would do and its actual behavior is the source of the bug.</p>
+<p>When reading and writing software, our aim should be to build the most accurate mental representation.</p>
+<p>As the late Anders Ericsson points out in his book <a href="https://geni.us/l8FSc">Peak</a>, it is the quality of mental representations that sets apart the best form the rest.</p>
+<p>Building mental representations is the same approach Nobel Prize <a href="https://geni.us/bV50i">Richard Feynman used to understand physics</a>:</p>
+<blockquote>
+<p>I had a scheme, which I still use today when somebody is explaining something that I&#39;m trying to understand:
+I keep making up examples.</p>
+</blockquote>
+<p>Instead of just trying to follow an equation, or in our case, the code, Feynman would picture it up in his mind, continuing to refine the model as more information arrived.</p>
+<blockquote>
+<p>As they&#39;re telling me the conditions of the theorem, I construct something which fits all the conditions.
+You know, you have a set (one ball)—disjoint (two balls).
+Then the balls turn colors, grow hairs, or whatever, in my head as they put more conditions on.
+Finally they state the theorem, which is some dumb thing about the ball which isn&#39;t true for my hairy green ball thing, so I say, &#39;False!&#39;</p>
+</blockquote>
+<p>Imagine being able to apply the same visual approach to debugging.
+Read the code, build up an image of the information flowing through the system, and identify the bug source when the outcome in your mental image is not doesn&#39;t match reality.</p>
+<p>One of the reasons I love Test-Driven Development is how it allows me to refine my mental image of the software I&#39;m writing or modifying.</p>
+<p>Before running the tests, I always pause and state what I expect them to do —will they pass, or will they fail, and if they fail, how?
+Usually, I&#39;m right, but sometimes I&#39;m not.
+Those are Asimov&#39;s &quot;That&#39;s funny…&quot; moments; the times where I get to adjust my model and refine my understanding, either of the new code I&#39;m writing or of the way I should be interacting what already exists.</p>
+<p>Our ability to build an accurate mental representation of the software also depends on how readable the code is.
+This is why designing for local reasoning is important and why we should strive to <a href="http://mokacoding.com/blog/honesty-oriented-programming/">write code that is honest</a>.
+Code with no hidden dependencies, doing only one thing, made up of small components, is easier to follow and reason about.
+There&#39;s less room for mistakes when building a mental representation of it.</p>
+<p>Back to the example above, a simple way to help future readers of the code build an accurate mental representation is to avoid omitting the <a href="https://docs.swift.org/swift-book/LanguageGuide/Functions.html#ID526">argument label</a>.</p>
+<pre><code class="hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">display</span>(<span class="hljs-params">shouldHide</span>: <span class="hljs-type">Bool</span>)</span> {
+  shouldHide <span class="hljs-operator">?</span> hide() : show()
+}</code></pre>
+<p>We could also make the code less surprising by removing the inverse logic.</p>
+<pre><code class="hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">display</span>(<span class="hljs-params">shouldShow</span>: <span class="hljs-type">Bool</span>)</span> {
+  showShow <span class="hljs-operator">?</span> show() : hide()
+}</code></pre>
+<p>The verb display means &quot;to make a prominent exhibition of (something) in a place that it can be easily seen&quot;.
+It&#39;s a bit weird to use it for a function that can hide a view, the opposite of displaying it.
+We could go even further to help paint an accurate mental image and use a different verb.</p>
+<pre><code class="hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">updateVisibility</span>(<span class="hljs-params">to</span> <span class="hljs-params">visible</span>: <span class="hljs-type">Bool</span>)</span> {
+  visible <span class="hljs-operator">?</span> show() : hide()
+}</code></pre>
+<p>Reading this a call to this version of the method, <code>updateVisibility(to: true)</code>, is less likely to result in an incorrect mental representation.</p>
+<hr>
+<p>Whether you are aware of it or not, you always build a mental representation of your software to understand it.
+Since the quality of our mental representation directly affects how well we can work within the codebase, it makes sense to invest in making sure it is accurate.</p>
+<p>As software writers, we can make our code easier to represent by taking into account readability, testability, how many things an unit of code does, and how many dependencies it has.
+Tip: <a href="https://mokacoding.com/blog/if-youre-not-writing-tests-first-youre-missing-out/">practicing TDD helps you with that</a>.</p>
+<p>As software readers, we can refine our mental representations by noticing when the behavior differs from our expectation and discover the reason why.</p>
+<p>&quot;That&#39;s funny…&quot; moments are a trampoline for learning.</p>
+<hr>
+<h3 id="footnotes">Footnotes</h3>
+<p><span id="mental-representation-fn"><b>1</b></span>.
+Another possible name for the representation we build in our brain of how the code behaves could be <em>mental model</em>.
+I avoided using that term because it&#39;s becoming trendy and therefore overloaded.
+Everyone&#39;s trying to sell you something about mental models these days.
+When I think about mental models, I think about Charile Munger&#39;s definition from <a href="https://fs.blog/great-talks/a-lesson-on-worldly-wisdom/">his USC Business School 1994 speech entitled A Lesson on Elementary Worldly Wisdom</a> (<em>the link is a third party transcript; I can&#39;t find the original</em>).
+<a href="#mental-representation-fn-back">Back</a>.</p>
+<p><i>
+<span>Cover image by <a href="https://unsplash.com/@wilhelmgunkel?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Wilhelm Gunkel</a> on <a href="https://unsplash.com/?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>.
+</i></p>
+</div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"><div><a href="/blog/you-dont-need-it-yet"><<&nbsp;You Don't Need It Yet</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/will-ios-14-destroy-your-productivity">Will iOS 14 Destroy Your Productivity?&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin Sendfox Signup Form -->
+<div id="sendfox_embed_signup">
+  <h4 class="form_title">Want more of these posts?</h4>
+  <p class="form_caption">Subscribe to receive new posts in your inbox.</p>
+  <form method="post" action="https://sendfox.com/form/3ee4z3/10r4wg" class="sendfox-form" id="10r4wg" data-async="true" data-recaptcha="true">
+    <p><input type="email" placeholder="Email" name="email" class="email" required /></p>
+    <!-- no botz please -->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="a_password" tabindex="-1" value="" autocomplete="off" /></div>
+    <div class="clear"><button type="submit">Sign me up</button></div>
+  </form>
+  <script src="https://sendfox.com/js/form.js"></script>
+</div>
+<!-- End Sendfox Signup Form -->
+</div><div class="bottom-box"><div id="disqus_thread"></div><script>var disqus_shortname = "mokacoding";
+// Neet do add the / at the end to maintain compatibility with previous version
+// of the blog that didn't define disqus_url, letting Disqus set it automatically
+// using window.location.href
+var disqus_url = "https://mokacoding.com/blog/thats-funny-moments-are-learning-opportunities/";
+
+(function() {
+  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><noscript>Please enable JavaScript to view the<a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></div></div></div><div class="row-12 footer"><div class="col-12"><h3><a href="/">mokacoding</a></h3></div><div id="copy" class="col-9"><p>Hi I&#39;m <a href="https://gio.codes">Gio</a> I write here semi-regularly on software testing and TDD, productivity, and iOS development.</p>
+<p><a href="mailto:gio+blog@mokacoding.com">Get in touch</a> if you&#39;re interested in working together.</p>
+</div><div id="links" class="col-3"><p><i class="fa fa-twitter"></i>&nbsp;<a href="https://twitter.com/mokagio">@mokagio</a></p><p><i class="fa fa-github"></i>&nbsp;<a href="https://github.com/mokagio">mokagio</a></p></div></div></div></body><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-43554041-1', 'auto');
+ga('send', 'pageview');
+</script><script>var toggle = function(elm){
+  var y = elm.style && elm.style.display ? elm.style.display : 'block';
+  if (y == 'block'){
+    elm.style.opacity='0';
+    setTimeout( function(){ elm.style.display = 'none'; }, 300 );
+  }
+  else {
+    elm.style.display='block';
+    setTimeout( function(){ elm.style.opacity = '1'; }, 10 );
+  }
+}
+
+document.getElementById('close').onclick = function(){
+  toggle(document.getElementById('sticky-header'));
+  toggle(document.getElementById('sticky-header-padding-hack'));
+}</script></html>

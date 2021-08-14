@@ -1,0 +1,121 @@
+<!DOCTYPE html><html lang="en"><head><title>Fixing Bugs Driven By Tests in Swift | mokacoding</title><meta name="description" content="Unit and acceptance test are powerful tools that can be used to identify and fix bugs. Let's see how using a bugged Swift app as an example."><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"><!-- Canonical URL--><link rel="canonical" href="https://mokacoding.com/blog/fixing-bugs-driven-by-tests-in-swift/"><!-- Open Graph meta tags--><meta property="og:title" content="Fixing Bugs Driven By Tests in Swift"><meta property="og:description" content="Unit and acceptance test are powerful tools that can be used to identify and fix bugs. Let's see how using a bugged Swift app as an example."><meta property="og:url" content="https://mokacoding.com/blog/fixing-bugs-driven-by-tests-in-swift/"><meta property="og:type" content="article"><meta property="og:site_name" content="mokacoding"><meta property="og:image" content="https://s3.amazonaws.com/mokacoding/mokacoding_og_image.jpg"><!-- Twitter meta tags--><meta property="twitter:card" content="summary"><meta property="twitter:title" content="Fixing Bugs Driven By Tests in Swift"><meta property="twitter:site" content="@mokacoding"><meta property="twitter:creator" content="@mokagio"><!-- Stylesheets--><link href="/css/griddy.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet"><link href="/css/font-awesome.min.css" rel="stylesheet"><link href="/css/zenburn.css" rel="stylesheet"><!-- FavIcon--><!-- Thanks to https://www.favicon-generator.org/ & https://html2jade.org/--><link rel="apple-touch-icon" sizes="57x57" href="https://s3.amazonaws.com/mokacoding/apple-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="https://s3.amazonaws.com/mokacoding/apple-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="https://s3.amazonaws.com/mokacoding/apple-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="https://s3.amazonaws.com/mokacoding/apple-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="https://s3.amazonaws.com/mokacoding/apple-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="https://s3.amazonaws.com/mokacoding/apple-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="https://s3.amazonaws.com/mokacoding/apple-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="https://s3.amazonaws.com/mokacoding/apple-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" href="https://s3.amazonaws.com/mokacoding/apple-icon-180x180.png"><link rel="icon" type="image/png" sizes="192x192" href="https://s3.amazonaws.com/mokacoding/android-icon-192x192.png"><link rel="icon" type="image/png" sizes="32x32" href="https://s3.amazonaws.com/mokacoding/favicon-32x32.png"><link rel="icon" type="image/png" sizes="96x96" href="https://s3.amazonaws.com/mokacoding/favicon-96x96.png"><link rel="icon" type="image/png" sizes="16x16" href="https://s3.amazonaws.com/mokacoding/favicon-16x16.png"><link rel="manifest" href="https://s3.amazonaws.com/mokacoding/manifest.json"><meta name="msapplication-TileColor" content="#ffffff"><meta name="msapplication-TileImage" content="https://s3.amazonaws.com/mokacoding/ms-icon-144x144.png"><meta name="theme-color" content="#ffffff"><!-- SumoMe--><script src="//load.sumome.com/" data-sumo-site-id="dd80959300db03e20c8bc3dd899f1424fd764d261e6c3c41923c96482a270dba" async="async"></script></head><body><!-- Use this to render an extra header in special occasions--><div class="special-header"><div class="page"><div class="row-12"><div class="col-12"><p><!-- - Saving this for later and to avoid a `git revert`:markdown
+  [What is your biggest struggle right now with building software?](https://goo.gl/forms/lCLlJd9hqCUYoTME2)--><p><a href="https://tddinswift.com?utm_source=mokacoding-site&amp;utm_campaign=coming-soon&amp;utm_medium=sticky-header">Avilable Now: <strong>Test-Driven Development in Swift with SwiftUI and Combine</strong></a></p>
+</p></div></div></div></div><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">unit and acceptance testing, automation, productivity</div><div class="links"><a href="/archive.html">Archive</a><a href="/tags.html">Tags</a><a href="https://gio.codes">About</a><a href="#subscribe">Subscribe</a><a href="/feed.xml"><i class="fa fa-rss"></i></a></div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/fixing-bugs-driven-by-tests-in-swift">Fixing Bugs Driven By Tests in Swift</a></h2><p class="post-meta"><span class="post-date">Wed Oct 28 2015&nbsp;</span><a href="/tag/Testing/index.html" class="post-tag">-Testing</a><a href="/tag/Swift/index.html" class="post-tag">-Swift</a><a href="/tag/Acceptance-Testing/index.html" class="post-tag">-Acceptance Testing</a><a href="/tag/UI-Testing/index.html" class="post-tag">-UI Testing</a></p><div class="post"><p>In the past months there have been a number of articles here on <a href="https://mokacoding.com">mokacoding</a> regarding testing, like <a href="https://mokacoding.com/blog/xctest-nimble/">&quot;Enhancing XCTest test cases with Nimble matchers&quot;</a>, <a href="https://mokacoding.com/blog/xcode-7-ui-testing/">&quot;Xcode 7 UI testing, a first look&quot;</a>, and <a href="https://mokacoding.com/blog/better-tests-with-specta/">&quot;Better tests with Specta&quot;</a>.</p>
+<p>It is clear that I&#39;m a big TDD fan boy, and if we meet in person I&#39;ll probably try to <em>convert</em> you. In this post though I will introduce another use for unit and acceptance tests that you might not have considered yet. Unit and acceptance tests can be used as a tool to fix bug.</p>
+<p><img src="https://s3.amazonaws.com/mokacoding/2015-10-29-bug.jpg" alt="Fixing bugs guided by test is productive and fun"></p>
+<blockquote>
+<p>A bug is only a test that hasn&#39;t been written yet. - Unknown</p>
+</blockquote>
+<p>It can sometimes be difficult to find a place where to start writing tests when developing new code, but it certainly isn&#39;t when there a bug. You already know what is wrong. Speaking in <a href="http://www.jamesshore.com/Blog/Red-Green-Refactor.html">red, green, refactor</a> you already have a red scenario to be made green.</p>
+<p>Let&#39;s take <a href="https://github.com/mokacoding/SimpleNotes">Simple Notes</a> a demo app build for the occasion. In its mvp form Simple Notes is a read only notes app, you can see a list of notes, and tap on one to see its details. The product owner is clearly a bit crazy.</p>
+<p><img src="https://s3.amazonaws.com/mokacoding/2015-10-29-simple-notes.png" alt="Simple Notes Screenshot"></p>
+<p>Simple Notes has two known bugs, see <a href="https://github.com/mokacoding/SimpleNotes/commit/92b55d744751afc013bf2b0002a74c25e1c5f855">this commit</a>, let&#39;s see how we can fix them in a TDD way.</p>
+<h2 id="fix-a-bug-with-an-unit-test">Fix a bug with an unit test</h2>
+<p>There is an issue in Simple Notes&#39; main screen, the notes are not in any particular order, while the spec says that they should be ordered by updated date, with the most recent first.</p>
+<p>Let&#39;s write a unit test that we&#39;ll have to make green in order to fix this bug. But how?</p>
+<p>Well first of all we need to find the code responsible for providing the data to the note table view. Turns out that there is a <code>NotesListDataSource</code> object that <code>NotesListViewController</code> uses in its implementation of the <code>UITableViewDataSource</code> methods.</p>
+<p>There are many ways to write the test for this bug, here&#39;s one:</p>
+<pre><code class="hljs swift"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">NotesDataSourceTest</span>: <span class="hljs-title">XCTestCase</span> </span>{
+
+  <span class="hljs-comment">// it sorts the notes by updated date</span>
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">testSortsNotesByUpdatesDate</span>()</span> {
+    <span class="hljs-keyword">let</span> firstNote <span class="hljs-operator">=</span> <span class="hljs-type">Note</span>(name: <span class="hljs-string">&quot;any name&quot;</span>, content: <span class="hljs-string">&quot;any content&quot;</span>, lastUpdated: <span class="hljs-type">NSDate</span>().dateByAddingTimeInterval(<span class="hljs-number">60</span>))
+    <span class="hljs-keyword">let</span> secondNote <span class="hljs-operator">=</span> <span class="hljs-type">Note</span>(name: <span class="hljs-string">&quot;any other name&quot;</span>, content: <span class="hljs-string">&quot;any content&quot;</span>, lastUpdated: <span class="hljs-type">NSDate</span>())
+    <span class="hljs-keyword">let</span> thirdNote <span class="hljs-operator">=</span> <span class="hljs-type">Note</span>(name: <span class="hljs-string">&quot;yet another name&quot;</span>, content: <span class="hljs-string">&quot;any content&quot;</span>, lastUpdated: <span class="hljs-type">NSDate</span>().dateByAddingTimeInterval(<span class="hljs-operator">-</span><span class="hljs-number">60</span>))
+
+    <span class="hljs-keyword">let</span> sut <span class="hljs-operator">=</span> <span class="hljs-type">NotesDataSource</span>(notes: [thirdNote, firstNote, secondNote])
+
+    <span class="hljs-built_in">assert</span>(sut.noteAtIndexPath(<span class="hljs-type">NSIndexPath</span>(forRow: <span class="hljs-number">0</span>, inSection: <span class="hljs-number">0</span>)), isEqualTo: firstNote)
+    <span class="hljs-built_in">assert</span>(sut.noteAtIndexPath(<span class="hljs-type">NSIndexPath</span>(forRow: <span class="hljs-number">1</span>, inSection: <span class="hljs-number">0</span>)), isEqualTo: secondNote)
+    <span class="hljs-built_in">assert</span>(sut.noteAtIndexPath(<span class="hljs-type">NSIndexPath</span>(forRow: <span class="hljs-number">2</span>, inSection: <span class="hljs-number">0</span>)), isEqualTo: thirdNote)
+  }
+
+  <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">assert</span>(<span class="hljs-params">note</span>: <span class="hljs-type">Note</span>, <span class="hljs-params">isEqualTo</span> <span class="hljs-params">otherNote</span>: <span class="hljs-type">Note</span>)</span> {
+    <span class="hljs-type">XCTAssertEqual</span>(note.name, otherNote.name)
+  }
+}</code></pre>
+<p>Now if you run the tests, or got to <a href="https://github.com/mokacoding/SimpleNotes/commit/a7431b2bd7363a96a54d0609c133c6b8e069b2f7">this commit</a>, you&#39;ll see that they fail.</p>
+<p>Making the test pass, and therefore fixing the bug is as easy as <a href="https://github.com/mokacoding/SimpleNotes/commit/048fe2db5b6f37f1875dd21ea1c8592a89d33f94">adding a <code>sort</code> step when initializing the data source</a>.</p>
+<h2 id="fix-a-bug-with-an-acceptance-test">Fix a bug with an acceptance test</h2>
+<p>If you run Simple Notes you&#39;ll notice that nothing happens when selecting a note. That is outrageous! The expected behaviour is for the app to transition to a screen showing the details of the note.</p>
+<p>This kind of bug is related to the navigation of the application rather that its logic, and we can easily write an acceptance test. For example:</p>
+<pre><code class="hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">testShowsNotesDetails</span>()</span> {
+  <span class="hljs-comment">// From the notes list screen</span>
+  <span class="hljs-keyword">let</span> app <span class="hljs-operator">=</span> <span class="hljs-type">XCUIApplication</span>()
+
+  <span class="hljs-type">XCTAssertTrue</span>(app.anyViewWithIdentifier(<span class="hljs-string">&quot;notes_list_screen&quot;</span>).exists)
+
+  <span class="hljs-comment">// When tapping on a note</span>
+  app.cells.elementBoundByIndex(<span class="hljs-number">1</span>).tap()
+
+  <span class="hljs-comment">// It goes to the note details screen</span>
+  <span class="hljs-type">XCTAssertFalse</span>(app.anyViewWithIdentifier(<span class="hljs-string">&quot;notes_list_screen&quot;</span>).exists)
+  <span class="hljs-type">XCTAssertTrue</span>(app.anyViewWithIdentifier(<span class="hljs-string">&quot;note_screen&quot;</span>).exists)
+
+  <span class="hljs-comment">// Go back</span>
+  app.backButton().tap()
+}</code></pre>
+<p>Note that because the app is currently broken I had to write that test manually, rather then recording it. But that&#39;s ok, after playing around with the UI testing APIs you will get familiar with them and writing acceptance test will be a smooth experience.</p>
+<p>Also note that the approach used in that test is to assert the presence of an accessibility element with a certain identifier. That is a simple trick I use that decouples tests for the user navigation in the app from the content on UI itself. In fact, the accessibility identifier is set on the view controller&#39;s main view.</p>
+<p>In my opinion this approach is better that, for example, asserting the presence of views containing the title and content of a note because:</p>
+<ol>
+<li>Those strings are present in the notes list screen as well, and</li>
+<li>The focus of the test is not on the content of the screen, but on the presence of the screen itself.</li>
+<li>Finally, it is always better to assert for the value of <code>accessibilityIdentifier</code> rather than <code>accessibilityLabel</code>.</li>
+</ol>
+<p>How do we make this test pass? Looking into <code>NotesListViewController</code> you&#39;ll notice that... I forgot to implement <code>tableView(didSelectRowAtIndexPath:)</code>. So silly...</p>
+<p><a href="">Implementing the delegate</a> makes the acceptance test pass. And now all tests are green, and SimpleNotes is working as expected. Hurray! 🎉</p>
+<h2 id="wrapping-up">Wrapping up</h2>
+<p>These two bugs in Simple Notes were just examples, but not too far from what real world development looks like. And the same goes for the way to fix them: identify what&#39;s wrong, write a failing test, write code to make the test pass.</p>
+<p>Not only this process is great to get into the TDD mindset, but it also produces a suite of <em>regression tests</em>, that will make sure you won&#39;t ship the same bug twice.</p>
+<p>I find that developing by writing failing tests then making them pass a very pleasurable experience, almost like a game made of little quests. Plus is a way to keep the system simple, writing long tests is a smell of a too complex design that more often than not can be simplified.</p>
+<p>What is your opinion on this? Have you ever tried to write a test for an existing bug? I&#39;d like to hear from you, ping me on Twitter <a href="https://twitter.com/mokagio">@mokagio</a>, leave a comment below, and don&#39;t forget to <a href="#subscribe">subscribe to the newsletter</a>.</p>
+<p><em>Happy coding, and leave the codebase better than you found it.</em></p>
+</div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"><div><a href="/blog/circle-ci-ios-testing"><<&nbsp;How to configure CircleCI for iOS testing</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/tools-sharpening">How To Sharpen Your Software Developer Tools&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin Sendfox Signup Form -->
+<div id="sendfox_embed_signup">
+  <h4 class="form_title">Want more of these posts?</h4>
+  <p class="form_caption">Subscribe to receive new posts in your inbox.</p>
+  <form method="post" action="https://sendfox.com/form/3ee4z3/10r4wg" class="sendfox-form" id="10r4wg" data-async="true" data-recaptcha="true">
+    <p><input type="email" placeholder="Email" name="email" class="email" required /></p>
+    <!-- no botz please -->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="a_password" tabindex="-1" value="" autocomplete="off" /></div>
+    <div class="clear"><button type="submit">Sign me up</button></div>
+  </form>
+  <script src="https://sendfox.com/js/form.js"></script>
+</div>
+<!-- End Sendfox Signup Form -->
+</div><div class="bottom-box"><div id="disqus_thread"></div><script>var disqus_shortname = "mokacoding";
+// Neet do add the / at the end to maintain compatibility with previous version
+// of the blog that didn't define disqus_url, letting Disqus set it automatically
+// using window.location.href
+var disqus_url = "https://mokacoding.com/blog/fixing-bugs-driven-by-tests-in-swift/";
+
+(function() {
+  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><noscript>Please enable JavaScript to view the<a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></div></div></div><div class="row-12 footer"><div class="col-12"><h3><a href="/">mokacoding</a></h3></div><div id="copy" class="col-9"><p>Hi I&#39;m <a href="https://gio.codes">Gio</a> I write here semi-regularly on software testing and TDD, productivity, and iOS development.</p>
+<p><a href="mailto:gio+blog@mokacoding.com">Get in touch</a> if you&#39;re interested in working together.</p>
+</div><div id="links" class="col-3"><p><i class="fa fa-twitter"></i>&nbsp;<a href="https://twitter.com/mokagio">@mokagio</a></p><p><i class="fa fa-github"></i>&nbsp;<a href="https://github.com/mokagio">mokagio</a></p></div></div></div></body><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-43554041-1', 'auto');
+ga('send', 'pageview');
+</script><script>var toggle = function(elm){
+  var y = elm.style && elm.style.display ? elm.style.display : 'block';
+  if (y == 'block'){
+    elm.style.opacity='0';
+    setTimeout( function(){ elm.style.display = 'none'; }, 300 );
+  }
+  else {
+    elm.style.display='block';
+    setTimeout( function(){ elm.style.opacity = '1'; }, 10 );
+  }
+}
+
+document.getElementById('close').onclick = function(){
+  toggle(document.getElementById('sticky-header'));
+  toggle(document.getElementById('sticky-header-padding-hack'));
+}</script></html>

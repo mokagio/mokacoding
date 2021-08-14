@@ -1,0 +1,90 @@
+<!DOCTYPE html><html lang="en"><head><title>Git-iquette | mokacoding</title><meta name="description" content="Every team and every project should have a Git-iquette: a set of common practices for managing the git repository."><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"><!-- Canonical URL--><link rel="canonical" href="https://mokacoding.com/blog/gitiquette/"><!-- Open Graph meta tags--><meta property="og:title" content="Git-iquette"><meta property="og:description" content="Every team and every project should have a Git-iquette: a set of common practices for managing the git repository."><meta property="og:url" content="https://mokacoding.com/blog/gitiquette/"><meta property="og:type" content="article"><meta property="og:site_name" content="mokacoding"><meta property="og:image" content="https://s3.amazonaws.com/mokacoding/mokacoding_og_image.jpg"><!-- Twitter meta tags--><meta property="twitter:card" content="summary"><meta property="twitter:title" content="Git-iquette"><meta property="twitter:site" content="@mokacoding"><meta property="twitter:creator" content="@mokagio"><!-- Stylesheets--><link href="/css/griddy.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet"><link href="/css/font-awesome.min.css" rel="stylesheet"><link href="/css/zenburn.css" rel="stylesheet"><!-- FavIcon--><!-- Thanks to https://www.favicon-generator.org/ & https://html2jade.org/--><link rel="apple-touch-icon" sizes="57x57" href="https://s3.amazonaws.com/mokacoding/apple-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="https://s3.amazonaws.com/mokacoding/apple-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="https://s3.amazonaws.com/mokacoding/apple-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="https://s3.amazonaws.com/mokacoding/apple-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="https://s3.amazonaws.com/mokacoding/apple-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="https://s3.amazonaws.com/mokacoding/apple-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="https://s3.amazonaws.com/mokacoding/apple-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="https://s3.amazonaws.com/mokacoding/apple-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" href="https://s3.amazonaws.com/mokacoding/apple-icon-180x180.png"><link rel="icon" type="image/png" sizes="192x192" href="https://s3.amazonaws.com/mokacoding/android-icon-192x192.png"><link rel="icon" type="image/png" sizes="32x32" href="https://s3.amazonaws.com/mokacoding/favicon-32x32.png"><link rel="icon" type="image/png" sizes="96x96" href="https://s3.amazonaws.com/mokacoding/favicon-96x96.png"><link rel="icon" type="image/png" sizes="16x16" href="https://s3.amazonaws.com/mokacoding/favicon-16x16.png"><link rel="manifest" href="https://s3.amazonaws.com/mokacoding/manifest.json"><meta name="msapplication-TileColor" content="#ffffff"><meta name="msapplication-TileImage" content="https://s3.amazonaws.com/mokacoding/ms-icon-144x144.png"><meta name="theme-color" content="#ffffff"><!-- SumoMe--><script src="//load.sumome.com/" data-sumo-site-id="dd80959300db03e20c8bc3dd899f1424fd764d261e6c3c41923c96482a270dba" async="async"></script></head><body><!-- Use this to render an extra header in special occasions--><div class="special-header"><div class="page"><div class="row-12"><div class="col-12"><p><!-- - Saving this for later and to avoid a `git revert`:markdown
+  [What is your biggest struggle right now with building software?](https://goo.gl/forms/lCLlJd9hqCUYoTME2)--><p><a href="https://tddinswift.com?utm_source=mokacoding-site&amp;utm_campaign=coming-soon&amp;utm_medium=sticky-header">Avilable Now: <strong>Test-Driven Development in Swift with SwiftUI and Combine</strong></a></p>
+</p></div></div></div></div><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">unit and acceptance testing, automation, productivity</div><div class="links"><a href="/archive.html">Archive</a><a href="/tags.html">Tags</a><a href="https://gio.codes">About</a><a href="#subscribe">Subscribe</a><a href="/feed.xml"><i class="fa fa-rss"></i></a></div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/gitiquette">Git-iquette</a></h2><p class="post-meta"><span class="post-date">Sun Feb 15 2015&nbsp;</span><a href="/tag/Git/index.html" class="post-tag">-Git</a></p><div class="post"><p>I&#39;d like to suggest the introduction of a <strong><em>Git-iquette</em></strong> in every project, an etiquette in the version control usage.</p>
+<p>I&#39;ve recently started a greenfield project with a new client, with a team bigger than what I&#39;m used to. As a team we discussed a coding styleguide, as set of rules and conventions to apply to both the style we use to code, the architectural choices, and the preferred patterns.</p>
+<p>This is a very valuable thing to have, specially for a team. If everybody writes with the same style, it&#39;s gonna be easier for a reader of the code to understand different parts of the system, and to start working on a piece that hasn&#39;t been written by them.</p>
+<p>I consider this an application of the <a href="http://en.wikipedia.org/wiki/Principle_of_least_astonishment"><em>&quot;principle of least surprise&quot;</em></a>, the code I&#39;m gonna read is written in the style I&#39;m expecting, and the components in the system follow the same set of rules.</p>
+<p>For these reasons having a set of rules on how to check-in code and how to manage the repository is incredibly valuable too.</p>
+<p>In his article <a href="http://mislav.uniqpath.com/2014/02/hidden-documentation/">&quot;Every line of code is always documented&quot;</a> Mislav Marohnić shows how by using <code>git blame</code> and <code>git show</code> he understood the reasons behind a cryptic line of code, and how important it was for the behaviour of the software.</p>
+<p>The repository is the history of the codebase. Some TV shows have a &quot;previously on ...&quot;, that&#39;s the same when we read the <code>git log</code> after a pull, we get up to date with the latest developments of the project.</p>
+<p>What we don&#39;t want is a summary of the changes happened while we were away written like this:</p>
+<pre><code>Doesn<span class="hljs-comment">&#x27;t work!</span>
+
+<span class="hljs-keyword">End</span> <span class="hljs-keyword">of</span> day commit
+
+Checking this <span class="hljs-keyword">in</span> because it<span class="hljs-comment">&#x27;s time for a beer</span></code></pre><p>Equally bad is getting a single gianormous commit that adds a bug fix, three feature, and removes a bunch of unused files.</p>
+<p>So here&#39;s some starting points to use when writing a project&#39;s Git-iquette.</p>
+<h2 id="how-to-write-a-git-iquette">How to write a Git-iquette</h2>
+<h3 id="short-commits">Short commits</h3>
+<p>Commits should be <a href="http://blog.crealytics.com/blog/2010/07/09/5-reasons-keeping-git-commits-small/">small</a> and <a href="http://en.wikipedia.org/wiki/Atomic_commit#Atomic_Commit_Convention">atomic</a>.</p>
+<h3 id="title-and-description">Title and description</h3>
+<p>The commit message should have a short, less than 50 characters, title, that describes what the has been done in the commit.</p>
+<p>If needed, a more detailed description can be written after the title, leaving an empty line between the two.</p>
+<p>More tips on how to write a good commit message <a href="http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html">here</a>.</p>
+<h3 id="commit-title-style">Commit title style</h3>
+<p>Given for granted that we all agree on the fact commits should be small and atomic, we need some rules on how to write the commit message.</p>
+<p>First of all, which verb to use? When reading a book it&#39;d be confusing if the author kept changing the verbs tense, and the same stands for our <code>git log</code>. Choose a style:</p>
+<pre><code>Add awesome <span class="hljs-built_in">feature</span>
+
+Adds awesome <span class="hljs-built_in">feature</span>
+
+Added awesome <span class="hljs-built_in">feature</span></code></pre><p>They&#39;re all legit and reasonable, the important thing is to be consistent. <em>My preference is to use imperative verbs, because it&#39;s the same thing git does in it&#39;s generated commit messages.</em></p>
+<h3 id="merge-vs-rebase">Merge vs Rebase</h3>
+<p>Merge vs rebase is an open discussion in the community, and both options have their pros and cons. Again the important thing is to be consistent, and to provide rules on when it&#39;s acceptable to merge instead of reabsing, or vice versa.</p>
+<h3 id="special-workflows">Special workflows</h3>
+<p>On top of merge vs rebase there are other workflows that can be adopted to manage the version control in an effective way. For example <a href="http://nvie.com/posts/a-successful-git-branching-model/">git-flow</a> makes it simpler to work on features, while the <a href="https://guides.github.com/introduction/flow/">GitHub flow</a> is very good for teams that focus on code reviews.</p>
+<p>Evaluate if the team will benefit from using a particular workflow, and make it clear in the Git-iquette.</p>
+<h3 id="hooks">Hooks</h3>
+<p>Finally there could be useful <a href="http://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks">git hooks</a> to add. Everything that can be automated should be automated!</p>
+<h2 id="wrapping-it-all-up">Wrapping it all up</h2>
+<p>What&#39;s listed above is just a suggestion on what to take into consideration when writing a Git-iquette, a version control styleguide. The choices proposed are based on what works for me, and they might not work for you. The important takeaway is to have a clear set of guidelines, and to <strong>always be consistent.</strong></p>
+<p>If you have suggestions or want to share a Git-iquette that works for you leave a comment below, or tweet me <a href="https://twitter.com/mokagio">@mokagio</a>.</p>
+<p><em>Happy version control check-ins</em></p>
+</div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"><div><a href="/blog/simpler-calabash-testing-with-rake"><<&nbsp;How to simplify Calabash acceptance testing with Rake</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/calabash-ios-with-cocoapods-and-build-configurations">Setting up Calabash for iOS projects with Cocoapods and Build Configurations&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin Sendfox Signup Form -->
+<div id="sendfox_embed_signup">
+  <h4 class="form_title">Want more of these posts?</h4>
+  <p class="form_caption">Subscribe to receive new posts in your inbox.</p>
+  <form method="post" action="https://sendfox.com/form/3ee4z3/10r4wg" class="sendfox-form" id="10r4wg" data-async="true" data-recaptcha="true">
+    <p><input type="email" placeholder="Email" name="email" class="email" required /></p>
+    <!-- no botz please -->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="a_password" tabindex="-1" value="" autocomplete="off" /></div>
+    <div class="clear"><button type="submit">Sign me up</button></div>
+  </form>
+  <script src="https://sendfox.com/js/form.js"></script>
+</div>
+<!-- End Sendfox Signup Form -->
+</div><div class="bottom-box"><div id="disqus_thread"></div><script>var disqus_shortname = "mokacoding";
+// Neet do add the / at the end to maintain compatibility with previous version
+// of the blog that didn't define disqus_url, letting Disqus set it automatically
+// using window.location.href
+var disqus_url = "https://mokacoding.com/blog/gitiquette/";
+
+(function() {
+  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><noscript>Please enable JavaScript to view the<a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></div></div></div><div class="row-12 footer"><div class="col-12"><h3><a href="/">mokacoding</a></h3></div><div id="copy" class="col-9"><p>Hi I&#39;m <a href="https://gio.codes">Gio</a> I write here semi-regularly on software testing and TDD, productivity, and iOS development.</p>
+<p><a href="mailto:gio+blog@mokacoding.com">Get in touch</a> if you&#39;re interested in working together.</p>
+</div><div id="links" class="col-3"><p><i class="fa fa-twitter"></i>&nbsp;<a href="https://twitter.com/mokagio">@mokagio</a></p><p><i class="fa fa-github"></i>&nbsp;<a href="https://github.com/mokagio">mokagio</a></p></div></div></div></body><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-43554041-1', 'auto');
+ga('send', 'pageview');
+</script><script>var toggle = function(elm){
+  var y = elm.style && elm.style.display ? elm.style.display : 'block';
+  if (y == 'block'){
+    elm.style.opacity='0';
+    setTimeout( function(){ elm.style.display = 'none'; }, 300 );
+  }
+  else {
+    elm.style.display='block';
+    setTimeout( function(){ elm.style.opacity = '1'; }, 10 );
+  }
+}
+
+document.getElementById('close').onclick = function(){
+  toggle(document.getElementById('sticky-header'));
+  toggle(document.getElementById('sticky-header-padding-hack'));
+}</script></html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html><html lang="en"><head><title>Why I (shouldn't have) stopped blogging with Jekyll | mokacoding</title><meta name="description" content="I recently decided to move my blog from Ruby and Jekyll, to Metalsmith and Javascript. It turned out to be not as easy as I thought, and a quite stupid choice, but not because of the tech."><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"><!-- Canonical URL--><link rel="canonical" href="https://mokacoding.com/blog/why-i-shouldnt-have-stopped-blogging-with-jekyll/"><!-- Open Graph meta tags--><meta property="og:title" content="Why I (shouldn't have) stopped blogging with Jekyll"><meta property="og:description" content="I recently decided to move my blog from Ruby and Jekyll, to Metalsmith and Javascript. It turned out to be not as easy as I thought, and a quite stupid choice, but not because of the tech."><meta property="og:url" content="https://mokacoding.com/blog/why-i-shouldnt-have-stopped-blogging-with-jekyll/"><meta property="og:type" content="article"><meta property="og:site_name" content="mokacoding"><meta property="og:image" content="https://s3.amazonaws.com/mokacoding/mokacoding_og_image.jpg"><!-- Twitter meta tags--><meta property="twitter:card" content="summary"><meta property="twitter:title" content="Why I (shouldn't have) stopped blogging with Jekyll"><meta property="twitter:site" content="@mokacoding"><meta property="twitter:creator" content="@mokagio"><!-- Stylesheets--><link href="/css/griddy.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet"><link href="/css/font-awesome.min.css" rel="stylesheet"><link href="/css/zenburn.css" rel="stylesheet"><!-- FavIcon--><!-- Thanks to https://www.favicon-generator.org/ & https://html2jade.org/--><link rel="apple-touch-icon" sizes="57x57" href="https://s3.amazonaws.com/mokacoding/apple-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="https://s3.amazonaws.com/mokacoding/apple-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="https://s3.amazonaws.com/mokacoding/apple-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="https://s3.amazonaws.com/mokacoding/apple-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="https://s3.amazonaws.com/mokacoding/apple-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="https://s3.amazonaws.com/mokacoding/apple-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="https://s3.amazonaws.com/mokacoding/apple-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="https://s3.amazonaws.com/mokacoding/apple-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" href="https://s3.amazonaws.com/mokacoding/apple-icon-180x180.png"><link rel="icon" type="image/png" sizes="192x192" href="https://s3.amazonaws.com/mokacoding/android-icon-192x192.png"><link rel="icon" type="image/png" sizes="32x32" href="https://s3.amazonaws.com/mokacoding/favicon-32x32.png"><link rel="icon" type="image/png" sizes="96x96" href="https://s3.amazonaws.com/mokacoding/favicon-96x96.png"><link rel="icon" type="image/png" sizes="16x16" href="https://s3.amazonaws.com/mokacoding/favicon-16x16.png"><link rel="manifest" href="https://s3.amazonaws.com/mokacoding/manifest.json"><meta name="msapplication-TileColor" content="#ffffff"><meta name="msapplication-TileImage" content="https://s3.amazonaws.com/mokacoding/ms-icon-144x144.png"><meta name="theme-color" content="#ffffff"><!-- SumoMe--><script src="//load.sumome.com/" data-sumo-site-id="dd80959300db03e20c8bc3dd899f1424fd764d261e6c3c41923c96482a270dba" async="async"></script></head><body><!-- Use this to render an extra header in special occasions--><div class="special-header"><div class="page"><div class="row-12"><div class="col-12"><p><!-- - Saving this for later and to avoid a `git revert`:markdown
+  [What is your biggest struggle right now with building software?](https://goo.gl/forms/lCLlJd9hqCUYoTME2)--><p><a href="https://tddinswift.com?utm_source=mokacoding-site&amp;utm_campaign=coming-soon&amp;utm_medium=sticky-header">Avilable Now: <strong>Test-Driven Development in Swift with SwiftUI and Combine</strong></a></p>
+</p></div></div></div></div><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">unit and acceptance testing, automation, productivity</div><div class="links"><a href="/archive.html">Archive</a><a href="/tags.html">Tags</a><a href="https://gio.codes">About</a><a href="#subscribe">Subscribe</a><a href="/feed.xml"><i class="fa fa-rss"></i></a></div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/why-i-shouldnt-have-stopped-blogging-with-jekyll">Why I (shouldn't have) stopped blogging with Jekyll</a></h2><p class="post-meta"><span class="post-date">Fri Aug 08 2014&nbsp;</span><a href="/tag/Ruby/index.html" class="post-tag">-Ruby</a><a href="/tag/Javascript/index.html" class="post-tag">-Javascript</a></p><div class="post"><p>It all started when I decided to add tags to my blog running on <a href="http://jekyllrb.com/">Jekyll</a>
+and discovered that to do so I&#39;d have to generate the static html manually because
+the plugin wasn&#39;t safe.</p>
+<p>That &quot;manuality&quot; defied the purpose of Jekyll itself, publish new posts just with a push,
+so caught in a mix of annoyance and spirit of exploration I decided to look towards the Javascript scene.</p>
+<p><a href="metalsmith.io">Metalsmith</a> promised to be lightweight and easy to use, so i jumped
+into a migration process that turned out not to be the good idea that I thought it was.</p>
+<h3 id="meet-metalsmith">Meet Metalsmith</h3>
+<p><a href="http://www.metalsmith.io/">Metalsmith</a> is a Node.js package for static website generation,
+based on the use of plugins.</p>
+<p>The way Metalsmith works is simple yet effective, it reads all the files in a source folder,
+invokes a series of plugins that manipulate those files, and finally writes the results
+on a destination folder.</p>
+<p>The team behind Metalsmith and the community have developed a vast array of plugins,
+making the task of creating a static website a matter of composing the right plugins.</p>
+<p>Using <a href="https://github.com/lsjroberts/gelatin-design">gelatin-design</a> as an example
+I rebuilt mokacoding one plugin at a time.
+I&#39;ve released the result as <a href="https://github.com/mokagio/metallo.js">metallo.js</a>,
+the static blog generator you should not use.</p>
+<h3 id="the-smith-is-still-an-apprentice">The smith is still an apprentice</h3>
+<p>What I discovered by working on it is that metalsmith is not a mature software at all,
+and it&#39;s core feature, the plugin structure is a bit fragile.
+The problem is that it&#39;s not hard to encounter a setup where a plugin parses data
+making assumptions on it, but those assumptions are wrong because another plugin has
+been added to the pipeline and changed that same data.
+I could find no documentation regarding this issue.
+The problem itself is not an easy one, how can a plugin determine if the assumption
+it&#39;s making are reliable, or how can a plugin inform the other plugins in the pipeline
+that it changed the data in a way that could cause unexpected results?
+As long as there are only and handful of plugins in the pipeline it&#39;s simple to
+spot the issue, but it gets harder the more plugins you use.</p>
+<p>Of course I could have realised all this about the state of the platform by spending
+more than just a couple of minutes through the READMEs, and maybe checking out the
+issues as well... <em>Facepalm</em>.</p>
+<p>But you&#39;re reading this blog post from a Metalsmith powered blog, so despite not being
+a piece of cake, blogging with metalsmith is possible.
+So why was it such a not so smart idea to drop Jekyll? The keywords are three: time, content and hosting.</p>
+<h3 id="time">Time</h3>
+<p>Our time is limited, and we have to juggle it the best way possible.
+I spent way more time that I wanted working on metallo.js.
+Yes it was fun and a good learning experience, and yes I think I achieved the result
+of making my blog and workflow at least slightly better.
+But it took me longer than hoped, and I&#39;m now left with a consistent backlog.</p>
+<p>One word is very important in the previous sentence, <strong>hoped</strong>.
+Being a personal project I didn&#39;t do any planning, I just thought and hoped that
+it wouldn&#39;t take long. As we all know developers are the worst people to ask for estimates.</p>
+<p><em>Fail!</em> If I had planned a bit I would have set a timebox and a list of experiments
+to do before starting with the migration.
+Doing so I would have discovered that this approach wasn&#39;t what I actually wanted,
+while still having fun and learning... <em>Facepalm</em>, again.</p>
+<h3 id="content">Content</h3>
+<p>Blogging is, or should be, about the content, not the medium!
+Even if this is a tech blog, the people that read this blog are interested in the
+content of the posts, not on the fact that they&#39;ve been generated by parsing markdown
+file and rendered with zero code duplication thanks to the view templates.
+The time I spend on this blog should be focused only on making the content better.</p>
+<p>Here&#39;s a message to all the devs that like me have a blog that they use to store
+some thoughts, and that like me couldn&#39;t handle the idea of using <a href="https://www.tumblr.com/">tumblr</a> or <a href="https://medium.com/">medium</a>
+because of the &quot;i can write it better&quot; syndrome.
+<strong>Forget about the medium, focus on the content!</strong></p>
+<h3 id="hosting">Hosting</h3>
+<p>Now for a less philosophical consideration.
+I&#39;m lazy and poor, so I <a href="https://pages.github.com/">host my blog for free on GitHub</a>.
+If you want to use GitHub to host your static blog than Jekyll is the way to go.
+It&#39;s the software they recommend and all the integrations an nice features are build for it.
+Embrace it.</p>
+<p>This is why I shouldn&#39;t have stopped using Jekyll.
+But let&#39;s face it this blog is my playground and I&#39;m gonna keep messing around with it!
+I&#39;ve learned the lesso though, and I&#39;ll kept it in mind for the future!</p>
+<p><em>Have fun hacking your planned and timeboxed next project!</em></p>
+</div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"><div><a href="/blog/in-app-purchase-debugging-lessons"><<&nbsp;In-App Purchase Debugging Lessons</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/cocoapods-and-custom-build-configurations">CocoaPods and custom Build Configurations&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin Sendfox Signup Form -->
+<div id="sendfox_embed_signup">
+  <h4 class="form_title">Want more of these posts?</h4>
+  <p class="form_caption">Subscribe to receive new posts in your inbox.</p>
+  <form method="post" action="https://sendfox.com/form/3ee4z3/10r4wg" class="sendfox-form" id="10r4wg" data-async="true" data-recaptcha="true">
+    <p><input type="email" placeholder="Email" name="email" class="email" required /></p>
+    <!-- no botz please -->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="a_password" tabindex="-1" value="" autocomplete="off" /></div>
+    <div class="clear"><button type="submit">Sign me up</button></div>
+  </form>
+  <script src="https://sendfox.com/js/form.js"></script>
+</div>
+<!-- End Sendfox Signup Form -->
+</div><div class="bottom-box"><div id="disqus_thread"></div><script>var disqus_shortname = "mokacoding";
+// Neet do add the / at the end to maintain compatibility with previous version
+// of the blog that didn't define disqus_url, letting Disqus set it automatically
+// using window.location.href
+var disqus_url = "https://mokacoding.com/blog/why-i-shouldnt-have-stopped-blogging-with-jekyll/";
+
+(function() {
+  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><noscript>Please enable JavaScript to view the<a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></div></div></div><div class="row-12 footer"><div class="col-12"><h3><a href="/">mokacoding</a></h3></div><div id="copy" class="col-9"><p>Hi I&#39;m <a href="https://gio.codes">Gio</a> I write here semi-regularly on software testing and TDD, productivity, and iOS development.</p>
+<p><a href="mailto:gio+blog@mokacoding.com">Get in touch</a> if you&#39;re interested in working together.</p>
+</div><div id="links" class="col-3"><p><i class="fa fa-twitter"></i>&nbsp;<a href="https://twitter.com/mokagio">@mokagio</a></p><p><i class="fa fa-github"></i>&nbsp;<a href="https://github.com/mokagio">mokagio</a></p></div></div></div></body><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-43554041-1', 'auto');
+ga('send', 'pageview');
+</script><script>var toggle = function(elm){
+  var y = elm.style && elm.style.display ? elm.style.display : 'block';
+  if (y == 'block'){
+    elm.style.opacity='0';
+    setTimeout( function(){ elm.style.display = 'none'; }, 300 );
+  }
+  else {
+    elm.style.display='block';
+    setTimeout( function(){ elm.style.opacity = '1'; }, 10 );
+  }
+}
+
+document.getElementById('close').onclick = function(){
+  toggle(document.getElementById('sticky-header'));
+  toggle(document.getElementById('sticky-header-padding-hack'));
+}</script></html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html><html lang="en"><head><title>The value of acceptance testing for mobile projects | mokacoding</title><meta name="description" content="Companion blogpost for Gio's talk &quot;Talking myself into the value of acceptance testing&quot; at Melbourne CocoaHeads meetup"><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"><!-- Canonical URL--><link rel="canonical" href="https://mokacoding.com/blog/the-value-of-acceptance-testing/"><!-- Open Graph meta tags--><meta property="og:title" content="The value of acceptance testing for mobile projects"><meta property="og:description" content="Companion blogpost for Gio's talk &quot;Talking myself into the value of acceptance testing&quot; at Melbourne CocoaHeads meetup"><meta property="og:url" content="https://mokacoding.com/blog/the-value-of-acceptance-testing/"><meta property="og:type" content="article"><meta property="og:site_name" content="mokacoding"><meta property="og:image" content="https://s3.amazonaws.com/mokacoding/mokacoding_og_image.jpg"><!-- Twitter meta tags--><meta property="twitter:card" content="summary"><meta property="twitter:title" content="The value of acceptance testing for mobile projects"><meta property="twitter:site" content="@mokacoding"><meta property="twitter:creator" content="@mokagio"><!-- Stylesheets--><link href="/css/griddy.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet"><link href="/css/font-awesome.min.css" rel="stylesheet"><link href="/css/zenburn.css" rel="stylesheet"><!-- FavIcon--><!-- Thanks to https://www.favicon-generator.org/ & https://html2jade.org/--><link rel="apple-touch-icon" sizes="57x57" href="https://s3.amazonaws.com/mokacoding/apple-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="https://s3.amazonaws.com/mokacoding/apple-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="https://s3.amazonaws.com/mokacoding/apple-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="https://s3.amazonaws.com/mokacoding/apple-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="https://s3.amazonaws.com/mokacoding/apple-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="https://s3.amazonaws.com/mokacoding/apple-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="https://s3.amazonaws.com/mokacoding/apple-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="https://s3.amazonaws.com/mokacoding/apple-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" href="https://s3.amazonaws.com/mokacoding/apple-icon-180x180.png"><link rel="icon" type="image/png" sizes="192x192" href="https://s3.amazonaws.com/mokacoding/android-icon-192x192.png"><link rel="icon" type="image/png" sizes="32x32" href="https://s3.amazonaws.com/mokacoding/favicon-32x32.png"><link rel="icon" type="image/png" sizes="96x96" href="https://s3.amazonaws.com/mokacoding/favicon-96x96.png"><link rel="icon" type="image/png" sizes="16x16" href="https://s3.amazonaws.com/mokacoding/favicon-16x16.png"><link rel="manifest" href="https://s3.amazonaws.com/mokacoding/manifest.json"><meta name="msapplication-TileColor" content="#ffffff"><meta name="msapplication-TileImage" content="https://s3.amazonaws.com/mokacoding/ms-icon-144x144.png"><meta name="theme-color" content="#ffffff"><!-- SumoMe--><script src="//load.sumome.com/" data-sumo-site-id="dd80959300db03e20c8bc3dd899f1424fd764d261e6c3c41923c96482a270dba" async="async"></script></head><body><!-- Use this to render an extra header in special occasions--><div class="special-header"><div class="page"><div class="row-12"><div class="col-12"><p><!-- - Saving this for later and to avoid a `git revert`:markdown
+  [What is your biggest struggle right now with building software?](https://goo.gl/forms/lCLlJd9hqCUYoTME2)--><p><a href="https://tddinswift.com?utm_source=mokacoding-site&amp;utm_campaign=coming-soon&amp;utm_medium=sticky-header">Avilable Now: <strong>Test-Driven Development in Swift with SwiftUI and Combine</strong></a></p>
+</p></div></div></div></div><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">unit and acceptance testing, automation, productivity</div><div class="links"><a href="/archive.html">Archive</a><a href="/tags.html">Tags</a><a href="https://gio.codes">About</a><a href="#subscribe">Subscribe</a><a href="/feed.xml"><i class="fa fa-rss"></i></a></div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/the-value-of-acceptance-testing">The value of acceptance testing for mobile projects</a></h2><p class="post-meta"><span class="post-date">Tue Jun 23 2015&nbsp;</span><a href="/tag/Acceptance-Testing/index.html" class="post-tag">-Acceptance Testing</a></p><div class="post"><p><em>This post might be a bit different from the usual ones on this blog, less technical and more hand wavy. I hope you won&#39;t mind.</em></p>
+<p>Last week I gave a, short, talk at <a href="http://www.melbournecocoaheads.com/">Melbourne&#39;s CocoaHeads</a> titled: <strong>&quot;Talking myself into the value of acceptance testing&quot;</strong>. In this post I will go through the contents of the talk.</p>
+<p>We will talk about the problems that make acceptance testing hard, the scenarios in which they can really add value to your projects, and we will close with some tips on how to get started.</p>
+<p><a href="http://www.melbournecocoaheads.com/">Melbourne CocoaHeads</a> being an iOS and Mac developer meetup I didn&#39;t specify that these consideration are related <strong>only to the mobile world</strong>. I have very little experience with acceptance testing outside iOS, and I cannot express informed opinions for acceptance testing in the web world.</p>
+<p>You can see or the original web version <a href="http://mokagio.github.io/acceptance-tests-cocoaheads-talk/#/">here</a>. The video should come out, eventually.</p>
+<h2 id="before-we-begin">Before we begin</h2>
+<p>Before we start talking about acceptance testing there are two things that need to be made clear.</p>
+<h3 id="acceptance-test--unit-test">Acceptance test != Unit test</h3>
+<p>An acceptance test asserts a specific acceptance criteria, or user story, or job story, a well defined behaviour that the app is supposed to have.</p>
+<p>A unit test on the other hand asserts the behaviour of a give class or module, the <code>sut</code>, <em>system under test</em>.</p>
+<p>The scope and the design of these two tests are completely different, and it is also important to say that they don&#39;t replace each other. A 100% coverage and green unit test suite doesn&#39;t necessarily mean that the acceptance tests will pass, and vice versa.</p>
+<p>Unit tests are very important, and <a href="http://mokagio.github.io/acceptance-tests-cocoaheads-talk/#/4">you should write them</a>.</p>
+<h3 id="acceptance-test--automated-test">Acceptance test != Automated test</h3>
+<p>An acceptance test doesn&#39;t have to be automated by definition. Having the intern make sure that when logging in with Facebook the profile picture is set as the same on of the Facebook profile is an acceptance test. But it is definitely not automated.</p>
+<p>At the same time, having Travis CI running the unit tests for the project after every push to the repo is a way of running tests automatically, but those are not acceptance tests.</p>
+<p>This post (and talk) is about <strong>automated acceptance tests</strong>. For the rest of the post we will omit the automated part of the name.</p>
+<h2 id="the-problems">The problems</h2>
+<p>There are three big pain points when attempting to do acceptance testing.</p>
+<p><img src="https://s3.amazonaws.com/mokacoding/2015-06-23-long-to-write.png" alt="Acceptance test are long to write"></p>
+<p>The tests are <strong>long to write</strong>, even now that we have Apple&#39;s new UI testing framework with the recording feature, it still takes time to write a test.</p>
+<p><img src="https://s3.amazonaws.com/mokacoding/2015-06-23-slow-to-run.png" alt="Acceptance tests are slow to run"></p>
+<p>They are then <strong>slow to run</strong>, as the test goes at more or less the same speed as the user, and it most likely has to perform extra setup and tear down interaction between every scenario.</p>
+<p><img src="https://s3.amazonaws.com/mokacoding/2015-06-23-acceptance-tests-expensive-to-maintain.png" alt="Acceptance tests are expensive to maintain"></p>
+<p>Not only that, acceptance tests are also <strong>expensive to maintain</strong>. Being so tied with the UI and UX of the app, every time a new screen is added to the flow, a button change name, or the interaction becomes different the tests need to be updated. And as we just saw, it takes time to do so.</p>
+<p>There are some best practices that we can take to minimise this cost, for example centralising the value of the accessibility labels and identifiers behind a constant, or use the <a href="https://www.kidozen.com/mobile-testing-page-object-pattern-with-multilayer-design/">screen/page object pattern</a>. But the cost of keeping the test suite up to date is relevant.</p>
+<p>Let&#39;s not talk about how hard it is to keep the tests from being brittle and unreliable.</p>
+<p>On top of those problems there is the fact that you <strong>still need QA</strong>. We are not ready yet to replace humans with AIs that can make sure the app is actually behaving as intended, and there are things like the camera interaction that are hard to test in an automated way.</p>
+<h2 id="when-acceptance-tests-become-valuable">When acceptance tests become valuable</h2>
+<p>At this point you might be thinking that there is no point at all in trying to do acceptance testing, it&#39;s just a wast of time. That is not true, there are projects and types of apps for which investing time in writing acceptance tests will reward you very well.</p>
+<h3 id="apps-with-many-possible-state-combinations">Apps with many possible state combinations</h3>
+<p><img src="https://s3.amazonaws.com/mokacoding/2015-06-23-useful-with-state.png" alt="Apps with many state combinations"></p>
+<p>Some apps are simple, the user can take only a couple of paths through them. They do one thing, and hopefully they do it well. There are other apps on the other hand that have UI full of switches and pickers and buttons, in which every action the user takes multiply the number of possible outcomes by at least 2.</p>
+<p>In such cases even components that have been thoroughly unit tested can fall short, and be used in an unexpected combination.</p>
+<p>Investing time into writing acceptance tests for all the possible scenario is gonna give you an extra degree of confidence. It will also save a lot of QA time, the test will cover all the edge cases, the humans will then be able to verify only the most important ones.</p>
+<h3 id="refactoring-legacy-spaghetti-code">Refactoring legacy spaghetti code</h3>
+<p><img src="https://s3.amazonaws.com/mokacoding/2015-06-23-useful-with-refactoring.png" alt="Refactoring legacy spaghetti code"></p>
+<p>Some authors define legacy code <em>any code that doesn&#39;t have test coverage</em>. It could happen that you inherit a project from another team, or are hired to fix one. This project is most likely gonna be complex, and the quality of the code is gonna be... arguable (otherwise why would you be there?).</p>
+<p>In such cases every change you make makes you uncomfortable. In <a href="http://www.amazon.com/Working-Effectively-Legacy-Michael-Feathers/dp/0131177052">Working Effectively with Legacy Code</a> Michael Feathers suggest to add a unit test before making a change, and to slowly use the reliability generate by the test to refactor the project.</p>
+<p>But sometimes the code is such a mess, such a bowl of spaghetti, that finding a plaec where to start refactoring is a mission. If that&#39;s the case then investing some time in writing an acceptance tests suite to assure that no matter what internal change, refactor, or rewrite, you made the app is still behaving as expected could give you the confidence to tackle the project and eat the spaghetti.</p>
+<h3 id="dealing-with-agile-clients">Dealing with &quot;Agile&quot; clients</h3>
+<p><img src="https://s3.amazonaws.com/mokacoding/2015-06-23-useful-with-client.png" alt="Dealing with &quot;Agile&quot; clients"></p>
+<p>You all know that kind of client that wants to be Agile without really knowing that it means. They have the JIRA board, the sprint planning, probably a PM or scrum master, and user stories bloated with acceptance criteria. And once you&#39;ve committed to a certain amount of points for the sprint there&#39;s nothing to do about it, you have to deliver!</p>
+<p>It can be useful to interact with these stubborn clients <em>one acceptance criteria at the time</em>, making sure that everything they ask is implemented, and being able to demonstrate it. And what better tool that a suite of automated acceptance tests?</p>
+<h2 id="who-should-write-acceptance-tests">Who should write acceptance tests</h2>
+<p>We saw that yeah, acceptance testing on iOS projects has some pitfalls, but there are scenarios in which it can actually be a very useful and powerful tool. Who should write acceptance tests?</p>
+<p>In my opinion you should consider writing acceptance tests if:</p>
+<ul>
+<li>You are in a medium-big team, where some developer time can be directed towards acceptance testing without impacting the overall <em>velocity</em>.</li>
+<li>The project has clear requirements and specifications. Since updating acceptance tests is painful you don&#39;t want to have to do it once a week.</li>
+<li>The project doesn&#39;t have a strict deadline. If you&#39;re writing test code you are clearly not writing production code. But while in most cases writing unit tests is a good use of time because the resulting software design is better, and on the long run unit tests will allow you to make changes more quickly, the same might not be true for acceptance tests. Don&#39;t run acceptance tests if you are in a rush.</li>
+</ul>
+<h2 id="i-want-to-write-acceptance-tests-where-do-i-begin">I want to write acceptance tests, where do I begin?</h2>
+<p><img src="https://s3.amazonaws.com/mokacoding/2015-06-23-where-to-start.png" alt="Where do I begin?"></p>
+<p>Getting started with acceptance testing on iOS is becoming easier and easier. Apple <a href="https://mokacoding.com/blog/xcode-7-ui-testing/">just released a new UI testing framework</a> which allows you to automagically write tests cases simply by running the app on the Simulator and interacting with it. It is fully integrated with <code>XCTest</code>, and being completely detached, is on another target, from your Release code, is a safe way where to write some Swift code without the problems of Objective-C interoperability.</p>
+<p>For the past years <a href="https://github.com/kif-framework/KIF">KIF</a> has been one of the best open source frameworks to use to write tests for the behaviour of your apps. The community around it is pretty active, and I&#39;m looking forward to see how we&#39;re gonna be able to leverage the new APIs provided by UI testing to make KIF an even better framework.</p>
+<p>Finally if you&#39;re working with a cross platform app, or you have a full time tester, you might want to have a look at <a href="http://calaba.sh/">Calabash</a> and <a href="http://appium.io/">Appium</a>.</p>
+<h2 id="your-first-test">Your first test</h2>
+<p>If you&#39;re sold on your framework of choice but don&#39;t know where to start you could:</p>
+<ul>
+<li>Identify the most important feature or user&#39;s path through your app, and write a test for that. How do you get money from your app? Is the login always working? What cannot absolutely break in your app? Find that out and write a test for that.</li>
+<li>Write an acceptance test for a bug that you need to fix, write the fix, and use the test to verify that it is actually valid.</li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>Acceptance testing is a practice that can increase the quality of your process, prevent you from shipping bugs, and give you more confidence when making changes on the codebase. There are although a number of factors that make it hard, and sometimes you could invest your time in more productive activities. In this post we saw some of the tradeoffs of acceptance testing, and some valid use cases. As with everything else the best way to find out if this is something valuable for your team and your project is <strong>trying it out</strong> and measure what happens.</p>
+<p>I hope you found this post interesting and informative. If you have any experience to share on acceptance testing going well or incredibly wrong, please tweet me <a href="https://twitter.com/mokagio">@mokagio</a> or leave a comment below.</p>
+<p>This blog has other articles regarding more practical aspects of acceptance testing for iOS, <a href="https://mokacoding.com/tag/Acceptance-Testing/index.html">check them out</a>.</p>
+<p><em>Happy coding, and leave the codebase better than you found it.</em></p>
+</div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"><div><a href="/blog/testing-realm-apps"><<&nbsp;Testing Realm apps</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/xcode-7-ui-testing">Xcode 7 UI testing, a first look&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin Sendfox Signup Form -->
+<div id="sendfox_embed_signup">
+  <h4 class="form_title">Want more of these posts?</h4>
+  <p class="form_caption">Subscribe to receive new posts in your inbox.</p>
+  <form method="post" action="https://sendfox.com/form/3ee4z3/10r4wg" class="sendfox-form" id="10r4wg" data-async="true" data-recaptcha="true">
+    <p><input type="email" placeholder="Email" name="email" class="email" required /></p>
+    <!-- no botz please -->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="a_password" tabindex="-1" value="" autocomplete="off" /></div>
+    <div class="clear"><button type="submit">Sign me up</button></div>
+  </form>
+  <script src="https://sendfox.com/js/form.js"></script>
+</div>
+<!-- End Sendfox Signup Form -->
+</div><div class="bottom-box"><div id="disqus_thread"></div><script>var disqus_shortname = "mokacoding";
+// Neet do add the / at the end to maintain compatibility with previous version
+// of the blog that didn't define disqus_url, letting Disqus set it automatically
+// using window.location.href
+var disqus_url = "https://mokacoding.com/blog/the-value-of-acceptance-testing/";
+
+(function() {
+  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><noscript>Please enable JavaScript to view the<a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></div></div></div><div class="row-12 footer"><div class="col-12"><h3><a href="/">mokacoding</a></h3></div><div id="copy" class="col-9"><p>Hi I&#39;m <a href="https://gio.codes">Gio</a> I write here semi-regularly on software testing and TDD, productivity, and iOS development.</p>
+<p><a href="mailto:gio+blog@mokacoding.com">Get in touch</a> if you&#39;re interested in working together.</p>
+</div><div id="links" class="col-3"><p><i class="fa fa-twitter"></i>&nbsp;<a href="https://twitter.com/mokagio">@mokagio</a></p><p><i class="fa fa-github"></i>&nbsp;<a href="https://github.com/mokagio">mokagio</a></p></div></div></div></body><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-43554041-1', 'auto');
+ga('send', 'pageview');
+</script><script>var toggle = function(elm){
+  var y = elm.style && elm.style.display ? elm.style.display : 'block';
+  if (y == 'block'){
+    elm.style.opacity='0';
+    setTimeout( function(){ elm.style.display = 'none'; }, 300 );
+  }
+  else {
+    elm.style.display='block';
+    setTimeout( function(){ elm.style.opacity = '1'; }, 10 );
+  }
+}
+
+document.getElementById('close').onclick = function(){
+  toggle(document.getElementById('sticky-header'));
+  toggle(document.getElementById('sticky-header-padding-hack'));
+}</script></html>

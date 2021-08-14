@@ -1,0 +1,157 @@
+<!DOCTYPE html><html lang="en"><head><title>How to test view controllers navigation | mokacoding</title><meta name="description" content="The answer to &quot;How can I test that a view controller presents another view controller when something happens?&quot; is as simple as defining a delegate."><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"><!-- Canonical URL--><link rel="canonical" href="https://mokacoding.com/blog/navigation-delegate-pattern/"><!-- Open Graph meta tags--><meta property="og:title" content="How to test view controllers navigation"><meta property="og:description" content="The answer to &quot;How can I test that a view controller presents another view controller when something happens?&quot; is as simple as defining a delegate."><meta property="og:url" content="https://mokacoding.com/blog/navigation-delegate-pattern/"><meta property="og:type" content="article"><meta property="og:site_name" content="mokacoding"><meta property="og:image" content="https://s3.amazonaws.com/mokacoding/mokacoding_og_image.jpg"><!-- Twitter meta tags--><meta property="twitter:card" content="summary"><meta property="twitter:title" content="How to test view controllers navigation"><meta property="twitter:site" content="@mokacoding"><meta property="twitter:creator" content="@mokagio"><!-- Stylesheets--><link href="/css/griddy.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet"><link href="/css/font-awesome.min.css" rel="stylesheet"><link href="/css/zenburn.css" rel="stylesheet"><!-- FavIcon--><!-- Thanks to https://www.favicon-generator.org/ & https://html2jade.org/--><link rel="apple-touch-icon" sizes="57x57" href="https://s3.amazonaws.com/mokacoding/apple-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="https://s3.amazonaws.com/mokacoding/apple-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="https://s3.amazonaws.com/mokacoding/apple-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="https://s3.amazonaws.com/mokacoding/apple-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="https://s3.amazonaws.com/mokacoding/apple-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="https://s3.amazonaws.com/mokacoding/apple-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="https://s3.amazonaws.com/mokacoding/apple-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="https://s3.amazonaws.com/mokacoding/apple-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" href="https://s3.amazonaws.com/mokacoding/apple-icon-180x180.png"><link rel="icon" type="image/png" sizes="192x192" href="https://s3.amazonaws.com/mokacoding/android-icon-192x192.png"><link rel="icon" type="image/png" sizes="32x32" href="https://s3.amazonaws.com/mokacoding/favicon-32x32.png"><link rel="icon" type="image/png" sizes="96x96" href="https://s3.amazonaws.com/mokacoding/favicon-96x96.png"><link rel="icon" type="image/png" sizes="16x16" href="https://s3.amazonaws.com/mokacoding/favicon-16x16.png"><link rel="manifest" href="https://s3.amazonaws.com/mokacoding/manifest.json"><meta name="msapplication-TileColor" content="#ffffff"><meta name="msapplication-TileImage" content="https://s3.amazonaws.com/mokacoding/ms-icon-144x144.png"><meta name="theme-color" content="#ffffff"><!-- SumoMe--><script src="//load.sumome.com/" data-sumo-site-id="dd80959300db03e20c8bc3dd899f1424fd764d261e6c3c41923c96482a270dba" async="async"></script></head><body><!-- Use this to render an extra header in special occasions--><div class="special-header"><div class="page"><div class="row-12"><div class="col-12"><p><!-- - Saving this for later and to avoid a `git revert`:markdown
+  [What is your biggest struggle right now with building software?](https://goo.gl/forms/lCLlJd9hqCUYoTME2)--><p><a href="https://tddinswift.com?utm_source=mokacoding-site&amp;utm_campaign=coming-soon&amp;utm_medium=sticky-header">Avilable Now: <strong>Test-Driven Development in Swift with SwiftUI and Combine</strong></a></p>
+</p></div></div></div></div><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">unit and acceptance testing, automation, productivity</div><div class="links"><a href="/archive.html">Archive</a><a href="/tags.html">Tags</a><a href="https://gio.codes">About</a><a href="#subscribe">Subscribe</a><a href="/feed.xml"><i class="fa fa-rss"></i></a></div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/navigation-delegate-pattern">How to test view controllers navigation</a></h2><p class="post-meta"><span class="post-date">Tue Apr 16 2019&nbsp;</span><a href="/tag/Swift/index.html" class="post-tag">-Swift</a><a href="/tag/Testing/index.html" class="post-tag">-Testing</a><a href="/tag/iOS/index.html" class="post-tag">-iOS</a><a href="/tag/Software-Design/index.html" class="post-tag">-Software-Design</a></p><div class="post"><p>Here&#39;s a question that often comes up when testing iOS application: &quot;How can I test that <em>a view controller</em> presents <em>another view controller</em> when <em>something</em> happens?&quot;</p>
+<p>Testing navigation between view controllers can be tricky.
+You need to wrap your view controller under test in a <code>UINavigationController</code> if you want to test a push navigation or add it to a <code>UIWindow</code> if for a modal presentation.
+There are usually animations involved, which in turn require either your test assertions to be asynchronous or your code to allow the <code>animated</code> flag to be injected as <code>false</code> from the tests.</p>
+<p>Those and other little gotchas make the tests harder to write and reason about, but it doesn&#39;t have to be so.</p>
+<p>You can use a simple and cheap pattern to easily test how your view controllers trigger navigation, making your code easier to work with in the process.</p>
+<h2 id="navigationdelegate"><code>NavigationDelegate</code></h2>
+<p>The key to make navigations between view controllers easy to test lies in appreciating that <strong>view controllers be responsible for presenting other view controllers</strong>.</p>
+<p>View controllers should only trigger the navigation and then <em>delegate</em> the act of performing it to another object.
+I like to call this kind of delegates <code>NavigationDelegate</code>s<a href="#fn1"><sup id="pattern-origin">*</sup></a>.</p>
+<p>With a <code>NavigationDelegate</code> in place, testing how a view controller does navigations is now a matter of testing how it interacts with its delegate.
+This can be done by using a <a href="https://mokacoding.com/blog/swift-test-doubles/#spy">spy</a>.</p>
+<h3 id="navigationdelegate-in-action"><code>NavigationDelegate</code> in action</h3>
+<p>To test that a view controller triggers the expected navigation you can verify that it calls the appropriate method of its <code>NavigationDelegate</code>.</p>
+<pre><code class="hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">testCallsShowRedWhenRedButtonTouched</span>()</span> {
+    <span class="hljs-keyword">let</span> viewController <span class="hljs-operator">=</span> loadViewController()
+    <span class="hljs-keyword">let</span> navigationDelegateSpy <span class="hljs-operator">=</span> <span class="hljs-type">ViewControllerNavigationDelegateSpy</span>()
+    viewController.navigationDelegate <span class="hljs-operator">=</span> navigationDelegateSpy
+
+    viewController.redButton.sendActions(for: .touchUpInside)
+
+    <span class="hljs-type">XCTAssertTrue</span>(navigationDelegateSpy.showRedCalled)
+}</code></pre>
+<pre><code class="hljs swift"><span class="hljs-class"><span class="hljs-keyword">protocol</span> <span class="hljs-title">ViewControllerNavigationDelegate</span>: <span class="hljs-title">class</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">showRedViewController</span>()</span>
+}
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ViewController</span>: <span class="hljs-title">UIViewController</span> </span>{
+
+    <span class="hljs-keyword">@IBOutlet</span> <span class="hljs-keyword">weak</span> <span class="hljs-keyword">var</span> redButton: <span class="hljs-type">UIButton</span>!
+
+    <span class="hljs-keyword">weak</span> <span class="hljs-keyword">var</span> navigationDelegate: <span class="hljs-type">ViewControllerNavigationDelegate</span>?
+
+    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">viewDidLoad</span>()</span> {
+        <span class="hljs-keyword">super</span>.viewDidLoad()
+
+        redButton.addTarget(<span class="hljs-keyword">self</span>, action: #selector(redButtonTouched), for: .primaryActionTriggered)
+    }
+
+    <span class="hljs-keyword">@objc</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">redButtonTouched</span>()</span> {
+        navigationDelegate<span class="hljs-operator">?</span>.showRedViewController()
+    }
+}</code></pre>
+<pre><code class="hljs swift"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ViewControllerNavigationDelegateSpy</span>: <span class="hljs-title">ViewControllerNavigationDelegate</span> </span>{
+
+    <span class="hljs-keyword">private(set)</span> <span class="hljs-keyword">var</span> showRedCalled <span class="hljs-operator">=</span> <span class="hljs-literal">false</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">showRedViewController</span>()</span> {
+        showRedCalled <span class="hljs-operator">=</span> <span class="hljs-literal">true</span>
+    }
+}</code></pre>
+<p><em>All the this code is available in <a href="https://github.com/mokagio/Navigation-Delegate-Example">this GitHub repo</a></em>.</p>
+<p>The tests above look simple, don&#39;t they?
+By using this pattern, you remove the need to set up the whole navigation stack containing the view controller under test to verify it&#39;s behavior.
+You also don&#39;t need to put the view controller inside a <code>UIWindow</code> or <code>UINavigationController</code>, simplifying the test setup and tear down.</p>
+<p>The only downside is that you have to build a spy test double for the <code>NavigationDelegate</code>.
+Given how little code this involves, I think it&#39;s a pretty good tradeoff.</p>
+<p>If you want to test how the type conforming to the <code>NavigationDelegate</code> performs the navigation -a wise thing to do- you can do that in isolation.</p>
+<pre><code class="hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">testPushesRedViewController</span>()</span> {
+    <span class="hljs-keyword">let</span> navigator <span class="hljs-operator">=</span> <span class="hljs-type">Navigator</span>(navigationController: <span class="hljs-type">UINavigationController</span>(rootViewController: <span class="hljs-type">UIViewController</span>()))
+
+    navigator.showRedViewController()
+
+    <span class="hljs-keyword">_</span> <span class="hljs-operator">=</span> expectation(
+        for: <span class="hljs-type">NSPredicate</span> { input, <span class="hljs-keyword">_</span> <span class="hljs-keyword">in</span>
+            <span class="hljs-keyword">return</span> (input <span class="hljs-keyword">as?</span> <span class="hljs-type">UINavigationController</span>)<span class="hljs-operator">?</span>.topViewController <span class="hljs-keyword">is</span> <span class="hljs-type">RedViewController</span>
+        },
+        evaluatedWith: navigator.navigationController,
+        handler: .none
+    )
+    waitForEnavigatorpectations(timeout: <span class="hljs-number">1</span>, handler: .none)
+}</code></pre>
+<h2 id="you-can-adopt-navigationdelegates-today">You can adopt <code>NavigationDelegate</code>s today</h2>
+<p>What I love about this idea is that it is cheap and portable.
+You don&#39;t have to change your application architecture to adopt it.
+In fact, it fits well with most architectures.</p>
+<p>You can start using <code>NavigationDelegate</code>s today.</p>
+<p>To get started and make your code testable you can even have the view controller be its own navigation delegate.
+This is definitely not something I would endorse in the long run, but it might help you get started.
+Once the delegate is in the codebase, you can come back to it later and extract the implementation in a dedicated object.</p>
+<h2 id="benefits">Benefits</h2>
+<p>Making the navigation side of your view controllers easier to test this way comes with other benefits too.</p>
+<p>Because your view controllers are now unaware of how to present new view controllers, they won&#39;t need to change when updating the way navigation works (see <a href="https://github.com/mokagio/Navigation-Delegate-Example/pull/1">this PR</a> in the example project).</p>
+<p>Remember the definition of the <a href="https://en.wikipedia.org/wiki/Single_responsibility_principle">single responsibility principle</a>? An object should only have one reason to change.
+View controllers are the glue code of iOS applications; they end up doing a lot of things.
+With a <code>NavigationDelegate</code> they have one less thing to do. 😉</p>
+<p>Single responsibility is also why I prefer to use a dedicated delegate for navigation only, even if the view controller already has a delegate.
+Yes, you end up with more definitions and objects, but I&#39;d rather work in a codebase with a lot of small and easy to reason about pieces, than one with a handful of classes doing all the work.</p>
+<hr>
+<p>If you know the right approach, testing how a <code>UIViewController</code> triggers a navigation is as simple as verifying any other side effect code.</p>
+<p>The <code>NavigationDelegate</code> pattern follows the <em>dīvide et imperā</em> rule; divide and conquer.
+Split the implementation of the navigation in two pieces, the code that starts it and the code that performs it.
+Testing both in isolation is easier than testing them together.</p>
+<p>Using <code>NavigationDelegate</code>s will not only make a critical area of your app such as how screens are linked together easier to test, but it will also make it easier to reuse view controllers in different areas of the application.
+A case in point for how making things easy to test also makes them easy to use.</p>
+<p>The pattern also scales nicely.
+You can imagine a view controller triggering the presentation of a different screen based on some internal state.
+For example, a button could present a screen to up-sell the user to a subscription if they don&#39;t have one or push to the feature screen if they have it.
+These two different flows are triggered by two different methods in a <code>NavigationDelegate</code>.
+In the tests, you can set the state in the view controller, synthesize the user action that should trigger the presentation, and verify with a spy that the correct navigation method is called.</p>
+<p>What do you think of this approach? I&#39;d love to hear your thoughts if you use it, and the spin that you&#39;ll put on it.
+Get in touch on Twitter at <a href="https://twitter.com/mokagio">@mokagio</a> or leave a comment below.</p>
+<h3 id="footnotes">Footnotes</h3>
+<p><span id="fn1"></span> <a href="#pattern-origin">*</a>. The idea of delegating the responsibility of performing navigations from a view controller is not original.
+This concept is what makes patterns like <a href="http://khanlou.com/2015/10/coordinators-redux/">Coordinators</a>, <a href="https://www.swiftbysundell.com/posts/navigation-in-swift">Navigators</a>, and <a href="https://clean-swift.com/routing-in-clean-swift/">Routers</a> possible.
+The first time I saw this formalized was in Alberto De Bortoli&#39;s 2014 post &quot;<a href="https://albertodebortoli.com/2014/09/03/flow-controllers-on-ios-for-a-better-navigation-control/">Flow Controllers on iOS for a better navigation control</a>&quot;.
+Although he injects the object responsible for the navigation in the view controller, the result is pretty much the same.</p>
+</div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"><div><a href="/blog/running-one-test-in-xcode"><<&nbsp;How to run a single test in Xcode</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/take-care-of-your-tools">Take care of your tools&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin Sendfox Signup Form -->
+<div id="sendfox_embed_signup">
+  <h4 class="form_title">Want more of these posts?</h4>
+  <p class="form_caption">Subscribe to receive new posts in your inbox.</p>
+  <form method="post" action="https://sendfox.com/form/3ee4z3/10r4wg" class="sendfox-form" id="10r4wg" data-async="true" data-recaptcha="true">
+    <p><input type="email" placeholder="Email" name="email" class="email" required /></p>
+    <!-- no botz please -->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="a_password" tabindex="-1" value="" autocomplete="off" /></div>
+    <div class="clear"><button type="submit">Sign me up</button></div>
+  </form>
+  <script src="https://sendfox.com/js/form.js"></script>
+</div>
+<!-- End Sendfox Signup Form -->
+</div><div class="bottom-box"><div id="disqus_thread"></div><script>var disqus_shortname = "mokacoding";
+// Neet do add the / at the end to maintain compatibility with previous version
+// of the blog that didn't define disqus_url, letting Disqus set it automatically
+// using window.location.href
+var disqus_url = "https://mokacoding.com/blog/navigation-delegate-pattern/";
+
+(function() {
+  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><noscript>Please enable JavaScript to view the<a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></div></div></div><div class="row-12 footer"><div class="col-12"><h3><a href="/">mokacoding</a></h3></div><div id="copy" class="col-9"><p>Hi I&#39;m <a href="https://gio.codes">Gio</a> I write here semi-regularly on software testing and TDD, productivity, and iOS development.</p>
+<p><a href="mailto:gio+blog@mokacoding.com">Get in touch</a> if you&#39;re interested in working together.</p>
+</div><div id="links" class="col-3"><p><i class="fa fa-twitter"></i>&nbsp;<a href="https://twitter.com/mokagio">@mokagio</a></p><p><i class="fa fa-github"></i>&nbsp;<a href="https://github.com/mokagio">mokagio</a></p></div></div></div></body><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-43554041-1', 'auto');
+ga('send', 'pageview');
+</script><script>var toggle = function(elm){
+  var y = elm.style && elm.style.display ? elm.style.display : 'block';
+  if (y == 'block'){
+    elm.style.opacity='0';
+    setTimeout( function(){ elm.style.display = 'none'; }, 300 );
+  }
+  else {
+    elm.style.display='block';
+    setTimeout( function(){ elm.style.opacity = '1'; }, 10 );
+  }
+}
+
+document.getElementById('close').onclick = function(){
+  toggle(document.getElementById('sticky-header'));
+  toggle(document.getElementById('sticky-header-padding-hack'));
+}</script></html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html><html lang="en"><head><title>You Don't Need It Yet | mokacoding</title><meta name="description" content="YDNIY is a purposeful restraint of what you decide to build in the interest of delivering value to the users as soon as possible and consistently."><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"><!-- Canonical URL--><link rel="canonical" href="https://mokacoding.com/blog/you-dont-need-it-yet/"><!-- Open Graph meta tags--><meta property="og:title" content="You Don't Need It Yet"><meta property="og:description" content="YDNIY is a purposeful restraint of what you decide to build in the interest of delivering value to the users as soon as possible and consistently."><meta property="og:url" content="https://mokacoding.com/blog/you-dont-need-it-yet/"><meta property="og:type" content="article"><meta property="og:site_name" content="mokacoding"><meta property="og:image" content="https://mokacoding.s3.amazonaws.com/2020-10-07-mvp.jpg"><!-- Twitter meta tags--><meta property="twitter:card" content="summary"><meta property="twitter:title" content="You Don't Need It Yet"><meta property="twitter:site" content="@mokacoding"><meta property="twitter:creator" content="@mokagio"><!-- Stylesheets--><link href="/css/griddy.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet"><link href="/css/font-awesome.min.css" rel="stylesheet"><link href="/css/zenburn.css" rel="stylesheet"><!-- FavIcon--><!-- Thanks to https://www.favicon-generator.org/ & https://html2jade.org/--><link rel="apple-touch-icon" sizes="57x57" href="https://s3.amazonaws.com/mokacoding/apple-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="https://s3.amazonaws.com/mokacoding/apple-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="https://s3.amazonaws.com/mokacoding/apple-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="https://s3.amazonaws.com/mokacoding/apple-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="https://s3.amazonaws.com/mokacoding/apple-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="https://s3.amazonaws.com/mokacoding/apple-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="https://s3.amazonaws.com/mokacoding/apple-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="https://s3.amazonaws.com/mokacoding/apple-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" href="https://s3.amazonaws.com/mokacoding/apple-icon-180x180.png"><link rel="icon" type="image/png" sizes="192x192" href="https://s3.amazonaws.com/mokacoding/android-icon-192x192.png"><link rel="icon" type="image/png" sizes="32x32" href="https://s3.amazonaws.com/mokacoding/favicon-32x32.png"><link rel="icon" type="image/png" sizes="96x96" href="https://s3.amazonaws.com/mokacoding/favicon-96x96.png"><link rel="icon" type="image/png" sizes="16x16" href="https://s3.amazonaws.com/mokacoding/favicon-16x16.png"><link rel="manifest" href="https://s3.amazonaws.com/mokacoding/manifest.json"><meta name="msapplication-TileColor" content="#ffffff"><meta name="msapplication-TileImage" content="https://s3.amazonaws.com/mokacoding/ms-icon-144x144.png"><meta name="theme-color" content="#ffffff"><!-- SumoMe--><script src="//load.sumome.com/" data-sumo-site-id="dd80959300db03e20c8bc3dd899f1424fd764d261e6c3c41923c96482a270dba" async="async"></script></head><body><!-- Use this to render an extra header in special occasions--><div class="special-header"><div class="page"><div class="row-12"><div class="col-12"><p><!-- - Saving this for later and to avoid a `git revert`:markdown
+  [What is your biggest struggle right now with building software?](https://goo.gl/forms/lCLlJd9hqCUYoTME2)--><p><a href="https://tddinswift.com?utm_source=mokacoding-site&amp;utm_campaign=coming-soon&amp;utm_medium=sticky-header">Avilable Now: <strong>Test-Driven Development in Swift with SwiftUI and Combine</strong></a></p>
+</p></div></div></div></div><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">unit and acceptance testing, automation, productivity</div><div class="links"><a href="/archive.html">Archive</a><a href="/tags.html">Tags</a><a href="https://gio.codes">About</a><a href="#subscribe">Subscribe</a><a href="/feed.xml"><i class="fa fa-rss"></i></a></div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/you-dont-need-it-yet">You Don't Need It Yet</a></h2><p class="post-meta"><span class="post-date">Wed Oct 07 2020&nbsp;</span><a href="/tag/Software-Design/index.html" class="post-tag">-Software Design</a></p><div class="post"><p>YDNIY, You Don&#39;t Need It Yet, is a principle to ship software on a schedule <a href="https://codewithoutrules.com/2020/09/18/ydniy/">proposed by Itamar Turner-Trauring</a>.
+Applying it consistently will benefit you beyond merely staying on track with a pre-committed schedule, though, it will help you learn and shape your software.</p>
+<p>The idea behind YDNIY is that if a feature, or part of it, is not required to make your product useful, you can delay implementing it and ship something valuable to the users.
+This is not limited to the first version of your product: <strong>keep refining the value you offer one strictly necessary change at a time, providing the users with a steady drip of improvements</strong>.</p>
+<p>Itamar uses his <a href="https://pythonspeed.com/products/filmemoryprofiler/">Python memory profiler library <code>fil</code></a> as an example of how to apply YDNIY.
+The first public version was installable only via <a href="https://pypi.org/project/pip/"><code>pip</code></a>, run only on Linux, and could profile only complete program runs.
+This version was obviously incomplete and not that powerful, but it still delivered something useful to some users.
+In the following releases, Itamar added more and more features, all of them useful and core for a memory profiler, but none critical enough to prevent delivering something valuable to the users before it was finished.</p>
+<p>YDNIY is similar to YAGNI, You Ain&#39;t Gonna Need It, the principle of writing only code that is motivated by a current requirement, not ideas of what the software might need to do in the future.
+Both help us write less software and ship faster.
+The difference is that where YAGNI is a ruthless elimination of anything but the necessary, YDNIY is a careful consideration of what is necessary <em>right now</em> and what can wait instead.</p>
+<p>YDNIY has some resemblance with the MVP, Minimum Viable Product, approach, too, but, as Itamar puts is, &quot;the goal of the MVP is to learn about users or customers, whereas the goal of YAGNI and YDNIY is to get something useful into users&#39; hands as quickly as possible.&quot;</p>
+<p>While it&#39;s true that YDNIY is not as explicitly about learning as MVP is, <strong>delivering something useful into users&#39; hands as soon as possible can generate even more learning than an MVP</strong>.</p>
+<p>Developing a product in small iterations, each refining the way it solves a problem, is the foundation of the <a href="https://blog.crisp.se/2016/01/25/henrikkniberg/making-sense-of-mvp">Earliest Testable/Usable/Lovable</a> approach created by Henrik Kniberg &quot;improving on MVP&quot;.</p>
+<blockquote>
+<p>What is the cheapest and fastest way we can start learning?
+Will [this incomplete but functional version of our product] help solve the customer&#39;s problem?
+Maybe, maybe not, but we&#39;ll definitely learn something by putting this into the hands of real users.</p>
+</blockquote>
+<p>In fact, Itamar library&#39;s changelog resembles Kniberg&#39;s famous &quot;skateboard, scooter, bicycle, motorbike, car&quot; example of Earlier Testable/Usable/Lovable iteration.</p>
+<p><img src="https://mokacoding.s3.amazonaws.com/2020-10-07-mvp.jpg" alt="The Earliest Testable/Usable/Lovable model applied to the process of building a car">
+<em>Image via Henrik Kniberg&#39;s <a href="https://blog.crisp.se/2016/01/25/henrikkniberg/making-sense-of-mvp">original post</a>.</em></p>
+<p>As such, Itamar is selling YDNIY short when he says it&#39;s more about shipping fast than learning.
+Carefully delaying the implementation of features and components that are not immediately necessary to ship something useful to the users sooner is precisely the kind of approach that generates learning when followed with feedback requests to the users.</p>
+<p>Successful bootstrappers know a lot about applying YDNIY and moving in small iterations focused on gaining insights from their customers.
+When you quit your day job to start your own business, your income depends on how many customers you can get.
+The ability to ship something valuable (that people will pay for) fast (before your savings run out) is the difference between staying in the game and having to leave before you can make your play.</p>
+<p><a href="https://twitter.com/r00k">Ben Orenstein</a>, co-founder and CEO of <a href="https://tuple.app/">Tuple</a>, a pair programming app, has been sharing his bootstrapping journey since inception in <a href="https://artofproductpodcast.com/">The Art Of Proudct</a> podcast.
+Like Itamar&#39;s <code>fip</code>, Tuple launched on only one platform: macOS.
+At the time of writing, it still doesn&#39;t offer Linux or Windows clients.
+This is clearly a limitation to the possible userbase for the app, but the company provides a smooth and reliable remote pair programming experience to enough developers on macOS to be profitable and growing.</p>
+<p>Several times in the show&#39;s history, Ben has bounced the idea of building clients for other platforms.
+&quot;Do we need it yet?&quot;
+The answer, for the moment, is still no.</p>
+<p>Had Ben and his team decided that it was necessary to ship the first version of Tuple with support across platforms, the company&#39;s trajectory would have been very different.
+Remote pair programming involves real-time streaming of and interaction with the users&#39; screen; making it work cross-platform is not a simple feat.
+Getting that right might have taken too much time, eating up the founders&#39; savings and sending Tuple to that section of the startup cemetery reserved for those who burnt their runway before their product ever saw the light of day.</p>
+<p><strong>You Don&#39;t Need It Yet is a purposeful restraint of what you decide to build in the interest of delivering value to the users as soon as possible.</strong></p>
+<p>It goes against the perfectionist nature shared by most software developers.
+To practice it, you need to be comfortable with being uncomfortable about your product&#39;s completeness, because you&#39;ll need to ship something clearly unfinished.</p>
+<p>When applied to a new product or a new complex feature, and paired with a fast-feedback mindset, YDNIY will help you learn and guide your development towards adding value on every iteration.</p>
+<p>Next time you sit down to write some code or flesh out a product idea, ask yourself, &quot;do I need this yet?&quot;
+What are you trying to solve, and what do you need to learn?
+Try to think of ways to build a smaller version of what you want to achieve, something you can ship as soon as possible to validate your assumptions.</p>
+</div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"><div><a href="/blog/hyperfocus-review"><<&nbsp;Hyperfocus by Chris Bailey</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/thats-funny-moments-are-learning-opportunities">&quot;That's funny…&quot; moments are learning opportunities&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin Sendfox Signup Form -->
+<div id="sendfox_embed_signup">
+  <h4 class="form_title">Want more of these posts?</h4>
+  <p class="form_caption">Subscribe to receive new posts in your inbox.</p>
+  <form method="post" action="https://sendfox.com/form/3ee4z3/10r4wg" class="sendfox-form" id="10r4wg" data-async="true" data-recaptcha="true">
+    <p><input type="email" placeholder="Email" name="email" class="email" required /></p>
+    <!-- no botz please -->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="a_password" tabindex="-1" value="" autocomplete="off" /></div>
+    <div class="clear"><button type="submit">Sign me up</button></div>
+  </form>
+  <script src="https://sendfox.com/js/form.js"></script>
+</div>
+<!-- End Sendfox Signup Form -->
+</div><div class="bottom-box"><div id="disqus_thread"></div><script>var disqus_shortname = "mokacoding";
+// Neet do add the / at the end to maintain compatibility with previous version
+// of the blog that didn't define disqus_url, letting Disqus set it automatically
+// using window.location.href
+var disqus_url = "https://mokacoding.com/blog/you-dont-need-it-yet/";
+
+(function() {
+  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><noscript>Please enable JavaScript to view the<a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></div></div></div><div class="row-12 footer"><div class="col-12"><h3><a href="/">mokacoding</a></h3></div><div id="copy" class="col-9"><p>Hi I&#39;m <a href="https://gio.codes">Gio</a> I write here semi-regularly on software testing and TDD, productivity, and iOS development.</p>
+<p><a href="mailto:gio+blog@mokacoding.com">Get in touch</a> if you&#39;re interested in working together.</p>
+</div><div id="links" class="col-3"><p><i class="fa fa-twitter"></i>&nbsp;<a href="https://twitter.com/mokagio">@mokagio</a></p><p><i class="fa fa-github"></i>&nbsp;<a href="https://github.com/mokagio">mokagio</a></p></div></div></div></body><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-43554041-1', 'auto');
+ga('send', 'pageview');
+</script><script>var toggle = function(elm){
+  var y = elm.style && elm.style.display ? elm.style.display : 'block';
+  if (y == 'block'){
+    elm.style.opacity='0';
+    setTimeout( function(){ elm.style.display = 'none'; }, 300 );
+  }
+  else {
+    elm.style.display='block';
+    setTimeout( function(){ elm.style.opacity = '1'; }, 10 );
+  }
+}
+
+document.getElementById('close').onclick = function(){
+  toggle(document.getElementById('sticky-header'));
+  toggle(document.getElementById('sticky-header-padding-hack'));
+}</script></html>
