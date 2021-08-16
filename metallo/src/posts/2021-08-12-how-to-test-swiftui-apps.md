@@ -79,7 +79,7 @@ From a practical point of view, both our brain and the screen size limit how eff
 As you can see in the image below, two different previews make the canvas crowded and the details hard to see.
 If we were to add more, they'd end up too small to see, and we'd have to zoom in a scroll through the canvas to check all of them.
 
-_image showing the two previews_
+![Screenshot of Xcode using two previews](https://s3.amazonaws.com/mokacoding/2021-08-12-two-previews.png)
 
 Moreover, using Previews relies on our eyes and brain to verify the behavior.
 Unfortunately, this biological hardware of ours is slow and bug-ridden.
@@ -234,6 +234,14 @@ To finish our work, we need to make the app UI use the new code.
 Integrating `hello(name:)` in the UI merely requires calling it from within `ContentView`'s `body`.
 
 ```swift
+struct ContentView: View {
+    let userName: String?
+
+    var body: some View {
+        Text(hello(name: userName))
+            .padding()
+    }
+}
 ```
 
 Unlike the quick and dirty implementation that didn't rely on tests, we don't need to generate two Previews to verify the conditional hello world behavior because that's already done in the unit tests.
@@ -250,3 +258,5 @@ In the real world, you'll be working with much more complex views, need to imple
 It's then that Test-Driven Development becomes a productivity multiplier because it will let you work in isolation and verify every change without spinning up the whole application and go through the motions of its UI.
 
 _If you enjoyed this introduction to TDD with SwiftUI, you'll like my book [_Test-Driven Development in Swift_](https://tddinswift.com) where we build a real-world application using TDD, SwiftUI, and Combine._
+
+_Thanks to [Nikita Ermolenko](https://twitter.com/otbivnoe) for reporting an issue with the first version of this post._ 🎩
