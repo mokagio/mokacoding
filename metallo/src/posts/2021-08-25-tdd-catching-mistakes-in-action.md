@@ -16,7 +16,13 @@ I published a [video tutorial](https://www.youtube.com/watch?v=AHsnHL6HOdI) show
 
 The example comes from my book [_Test-Driven Developmen in Swift_](https://tddinswift.com) but what's particularly interesting in the video is that it shows how fast TDD can reveal a mistake and help you learn from it.
 
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/AHsnHL6HOdI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<!-- YouTube embed code -->
+<!-- Thanks https://jameshfisher.com/2017/08/30/how-do-i-make-a-full-width-iframe/ for the aspect-ratio with YouTube iframe code -->
+<div>
+  <div style="position:relative;padding-top:56.25%;">
+    <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;" src="https://www.youtube-nocookie.com/embed/AHsnHL6HOdI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>
+</div>
 
 ## How TDD reveals coding mistakes
 
