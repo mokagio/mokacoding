@@ -1,6 +1,6 @@
 ---
-title: A real-world example of TDD catching code regressions
-description: I published a YouTube video with a tutorial on how to implement the FizzBuzz algorithm using Test-Driven Development. In a couple of occasions while recording, I made a thinking or coding mistake and, sure enough, the tests immediately pointed it out.
+title: A real-world example of TDD catching bugs
+description: I published a YouTube video with a tutorial on implementing the FizzBuzz algorithm using Test-Driven Development. While recording, I made a couple of thinking or coding mistakes, and, sure enough, the tests immediately pointed them out.
 twitter_title: How tests reveal coding mistakes FAST
 og_description: While recording a FizzBuzz TDD tutorial, I made some mistakes that my tests immediately noticed
 tags:
@@ -12,21 +12,13 @@ tags:
 og_image: https://s3.amazonaws.com/mokacoding/2021-08-25-tdd-fizz-buzz.jpg
 ---
 
-I published a [video tutorial](https://www.youtube.com/watch?v=AHsnHL6HOdI) showing how to implement the infamous [FizzBuzz](https://en.wikipedia.org/wiki/Fizz_buzz#Programming) using Test-Driven Development.
+I published a [video tutorial](https://www.youtube.com/watch?v=AHsnHL6HOdI) showing how to implement the infamous [FizzBuzz](https://en.wikipedia.org/wiki/Fizz_buzz#Programming) using Test-Driven Development, an example coming from my book [_Test-Driven Development in Swift_](https://tddinswift.com).
 
-The example comes from my book [_Test-Driven Developmen in Swift_](https://tddinswift.com) but what's particularly interesting in the video is that it shows how fast TDD can reveal a mistake and help you learn from it.
-
-<!-- YouTube embed code -->
-<!-- Thanks https://jameshfisher.com/2017/08/30/how-do-i-make-a-full-width-iframe/ for the aspect-ratio with YouTube iframe code -->
-<div>
-  <div style="position:relative;padding-top:56.25%;">
-    <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;" src="https://www.youtube-nocookie.com/embed/AHsnHL6HOdI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-  </div>
-</div>
+Aside from the tutorial, what's truly interesting in the video is that it shows how fast TDD can reveal a mistake and help you learn from it.
 
 ## How TDD reveals coding mistakes
 
-After completing the implementation, I decided to refactor the ugly code I wrote just to make the test pass into something I liked more.
+After completing the implementation, I decided to refactor the ugly code I wrote to make the test pass as soon as possible into something I liked more.
 
 I went from this:
 
@@ -69,7 +61,8 @@ The tests [revealed it](https://youtu.be/AHsnHL6HOdI?t=816) as soon as I run the
 In my copy-pasta, I used the code to check for "fizz" to print "buzz" and vice versa.
 
 How long do you think it would have taken me to notice that mistake if I'd been relying solely on manual testing?
-Definitely more time, as I would have had to manually launch the app or script that uses `fizzBuzz(_:)` feed it an input like `3` and _notice_, something is not always guaranteed it to occur, the output was not the correct one.
+More time for sure, as I would have had to manually launch the app or script that uses `fizzBuzz(_:)` feed it an input like `3` and _notice_ the output was not correct.
+Apart from the overhead of launching the app and navigating its UI, which might be negligible in some cases, manually verifying code uses our _biological hardware_, which is liable to all sorts of distractions and hiccups.
 
 ## How TDD reveals incorrect mental models
 
@@ -99,19 +92,29 @@ func testDivisibleBy15ReturnsFizzBuzz() {
 }
 ```
 
-Looking at the code, I was expecting it to return `"buzz"` and the test to fail.
+Looking at the code, I expected it to return `"buzz"` and the test to fail.
 Can you see where I was wrong?
 
 The test did fail indeed, but the value it received was `"fizz"` instead.
-I didn't realized that, because 15 is divisible by both 3 and 5, the code would have gone in the `divisibleBy3 == true` branch.
+I didn't realize that because 15 is divisible by both 3 and 5, the code would have gone in the `divisibleBy3 == true` branch.
 
-This is why it's useful to always make a guess on what the tests will do before running them.
+Always guess what the tests will do before running them.
 When the result you get is not what you expect, you can [update your mental representation](https://mokacoding.com/blog/thats-funny-moments-are-learning-opportunities/) of the system.
+
+Here's the full video:
+
+<!-- YouTube embed code -->
+<!-- Thanks https://jameshfisher.com/2017/08/30/how-do-i-make-a-full-width-iframe/ for the aspect-ratio with YouTube iframe code -->
+<div>
+  <div style="position:relative;padding-top:56.25%;">
+    <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;" src="https://www.youtube-nocookie.com/embed/AHsnHL6HOdI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>
+</div>
 
 ---
 
-I could have easily edit those mistakes out of my YouTube video, but I decided to leave them.
+I could have easily edited those mistakes from my YouTube video, but I decided to leave them.
 I hope they serve as a good showcase of the teaching power of Test-Driven Development.
 
 You don't have to be a genius to write great software.
-You only need to discover your mistakes fast enough to learn from them.
+You only need to discover your mistakes fast enough to learn from them and iterate.
