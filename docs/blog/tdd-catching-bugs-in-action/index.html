@@ -1,0 +1,125 @@
+<!DOCTYPE html><html lang="en"><head><title>A real-world example of TDD catching bugs | mokacoding</title><meta name="description" content="I published a YouTube video with a tutorial on implementing the FizzBuzz algorithm using Test-Driven Development. While recording, I made a couple of thinking or coding mistakes, and, sure enough, the tests immediately pointed them out."><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"><!-- Canonical URL--><link rel="canonical" href="https://mokacoding.com/blog/tdd-catching-bugs-in-action/"><!-- Open Graph meta tags--><meta property="og:title" content="A real-world example of TDD catching bugs"><meta property="og:description" content="While recording a FizzBuzz TDD tutorial, I made some mistakes that my tests immediately noticed"><meta property="og:url" content="https://mokacoding.com/blog/tdd-catching-bugs-in-action/"><meta property="og:type" content="article"><meta property="og:site_name" content="mokacoding"><meta property="og:image" content="https://s3.amazonaws.com/mokacoding/2021-08-25-tdd-fizz-buzz.jpg"><!-- Twitter meta tags--><meta property="twitter:card" content="summary"><meta property="twitter:title" content="How tests reveal coding mistakes FAST"><meta property="twitter:site" content="@mokacoding"><meta property="twitter:creator" content="@mokagio"><!-- Stylesheets--><link href="/css/griddy.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet"><link href="/css/font-awesome.min.css" rel="stylesheet"><link href="/css/zenburn.css" rel="stylesheet"><!-- FavIcon--><!-- Thanks to https://www.favicon-generator.org/ & https://html2jade.org/--><link rel="apple-touch-icon" sizes="57x57" href="https://s3.amazonaws.com/mokacoding/apple-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="https://s3.amazonaws.com/mokacoding/apple-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="https://s3.amazonaws.com/mokacoding/apple-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="https://s3.amazonaws.com/mokacoding/apple-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="https://s3.amazonaws.com/mokacoding/apple-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="https://s3.amazonaws.com/mokacoding/apple-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="https://s3.amazonaws.com/mokacoding/apple-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="https://s3.amazonaws.com/mokacoding/apple-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" href="https://s3.amazonaws.com/mokacoding/apple-icon-180x180.png"><link rel="icon" type="image/png" sizes="192x192" href="https://s3.amazonaws.com/mokacoding/android-icon-192x192.png"><link rel="icon" type="image/png" sizes="32x32" href="https://s3.amazonaws.com/mokacoding/favicon-32x32.png"><link rel="icon" type="image/png" sizes="96x96" href="https://s3.amazonaws.com/mokacoding/favicon-96x96.png"><link rel="icon" type="image/png" sizes="16x16" href="https://s3.amazonaws.com/mokacoding/favicon-16x16.png"><link rel="manifest" href="https://s3.amazonaws.com/mokacoding/manifest.json"><meta name="msapplication-TileColor" content="#ffffff"><meta name="msapplication-TileImage" content="https://s3.amazonaws.com/mokacoding/ms-icon-144x144.png"><meta name="theme-color" content="#ffffff"><!-- SumoMe--><script src="//load.sumome.com/" data-sumo-site-id="dd80959300db03e20c8bc3dd899f1424fd764d261e6c3c41923c96482a270dba" async="async"></script></head><body><!-- Use this to render an extra header in special occasions--><div class="special-header"><div class="page"><div class="row-12"><div class="col-12"><p><!-- - Saving this for later and to avoid a `git revert`:markdown
+  [What is your biggest struggle right now with building software?](https://goo.gl/forms/lCLlJd9hqCUYoTME2)--><p><a href="https://tddinswift.com?utm_source=mokacoding-site&amp;utm_campaign=coming-soon&amp;utm_medium=sticky-header">Avilable Now: <strong>Test-Driven Development in Swift with SwiftUI and Combine</strong></a></p>
+</p></div></div></div></div><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">unit and acceptance testing, automation, productivity</div><div class="links"><a href="/archive.html">Archive</a><a href="/tags.html">Tags</a><a href="https://gio.codes">About</a><a href="#subscribe">Subscribe</a><a href="/feed.xml"><i class="fa fa-rss"></i></a></div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/tdd-catching-bugs-in-action">A real-world example of TDD catching bugs</a></h2><p class="post-meta"><span class="post-date">Wed Aug 25 2021&nbsp;</span><a href="/tag/swift/index.html" class="post-tag">-swift</a><a href="/tag/testing/index.html" class="post-tag">-testing</a><a href="/tag/tdd/index.html" class="post-tag">-tdd</a><a href="/tag/xcode/index.html" class="post-tag">-xcode</a><a href="/tag/refactoring/index.html" class="post-tag">-refactoring</a></p><div class="post"><p>I published a <a href="https://www.youtube.com/watch?v=AHsnHL6HOdI">video tutorial</a> showing how to implement the infamous <a href="https://en.wikipedia.org/wiki/Fizz_buzz#Programming">FizzBuzz</a> using Test-Driven Development, an example coming from my book <a href="https://tddinswift.com"><em>Test-Driven Development in Swift</em></a>.</p>
+<p>Aside from the tutorial, what&#39;s truly interesting in the video is that it shows how fast TDD can reveal a mistake and help you learn from it.</p>
+<h2 id="how-tdd-reveals-coding-mistakes">How TDD reveals coding mistakes</h2>
+<p>After completing the implementation, I decided to refactor the ugly code I wrote to make the test pass as soon as possible into something I liked more.</p>
+<p>I went from this:</p>
+<pre><code class="hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">fizzBuzz</span>(<span class="hljs-keyword">_</span> <span class="hljs-params">input</span>: <span class="hljs-type">Int</span>)</span> -&gt; <span class="hljs-type">String</span> {
+    <span class="hljs-keyword">let</span> divisibleBy3 <span class="hljs-operator">=</span> input <span class="hljs-operator">%</span> <span class="hljs-number">3</span> <span class="hljs-operator">==</span> <span class="hljs-number">0</span>
+    <span class="hljs-keyword">let</span> divisibleBy5 <span class="hljs-operator">=</span> input <span class="hljs-operator">%</span> <span class="hljs-number">5</span> <span class="hljs-operator">==</span> <span class="hljs-number">0</span>
+
+    <span class="hljs-keyword">if</span> divisibleBy3 <span class="hljs-operator">&amp;&amp;</span> divisibleBy5 {
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;fizz-buzz&quot;</span>
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> divisibleBy3 {
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;fizz&quot;</span>
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> divisibleBy5 {
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;buzz&quot;</span>
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;<span class="hljs-subst">\(input)</span>&quot;</span>
+    }
+}</code></pre>
+<p>To this:</p>
+<pre><code class="hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">fizzBuzz</span>(<span class="hljs-keyword">_</span> <span class="hljs-params">input</span>: <span class="hljs-type">Int</span>)</span> -&gt; <span class="hljs-type">String</span> {
+    <span class="hljs-keyword">let</span> divisibleBy3 <span class="hljs-operator">=</span> input <span class="hljs-operator">%</span> <span class="hljs-number">3</span> <span class="hljs-operator">==</span> <span class="hljs-number">0</span>
+    <span class="hljs-keyword">let</span> divisibleBy5 <span class="hljs-operator">=</span> input <span class="hljs-operator">%</span> <span class="hljs-number">5</span> <span class="hljs-operator">==</span> <span class="hljs-number">0</span>
+
+    <span class="hljs-keyword">switch</span> (divisibleBy3, divisibleBy5) {
+    <span class="hljs-keyword">case</span> (<span class="hljs-literal">false</span>, <span class="hljs-literal">true</span>): <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;fizz&quot;</span>
+    <span class="hljs-keyword">case</span> (<span class="hljs-literal">true</span>, <span class="hljs-literal">false</span>): <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;buzz&quot;</span>
+    <span class="hljs-keyword">case</span> (<span class="hljs-literal">true</span>, <span class="hljs-literal">true</span>): <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;fizz-buzz&quot;</span>
+    <span class="hljs-keyword">case</span> (<span class="hljs-literal">false</span>, <span class="hljs-literal">false</span>): <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;<span class="hljs-subst">\(input)</span>&quot;</span>
+    }
+}</code></pre>
+<p>Can you spot the error I made?
+The tests <a href="https://youtu.be/AHsnHL6HOdI?t=816">revealed it</a> as soon as I run them.</p>
+<p>In my copy-pasta, I used the code to check for &quot;fizz&quot; to print &quot;buzz&quot; and vice versa.</p>
+<p>How long do you think it would have taken me to notice that mistake if I&#39;d been relying solely on manual testing?
+More time for sure, as I would have had to manually launch the app or script that uses <code>fizzBuzz(_:)</code> feed it an input like <code>3</code> and <em>notice</em> the output was not correct.
+Apart from the overhead of launching the app and navigating its UI, which might be negligible in some cases, manually verifying code uses our <em>biological hardware</em>, which is liable to all sorts of distractions and hiccups.</p>
+<h2 id="how-tdd-reveals-incorrect-mental-models">How TDD reveals incorrect mental models</h2>
+<p>That refactoring mistake is not the only one I made in the screencast.
+<a href="https://youtu.be/AHsnHL6HOdI?t=491">Earlier on</a>, the tests failed in a way that I was not expecting.</p>
+<p>I the production code was in this incomplete state:</p>
+<pre><code class="hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">fizzBuzz</span>(<span class="hljs-keyword">_</span> <span class="hljs-params">input</span>: <span class="hljs-type">Int</span>)</span> -&gt; <span class="hljs-type">String</span> {
+    <span class="hljs-keyword">let</span> divisibleBy3 <span class="hljs-operator">=</span> input <span class="hljs-operator">%</span> <span class="hljs-number">3</span> <span class="hljs-operator">==</span> <span class="hljs-number">0</span>
+
+    <span class="hljs-keyword">if</span> divisibleBy3 {
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> divisibleBy3 {
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;fizz&quot;</span>
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;buzz&quot;</span>
+    }
+}</code></pre>
+<p>I had just added a test for the <code>&quot;fizz-buzz&quot;</code> scenario:</p>
+<pre><code class="hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">testDivisibleBy15ReturnsFizzBuzz</span>()</span> {
+   <span class="hljs-type">XCTAssertEqual</span>(fizzBuzz(<span class="hljs-number">15</span>), <span class="hljs-string">&quot;fizz-buzz&quot;</span>)
+}</code></pre>
+<p>Looking at the code, I expected it to return <code>&quot;buzz&quot;</code> and the test to fail.
+Can you see where I was wrong?</p>
+<p>The test did fail indeed, but the value it received was <code>&quot;fizz&quot;</code> instead.
+I didn&#39;t realize that because 15 is divisible by both 3 and 5, the code would have gone in the <code>divisibleBy3 == true</code> branch.</p>
+<p>Always guess what the tests will do before running them.
+When the result you get is not what you expect, you can <a href="https://mokacoding.com/blog/thats-funny-moments-are-learning-opportunities/">update your mental representation</a> of the system.</p>
+<p>Here&#39;s the full video:</p>
+<!-- YouTube embed code -->
+<!-- Thanks https://jameshfisher.com/2017/08/30/how-do-i-make-a-full-width-iframe/ for the aspect-ratio with YouTube iframe code -->
+<div>
+  <div style="position:relative;padding-top:56.25%;">
+    <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;" src="https://www.youtube-nocookie.com/embed/AHsnHL6HOdI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>
+</div>
+
+<hr>
+<p>I could have easily edited those mistakes from my YouTube video, but I decided to leave them.
+I hope they serve as a good showcase of the teaching power of Test-Driven Development.</p>
+<p>You don&#39;t have to be a genius to write great software.
+You only need to discover your mistakes fast enough to learn from them and iterate.</p>
+</div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"></div><div class="col-6"><div style="text-align: right"><a href="/blog/how-to-test-swiftui-apps">How to write unit tests for SwiftUI apps&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin Sendfox Signup Form -->
+<div id="sendfox_embed_signup">
+  <h4 class="form_title">Want more of these posts?</h4>
+  <p class="form_caption">Subscribe to receive new posts in your inbox.</p>
+  <form method="post" action="https://sendfox.com/form/3ee4z3/10r4wg" class="sendfox-form" id="10r4wg" data-async="true" data-recaptcha="false">
+    <p><input type="email" placeholder="Email" name="email" class="email" required /></p>
+    <!-- no botz please -->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="a_password" tabindex="-1" value="" autocomplete="off" /></div>
+    <div class="clear"><button type="submit">Sign me up</button></div>
+  </form>
+  <script src="https://sendfox.com/js/form.js"></script>
+</div>
+<!-- End Sendfox Signup Form -->
+</div><div class="bottom-box"><div id="disqus_thread"></div><script>var disqus_shortname = "mokacoding";
+// Neet do add the / at the end to maintain compatibility with previous version
+// of the blog that didn't define disqus_url, letting Disqus set it automatically
+// using window.location.href
+var disqus_url = "https://mokacoding.com/blog/tdd-catching-bugs-in-action/";
+
+(function() {
+  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><noscript>Please enable JavaScript to view the<a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></div></div></div><div class="row-12 footer"><div class="col-12"><h3><a href="/">mokacoding</a></h3></div><div id="copy" class="col-9"><p>Hi I&#39;m <a href="https://gio.codes">Gio</a> I write here semi-regularly on software testing and TDD, productivity, and iOS development.</p>
+<p><a href="mailto:gio+blog@mokacoding.com">Get in touch</a> if you&#39;re interested in working together.</p>
+</div><div id="links" class="col-3"><p><i class="fa fa-twitter"></i>&nbsp;<a href="https://twitter.com/mokagio">@mokagio</a></p><p><i class="fa fa-github"></i>&nbsp;<a href="https://github.com/mokagio">mokagio</a></p></div></div></div></body><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-43554041-1', 'auto');
+ga('send', 'pageview');
+</script><script>var toggle = function(elm){
+  var y = elm.style && elm.style.display ? elm.style.display : 'block';
+  if (y == 'block'){
+    elm.style.opacity='0';
+    setTimeout( function(){ elm.style.display = 'none'; }, 300 );
+  }
+  else {
+    elm.style.display='block';
+    setTimeout( function(){ elm.style.opacity = '1'; }, 10 );
+  }
+}
+
+document.getElementById('close').onclick = function(){
+  toggle(document.getElementById('sticky-header'));
+  toggle(document.getElementById('sticky-header-padding-hack'));
+}</script></html>
