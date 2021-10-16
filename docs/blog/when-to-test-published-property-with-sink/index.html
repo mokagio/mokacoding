@@ -1,0 +1,142 @@
+<!DOCTYPE html><html lang="en"><head><title>When to test a published property with sink | mokacoding</title><meta name="description" content="Swift @Published properties come with an associated Combine Publisher that emits values over time. In this free tutorial I'll explain when to write an XCTest unit test that access the property directly and when to it's instead necessary to subscribe to it using the sink operator."><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"><!-- Canonical URL--><link rel="canonical" href="https://mokacoding.com/blog/when-to-test-published-property-with-sink/"><!-- Open Graph meta tags--><meta property="og:title" content="When to test a published property with sink"><meta property="og:description" content="When to test a @Published property directly and when to subscribe to it instead"><meta property="og:url" content="https://mokacoding.com/blog/when-to-test-published-property-with-sink/"><meta property="og:type" content="article"><meta property="og:site_name" content="mokacoding"><meta property="og:image" content="https://s3.amazonaws.com/mokacoding/mokacoding_og_image.jpg"><!-- Twitter meta tags--><meta property="twitter:card" content="summary"><meta property="twitter:title" content="@Published properties and unit tests"><meta property="twitter:site" content="@mokacoding"><meta property="twitter:creator" content="@mokagio"><!-- Stylesheets--><link href="/css/griddy.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet"><link href="/css/font-awesome.min.css" rel="stylesheet"><link href="/css/zenburn.css" rel="stylesheet"><!-- FavIcon--><!-- Thanks to https://www.favicon-generator.org/ & https://html2jade.org/--><link rel="apple-touch-icon" sizes="57x57" href="https://s3.amazonaws.com/mokacoding/apple-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="https://s3.amazonaws.com/mokacoding/apple-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="https://s3.amazonaws.com/mokacoding/apple-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="https://s3.amazonaws.com/mokacoding/apple-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="https://s3.amazonaws.com/mokacoding/apple-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="https://s3.amazonaws.com/mokacoding/apple-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="https://s3.amazonaws.com/mokacoding/apple-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="https://s3.amazonaws.com/mokacoding/apple-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" href="https://s3.amazonaws.com/mokacoding/apple-icon-180x180.png"><link rel="icon" type="image/png" sizes="192x192" href="https://s3.amazonaws.com/mokacoding/android-icon-192x192.png"><link rel="icon" type="image/png" sizes="32x32" href="https://s3.amazonaws.com/mokacoding/favicon-32x32.png"><link rel="icon" type="image/png" sizes="96x96" href="https://s3.amazonaws.com/mokacoding/favicon-96x96.png"><link rel="icon" type="image/png" sizes="16x16" href="https://s3.amazonaws.com/mokacoding/favicon-16x16.png"><link rel="manifest" href="https://s3.amazonaws.com/mokacoding/manifest.json"><meta name="msapplication-TileColor" content="#ffffff"><meta name="msapplication-TileImage" content="https://s3.amazonaws.com/mokacoding/ms-icon-144x144.png"><meta name="theme-color" content="#ffffff"><!-- SumoMe--><script src="//load.sumome.com/" data-sumo-site-id="dd80959300db03e20c8bc3dd899f1424fd764d261e6c3c41923c96482a270dba" async="async"></script></head><body><!-- Use this to render an extra header in special occasions--><div class="special-header"><div class="page"><div class="row-12"><div class="col-12"><p><!-- - Saving this for later and to avoid a `git revert`:markdown
+  [What is your biggest struggle right now with building software?](https://goo.gl/forms/lCLlJd9hqCUYoTME2)--><p><a href="https://tddinswift.com?utm_source=mokacoding-site&amp;utm_campaign=coming-soon&amp;utm_medium=sticky-header">Avilable Now: <strong>Test-Driven Development in Swift with SwiftUI and Combine</strong></a></p>
+</p></div></div></div></div><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">unit and acceptance testing, automation, productivity</div><div class="links"><a href="/archive.html">Archive</a><a href="/tags.html">Tags</a><a href="https://gio.codes">About</a><a href="#subscribe">Subscribe</a><a href="/feed.xml"><i class="fa fa-rss"></i></a></div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/when-to-test-published-property-with-sink">When to test a published property with sink</a></h2><p class="post-meta"><span class="post-date">Sun Oct 17 2021&nbsp;</span><a href="/tag/Testing/index.html" class="post-tag">-Testing</a><a href="/tag/Swift/index.html" class="post-tag">-Swift</a><a href="/tag/Combine/index.html" class="post-tag">-Combine</a><a href="/tag/XCTest/index.html" class="post-tag">-XCTest</a></p><div class="post"><p>A <a href="https://tddinswift.com"><em>Test-Driven Development in Swift</em></a> reader wrote with a question about testing Swift <code>@Published</code> properties.
+He noticed that some of the examples access a <code>@Published</code> property directly while others subscribed to it using <code>sink</code> and wanted to know when to use one approach instead of the other.</p>
+<p>Here&#39;s my rule of thumb:</p>
+<p><strong>In a test, access a <code>@Published</code> property directly only when you want to verify its initial value. Otherwise, subscribe to it.</strong></p>
+<p>Let&#39;s dig deeper to understand how <code>@Published</code> properties behave in unit tests.</p>
+<p>The Swift <a href="https://developer.apple.com/documentation/combine/published">docs</a> explain that annotating a property with <code>@Published</code> creates a <code>Publisher</code> for it.
+The publisher will emit a new value every time the property changes, including on its first assignment.</p>
+<p>We can read a <code>@Published</code> property value like any other property.</p>
+<pre><code class="hljs swift"><span class="hljs-meta">@Published</span> <span class="hljs-keyword">var</span> items: [<span class="hljs-type">Item</span>] <span class="hljs-operator">=</span> []
+
+<span class="hljs-built_in">print</span>(items.count) <span class="hljs-comment">// =&gt; 0</span></code></pre>
+<p>We can access the generated <code>Publisher</code> via the <code>$</code> prefix and subscribe to it to observe how the property changes over time:</p>
+<pre><code class="hljs swift"><span class="hljs-variable">$items</span>.sink { <span class="hljs-built_in">print</span>(<span class="hljs-variable">$0</span>) }</code></pre>
+<p>How you interact with a <code>@Published</code> property –in the tests as well as the production code– depends on which of its possible values you want.
+Are you interested in its value <em>right now</em> or in the value it will have in the future?</p>
+<p>Here&#39;s an example from <a href="https://tddinswift.com"><em>Test-Driven Development in Swift</em></a> Chapter 7, <em>Testing Dynamic SwiftUI Views</em>.
+We want to ensure the initial value of the menu list ViewModel menu section property is an empty array.
+The property is defined as:</p>
+<pre><code class="hljs swift"><span class="hljs-meta">@Published</span> <span class="hljs-keyword">var</span> sections: [<span class="hljs-type">MenuSection</span>] <span class="hljs-operator">=</span> []</code></pre>
+<p>In the test, we access <code>sections</code> directly:</p>
+<pre><code class="hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">testPublishesEmptyMenuAtInit</span>()</span> {
+    <span class="hljs-keyword">let</span> viewModel <span class="hljs-operator">=</span> <span class="hljs-type">MenuList</span>.<span class="hljs-type">ViewModel</span>(menuFetching: <span class="hljs-type">MenuFetchingPlaceholder</span>())
+
+    <span class="hljs-type">XCTAssertTrue</span>(viewModel.sections.isEmpty)
+}</code></pre>
+<p><em>You can find <a href="https://github.com/Apress/Test-Driven-Development-in-Swift/blob/13c24681fb0df9f109bd8bdf9575b6b6d90682a3/07-testing-dynamic-swiftui-views/1-end/AlbertosTests/MenuList.ViewModelTests.swift#L9-L13">the code above</a> and all the other examples from the book <a href="https://github.com/Apress/Test-Driven-Development-in-Swift">on GitHub</a>.</em></p>
+<p><code>@Published</code> properties stream values over time, but when you access them directly, they return their current value.
+Above, we are interested in the property&#39;s initial value, so we can read from it directly.</p>
+<p>Nothing stops us from subscribing to it, but as you can see from the example below, it requires extra effort:</p>
+<pre><code class="hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">testPublishesEmptyMenuAtInit</span>()</span> {
+    <span class="hljs-keyword">let</span> viewModel <span class="hljs-operator">=</span> <span class="hljs-type">MenuList</span>.<span class="hljs-type">ViewModel</span>(menuFetching: <span class="hljs-type">MenuFetchingPlaceholder</span>())
+
+    <span class="hljs-keyword">let</span> expectation <span class="hljs-operator">=</span> <span class="hljs-type">XCTestExpectation</span>(description: <span class="hljs-string">&quot;The first publishes value is an empty section&quot;</span>)
+
+    viewModel
+        .<span class="hljs-variable">$sections</span>
+        .sink { value <span class="hljs-keyword">in</span>
+            <span class="hljs-type">XCTAssertTrue</span>(value.isEmpty)
+            expectation.fulfill()
+        }
+        .store(in: <span class="hljs-operator">&amp;</span>cancellables)
+
+    wait(for: [expectation], timeout: <span class="hljs-number">1</span>)
+}</code></pre>
+<p>Because subscribing to a <code>Publisher</code> requires more code, I do that only when absolutely necessary.
+Alas, that turns out to be most of the time.</p>
+<p>The whole point of making a property <code>@Published</code> is to support streaming value changes.
+We&#39;re seldom interested in its initial value alone, which means <strong>most tests <code>@Published</code> properties require subscribing to it.</strong></p>
+<p>Here&#39;s another example inspired by <a href="https://tddinswift.com">the book</a>, where we check how <code>sections</code> changes due to a successful response from the fetching component.</p>
+<pre><code class="hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">testWhenFetchingSucceedsPublishesReceivedSections</span>()</span> {
+    <span class="hljs-keyword">let</span> viewModel <span class="hljs-operator">=</span> <span class="hljs-type">MenuList</span>.<span class="hljs-type">ViewModel</span>(menuFetching: <span class="hljs-type">MenuFetchingPlaceholder</span>())
+
+    <span class="hljs-keyword">let</span> expectation <span class="hljs-operator">=</span> <span class="hljs-type">XCTestExpectation</span>(description: <span class="hljs-string">&quot;Publishes sections built from received menu&quot;</span>)
+
+    viewModel
+        .<span class="hljs-variable">$sections</span>
+        <span class="hljs-comment">// Drop first to ignore the initial value</span>
+        .dropFirst()
+        .sink { value <span class="hljs-keyword">in</span>
+            <span class="hljs-comment">// For the sake of this example, check the count only</span>
+            <span class="hljs-type">XCTAssertEqual</span>(value.count, <span class="hljs-number">4</span>)
+            expectation.fulfill()
+        }
+        .store(in: <span class="hljs-operator">&amp;</span>cancellables)
+
+    wait(for: [expectation], timeout: <span class="hljs-number">1</span>)
+}</code></pre>
+<p>Because we are interested in how <code>section</code> <em>changes</em>, we need to subscribe to it.</p>
+<p>If one wanted to be pedantic, they could point out that we can write the same test with direct access by reading the property after the expectation is fulfilled.</p>
+<pre><code class="hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">testWhenFetchingSucceedsPublishesReceivedSections</span>()</span> {
+    <span class="hljs-keyword">let</span> viewModel <span class="hljs-operator">=</span> <span class="hljs-type">MenuList</span>.<span class="hljs-type">ViewModel</span>(menuFetching: <span class="hljs-type">MenuFetchingPlaceholder</span>())
+
+    <span class="hljs-keyword">let</span> expectation <span class="hljs-operator">=</span> <span class="hljs-type">XCTestExpectation</span>(description: <span class="hljs-string">&quot;Publishes sections built from received menu&quot;</span>)
+
+    viewModel
+        .<span class="hljs-variable">$sections</span>
+        .dropFirst()
+        .sink { <span class="hljs-keyword">_</span> <span class="hljs-keyword">in</span>
+            expectation.fulfill()
+        }
+        .store(in: <span class="hljs-operator">&amp;</span>cancellables)
+
+    wait(for: [expectation], timeout: <span class="hljs-number">1</span>)
+
+    <span class="hljs-type">XCTAssertEqual</span>(viewModel.sections.count, <span class="hljs-number">4</span>)
+}</code></pre>
+<p>I prefer the implementation with the check right inside the <code>sink</code> but wouldn&#39;t complain about this if I came across it in a code review.
+Still, while it&#39;s true that it runs the assertion on <code>.section</code> and not <code>.$section</code>, it didn&#39;t remove the necessity to subscribe to the <code>Publisher</code> to keep track of how it changed.</p>
+<hr>
+<p>To recap, whenever you want to assert the value of a <code>@Published</code> property after it changes, you&#39;ll have to subscribe to it with <code>sink</code>.
+It&#39;s up to you to verify the value it will have taken directly in the <code>sink</code> closure or afterward by accessing the property directly — I recommend the former.</p>
+<p>If you want to learn more about testing Combine <code>Publisher</code> and <code>@Published</code> properties, check out my <a href="https://mokacoding.com/blog/testing-combine-publisher-cheatsheet/">Unit Testing Combine Publisher Cheatsheet</a> and, of course, <a href="https://tddinswift.com/">_Test-Driven Development in Swift</a>.</p>
+</div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"></div><div class="col-6"><div style="text-align: right"><a href="/blog/tdd-catching-bugs-in-action">A real-world example of TDD catching bugs&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin Sendfox Signup Form -->
+<div id="sendfox_embed_signup">
+  <h4 class="form_title">Want more of these posts?</h4>
+  <p class="form_caption">Subscribe to receive new posts in your inbox.</p>
+  <form method="post" action="https://sendfox.com/form/3ee4z3/10r4wg" class="sendfox-form" id="10r4wg" data-async="true" data-recaptcha="false">
+    <p><input type="email" placeholder="Email" name="email" class="email" required /></p>
+    <!-- no botz please -->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="a_password" tabindex="-1" value="" autocomplete="off" /></div>
+    <div class="clear"><button type="submit">Sign me up</button></div>
+  </form>
+  <script src="https://sendfox.com/js/form.js"></script>
+</div>
+<!-- End Sendfox Signup Form -->
+</div><div class="bottom-box"><div id="disqus_thread"></div><script>var disqus_shortname = "mokacoding";
+// Neet do add the / at the end to maintain compatibility with previous version
+// of the blog that didn't define disqus_url, letting Disqus set it automatically
+// using window.location.href
+var disqus_url = "https://mokacoding.com/blog/when-to-test-published-property-with-sink/";
+
+(function() {
+  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><noscript>Please enable JavaScript to view the<a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></div></div></div><div class="row-12 footer"><div class="col-12"><h3><a href="/">mokacoding</a></h3></div><div id="copy" class="col-9"><p>Hi I&#39;m <a href="https://gio.codes">Gio</a> I write here semi-regularly on software testing and TDD, productivity, and iOS development.</p>
+<p><a href="mailto:gio+blog@mokacoding.com">Get in touch</a> if you&#39;re interested in working together.</p>
+</div><div id="links" class="col-3"><p><i class="fa fa-twitter"></i>&nbsp;<a href="https://twitter.com/mokagio">@mokagio</a></p><p><i class="fa fa-github"></i>&nbsp;<a href="https://github.com/mokagio">mokagio</a></p></div></div></div></body><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-43554041-1', 'auto');
+ga('send', 'pageview');
+</script><script>var toggle = function(elm){
+  var y = elm.style && elm.style.display ? elm.style.display : 'block';
+  if (y == 'block'){
+    elm.style.opacity='0';
+    setTimeout( function(){ elm.style.display = 'none'; }, 300 );
+  }
+  else {
+    elm.style.display='block';
+    setTimeout( function(){ elm.style.opacity = '1'; }, 10 );
+  }
+}
+
+document.getElementById('close').onclick = function(){
+  toggle(document.getElementById('sticky-header'));
+  toggle(document.getElementById('sticky-header-padding-hack'));
+}</script></html>
