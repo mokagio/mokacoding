@@ -1,8 +1,9 @@
 ---
-title: When to test a published property with sink
-description: "Swift @Published properties come with an associated Combine Publisher that emits values over time. In this free tutorial I'll explain when to write an XCTest unit test that access the property directly and when to it's instead necessary to subscribe to it using the sink operator."
+title: When to test a @Published property using sink
+description: "Swift @Published properties come with an associated Combine Publisher that emits values over time. This free XCTest tutorial explains when to write a unit test that accesses the property directly and when it's instead necessary to subscribe to it using the sink operator."
 twitter_title: "@Published properties and unit tests"
 og_description: "When to test a @Published property directly and when to subscribe to it instead"
+og_image: https://s3.amazonaws.com/mokacoding/2021-10-17-published-testing.jpg
 tags:
   - Testing
   - Swift
@@ -18,6 +19,8 @@ Here's my rule of thumb:
 **In a test, access a `@Published` property directly only when you want to verify its initial value. Otherwise, subscribe to it.**
 
 Let's dig deeper to understand how `@Published` properties behave in unit tests.
+
+## How `@Published` properties work
 
 The Swift [docs](https://developer.apple.com/documentation/combine/published) explain that annotating a property with `@Published` creates a `Publisher` for it.
 The publisher will emit a new value every time the property changes, including on its first assignment.
@@ -38,6 +41,8 @@ $items.sink { print($0) }
 
 How you interact with a `@Published` property –in the tests as well as the production code– depends on which of its possible values you want.
 Are you interested in its value _right now_ or in the value it will have in the future?
+
+## How to test `@Published` properties with direct access
 
 Here's an example from [_Test-Driven Development in Swift_](https://tddinswift.com) Chapter 7, _Testing Dynamic SwiftUI Views_.
 We want to ensure the initial value of the menu list ViewModel menu section property is an empty array.
@@ -62,6 +67,8 @@ _You can find [the code above](https://github.com/Apress/Test-Driven-Development
 
 `@Published` properties stream values over time, but when you access them directly, they return their current value.
 Above, we are interested in the property's initial value, so we can read from it directly.
+
+## How to test `@Published` properties by subscribing to them
 
 Nothing stops us from subscribing to it, but as you can see from the example below, it requires extra effort:
 
@@ -114,6 +121,8 @@ func testWhenFetchingSucceedsPublishesReceivedSections() {
 
 Because we are interested in how `section` _changes_, we need to subscribe to it.
 
+## Combining subscription and direct access
+
 If one wanted to be pedantic, they could point out that we can write the same test with direct access by reading the property after the expectation is fulfilled.
 
 ```swift
@@ -139,7 +148,7 @@ func testWhenFetchingSucceedsPublishesReceivedSections() {
 I prefer the implementation with the check right inside the `sink` but wouldn't complain about this if I came across it in a code review.
 Still, while it's true that it runs the assertion on `.section` and not `.$section`, it didn't remove the necessity to subscribe to the `Publisher` to keep track of how it changed.
 
----
+## Recap
 
 To recap, whenever you want to assert the value of a `@Published` property after it changes, you'll have to subscribe to it with `sink`.
 It's up to you to verify the value it will have taken directly in the `sink` closure or afterward by accessing the property directly — I recommend the former.
