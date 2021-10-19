@@ -2,6 +2,7 @@
 title: When to test a @Published property using sink
 description: "Swift @Published properties come with an associated Combine Publisher that emits values over time. This free XCTest tutorial explains when to write a unit test that accesses the property directly and when it's instead necessary to subscribe to it using the sink operator."
 twitter_title: "@Published properties and unit tests"
+og_title: "@Published properties and unit tests"
 og_description: "When to test a @Published property directly and when to subscribe to it instead"
 og_image: https://s3.amazonaws.com/mokacoding/2021-10-17-published-testing.jpg
 tags:
