@@ -146,8 +146,10 @@ func testWhenFetchingSucceedsPublishesReceivedSections() {
 }
 ```
 
-I prefer the implementation with the check right inside the `sink` but wouldn't complain about this if I came across it in a code review.
-Still, while it's true that it runs the assertion on `.section` and not `.$section`, it didn't remove the necessity to subscribe to the `Publisher` to keep track of how it changed.
+A test written like that will work _most of the time_.
+But, as my friend [Rob Amos](https://twitter.com/bok_) pointed out in the [Melbourne CocoaHeads](https://melbournecocoaheads.com/) Slack, `@Published` notifies subscribers from the property's `willSet` block.
+That means that there is a chance, however slim, that the assertion will run before the property value actually changes.
+Therefore, **it's safer to run the assertion from within the `sink` observer closure**.
 
 ## Recap
 
