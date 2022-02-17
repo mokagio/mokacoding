@@ -89,6 +89,6 @@ You might have noticed that I have made no mention yet to `pod install` or `cart
 
 ---
 
-This has been a quick practical introduction on how to configure CircleCI for iOS testing. If you need to look deeper into the topic head over to the [Circle documentation page](https://circleci.com/docs/ios), or look at how the open source libraries you use do it. Also, feel free to leave a comment below or hit me up on Twitter [@mokagio](http://twitter.com/mokagio) if you need help.
+This has been a quick practical introduction on how to configure CircleCI for iOS testing. If you need to look deeper into the topic head over to the [Circle documentation page](https://circleci.com/docs/), or look at how the open source libraries you use do it. Also, feel free to leave a comment below or hit me up on Twitter [@mokagio](http://twitter.com/mokagio) if you need help.
 
 _Happy coding, and leave the codebase better than you found it._
