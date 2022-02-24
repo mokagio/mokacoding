@@ -1,8 +1,8 @@
 ---
-title: What to do when XCTNSPredicateExpectation are slowing down your tests
-description: "Each XCTNSPredicateExpectation requires a timeout of at least 1.1 seconds. That's too slow. Use Nimble's toEventually instead."
+title: "XCTNSPredicateExpectation is slow, and what to do about it"
+description: "Each XCTNSPredicateExpectation requires a timeout of at least 1.1 seconds. That's will unnecessarily slow down your test suite. You can use Nimble's toEventually instead and make your tests as fast as possible."
 twitter_title: "PSA: XCTNSPredicateExpectation is too slow"
-og_description: Use Nimble's toEventually instead to keep your tests snappy
+og_description: "Use Nimble's toEventually to keep your tests snappy"
 og_image: https://mokacoding.s3.amazonaws.com/2022-02-25-xctnspredicateexpectation-tortoise.jpg
 tags:
   - Nimble
