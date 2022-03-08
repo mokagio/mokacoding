@@ -15,7 +15,7 @@ I was recently involved in one such conversation.
 It wasn't the first time, and it certainly won't be the last.
 The following is the result of that conversation, a note for my future self on where my thinking was in 2022.
 
-## Why "Create a merge commit" is the best
+## Why "Create a merge commit" is the best...
 
 My whole argument rests on the value of having a tidy Git history and small, atomic, well-crafted commits.
 I won't delve much into that, but I added some links at the end of the post that argument its value.
@@ -40,7 +40,7 @@ I find it's better to have all that information already available in Git without
 
 Other points in favor of keeping your small commits in the main branch are that it makes bisecting and reverting easier, even though both are admittedly not frequent—_maybe because we don't make small enough commits?_
 
-## Actually, it depends
+## ...or is it?
 
 Software development is a game of tradeoffs.
 In the same way that the answer to "Should I go native or cross-platform?" is "It depends," choosing which merge strategy to use requires considering many factors.
