@@ -1,0 +1,101 @@
+<!DOCTYPE html><html lang="en"><head><title>The case for creating a merge commit | mokacoding</title><meta name="description" content="My current thoughts on which merge strategy to use on GitHub. &quot;Create a merge commit&quot; will help you make sense of how code changed over time without removing the option for a high-level overview of the changes on the main branch."><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"><!-- Canonical URL--><link rel="canonical" href="https://mokacoding.com/blog/create-a-merge-commit/"><!-- Open Graph meta tags--><meta property="og:title" content="The case for creating a merge commit"><meta property="og:description" content="This GitHub merge strategy will help you make sense of how code changed"><meta property="og:url" content="https://mokacoding.com/blog/create-a-merge-commit/"><meta property="og:type" content="article"><meta property="og:site_name" content="mokacoding"><meta property="og:image" content="https://s3.amazonaws.com/mokacoding/mokacoding_og_image.jpg"><!-- Twitter meta tags--><meta property="twitter:card" content="summary"><meta property="twitter:title" content="The case for creating a merge commit"><meta property="twitter:site" content="@mokacoding"><meta property="twitter:creator" content="@mokagio"><!-- Stylesheets--><link href="/css/griddy.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet"><link href="/css/font-awesome.min.css" rel="stylesheet"><link href="/css/zenburn.css" rel="stylesheet"><!-- FavIcon--><!-- Thanks to https://www.favicon-generator.org/ & https://html2jade.org/--><link rel="apple-touch-icon" sizes="57x57" href="https://s3.amazonaws.com/mokacoding/apple-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="https://s3.amazonaws.com/mokacoding/apple-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="https://s3.amazonaws.com/mokacoding/apple-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="https://s3.amazonaws.com/mokacoding/apple-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="https://s3.amazonaws.com/mokacoding/apple-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="https://s3.amazonaws.com/mokacoding/apple-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="https://s3.amazonaws.com/mokacoding/apple-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="https://s3.amazonaws.com/mokacoding/apple-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" href="https://s3.amazonaws.com/mokacoding/apple-icon-180x180.png"><link rel="icon" type="image/png" sizes="192x192" href="https://s3.amazonaws.com/mokacoding/android-icon-192x192.png"><link rel="icon" type="image/png" sizes="32x32" href="https://s3.amazonaws.com/mokacoding/favicon-32x32.png"><link rel="icon" type="image/png" sizes="96x96" href="https://s3.amazonaws.com/mokacoding/favicon-96x96.png"><link rel="icon" type="image/png" sizes="16x16" href="https://s3.amazonaws.com/mokacoding/favicon-16x16.png"><link rel="manifest" href="https://s3.amazonaws.com/mokacoding/manifest.json"><meta name="msapplication-TileColor" content="#ffffff"><meta name="msapplication-TileImage" content="https://s3.amazonaws.com/mokacoding/ms-icon-144x144.png"><meta name="theme-color" content="#ffffff"><!-- SumoMe--><script src="//load.sumome.com/" data-sumo-site-id="dd80959300db03e20c8bc3dd899f1424fd764d261e6c3c41923c96482a270dba" async="async"></script></head><body><!-- Use this to render an extra header in special occasions--><div class="special-header"><div class="page"><div class="row-12"><div class="col-12"><p><!-- - Saving this for later and to avoid a `git revert`:markdown
+  [What is your biggest struggle right now with building software?](https://goo.gl/forms/lCLlJd9hqCUYoTME2)--><p><a href="https://tddinswift.com?utm_source=mokacoding-site&amp;utm_campaign=coming-soon&amp;utm_medium=sticky-header">Available Now: <strong>Test-Driven Development in Swift with SwiftUI and Combine</strong></a></p>
+</p></div></div></div></div><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">unit and acceptance testing, automation, productivity</div><div class="links"><a href="/archive.html">Archive</a><a href="/tags.html">Tags</a><a href="https://gio.codes">About</a><a href="#subscribe">Subscribe</a><a href="/feed.xml"><i class="fa fa-rss"></i></a></div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/create-a-merge-commit">The case for creating a merge commit</a></h2><p class="post-meta"><span class="post-date">Wed Mar 09 2022&nbsp;</span><a href="/tag/git/index.html" class="post-tag">-git</a><a href="/tag/github/index.html" class="post-tag">-github</a><a href="/tag/processes/index.html" class="post-tag">-processes</a></p><div class="post"><p>Of the three merge options that GitHub offers, &quot;Create a merge commit&quot; is my current favorite.</p>
+<p>&quot;Which merge strategy to use&quot; has become as classic debate in the software development circles, much like &quot;Tabs vs. Spaces&quot; or &quot;Vim vs. Emacs.&quot;
+I was recently involved in one such conversation.
+It wasn&#39;t the first time, and it certainly won&#39;t be the last.
+The following is the result of that conversation, a note for my future self on where my thinking was in 2022.</p>
+<h2 id="why-create-a-merge-commit-is-the-best">Why &quot;Create a merge commit&quot; is the best</h2>
+<p>My whole argument rests on the value of having a tidy Git history and small, atomic, well-crafted commits.
+I won&#39;t delve much into that, but I added some links at the end of the post that argument its value.</p>
+<p>Assuming we agree on the benefits of a tidy Git history, then &quot;Create a merge commit&quot; is the best strategy because <strong>it makes it easier to understand how individual pieces of code changed</strong>.</p>
+<p>When you &quot;Squash and merge,&quot; you compress the many small steps that comprise your PR into a single commit, losing nuance.
+&quot;Rebase and merge&quot; keeps all the small steps, but the <code>git log</code> on your main branch becomes overwhelming.</p>
+<p>&quot;Create a merge commit&quot; is the best of both worlds.
+It maintains the small changes while allowing for 30,000 feet view of the history via <code>git log --first-parent</code>.
+The <code>--first-parent</code> flag makes the log show only the merge commits, simulating the history that would result from the &quot;Squash and merge&quot; approach.</p>
+<p>Software development is mostly editing existing code.
+We spend lots of time optimizing for readability.
+It also makes sense to <strong>optimize for understanding how the code came to be in its current state</strong>.</p>
+<p>A common counterargument is that the GitHub PR will still contain all the commits, plus the valuable code review discussion.
+Using &quot;Squash and merge&quot; won&#39;t delete that information, so why not make the Git history on the main branch more condensed while allowing for noisy commits in feature branches?</p>
+<p>I find it&#39;s better to have all that information already available in Git without going to search for it on GitHub, regardless of how advanced GitHub searching capabilities are.</p>
+<p>Other points in favor of keeping your small commits in the main branch are that it makes bisecting and reverting easier, even though both are admittedly not frequent—<em>maybe because we don&#39;t make small enough commits?</em></p>
+<h2 id="actually-it-depends">Actually, it depends</h2>
+<p>Software development is a game of tradeoffs.
+In the same way that the answer to &quot;Should I go native or cross-platform?&quot; is &quot;It depends,&quot; choosing which merge strategy to use requires considering many factors.</p>
+<p>I already mentioned my assumptions on working in a certain way: small steps, small commits, tidy Git history.
+That is <em>my</em> favorite way of working.
+It&#39;s also a strategy that smarter folks than me recommend.
+See for example <a href="https://medium.com/@kentbeck_7670/bs-changes-e574bc396aaa">Kent Beck&#39;s SB chages</a> and <a href="https://www.geepawhill.org/2021/09/29/many-more-much-smaller-steps-first-sketch/">GeePaw Hill&#39;s MMMSS</a>.</p>
+<p>But <em>my</em> favorite way of working is not <em>the best™</em> way.
+I&#39;ve seen plenty of successful products with what I would call poor Git and GitHub hygiene.
+They were generating revenue and their teams were still able to add features and fix bugs.
+At the end of the day, what matters is to find a workflow that suits your team well and lets you deliver.
+Don&#39;t worry about the approval of internet pontificators such as myself.</p>
+<p>A good case for &quot;Squash and merge,&quot; for example, is in long-lived codebases with many contributors.
+Trading granularity to contain the explosion in commits in the history is beneficial there.</p>
+<p>A small team of developers all comfortable with using <a href="https://thoughtbot.com/blog/git-interactive-rebase-squash-amend-rewriting-history">interactive rebase</a> to tidy up their branches before finishing up a PR might opt for &quot;Rebase and merge&quot; so that the history on the main branch is linear.</p>
+<p>Again, it depends.</p>
+<hr>
+<p>One of the few benefits of getting older is that you gain perspective.
+I clearly remember a younger version of me arguing that &quot;Rebase and merge&quot; was the best strategy, the one true way.</p>
+<p>It&#39;s entirely possible I&#39;m wrong today.
+Maybe my future self will have battle scars that will make him recoil at the thought of using &quot;Create a merge commit.&quot;
+Let&#39;s all be mindful of the <a href="https://en.wikipedia.org/wiki/End-of-history_illusion"><em>end-of-history illusion</em></a> and open to the possibility that our opinions might, and most certainly will, change in the future.</p>
+<h2 id="further-readings">Further Readings</h2>
+<p>To learn more about the value of small, atomic commits and having a tidy Git history, see:</p>
+<ul>
+<li><a href="https://mislav.net/2014/02/hidden-documentation/">https://mislav.net/2014/02/hidden-documentation/</a></li>
+<li><a href="https://mokacoding.com/blog/better-merging-for-github-pull-requests/">https://mokacoding.com/blog/better-merging-for-github-pull-requests/</a></li>
+<li><a href="https://mokacoding.com/blog/your-git-log-should-tell-a-story/">https://mokacoding.com/blog/your-git-log-should-tell-a-story/</a></li>
+<li><a href="https://thoughtbot.com/blog/5-useful-tips-for-a-better-commit-message">https://thoughtbot.com/blog/5-useful-tips-for-a-better-commit-message</a></li>
+</ul>
+</div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"></div><div class="col-6"><div style="text-align: right"><a href="/blog/xctnspredicateexpectation-slow">XCTNSPredicateExpectation is slow, and what to do about it&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin Sendfox Signup Form -->
+<div id="sendfox_embed_signup">
+  <h4 class="form_title">Want more of these posts?</h4>
+  <p class="form_caption">Subscribe to receive new posts in your inbox.</p>
+  <form method="post" action="https://sendfox.com/form/3ee4z3/10r4wg" class="sendfox-form" id="10r4wg" data-async="true" data-recaptcha="false">
+    <p><input type="email" placeholder="Email" name="email" class="email" required /></p>
+    <!-- no botz please -->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="a_password" tabindex="-1" value="" autocomplete="off" /></div>
+    <div class="clear"><button type="submit">Sign me up</button></div>
+  </form>
+  <script src="https://sendfox.com/js/form.js"></script>
+</div>
+<!-- End Sendfox Signup Form -->
+</div><div class="bottom-box"><div id="disqus_thread"></div><script>var disqus_shortname = "mokacoding";
+// Neet do add the / at the end to maintain compatibility with previous version
+// of the blog that didn't define disqus_url, letting Disqus set it automatically
+// using window.location.href
+var disqus_url = "https://mokacoding.com/blog/create-a-merge-commit/";
+
+(function() {
+  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><noscript>Please enable JavaScript to view the<a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></div></div></div><div class="row-12 footer"><div class="col-12"><h3><a href="/">mokacoding</a></h3></div><div id="copy" class="col-9"><p>Hi I&#39;m <a href="https://gio.codes">Gio</a> I write here semi-regularly on software testing and TDD, productivity, and iOS development.</p>
+<p><a href="mailto:gio+blog@mokacoding.com">Get in touch</a> if you&#39;re interested in working together.</p>
+</div><div id="links" class="col-3"><p><i class="fa fa-twitter"></i>&nbsp;<a href="https://twitter.com/mokagio">@mokagio</a></p><p><i class="fa fa-github"></i>&nbsp;<a href="https://github.com/mokagio">mokagio</a></p></div></div></div></body><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-43554041-1', 'auto');
+ga('send', 'pageview');
+</script><script>var toggle = function(elm){
+  var y = elm.style && elm.style.display ? elm.style.display : 'block';
+  if (y == 'block'){
+    elm.style.opacity='0';
+    setTimeout( function(){ elm.style.display = 'none'; }, 300 );
+  }
+  else {
+    elm.style.display='block';
+    setTimeout( function(){ elm.style.opacity = '1'; }, 10 );
+  }
+}
+
+document.getElementById('close').onclick = function(){
+  toggle(document.getElementById('sticky-header'));
+  toggle(document.getElementById('sticky-header-padding-hack'));
+}</script></html>
