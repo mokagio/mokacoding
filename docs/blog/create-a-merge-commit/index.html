@@ -5,7 +5,7 @@
 I was recently involved in one such conversation.
 It wasn&#39;t the first time, and it certainly won&#39;t be the last.
 The following is the result of that conversation, a note for my future self on where my thinking was in 2022.</p>
-<h2 id="why-create-a-merge-commit-is-the-best">Why &quot;Create a merge commit&quot; is the best</h2>
+<h2 id="why-create-a-merge-commit-is-the-best">Why &quot;Create a merge commit&quot; is the best...</h2>
 <p>My whole argument rests on the value of having a tidy Git history and small, atomic, well-crafted commits.
 I won&#39;t delve much into that, but I added some links at the end of the post that argument its value.</p>
 <p>Assuming we agree on the benefits of a tidy Git history, then &quot;Create a merge commit&quot; is the best strategy because <strong>it makes it easier to understand how individual pieces of code changed</strong>.</p>
@@ -21,7 +21,7 @@ It also makes sense to <strong>optimize for understanding how the code came to b
 Using &quot;Squash and merge&quot; won&#39;t delete that information, so why not make the Git history on the main branch more condensed while allowing for noisy commits in feature branches?</p>
 <p>I find it&#39;s better to have all that information already available in Git without going to search for it on GitHub, regardless of how advanced GitHub searching capabilities are.</p>
 <p>Other points in favor of keeping your small commits in the main branch are that it makes bisecting and reverting easier, even though both are admittedly not frequent—<em>maybe because we don&#39;t make small enough commits?</em></p>
-<h2 id="actually-it-depends">Actually, it depends</h2>
+<h2 id="or-is-it">...or is it?</h2>
 <p>Software development is a game of tradeoffs.
 In the same way that the answer to &quot;Should I go native or cross-platform?&quot; is &quot;It depends,&quot; choosing which merge strategy to use requires considering many factors.</p>
 <p>I already mentioned my assumptions on working in a certain way: small steps, small commits, tidy Git history.
