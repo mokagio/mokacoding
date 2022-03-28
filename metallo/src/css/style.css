@@ -215,27 +215,27 @@ a.bordered-button {
       text-decoration: underline;
       text-underline-position: under; }
 
-/* Sendfox */
-#sendfox_embed_signup{
+/* Newsletter Form */
+#newsletter_embed_signup{
   background:#fff;
   clear:left;
   color: #838383;
   font-size: 14px; }
 
-#sendfox_embed_signup .form_title {
+#newsletter_embed_signup .form_title {
   margin-bottom: .25rem;
   color: #303030; }
 
-#sendfox_embed_signup p {
+#newsletter_embed_signup p {
   margin-top: 0;
   margin-bottom: .25rem;
   font-style: italic; }
 
-#sendfox_embed_signup form {
+#newsletter_embed_signup form {
   padding: 0; }
 
 
-#sendfox_embed_signup input.email {
+#newsletter_embed_signup input.email {
     display: block;
     padding: 8px 0;
     margin: 0 4% 10px 0;
@@ -245,7 +245,7 @@ a.bordered-button {
     border: 1px solid #999;
     -webkit-appearance: none; }
 
-#sendfox_embed_signup button {
+#newsletter_embed_signup button {
   background-color: #27ae60;
   display: block;
   width: 35%;
@@ -266,7 +266,7 @@ a.bordered-button {
   vertical-align: top;
   white-space: nowrap; }
 
-  #sendfox_embed_signup button:hover {
+  #newsletter_embed_signup button:hover {
     background-color: #16a085; }
 
 #homepage-posts ul {
