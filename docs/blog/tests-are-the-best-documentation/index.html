@@ -1,0 +1,91 @@
+<!DOCTYPE html><html lang="en"><head><title>Tests Are The Best Kind Of Documentation | mokacoding</title><meta name="description" content="Unit tests are a vital tool for writing quality code. They also happen to be the best kind of documentation for your software, the kind that never gets out of date."><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"><!-- Canonical URL--><link rel="canonical" href="https://mokacoding.com/blog/tests-are-the-best-documentation/"><!-- Open Graph meta tags--><meta property="og:title" content="Tests Are The Best Kind Of Documentation"><meta property="og:description" content="Tests are the only documentation that never gets out of date"><meta property="og:url" content="https://mokacoding.com/blog/tests-are-the-best-documentation/"><meta property="og:type" content="article"><meta property="og:site_name" content="mokacoding"><meta property="og:image" content="https://s3.amazonaws.com/mokacoding/mokacoding_og_image.jpg"><!-- Twitter meta tags--><meta property="twitter:card" content="summary"><meta property="twitter:title" content="Tests Are The Best Kind Of Documentation"><meta property="twitter:site" content="@mokacoding"><meta property="twitter:creator" content="@mokagio"><!-- Stylesheets--><link href="/css/griddy.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet"><link href="/css/font-awesome.min.css" rel="stylesheet"><link href="/css/zenburn.css" rel="stylesheet"><!-- FavIcon--><!-- Thanks to https://www.favicon-generator.org/ & https://html2jade.org/--><link rel="apple-touch-icon" sizes="57x57" href="https://s3.amazonaws.com/mokacoding/apple-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="https://s3.amazonaws.com/mokacoding/apple-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="https://s3.amazonaws.com/mokacoding/apple-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="https://s3.amazonaws.com/mokacoding/apple-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="https://s3.amazonaws.com/mokacoding/apple-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="https://s3.amazonaws.com/mokacoding/apple-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="https://s3.amazonaws.com/mokacoding/apple-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="https://s3.amazonaws.com/mokacoding/apple-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" href="https://s3.amazonaws.com/mokacoding/apple-icon-180x180.png"><link rel="icon" type="image/png" sizes="192x192" href="https://s3.amazonaws.com/mokacoding/android-icon-192x192.png"><link rel="icon" type="image/png" sizes="32x32" href="https://s3.amazonaws.com/mokacoding/favicon-32x32.png"><link rel="icon" type="image/png" sizes="96x96" href="https://s3.amazonaws.com/mokacoding/favicon-96x96.png"><link rel="icon" type="image/png" sizes="16x16" href="https://s3.amazonaws.com/mokacoding/favicon-16x16.png"><link rel="manifest" href="https://s3.amazonaws.com/mokacoding/manifest.json"><meta name="msapplication-TileColor" content="#ffffff"><meta name="msapplication-TileImage" content="https://s3.amazonaws.com/mokacoding/ms-icon-144x144.png"><meta name="theme-color" content="#ffffff"><!-- SumoMe--><script src="//load.sumome.com/" data-sumo-site-id="dd80959300db03e20c8bc3dd899f1424fd764d261e6c3c41923c96482a270dba" async="async"></script></head><body><!-- Use this to render an extra header in special occasions--><div class="special-header"><div class="page"><div class="row-12"><div class="col-12"><p><!-- - Saving this for later and to avoid a `git revert`:markdown
+  [What is your biggest struggle right now with building software?](https://goo.gl/forms/lCLlJd9hqCUYoTME2)--><p><a href="https://tddinswift.com?utm_source=mokacoding-site&amp;utm_campaign=coming-soon&amp;utm_medium=sticky-header">Available Now: <strong>Test-Driven Development in Swift with SwiftUI and Combine</strong></a></p>
+</p></div></div></div></div><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">unit and acceptance testing, automation, productivity</div><div class="links"><a href="/archive.html">Archive</a><a href="/tags.html">Tags</a><a href="https://gio.codes">About</a><a href="#subscribe">Subscribe</a><a href="/feed.xml"><i class="fa fa-rss"></i></a></div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/tests-are-the-best-documentation">Tests Are The Best Kind Of Documentation</a></h2><p class="post-meta"><span class="post-date">Fri Jun 03 2022&nbsp;</span><a href="/tag/testing/index.html" class="post-tag">-testing</a></p><div class="post"><p>When learning about unit testing, we&#39;re often shown the value they bring in speeding up the development feedback loop and nudging us towards better software architecture.
+But there&#39;s another reason tests are software developers&#39; greatest allies:</p>
+<p><strong>Tests are living documentation of the production code.</strong></p>
+<p>When you think of tests this way, you also see the value of writing readable and well-structured tests.</p>
+<p>I was recently reminded of tests&#39; role as documentation when looking at how to mark a <a href="https://fastlane.tools/">Fastlane</a> action as deprecated.
+Fastlane has a detailed <a href="https://docs.fastlane.tools/">documentation site</a>, but no one has gotten on to write docs for deprecation.</p>
+<p><em>Side note: Contributing documentation is a great way to get involved in an open-source project. It&#39;s something you can do regardless of your skill level with the project&#39;s language and tools.</em></p>
+<p>Lucky for me, the Fastlane maintainers invested in a good test suite.
+I&#39;m speculating, but I bet that&#39;s a direct result of the project&#39;s size and complexity.
+Fastlane has so many features, configuration options, and possible ways to use it that it would be impossible to manually verify the code&#39;s behavior.</p>
+<p>Since I couldn&#39;t find documentation for how to deprecate an action, I looked in the tests.
+I quickly found the one I was looking for, and it immediately showed me what to do.
+Happy days.</p>
+<p><strong>The advantage of learning about software&#39;s behavior by looking at its tests is that you are guaranteed to be looking at working examples.</strong>
+Conversely, there&#39;s little you can do to ensure the snippets in a documentation site are up-to-date.
+You can&#39;t compile plain language.</p>
+<p>How well tests document the software depends on how well they are written.
+To a certain extent, readability is in the eye of the beholder and in how familiar they are with the language and project&#39;s conventions.
+The topic is too broad to tackle in a blog post, but there are a few guidelines I think we can all agree on.</p>
+<p><strong>Separate the Arrange, Act, and Assert stages.</strong>
+Visually separating the code that prepares the system under tests (Arrange) from the part that exercises it (Act) and the one that verifies its behavior (Assert) will help readers understand how the tests flow and quickly identify the call site.</p>
+<p><strong>Exercise a single method and verify a single <em>behavior</em>.</strong>
+Each test should act on only one API of its system under test and only verify how that single one behaves.
+Notice that verifying a single behavior doesn&#39;t mean having only one assertion.
+Certain behaviors have different facets that require dedicated assertions but all fit in the same tests.</p>
+<p><strong>Use helper methods to improve readability but avoid shared setup code</strong>.
+One of my favorite advice from <a href="https://geni.us/cz8vB5">Clean Code</a> is to replace comments with code whenever possible.
+Particularly in the arranging stage of a test, if you find yourself needing multiple calls, it pays to extract them into a helper method.</p>
+<p>Helper methods shouldn&#39;t be confused with shared setup code.
+Helpers hide noisy implementation details behind their method signature.
+When looking at a test, a reader will see the helper method and decide whether to drill into it or not.
+But if implementation details are tucked away in a test life-cycle method, in XCTest those are the various <code>setUp...</code> and <code>tearDown...</code> ones, a reader might miss them.</p>
+<p>Remember, the end goal is to help readers understand everything they need to work with a specific API by looking at its tests.
+Helper methods summarize information but shared setup and tear-down hide it.</p>
+<hr>
+<p>Unit tests are, first and foremost, a tool for writing better code.
+That they also are living documentation is a nice side effect of being a specialized consumer of the code&#39;s API.
+Still, all the recommendations that make tests read like good documentation also make them read like better code.</p>
+<p>Spending a couple of extra minutes refining your tests once they are green will help future readers, whether they are trying to modify the code or merely want to learn how to use it.</p>
+<p><em>And you know what&#39;s the best way to write good tests? Practicing Test-Driven Development! Checkout <a href="https://tddinswift.com">Test-Driven Development in Swift</a> to learn how.</em></p>
+</div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"></div><div class="col-6"><div style="text-align: right"><a href="/blog/how-to-convince-your-team-to-use-tdd">How to convince your team to adopt TDD&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin Buttondown Signup Form https://buttondown.email -->
+<div id="newsletter_embed_signup">
+  <h4 class="form_title">Want more of these posts?</h4>
+  <p class="form_caption">Subscribe to receive new posts in your inbox.</p>
+  <form
+    method="post"
+    action="https://buttondown.email/api/emails/embed-subscribe/mokagio"
+  >
+    <p><input type="email" placeholder="Email" name="email" class="email" required /></p>
+    <input type="hidden" name="tag" value="mokacoding" />
+    <div class="clear"><button type="submit">Sign me up</button></div>
+  </form>
+</div>
+<!-- End Buttondown Signup Form -->
+</div><div class="bottom-box"><div id="disqus_thread"></div><script>var disqus_shortname = "mokacoding";
+// Neet do add the / at the end to maintain compatibility with previous version
+// of the blog that didn't define disqus_url, letting Disqus set it automatically
+// using window.location.href
+var disqus_url = "https://mokacoding.com/blog/tests-are-the-best-documentation/";
+
+(function() {
+  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><noscript>Please enable JavaScript to view the<a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></div></div></div><div class="row-12 footer"><div class="col-12"><h3><a href="/">mokacoding</a></h3></div><div id="copy" class="col-9"><p>Hi I&#39;m <a href="https://gio.codes">Gio</a> I write here semi-regularly on software testing and TDD, productivity, and iOS development.</p>
+<p><a href="mailto:gio+blog@mokacoding.com">Get in touch</a> if you&#39;re interested in working together.</p>
+</div><div id="links" class="col-3"><p><i class="fa fa-twitter"></i>&nbsp;<a href="https://twitter.com/mokagio">@mokagio</a></p><p><i class="fa fa-github"></i>&nbsp;<a href="https://github.com/mokagio">mokagio</a></p></div></div></div></body><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-43554041-1', 'auto');
+ga('send', 'pageview');
+</script><script>var toggle = function(elm){
+  var y = elm.style && elm.style.display ? elm.style.display : 'block';
+  if (y == 'block'){
+    elm.style.opacity='0';
+    setTimeout( function(){ elm.style.display = 'none'; }, 300 );
+  }
+  else {
+    elm.style.display='block';
+    setTimeout( function(){ elm.style.opacity = '1'; }, 10 );
+  }
+}
+
+document.getElementById('close').onclick = function(){
+  toggle(document.getElementById('sticky-header'));
+  toggle(document.getElementById('sticky-header-padding-hack'));
+}</script></html>
