@@ -56,18 +56,27 @@ Using Git LFS adds a bit of management overhead but you&#39;ll only build to bui
 Since I&#39;m yet to find a way to tell a <code>Brewfile</code> which version to install following <a href="https://semver.org/">semantic versioning</a>, I&#39;d end up adding checks in my scripts to ensure the tools I needed where available and in the expected version.
 This added a bit of overhead, and disrupted the workflow of other developers that might have updated certain tools without meaning to.</p>
 <p>Using CocoaPods like this, I can better control the versions of some of my CLI tools, update them when I see fit, and always be sure the expected version is used.</p>
-</div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"><div><a href="/blog/the-indistractable-developer"><<&nbsp;The Indistractable Developer</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/how-to-manually-generate-devise-reset-password-link">How to manually generate Devise reset password link&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin Buttondown Signup Form https://buttondown.email -->
+</div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"><div><a href="/blog/the-indistractable-developer"><<&nbsp;The Indistractable Developer</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/how-to-manually-generate-devise-reset-password-link">How to manually generate Devise reset password link&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin Substack Signup Form, via https://substackapi.com/ -->
 <div id="newsletter_embed_signup">
   <h4 class="form_title">Want more of these posts?</h4>
   <p class="form_caption">Subscribe to receive new posts in your inbox.</p>
-  <form
-    method="post"
-    action="https://buttondown.email/api/emails/embed-subscribe/mokagio"
-  >
-    <p><input type="email" placeholder="Email" name="email" class="email" required /></p>
-    <input type="hidden" name="tag" value="mokacoding" />
-    <div class="clear"><button type="submit">Sign me up</button></div>
-  </form>
+  <div id="custom-substack-embed" style="white-space: nowrap;"></div>
+
+  <script>
+    window.CustomSubstackWidget = {
+      substackUrl: "mokagio.substack.com",
+      placeholder: "me@email.com",
+      buttonText: "Sign me up",
+      theme: "custom",
+      colors: {
+        primary: "#27ae60", // button and border, mokacoding green
+        input: "#ffffff", // background of the email input
+        email: "#303030", // email input text font
+        text: "#ffffff", // button text color
+      }
+    };
+  </script>
+  <script src="https://substackapi.com/widget.js" async></script>
 </div>
 <!-- End Buttondown Signup Form -->
 </div><div class="bottom-box"><div id="disqus_thread"></div><script>var disqus_shortname = "mokacoding";

@@ -82,18 +82,27 @@ describe(<span class="hljs-string">@&quot;The expecta matcher libray&quot;</span
 SpecEnd</code></pre>
 <p>What we just saw is only a subset of the matchers available with Expecta, you can find the full list on the <a href="https://github.com/specta/expecta#built-in-matchers">project&#39;s README</a>.</p>
 <p>Expecta is a very nice library, and I hope this post triggered some interest in you towards unit testing and the art of readable code, but it does not end here! You can actually extent Expecta by providing custom matchers. <del><strong>We are going to look at those next week</strong>, so don&#39;t forget to <a href="#subscribe">subscribe</a>.</del> If you&#39;re interested check out the next post: &quot;<a href="https://mokacoding.com/blog/expecta-custom-matchers/">How to write an Expecta custom matcher</a>&quot;, and don&#39;t forget to <a href="#subscribe">subscribe</a> to be notified when new posts about Expecta and the world of iOS unit testing are published.</p>
-</div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"><div><a href="/blog/expecta-custom-matchers"><<&nbsp;Writing an Expecta custom matcher</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/specta-global-before-after-each-updated">Specta global before and after each hooks (Updated)&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin Buttondown Signup Form https://buttondown.email -->
+</div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"><div><a href="/blog/expecta-custom-matchers"><<&nbsp;Writing an Expecta custom matcher</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/specta-global-before-after-each-updated">Specta global before and after each hooks (Updated)&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin Substack Signup Form, via https://substackapi.com/ -->
 <div id="newsletter_embed_signup">
   <h4 class="form_title">Want more of these posts?</h4>
   <p class="form_caption">Subscribe to receive new posts in your inbox.</p>
-  <form
-    method="post"
-    action="https://buttondown.email/api/emails/embed-subscribe/mokagio"
-  >
-    <p><input type="email" placeholder="Email" name="email" class="email" required /></p>
-    <input type="hidden" name="tag" value="mokacoding" />
-    <div class="clear"><button type="submit">Sign me up</button></div>
-  </form>
+  <div id="custom-substack-embed" style="white-space: nowrap;"></div>
+
+  <script>
+    window.CustomSubstackWidget = {
+      substackUrl: "mokagio.substack.com",
+      placeholder: "me@email.com",
+      buttonText: "Sign me up",
+      theme: "custom",
+      colors: {
+        primary: "#27ae60", // button and border, mokacoding green
+        input: "#ffffff", // background of the email input
+        email: "#303030", // email input text font
+        text: "#ffffff", // button text color
+      }
+    };
+  </script>
+  <script src="https://substackapi.com/widget.js" async></script>
 </div>
 <!-- End Buttondown Signup Form -->
 </div><div class="bottom-box"><div id="disqus_thread"></div><script>var disqus_shortname = "mokacoding";

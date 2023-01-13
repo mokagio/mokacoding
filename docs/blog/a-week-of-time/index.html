@@ -4,18 +4,27 @@
 <p>What am I gonna do? The answer is easy: code as much as I can, and enjoy the sun that&#39;s been blessing London for the past days.</p>
 <p>I&#39;ve actually already started coding. I&#39;ve just submitted a <a href="https://github.com/facebook/xctool/pull/106">PR to xctool</a>, let&#39;s see how it goes...</p>
 <p>I&#39;m gonna write again in a week and report my progress. Hopefully I&#39;ll have an almost ready iOS app, and an embryo of a Twitter-based web-app ready.</p>
-</div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"><div><a href="/blog/what-i-did-in-a-week"><<&nbsp;What I did in a week...</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/cocoapods-the-inherited-flag">CocoaPods: the $(inherited) flag&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin Buttondown Signup Form https://buttondown.email -->
+</div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"><div><a href="/blog/what-i-did-in-a-week"><<&nbsp;What I did in a week...</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/cocoapods-the-inherited-flag">CocoaPods: the $(inherited) flag&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin Substack Signup Form, via https://substackapi.com/ -->
 <div id="newsletter_embed_signup">
   <h4 class="form_title">Want more of these posts?</h4>
   <p class="form_caption">Subscribe to receive new posts in your inbox.</p>
-  <form
-    method="post"
-    action="https://buttondown.email/api/emails/embed-subscribe/mokagio"
-  >
-    <p><input type="email" placeholder="Email" name="email" class="email" required /></p>
-    <input type="hidden" name="tag" value="mokacoding" />
-    <div class="clear"><button type="submit">Sign me up</button></div>
-  </form>
+  <div id="custom-substack-embed" style="white-space: nowrap;"></div>
+
+  <script>
+    window.CustomSubstackWidget = {
+      substackUrl: "mokagio.substack.com",
+      placeholder: "me@email.com",
+      buttonText: "Sign me up",
+      theme: "custom",
+      colors: {
+        primary: "#27ae60", // button and border, mokacoding green
+        input: "#ffffff", // background of the email input
+        email: "#303030", // email input text font
+        text: "#ffffff", // button text color
+      }
+    };
+  </script>
+  <script src="https://substackapi.com/widget.js" async></script>
 </div>
 <!-- End Buttondown Signup Form -->
 </div><div class="bottom-box"><div id="disqus_thread"></div><script>var disqus_shortname = "mokacoding";

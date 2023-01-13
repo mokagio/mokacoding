@@ -45,18 +45,27 @@ dsym_plist=<span class="hljs-string">&quot;<span class="hljs-variable">$DWARF_DS
 <hr>
 <p>I hope you found this post useful, and I&#39;d recommend you try this approach in your next project. Having automation perform mundane tasks like bumping the build number is incredibly powerful, it makes the workflow more reliable and frees developers&#39; head space so that they can focus on more important tasks, like, you know... writing better code.</p>
 <p>If you would like to share you experience with automatic version numbering via git, need help setting it up, or have some improvements to suggest, hit me up on Twitter <a href="https://twitter.com/mokagio">@mokagio</a> or leave a comment below.</p>
-</div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"><div><a href="/blog/nerdtree-relative-numbers"><<&nbsp;How to display relative line numbers in NERDTree</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/how-to-always-run-latest-simulator-cli">How to always use the latest Simulator with Xcodebuild&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin Buttondown Signup Form https://buttondown.email -->
+</div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"><div><a href="/blog/nerdtree-relative-numbers"><<&nbsp;How to display relative line numbers in NERDTree</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/how-to-always-run-latest-simulator-cli">How to always use the latest Simulator with Xcodebuild&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin Substack Signup Form, via https://substackapi.com/ -->
 <div id="newsletter_embed_signup">
   <h4 class="form_title">Want more of these posts?</h4>
   <p class="form_caption">Subscribe to receive new posts in your inbox.</p>
-  <form
-    method="post"
-    action="https://buttondown.email/api/emails/embed-subscribe/mokagio"
-  >
-    <p><input type="email" placeholder="Email" name="email" class="email" required /></p>
-    <input type="hidden" name="tag" value="mokacoding" />
-    <div class="clear"><button type="submit">Sign me up</button></div>
-  </form>
+  <div id="custom-substack-embed" style="white-space: nowrap;"></div>
+
+  <script>
+    window.CustomSubstackWidget = {
+      substackUrl: "mokagio.substack.com",
+      placeholder: "me@email.com",
+      buttonText: "Sign me up",
+      theme: "custom",
+      colors: {
+        primary: "#27ae60", // button and border, mokacoding green
+        input: "#ffffff", // background of the email input
+        email: "#303030", // email input text font
+        text: "#ffffff", // button text color
+      }
+    };
+  </script>
+  <script src="https://substackapi.com/widget.js" async></script>
 </div>
 <!-- End Buttondown Signup Form -->
 </div><div class="bottom-box"><div id="disqus_thread"></div><script>var disqus_shortname = "mokacoding";

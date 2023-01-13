@@ -383,18 +383,27 @@
 <p>In other words: red, green, commit, refactor, commit.</p>
 <p>This simplicity is what makes it powerful. Writing just enough test code to get a failure, then just enough code to make it pass means you&#39;re always solving small problems. This constant and fast feedback loop is a <a href="https://geni.us/StUP">flow</a> inducing process. Like athletes and stand up comedians know well, the faster your feedback loop the faster you&#39;ll improve.</p>
 <p><strong>TDD is more than a way to write code, is a business philosophy</strong>. It&#39;s a way to build a product in small incremental steps while continuously getting feedback, from the micro level of a single function, to the macro of an iteration on the next version.</p>
-</div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"><div><a href="/blog/wirte-less-code"><<&nbsp;Write Less Code</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/the-productivity-project-notes">The Productivity Project - by Chris Bailey&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin Buttondown Signup Form https://buttondown.email -->
+</div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"><div><a href="/blog/wirte-less-code"><<&nbsp;Write Less Code</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/the-productivity-project-notes">The Productivity Project - by Chris Bailey&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin Substack Signup Form, via https://substackapi.com/ -->
 <div id="newsletter_embed_signup">
   <h4 class="form_title">Want more of these posts?</h4>
   <p class="form_caption">Subscribe to receive new posts in your inbox.</p>
-  <form
-    method="post"
-    action="https://buttondown.email/api/emails/embed-subscribe/mokagio"
-  >
-    <p><input type="email" placeholder="Email" name="email" class="email" required /></p>
-    <input type="hidden" name="tag" value="mokacoding" />
-    <div class="clear"><button type="submit">Sign me up</button></div>
-  </form>
+  <div id="custom-substack-embed" style="white-space: nowrap;"></div>
+
+  <script>
+    window.CustomSubstackWidget = {
+      substackUrl: "mokagio.substack.com",
+      placeholder: "me@email.com",
+      buttonText: "Sign me up",
+      theme: "custom",
+      colors: {
+        primary: "#27ae60", // button and border, mokacoding green
+        input: "#ffffff", // background of the email input
+        email: "#303030", // email input text font
+        text: "#ffffff", // button text color
+      }
+    };
+  </script>
+  <script src="https://substackapi.com/widget.js" async></script>
 </div>
 <!-- End Buttondown Signup Form -->
 </div><div class="bottom-box"><div id="disqus_thread"></div><script>var disqus_shortname = "mokacoding";

@@ -52,18 +52,27 @@
 <ol>
 <li><span id="fn1"></span> <a href="#researchers-say"><em>Researchers say</em></a>. Neisser, U.; Boodoo, G.; Bouchard, T. J., J.; Boykin, A. W.; Brody, N.; Ceci, S. J.; Halpern, D. F.; Loehlin, J. C.; Perloff, R.; Sternberg, R. J.; Urbina, S. (1996). &quot;<a href="https://en.wikipedia.org/wiki/Intelligence:_Knowns_and_Unknowns">Intelligence: Knowns and Unknowns</a>&quot;. American Psychologist Association.</li>
 </ol>
-</div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"><div><a href="/blog/clutter-and-optimization"><<&nbsp;The value of decluttering and optimizing your software</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/wirte-less-code">Write Less Code&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin Buttondown Signup Form https://buttondown.email -->
+</div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"><div><a href="/blog/clutter-and-optimization"><<&nbsp;The value of decluttering and optimizing your software</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/wirte-less-code">Write Less Code&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin Substack Signup Form, via https://substackapi.com/ -->
 <div id="newsletter_embed_signup">
   <h4 class="form_title">Want more of these posts?</h4>
   <p class="form_caption">Subscribe to receive new posts in your inbox.</p>
-  <form
-    method="post"
-    action="https://buttondown.email/api/emails/embed-subscribe/mokagio"
-  >
-    <p><input type="email" placeholder="Email" name="email" class="email" required /></p>
-    <input type="hidden" name="tag" value="mokacoding" />
-    <div class="clear"><button type="submit">Sign me up</button></div>
-  </form>
+  <div id="custom-substack-embed" style="white-space: nowrap;"></div>
+
+  <script>
+    window.CustomSubstackWidget = {
+      substackUrl: "mokagio.substack.com",
+      placeholder: "me@email.com",
+      buttonText: "Sign me up",
+      theme: "custom",
+      colors: {
+        primary: "#27ae60", // button and border, mokacoding green
+        input: "#ffffff", // background of the email input
+        email: "#303030", // email input text font
+        text: "#ffffff", // button text color
+      }
+    };
+  </script>
+  <script src="https://substackapi.com/widget.js" async></script>
 </div>
 <!-- End Buttondown Signup Form -->
 </div><div class="bottom-box"><div id="disqus_thread"></div><script>var disqus_shortname = "mokacoding";

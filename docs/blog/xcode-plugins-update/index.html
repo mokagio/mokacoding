@@ -6,18 +6,27 @@
 <pre><code>defaults <span class="hljs-keyword">write</span> ~<span class="hljs-regexp">/Library/</span>Application\ Support<span class="hljs-regexp">/Developer/</span>Shared<span class="hljs-regexp">/Xcode/</span>Plug-ins<span class="hljs-regexp">/XVim.xcplugin/</span>Contents<span class="hljs-regexp">/Info  DVTPlugInCompatibilityUUIDs -array-add $(defaults read /</span>Applications<span class="hljs-regexp">/Xcode.app/</span>Contents/Info DVTPlugInCompatibilityUUID)</code></pre><p>Note that in the command above the plug-in I&#39;m updating is <code>XVim.xcplugin</code>, you should replace that with the name of the plug-in you want to update.</p>
 <p>If you need any help with this please hit me up on Twitter <a href="https://twitter.com/mokagio">@mokagio</a>, or leave a comment below.</p>
 <p><em>Happy coding, and leave the codebase better than you found it.</em></p>
-</div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"><div><a href="/blog/bitbucket-pr-from-command-line"><<&nbsp;Opening a PR to Bitbucket from the terminal</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/hacker-news-button">Hacker News Button&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin Buttondown Signup Form https://buttondown.email -->
+</div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"><div><a href="/blog/bitbucket-pr-from-command-line"><<&nbsp;Opening a PR to Bitbucket from the terminal</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/hacker-news-button">Hacker News Button&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin Substack Signup Form, via https://substackapi.com/ -->
 <div id="newsletter_embed_signup">
   <h4 class="form_title">Want more of these posts?</h4>
   <p class="form_caption">Subscribe to receive new posts in your inbox.</p>
-  <form
-    method="post"
-    action="https://buttondown.email/api/emails/embed-subscribe/mokagio"
-  >
-    <p><input type="email" placeholder="Email" name="email" class="email" required /></p>
-    <input type="hidden" name="tag" value="mokacoding" />
-    <div class="clear"><button type="submit">Sign me up</button></div>
-  </form>
+  <div id="custom-substack-embed" style="white-space: nowrap;"></div>
+
+  <script>
+    window.CustomSubstackWidget = {
+      substackUrl: "mokagio.substack.com",
+      placeholder: "me@email.com",
+      buttonText: "Sign me up",
+      theme: "custom",
+      colors: {
+        primary: "#27ae60", // button and border, mokacoding green
+        input: "#ffffff", // background of the email input
+        email: "#303030", // email input text font
+        text: "#ffffff", // button text color
+      }
+    };
+  </script>
+  <script src="https://substackapi.com/widget.js" async></script>
 </div>
 <!-- End Buttondown Signup Form -->
 </div><div class="bottom-box"><div id="disqus_thread"></div><script>var disqus_shortname = "mokacoding";

@@ -102,18 +102,27 @@
 <p>I personally like to put factory methods in a category extension, just to make the separation from the core code of the class clearer.</p>
 <p>When designing code is important to remember that being too smart is not a clever idea. Code that does too much, with side effects, or with implementations that don&#39;t behave as one would expect when looking at the interface are dangerous. When writing code we should think of our readers and apply the <a href="https://en.wikipedia.org/wiki/Principle_of_least_astonishment">principle of least astonishment</a>, everything should behave as the they would expect. Making the dependencies of your classes explicit is one good technique to make sure that once the interface lid is lifted and we take a look at the implementation there are no surprises.</p>
 <p><em>Leave the codebase better than you found it.</em></p>
-</div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"><div><a href="/blog/swift-array-string-characters"><<&nbsp;Swift array of characters from String</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/terminal-reusing-last-command-parameter">How to reuse the last parameter in a terminal command&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin Buttondown Signup Form https://buttondown.email -->
+</div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"><div><a href="/blog/swift-array-string-characters"><<&nbsp;Swift array of characters from String</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/terminal-reusing-last-command-parameter">How to reuse the last parameter in a terminal command&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin Substack Signup Form, via https://substackapi.com/ -->
 <div id="newsletter_embed_signup">
   <h4 class="form_title">Want more of these posts?</h4>
   <p class="form_caption">Subscribe to receive new posts in your inbox.</p>
-  <form
-    method="post"
-    action="https://buttondown.email/api/emails/embed-subscribe/mokagio"
-  >
-    <p><input type="email" placeholder="Email" name="email" class="email" required /></p>
-    <input type="hidden" name="tag" value="mokacoding" />
-    <div class="clear"><button type="submit">Sign me up</button></div>
-  </form>
+  <div id="custom-substack-embed" style="white-space: nowrap;"></div>
+
+  <script>
+    window.CustomSubstackWidget = {
+      substackUrl: "mokagio.substack.com",
+      placeholder: "me@email.com",
+      buttonText: "Sign me up",
+      theme: "custom",
+      colors: {
+        primary: "#27ae60", // button and border, mokacoding green
+        input: "#ffffff", // background of the email input
+        email: "#303030", // email input text font
+        text: "#ffffff", // button text color
+      }
+    };
+  </script>
+  <script src="https://substackapi.com/widget.js" async></script>
 </div>
 <!-- End Buttondown Signup Form -->
 </div><div class="bottom-box"><div id="disqus_thread"></div><script>var disqus_shortname = "mokacoding";

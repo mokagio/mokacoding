@@ -8,18 +8,27 @@ I had the password for that key in 1Password (after years of creating SSH keys w
 <pre><code>ssh-keygen -y -f <span class="hljs-regexp">/path/</span>to/ssh_key</code></pre><p>The <code>-y</code> option &quot;will read a private OpenSSH format file and print an OpenSSH public key to stdout&quot;.
 The <code>-f</code> option specifies the path to the private key.</p>
 <p>If the private key is password protected, <code>ssh-keygen</code> will ask for the password.</p>
-</div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"><div><a href="/blog/how-to-reverse-a-file-in-the-terminal"><<&nbsp;How to reverse a file in the terminal</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/how-to-check-if-ruby-array-contains-element">How to check if array contains element with block in Ruby&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin Buttondown Signup Form https://buttondown.email -->
+</div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"><div><a href="/blog/how-to-reverse-a-file-in-the-terminal"><<&nbsp;How to reverse a file in the terminal</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/how-to-check-if-ruby-array-contains-element">How to check if array contains element with block in Ruby&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin Substack Signup Form, via https://substackapi.com/ -->
 <div id="newsletter_embed_signup">
   <h4 class="form_title">Want more of these posts?</h4>
   <p class="form_caption">Subscribe to receive new posts in your inbox.</p>
-  <form
-    method="post"
-    action="https://buttondown.email/api/emails/embed-subscribe/mokagio"
-  >
-    <p><input type="email" placeholder="Email" name="email" class="email" required /></p>
-    <input type="hidden" name="tag" value="mokacoding" />
-    <div class="clear"><button type="submit">Sign me up</button></div>
-  </form>
+  <div id="custom-substack-embed" style="white-space: nowrap;"></div>
+
+  <script>
+    window.CustomSubstackWidget = {
+      substackUrl: "mokagio.substack.com",
+      placeholder: "me@email.com",
+      buttonText: "Sign me up",
+      theme: "custom",
+      colors: {
+        primary: "#27ae60", // button and border, mokacoding green
+        input: "#ffffff", // background of the email input
+        email: "#303030", // email input text font
+        text: "#ffffff", // button text color
+      }
+    };
+  </script>
+  <script src="https://substackapi.com/widget.js" async></script>
 </div>
 <!-- End Buttondown Signup Form -->
 </div><div class="bottom-box"><div id="disqus_thread"></div><script>var disqus_shortname = "mokacoding";

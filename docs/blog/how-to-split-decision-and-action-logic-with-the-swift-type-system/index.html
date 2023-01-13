@@ -106,18 +106,27 @@
 <p>If you ask my opinion, when using a language like Swift <strong>relying on the type system is your best option</strong>.</p>
 <p>Have you got other approaches to suggest to remove duplication in this example? Or have you got tests with duplication and would like to chat about ways to remove it? Leave a comment below, get in touch <a href="https://twitter.com/mokagio">on Twitter at @mokagio</a>, or write to <a href="mailto:gio@mokacoding.com">gio@mokacoding.com</a>.</p>
 <p style="font-size: smaller"><a id="fn1">1</a>: One could argue the test in the example could tricked by making the `log(:)` body return `"something"`, the value returned by the test `transformation` function. While that's true it leads us into a spiral of more and more refined tests which might eventually turn into the need for generative testing. Let's just assume no one is trying to intentionally trick the tests and compromise using this single simpler one.</p>
-</div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"><div><a href="/blog/terminal-aliases"><<&nbsp;How to become drastically faster at using the terminal</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/how-to-remove-duplication-from-swift-tests-with-helper-functions">How to remove duplication from Swift tests with helper functions&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin Buttondown Signup Form https://buttondown.email -->
+</div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"><div><a href="/blog/terminal-aliases"><<&nbsp;How to become drastically faster at using the terminal</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/how-to-remove-duplication-from-swift-tests-with-helper-functions">How to remove duplication from Swift tests with helper functions&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin Substack Signup Form, via https://substackapi.com/ -->
 <div id="newsletter_embed_signup">
   <h4 class="form_title">Want more of these posts?</h4>
   <p class="form_caption">Subscribe to receive new posts in your inbox.</p>
-  <form
-    method="post"
-    action="https://buttondown.email/api/emails/embed-subscribe/mokagio"
-  >
-    <p><input type="email" placeholder="Email" name="email" class="email" required /></p>
-    <input type="hidden" name="tag" value="mokacoding" />
-    <div class="clear"><button type="submit">Sign me up</button></div>
-  </form>
+  <div id="custom-substack-embed" style="white-space: nowrap;"></div>
+
+  <script>
+    window.CustomSubstackWidget = {
+      substackUrl: "mokagio.substack.com",
+      placeholder: "me@email.com",
+      buttonText: "Sign me up",
+      theme: "custom",
+      colors: {
+        primary: "#27ae60", // button and border, mokacoding green
+        input: "#ffffff", // background of the email input
+        email: "#303030", // email input text font
+        text: "#ffffff", // button text color
+      }
+    };
+  </script>
+  <script src="https://substackapi.com/widget.js" async></script>
 </div>
 <!-- End Buttondown Signup Form -->
 </div><div class="bottom-box"><div id="disqus_thread"></div><script>var disqus_shortname = "mokacoding";

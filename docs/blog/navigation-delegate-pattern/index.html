@@ -107,18 +107,27 @@ Get in touch on Twitter at <a href="https://twitter.com/mokagio">@mokagio</a> or
 This concept is what makes patterns like <a href="http://khanlou.com/2015/10/coordinators-redux/">Coordinators</a>, <a href="https://www.swiftbysundell.com/posts/navigation-in-swift">Navigators</a>, and <a href="https://clean-swift.com/routing-in-clean-swift/">Routers</a> possible.
 The first time I saw this formalized was in Alberto De Bortoli&#39;s 2014 post &quot;<a href="https://albertodebortoli.com/2014/09/03/flow-controllers-on-ios-for-a-better-navigation-control/">Flow Controllers on iOS for a better navigation control</a>&quot;.
 Although he injects the object responsible for the navigation in the view controller, the result is pretty much the same.</p>
-</div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"><div><a href="/blog/running-one-test-in-xcode"><<&nbsp;How to run a single test in Xcode</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/take-care-of-your-tools">Take care of your tools&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin Buttondown Signup Form https://buttondown.email -->
+</div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"><div><a href="/blog/running-one-test-in-xcode"><<&nbsp;How to run a single test in Xcode</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/take-care-of-your-tools">Take care of your tools&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin Substack Signup Form, via https://substackapi.com/ -->
 <div id="newsletter_embed_signup">
   <h4 class="form_title">Want more of these posts?</h4>
   <p class="form_caption">Subscribe to receive new posts in your inbox.</p>
-  <form
-    method="post"
-    action="https://buttondown.email/api/emails/embed-subscribe/mokagio"
-  >
-    <p><input type="email" placeholder="Email" name="email" class="email" required /></p>
-    <input type="hidden" name="tag" value="mokacoding" />
-    <div class="clear"><button type="submit">Sign me up</button></div>
-  </form>
+  <div id="custom-substack-embed" style="white-space: nowrap;"></div>
+
+  <script>
+    window.CustomSubstackWidget = {
+      substackUrl: "mokagio.substack.com",
+      placeholder: "me@email.com",
+      buttonText: "Sign me up",
+      theme: "custom",
+      colors: {
+        primary: "#27ae60", // button and border, mokacoding green
+        input: "#ffffff", // background of the email input
+        email: "#303030", // email input text font
+        text: "#ffffff", // button text color
+      }
+    };
+  </script>
+  <script src="https://substackapi.com/widget.js" async></script>
 </div>
 <!-- End Buttondown Signup Form -->
 </div><div class="bottom-box"><div id="disqus_thread"></div><script>var disqus_shortname = "mokacoding";

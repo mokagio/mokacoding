@@ -10,18 +10,27 @@
 <p>Download the raw script <a href="https://gist.githubusercontent.com/phatblat/6eb8895e2202f796960e/raw/264765c05ecc8918425cb513b12409de91e3a675/package-ida.sh">from here</a>, place it somewhere, maybe in the project&#39;s root, then simply replace the <code>xcodebuild -exportArchive</code> command with:</p>
 <pre><code>bin/package-swift-ipa.sh <span class="hljs-string">&quot;<span class="hljs-variable">$archive_path</span>&quot;</span> <span class="hljs-string">&quot;<span class="hljs-subst">$(pwd)</span>/<span class="hljs-variable">$ipa_path</span>&quot;</span></code></pre><p>Notice the <code>$(pwd)</code> in the second argument. That&#39;s because the script is expecting absolute paths, while mine uses relative ones.</p>
 <p><em>Leave the codebase better than you found it.</em></p>
-</div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"><div><a href="/blog/keep-your-bench-clean"><<&nbsp;Keep Your Bench Clean</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/xcode-ui-test-view-changes">How to test UI changes in Xcode 7&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin Buttondown Signup Form https://buttondown.email -->
+</div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"><div><a href="/blog/keep-your-bench-clean"><<&nbsp;Keep Your Bench Clean</a></div></div><div class="col-6"><div style="text-align: right"><a href="/blog/xcode-ui-test-view-changes">How to test UI changes in Xcode 7&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin Substack Signup Form, via https://substackapi.com/ -->
 <div id="newsletter_embed_signup">
   <h4 class="form_title">Want more of these posts?</h4>
   <p class="form_caption">Subscribe to receive new posts in your inbox.</p>
-  <form
-    method="post"
-    action="https://buttondown.email/api/emails/embed-subscribe/mokagio"
-  >
-    <p><input type="email" placeholder="Email" name="email" class="email" required /></p>
-    <input type="hidden" name="tag" value="mokacoding" />
-    <div class="clear"><button type="submit">Sign me up</button></div>
-  </form>
+  <div id="custom-substack-embed" style="white-space: nowrap;"></div>
+
+  <script>
+    window.CustomSubstackWidget = {
+      substackUrl: "mokagio.substack.com",
+      placeholder: "me@email.com",
+      buttonText: "Sign me up",
+      theme: "custom",
+      colors: {
+        primary: "#27ae60", // button and border, mokacoding green
+        input: "#ffffff", // background of the email input
+        email: "#303030", // email input text font
+        text: "#ffffff", // button text color
+      }
+    };
+  </script>
+  <script src="https://substackapi.com/widget.js" async></script>
 </div>
 <!-- End Buttondown Signup Form -->
 </div><div class="bottom-box"><div id="disqus_thread"></div><script>var disqus_shortname = "mokacoding";
