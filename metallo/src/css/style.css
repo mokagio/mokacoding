@@ -234,7 +234,9 @@ a.bordered-button {
 #newsletter_embed_signup form {
   padding: 0; }
 
-
+/* Custom style for the hand-rolled form. Now replaced by the one from
+ * https://substackapi.com/
+ *
 #newsletter_embed_signup input.email {
     display: block;
     padding: 8px 0;
@@ -268,6 +270,7 @@ a.bordered-button {
 
   #newsletter_embed_signup button:hover {
     background-color: #16a085; }
+*/
 
 #homepage-posts ul {
   list-style: none;
