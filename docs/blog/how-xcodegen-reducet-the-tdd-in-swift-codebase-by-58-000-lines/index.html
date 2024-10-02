@@ -1,0 +1,180 @@
+<!DOCTYPE html><html lang="en"><head><title>How XcodeGen reduced the TDD in Swift codebase by 58,000+ lines | mokacoding</title><meta name="description" content="A code generation story."><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"><!-- Canonical URL--><link rel="canonical" href="https://mokacoding.com/blog/how-xcodegen-reducet-the-tdd-in-swift-codebase-by-58-000-lines/"><!-- Open Graph meta tags--><meta property="og:title" content="How XcodeGen reduced the TDD in Swift codebase by 58,000+ lines"><meta property="og:description" content="A code generation story."><meta property="og:url" content="https://mokacoding.com/blog/how-xcodegen-reducet-the-tdd-in-swift-codebase-by-58-000-lines/"><meta property="og:type" content="article"><meta property="og:site_name" content="mokacoding"><meta property="og:image" content="https://mokacoding.s3.amazonaws.com/2024-10-03-xcodegen-diff.png"><!-- Twitter meta tags--><meta property="twitter:card" content="summary"><meta property="twitter:title" content="How XcodeGen reduced the TDD in Swift codebase by 58,000+ lines"><meta property="twitter:site" content="@mokacoding"><meta property="twitter:creator" content="@mokagio"><!-- Stylesheets--><link href="/css/griddy.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet"><link href="/css/font-awesome.min.css" rel="stylesheet"><link href="/css/zenburn.css" rel="stylesheet"><!-- FavIcon--><!-- Thanks to https://www.favicon-generator.org/ & https://html2jade.org/--><link rel="apple-touch-icon" sizes="57x57" href="https://s3.amazonaws.com/mokacoding/apple-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="https://s3.amazonaws.com/mokacoding/apple-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="https://s3.amazonaws.com/mokacoding/apple-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="https://s3.amazonaws.com/mokacoding/apple-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="https://s3.amazonaws.com/mokacoding/apple-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="https://s3.amazonaws.com/mokacoding/apple-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="https://s3.amazonaws.com/mokacoding/apple-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="https://s3.amazonaws.com/mokacoding/apple-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" href="https://s3.amazonaws.com/mokacoding/apple-icon-180x180.png"><link rel="icon" type="image/png" sizes="192x192" href="https://s3.amazonaws.com/mokacoding/android-icon-192x192.png"><link rel="icon" type="image/png" sizes="32x32" href="https://s3.amazonaws.com/mokacoding/favicon-32x32.png"><link rel="icon" type="image/png" sizes="96x96" href="https://s3.amazonaws.com/mokacoding/favicon-96x96.png"><link rel="icon" type="image/png" sizes="16x16" href="https://s3.amazonaws.com/mokacoding/favicon-16x16.png"><link rel="manifest" href="https://s3.amazonaws.com/mokacoding/manifest.json"><meta name="msapplication-TileColor" content="#ffffff"><meta name="msapplication-TileImage" content="https://s3.amazonaws.com/mokacoding/ms-icon-144x144.png"><meta name="theme-color" content="#ffffff"><!-- SumoMe--><script src="//load.sumome.com/" data-sumo-site-id="dd80959300db03e20c8bc3dd899f1424fd764d261e6c3c41923c96482a270dba" async="async"></script></head><body><!-- Use this to render an extra header in special occasions--><div class="special-header"><div class="page"><div class="row-12"><div class="col-12"><p><!-- - Saving this for later and to avoid a `git revert`:markdown
+  [What is your biggest struggle right now with building software?](https://goo.gl/forms/lCLlJd9hqCUYoTME2)--><p><a href="https://tddinswift.com?utm_source=mokacoding-site&amp;utm_campaign=coming-soon&amp;utm_medium=sticky-header">Available Now: <strong>Test-Driven Development in Swift with SwiftUI and Combine</strong></a></p>
+</p></div></div></div></div><div class="page"><div class="row-12"><div class="col-12 header"><h1 class="brand"><a href="/">mokacoding</a></h1><div class="punchline">unit and acceptance testing, automation, productivity</div><div class="links"><a href="/archive.html">Archive</a><a href="/tags.html">Tags</a><a href="https://gio.codes">About</a><a href="#subscribe">Subscribe</a><a href="/feed.xml"><i class="fa fa-rss"></i></a></div></div><div class="col-12"><div class="post-container"><h2 class="post-title"><a href="/blog/how-xcodegen-reducet-the-tdd-in-swift-codebase-by-58-000-lines">How XcodeGen reduced the TDD in Swift codebase by 58,000+ lines</a></h2><p class="post-meta"><span class="post-date">Thu Oct 03 2024&nbsp;</span><a href="/tag/Swift/index.html" class="post-tag">-Swift</a><a href="/tag/Xcode/index.html" class="post-tag">-Xcode</a><a href="/tag/Books/index.html" class="post-tag">-Books</a></p><div class="post"><p>I&#39;m in the middle of tidying up the <a href="https://tddinswift.com"><em>Test-Driven Development in Swift</em></a> chapters <a href="https://github.com/Apress/Test-Driven-Development-in-Swift">sources</a>.</p>
+<p>One of the first things I did was set up <a href="https://github.com/yonaskolb/XcodeGen">XcodeGen</a>.
+Thanks to it, I removed more than 58,000 lines between Xcode project files, <code>xcschemes</code>, and duplicated sources.</p>
+<p>Needless to say, I&#39;m very pleased to see all that cruft go.
+Here&#39;s what I did, and while few projects are set up like a book&#39;s chapters sources repository, I think my experience will show the benefits of using a tool to generate the Xcode project and of code-generation more broadly.</p>
+<h2 id="twenty-seven-projects-to-update">Twenty-seven projects to update</h2>
+<p>A lot has changed in Apple development since <em>Test-Driven Development in Swift</em> hit the shelves in 2021.
+SwiftUI has matured.
+Async/await has replaced Combine to manage most asynchronous or concurrent operations.
+Apple released a new Swift-native testing framework, which is a pleasure to use.
+<em>Xcode&#39;s Vim mode finally supports relative line numbers and the <code>.</code> operator!</em></p>
+<p>With all this novelty, it might be time to dust off the <a href="https://github.com/Apress/Test-Driven-Development-in-Swift">book&#39;s examples code</a> and see how much they can improve.</p>
+<p>The core twelve chapters of <em>Test-Driven Development in Swift</em> chronicle the development of a quasi-real-world app.
+Each chapter builds on top of the code implemented in the previous one.
+For each, the chapter sources repo offers a &quot;start&quot; and &quot;end&quot; project.
+Readers can use the start project to code along or jump straight into the end project to explore the result.</p>
+<p>There are also sources for the three appendixes, for a total of twenty-seven Xcode projects.</p>
+<p>When I created the repo, I went through each project starting from scratch like a reader would.
+It made sense while writing the book, but the thought of updating them all now made me shiver.</p>
+<p>If only there was a way for each project to inherit the code it needs from the previous ones...
+Enter <a href="https://github.com/yonaskolb/XcodeGen">XcodeGen</a>.</p>
+<h1 id="xcodegen">XcodeGen</h1>
+<p>XcodeGen lets you describe an Xcode project in a YAML file, much like you define a Swift package in <code>Package.swift</code>.
+You can then run <code>xcodegen generate</code> to generate the <code>xcodeproj</code> folder with <code>project.pbxproj</code>, <code>xcshareddata</code>, and everything else your software needs to run.</p>
+<p>The best thing is, given the project folder is code-generated based on the YAML configuration, you don&#39;t need to check that monster of a file into Git!
+This reduces diff sizes, highly reduces the chance of merge conflicts, such as when both your branch and the main one add files to the project, and overall makes the project structure much easier to understand.</p>
+<p>Here&#39;s the config file for the project at the beginning of the book:</p>
+<pre><code class="hljs yml"><span class="hljs-comment"># 04-tdd-in-the-real-world/1-end/project.yml</span>
+
+<span class="hljs-attr">name:</span> <span class="hljs-string">Albertos</span>
+<span class="hljs-attr">options:</span>
+  <span class="hljs-attr">bundleIdPrefix:</span> <span class="hljs-string">com.mokacoding.Albertos</span>
+<span class="hljs-attr">targets:</span>
+  <span class="hljs-attr">Albertos:</span>
+    <span class="hljs-attr">type:</span> <span class="hljs-string">application</span>
+    <span class="hljs-attr">platform:</span> <span class="hljs-string">iOS</span>
+    <span class="hljs-attr">sources:</span> [<span class="hljs-string">Albertos</span>]
+    <span class="hljs-attr">info:</span>
+      <span class="hljs-attr">path:</span> <span class="hljs-string">Albertos/Info.plist</span>
+      <span class="hljs-attr">properties:</span>
+        <span class="hljs-attr">UILaunchScreen:</span>
+          <span class="hljs-attr">UIRequiredDeviceCapabilities:</span> [<span class="hljs-string">armv7</span>]
+    <span class="hljs-attr">scheme:</span>
+      <span class="hljs-attr">testTargets:</span> [<span class="hljs-string">AlbertosTests</span>]
+  <span class="hljs-attr">AlbertosTests:</span>
+    <span class="hljs-attr">target:</span> <span class="hljs-string">Albertos</span>
+    <span class="hljs-attr">type:</span> <span class="hljs-string">bundle.unit-test</span>
+    <span class="hljs-attr">platform:</span> <span class="hljs-string">iOS</span>
+    <span class="hljs-attr">sources:</span> [<span class="hljs-string">AlbertosTests</span>]
+    <span class="hljs-attr">settings:</span>
+      <span class="hljs-attr">CODE_SIGNING_ALLOWED:</span> <span class="hljs-literal">NO</span>
+    <span class="hljs-attr">dependencies:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-attr">target:</span> <span class="hljs-string">Albertos</span></code></pre>
+<p>Those twenty-three lines are all we need to generate the eight-hundred-plus <code>project.pbxproj</code> file plus the <code>xcscheme</code> to run it.</p>
+<p>Notice the <code>sources</code> node is an array: You can add as many paths or folders as you need.
+Plus, <code>xcodeproj</code> supports splitting configurations into multiple files and inheriting options, which is great for organizing projects with many targets.</p>
+<p>Thanks to XcodeGen, the projects for each chapter can specify the Swift files for the parts of the app and tests they changed while inheriting the rest from the previous chapters.</p>
+<p>Here is the <code>sources</code> node for the project after completing Chapter 6:</p>
+<pre><code class="hljs yml"><span class="hljs-comment"># 06-testing-static-swiftui-views/1-start/project.yml</span>
+
+<span class="hljs-attr">sources:</span>
+  <span class="hljs-comment"># Use the MenuGrouping implementation from Chapter 4.</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-string">../../04-tdd-in-the-real-world/1-end/Albertos/MenuGrouping.swift</span>
+  <span class="hljs-comment"># Use the same menu dummy value as defined at the start of the chapter.</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-string">../0-start/Albertos/Menu+Dummy.swift</span>
+  <span class="hljs-comment"># All the other sources are custom and live in the project-specific folder</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-string">Albertos</span></code></pre>
+<p>If the start of a chapter has the same code as the end of the previous chapter, it can inherit the whole project configuration from it.</p>
+<pre><code class="hljs yml"><span class="hljs-comment"># 07-testing-dynamic-swiftui-views/0-start/project.yml</span>
+
+<span class="hljs-attr">include:</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-string">../../constants.yml</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-string">../../06-testing-static-swiftui-views/1-end/project.yml</span></code></pre>
+<!--
+## Code-Generation
+
+Code-generation is a technique to maximize the information-scaffold ratio of your source code.
+
+You don't need me to tell you that not all code is the same.
+There's code that _does stuff_, there's code that _tests stuff_.
+Some code implements the _how_ of the app, other code the _what_.
+
+The _what_ code is usually configuration code and can have a low information-scaffold ratio.
+
+Imagine an app that displays reviews on the authentication screen.
+
+```swift
+extension Review {
+  static let all = [
+    Review(message: "Awesome", author: "Alice"),
+    Review(message: "Brilliant", author: "Bob"),
+    Review(message: "Charming", author: "Carol")
+  ]
+}
+```
+
+The information code, in the form of the message-author string pairs, is embedded in as much scaffold code.
+
+By contrast, a CSV with the message-author pairs has maximum information and zero scaffolding.
+
+```CSV
+Awesome, Alice
+Brilliant, Bob
+Charming, Carol
+```
+
+With code-generation, we can keep the data in the CSV file and have a script or tool derive the `Review.all` implementation for us at build time.
+
+Now, when you look at the code, you can focus on the information without distracting scaffolding.
+-->
+
+<p>Using <code>xcodegen</code> to code-generate the many projects and inherit sources from chapter to chapter resulted in a <a href="https://github.com/Apress/Test-Driven-Development-in-Swift/compare/v1.0.0...744697aac33f8ee3d15b5172f4e1df6bfa663e17">whopping 58,724 deletions</a> from the repository.</p>
+<p>And while the Test-Driven Development in Swift chapter sources repo is quite unique, I hope this gives you an idea of the benefits a code-generation tool can bring to your project.</p>
+<h2 id="code-generate-all-the-things">Code-generate all the things!</h2>
+<p>If you want to explore the topic more, check out:</p>
+<ul>
+<li><a href="https://github.com/yonaskolb/XcodeGen">XcodeGen</a> and <a href="https://tuist.io">Tuist</a> to code-generate the Xcode project.</li>
+<li><a href="https://github.com/SwiftGen/SwiftGen">SwiftGen</a> to code-generate constants for colors, fonts, localizable strings, and more.</li>
+<li><a href="https://github.com/krzysztofzablocki/Sourcery">Sourcery</a> to code-generate various types of sources using templates.</li>
+</ul>
+</div><div id="paginator" class="bottom-box clearfixed"><div class="col-6"></div><div class="col-6"><div style="text-align: right"><a href="/blog/tests-are-the-best-documentation">Tests Are The Best Kind Of Documentation&nbsp;>></a></div></div></div><div id="subscribe" class="bottom-box"><!-- Begin Substack Signup Form, via https://substackapi.com/ -->
+<div id="newsletter_embed_signup">
+  <h4 class="form_title">Want more of these posts?</h4>
+  <p class="form_caption">Subscribe to receive new posts in your inbox.</p>
+  <div id="custom-substack-embed" style="white-space: nowrap;"></div>
+
+  <script>
+    window.CustomSubstackWidget = {
+      substackUrl: "mokagio.substack.com",
+      placeholder: "me@email.com",
+      buttonText: "Sign me up",
+      theme: "custom",
+      colors: {
+        primary: "#27ae60", // button and border, mokacoding green
+        input: "#ffffff", // background of the email input
+        email: "#303030", // email input text font
+        text: "#ffffff", // button text color
+      }
+    };
+  </script>
+  <script src="https://substackapi.com/widget.js" async></script>
+</div>
+<!-- End Buttondown Signup Form -->
+</div><div class="bottom-box"><div id="disqus_thread"></div><script>var disqus_shortname = "mokacoding";
+// Neet do add the / at the end to maintain compatibility with previous version
+// of the blog that didn't define disqus_url, letting Disqus set it automatically
+// using window.location.href
+var disqus_url = "https://mokacoding.com/blog/how-xcodegen-reducet-the-tdd-in-swift-codebase-by-58-000-lines/";
+
+(function() {
+  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><noscript>Please enable JavaScript to view the<a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></div></div></div><div class="row-12 footer"><div class="col-12"><h3><a href="/">mokacoding</a></h3></div><div id="copy" class="col-9"><p>Hi I&#39;m <a href="https://gio.codes">Gio</a> I write here semi-regularly on software testing and TDD, productivity, and iOS development.</p>
+<p><a href="mailto:gio+blog@mokacoding.com">Get in touch</a> if you&#39;re interested in working together.</p>
+</div><div id="links" class="col-3"><p><i class="fa fa-twitter"></i>&nbsp;<a href="https://twitter.com/mokagio">@mokagio</a></p><p><i class="fa fa-github"></i>&nbsp;<a href="https://github.com/mokagio">mokagio</a></p></div></div></div></body><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-43554041-1', 'auto');
+ga('send', 'pageview');
+</script><script>var toggle = function(elm){
+  var y = elm.style && elm.style.display ? elm.style.display : 'block';
+  if (y == 'block'){
+    elm.style.opacity='0';
+    setTimeout( function(){ elm.style.display = 'none'; }, 300 );
+  }
+  else {
+    elm.style.display='block';
+    setTimeout( function(){ elm.style.opacity = '1'; }, 10 );
+  }
+}
+
+document.getElementById('close').onclick = function(){
+  toggle(document.getElementById('sticky-header'));
+  toggle(document.getElementById('sticky-header-padding-hack'));
+}</script></html>
