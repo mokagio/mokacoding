@@ -5,10 +5,10 @@ tags:
 - Espresso
 ---
 
-A bit of an off topic post, but here's how to load cheat codes in the [Delta emulator](https://github.com/rileytestut/Delta) when playing Pokémon Emeral to catch all three starters.
+A bit of an off topic post, but here's how to load cheat codes in the [Delta emulator](https://github.com/rileytestut/Delta) when playing Pokémon Emerald to catch all three starters.
 That's something I had to figure out today so my son could have all three starters.
 
-First of all, I'll assume you already had Delta installed, Pokémon Emerlad launched, and have gotten to a point where you can catch Pokémons.
+First of all, I'll assume you already had Delta installed, Pokémon Emerald launched, and have gotten to a point where you can catch Pokémons.
 
 Loading cheat codes in Delta is straightforward and you can read [the official page](https://faq.deltaemulator.com/using-delta/cheat-codes) for how to.
 
