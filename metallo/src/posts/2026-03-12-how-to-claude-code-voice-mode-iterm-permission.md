@@ -11,7 +11,7 @@ I wanted to try it out but my [iTerm2](https://iterm2.com/) had no microphone pe
 
 Before the horrific UX downgrade that is Thaoe, I would had clicked a `+` button in the Privacy & Security > Microphone, but the option is no longer there.
 
-![The microphone permission settings with no option to add the app](https://mokacoding.s3.amazonaws.com/202603-iterm2-microphone-permission-thaoe.png)
+![The microphone permission settings with no option to add the app](https://mokacoding.s3.amazonaws.com/202603-thaoe-no-plus-button-microphone.png)
 
 I tried dragging and dropping iTerm2 from the doc to the settings, but it did not work.
 
