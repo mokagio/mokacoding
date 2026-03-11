@@ -1,12 +1,17 @@
-serve:
-	cd ./docs && ../node_modules/http-server/bin/http-server -p 8000
+.DEFAULT_GOAL := build
 
-build:
+node_modules: package.json
+	npm install
+
+build: node_modules
 	node ./metallo/build.js
 
-dev_build:
+dev_build: node_modules
 	node ./metallo/build.js --dev
 
-watch:
+serve: node_modules build
+	cd ./docs && ../node_modules/http-server/bin/http-server -p 8000
+
+watch: node_modules
 	node ./metallo/build.js
 	node ./metallo/watch.js
