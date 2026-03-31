@@ -27,4 +27,4 @@ We do not have access to your payment information.
 
 ## Contact
 
-If you have questions about this privacy policy, contact us at [gio@mokacoding.com](mailto:gio@mokacoding.com).
+If you have questions about this privacy policy, get in touch at [gio@mokacoding.com](mailto:gio@mokacoding.com).
